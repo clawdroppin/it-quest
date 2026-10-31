@@ -1,0 +1,123 @@
+@@lesson aw1-network-db Networking and Databases
+@@text
+## VPC
+
+A **VPC** is your private network in a region (for example `10.0.0.0/16`). **Subnets** live in one AZ each.
+
+- A **public subnet** has a route to an **internet gateway**; instances there can have public IPs.
+- A **private subnet** has no direct route in; for outbound internet (updates) it routes to a **NAT gateway** in a public subnet.
+- **Route tables** decide where traffic goes.
+- **Security groups**: **stateful** firewalls on instances/ENIs, **allow rules only**, return traffic automatically allowed.
+- **Network ACLs**: **stateless**, on subnets, allow *and* deny rules, evaluated in number order: return traffic needs its own rule.
+- Connectivity: **VPC peering** (two VPCs), **Transit Gateway** (hub for many VPCs and on-premises), **Site-to-Site VPN**, **Direct Connect** (private line), **Client VPN**, **PrivateLink / VPC endpoints** (reach S3 or services without the internet).
+
+A typical web app: ALB in public subnets in two AZs, app servers in private subnets, database in private subnets with no internet route.
+
+## DNS and content delivery
+
+- **Route 53**: DNS and domain registration, with **routing policies**: simple, **weighted** (10% to the new version), **latency-based**, **failover** (with health checks), **geolocation**, geoproximity, multivalue.
+- **CloudFront**: CDN caching content at edge locations; works with S3, ALB, any origin; HTTPS, WAF, signed URLs.
+- **Global Accelerator**: fast, static anycast IPs into AWS's network.
+- **API Gateway**: managed front door for REST/HTTP/WebSocket APIs (often with Lambda).
+
+## Databases
+
+| Need | Service |
+|---|---|
+| Relational (MySQL, PostgreSQL, MariaDB, Oracle, SQL Server) | **RDS**: managed backups, patching, **Multi-AZ** (synchronous standby for HA), **read replicas** (scale reads) |
+| High-end relational, MySQL/PostgreSQL compatible | **Aurora** (also Aurora Serverless) |
+| Key-value / document, single-digit ms at any scale | **DynamoDB** (serverless, NoSQL) |
+| In-memory cache | **ElastiCache** (Redis/Valkey, Memcached), MemoryDB |
+| Data warehouse / analytics | **Redshift**; **Athena** queries files in S3 with SQL |
+| Graph | Neptune |
+| MongoDB-compatible | DocumentDB |
+| Migration | **DMS** (Database Migration Service), with SCT for engine changes |
+
+Multi-AZ is for **availability** (automatic failover); read replicas are for **performance** (and can be promoted for DR).
+
+## Decoupling and integration
+
+**SQS** (queues: producers and consumers work at their own pace), **SNS** (publish/subscribe notifications: email, SMS, fan-out to queues), **EventBridge** (event bus and schedules), **Step Functions** (workflows), **Kinesis** (real-time streams).
+
+@@quiz
+A security group allows inbound HTTPS. Do you need a rule for the response traffic going back out?
+* No: security groups are stateful
+- Yes, an outbound rule for ephemeral ports
+- Yes, a network ACL deny rule
+- Only for IPv6
+? Network ACLs, which are stateless, would need it.
+
+@@quiz
+Which component lets instances in a private subnet download updates without being reachable from the internet?
+* A NAT gateway in a public subnet
+- An internet gateway attached to the private subnet
+- A VPC peering connection
+- A security group with 0.0.0.0/0 inbound
+? NAT allows outbound connections only.
+
+@@quiz
+You must block one specific malicious IP address from a whole subnet. Which feature can do it?
+* A network ACL deny rule
+- A security group deny rule
+- Route 53
+- An IAM policy
+? Security groups only have allow rules.
+
+@@quiz
+An RDS database must fail over automatically if its AZ goes down. Which feature?
+* Multi-AZ deployment
+- Read replicas
+- A bigger instance class
+- S3 cross-region replication
+? Multi-AZ keeps a synchronous standby in another AZ.
+
+@@quiz
+An app needs a serverless NoSQL database with millisecond latency at huge scale. Which service?
+* DynamoDB
+- RDS for MySQL
+- Redshift
+- Aurora
+? DynamoDB is a fully managed key-value and document database.
+
+@@quiz
+A web shop wants to send 10% of users to a new version of the site using DNS. Which Route 53 routing policy?
+* Weighted
+- Failover
+- Geolocation
+- Simple
+? Weights split traffic in proportions.
+
+@@quiz
+An order system must not lose orders when the processing servers are overloaded. What should sit between the web tier and the processors?
+* An SQS queue
+- An internet gateway
+- CloudFront
+- A NAT gateway
+? Queues decouple components and buffer bursts.
+
+@@flashcards
+VPC :: Your private network in a region
+public subnet :: Has a route to an internet gateway
+NAT gateway :: Outbound-only internet for private subnets
+security group :: Stateful, allow-only, instance level
+network ACL :: Stateless, allow and deny, subnet level, numbered rules
+Transit Gateway :: Hub connecting many VPCs and on-premises networks
+Direct Connect :: Dedicated private line to AWS
+VPC endpoint / PrivateLink :: Reach services privately without the internet
+Route 53 :: DNS with routing policies and health checks
+CloudFront :: CDN at edge locations
+API Gateway :: Managed API front door
+RDS Multi-AZ :: High availability with automatic failover
+read replica :: Scales reads
+Aurora :: AWS's cloud-native MySQL/PostgreSQL-compatible database
+DynamoDB :: Serverless NoSQL key-value/document
+ElastiCache :: Managed Redis/Memcached
+Redshift :: Data warehouse
+Athena :: SQL queries on files in S3
+SQS / SNS :: Queues / pub-sub notifications
+EventBridge :: Event bus and scheduler
+
+@@drill
+Is a network ACL stateful or stateless?
+= stateless
+? Return traffic must be explicitly allowed.

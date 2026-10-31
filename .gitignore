@@ -1,0 +1,10 @@
+node_modules/
+dist/
+src-tauri/target/
+src-tauri/gen/
+*.tmp
+it_quest_progress.json
+ITQuestProjects/
+dist-linux/
+__pycache__/
+*.pyc

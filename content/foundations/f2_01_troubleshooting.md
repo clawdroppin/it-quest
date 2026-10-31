@@ -1,0 +1,106 @@
+@@lesson f2-troubleshooting Troubleshooting and the Help Desk
+@@text
+Employers hire IT support staff for two things: **fixing problems methodically** and **communicating well** while doing it. Both can be learned.
+
+## The troubleshooting methodology
+
+This is CompTIA's version (it's on the A+ exam), and it's what experienced engineers do without thinking:
+
+1. **Identify the problem.** Ask the user, reproduce it, check logs. *What changed?* Back up data before you change anything.
+2. **Establish a theory of probable cause.** Question the obvious first (is it plugged in? is the caps lock on?).
+3. **Test the theory.** Confirmed → plan the fix. Not confirmed → new theory, or **escalate**.
+4. **Establish a plan of action** and think about side effects (does a reboot interrupt a meeting? does a change need approval?).
+5. **Implement** the solution, or escalate.
+6. **Verify full system functionality**, and add preventive measures if you can.
+7. **Document** findings, actions and outcomes.
+
+The question that solves the most problems: **"What changed?"** A new update, a moved desk, a changed password, a new monitor.
+
+## Good questions
+
+- *When did it start? Did it ever work?*
+- *Does it happen to anyone else?* (one user → their machine; everyone → the network or a server)
+- *Does it happen every time, or sometimes?*
+- *What exactly does the error say?* Ask for a screenshot.
+- *What were you doing when it happened?*
+
+**Divide and conquer**: if Outlook can't connect, does the web browser work? Does Outlook on the web work? Each answer halves the possibilities.
+
+## Tickets
+
+Work is tracked in **tickets** in an ITSM tool (ServiceNow, Jira Service Management, Zendesk, Freshservice). A good ticket note lets anyone continue the work:
+
+```text
+Issue: User cannot print to 3F-PRINTER-02 since this morning. Others on 3F can print.
+Checked: printer online, queue empty. User's PC showed driver error 0x0000007e.
+Action: removed and re-added the printer via \\print01\3F-PRINTER-02; test page OK.
+Result: resolved, user confirmed. Cause: corrupted driver after last night's update.
+```
+
+**Priority** usually = **impact** (how many people) × **urgency** (how soon it hurts). The CEO's printer is not automatically priority 1; the whole sales floor offline is.
+
+## Communication
+
+- Use plain words. "Your laptop couldn't reach the server that checks passwords", not "the Kerberos ticket failed".
+- **Set expectations**: "I'm going to restart the service. It takes about two minutes; I'll call you back by 10:30."
+- Never blame the user, never argue, don't promise what you can't control.
+- Respect privacy: don't read their documents, ask before taking remote control, and log off when done.
+- **Escalate** when it's beyond your access or skill, with clear notes, not when it's merely boring.
+
+@@quiz
+A user says the internet is down. What's the best first question?
+* "Is it affecting anyone else near you?"
+- "Have you tried a different browser?"
+- "Which ISP does the company use?"
+- "Can you send me your password so I can test?"
+? Scope first: one person points at their device; many people point at the network. (And never ask for passwords.)
+
+@@quiz
+According to the CompTIA methodology, what comes right after implementing the solution?
+* Verify full system functionality and, if applicable, implement preventive measures
+- Document findings
+- Establish a theory of probable cause
+- Close the ticket immediately
+? Verify, then document. Documentation is the final step.
+
+@@quiz
+Before replacing a failing hard drive or reinstalling Windows, what should you do first?
+* Make sure the user's data is backed up
+- Update the BIOS
+- Tell the user it's their fault
+- Order a new computer
+? Step 1 includes "back up data before making changes".
+
+@@quiz
+Your theory doesn't hold up after testing, and you're out of ideas. What next?
+* Establish a new theory or escalate
+- Close the ticket as "could not reproduce"
+- Reinstall the operating system
+- Ask the user to wait until it fixes itself
+? Escalating with good notes is a professional move, not a failure.
+
+@@quiz
+How is ticket priority usually decided?
+* By impact and urgency
+- By the requester's job title
+- By the order tickets arrive in
+- By how easy the fix is
+? Many organizations use an impact × urgency matrix.
+
+@@flashcards
+1. Identify the problem :: Question the user, reproduce, ask what changed, back up first
+2. Theory of probable cause :: Start with the obvious
+3. Test the theory :: Confirm, or new theory / escalate
+4. Plan of action :: Consider side effects and approvals
+5. Implement :: Fix it, or escalate
+6. Verify :: Full functionality; preventive measures
+7. Document :: Findings, actions, outcomes
+priority :: Impact × urgency
+escalate :: Hand over to a higher level of support, with notes
+ITSM :: IT service management tools: ServiceNow, Jira Service Management...
+
+@@drill
+What is the very last step of the CompTIA troubleshooting methodology? (one word)
+= document
+= documentation
+? Document findings, actions and outcomes, so the next person (or future you) benefits.

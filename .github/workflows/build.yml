@@ -1,0 +1,95 @@
+# Builds the portable Windows exe and the Linux AppImage (+ .deb) on GitHub's machines,
+# then publishes them as a GitHub Release named after the app's version (v1.0.0, ...).
+# Runs on every push to the `release` branch, on tags like v1.2.0, and by hand from the Actions tab.
+name: build and release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [release]
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: System libraries for Tauri
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npx tauri build
+      - name: Collect files
+        run: |
+          mkdir out
+          cp src-tauri/target/release/bundle/appimage/*.AppImage "out/IT-Quest-linux-x86_64.AppImage"
+          cp src-tauri/target/release/bundle/deb/*.deb "out/IT-Quest-linux-amd64.deb"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: out/*
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci
+      - run: npx tauri build
+      - name: Collect files
+        shell: bash
+        run: |
+          mkdir out
+          cp src-tauri/target/release/it_quest.exe "out/IT-Quest-windows-portable.exe"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: out/*
+
+  release:
+    needs: [linux, windows]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version="v$(node -p "require('./package.json').version")"
+          notes="Portable builds of IT Quest ${version}. Windows: download the .exe and run it. Linux: download the .AppImage, chmod +x it, and run it. See the README for details."
+          if gh release view "$version" >/dev/null 2>&1; then
+            gh release upload "$version" dist/* --clobber
+          else
+            gh release create "$version" dist/* --title "IT Quest ${version}" --notes "$notes" --target "${GITHUB_SHA}"
+          fi
+
+  verify:
+    # The content checks that don't need every language installed: lessons parse, Python projects pass.
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: System libraries for Tauri
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: npm ci && npx tsc --noEmit -p .
+      - run: mkdir -p dist && cargo test --manifest-path src-tauri/Cargo.toml

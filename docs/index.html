@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IT Quest</title>
+<meta name="description" content="A free, offline desktop app that teaches IT from zero: languages, networking, security, cloud, certifications and the path to an IT job in Japan.">
+<style>
+  :root {
+    --bg: #f7f8fb; --surface: #ffffff; --text: #1b1f2a; --muted: #5b6475;
+    --accent: #3b5bdb; --accent-soft: #e7ecff; --border: #e1e5ee; --code: #f0f2f7;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f121a; --surface: #171b26; --text: #e6e9f0; --muted: #9aa3b5;
+      --accent: #8ea6ff; --accent-soft: #1f2840; --border: #2a3040; --code: #1d2230;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f121a; --surface: #171b26; --text: #e6e9f0; --muted: #9aa3b5;
+    --accent: #8ea6ff; --accent-soft: #1f2840; --border: #2a3040; --code: #1d2230;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", "Noto Sans JP", sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 64px 0 40px; }
+  .badge { display: inline-block; background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; padding: 4px 12px; font-size: 14px; font-weight: 600; }
+  h1 { font-size: clamp(36px, 7vw, 56px); margin: 16px 0 8px; letter-spacing: -0.02em; }
+  h2 { font-size: 28px; margin: 56px 0 16px; }
+  h3 { margin: 0 0 6px; font-size: 18px; }
+  .lead { font-size: 20px; color: var(--muted); max-width: 680px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn { display: inline-block; padding: 12px 20px; border-radius: 10px; text-decoration: none;
+    font-weight: 600; border: 1px solid var(--border); color: var(--text); background: var(--surface); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  :root[data-theme="dark"] .btn.primary { color: #0f121a; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #0f121a; } }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+  .card p { margin: 0; color: var(--muted); }
+  .stat { font-size: 32px; font-weight: 700; color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--code); font-size: 14px; }
+  tr:last-child td { border-bottom: 0; }
+  .scroll { overflow-x: auto; }
+  code { background: var(--code); padding: 2px 6px; border-radius: 6px; font-size: 14px; }
+  pre { background: var(--code); padding: 14px 16px; border-radius: 10px; overflow-x: auto; }
+  pre code { padding: 0; background: none; }
+  ol li, ul li { margin: 6px 0; }
+  .tracks span { display: inline-block; margin: 4px 6px 4px 0; padding: 4px 10px; border-radius: 8px;
+    background: var(--surface); border: 1px solid var(--border); font-size: 14px; }
+  .note { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 12px 16px; border-radius: 8px; }
+  a { color: var(--accent); }
+  footer { color: var(--muted); padding: 48px 0; font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">Free · Offline · Windows &amp; Linux</span>
+    <h1>IT Quest</h1>
+    <p class="lead">Learn IT from zero to job-ready: programming languages, networking, security, cloud, the certifications employers ask for, and the path to an IT job in Japan.</p>
+    <div class="btns">
+      <a class="btn primary" id="dl-win" href="#download">⬇ Windows (portable .exe)</a>
+      <a class="btn primary" id="dl-linux" href="#download">⬇ Linux (AppImage)</a>
+      <a class="btn" id="repo" href="#">View on GitHub</a>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="card"><div class="stat">31</div><p>tracks: 11 languages, 17 IT skills and certifications, Japanese and the Japan career path</p></div>
+    <div class="card"><div class="stat">400+</div><p>lesson pages, novice to expert, with 1,000+ quiz questions and 1,800+ flashcards</p></div>
+    <div class="card"><div class="stat">400+</div><p>practice exercises, checked automatically</p></div>
+    <div class="card"><div class="stat">100</div><p>guided projects with starters and tests, plus open-ended project briefs for every skill</p></div>
+  </div>
+
+  <h2 id="download">Download and start</h2>
+  <p>Get the newest version from the <a id="releases" href="#">Releases page</a>. Nothing to install: the app is one file.</p>
+  <div class="scroll"><table>
+    <tr><th>System</th><th>File</th><th>How to start</th></tr>
+    <tr><td>Windows 10/11</td><td><code>IT-Quest-windows-portable.exe</code></td><td>Double-click it. If SmartScreen warns about an unknown app, choose <b>More info → Run anyway</b>.</td></tr>
+    <tr><td>Linux (x86-64)</td><td><code>IT-Quest-linux-x86_64.AppImage</code></td><td>Right-click → Properties → allow executing, or run <code>chmod +x IT-Quest-linux-x86_64.AppImage</code>. Then double-click it.</td></tr>
+    <tr><td>Debian / Ubuntu</td><td><code>IT-Quest-linux-amd64.deb</code></td><td>Optional installer: <code>sudo apt install ./IT-Quest-linux-amd64.deb</code></td></tr>
+  </table></div>
+  <p class="note"><b>Portable:</b> keep the app in its own folder (a USB stick works). Your progress is saved next to it in <code>it_quest_progress.json</code>; copy that file to continue on another computer, even between Windows and Linux.</p>
+
+  <h2>What you'll learn</h2>
+  <div class="grid">
+    <div class="card"><h3>💻 Languages</h3><p>Python, PowerShell, Bash, JavaScript, TypeScript, HTML &amp; CSS, Go, C#, C++, Rust and SQL. Run every example with one click.</p></div>
+    <div class="card"><h3>🌐 Networks &amp; systems</h3><p>IT Fundamentals, A+, Network+, Linux+, CCNA and CCNP Enterprise.</p></div>
+    <div class="card"><h3>☁ Cloud &amp; DevOps</h3><p>AWS, Azure, Google Cloud PCA, containers, Kubernetes (CKA), Terraform, DevOps and SRE.</p></div>
+    <div class="card"><h3>🛡 Security &amp; management</h3><p>Security+, CISSP, ITIL 4 and PMP.</p></div>
+    <div class="card"><h3>🗾 Working in Japan</h3><p>Japanese for IT work, 基本情報技術者 (IPA FE), visas, résumés (履歴書・職務経歴書) and interviews.</p></div>
+    <div class="card"><h3>🤖 Local AI coach</h3><p>Optional helper running on your own PC. It sees your lesson and code, and gives hints instead of answers.</p></div>
+  </div>
+
+  <h2>How to use it</h2>
+  <ol>
+    <li><b>Start on 🏠 Home.</b> The roadmap goes Foundations → Systems and networks → Security and cloud → Specialize → Senior, with Japanese alongside. Home also shows which languages your computer can run.</li>
+    <li><b>Open a track and read a lesson.</b> Press <b>Run</b> on any code example and change it to see what happens.</li>
+    <li><b>Do the quiz and the exercises.</b> Exercises are checked automatically. Ask for a hint before looking at the solution.</li>
+    <li><b>Build the projects.</b> Each project card can create the files in <code>ITQuestProjects</code> next to the app, open them in VS Code, and run the commands in a terminal. Projects are what you show in job interviews.</li>
+    <li><b>Review every day.</b> 🃏 Review gives you flashcards with spaced repetition and practice exams for every track.</li>
+  </ol>
+
+  <h3 style="margin-top:28px">Install the languages you want to run</h3>
+  <div class="scroll"><table>
+    <tr><th>Language</th><th>Get it</th></tr>
+    <tr><td>Python, SQL</td><td><a href="https://www.python.org/downloads/">python.org</a> (Windows: tick "Add to PATH"). SQLite comes with Python.</td></tr>
+    <tr><td>PowerShell</td><td>Built into Windows. Linux: <a href="https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-linux">PowerShell 7</a>.</td></tr>
+    <tr><td>Bash</td><td>Built into Linux. Windows: <a href="https://git-scm.com/download/win">Git for Windows</a>.</td></tr>
+    <tr><td>JavaScript, TypeScript</td><td><a href="https://nodejs.org">Node.js</a> 22.6 or newer.</td></tr>
+    <tr><td>Go · C# · Rust</td><td><a href="https://go.dev/dl">go.dev</a> · <a href="https://dotnet.microsoft.com/download">.NET SDK 8+</a> · <a href="https://rustup.rs">rustup.rs</a></td></tr>
+    <tr><td>C++</td><td>Windows: Visual Studio Community ("Desktop development with C++") or MinGW. Linux: <code>sudo apt install g++</code>.</td></tr>
+    <tr><td>HTML &amp; CSS</td><td>Nothing: previewed inside the app.</td></tr>
+  </table></div>
+
+  <h3 style="margin-top:28px">Set up the AI helper (optional)</h3>
+  <ol>
+    <li>Install <a href="https://ollama.com">Ollama</a> (or LM Studio).</li>
+    <li>Download a model: <code>ollama pull qwen2.5-coder:7b</code></li>
+    <li>In IT Quest, open 🤖 AI Helper. The default address <code>http://localhost:11434/v1</code> works for Ollama (LM Studio: <code>http://localhost:1234/v1</code>). Choose the model.</li>
+  </ol>
+  <p>Everything stays on your computer. Keep <b>Hints only</b> on while you practise.</p>
+
+  <h2>For future AI assistants and contributors</h2>
+  <p>The repository is set up so that an AI coding assistant (or a person) can add lessons, projects and tracks safely. Start with <a id="agents" href="#">AGENTS.md</a>.</p>
+  <div class="grid">
+    <div class="card"><h3>Where things live</h3><p>Lessons are text files in <code>content/&lt;track&gt;/</code>, registered in <code>src-tauri/src/tracks.rs</code>. The Rust backend runs code; the React UI is in <code>src/</code>.</p></div>
+    <div class="card"><h3>Golden rules</h3><p>Never rename lesson ids or reorder exercises (they are progress keys). Every change must pass <code>--verify</code> with 0 problems.</p></div>
+    <div class="card"><h3>Tools</h3><p><code>tools/assemble.py</code> and <code>tools/stub.py</code> build guided projects; <code>tools/project_ideas/</code> generates project briefs from specs.</p></div>
+  </div>
+<pre><code># check everything (runs examples, exercise solutions and project tests)
+cd src-tauri
+CARGO_TARGET_DIR=target/verify cargo run -q -- --verify --projects
+
+# release: bump the version in package.json, tauri.conf.json and Cargo.toml, then
+git push origin release   # GitHub Actions builds Windows + Linux and publishes the release</code></pre>
+
+  <footer>
+    IT Quest is a learning project. Exam details change, so check the official exam guide before you book. Certification names are trademarks of their owners; this app isn't affiliated with them.
+  </footer>
+</div>
+<script>
+  // Work out the repository from the Pages address (owner.github.io/repo/).
+  (function () {
+    var owner = location.hostname.split(".")[0];
+    var repo = location.pathname.split("/").filter(Boolean)[0];
+    if (!location.hostname.endsWith("github.io") || !repo) return;
+    var base = "https://github.com/" + owner + "/" + repo;
+    var latest = base + "/releases/latest/download/";
+    document.getElementById("repo").href = base;
+    document.getElementById("releases").href = base + "/releases";
+    document.getElementById("agents").href = base + "/blob/release/AGENTS.md";
+    document.getElementById("dl-win").href = latest + "IT-Quest-windows-portable.exe";
+    document.getElementById("dl-linux").href = latest + "IT-Quest-linux-x86_64.AppImage";
+  })();
+</script>
+</body>
+</html>

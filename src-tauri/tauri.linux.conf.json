@@ -1,0 +1,13 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "bundle": {
+    "active": true,
+    "targets": ["appimage", "deb"],
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png"],
+    "category": "Education",
+    "shortDescription": "Learn IT from zero: languages, networking, security, cloud and certifications.",
+    "linux": {
+      "deb": { "depends": [] }
+    }
+  }
+}

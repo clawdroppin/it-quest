@@ -1,0 +1,120 @@
+@@lesson a1-networking A+ Networking: Wi-Fi, Cables, SOHO and Tools
+@@text
+(Start with *How Networks Work* in the Foundations track: IP, DNS, DHCP and ports are assumed here.)
+
+## Wi-Fi standards
+
+| Standard | Name | Bands | Notes |
+|---|---|---|---|
+| 802.11a | | 5 GHz | 54 Mb/s |
+| 802.11b / g | | 2.4 GHz | 11 / 54 Mb/s |
+| 802.11n | Wi-Fi 4 | 2.4 + 5 GHz | MIMO |
+| 802.11ac | Wi-Fi 5 | 5 GHz | |
+| 802.11ax | Wi-Fi 6 / **6E** | 2.4 + 5 (+ **6 GHz** for 6E) | better in crowded places |
+| 802.11be | Wi-Fi 7 | 2.4 + 5 + 6 GHz | newest |
+
+**2.4 GHz** reaches further and through walls but is crowded (only channels **1, 6, 11** don't overlap). **5/6 GHz** is faster with a shorter range. Security: use **WPA3** (or WPA2 with AES); WEP and WPA are broken. Change default admin passwords and turn off **WPS**.
+
+## Cables
+
+| Cable | Max speed | Max length |
+|---|---|---|
+| **Cat 5e** | 1 Gb/s | 100 m |
+| **Cat 6** | 10 Gb/s (up to ~55 m) | 100 m at 1 Gb/s |
+| **Cat 6a** | 10 Gb/s | 100 m |
+| **Fiber**: single-mode / multimode | very high | kilometres / hundreds of metres |
+| **Coaxial** (RG6) | | cable internet, TV |
+
+Twisted pair is wired to **T568A** or **T568B** (B is most common). Same standard on both ends = straight-through cable; one of each = crossover (rarely needed now: ports auto-detect, called Auto-MDIX). **STP** (shielded) resists interference near motors and fluorescent lights; **plenum**-rated cable is required in air-handling spaces because it gives off less toxic smoke.
+
+## Network devices
+
+- **Switch**: connects devices in one network, forwards by MAC address. **Managed** switches support VLANs. **PoE** switches power phones, cameras and access points through the cable.
+- **Router**: connects networks, forwards by IP; at home it also does NAT, DHCP and Wi-Fi.
+- **Access point**: provides Wi-Fi to a wired network.
+- **Firewall**: allows or blocks traffic by rules.
+- **Modem / ONT**: connects to the ISP (cable, DSL, fiber).
+
+A **SOHO** (small office/home office) router setup: change the admin password, update the firmware, set WPA3, a separate **guest network**, DHCP range and **reservations** for printers, **port forwarding** only if needed, and disable UPnP if you don't need it.
+
+## Tools
+
+| Tool | Use |
+|---|---|
+| **Crimper** | attach RJ45 plugs to a cable |
+| **Cable tester** | checks the wire pairs are connected correctly |
+| **Toner probe** | find which cable in a bundle goes where |
+| **Punchdown tool** | terminate wires on a patch panel or keystone jack |
+| **Loopback plug** | test a network port on its own |
+| **Wi-Fi analyzer** | see channels and signal strength |
+
+@@quiz
+A small office's Wi-Fi is slow, and a Wi-Fi analyzer shows many neighbours' networks on 2.4 GHz channels 3, 4 and 9. What should you do?
+* Move the router to channel 1, 6 or 11, or use the 5 GHz band
+- Switch to WEP
+- Lower the transmit power to zero
+- Replace all the Ethernet cables
+? 1, 6 and 11 are the only non-overlapping 2.4 GHz channels; 5 GHz has many more.
+
+@@quiz
+You need to run a 10 Gb/s Ethernet link 90 metres through a building. Which cable?
+* Cat 6a
+- Cat 5e
+- Cat 6
+- RG6 coaxial
+? Cat 6 only does 10 Gb/s up to about 55 m. Cat 6a does it at 100 m.
+
+@@quiz
+Which tool helps find which unlabelled cable at the patch panel goes to a particular wall jack?
+* A toner probe
+- A crimper
+- A loopback plug
+- A multimeter only
+? Connect the tone generator at the jack, and the probe beeps near the matching cable.
+
+@@quiz
+Which Wi-Fi security setting should a new SOHO router use?
+* WPA3 (or WPA2-AES if devices don't support WPA3)
+- WEP
+- WPA with TKIP
+- Open network with a hidden SSID
+? WEP and TKIP are broken; hiding the SSID isn't security.
+
+@@quiz
+New IP security cameras should get power and data from the same cable. What's needed?
+* A PoE switch (or PoE injectors)
+- A crossover cable
+- A modem
+- Fiber cable
+? Power over Ethernet carries power on the network cable.
+
+@@quiz
+Which Wi-Fi standard added the 6 GHz band?
+* Wi-Fi 6E
+- Wi-Fi 4
+- Wi-Fi 5
+- 802.11g
+? Wi-Fi 6E is 802.11ax extended into 6 GHz; Wi-Fi 7 also uses it.
+
+@@flashcards
+802.11n :: Wi-Fi 4; 2.4 and 5 GHz
+802.11ac :: Wi-Fi 5; 5 GHz
+802.11ax :: Wi-Fi 6 (6E adds 6 GHz)
+2.4 GHz non-overlapping channels :: 1, 6, 11
+WPA3 :: Current Wi-Fi security standard
+Cat 5e :: 1 Gb/s, 100 m
+Cat 6a :: 10 Gb/s, 100 m
+T568B :: The most common RJ45 wiring standard
+plenum cable :: Fire-safe cable for air-handling spaces
+PoE :: Power over Ethernet
+switch vs router :: Forwards by MAC in one network vs by IP between networks
+toner probe :: Traces cables
+punchdown tool :: Terminates wires on patch panels and keystones
+DHCP reservation :: Always give a device (like a printer) the same IP
+
+@@drill
+What is the maximum length of a Cat 6a Ethernet run, in metres?
+= 100
+= 100m
+= 100 m
+? The 100 m limit applies to all common twisted-pair categories.

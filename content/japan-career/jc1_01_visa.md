@@ -1,0 +1,97 @@
+@@lesson jc1-visa Visas and Residence Status
+@@text
+> **Important**: immigration rules change, and individual cases differ. This lesson explains the system so you can ask good questions. Always check the **Immigration Services Agency of Japan** (出入国在留管理庁, isa.go.jp), your employer's HR, or a licensed immigration specialist (**行政書士**, gyōseishoshi) before acting.
+
+## The usual work visa for IT: 技術・人文知識・国際業務
+
+**Engineer / Specialist in Humanities / International Services** (often called the "gijinkoku" visa) covers most IT jobs. Typical requirements for the **技術** (engineering) part:
+
+- a **university degree** (or a Japanese vocational school diploma, 専門士) in a **related field**, **or**
+- around **10 years** of relevant work experience, **or**
+- for IT work specifically, passing certain **IT qualifications listed in a Ministry of Justice notice** (the "IT告示"), which includes Japan's IPA exams such as 基本情報技術者 and some exams of other Asian countries, can substitute for the degree/experience requirement;
+- a **job offer** from a Japanese employer, with work that matches your background and pay **equal to or higher than a Japanese employee** doing the same work.
+
+The employer usually applies for a **Certificate of Eligibility** (在留資格認定証明書, COE); with it, you get the visa at a Japanese embassy. Periods: 3 months, 1, 3 or 5 years, renewable.
+
+## Highly Skilled Professional (高度専門職)
+
+A **points system**: academic background, career, annual salary, age, Japanese ability (JLPT N1/N2), research, certain qualifications and more. **70 points** or more qualifies; benefits include a 5-year period, a working spouse, and a much faster route to **permanent residence** (永住権): possible after **3 years at 70 points, or 1 year at 80 points**. Calculate your points with the official points table (ポイント計算表) on the ISA site.
+
+## Other routes you may hear about
+
+| Route | For |
+|---|---|
+| **J-Skip** (特別高度人材) | very high salaries/degrees: faster benefits than regular HSP |
+| **J-Find** (未来創造人材) | graduates of top-ranked universities: up to 2 years to look for work or start a business |
+| **Working holiday** | young people from partner countries; short-term, can be a first step |
+| **Student → work** | study at a Japanese language school or university, then change status after a job offer (very common) |
+| **Spouse / long-term resident** | no work restrictions |
+
+## Once you're in Japan
+
+- **在留カード** (residence card): carry it always. Your status and expiry date are on it.
+- **住民登録**: register your address at the city office (市役所/区役所) within **14 days** of moving in. You'll get your **マイナンバー** (My Number) there.
+- **Changing jobs** (転職): notify immigration within **14 days** (所属機関に関する届出, online). Make sure the new job fits your status; you can apply for a **就労資格証明書** to confirm it.
+- **Renewing**: apply up to 3 months before expiry; keep tax and pension payment records clean, as they're checked.
+- **Side jobs** outside your status need **資格外活動許可** (permission).
+
+@@quiz
+Which residence status covers most IT engineering jobs?
+* 技術・人文知識・国際業務 (Engineer/Specialist in Humanities/International Services)
+- 特定技能
+- 短期滞在 (temporary visitor)
+- 文化活動
+? Usually called gijinkoku.
+
+@@quiz
+What can sometimes substitute for the degree requirement for IT work under that status?
+* Passing an IT qualification listed in the Ministry of Justice notice, such as certain IPA exams
+- Any online course certificate
+- A driving licence
+- A JLPT N5 certificate
+? Check the current list: it's specific.
+
+@@quiz
+How many points does the Highly Skilled Professional system require?
+* 70 or more
+- 50 or more
+- 100
+- 30
+? 80+ points can lead to permanent residence after 1 year.
+
+@@quiz
+You change jobs while on a work visa. What must you do?
+* Notify immigration within 14 days, and make sure the new job fits your status
+- Nothing
+- Leave Japan and re-enter
+- Tell only your new employer
+? Late or missing notifications can cause problems at renewal.
+
+@@quiz
+Who is a licensed specialist who can handle visa applications?
+* A 行政書士 (gyōseishoshi)
+- A 社内SE
+- A 部長
+- A recruiter only
+? Many specialize in immigration.
+
+@@flashcards
+在留資格 :: Residence status (visa category)
+技術・人文知識・国際業務 :: The common IT/office work status
+在留資格認定証明書 (COE) :: Certificate of Eligibility, applied for by the employer
+高度専門職 :: Highly Skilled Professional (points-based)
+70 / 80 points :: HSP threshold / fastest permanent residence route
+永住権 :: Permanent residence
+在留カード :: Residence card: always carry it
+住民登録 :: Address registration within 14 days
+マイナンバー :: My Number (personal number)
+所属機関に関する届出 :: Notification when changing employer (14 days)
+就労資格証明書 :: Certificate confirming your new job fits your status
+資格外活動許可 :: Permission for work outside your status
+行政書士 :: Licensed administrative scrivener (visa specialist)
+出入国在留管理庁 :: Immigration Services Agency
+
+@@drill
+Within how many days must you register your address after moving in? (a number)
+= 14
+? At the city or ward office.
