@@ -382,8 +382,12 @@ pub fn sql() -> Track {
                 "s4_01_window.md"),
             module!(Expert, "5 · Professional Databases", "SQL injection, permissions, normalization and DBA basics.", "sql";
                 "s5_01_professional.md"),
+            module!(Expert, "6 · Databases for Applications", "Schema design and constraints, indexes and query plans, pagination, transactions, UPSERT, triggers and migrations.", "sql";
+                "s6_01_schema.md", "s6_02_performance.md", "s6_03_app_patterns.md"),
             build!(Intermediate, "🗃 IT Asset Inventory", "A real inventory database: schema, reports and a safe Python CLI.", "sql";
                 "t1_01_asset_inventory.md"),
+            build!(Expert, "🛒 Shop Order Database", "Write the SQL behind an online shop: no overselling, optimistic locking, triggers, keyset search and rankings.", "sql";
+                "t2_01_shop.md"),
             // generated project ideas sql
             build!(Advanced, "🧩 Sales Analytics with Window Functions", "Answer business questions with CTEs and window functions.", "sql"; "zp_01_sales_analytics.md"),
             build!(Intermediate, "🧩 Help Desk Ticket Database", "Design a ticketing database and write the reports a manager asks for.", "sql"; "zp_02_helpdesk_db.md"),
