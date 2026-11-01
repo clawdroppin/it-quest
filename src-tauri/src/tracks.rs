@@ -80,12 +80,16 @@ pub fn python() -> Track {
                 "a6_01_networking.md", "a6_02_http.md"),
             module!(Expert, "7 · Professional Python", "Generators, decorators, types, concurrency and real projects.", "python";
                 "e7_01_generators.md", "e7_02_decorators.md", "e7_03_typing.md", "e7_04_concurrency.md", "e7_05_professional.md"),
+            module!(Expert, "8 · Application Development", "Architecture, databases and migrations, web APIs, GUIs and shipping real apps.", "python";
+                "f8_01_architecture.md", "f8_02_data.md", "f8_03_interfaces.md"),
             build!(Intermediate, "🔎 Log Sentinel", "A security tool that finds brute-force attacks and break-ins in SSH logs.", "python";
                 "b1_01_sentinel_parse.md", "b1_02_sentinel_rules.md"),
             build!(Advanced, "🌐 Network Toolkit", "Subnet calculator, VLSM planner and a threaded port scanner in one CLI.", "python";
                 "b2_01_netkit_subnets.md", "b2_02_netkit_scanner.md"),
             build!(Advanced, "💾 Backup Rotator", "Zip backups with checksums, a retention policy and a dry-run mode.", "python";
                 "b3_01_backup_rotator.md"),
+            build!(Expert, "🗓 Team Task Board", "A full app: SQLite with migrations, business rules, a JSON API, a web page and a CLI.", "python";
+                "b4_01_task_board.md"),
             // generated project ideas python
             build!(Intermediate, "🧩 Downloads Folder Organizer", "Sort a messy folder into subfolders by file type and date.", "python"; "zp_01_folder_organizer.md"),
             build!(Advanced, "🧩 Certification Study Planner", "Plan your study hours to an exam date, stored in SQLite.", "python"; "zp_02_study_planner.md"),
