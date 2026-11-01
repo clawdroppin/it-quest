@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plant Buddy</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; img-src 'self' data:">
+  <link rel="icon" href="app-icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- The icon set: one 24 x 24 grid, 2-unit stroke, round caps and joins, drawn inside 2..22.
+       Each <symbol> is used with <svg class="icon"><use href="#i-name"/></svg> and takes the text colour. -->
+  <svg class="sprite" aria-hidden="true">
+    <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3c3.5 4.4 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.5-6.6 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l7-7"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-pot" viewBox="0 0 24 24"><path d="M5 13h14l-2 8H7z"/><path d="M12 13V8"/><path d="M12 9c-3 0-5-2-5-5 3 0 5 2 5 5zM12 8c0-3 2-5 5-5 0 3-2 5-5 5z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  </svg>
+
+  <header class="top">
+    <div class="brand">
+      <img src="app-icon.svg" alt="" width="40" height="40" class="logo">
+      <div>
+        <h1>Plant Buddy</h1>
+        <p id="summary" class="muted"></p>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="theme" class="icon-btn" aria-label="Switch to dark theme" title="Theme (T)">
+        <svg class="icon"><use href="#i-moon"/></svg>
+      </button>
+      <button id="add" class="btn" title="New plant (N)">
+        <svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg> New plant
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <ul id="plants" class="grid" aria-label="Your plants"></ul>
+    <div id="empty" class="empty" hidden>
+      <svg class="icon big"><use href="#i-pot"/></svg>
+      <p>No plants yet. Press <kbd>N</kbd> to add your first one.</p>
+    </div>
+  </main>
+
+  <template id="card">
+    <li class="card">
+      <div class="face" aria-hidden="true"><span class="emoji"></span></div>
+      <div class="info">
+        <h2 class="name"></h2>
+        <p class="when"></p>
+        <div class="meter" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="card-actions">
+        <button class="btn water"><svg class="icon" aria-hidden="true"><use href="#i-drop"/></svg> Water</button>
+        <button class="icon-btn remove"><svg class="icon"><use href="#i-trash"/></svg></button>
+      </div>
+    </li>
+  </template>
+
+  <dialog id="dialog" aria-labelledby="dialog-title">
+    <form id="form" method="dialog">
+      <header class="dialog-head">
+        <h2 id="dialog-title">A new plant</h2>
+        <button type="button" class="icon-btn" id="cancel" aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+      </header>
+      <label>Name <input name="name" maxlength="30" required autocomplete="off" placeholder="e.g. Fernando the Fern"></label>
+      <fieldset class="emojis">
+        <legend>Pick a face</legend>
+        <label><input type="radio" name="emoji" value="🪴" checked><span>🪴</span></label>
+        <label><input type="radio" name="emoji" value="🌿"><span>🌿</span></label>
+        <label><input type="radio" name="emoji" value="🌵"><span>🌵</span></label>
+        <label><input type="radio" name="emoji" value="🌱"><span>🌱</span></label>
+        <label><input type="radio" name="emoji" value="🌻"><span>🌻</span></label>
+        <label><input type="radio" name="emoji" value="🌷"><span>🌷</span></label>
+      </fieldset>
+      <label>Water every <output id="every-out">3 days</output>
+        <input name="everyDays" type="range" min="1" max="30" value="3">
+      </label>
+      <p id="error" class="error" role="alert"></p>
+      <div class="dialog-actions">
+        <button type="submit" class="btn">Add plant</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toasts" class="toasts" role="status"></div>
+
+  <script src="plants.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

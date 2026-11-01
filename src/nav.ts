@@ -1,12 +1,12 @@
 // Moving around the app: everything is stored in progress, so the app reopens where you were.
-import { isLearnTrack, lessonRef, trackById } from "./course";
+import { lessonRef, trackById, viewOf } from "./course";
 import { Page, addUnique, update } from "./progress";
 
 export function goto(page: Page) {
   update((q) => void (q.page = page));
 }
 
-/** Opens a lesson in the tab it belongs to (Learn, Certs or Projects). */
+/** Opens a lesson in the tab it belongs to (Learn, Certs, Extras or Projects). */
 export function openLesson(id: string) {
   const r = lessonRef(id);
   if (!r) return;
@@ -16,7 +16,7 @@ export function openLesson(id: string) {
       q.page = "projects";
       q.last.projects = id;
     } else {
-      const view = isLearnTrack(r.track) ? "learn" : "certs";
+      const view = viewOf(r.track);
       q.page = view;
       q.track[view] = r.track.id;
       q.last[r.track.id] = id;
@@ -29,7 +29,7 @@ export function openTrack(trackId: string) {
   const t = trackById(trackId);
   if (!t) return;
   update((q) => {
-    const view = isLearnTrack(t) ? "learn" : "certs";
+    const view = viewOf(t);
     q.page = view;
     q.track[view] = t.id;
   });

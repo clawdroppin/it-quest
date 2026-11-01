@@ -13,6 +13,7 @@ const PAGES: { id: Page; label: string; title: string }[] = [
   { id: "home", label: "🏠 Home", title: "Roadmap, progress and setup" },
   { id: "learn", label: "💻 Languages", title: "Scripting and programming languages, novice to expert" },
   { id: "certs", label: "🎓 IT & Certs", title: "IT foundations, certifications, and the Japan career track" },
+  { id: "extras", label: "✨ Extras", title: "Beyond IT: extra courses like GUI design, animation and icons" },
   { id: "projects", label: "🛠 Projects", title: "Real projects to build, for every skill and certification" },
   { id: "compare", label: "⚖ Compare", title: "One concept, every language, side by side" },
   { id: "review", label: "🃏 Review", title: "Flashcards and practice exams" },
@@ -71,6 +72,7 @@ export function App() {
           {p.page === "home" && <Home />}
           {p.page === "learn" && <TrackPage key="learn" view="learn" />}
           {p.page === "certs" && <TrackPage key="certs" view="certs" />}
+          {p.page === "extras" && <TrackPage key="extras" view="extras" />}
           {p.page === "projects" && <TrackPage key="projects" view="projects" />}
           {p.page === "compare" && <Compare />}
           {p.page === "review" && <Review />}

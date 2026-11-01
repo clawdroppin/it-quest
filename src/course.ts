@@ -34,7 +34,13 @@ export const CERT_CATEGORIES: { id: Category; name: string }[] = [
   { id: "career", name: "Career & Japan" },
 ];
 
+export const EXTRA_CATEGORIES: { id: Category; name: string }[] = [{ id: "extra", name: "Extras" }];
+
 export const isLearnTrack = (t: Track) => LEARN_CATEGORIES.some((c) => c.id === t.category);
+
+/** The tab a track's lessons are shown in. */
+export const viewOf = (t: Track): "learn" | "certs" | "extras" =>
+  isLearnTrack(t) ? "learn" : t.category === "extra" ? "extras" : "certs";
 
 /** The lessons of a track in a view: course lessons, or the Projects tab's builds. */
 export function viewLessons(track: Track, builds: boolean): Lesson[] {

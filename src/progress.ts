@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { AiSettings, Lang, api } from "./api";
 
-export type Page = "home" | "learn" | "certs" | "projects" | "compare" | "review";
+export type Page = "home" | "learn" | "certs" | "extras" | "projects" | "compare" | "review";
 
 /** Leitner box (0–5) and when the card is due again (ms since epoch). */
 export interface CardState {
@@ -58,7 +58,7 @@ export function defaultProgress(): Progress {
     cards: {},
     exams: [],
     page: "home",
-    track: { learn: "python", certs: "foundations" },
+    track: { learn: "python", certs: "foundations", extras: "gui" },
     last: {},
     showEditorInBuilds: false,
     zoom: 1,

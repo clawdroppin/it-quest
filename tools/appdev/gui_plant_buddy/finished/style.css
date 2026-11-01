@@ -1,0 +1,235 @@
+/* ---------- Design tokens: every colour, gap, radius and timing lives here ---------- */
+:root {
+  color-scheme: light;
+  --bg: #f4fbf5;
+  --surface: #ffffff;
+  --surface-2: #ecf7ee;
+  --text: #17301f;
+  --muted: #5d7464;
+  --border: #d8eadb;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --accent-text: #ffffff;
+  --ring: #86efac;
+  --water: #0ea5e9;
+  --thirsty: #e11d48;
+  --today: #d97706;
+  --soon: #ca8a04;
+  --happy: #16a34a;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 16px; --space-4: 24px; --space-5: 40px;
+  --radius: 18px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgb(23 48 31 / .06), 0 10px 30px rgb(23 48 31 / .08);
+  --shadow-lift: 0 2px 4px rgb(23 48 31 / .08), 0 18px 40px rgb(23 48 31 / .14);
+
+  --ease-out: cubic-bezier(.2, .8, .3, 1);
+  --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+  --dur-fast: 150ms;
+  --dur: 300ms;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1a13;
+  --surface: #172419;
+  --surface-2: #1d2e21;
+  --text: #e3f2e6;
+  --muted: #9bb3a1;
+  --border: #29402e;
+  --accent: #4ade80;
+  --accent-hover: #86efac;
+  --accent-text: #0f1a13;
+  --ring: #166534;
+  --water: #38bdf8;
+  --thirsty: #fb7185;
+  --today: #fbbf24;
+  --soon: #facc15;
+  --happy: #4ade80;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 10px 30px rgb(0 0 0 / .3);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / .35), 0 18px 40px rgb(0 0 0 / .45);
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  transition: background-color var(--dur), color var(--dur);
+}
+h1, h2 { margin: 0; line-height: 1.2; }
+.muted { color: var(--muted); margin: 0; }
+.sprite { position: absolute; width: 0; height: 0; }
+.icon {
+  width: 20px; height: 20px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+}
+.icon.big { width: 56px; height: 56px; stroke-width: 1.5; }
+kbd { font: 600 .85em ui-monospace, monospace; background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+
+/* ---------- Buttons: default, hover, active, focus-visible, disabled ---------- */
+.btn, .icon-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  border: 0; font: inherit; font-weight: 700; cursor: pointer;
+  transition: background-color var(--dur-fast), transform var(--dur-fast) var(--ease-bounce), box-shadow var(--dur-fast), color var(--dur-fast);
+}
+.btn {
+  background: var(--accent); color: var(--accent-text);
+  border-radius: 999px; padding: var(--space-2) var(--space-3);
+  box-shadow: 0 2px 0 rgb(0 0 0 / .12);
+}
+.btn:hover { background: var(--accent-hover); transform: translateY(-1px); }
+.btn:active { transform: translateY(1px) scale(.97); box-shadow: none; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; color: var(--muted);
+}
+.icon-btn:hover { background: var(--surface-2); color: var(--text); }
+.icon-btn:active { transform: scale(.9); }
+.btn:focus-visible, .icon-btn:focus-visible, input:focus-visible + span, input:focus-visible {
+  outline: 3px solid var(--ring); outline-offset: 2px;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+/* ---------- Layout ---------- */
+.top {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap;
+  max-width: 960px; margin: 0 auto; padding: var(--space-4) var(--space-3);
+}
+.brand { display: flex; align-items: center; gap: var(--space-3); }
+.logo { border-radius: 12px; animation: sway 4s ease-in-out infinite; transform-origin: 50% 100%; }
+.actions { display: flex; align-items: center; gap: var(--space-2); }
+main { max-width: 960px; margin: 0 auto; padding: 0 var(--space-3) var(--space-5); }
+.grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+/* ---------- Plant cards ---------- */
+.card {
+  --status: var(--happy);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: var(--space-3);
+  display: grid; grid-template-columns: auto 1fr; gap: var(--space-3); align-items: center;
+  transition: transform var(--dur) var(--ease-bounce), box-shadow var(--dur);
+}
+.card.enter {                                       /* the first render: a staggered entrance */
+  animation: card-in var(--dur) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);        /* app.js sets --i */
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+.card[data-status="thirsty"] { --status: var(--thirsty); }
+.card[data-status="today"] { --status: var(--today); }
+.card[data-status="soon"] { --status: var(--soon); }
+
+.face {
+  width: 64px; height: 64px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 34px;
+  background: color-mix(in srgb, var(--status) 16%, var(--surface));
+  box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--status) 45%, transparent);
+}
+.emoji { display: inline-block; transform-origin: 50% 90%; }
+.card[data-status="happy"] .emoji { animation: sway 3.5s ease-in-out infinite; }
+.card[data-status="thirsty"] .emoji { animation: droop 2.4s ease-in-out infinite; filter: saturate(.6); }
+.name { font-size: 1.1rem; font-weight: 800; overflow-wrap: anywhere; }
+.when { margin: 2px 0 var(--space-2); color: var(--status); font-weight: 700; font-size: .95rem; }
+.meter { height: 6px; border-radius: 999px; background: var(--surface-2); overflow: hidden; }
+.meter span {
+  display: block; height: 100%; width: calc(var(--fill, 1) * 100%);
+  background: var(--status); border-radius: inherit;
+  transition: width 600ms var(--ease-bounce);
+}
+.card-actions { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+.water { background: var(--water); color: white; }
+.water:hover { background: color-mix(in srgb, var(--water) 85%, black); }
+
+/* Watering: the card does a little hop, and droplets fall from the button (made in app.js) */
+.card.watered { animation: hop 500ms var(--ease-bounce); }
+.drop {
+  position: fixed; width: 10px; height: 14px; pointer-events: none;
+  background: var(--water); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: fall 700ms var(--ease-out) forwards;
+}
+.card.removing { animation: card-out 250ms ease-in forwards; }
+
+/* ---------- Empty state ---------- */
+.empty { text-align: center; color: var(--muted); padding: var(--space-5) var(--space-3); }
+.empty .icon { color: var(--accent); animation: float 3s ease-in-out infinite; }
+
+/* ---------- Dialog and form ---------- */
+dialog {
+  border: 0; border-radius: var(--radius); padding: var(--space-4);
+  width: min(420px, calc(100vw - 32px));
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow-lift);
+}
+dialog[open] { animation: pop-in var(--dur) var(--ease-bounce); }
+dialog::backdrop { background: rgb(15 26 19 / .45); backdrop-filter: blur(3px); }
+form { display: grid; gap: var(--space-3); }
+.dialog-head { display: flex; justify-content: space-between; align-items: center; }
+label { display: grid; gap: var(--space-1); font-weight: 700; }
+input[name="name"] {
+  font: inherit; padding: 10px 12px; border-radius: var(--radius-sm);
+  border: 2px solid var(--border); background: var(--bg); color: var(--text);
+  transition: border-color var(--dur-fast);
+}
+input[name="name"]:focus { border-color: var(--accent); }
+input[type="range"] { accent-color: var(--accent); }
+output { color: var(--accent); font-variant-numeric: tabular-nums; }
+.emojis { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.emojis legend { font-weight: 700; margin-bottom: var(--space-1); }
+.emojis label { cursor: pointer; }
+.emojis input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.emojis span {
+  display: grid; place-items: center; width: 44px; height: 44px; font-size: 24px;
+  border-radius: 12px; background: var(--surface-2); border: 2px solid transparent;
+  transition: transform var(--dur-fast) var(--ease-bounce), border-color var(--dur-fast);
+}
+.emojis span:hover { transform: scale(1.1); }
+.emojis input:checked + span { border-color: var(--accent); transform: scale(1.1); }
+.error { color: var(--thirsty); margin: 0; min-height: 1.5em; font-weight: 700; }
+.error:not(:empty) { animation: shake 300ms; }
+.dialog-actions { display: flex; justify-content: flex-end; }
+
+/* ---------- Toasts ---------- */
+.toasts { position: fixed; bottom: var(--space-3); left: 50%; transform: translateX(-50%); display: grid; gap: var(--space-2); z-index: 10; }
+.toast {
+  background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 999px;
+  box-shadow: var(--shadow-lift); font-weight: 700; display: flex; align-items: center; gap: var(--space-2);
+  animation: toast-in var(--dur) var(--ease-bounce);
+}
+.toast.leaving { opacity: 0; transform: translateY(8px); transition: opacity 200ms, transform 200ms; }
+
+/* ---------- Celebration: leaves burst out when every plant is watered ---------- */
+.leaf {
+  position: fixed; font-size: 20px; pointer-events: none;
+  animation: burst 1100ms var(--ease-out) forwards;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes card-in { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+@keyframes card-out { to { opacity: 0; transform: scale(.85); } }
+@keyframes pop-in { from { opacity: 0; transform: scale(.92); } }
+@keyframes toast-in { from { opacity: 0; transform: translateY(14px) scale(.9); } }
+@keyframes sway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+@keyframes droop { 0%, 100% { transform: rotate(0) translateY(0); } 50% { transform: rotate(-10deg) translateY(2px); } }
+@keyframes float { 50% { transform: translateY(-8px); } }
+@keyframes hop {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(-10px) scale(.97, 1.04); }
+  65% { transform: translateY(0) scale(1.03, .97); }
+}
+@keyframes fall { from { opacity: 1; } to { opacity: 0; transform: translate(var(--dx), 70px) scale(.5); } }
+@keyframes burst { to { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--r)); } }
+@keyframes shake { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+/* ---------- Less motion for people who asked their OS for it ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

@@ -146,6 +146,8 @@ pub enum Category {
     Foundations,
     Cert,
     Career,
+    /// Outside IT: the Extras tab.
+    Extra,
 }
 
 #[derive(Serialize, Clone)]
@@ -403,6 +405,7 @@ pub fn load_course() -> Vec<Track> {
         crate::tracks::sql(),
     ];
     tracks.extend(crate::tracks::knowledge());
+    tracks.push(crate::tracks::gui());
     tracks
 }
 

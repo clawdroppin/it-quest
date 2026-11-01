@@ -1,19 +1,19 @@
-// The Learn, Certs and Projects tabs: track picker, module sidebar, lesson, and the code workbench.
+// The Learn, Certs, Extras and Projects tabs: track picker, module sidebar, lesson, and the code workbench.
 import { useEffect, useMemo, useRef, useState } from "react";
 import { LEVELS, Lesson, Track, api } from "./api";
-import { CERT_CATEGORIES, LEARN_CATEGORIES, LessonRef, course, lessonLang, lessonRef, trackProgress } from "./course";
+import { CERT_CATEGORIES, EXTRA_CATEGORIES, LEARN_CATEGORIES, LessonRef, course, lessonLang, lessonRef, trackProgress } from "./course";
 import { LessonView } from "./LessonView";
 import { Tab, Workbench, exerciseKey, shorten } from "./Workbench";
 import { addUnique, update, useProgress } from "./progress";
 import { aiContext, workbenchContext } from "./bus";
 
-type View = "learn" | "certs" | "projects";
+type View = "learn" | "certs" | "extras" | "projects";
 
 export function TrackPage({ view }: { view: View }) {
   const p = useProgress();
   const tracks = course().tracks;
   const builds = view === "projects";
-  const cats = view === "certs" ? CERT_CATEGORIES : LEARN_CATEGORIES;
+  const cats = view === "certs" ? CERT_CATEGORIES : view === "extras" ? EXTRA_CATEGORIES : LEARN_CATEGORIES;
 
   // Which tracks this tab shows, and which one is selected.
   const shown = useMemo(

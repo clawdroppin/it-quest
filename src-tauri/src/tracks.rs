@@ -409,6 +409,33 @@ pub fn sql() -> Track {
 const COMPANY_DB: &str = include_str!("../../content/sql/company_db.sql");
 
 /// IT foundations, certifications and the Japan career track: knowledge more than code.
+pub fn gui() -> Track {
+    Track {
+        id: "gui",
+        name: "GUI Design & Creation",
+        icon: "🖌",
+        category: Category::Extra,
+        lang: Some(Lang::Html),
+        blurb: "Build windows and apps people enjoy using: GUIs in many languages, colour and type, interactive controls, cute animations and your own icons.",
+        modules: vec![
+            module!(Novice, "0 · GUI Foundations", "Windows, widgets, the event loop, layouts and keeping logic out of the window.", "gui";
+                "gu0_01_foundations.md"),
+            module!(Intermediate, "1 · Desktop GUIs in Every Language", "WinForms, WPF and XAML binding, PowerShell windows, Electron and Tauri, Qt and Fyne.", "gui";
+                "gu1_01_desktop_languages.md"),
+            module!(Intermediate, "2 · Making It Pretty", "Colour, spacing scales, typography, depth, and light and dark themes.", "gui";
+                "gu2_01_pretty.md"),
+            module!(Intermediate, "3 · Interactive Controls", "Button states, toggles, sliders, toasts, spinners and keyboard access.", "gui";
+                "gu3_01_interactive.md"),
+            module!(Advanced, "4 · Cute Animations", "Transitions, keyframes, easing, micro-interactions and animating desktop GUIs.", "gui";
+                "gu4_01_css_animation.md", "gu4_02_animation_code.md"),
+            module!(Advanced, "5 · Icon Creation", "Hand-written SVG icons, a consistent set, animated icons, and exporting app icons.", "gui";
+                "gu5_01_svg_icons.md", "gu5_02_icon_export.md"),
+            build!(Advanced, "🌱 Plant Buddy App", "A polished plant-care app with a hand-drawn icon set, light and dark themes, toasts and watering animations.", "gui";
+                "gu9_01_plant_buddy.md"),
+        ],
+    }
+}
+
 pub fn knowledge() -> Vec<Track> {
     vec![
         Track {

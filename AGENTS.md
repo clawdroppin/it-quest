@@ -50,7 +50,7 @@ Rules that keep things working:
 - **A lesson**: write `content/<track>/<file>.md`, add it to a `module!(...)` in `tracks.rs`.
 - **A guided build** (starter + tests + finished): write the finished project and its tests in a scratch folder, make the starter with `python tools/stub.py finished.py starter.py func1 func2` (replaces bodies with `raise NotImplementedError`, keeps docstrings and `# HINT` comments), describe the lesson in a spec and run `python tools/assemble.py spec.py` (see its docstring). Register with `build!(...)`.
 - **Project briefs** (🧩, open-ended): add a `P(...)` entry to a spec in `tools/project_ideas/`, then run **all** specs: `python tools/project_ideas/gen_projects.py tools/project_ideas/spec_*.py`. It rewrites `content/*/zp_*.md` and the `// generated project ideas <track>` lines in `tracks.rs`. Don't edit those generated files by hand.
-- **A new track**: a `Track { ... }` in `tracks.rs` (`knowledge()` for certs/careers, its own fn + `load_course()` for languages), and add its id to the roadmap in `src/Home.tsx`.
+- **A new track**: a `Track { ... }` in `tracks.rs` (`knowledge()` for certs/careers, its own fn + `load_course()` for languages), and add its id to the roadmap in `src/Home.tsx`. Tracks outside IT (the Extras tab) use `category: Category::Extra`, are pushed in `load_course()` and stay off the roadmap; see `gui()`.
 
 ## Checking your work
 

@@ -6,10 +6,10 @@ IT Quest is a free, offline desktop app for Windows and Linux. Every lesson has 
 
 | | |
 |---|---|
-| 31 tracks | 11 languages, 17 certifications and IT skills, Japanese and the Japan career path |
-| 400+ lesson pages | novice to expert, with 1,000+ quiz questions and 1,800+ flashcards |
-| 400+ exercises | checked automatically: output, tests and required code |
-| 100 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
+| 32 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and extras like GUI design |
+| 450+ lesson pages | novice to expert, with 1,200+ quiz questions and 2,200+ flashcards |
+| 490+ exercises | checked automatically: output, tests and required code |
+| 111 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
 
 ## Download
 
@@ -38,6 +38,10 @@ The Linux AppImage needs WebKitGTK, which most desktop distributions already hav
 - Japan: Japanese for IT work, 基本情報技術者 (IPA FE), and the Japan career track (visas, résumés, interviews)
 
 **🛠 Projects**: every track has projects. *Builds* come with a starter, tests and a finished version (a BGP route simulator, a Kubernetes manifest linter, a Terraform plan reviewer, a risk register and more). *Project briefs* (🧩) are open-ended: milestones, a starter folder and suggested questions for the AI helper.
+
+**🧑‍💻 Application development**: every programming language goes past IT scripting into building real software. An expert module covers architecture, testing, databases, APIs and shipping, and a capstone app ties it together: a team task board (Python), a full-stack link manager (JavaScript), a meeting-room booking system (TypeScript), an invoice manager (C#), a key-value database (C++), an asset-tracker module with a GUI (PowerShell), a ticket CLI (Bash), an offline habit-tracker PWA (HTML), an online shop database (SQL) and a REST API (Go).
+
+**✨ Extras**: courses beyond IT. The first is **GUI Design & Creation**: windows and the event loop in tkinter, WinForms, WPF, PowerShell, Electron/Tauri, Qt and Fyne; colour, spacing, type and dark themes; interactive controls; cute animations (transitions, keyframes, easing, micro-interactions); drawing your own SVG icons and exporting app icons; and a capstone, the Plant Buddy app.
 
 **🃏 Review**: flashcards with spaced repetition (Leitner boxes) and practice exams for every track. **⚖ Compare**: one concept, every language, side by side.
 

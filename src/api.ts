@@ -3,7 +3,7 @@ import { Channel, invoke } from "@tauri-apps/api/core";
 
 export type Lang = "rust" | "python" | "javascript" | "powershell" | "bash" | "sql" | "typescript" | "go" | "csharp" | "cpp" | "html";
 export type Level = "novice" | "intermediate" | "advanced" | "expert";
-export type Category = "scripting" | "programming" | "data" | "foundations" | "cert" | "career";
+export type Category = "scripting" | "programming" | "data" | "foundations" | "cert" | "career" | "extra";
 
 export type Segment = { kind: "md"; text: string } | { kind: "code"; code: string; lang: Lang; runnable: boolean };
 

@@ -1,7 +1,7 @@
 // The start page: continue where you left off, the career roadmap, every track, and setup status.
 import { useEffect, useState } from "react";
 import { ToolStatus, api } from "./api";
-import { CERT_CATEGORIES, LEARN_CATEGORIES, course, lessonRef, trackById, trackProgress } from "./course";
+import { CERT_CATEGORIES, EXTRA_CATEGORIES, LEARN_CATEGORIES, course, lessonRef, trackById, trackProgress } from "./course";
 import { importRustQuest, update, useProgress } from "./progress";
 import { openLesson, openTrack } from "./nav";
 
@@ -154,7 +154,7 @@ export function Home() {
         </div>
       </section>
 
-      {[...LEARN_CATEGORIES, ...CERT_CATEGORIES].map((c) => {
+      {[...LEARN_CATEGORIES, ...CERT_CATEGORIES, ...EXTRA_CATEGORIES].map((c) => {
         const ts = tracks.filter((t) => t.category === c.id);
         if (!ts.length) return null;
         return (
