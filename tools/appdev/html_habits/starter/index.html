@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#2f6f5e">
+  <title>Habits</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Habits</h1>
+    <p id="today" class="muted"></p>
+  </header>
+
+  <main>
+    <form id="add-form" class="add" novalidate>
+      <label for="habit-name" class="visually-hidden">New habit</label>
+      <input id="habit-name" name="name" type="text" placeholder="A new habit, e.g. Stretch for 5 minutes"
+             maxlength="60" autocomplete="off" required>
+      <button type="submit">Add</button>
+      <p id="form-error" class="error" role="alert" hidden></p>
+    </form>
+
+    <section aria-labelledby="list-title">
+      <h2 id="list-title" class="visually-hidden">Your habits</h2>
+      <div id="days-header" class="days-header" aria-hidden="true"></div>
+      <ul id="habits" class="habits"></ul>
+      <p id="empty" class="muted empty" hidden>No habits yet. Add one above. Small ones work best.</p>
+    </section>
+
+    <section class="data" aria-labelledby="data-title">
+      <h2 id="data-title">Your data</h2>
+      <p class="muted">Everything stays in this browser. Export a file to back it up or move it to another device.</p>
+      <div class="buttons">
+        <button type="button" id="export">Export</button>
+        <label class="button" for="import">Import…</label>
+        <input type="file" id="import" accept="application/json,.json" class="visually-hidden">
+      </div>
+    </section>
+  </main>
+
+  <p id="status" class="visually-hidden" aria-live="polite"></p>
+
+  <template id="habit-template">
+    <li class="habit">
+      <div class="habit-head">
+        <span class="name"></span>
+        <span class="stats muted"></span>
+        <button type="button" class="remove" data-action="remove">Remove</button>
+      </div>
+      <div class="days"></div>
+    </li>
+  </template>
+
+  <script src="logic.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -256,8 +256,12 @@ pub fn html() -> Track {
                 "h3_01_responsive.md", "h3_02_accessibility.md"),
             module!(Expert, "4 · Professional Front End", "Web security (XSS, CSP), performance and publishing.", "html";
                 "h4_01_professional.md"),
+            module!(Expert, "5 · Web Applications", "The DOM, events, state and render, fetch, storage, routing, components, accessibility and PWAs.", "html";
+                "h5_01_dom_state.md", "h5_02_data.md", "h5_03_apps.md"),
             build!(Intermediate, "🪪 Portfolio and Résumé Site", "Your own responsive site with dark mode and a print-ready résumé.", "html";
                 "i1_01_portfolio.md"),
+            build!(Expert, "📅 Habit Tracker PWA", "An installable, offline web app with tested logic, local storage, import/export and full keyboard support.", "html";
+                "i2_01_habits.md"),
             // generated project ideas html
             build!(Advanced, "🧩 Searchable IT Handbook", "A multi-page help site for staff, with a search box and print styles.", "html"; "zp_01_it_handbook.md"),
             build!(Intermediate, "🧩 Service Status Page", "A public status page for your company's IT services.", "html"; "zp_02_status_page.md"),
