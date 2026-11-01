@@ -7,9 +7,10 @@ with the body of each named function or method replaced by STATEMENT, for exampl
     'throw std::logic_error("TODO: not done yet");'   C++
 
 A function is found by its first line: the name followed by "(" with only keywords, a type or
-modifiers before it, and the line ending in "{". Its body ends at the first later line that is the
-same indentation followed by "}" (so the code must be formatted, which ours always is).
-Comments above the function stay, so they can explain what to write.
+modifiers before it, and the line ending in "{" (or the next line being just "{", C# style).
+Its body ends at the first later line that is the same indentation followed by "}" (so the code
+must be formatted, which ours always is). Comments above the function stay, so they can explain
+what to write.
 """
 import re
 import sys
@@ -20,15 +21,19 @@ out, i, done = [], 0, set()
 while i < len(lines):
     line = lines[i]
     m = re.match(r"^(\s*)(.*?)\b(\w+)\s*(<[^>]*>)?\s*\(", line)
-    if m and m.group(3) in names and line.rstrip().endswith("{") and not re.match(r"\s*(if|for|while|switch|return)\b", line):
+    is_target = m is not None and m.group(3) in names and not re.match(r"\s*(if|for|while|switch|return)\b", line)
+    if is_target:
         indent = m.group(1)
-        end = i + 1
-        while not re.match(re.escape(indent) + r"\}", lines[end]) or lines[end][len(indent):].startswith(" "):
-            end += 1
-        out += [line, f"{indent}  {statement}" if "\t" not in indent else f"{indent}\t{statement}", lines[end]]
-        done.add(m.group(3))
-        i = end + 1
-        continue
+        allman = i + 1 < len(lines) and lines[i + 1] == indent + "{"
+        if line.rstrip().endswith("{") or allman:
+            end = i + 2 if allman else i + 1
+            while not (lines[end].startswith(indent + "}") and not lines[end][len(indent):].startswith(" ")):
+                end += 1
+            step = "\t" if "\t" in indent else ("    " if allman else "  ")
+            out += [line] + ([lines[i + 1]] if allman else []) + [indent + step + statement, lines[end]]
+            done.add(m.group(3))
+            i = end + 1
+            continue
     out.append(line)
     i += 1
 missing = set(names) - done

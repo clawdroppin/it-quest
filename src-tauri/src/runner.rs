@@ -803,8 +803,10 @@ fn execute_script(tool: &Tool, job: &Job, dir: &Path, res: &mut RunResult) -> st
 
 const COMPILE_TIMEOUT: Duration = Duration::from_secs(60);
 
-/// What .NET's implicit usings would give a new console project.
-const CSHARP_USINGS: &str = "global using System;\nglobal using System.Collections.Generic;\nglobal using System.IO;\nglobal using System.Linq;\nglobal using System.Net.Http;\nglobal using System.Threading;\nglobal using System.Threading.Tasks;\n";
+/// What .NET's implicit usings would give a new console project, plus UTF-8 console output
+/// (Windows consoles default to an old code page that turns ¥ or 日本語 into question marks).
+const CSHARP_USINGS: &str = "global using System;\nglobal using System.Collections.Generic;\nglobal using System.IO;\nglobal using System.Linq;\nglobal using System.Net.Http;\nglobal using System.Threading;\nglobal using System.Threading.Tasks;\n\
+internal static class ItQuestConsole\n{\n    [System.Runtime.CompilerServices.ModuleInitializer]\n    internal static void Init() => Console.OutputEncoding = new System.Text.UTF8Encoding(false);\n}\n";
 
 fn execute_compiled(tool: &Tool, job: &Job, dir: &Path, res: &mut RunResult) -> std::io::Result<Option<Vec<String>>> {
     let exe = dir.join(if cfg!(windows) { "main.exe" } else { "main" });

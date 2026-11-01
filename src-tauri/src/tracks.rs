@@ -304,8 +304,12 @@ pub fn csharp() -> Track {
                 "c3_01_errors_files.md", "c3_02_async.md"),
             module!(Expert, "4 · Professional .NET", "Projects, NuGet, testing, dependency injection and Web APIs.", "csharp";
                 "c4_01_professional.md"),
+            module!(Expert, "5 · Application Development", "Clean architecture, EF Core and ASP.NET Core, MVVM desktop apps and shipping.", "csharp";
+                "c5_01_architecture.md", "c5_02_data_web.md", "c5_03_desktop.md"),
             build!(Advanced, "🛡 Patch Compliance Reporter", "Check every machine against the security baseline: builds, patches, encryption, AV.", "csharp";
                 "d1_01_patch_report.md"),
+            build!(Expert, "🧾 Invoice Manager", "Japan's qualified-invoice tax rules, numbering, payments and an aging report.", "csharp";
+                "d2_01_invoices.md"),
             // generated project ideas csharp
             build!(Advanced, "🧩 Log Analyzer with LINQ", "Parse application logs and answer questions with LINQ queries.", "csharp"; "zp_01_event_log_parser.md"),
             build!(Intermediate, "🧩 Password Generator and Strength Meter", "Generate strong passwords and passphrases, and rate existing ones.", "csharp"; "zp_02_password_tool.md"),
