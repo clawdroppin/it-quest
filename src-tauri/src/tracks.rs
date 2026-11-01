@@ -336,8 +336,12 @@ pub fn cpp() -> Track {
                 "x3_01_memory.md", "x3_02_errors_files.md"),
             module!(Expert, "4 · Expert C++", "Templates, concepts, builds, threads and writing safe C++.", "cpp";
                 "x4_01_templates.md", "x4_02_professional.md"),
+            module!(Expert, "5 · Systems Applications", "Designing, measuring and shipping real C++ programs: interfaces, performance, undo, GUIs and networking.", "cpp";
+                "x5_01_design.md", "x5_02_performance.md", "x5_03_apps.md"),
             build!(Advanced, "🧱 Firewall Rule Engine", "A first-match ACL engine with CIDR matching and shadowed-rule detection.", "cpp";
                 "y1_01_firewall.md"),
+            build!(Expert, "🗄 Mini Key-Value Database", "An in-memory store with a write-ahead log, crash-safe replay and compaction.", "cpp";
+                "y2_01_kvstore.md"),
             // generated project ideas cpp
             build!(Intermediate, "🧩 Network Packet Header Parser", "Decode Ethernet, IPv4 and TCP headers from raw bytes.", "cpp"; "zp_01_packet_parser.md"),
             build!(Advanced, "🧩 Ring Buffer Logger", "A fixed-size, fast in-memory log that never allocates after start.", "cpp"; "zp_02_ring_logger.md"),

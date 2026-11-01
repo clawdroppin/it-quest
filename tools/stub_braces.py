@@ -17,6 +17,13 @@ import sys
 
 src, dst, statement, *names = sys.argv[1:]
 lines = open(src, encoding="utf-8").read().split("\n")
+# The file's own indentation step: how much deeper the line after an opening "{" usually is.
+steps = [
+    (len(b) - len(b.lstrip(" "))) - (len(a) - len(a.lstrip(" ")))
+    for a, b in zip(lines, lines[1:])
+    if a.rstrip().endswith("{") and b.strip()
+]
+unit = "    " if steps.count(4) > steps.count(2) else "  "
 out, i, done = [], 0, set()
 while i < len(lines):
     line = lines[i]
@@ -29,7 +36,7 @@ while i < len(lines):
             end = i + 2 if allman else i + 1
             while not (lines[end].startswith(indent + "}") and not lines[end][len(indent):].startswith(" ")):
                 end += 1
-            step = "\t" if "\t" in indent else ("    " if allman else "  ")
+            step = "\t" if "\t" in indent else unit
             out += [line] + ([lines[i + 1]] if allman else []) + [indent + step + statement, lines[end]]
             done.add(m.group(3))
             i = end + 1
