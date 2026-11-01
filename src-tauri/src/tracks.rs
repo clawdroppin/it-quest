@@ -216,8 +216,12 @@ pub fn typescript() -> Track {
                 "t3_01_classes_utility.md", "t3_02_async_modules.md"),
             module!(Expert, "4 · Professional TypeScript", "tsconfig, testing, declarations, migration and runtime validation.", "typescript";
                 "t4_01_professional.md"),
+            module!(Expert, "5 · Application Architecture", "Domain modeling with types, ports and adapters, events, and full-stack TypeScript.", "typescript";
+                "t5_01_domain.md", "t5_02_architecture.md", "t5_03_fullstack.md"),
             build!(Advanced, "🚨 Alert Router", "Route monitoring alerts to on-call teams: matchers, silences, de-duplication.", "typescript";
                 "u1_01_alert_router.md"),
+            build!(Expert, "🏢 Meeting Room Booking", "Holds that expire, confirmations and smart room search, with ports and adapters.", "typescript";
+                "u2_01_room_booking.md"),
             // generated project ideas typescript
             build!(Intermediate, "🧩 Type-safe CSV Importer", "Parse CSV into typed records with validation errors per row.", "typescript"; "zp_01_csv_typed.md"),
             build!(Advanced, "🧩 Typed Inventory REST API", "A small JSON API for IT assets with node:http and TypeScript.", "typescript"; "zp_02_inventory_api.md"),
