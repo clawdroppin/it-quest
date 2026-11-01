@@ -81,6 +81,7 @@ jobs:
   verify:
     # The content checks that don't need every language installed: lessons parse, Python projects pass.
     runs-on: ubuntu-22.04
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: System libraries for Tauri
@@ -92,4 +93,8 @@ jobs:
         with:
           node-version: 24
       - run: npm ci && npx tsc --noEmit -p .
-      - run: mkdir -p dist && cargo test --manifest-path src-tauri/Cargo.toml
+      - name: Build the tests
+        run: mkdir -p dist && cargo test --manifest-path src-tauri/Cargo.toml --no-run
+      - name: Run the tests
+        timeout-minutes: 5
+        run: cargo test --manifest-path src-tauri/Cargo.toml -- --nocapture --test-threads=1

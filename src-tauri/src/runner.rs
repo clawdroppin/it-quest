@@ -508,7 +508,8 @@ fn kill_tree(child: &mut std::process::Child) {
     }
     #[cfg(unix)]
     {
-        let _ = Command::new("kill").args(["-KILL", &format!("-{}", child.id())]).output();
+        // `--` so the negative id is read as a process group, not as an option.
+        let _ = Command::new("kill").args(["-s", "KILL", "--", &format!("-{}", child.id())]).output();
     }
     let _ = child.kill();
     let _ = child.wait();
