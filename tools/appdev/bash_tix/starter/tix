@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# tix: a help-desk ticket tracker for the command line. Run "tix help".
+set -euo pipefail
+# Find tixlib.sh next to this script (or next to where a symlink to it points).
+here=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
+source "$here/tixlib.sh"
+main "$@"

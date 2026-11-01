@@ -154,10 +154,14 @@ pub fn bash() -> Track {
                 "l4_01_robust_scripts.md", "l4_02_cron.md", "l4_03_packages_storage.md"),
             module!(Expert, "5 · Containers and Expert Bash", "Docker, associative arrays, parallel jobs and Git.", "bash";
                 "l5_01_containers.md", "l5_02_professional.md"),
+            module!(Expert, "6 · Building CLI Tools", "Command-line conventions, getopts, subcommands, tests, ShellCheck, packaging and completion.", "bash";
+                "l6_01_cli_design.md", "l6_02_quality.md", "l6_03_shipping.md"),
             build!(Intermediate, "📊 Access Log Analyzer", "Who, what and when on a web server: a report from nginx logs.", "bash";
                 "m1_01_log_analyzer.md"),
             build!(Advanced, "🛡 Server Security Audit", "Check SSH, accounts and sudo rules, and score a Linux server.", "bash";
                 "m2_01_server_audit.md"),
+            build!(Expert, "🎫 tix: Ticket Tracker CLI", "A git-style command-line app: subcommands, options, safe updates, tests, completion and make install.", "bash";
+                "m3_01_tix.md"),
             // generated project ideas bash
             build!(Intermediate, "🧩 Dotfiles Installer", "Keep your shell setup in Git and install it on any Linux machine.", "bash"; "zp_01_dotfiles.md"),
             build!(Advanced, "🧩 Server Login Dashboard", "A message of the day showing a server's health at login.", "bash"; "zp_02_motd.md"),
