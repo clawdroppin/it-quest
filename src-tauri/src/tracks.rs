@@ -288,8 +288,12 @@ pub fn go() -> Track {
                 "g3_01_concurrency.md", "g3_02_http_json.md"),
             module!(Expert, "4 · Professional Go", "Modules, table-driven tests, generics and shipping binaries.", "go";
                 "g4_01_professional.md"),
+            module!(Expert, "5 · Building Services", "Go 1.22 routing, JSON, middleware, project structure, errors, databases, logging, timeouts and containers.", "go";
+                "g5_01_services.md", "g5_02_structure.md", "g5_03_operations.md"),
             build!(Advanced, "🩺 Service Health Prober", "Check every service at once: TCP and HTTP, a worker pool, timeouts, percentiles.", "go";
                 "h1_01_health_prober.md"),
+            build!(Expert, "📇 Device Inventory REST API", "A standard-library Go service: routing, validation, error mapping, middleware, safe storage and tests.", "go";
+                "h2_01_device_api.md"),
             // generated project ideas go
             build!(Intermediate, "🧩 URL Shortener Service", "A small HTTP service with JSON, a map behind a mutex, and tests.", "go"; "zp_01_url_shortener.md"),
             build!(Advanced, "🧩 Multi-file Log Follower", "tail -f for many files at once, with filters and colours.", "go"; "zp_02_log_tail.md"),
