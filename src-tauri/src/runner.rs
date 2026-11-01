@@ -818,7 +818,11 @@ fn execute_compiled(tool: &Tool, job: &Job, dir: &Path, res: &mut RunResult) -> 
     let mut run = command(&exe);
     match job.lang {
         Lang::Go => {
-            compile.args(["build", "-o"]).arg(&exe).arg(file).env("GOTOOLCHAIN", "local").env("GO111MODULE", "off");
+            // A module at the installed Go version, so the current language and library defaults
+            // apply (without one, Go falls back to old behaviour, e.g. no "GET /x/{id}" routes).
+            let go = tool.version.trim_start_matches("Go ").split('.').take(2).collect::<Vec<_>>().join(".");
+            std::fs::write(dir.join("go.mod"), format!("module exercise\n\ngo {go}\n"))?;
+            compile.args(["build", "-o"]).arg(&exe).arg(file).env("GOTOOLCHAIN", "local").env("GOFLAGS", "-mod=mod");
         }
         Lang::CSharp => {
             std::fs::write(dir.join("usings.cs"), CSHARP_USINGS)?;
