@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Link Vault</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>🔖 Link Vault</h1>
+    <input id="search" type="search" placeholder="Search links…" aria-label="Search links">
+    <select id="sort" aria-label="Sort">
+      <option value="new">Newest</option>
+      <option value="popular">Most visited</option>
+      <option value="title">Title</option>
+    </select>
+  </header>
+  <main>
+    <form id="add">
+      <input name="url" placeholder="https://…" required aria-label="URL">
+      <input name="title" placeholder="Title (optional)" aria-label="Title">
+      <input name="tags" placeholder="tags, comma separated" aria-label="Tags">
+      <button>Save link</button>
+    </form>
+    <p id="message" role="status"></p>
+    <nav id="tags" aria-label="Tags"></nav>
+    <ul id="links"></ul>
+    <p id="empty" hidden>No links yet. Save your first one above.</p>
+  </main>
+</body>
+</html>

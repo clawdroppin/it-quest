@@ -182,10 +182,14 @@ pub fn javascript() -> Track {
                 "j4_01_web.md", "j4_02_http.md"),
             module!(Expert, "5 · Professional JavaScript", "Testing, TypeScript and security.", "javascript";
                 "j5_01_professional.md"),
+            module!(Expert, "6 · Full-Stack Applications", "Your own web server, front-end state and rendering, auth, config and deployment.", "javascript";
+                "j6_01_server.md", "j6_02_frontend.md", "j6_03_production.md"),
             build!(Advanced, "📡 Uptime Monitor", "Parallel site checks, alerts, history and a status page.", "javascript";
                 "k1_01_uptime_monitor.md"),
             build!(Expert, "🎫 Help Desk Ticket API", "A REST API with SLAs, validation and tests: the core of an ITSM tool.", "javascript";
                 "k2_01_ticket_api.md"),
+            build!(Expert, "🔖 Link Vault", "A full-stack app with no dependencies: your own router, safe file storage and a reactive front end.", "javascript";
+                "k3_01_link_vault.md"),
             // generated project ideas javascript
             build!(Advanced, "🧩 Website Uptime Checker CLI", "Check a list of URLs in parallel with fetch and report response times.", "javascript"; "zp_01_uptime_cli.md"),
             build!(Intermediate, "🧩 Kanban Board in the Browser", "A drag-and-drop task board saved in localStorage.", "javascript"; "zp_02_kanban.md"),

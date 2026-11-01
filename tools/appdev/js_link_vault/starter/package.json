@@ -1,0 +1,14 @@
+{
+  "name": "link-vault",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Save, tag and search links: a full-stack app with no dependencies.",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
