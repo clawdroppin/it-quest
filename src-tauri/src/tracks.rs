@@ -118,10 +118,14 @@ pub fn powershell() -> Track {
                 "p4_01_advanced_functions.md", "p4_02_scripts_modules.md", "p4_03_remoting_ad.md"),
             module!(Expert, "5 · Professional PowerShell", "Classes, .NET, testing, style and security.", "powershell";
                 "p5_01_classes.md", "p5_02_professional.md"),
+            module!(Expert, "6 · Building Tools and Apps", "Tool design, REST APIs, secrets, logging, desktop GUIs, CI and publishing.", "powershell";
+                "p6_01_tool_design.md", "p6_02_apis.md", "p6_03_gui_shipping.md"),
             build!(Intermediate, "🩺 System Health Monitor", "Check disks, services and uptime; write an HTML report with exit codes.", "powershell";
                 "q1_01_health_monitor.md"),
             build!(Advanced, "👥 User Onboarding", "Turn HR's CSV into accounts, groups, passwords and welcome letters.", "powershell";
                 "q2_01_onboarding.md"),
+            build!(Expert, "🧰 IT Asset Tracker", "A tested PowerShell module and a WinForms app: who has which laptop, and when warranties end.", "powershell";
+                "q3_01_asset_tracker.md"),
             // generated project ideas powershell
             build!(Intermediate, "🧩 Software Inventory Report", "List installed programs on a PC and export a tidy report.", "powershell"; "zp_01_software_inventory.md"),
             build!(Advanced, "🧩 Scheduled Disk Cleanup Task", "A safe cleanup script that registers itself as a scheduled task.", "powershell"; "zp_02_cleanup_task.md"),
