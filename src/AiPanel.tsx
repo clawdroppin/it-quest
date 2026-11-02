@@ -1,9 +1,9 @@
 // The AI helper: a chat with a model running on the learner's own computer.
 import { useEffect, useRef, useState } from "react";
-import { AI_PRESETS, ChatMessage, api } from "./api";
+import { AI_PRESETS, ChatMessage, RunResult, api } from "./api";
 import { Markdown } from "./Markdown";
 import { update, useProgress } from "./progress";
-import { aiContext, askAi } from "./bus";
+import { aiContext, askAi, projectControl, workbenchControl } from "./bus";
 
 const ASKS: [string, string][] = [
   ["Explain my error", "Can you explain the error or failed check I'm getting, and how I could fix it?"],
@@ -23,6 +23,34 @@ function splitThinking(text: string): { thinking: string | null; answer: string;
   return { thinking: rest.slice(0, end).trim(), answer: rest.slice(end + 8).trimStart(), still: false };
 }
 
+/** How many times in a row the AI may run the code and answer again by itself. */
+const MAX_AUTO_ROUNDS = 4;
+const RUN_MARK = /^\s*\[\[(RUN|CHECK)\]\]\s*$/m;
+
+type Block = { info: string; code: string };
+
+/** The fenced code blocks of an answer, with their info strings ("python editor", "js file=a.js"). */
+function codeBlocks(text: string): Block[] {
+  const out: Block[] = [];
+  const re = /^```([^\n`]*)\n([\s\S]*?)^```\s*$/gm;
+  for (let m; (m = re.exec(text)); ) out.push({ info: m[1].trim(), code: m[2].replace(/\n$/, "") });
+  return out;
+}
+
+/** What the AI should hear back after running the learner's code. */
+function describeRun(r: RunResult | null, check: boolean): string {
+  if (!r) return "The run was replaced by a newer one, so there's no result.";
+  const fence = (t: string) => "```text\n" + (t.length > 2500 ? t.slice(0, 2500) + "…" : t) + "\n```";
+  if (r.internalError) return `The app couldn't run it: ${r.internalError}`;
+  if (!r.compileOk) return "It didn't compile:\n" + fence(r.compilerOutput);
+  let out = "";
+  if (check && r.check) out += r.check.passed ? "All checks passed. 🎉\n" : "The checks failed:\n" + fence(r.check.problems.join("\n")) + "\n";
+  out += r.stdout ? "Output:\n" + fence(r.stdout) : "It printed nothing.";
+  if (r.stderr.trim()) out += "\nError output:\n" + fence(r.stderr);
+  if (r.timedOut) out += "\nIt was stopped because it took too long.";
+  return out;
+}
+
 export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean) => void }) {
   const p = useProgress();
   const [chat, setChat] = useState<ChatMessage[]>([]);
@@ -35,35 +63,105 @@ export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean
   const chatRef = useRef(chat);
   chatRef.current = chat;
 
-  useEffect(() => bottom.current?.scrollIntoView({ block: "end" }), [chat]);
+  // Braces matter: newer WebView2/Chromium returns a Promise from scrollIntoView, and React
+  // would treat a returned value as the effect's cleanup function.
+  useEffect(() => {
+    bottom.current?.scrollIntoView({ block: "end" });
+  }, [chat]);
 
-  async function send(question: string) {
+  // Undo steps for the AI's changes, by id (kept outside the chat so the chat stays plain data).
+  const stopped = useRef(false);
+  const undos = useRef(new Map<number, () => Promise<unknown>>());
+  const nextUndo = useRef(1);
+  const [undone, setUndone] = useState<number[]>([]);
+
+  function remember(undo: () => Promise<unknown>) {
+    const undoId = nextUndo.current++;
+    undos.current.set(undoId, undo);
+    return undoId;
+  }
+
+  /** Applies the answer's `editor` and `file=` blocks, and says what changed. */
+  async function applyChanges(answer: string): Promise<{ label: string; undoId: number }[]> {
+    const changes: { label: string; undoId: number }[] = [];
+    for (const b of codeBlocks(answer)) {
+      const words = b.info.split(/\s+/);
+      const file = words.find((w) => w.startsWith("file="))?.slice(5);
+      try {
+        if (words.includes("editor") && workbenchControl.current) {
+          const wb = workbenchControl.current;
+          const before = wb.getCode();
+          wb.setCode(b.code);
+          changes.push({ label: "✏ Replaced the code in the editor", undoId: remember(async () => wb.setCode(before)) });
+        } else if (file && projectControl.current) {
+          const pc = projectControl.current;
+          const before = await pc.write(file, b.code + "\n");
+          changes.push({ label: `📄 ${before === null ? "Created" : "Updated"} ${file}`, undoId: remember(() => pc.write(file, before)) });
+        }
+      } catch (e) {
+        changes.push({ label: `⚠ Couldn't change ${file ?? "the editor"}: ${e}`, undoId: 0 });
+      }
+    }
+    return changes;
+  }
+
+  async function send(question: string, auto?: { round: number; result: string }) {
     question = question.trim();
-    if (!question || streamId !== null) return;
+    if (!question || (streamId !== null && !auto)) return;
+    if (!auto) stopped.current = false;
     const settings = p.ai;
-    const sent = settings.include_context ? `${await aiContext.current()}\n\nMy question: ${question}` : undefined;
-    const history = [...chatRef.current.filter((m) => m.role !== "error"), { role: "user" as const, content: question, sent }];
+    const sent = !auto && settings.include_context ? `${await aiContext.current()}\n\nMy question: ${question}` : undefined;
+    const asked: ChatMessage = auto ? { role: "tool", content: auto.result } : { role: "user", content: question, sent };
+    const history = [...chatRef.current.filter((m) => m.role !== "error"), asked];
     setChat([...history, { role: "assistant", content: "" }]);
-    setInput("");
+    if (!auto) setInput("");
     // Older turns go as shown, to keep within small models' context; the newest with its context.
-    const messages = history.map((m, i) => ({ role: m.role, content: i === history.length - 1 ? (m.sent ?? m.content) : m.content }));
+    const messages = history.map((m, i) => ({
+      role: m.role === "tool" ? "user" : m.role,
+      content: i === history.length - 1 ? (m.sent ?? m.content) : m.content,
+    }));
+    let answer = "";
     const id = await api.aiChat(settings, aiContext.subject(), messages, (e) => {
-      if (e.kind === "delta")
+      if (e.kind === "delta") {
+        answer += e.text;
         setChat((c) => {
           const last = c[c.length - 1];
           return [...c.slice(0, -1), { ...last, content: last.content + e.text }];
         });
-      else {
-        if (e.kind === "error")
-          setChat((c) => {
-            const last = c[c.length - 1];
-            const rest = last.role === "assistant" && !last.content ? c.slice(0, -1) : c;
-            return [...rest, { role: "error", content: e.text }];
-          });
+      } else if (e.kind === "error") {
+        setChat((c) => {
+          const last = c[c.length - 1];
+          const rest = last.role === "assistant" && !last.content ? c.slice(0, -1) : c;
+          return [...rest, { role: "error", content: e.text }];
+        });
         setStreamId(null);
-      }
+      } else void finish(answer, auto?.round ?? 0);
     });
     setStreamId(id);
+  }
+
+  /** After an answer: apply its changes, then run or check the code if it asked to. */
+  async function finish(answer: string, round: number) {
+    const { answer: visible } = splitThinking(answer);
+    if (p.ai.can_edit) {
+      const changes = await applyChanges(visible);
+      if (changes.length)
+        setChat((c) => {
+          const last = c[c.length - 1];
+          return [...c.slice(0, -1), { ...last, changes }];
+        });
+      const mark = visible.match(RUN_MARK)?.[1];
+      const wb = workbenchControl.current;
+      if (mark && wb && round < MAX_AUTO_ROUNDS && !stopped.current) {
+        const check = mark === "CHECK" && wb.canCheck;
+        // Let React save the new code before running it.
+        await new Promise((ok) => setTimeout(ok, 50));
+        const result = await wb.run(check);
+        const label = check ? "🛠 Checked the exercise" : "🛠 Ran the code";
+        return sendRef.current(label, { round: round + 1, result: `${label} (round ${round + 1}). ${describeRun(result, check)}` });
+      }
+    }
+    setStreamId(null);
   }
 
   const sendRef = useRef(send);
@@ -149,6 +247,10 @@ export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean
             Hints, not full solutions (recommended: you learn more)
           </label>
           <label className="check">
+            <input type="checkbox" checked={p.ai.can_edit} onChange={(e) => update((q) => void (q.ai.can_edit = e.target.checked))} />
+            Let the AI change my code and project files, and run them (every change can be undone)
+          </label>
+          <label className="check">
             <input type="checkbox" checked={p.ai.include_context} onChange={(e) => update((q) => void (q.ai.include_context = e.target.checked))} />
             Include the lesson, my code and errors with each question
           </label>
@@ -168,6 +270,13 @@ export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean
                 {m.content}
               </div>
             );
+          if (m.role === "tool")
+            return (
+              <details key={i} className="msg tool small">
+                <summary>{m.content.split(" (round")[0]}: the result went back to the AI</summary>
+                <Markdown text={m.content} />
+              </details>
+            );
           if (m.role === "error")
             return (
               <div key={i} className="msg error">
@@ -183,7 +292,55 @@ export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean
                   <div className="small muted">{thinking}</div>
                 </details>
               )}
-              {answer ? <Markdown text={answer} /> : !still && <span className="muted">…</span>}
+              {answer ? <Markdown text={answer.replace(RUN_MARK, "")} /> : !still && <span className="muted">…</span>}
+              {m.changes && (
+                <div className="ai-changes">
+                  {m.changes.map((ch, k) => (
+                    <div key={k} className="small">
+                      {ch.label}{" "}
+                      {ch.undoId > 0 &&
+                        (undone.includes(ch.undoId) ? (
+                          <span className="muted">(undone)</span>
+                        ) : (
+                          <button
+                            className="btn subtle small"
+                            onClick={async () => {
+                              await undos.current.get(ch.undoId)?.();
+                              setUndone((u) => [...u, ch.undoId]);
+                            }}
+                          >
+                            ↶ Undo
+                          </button>
+                        ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {!still && streamId === null && workbenchControl.current && (
+                <div className="btn-row">
+                  {codeBlocks(answer)
+                    .filter((b) => !/\b(editor|file=)/.test(b.info) && !/^(text|console|output)?$/.test(b.info))
+                    .map((b, k) => (
+                      <button
+                        key={k}
+                        className="btn subtle small"
+                        title="Replace the code in the editor with this block"
+                        onClick={() => {
+                          const wb = workbenchControl.current;
+                          if (!wb) return;
+                          const before = wb.getCode();
+                          wb.setCode(b.code);
+                          const undoId = remember(async () => wb.setCode(before));
+                          setChat((c) =>
+                            c.map((x, j) => (j === i ? { ...x, changes: [...(x.changes ?? []), { label: "✏ Put a code block in the editor", undoId }] } : x)),
+                          );
+                        }}
+                      >
+                        ⤵ Use block {k + 1} in the editor
+                      </button>
+                    ))}
+                </div>
+              )}
             </div>
           );
         })}
@@ -211,7 +368,13 @@ export function AiPanel({ open, setOpen }: { open: boolean; setOpen: (o: boolean
           }}
         />
         {streamId !== null ? (
-          <button className="btn danger" onClick={() => api.aiStop(streamId)}>
+          <button
+            className="btn danger"
+            onClick={() => {
+              stopped.current = true;
+              api.aiStop(streamId);
+            }}
+          >
             ■ Stop
           </button>
         ) : (

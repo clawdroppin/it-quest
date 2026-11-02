@@ -5,7 +5,7 @@ import { CERT_CATEGORIES, EXTRA_CATEGORIES, LEARN_CATEGORIES, LessonRef, course,
 import { LessonView } from "./LessonView";
 import { Tab, Workbench, exerciseKey, shorten } from "./Workbench";
 import { addUnique, update, useProgress } from "./progress";
-import { aiContext, workbenchContext } from "./bus";
+import { aiContext, projectControl, workbenchContext } from "./bus";
 
 type View = "learn" | "certs" | "extras" | "projects";
 
@@ -72,7 +72,16 @@ export function TrackPage({ view }: { view: View }) {
       }
       return ctx;
     };
+    // The first project card of the lesson is the learner's own (later ones are finished versions).
+    const pi = r.lesson.blocks.findIndex((b) => b.kind === "project");
+    projectControl.current = pi >= 0 ? { write: (path, contents) => api.projectWrite(r.lesson.id, pi, path, contents) } : null;
   });
+  useEffect(
+    () => () => {
+      projectControl.current = null;
+    },
+    [],
+  );
 
   const setFilter = (id: string) => update((q) => void (q.track[view] = id));
 

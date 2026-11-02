@@ -1,0 +1,26 @@
+groups:
+  - name: ticket-api
+    rules:
+      - alert: TicketApiDown
+        expr: up{job="ticket-api"} == 0
+        for: 1m
+        labels: { severity: page }
+        annotations:
+          summary: "The ticket API can't be scraped"
+
+      - alert: TicketApiHighErrorRate
+        expr: |
+          sum(rate(http_requests_total{job="ticket-api",status=~"5.."}[5m]))
+            / sum(rate(http_requests_total{job="ticket-api"}[5m])) > 0.05
+        for: 10m
+        labels: { severity: page }
+        annotations:
+          summary: "More than 5% of ticket API requests fail"
+
+      - alert: TicketApiSlow
+        expr: |
+          histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job="ticket-api"}[5m]))) > 0.5
+        for: 10m
+        labels: { severity: ticket }
+        annotations:
+          summary: "p95 latency is above 500 ms"

@@ -436,6 +436,52 @@ pub fn gui() -> Track {
     }
 }
 
+/// Living in Linux on your own computer: the desktop side, next to the Linux admin certification track.
+pub fn linux_env() -> Track {
+    Track {
+        id: "linuxenv",
+        name: "Linux Desktop & Environment",
+        icon: "🐧",
+        category: Category::Extra,
+        lang: Some(Lang::Bash),
+        blurb: "Use Linux as your everyday system: choose and install a distro, the terminal and files, software and Flatpak, customising, drivers, gaming, backups and fixing problems.",
+        modules: vec![
+            module!(Novice, "0 · Choosing and Installing", "Distros and families, desktop environments, Wayland, live USBs, dual boot and the first hour.", "linuxenv";
+                "le0_01_choose_install.md"),
+            module!(Novice, "1 · The Terminal and Files", "The shell, the filesystem tree, finding things, pipes and permissions.", "linuxenv";
+                "le1_01_shell_files.md"),
+            module!(Intermediate, "2 · Installing Software", "apt, dnf, pacman and zypper, Flatpak, Snap, AppImage and keeping it updated.", "linuxenv";
+                "le2_01_software.md"),
+            module!(Intermediate, "3 · Making It Yours", "Themes, fonts and Japanese input, launchers, autostart and user services, .bashrc and dotfiles.", "linuxenv";
+                "le3_01_customise.md"),
+            module!(Advanced, "4 · Hardware, Gaming and Fixing Things", "Drivers, audio, Steam and Proton, backups, logs and a method for fixing anything.", "linuxenv";
+                "le4_01_hardware_fix.md"),
+        ],
+    }
+}
+
+/// Image editing with GIMP; the exercises rebuild what its tools do to pixels.
+pub fn gimp() -> Track {
+    Track {
+        id: "gimp",
+        name: "GIMP Image Editing",
+        icon: "🎨",
+        category: Category::Extra,
+        lang: Some(Lang::Python),
+        blurb: "Edit photos and make graphics with GIMP 3: layers, selections and masks, colour correction, retouching, text, filters and automation with Python.",
+        modules: vec![
+            module!(Novice, "0 · GIMP Basics", "The interface and tools, pixels and print size, image modes, saving XCF and exporting.", "gimp";
+                "gm0_01_basics.md"),
+            module!(Intermediate, "1 · Layers, Selections and Masks", "The layer stack, blend modes, every selection tool and mode, and layer masks.", "gimp";
+                "gm1_01_layers_selections.md"),
+            module!(Intermediate, "2 · Colour and Retouching", "Histograms, Levels and Curves, black and white, hue and saturation, healing and cloning.", "gimp";
+                "gm2_01_colour_retouch.md"),
+            module!(Advanced, "3 · Text, Filters and Automation", "Text and painting, how filters work, exporting for every destination, batch jobs and Python plug-ins.", "gimp";
+                "gm3_01_filters_automation.md"),
+        ],
+    }
+}
+
 pub fn knowledge() -> Vec<Track> {
     vec![
         Track {
@@ -582,6 +628,8 @@ pub fn knowledge() -> Vec<Track> {
                     "aw1_01_compute_storage.md", "aw1_02_network_databases.md"),
                 module!(Advanced, "2 · Security, Billing, Architecture", "IAM, security services, pricing, support and resilient designs.", "aws";
                     "aw2_01_security_billing.md", "aw2_02_architecture.md"),
+                module!(Advanced, "3 · Solutions Architect Associate", "The SAA-C03 domains, scenario keywords, IAM evaluation, storage classes and sizing.", "aws";
+                    "aw3_01_saa_scenarios.md"),
                 build!(Advanced, "📝 Serverless IT Request Form", "API Gateway + Lambda + DynamoDB with SAM, tested offline first.", "aws";
                     "aw9_01_serverless_form.md"),
                 // generated project ideas aws
@@ -643,6 +691,8 @@ pub fn knowledge() -> Vec<Track> {
                     "ck1_01_workloads_networking_storage.md"),
                 module!(Expert, "2 · Administration and Troubleshooting", "kubeadm upgrades, etcd backup, RBAC, Helm, and a method for fixing anything.", "cka";
                     "ck2_01_admin_troubleshooting.md"),
+                module!(Expert, "3 · Exam Tasks, Hands On", "The task types on the exam, fastest commands, and the rules behind scheduling, Services, RBAC and NetworkPolicy.", "cka";
+                    "ck3_01_exam_tasks.md"),
                 build!(Expert, "🧹 Kubernetes Manifest Linter", "Catch latest tags, missing limits, privileged pods and broken Services before deploy.", "cka";
                     "ck9_01_manifest_linter.md"),
                 // generated project ideas cka
@@ -664,6 +714,8 @@ pub fn knowledge() -> Vec<Track> {
                     "tf1_01_state_modules.md"),
                 module!(Advanced, "2 · Testing, CI/CD, Advanced HCL", "dynamic blocks, terraform test, pipelines with OIDC, drift, structure.", "terraform";
                     "tf2_01_testing_ci.md"),
+                module!(Advanced, "3 · Hands-on HCL", "Types, count vs for_each, expressions, functions, refactoring with moved/import, exam checklist.", "terraform";
+                    "tf3_01_hcl_hands_on.md"),
                 build!(Advanced, "🧾 Terraform Plan Reviewer", "Read plan JSON and block data loss and open ports before apply.", "terraform";
                     "tf9_01_plan_reviewer.md"),
                 // generated project ideas terraform
@@ -738,7 +790,7 @@ pub fn knowledge() -> Vec<Track> {
             icon: "📦",
             category: Category::Cert,
             lang: None,
-            blurb: "Virtualization, cloud models, Docker, Kubernetes and cloud-native design, for any provider.",
+            blurb: "Virtualization, Docker, Kubernetes, cloud-native design, and CloudOps: landing zones, DR, cost, networking and Python automation.",
             modules: vec![
                 module!(Novice, "0 · Virtualization and Cloud", "Hypervisors, VMs vs containers, cloud models, migration and FinOps.", "cloud";
                     "cl0_01_virtualization.md"),
@@ -746,6 +798,10 @@ pub fn knowledge() -> Vec<Track> {
                     "cl1_01_containers.md"),
                 module!(Advanced, "2 · Orchestration and Cloud-Native", "Kubernetes, twelve-factor apps, resilience patterns and serverless.", "cloud";
                     "cl2_01_kubernetes.md", "cl2_02_cloud_native.md"),
+                module!(Advanced, "3 · CloudOps", "Landing zones, identity, tagging, monitoring, patching, backup and DR, cost and cloud networking.", "cloud";
+                    "cl3_01_cloudops.md", "cl3_02_cloud_networking.md"),
+                module!(Advanced, "4 · Cloud Automation with Python", "SDKs, pagination, retries and backoff, safe cleanup scripts, events and cost reports.", "cloud";
+                    "cl4_01_cloud_automation.md"),
                 build!(Advanced, "📦 Containerize a Status Board", "A Python service, its Docker image, a Compose stack and a Kubernetes deployment.", "cloud";
                     "cl9_01_containerize.md"),
                 // generated project ideas cloud
@@ -759,7 +815,7 @@ pub fn knowledge() -> Vec<Track> {
             icon: "🚀",
             category: Category::Cert,
             lang: None,
-            blurb: "Git, CI/CD, infrastructure as code, observability, SLOs and incident response.",
+            blurb: "Git, GitHub Actions, Docker, infrastructure as code, Ansible and GitOps, Prometheus and Grafana, DevSecOps, SLOs and incident response.",
             modules: vec![
                 module!(Novice, "0 · Git", "Commits, branches, merges, pull requests and team workflows.", "devops";
                     "d0_01_git.md"),
@@ -767,6 +823,20 @@ pub fn knowledge() -> Vec<Track> {
                     "d1_01_cicd.md", "d1_02_iac.md"),
                 module!(Advanced, "2 · Run It", "Metrics, logs, traces, SLOs, error budgets, on-call and postmortems.", "devops";
                     "d2_01_observability.md"),
+                module!(Intermediate, "3 · Git and GitHub in Practice", "Hands-on branches, conflicts, rebase, squash, revert and the pull request workflow.", "devops";
+                    "d3_01_git_practice.md"),
+                module!(Advanced, "4 · GitHub Actions", "Workflows, jobs, matrices, secrets, OIDC to the cloud, delivery pipelines and pipeline security.", "devops";
+                    "d4_01_github_actions.md"),
+                module!(Advanced, "5 · Docker in Depth", "Layers and caching, multi-stage builds, registries, Compose, debugging and container security.", "devops";
+                    "d5_01_docker.md"),
+                module!(Advanced, "6 · Prometheus and Grafana", "Metrics, exporters, PromQL, alerting, Alertmanager, dashboards and logs with Loki.", "devops";
+                    "d6_01_prometheus_grafana.md"),
+                module!(Expert, "7 · Configuration and GitOps", "Ansible, Helm, Kustomize, Argo CD and progressive delivery.", "devops";
+                    "d7_01_gitops.md"),
+                module!(Expert, "8 · DevSecOps and Platforms", "Secrets, pipeline security scans, supply chain, policy as code and platform engineering.", "devops";
+                    "d8_01_devsecops.md"),
+                build!(Expert, "🚀 Ship a Service End to End", "An instrumented API with its image, CI pipeline, Kubernetes manifests, Prometheus alerts and Grafana dashboard.", "devops";
+                    "d9_02_ship_service.md"),
                 build!(Advanced, "🚦 SLO Report with CI", "Error budgets from an access log, gated by a GitHub Actions pipeline.", "devops";
                     "d9_01_ci_pipeline.md"),
                 // generated project ideas devops

@@ -5,7 +5,7 @@ import { CodeEditor } from "./Editor";
 import { Markdown } from "./Markdown";
 import { LessonRef, lessonLang } from "./course";
 import { addUnique, getProgress, update, useProgress } from "./progress";
-import { askAi, tryCode, workbenchContext } from "./bus";
+import { askAi, tryCode, workbenchContext, workbenchControl } from "./bus";
 
 export type Tab = { kind: "exercise"; index: number } | { kind: "playground" };
 
@@ -67,7 +67,7 @@ export function Workbench({ r, tab, setTab }: Props) {
       else q.playground[runLang] = c;
     });
 
-  async function run(check: boolean, codeOverride?: string) {
+  async function run(check: boolean, codeOverride?: string): Promise<RunResult | null> {
     const id = ++runId.current;
     setRunning(check ? "check" : "run");
     try {
@@ -79,9 +79,10 @@ export function Workbench({ r, tab, setTab }: Props) {
         setup: ex ? ex.setup : lesson.setup,
         check: check && ex ? { expected: ex.expected, tests: ex.tests, requires: ex.requires } : null,
       });
-      if (id !== runId.current) return;
+      if (id !== runId.current) return null;
       setOutput({ result, check });
       if (check && result.check?.passed && key) update((q) => addUnique(q.passed, key));
+      return result;
     } finally {
       if (id === runId.current) setRunning(null);
     }
@@ -124,9 +125,26 @@ export function Workbench({ r, tab, setTab }: Props) {
       return ctx;
     };
   });
+  // What the AI helper may do here (it reads the code fresh, since its answer arrives later).
+  useEffect(() => {
+    workbenchControl.current = {
+      lang: runLang,
+      canCheck: !!ex,
+      getCode: () => {
+        const q = getProgress();
+        return ex ? (q.code[key!] ?? ex.starter) : (q.playground[runLang] ?? PLAYGROUND[runLang]);
+      },
+      setCode,
+      run: (check) => {
+        const q = getProgress();
+        return run(check && !!ex, ex ? (q.code[key!] ?? ex.starter) : (q.playground[runLang] ?? PLAYGROUND[runLang]));
+      },
+    };
+  });
   useEffect(
     () => () => {
       workbenchContext.current = null;
+      workbenchControl.current = null;
     },
     [],
   );

@@ -19,6 +19,9 @@ pub struct AiSettings {
     /// Ask the model to guide instead of handing out full solutions.
     #[serde(default)]
     pub hints_only: bool,
+    /// Let the model change the editor and project files, and run the code (see EDIT_RULES).
+    #[serde(default)]
+    pub can_edit: bool,
 }
 
 #[derive(Clone, Deserialize, Serialize)]
@@ -37,7 +40,10 @@ pub enum Event {
 }
 
 /// `subject` is what the learner is studying right now: "Python", "CompTIA Network+"…
-fn system_prompt(subject: &str, hints_only: bool) -> String {
+/// How the model edits and runs things. The app (AiPanel.tsx) looks for exactly these markers.
+const EDIT_RULES: &str = " You are built into the app and can work in it directly. To replace ALL the code in the learner's editor, write a fenced block whose info string is the language followed by `editor`, for example ```python editor. To create or replace a file of the lesson's project on disk, use the language followed by `file=<relative path>`, for example ```python file=app/models.py. Such blocks must contain the complete code or file, never a fragment, and each one is applied as soon as you finish answering (the learner can undo it). Plain ```python blocks are only shown. To run the editor's code and see its output, end your answer with a line containing only [[RUN]]; to run the exercise's checks, use [[CHECK]]. The result comes back in the next message, so you can fix things and try again. Only change the learner's work when they ask you to write, fix or change code, and say in one sentence what you changed.";
+
+fn system_prompt(subject: &str, hints_only: bool, can_edit: bool) -> String {
     let mut p = format!(
         "You are a patient, encouraging tutor built into IT Quest, an app that teaches complete beginners \
 the skills for a career in IT: programming and scripting languages, networking, security, cloud, Linux and \
@@ -52,6 +58,12 @@ certification topics, be accurate, say when exam details may have changed, and p
     }
     if subject == "PowerShell" {
         p.push_str(" The app runs Windows PowerShell 5.1, so avoid PowerShell 7-only syntax like ?? and ternaries.");
+    }
+    if can_edit {
+        p.push_str(EDIT_RULES);
+        if hints_only {
+            p.push_str(" Because the learner wants hints, only edit or run their code when they explicitly ask you to.");
+        }
     }
     if hints_only {
         p.push_str(
@@ -111,7 +123,7 @@ pub fn chat(settings: AiSettings, subject: String, history: Vec<Message>, stop: 
     let send = |event: Event| {
         let _ = channel.send(event);
     };
-    let mut messages = vec![json!({ "role": "system", "content": system_prompt(&subject, settings.hints_only) })];
+    let mut messages = vec![json!({ "role": "system", "content": system_prompt(&subject, settings.hints_only, settings.can_edit) })];
     // Keep within small models' context: only the last dozen turns.
     for m in history.iter().skip(history.len().saturating_sub(12)) {
         messages.push(json!({ "role": m.role, "content": m.content }));

@@ -157,6 +157,13 @@ pub fn project_sources(lesson_id: String, block: usize) -> Result<String, String
     Ok(if projects::existing_files(track, p) > 0 { projects::read_sources(track, p, 12_000) } else { String::new() })
 }
 
+/// The AI helper writes a project file (`contents: None` deletes it); returns the old contents.
+#[tauri::command]
+pub fn project_write(lesson_id: String, block: usize, path: String, contents: Option<String>) -> Result<Option<String>, String> {
+    let (track, p) = find_project(&lesson_id, block)?;
+    projects::write_source(track, p, &path, contents.as_deref())
+}
+
 // ---------------------------------------------------------------- AI helper
 
 #[tauri::command]

@@ -62,7 +62,7 @@ export function defaultProgress(): Progress {
     last: {},
     showEditorInBuilds: false,
     zoom: 1,
-    ai: { base_url: "http://localhost:11434/v1", model: "", hints_only: true, include_context: true },
+    ai: { base_url: "http://localhost:11434/v1", model: "", hints_only: true, include_context: true, can_edit: true },
     rustQuestAsked: false,
   };
 }

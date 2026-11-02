@@ -1,0 +1,52 @@
+{
+  "title": "Ticket API (RED)",
+  "uid": "ticket-api",
+  "schemaVersion": 39,
+  "time": { "from": "now-1h", "to": "now" },
+  "refresh": "30s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Up",
+      "gridPos": { "x": 0, "y": 0, "w": 4, "h": 4 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [{ "expr": "up{job=\"ticket-api\"}" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Rate: requests per second by route",
+      "gridPos": { "x": 4, "y": 0, "w": 20, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [{ "expr": "sum by (route) (rate(http_requests_total{job=\"ticket-api\"}[5m]))", "legendFormat": "{{route}}" }]
+    },
+    {
+      "type": "timeseries",
+      "title": "Errors: share of 4xx and 5xx",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "percentunit" } },
+      "targets": [
+        { "expr": "sum(rate(http_requests_total{job=\"ticket-api\",status=~\"5..\"}[5m])) / sum(rate(http_requests_total{job=\"ticket-api\"}[5m]))", "legendFormat": "5xx" },
+        { "expr": "sum(rate(http_requests_total{job=\"ticket-api\",status=~\"4..\"}[5m])) / sum(rate(http_requests_total{job=\"ticket-api\"}[5m]))", "legendFormat": "4xx" }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Duration: p50 and p95",
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "fieldConfig": { "defaults": { "unit": "s" } },
+      "targets": [
+        { "expr": "histogram_quantile(0.5, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"ticket-api\"}[5m])))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"ticket-api\"}[5m])))", "legendFormat": "p95" }
+      ]
+    },
+    {
+      "type": "barchart",
+      "title": "Tickets created by priority (last 24 h)",
+      "gridPos": { "x": 0, "y": 16, "w": 24, "h": 7 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [{ "expr": "sum by (priority) (increase(tickets_created_total{job=\"ticket-api\"}[24h]))", "legendFormat": "{{priority}}", "instant": true }]
+    }
+  ]
+}

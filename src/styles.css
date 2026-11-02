@@ -807,6 +807,20 @@ details summary {
 .thinking {
   font-size: 0.85em;
 }
+.msg.tool {
+  border: 1px dashed var(--line);
+  margin-left: 36px;
+}
+.msg.tool summary {
+  cursor: pointer;
+}
+.ai-changes {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 3px;
+}
 .ai-asks {
   display: flex;
   flex-wrap: wrap;

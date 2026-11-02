@@ -120,14 +120,19 @@ export interface AiSettings {
   model: string;
   hints_only: boolean;
   include_context: boolean;
+  /** Let the AI change the editor and project files and run the code. */
+  can_edit: boolean;
 }
 
 export interface ChatMessage {
-  role: "user" | "assistant" | "error";
+  /** "tool": a result the app sends back to the AI by itself (a run or check). */
+  role: "user" | "assistant" | "error" | "tool";
   /** What the chat shows. */
   content: string;
   /** What was actually sent (the question plus app context), if different. */
   sent?: string;
+  /** Changes the AI made with this answer, shown with an Undo button. */
+  changes?: { label: string; undoId: number }[];
 }
 
 export type AiEvent = { kind: "delta"; text: string } | { kind: "done" } | { kind: "error"; text: string };
@@ -149,6 +154,9 @@ export const api = {
   projectAction: (lessonId: string, block: number, action: string, command?: string) =>
     invoke<string>("project_action", { lessonId, block, action, command }),
   projectSources: (lessonId: string, block: number) => invoke<string>("project_sources", { lessonId, block }),
+  /** Writes (or with null, deletes) a project file; returns what was there before. */
+  projectWrite: (lessonId: string, block: number, path: string, contents: string | null) =>
+    invoke<string | null>("project_write", { lessonId, block, path, contents }),
   aiModels: (baseUrl: string) => invoke<string[]>("ai_models", { baseUrl }),
   aiChat: (settings: AiSettings, subject: string, messages: { role: string; content: string }[], onEvent: (e: AiEvent) => void) => {
     const channel = new Channel<AiEvent>();

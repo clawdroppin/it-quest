@@ -406,6 +406,8 @@ pub fn load_course() -> Vec<Track> {
     ];
     tracks.extend(crate::tracks::knowledge());
     tracks.push(crate::tracks::gui());
+    tracks.push(crate::tracks::linux_env());
+    tracks.push(crate::tracks::gimp());
     tracks
 }
 

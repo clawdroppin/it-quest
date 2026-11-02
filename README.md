@@ -6,10 +6,10 @@ IT Quest is a free, offline desktop app for Windows and Linux. Every lesson has 
 
 | | |
 |---|---|
-| 32 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and extras like GUI design |
-| 450+ lesson pages | novice to expert, with 1,200+ quiz questions and 2,200+ flashcards |
-| 490+ exercises | checked automatically: output, tests and required code |
-| 111 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
+| 34 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and extras: GUI design, the Linux desktop and GIMP |
+| 470+ lesson pages | novice to expert, with 1,300+ quiz questions and 2,600+ flashcards |
+| 550+ exercises | checked automatically: output, tests and required code |
+| 112 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
 
 ## Download
 
@@ -33,7 +33,7 @@ The Linux AppImage needs WebKitGTK, which most desktop distributions already hav
 
 - Foundations: IT fundamentals, CompTIA A+, Network+, Linux+, Security+
 - Networking: Cisco CCNA, CCNP Enterprise
-- Cloud and DevOps: AWS, Microsoft Azure, Google Cloud Professional Cloud Architect, Cloud and containers, Kubernetes (CKA), Terraform Associate, DevOps and SRE
+- Cloud and DevOps: AWS (to Solutions Architect Associate), Microsoft Azure, Google Cloud Professional Cloud Architect, Cloud and containers with CloudOps (landing zones, DR, cost, cloud networking, Python automation), Kubernetes (CKA, with hands-on exam tasks), Terraform Associate (with hands-on HCL), DevOps and SRE (Git and pull requests, GitHub Actions, Docker, Prometheus and Grafana, GitOps, DevSecOps, and a ship-a-service capstone)
 - Management and security leadership: ITIL 4, CISSP, PMP
 - Japan: Japanese for IT work, 基本情報技術者 (IPA FE), and the Japan career track (visas, résumés, interviews)
 
@@ -42,6 +42,10 @@ The Linux AppImage needs WebKitGTK, which most desktop distributions already hav
 **🧑‍💻 Application development**: every programming language goes past IT scripting into building real software. An expert module covers architecture, testing, databases, APIs and shipping, and a capstone app ties it together: a team task board (Python), a full-stack link manager (JavaScript), a meeting-room booking system (TypeScript), an invoice manager (C#), a key-value database (C++), an asset-tracker module with a GUI (PowerShell), a ticket CLI (Bash), an offline habit-tracker PWA (HTML), an online shop database (SQL) and a REST API (Go).
 
 **✨ Extras**: courses beyond IT. The first is **GUI Design & Creation**: windows and the event loop in tkinter, WinForms, WPF, PowerShell, Electron/Tauri, Qt and Fyne; colour, spacing, type and dark themes; interactive controls; cute animations (transitions, keyframes, easing, micro-interactions); drawing your own SVG icons and exporting app icons; and a capstone, the Plant Buddy app.
+
+**🐧 Linux Desktop & Environment** teaches Linux as your everyday system: choosing a distro and desktop, installing and dual-booting, the terminal, files and permissions, apt/dnf/pacman, Flatpak and Snap, customising, dotfiles, drivers, gaming with Proton, backups and troubleshooting, with Bash exercises throughout.
+
+**🎨 GIMP Image Editing** covers GIMP 3 from the interface to layers, selections and masks, colour correction, retouching, text, filters, exporting and Python automation; the exercises rebuild what the tools do to pixels (blend modes, Levels, convolutions).
 
 **🃏 Review**: flashcards with spaced repetition (Leitner boxes) and practice exams for every track. **⚖ Compare**: one concept, every language, side by side.
 
@@ -73,6 +77,8 @@ The 🤖 **AI Helper** talks to a language model running **on your own computer*
 3. In IT Quest, open the AI Helper. The default address `http://localhost:11434/v1` works for Ollama (LM Studio uses `http://localhost:1234/v1`). Pick the model.
 
 It knows which lesson, exercise or project you're on and can see your code. **Hints only** mode (on by default) makes it coach you instead of writing the solution. Turn it off when you want a full explanation.
+
+The helper can also **work in the app for you**: when you ask, it rewrites the code in the editor or creates and edits files in your project folder, then runs or checks the code and reads the result, trying again a few times if needed. Every change shows an **↶ Undo** button. Turn this off in the helper's settings if you only want advice.
 
 ## Study tips
 

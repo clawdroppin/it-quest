@@ -24,6 +24,7 @@ fn main() {
             commands::project_status,
             commands::project_action,
             commands::project_sources,
+            commands::project_write,
             commands::ai_models,
             commands::ai_chat,
             commands::ai_stop,

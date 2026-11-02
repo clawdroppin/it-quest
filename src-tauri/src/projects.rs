@@ -234,6 +234,24 @@ pub fn read_sources(track: &str, project: &Project, max_chars: usize) -> String 
     out
 }
 
+/// Writes (or with `None`, deletes) one file of the project for the AI helper, and returns what
+/// was there before so the learner can undo it. Only plain relative paths inside the project.
+pub fn write_source(track: &str, project: &Project, path: &str, contents: Option<&str>) -> Result<Option<String>, String> {
+    let rel = Path::new(path);
+    if path.trim().is_empty() || !rel.components().all(|c| matches!(c, std::path::Component::Normal(_))) {
+        return Err(format!("\"{path}\" isn't a path inside the project folder"));
+    }
+    let target = dir_of(track, project).join(rel);
+    let before = std::fs::read_to_string(&target).ok();
+    match contents {
+        Some(text) => write_file(&target, text),
+        None if target.exists() => std::fs::remove_file(&target),
+        None => Ok(()),
+    }
+    .map_err(|e| format!("Couldn't write {path}: {e}"))?;
+    Ok(before)
+}
+
 fn write_file(target: &Path, contents: &str) -> std::io::Result<()> {
     if let Some(parent) = target.parent() {
         std::fs::create_dir_all(parent)?;

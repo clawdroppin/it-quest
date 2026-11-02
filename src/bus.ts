@@ -1,5 +1,5 @@
 // Small cross-component signals: "try this code", "ask the AI", and what the AI should know.
-import { Lang } from "./api";
+import { Lang, RunResult } from "./api";
 
 type Handler<T> = (value: T) => void;
 
@@ -30,3 +30,19 @@ export const aiContext: { current: () => Promise<string>; subject: () => string 
 
 /** The code editor's part of that context (its code and last output), while it's shown. */
 export const workbenchContext: { current: (() => string) | null } = { current: null };
+
+/** Lets the AI helper change and run the code in the editor, while one is shown. */
+export const workbenchControl: {
+  current: {
+    lang: Lang;
+    canCheck: boolean;
+    getCode: () => string;
+    setCode: (code: string) => void;
+    run: (check: boolean) => Promise<RunResult | null>;
+  } | null;
+} = { current: null };
+
+/** Lets the AI helper write the files of the open lesson's project, if it has one. */
+export const projectControl: {
+  current: { write: (path: string, contents: string | null) => Promise<string | null> } | null;
+} = { current: null };
