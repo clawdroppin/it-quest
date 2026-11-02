@@ -6,9 +6,9 @@ IT Quest is a free, offline desktop app for Windows and Linux. Every lesson has 
 
 | | |
 |---|---|
-| 34 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and extras: GUI design, the Linux desktop and GIMP |
-| 470+ lesson pages | novice to expert, with 1,300+ quiz questions and 2,600+ flashcards |
-| 550+ exercises | checked automatically: output, tests and required code |
+| 39 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and creative extras: GUI design, Rust UI themes, vector UI design, UI animation, Blender, DaVinci Resolve, the Linux desktop and GIMP |
+| 500+ lesson pages | novice to expert, with 1,400+ quiz questions and 3,000+ flashcards |
+| 600+ exercises | checked automatically: output, tests and required code |
 | 112 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
 
 ## Download
@@ -46,6 +46,16 @@ The Linux AppImage needs WebKitGTK, which most desktop distributions already hav
 **🐧 Linux Desktop & Environment** teaches Linux as your everyday system: choosing a distro and desktop, installing and dual-booting, the terminal, files and permissions, apt/dnf/pacman, Flatpak and Snap, customising, dotfiles, drivers, gaming with Proton, backups and troubleshooting, with Bash exercises throughout.
 
 **🎨 GIMP Image Editing** covers GIMP 3 from the interface to layers, selections and masks, colour correction, retouching, text, filters, exporting and Python automation; the exercises rebuild what the tools do to pixels (blend modes, Levels, convolutions).
+
+**🦀 Rust UI & Theme Design** makes Rust apps beautiful: egui, iced, Slint and Tauri compared; colour palettes, design tokens and WCAG contrast; interactive animated buttons with easing and springs; icon fonts, SVG and app icons; layout, accessibility and a polish checklist, with Rust exercises that build the maths behind them.
+
+**✒ Vector UI Design: Penpot & Inkscape** designs screens, buttons, icons and themes with Penpot (the open-source Figma, desktop or self-hosted with Docker) and Inkscape: flex and grid layout, components and variants, a full button system with animated states, a clean icon set and SVG sprites, and three-layer design tokens with light and dark themes.
+
+**✨ UI Animation: Synfig & Glaxnimate** covers motion principles for interfaces, Synfig Studio (tweening, path morphing, bones, linked parameters), Glaxnimate and the Lottie JSON format inside out, and playing animations in web, Tauri and Rust apps with state-machine buttons and reduced-motion support.
+
+**🧊 Blender: 3D, VFX & Motion Graphics** is a full Blender class: modeling and modifiers, shader nodes and Cycles/EEVEE rendering, animation and rigging, Geometry Nodes, particles, fire, smoke, liquids, rigid bodies and cloth, Grease Pencil, motion tracking and the node Compositor, the Video Sequence Editor and bpy scripting.
+
+**🎬 DaVinci Resolve: Edit, Color, Fusion & Audio** goes from import to delivery: the Cut and Edit pages, Fusion VFX and motion graphics, colour grading, scopes, log, ACES and HDR, Fairlight mixing and loudness, codecs and export, and automating Resolve with Python.
 
 **🃏 Review**: flashcards with spaced repetition (Leitner boxes) and practice exams for every track. **⚖ Compare**: one concept, every language, side by side.
 

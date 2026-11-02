@@ -482,6 +482,135 @@ pub fn gimp() -> Track {
     }
 }
 
+/// Beautiful Rust desktop apps: themes, animated buttons, icons and polish (egui, iced, Slint).
+pub fn rust_ui() -> Track {
+    Track {
+        id: "rustui",
+        name: "Rust UI & Theme Design",
+        icon: "🦀",
+        category: Category::Extra,
+        lang: Some(Lang::Rust),
+        blurb: "Make Rust apps beautiful: egui, iced and Slint, pretty light and dark themes, interactive animated buttons, icons and app icons, layout and polish.",
+        modules: vec![
+            module!(Intermediate, "0 · Rust GUI Toolkits", "egui, iced, Slint and Tauri, immediate vs retained mode, widget states and hit testing.", "rustui";
+                "ru0_01_landscape.md"),
+            module!(Intermediate, "1 · Pretty Themes", "Palettes and design tokens, contrast, derived state colours, fonts, egui Visuals and iced themes.", "rustui";
+                "ru1_01_themes.md"),
+            module!(Advanced, "2 · Interactive Animated Buttons", "Easing, interruptible animations, springs, and a custom animated egui button.", "rustui";
+                "ru2_01_animated_buttons.md"),
+            module!(Advanced, "3 · Icons and App Icons", "Icon fonts, SVG icons, icons generated and painted in code, and the executable's icon.", "rustui";
+                "ru3_01_icons.md"),
+            module!(Advanced, "4 · Layout and Polish", "Flex layout, text that fits, keyboard focus, accessibility and the polish checklist.", "rustui";
+                "ru4_01_layout_polish.md"),
+        ],
+    }
+}
+
+/// Vector UI design with Penpot and Inkscape: icons, buttons, components and themes.
+pub fn vector_ui() -> Track {
+    Track {
+        id: "vectorui",
+        name: "Vector UI Design: Penpot & Inkscape",
+        icon: "✒",
+        category: Category::Extra,
+        lang: Some(Lang::Html),
+        blurb: "Design app screens, buttons, icons and themes with Penpot (the open-source Figma) and Inkscape (the open-source Illustrator), and turn them into real SVG and CSS.",
+        modules: vec![
+            module!(Novice, "0 · Vector Basics", "Vector vs raster, SVG anatomy and paths, setting up Penpot (or self-hosting it) and Inkscape.", "vectorui";
+                "vu0_01_vector_basics.md"),
+            module!(Intermediate, "1 · Penpot", "Boards, flex and grid layout, components and variants, tokens, prototypes and Inspect.", "vectorui";
+                "vu1_01_penpot.md"),
+            module!(Intermediate, "2 · A Button System", "Variants, sizes, states and micro-interactions, from Penpot components to animated CSS.", "vectorui";
+                "vu2_01_button_system.md"),
+            module!(Advanced, "3 · Inkscape Icons", "Paths and nodes, boolean operations, a consistent icon grid, clean SVG export and sprites.", "vectorui";
+                "vu3_01_inkscape.md"),
+            module!(Advanced, "4 · Themes and Design Systems", "Three layers of design tokens, light and dark themes, exporting tokens to CSS and Rust.", "vectorui";
+                "vu4_01_themes_tokens.md"),
+        ],
+    }
+}
+
+pub fn ui_anim() -> Track {
+    Track {
+        id: "uianim",
+        name: "UI Animation: Synfig & Glaxnimate",
+        icon: "✨",
+        category: Category::Extra,
+        lang: Some(Lang::Python),
+        blurb: "Animated icons, buttons and micro-interactions: motion principles, Synfig Studio's tweening and bones, Glaxnimate and the Lottie format, and playing animations in web, Tauri and Rust apps.",
+        modules: vec![
+            module!(Novice, "0 · Motion for Interfaces", "Animation principles for UI, keyframes and interpolation, formats, and planning a micro-interaction.", "uianim";
+                "ua0_01_motion.md"),
+            module!(Intermediate, "1 · Synfig Studio", "Layers, waypoints and interpolation, path morphing, bones, linked parameters and rendering.", "uianim";
+                "ua1_01_synfig.md"),
+            module!(Intermediate, "2 · Glaxnimate and Lottie", "Keyframes, easing, trim paths and precomps, and the Lottie JSON format inside out.", "uianim";
+                "ua2_01_glaxnimate.md"),
+            module!(Advanced, "3 · Animations in Real Apps", "dotlottie-web, lottie-web, Rust players, state-machine buttons, sprite sheets and reduced motion.", "uianim";
+                "ua3_01_lottie_in_apps.md"),
+        ],
+    }
+}
+
+pub fn blender() -> Track {
+    Track {
+        id: "blender",
+        name: "Blender: 3D, VFX & Motion Graphics",
+        icon: "🧊",
+        category: Category::Extra,
+        lang: Some(Lang::Python),
+        blurb: "The full Blender suite: modeling, shading and rendering, animation and rigging, Geometry Nodes, smoke, fire, fluid and physics simulations, Grease Pencil, motion tracking, the node Compositor, the Video Sequence Editor and Python scripting.",
+        modules: vec![
+            module!(Novice, "0 · Interface and 3D Space", "Editors and workspaces, navigation, transforms, parenting, collections and the coordinate system.", "blender";
+                "bl0_01_interface.md"),
+            module!(Novice, "1 · Modeling", "Edit Mode tools, clean topology, the modifier stack, hard surface, sculpting, UVs, curves and text.", "blender";
+                "bl1_01_modeling.md"),
+            module!(Intermediate, "2 · Shading and Rendering", "Principled BSDF, shader nodes, procedural materials, lighting, cameras, EEVEE and Cycles.", "blender";
+                "bl2_01_shading_rendering.md"),
+            module!(Intermediate, "3 · Animation and Rigging", "Keyframes, the Graph Editor, drivers, constraints, armatures, FK/IK, Rigify and shape keys.", "blender";
+                "bl3_01_animation_rigging.md"),
+            module!(Intermediate, "4 · Geometry Nodes", "Fields, attributes, instances, scattering, simulation zones and procedural motion graphics.", "blender";
+                "bl4_01_geometry_nodes.md"),
+            module!(Advanced, "5 · Simulations and VFX", "Particles, Mantaflow fire, smoke and liquids, rigid body destruction, cloth and caching.", "blender";
+                "bl5_01_simulations.md"),
+            module!(Advanced, "6 · Grease Pencil", "2D animation in 3D: strokes, layers, onion skins, interpolation, modifiers and Line Art.", "blender";
+                "bl6_01_grease_pencil.md"),
+            module!(Advanced, "7 · Tracking and Compositing", "Camera and plane tracking, solving, the node Compositor, keying, Alpha Over and integration.", "blender";
+                "bl7_01_tracking_compositing.md"),
+            module!(Expert, "8 · VSE, Projects and Scripting", "The Video Sequence Editor, a motion graphics pipeline, bpy scripting and command-line rendering.", "blender";
+                "bl8_01_vse_scripting.md"),
+        ],
+    }
+}
+
+pub fn resolve() -> Track {
+    Track {
+        id: "resolve",
+        name: "DaVinci Resolve: Edit, Color, Fusion & Audio",
+        icon: "🎬",
+        category: Category::Extra,
+        lang: Some(Lang::Python),
+        blurb: "Post-production from first import to final delivery: editing on the Cut and Edit pages, Fusion VFX and motion graphics, colour grading and colour management, Fairlight audio, codecs and export, and scripting Resolve with Python.",
+        modules: vec![
+            module!(Novice, "0 · Pages, Projects and Timecode", "The pages, project settings, media management, proxies, frame rates and timecode.", "resolve";
+                "dr0_01_basics.md"),
+            module!(Novice, "1 · Editing", "The Cut and Edit pages, essential edits, trimming, storytelling, titles, speed and EDLs.", "resolve";
+                "dr1_01_editing.md"),
+            module!(Intermediate, "2 · Fusion", "Node-based compositing, keyframes and modifiers, tracking, keying, macros and motion graphics.", "resolve";
+                "dr2_01_fusion.md"),
+            module!(Intermediate, "3 · Color Grading", "Nodes, lift/gamma/gain, secondaries, shot matching, groups and LUTs.", "resolve";
+                "dr3_01_color.md"),
+            module!(Advanced, "4 · Scopes and Colour Management", "Waveforms and vectorscopes, log footage, DaVinci Wide Gamut, ACES and HDR.", "resolve";
+                "dr4_01_color_management.md"),
+            module!(Advanced, "5 · Fairlight Audio", "Editing and mixing dialogue, music and effects, EQ, compression, ducking and loudness.", "resolve";
+                "dr5_01_fairlight.md"),
+            module!(Advanced, "6 · Deliver", "Codecs, bitrates and file sizes, export recipes, alpha, subtitles and quality checks.", "resolve";
+                "dr6_01_deliver.md"),
+            module!(Expert, "7 · Scripting and Workflow", "The Python API, automation, collaboration, project structure and a full creative pipeline.", "resolve";
+                "dr7_01_scripting_workflow.md"),
+        ],
+    }
+}
+
 pub fn knowledge() -> Vec<Track> {
     vec![
         Track {

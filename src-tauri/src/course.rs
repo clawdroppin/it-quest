@@ -408,6 +408,11 @@ pub fn load_course() -> Vec<Track> {
     tracks.push(crate::tracks::gui());
     tracks.push(crate::tracks::linux_env());
     tracks.push(crate::tracks::gimp());
+    tracks.push(crate::tracks::rust_ui());
+    tracks.push(crate::tracks::vector_ui());
+    tracks.push(crate::tracks::ui_anim());
+    tracks.push(crate::tracks::blender());
+    tracks.push(crate::tracks::resolve());
     tracks
 }
 
