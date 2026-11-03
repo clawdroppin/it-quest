@@ -416,17 +416,25 @@ pub fn cpp() -> Track {
         blurb: "Close to the machine: performance, embedded systems, games, and the code under most other software.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Your first C++ program, compiling, and variables.", "cpp";
-                "x0_01_welcome.md"),
+                "x0_01_welcome.md", "x0_02_toolchain.md"),
             module!(Novice, "1 · Fundamentals", "Types, bits, strings, input, decisions, loops and functions.", "cpp";
-                "x1_01_types.md", "x1_02_control_functions.md"),
+                "x1_01_types.md", "x1_02_control_functions.md", "x1_03_references_pointers.md", "x1_04_text.md"),
             module!(Intermediate, "2 · The Standard Library", "Vectors, maps, algorithms, lambdas, classes and RAII.", "cpp";
-                "x2_01_containers.md", "x2_02_classes.md"),
+                "x2_01_containers.md", "x2_02_classes.md", "x2_03_stl_deep.md"),
             module!(Advanced, "3 · Memory and Errors", "Pointers, smart pointers, move semantics, exceptions and files.", "cpp";
                 "x3_01_memory.md", "x3_02_errors_files.md"),
             module!(Expert, "4 · Expert C++", "Templates, concepts, builds, threads and writing safe C++.", "cpp";
                 "x4_01_templates.md", "x4_02_professional.md"),
             module!(Expert, "5 · Systems Applications", "Designing, measuring and shipping real C++ programs: interfaces, performance, undo, GUIs and networking.", "cpp";
                 "x5_01_design.md", "x5_02_performance.md", "x5_03_apps.md"),
+            module!(Expert, "6 · C++ in Depth", "Special members and the rule of five, polymorphism and variant, move semantics, templates and constexpr, exception safety, concurrency, ranges and coroutines.", "cpp";
+                "e6_01_classes_deep.md", "e6_02_polymorphism.md", "e6_03_move_semantics.md", "e6_04_templates_deep.md", "e6_05_errors_deep.md", "e6_06_concurrency_deep.md", "e6_07_ranges_coroutines.md", "e6_08_project.md"),
+            module!(Expert, "7 · Production C++", "CMake and dependency resolution, test frameworks and property tests, undefined behaviour and sanitizers, network protocols, allocators and data layout, C interop, and a log shipping agent.", "cpp";
+                "n7_01_builds_dependencies.md", "n7_02_testing.md", "n7_03_ub_safety.md", "n7_04_networking.md", "n7_05_memory_layout.md", "n7_06_interop.md", "n7_07_project.md"),
+            module!(Expert, "8 · Desktop GUIs: Qt and Dear ImGui", "Signals and slots, the object tree, model/view with proxies, QML-style bindings, immediate-mode UIs, and a server monitor with an event loop and settings.", "cpp";
+                "g8_01_qt_basics.md", "g8_02_qt_models.md", "g8_03_imgui.md", "g8_04_project.md"),
+            module!(Expert, "9 · 🎓 Beyond IT: Games, Embedded and SIMD", "Optional, beyond IT scope: an ECS and collisions with raylib/SDL, microcontroller registers and interrupts, and SIMD/SWAR bit tricks.", "cpp";
+                "b9_01_games.md", "b9_02_embedded.md", "b9_03_simd.md"),
             build!(Advanced, "🧱 Firewall Rule Engine", "A first-match ACL engine with CIDR matching and shadowed-rule detection.", "cpp";
                 "y1_01_firewall.md"),
             build!(Expert, "🗄 Mini Key-Value Database", "An in-memory store with a write-ahead log, crash-safe replay and compaction.", "cpp";

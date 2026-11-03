@@ -13,7 +13,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | JavaScript | 55 | 106 | 153 | 83k | 47% (done, see below) |
 | SQL | 16 | 33 | 35 | 23k | 13% |
 | C# | 40 | 76 | 112 | 60k | 34% (done, see below) |
-| C++ | 14 | 23 | 40 | 24k | 14% |
+| C++ | 40 | 75 | 111 | 61k | 35% (done, see below) |
 | Go | 39 | 74 | 113 | 69k | 39% (done, see below) |
 | HTML/CSS | 13 | 19 | 43 | 21k | 12% |
 | TypeScript | 39 | 71 | 116 | 75k | 43% (done, see below) |
@@ -405,3 +405,39 @@ C# went from 14 to 40 lessons (76 exercises, 112 quizzes, about 60k words). The 
   - Unity's lifecycle and a fixed-timestep accumulator
   - coroutines as iterators and enemy AI state machines
   - Godot/MonoGame, seeded dungeon generation and A* pathfinding
+
+## C++ (done in this pass)
+
+C++ went from 14 to 40 lessons (75 exercises, 111 quizzes, about 61k words). The whole track verifies with 81 checks and 0 problems. The runner compiles with MSVC `/std:c++20` or g++ `-std=c++20`, so C++23 features (`std::expected`, `std::print`, `std::generator`) are shown as read-only examples. Exercises avoid anything whose output differs between standard libraries: unordered iteration order, `*_distribution` classes, timings and vector growth. Qt, Dear ImGui, Asio, GoogleTest, CMake, raylib/SDL and Arduino are taught with read-only examples. Their exercises rebuild the mechanisms behind them: signals/slots, the QObject tree, proxy models, QML bindings, an immediate-mode UI, an event loop, a test framework, frame and HTTP parsers, an ECS, and GPIO registers.
+
+- **Granular fundamentals (4 lessons, inserted into modules 0–2):**
+  - how C++ is built (preprocessor, compiler, linker), argv parsing, fixed-width integers and overflow
+  - references, pointers, const and std::span (the IP checksum)
+  - text in depth: string_view, std::format, from_chars, UTF-8
+  - choosing containers, custom hashes, priority queues
+- **Module 6, C++ in Depth (8 lessons):**
+  - special members and the rule of zero/five, the spaceship operator
+  - virtual functions, std::variant/visit and CRTP
+  - move semantics and perfect forwarding
+  - variadic templates, if constexpr, concepts and a compile-time CRC table
+  - exception safety and an expected type
+  - condition variables, scoped_lock, atomics and jthread
+  - ranges and a generator coroutine
+  - project: a thread pool with futures and parallel map-reduce
+- **Module 7, Production C++ (7 lessons):**
+  - CMake, vcpkg/Conan, topological build order and version resolution
+  - GoogleTest/Catch2 internals and property tests
+  - undefined behaviour, sanitizers and checked containers
+  - network framing and an incremental HTTP parser
+  - pmr allocators and data-oriented design
+  - C APIs, callbacks and language bindings
+  - project: a log shipper with batching, backoff and a circuit breaker
+- **Module 8, Desktop GUIs: Qt and Dear ImGui (4 lessons):**
+  - signals and slots and the object tree
+  - model/view proxies and QML-style bindings
+  - immediate-mode UI and the ID stack
+  - project: a server monitor event loop and INI settings
+- **Module 9, 🎓 Beyond IT: Games, Embedded and SIMD (3 lessons):**
+  - a sparse-set ECS and AABB collisions
+  - GPIO registers, an ISR ring buffer and debouncing
+  - SWAR byte counting and bitmap indexes with popcount
