@@ -9,7 +9,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | Rust | 106 | 179 | 254 | 175k | 100% |
 | Python | 84 | 155 | 216 | 103k | 59% (done, see below) |
 | PowerShell | 24 | 46 | 53 | 28k | 16% |
-| Bash | 23 | 41 | 53 | 27k | 15% |
+| Bash | 45 | 85 | 115 | 55k | 32% (done, see below) |
 | JavaScript | 55 | 106 | 153 | 83k | 47% (done, see below) |
 | SQL | 16 | 33 | 35 | 23k | 13% |
 | C# | 40 | 76 | 112 | 60k | 34% (done, see below) |
@@ -441,3 +441,35 @@ C++ went from 14 to 40 lessons (75 exercises, 111 quizzes, about 61k words). The
   - a sparse-set ECS and AABB collisions
   - GPIO registers, an ISR ring buffer and debouncing
   - SWAR byte counting and bitmap indexes with popcount
+
+## Bash (done in this pass)
+
+Bash went from 23 to 45 lessons (85 exercises, 115 quizzes, about 55k words; the counts include the three build projects). The whole track verifies with 93 checks and 0 problems. Git Bash has no jq, bc, whiptail or python3, so these tools are taught with read-only examples. Exercises use pure Bash and awk instead (a flat-JSON reader and writer, `select` menus, key decoding). Sorted output uses `LC_ALL=C`, and timings go to stderr, so the expected output is the same on every machine.
+
+- **Granular fundamentals (4 lessons, inserted into modules 1–2):**
+  - parameter expansion: defaults, trimming, replacement, case and indirection
+  - arrays in depth: mapfile, read -a, associative arrays and namerefs
+  - redirection in depth: file descriptors, the order of redirections, here-docs, process substitution, exec
+  - regular expressions: grep -E, sed -E, `[[ =~ ]]` and BASH_REMATCH validators
+- **Module 7, Bash in Depth (6 lessons):**
+  - printf formatting and safe `read` (NUL-separated data)
+  - functions: return values, dynamic scope, libraries and stack traces
+  - signals, traps, job control and `wait -n` concurrency limits
+  - subshells, PIPESTATUS, pipefail and replacing eval
+  - awk as a programming language (joins, arrays, functions)
+  - project: a task runner with topological ordering
+- **Module 8, Production Bash (6 lessons):**
+  - curl, retries with backoff, and JSON (jq, plus a pure-Bash reader and writer)
+  - portability: POSIX sh, dash, BusyBox, macOS, GNU vs BSD tools
+  - performance: counting forks, builtins vs external commands, awk for bulk work
+  - testing: Bats, a small test framework, mocking commands
+  - security: injection, option injection, validation, mktemp, umask, atomic writes
+  - project: a release script with Conventional Commits, a changelog and a dry run
+- **Module 9, Terminal UIs (3 lessons):**
+  - ANSI escapes, tput, NO_COLOR, boxes, bars and sparklines
+  - select menus, key decoding and whiptail
+  - project: a full-screen service dashboard (render, scrolling, an event loop)
+- **Module 10, 🎓 Beyond IT: Games, Generative Art and Interpreters (3 lessons):**
+  - Game of Life and 2048
+  - a fixed-point Mandelbrot set and a maze from a seeded random generator (an LCG)
+  - an RPN calculator and a Brainf*ck interpreter

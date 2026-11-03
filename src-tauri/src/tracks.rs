@@ -172,9 +172,9 @@ pub fn bash() -> Track {
             module!(Novice, "0 · Getting Started", "The shell, commands, help and the Linux file system.", "bash";
                 "l0_01_welcome.md", "l0_02_filesystem.md"),
             module!(Novice, "1 · Scripting Fundamentals", "Variables, quoting, tests, loops and functions.", "bash";
-                "l1_01_variables.md", "l1_02_conditions.md", "l1_03_loops.md", "l1_04_functions.md"),
+                "l1_01_variables.md", "l1_02_conditions.md", "l1_03_loops.md", "l1_04_functions.md", "l1_05_expansion.md", "l1_06_arrays.md"),
             module!(Intermediate, "2 · Text Power Tools", "Pipes, redirection, grep, sed, awk, find and archives.", "bash";
-                "l2_01_pipes.md", "l2_02_grep_sed_awk.md", "l2_03_find.md"),
+                "l2_01_pipes.md", "l2_02_grep_sed_awk.md", "l2_03_find.md", "l2_04_redirection_deep.md", "l2_05_regex.md"),
             module!(Intermediate, "3 · Linux Administration", "Permissions, processes, systemd, logs and networking.", "bash";
                 "l3_01_permissions.md", "l3_02_processes.md", "l3_03_networking.md"),
             module!(Advanced, "4 · Automation and Servers", "Robust scripts, scheduling, packages, disks and hardening.", "bash";
@@ -183,6 +183,15 @@ pub fn bash() -> Track {
                 "l5_01_containers.md", "l5_02_professional.md"),
             module!(Expert, "6 · Building CLI Tools", "Command-line conventions, getopts, subcommands, tests, ShellCheck, packaging and completion.", "bash";
                 "l6_01_cli_design.md", "l6_02_quality.md", "l6_03_shipping.md"),
+            module!(Expert, "7 · Bash in Depth", "printf and read, functions and scope, signals and jobs, subshells and eval, awk programs, and a task runner project.", "bash";
+                "e7_01_printf_read.md", "e7_02_functions_scope.md", "e7_03_signals_jobs.md", "e7_04_subshells_eval.md", "e7_05_awk_programs.md", "e7_06_project.md"),
+            module!(Expert, "8 · Production Bash", "HTTP APIs and JSON, portability, performance, testing, security, and a release script project.", "bash";
+                "n8_01_http_json.md", "n8_02_portability.md", "n8_03_performance.md",
+                "n8_04_testing.md", "n8_05_security.md", "n8_06_project.md"),
+            module!(Expert, "9 · Terminal UIs", "Colours and cursor control, menus and key handling, whiptail, and a full-screen dashboard project.", "bash";
+                "g9_01_ansi_tput.md", "g9_02_menus.md", "g9_03_project.md"),
+            module!(Expert, "10 · 🎓 Beyond IT: Games, Generative Art and Interpreters", "Optional, beyond IT scope: terminal games, fixed-point fractals and mazes, and language interpreters in pure Bash.", "bash";
+                "b10_01_games.md", "b10_02_generative.md", "b10_03_interpreters.md"),
             build!(Intermediate, "📊 Access Log Analyzer", "Who, what and when on a web server: a report from nginx logs.", "bash";
                 "m1_01_log_analyzer.md"),
             build!(Advanced, "🛡 Server Security Audit", "Check SSH, accounts and sudo rules, and score a Linux server.", "bash";
