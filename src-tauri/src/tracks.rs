@@ -41,6 +41,14 @@ pub fn rust() -> Track {
             module!(Expert, "9 · GUI Capstone", "Build a real desktop app with a GUI.", "rust";
                 "m9_01_how_guis_work.md", "m9_02_egui_hello.md", "m9_03_widgets_layout.md", "m9_04_app_state.md",
                 "m9_04b_background.md", "m9_05_ledger_model.md", "m9_06_ledger_gui.md", "m9_07_ledger_save.md", "m9_08_shipping.md"),
+            module!(Expert, "10 · Advanced Rust", "Advanced traits, dispatch, lifetimes, concurrency, async, macros, unsafe and performance.", "rust";
+                "m10_01_advanced_traits.md", "m10_02_dispatch.md", "m10_03_lifetimes_advanced.md", "m10_04_concurrency.md",
+                "m10_05_async.md", "m10_06_macros.md", "m10_07_unsafe_ffi.md", "m10_08_performance.md", "m10_09_project_threadpool.md"),
+            module!(Expert, "11 · Rust in the Real World", "Command-line tools, networking, web services, databases, the Cargo ecosystem, testing, observability and WebAssembly.", "rust";
+                "m11_01_cli.md", "m11_02_networking.md", "m11_03_web.md", "m11_04_databases.md", "m11_05_cargo_ecosystem.md",
+                "m11_06_testing_advanced.md", "m11_07_observability_errors.md", "m11_08_wasm.md", "m11_09_project_kvstore.md"),
+        module!(Expert, "12 · 🎓 Beyond IT: Embedded and Game Development", "Optional, beyond IT scope: no_std firmware on microcontrollers, and game development with ECS and Bevy.", "rust";
+                "m12_01_embedded.md", "m12_02_gamedev.md"),
             build!(Novice, "Start Here", "How the builds work, and setting up an AI helper.", "rust"; "g0_start.md"),
             build!(Advanced, "🍅 Focus Timer", "A Pomodoro timer with a progress ring, task log and weekly stats.", "rust";
                 "g1_01_timer_model.md", "g1_02_timer_window.md", "g1_03_timer_stats.md"),
@@ -64,12 +72,13 @@ pub fn python() -> Track {
         blurb: "The most useful first language in IT: automation, scripting, data, security tools and the cloud.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Your first programs, and how to read errors.", "python";
-                "n0_01_welcome.md", "n0_02_errors.md"),
+                "n0_01_welcome.md", "n0_02_errors.md", "n0_03_how_python_runs.md"),
             module!(Novice, "1 · Fundamentals", "Variables, math, text, decisions, loops and functions.", "python";
                 "n1_01_variables.md", "n1_02_numbers.md", "n1_03_strings.md", "n1_04_input.md", "n1_05_conditions.md",
-                "n1_06_loops.md", "n1_07_functions.md"),
+                "n1_06_loops.md", "n1_07_functions.md", "n1_08_booleans_none.md", "n1_09_scope_arguments.md", "n1_10_loop_patterns.md"),
             module!(Novice, "2 · Collections", "Lists, dictionaries, tuples and sets, and a first project.", "python";
-                "n2_01_lists.md", "n2_02_dicts.md", "n2_03_tuples_sets.md", "n2_04_project_inventory.md"),
+                "n2_01_lists.md", "n2_02_dicts.md", "n2_03_tuples_sets.md", "n2_05_comprehensions.md", "n2_06_collections_sorting.md",
+                "n2_04_project_inventory.md"),
             module!(Intermediate, "3 · Real-World Input", "Errors, files, the standard library and regular expressions.", "python";
                 "i3_01_exceptions.md", "i3_02_files.md", "i3_03_stdlib.md", "i3_04_regex.md"),
             module!(Intermediate, "4 · Data and Objects", "JSON, CSV, classes, and a log analyzer.", "python";
@@ -82,6 +91,24 @@ pub fn python() -> Track {
                 "e7_01_generators.md", "e7_02_decorators.md", "e7_03_typing.md", "e7_04_concurrency.md", "e7_05_professional.md"),
             module!(Expert, "8 · Application Development", "Architecture, databases and migrations, web APIs, GUIs and shipping real apps.", "python";
                 "f8_01_architecture.md", "f8_02_data.md", "f8_03_interfaces.md"),
+            module!(Advanced, "9 · The Python Object Model", "References and mutability, special methods, inheritance, properties, protocols, enums, pattern matching and functional tools.", "python";
+                "p9_01_references.md", "p9_02_dunder_methods.md", "p9_03_inheritance.md", "p9_04_properties_classmethods.md",
+                "p9_05_abc_protocols.md", "p9_06_enums_matching.md", "p9_07_functional.md", "p9_08_project_calculator.md"),
+            module!(Expert, "10 · Advanced Python", "Descriptors and metaclasses, asyncio in depth, threads and processes, performance, introspection, advanced typing, binary data and C/Rust interop, memory.", "python";
+                "q10_01_descriptors_metaclasses.md", "q10_02_asyncio.md", "q10_03_parallelism.md", "q10_04_performance.md", "q10_05_introspection.md",
+                "q10_06_typing_advanced.md", "q10_07_binary_interop.md", "q10_08_memory.md", "q10_09_project_scheduler.md"),
+            module!(Expert, "11 · Python in the Real World", "FastAPI and Pydantic, ORMs and query performance, packaging, pytest in depth, logging, configuration and secrets, security, dates and times.", "python";
+                "r11_01_fastapi.md", "r11_02_orm.md", "r11_03_packaging.md", "r11_04_pytest.md", "r11_05_logging.md",
+                "r11_06_config_secrets.md", "r11_07_security.md", "r11_08_dates_times.md", "r11_09_project_relay.md"),
+        module!(Expert, "12 · GUI Capstone: Desktop Apps with Tkinter",
+                "Tkinter and ttk widgets, layout, events and validation, MVP and undo, tables and themes, menus and files, canvas charts, background threads, and packaging with PyInstaller.",
+                "python"; "s12_01_tkinter_basics.md", "s12_02_layout.md", "s12_03_events_variables.md", "s12_04_mvp.md",
+                "s12_05_tables_themes.md", "s12_06_menus_dialogs_files.md", "s12_07_canvas_charts.md",
+                "s12_08_background_work.md", "s12_09_project_packaging.md"),
+        module!(Expert, "13 · 🎓 Beyond IT: Data Science, Machine Learning and Games",
+                "Optional, beyond IT scope: data analysis, machine learning from scratch, NumPy and numerical methods, and game development with Pygame.",
+                "python"; "t13_01_data_analysis.md", "t13_02_machine_learning.md", "t13_03_scientific_computing.md",
+                "t13_04_game_development.md"),
             build!(Intermediate, "🔎 Log Sentinel", "A security tool that finds brute-force attacks and break-ins in SSH logs.", "python";
                 "b1_01_sentinel_parse.md", "b1_02_sentinel_rules.md"),
             build!(Advanced, "🌐 Network Toolkit", "Subnet calculator, VLSM planner and a threaded port scanner in one CLI.", "python";
@@ -179,11 +206,13 @@ pub fn javascript() -> Track {
         blurb: "The language of the web, and with Node.js, of servers and tools too.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Your first JavaScript, run with Node.js.", "javascript";
-                "j0_01_welcome.md"),
+                "j0_01_welcome.md", "j0_02_how_js_runs.md"),
             module!(Novice, "1 · Fundamentals", "Values, comparisons, decisions, loops and functions.", "javascript";
-                "j1_01_values.md", "j1_02_control.md", "j1_03_functions.md"),
+                "j1_01_values.md", "j1_02_control.md", "j1_03_functions.md",
+                "j1_04_types_coercion.md", "j1_05_scope_hoisting.md", "j1_06_loops_iteration.md"),
             module!(Intermediate, "2 · Working with Data", "Arrays, objects, JSON and regular expressions.", "javascript";
-                "j2_01_arrays.md", "j2_02_objects.md", "j2_03_regex.md"),
+                "j2_01_arrays.md", "j2_02_objects.md", "j2_03_regex.md",
+                "j2_04_destructuring_copying.md", "j2_05_maps_sets.md", "j2_06_dates_intl.md"),
             module!(Intermediate, "3 · Real-World JavaScript", "Errors, classes, async code, files and npm.", "javascript";
                 "j3_01_errors_classes.md", "j3_02_async.md", "j3_03_node.md"),
             module!(Advanced, "4 · The Web", "HTML, the DOM, HTTP and REST APIs.", "javascript";
@@ -192,6 +221,24 @@ pub fn javascript() -> Track {
                 "j5_01_professional.md"),
             module!(Expert, "6 · Full-Stack Applications", "Your own web server, front-end state and rendering, auth, config and deployment.", "javascript";
                 "j6_01_server.md", "j6_02_frontend.md", "j6_03_production.md"),
+            module!(Advanced, "7 · JavaScript in Depth",
+                "this and binding, prototypes and classes, modules, iterators and generators, the event loop, metaprogramming, error handling and functional patterns.",
+                "javascript"; "l7_01_this_binding.md", "l7_02_prototypes_classes.md", "l7_03_modules.md",
+                "l7_04_iterators_generators.md", "l7_05_event_loop.md", "l7_06_metaprogramming.md",
+                "l7_07_errors_deep.md", "l7_08_functional.md", "l7_09_project_task_queue.md"),
+            module!(Expert, "8 · Advanced Node.js",
+                "Streams, worker threads and child processes, testing with node:test, binary data and crypto, performance and memory, security, observability and databases.",
+                "javascript"; "m8_01_streams.md", "m8_02_workers_processes.md", "m8_03_testing.md",
+                "m8_04_binary_crypto.md", "m8_05_performance_memory.md", "m8_06_security.md",
+                "m8_07_observability.md", "m8_08_databases.md", "m8_09_project_backup.md"),
+            module!(Expert, "9 · GUI Capstone: React and Desktop Apps",
+                "Components and the virtual DOM, React state and reducers, hooks and effects, forms and schemas, routing and server state, accessibility, and desktop apps with Electron and Tauri.",
+                "javascript"; "u9_01_components_vdom.md", "u9_02_react_basics.md", "u9_03_hooks_effects.md",
+                "u9_04_forms_validation.md", "u9_05_routing_data.md", "u9_06_accessibility_styling.md",
+                "u9_07_desktop_apps.md", "u9_08_project_asset_app.md"),
+            module!(Expert, "10 · 🎓 Beyond IT: Games, 3D and Creative Coding",
+                "Optional, beyond IT scope: canvas games, 3D graphics with three.js, and generative art and sound.",
+                "javascript"; "g10_01_canvas_games.md", "g10_02_3d_graphics.md", "g10_03_creative_coding.md"),
             build!(Advanced, "📡 Uptime Monitor", "Parallel site checks, alerts, history and a status page.", "javascript";
                 "k1_01_uptime_monitor.md"),
             build!(Expert, "🎫 Help Desk Ticket API", "A REST API with SLAs, validation and tests: the core of an ITSM tool.", "javascript";
@@ -215,17 +262,27 @@ pub fn typescript() -> Track {
         blurb: "JavaScript with types: the standard for serious web, Node.js and cloud tooling code.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Types, inference, and how TypeScript runs.", "typescript";
-                "t0_01_welcome.md"),
+                "t0_01_welcome.md", "t0_02_type_checking.md"),
             module!(Intermediate, "1 · The Type System", "Arrays, unions, literal types and object types.", "typescript";
-                "t1_01_types.md"),
+                "t1_01_types.md", "t1_02_objects_interfaces.md", "t1_03_tuples_literals.md"),
             module!(Intermediate, "2 · Functions and Narrowing", "Generics, discriminated unions and type guards.", "typescript";
-                "t2_01_functions_generics.md", "t2_02_narrowing.md"),
+                "t2_01_functions_generics.md", "t2_02_narrowing.md", "t2_03_function_types.md"),
             module!(Advanced, "3 · Real-World TypeScript", "Classes, utility types, async code, APIs and modules.", "typescript";
                 "t3_01_classes_utility.md", "t3_02_async_modules.md"),
             module!(Expert, "4 · Professional TypeScript", "tsconfig, testing, declarations, migration and runtime validation.", "typescript";
                 "t4_01_professional.md"),
             module!(Expert, "5 · Application Architecture", "Domain modeling with types, ports and adapters, events, and full-stack TypeScript.", "typescript";
                 "t5_01_domain.md", "t5_02_architecture.md", "t5_03_fullstack.md"),
+            module!(Expert, "6 · The Type System in Depth", "Generics, mapped, conditional and template literal types, variance, brands and type-level programming.", "typescript";
+                "t6_01_generics_deep.md", "t6_02_mapped_types.md", "t6_03_conditional_infer.md", "t6_04_template_literal_types.md",
+                "t6_05_variance_branded.md", "t6_06_recursive_types.md", "t6_07_project_query_builder.md"),
+            module!(Expert, "7 · TypeScript in the Real World", "Declaration files, decorators, tooling and packages, testing, runtime validation, typed errors and typed APIs.", "typescript";
+                "t7_01_declaration_files.md", "t7_02_decorators.md", "t7_03_tooling_packages.md", "t7_04_testing.md",
+                "t7_05_runtime_validation.md", "t7_06_typed_errors.md", "t7_07_typed_api.md", "t7_08_project_incidents.md"),
+            module!(Expert, "8 · GUI Capstone: React and Tauri Desktop Apps", "Typed components and props, state stores, data fetching and forms, Tauri commands and events, and a keyboard-first desktop app core.", "typescript";
+                "t8_01_react_typescript.md", "t8_02_state_stores.md", "t8_03_data_forms.md", "t8_04_tauri_ipc.md", "t8_05_project_asset_desk.md"),
+            module!(Expert, "9 · 🎓 Beyond IT: Interpreters, Game Engines and Generative Art", "Optional, beyond IT scope: a parser and interpreter, a typed ECS game engine, and seeded simulations.", "typescript";
+                "x9_01_interpreter.md", "x9_02_game_ecs.md", "x9_03_simulation_generative.md"),
             build!(Advanced, "🚨 Alert Router", "Route monitoring alerts to on-call teams: matchers, silences, de-duplication.", "typescript";
                 "u1_01_alert_router.md"),
             build!(Expert, "🏢 Meeting Room Booking", "Holds that expire, confirmations and smart room search, with ports and adapters.", "typescript";
