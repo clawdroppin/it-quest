@@ -14,7 +14,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | SQL | 16 | 33 | 35 | 23k | 13% |
 | C# | 14 | 24 | 39 | 22k | 12% |
 | C++ | 14 | 23 | 40 | 24k | 14% |
-| Go | 13 | 22 | 38 | 26k | 15% |
+| Go | 39 | 74 | 113 | 69k | 39% (done, see below) |
 | HTML/CSS | 13 | 19 | 43 | 21k | 12% |
 | TypeScript | 39 | 71 | 116 | 75k | 43% (done, see below) |
 
@@ -333,3 +333,39 @@ TypeScript went from 12 to 39 lessons (71 exercises, 116 quizzes, about 75k word
   - a Pratt parser and interpreter
   - a typed ECS game engine
   - seeded simulations, cellular automata and L-systems
+
+## Go (done in this pass)
+
+Go went from 13 to 39 lessons (74 exercises, 113 quizzes, about 69k words). The whole track verifies with 80 checks and 0 problems. The runner builds with `GOTOOLCHAIN=local` and only the standard library, so third-party tools (cobra, gRPC, database drivers, Fyne, Ebitengine, TinyGo) are taught with read-only examples, and their exercises test the stdlib logic behind them: flag-based subcommands, a query builder and migrations runner, protobuf varints and wire encoding, view-models and bindings, fixed-point physics. Concurrent exercises print deterministic output: results are sorted, timing is checked as booleans, and UI updates go through a single queue.
+
+- **Granular fundamentals (4 lessons, inserted into modules 0–2):**
+  - the toolchain, constants and iota
+  - pointers vs values and nil receivers
+  - strings, bytes and runes (display width for CJK text)
+  - slices in depth: aliasing, capacity, the slices and maps packages
+- **Module 6, Go in Depth (8 lessons):**
+  - interfaces in depth: embedding, io.Writer decorators, type switches
+  - generics in depth
+  - range-over-func iterators and iter.Pull
+  - errors in depth: wrapping, errors.Join, panics and recover
+  - concurrency patterns: select, pipelines, fan-out/fan-in, an errgroup with a limit
+  - context, mutexes, Once/OnceValue, atomics and the race detector
+  - reflection, struct tags, unsafe and cgo
+  - project: a concurrent link checker with retries and backoff
+- **Module 7, Production Go (7 lessons):**
+  - testing: table tests, benchmarks, fuzzing, examples, synctest
+  - CLIs: flag, subcommands, exit codes, config precedence, cobra
+  - database/sql: queries, transactions, placeholders, migrations
+  - Protocol Buffers and gRPC
+  - performance: pprof, allocations, escape analysis, GOGC/GOMEMLIMIT, PGO
+  - observability: slog, redaction, request logging middleware, metrics and tracing
+  - project: a production HTTP service with graceful shutdown
+- **Module 8, GUI Capstone: Desktop Apps with Fyne (4 lessons):**
+  - apps, widgets, layouts and form validation
+  - data binding, virtualized lists and view-models
+  - background work on the UI thread, cancellation and debouncing
+  - project: a server status dashboard with versioned settings
+- **Module 9, 🎓 Beyond IT: Embedded, Games and Generative Code (3 lessons):**
+  - TinyGo on microcontrollers (debouncing, fixed-point sensors) and WebAssembly
+  - 2D games with Ebitengine (sub-pixel tilemap physics, pathfinding)
+  - procedural generation (seeded mazes, the Game of Life)

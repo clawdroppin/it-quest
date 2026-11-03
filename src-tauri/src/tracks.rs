@@ -336,17 +336,25 @@ pub fn go() -> Track {
         blurb: "The language of cloud infrastructure: Docker, Kubernetes and Terraform are written in Go.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Your first Go program, variables and Go's strict compiler.", "go";
-                "g0_01_welcome.md"),
+                "g0_01_welcome.md", "g0_02_toolchain_constants.md"),
             module!(Novice, "1 · Fundamentals", "Types, strings, control flow, functions and errors.", "go";
-                "g1_01_basics.md", "g1_02_functions_errors.md"),
+                "g1_01_basics.md", "g1_02_functions_errors.md", "g1_03_pointers_values.md", "g1_04_strings_runes.md"),
             module!(Intermediate, "2 · Data", "Slices, maps, structs, methods and interfaces.", "go";
-                "g2_01_slices_maps.md", "g2_02_structs_interfaces.md"),
+                "g2_01_slices_maps.md", "g2_02_structs_interfaces.md", "g2_03_slices_deep.md"),
             module!(Advanced, "3 · Concurrency and Networks", "Goroutines, channels, worker pools, HTTP and JSON.", "go";
                 "g3_01_concurrency.md", "g3_02_http_json.md"),
             module!(Expert, "4 · Professional Go", "Modules, table-driven tests, generics and shipping binaries.", "go";
                 "g4_01_professional.md"),
             module!(Expert, "5 · Building Services", "Go 1.22 routing, JSON, middleware, project structure, errors, databases, logging, timeouts and containers.", "go";
                 "g5_01_services.md", "g5_02_structure.md", "g5_03_operations.md"),
+            module!(Expert, "6 · Go in Depth", "Interfaces, generics, iterators, errors, concurrency patterns, context and sync, reflection and unsafe.", "go";
+                "d6_01_interfaces_deep.md", "d6_02_generics_deep.md", "d6_03_iterators.md", "d6_04_errors_deep.md", "d6_05_concurrency_patterns.md", "d6_06_context_sync.md", "d6_07_reflection_unsafe.md", "d6_08_project.md"),
+            module!(Expert, "7 · Production Go", "Testing, benchmarks and fuzzing, CLIs, databases, protobuf and gRPC, performance, structured logging and a production HTTP service.", "go";
+                "p7_01_testing.md", "p7_02_cli.md", "p7_03_database.md", "p7_04_grpc_protobuf.md", "p7_05_performance.md", "p7_06_slog.md", "p7_07_project.md"),
+            module!(Expert, "8 · GUI Capstone: Desktop Apps with Fyne", "Fyne windows, widgets and layouts, data binding and view-models, background work on the UI thread, and a server dashboard app.", "go";
+                "f8_01_fyne_basics.md", "f8_02_binding_mvvm.md", "f8_03_ui_concurrency.md", "f8_04_project.md"),
+            module!(Expert, "9 · 🎓 Beyond IT: Embedded, Games and Generative Code", "Optional, beyond IT scope: TinyGo on microcontrollers, 2D games with Ebitengine, and procedural generation.", "go";
+                "b9_01_tinygo.md", "b9_02_ebitengine.md", "b9_03_generative.md"),
             build!(Advanced, "🩺 Service Health Prober", "Check every service at once: TCP and HTTP, a worker pool, timeouts, percentiles.", "go";
                 "h1_01_health_prober.md"),
             build!(Expert, "📇 Device Inventory REST API", "A standard-library Go service: routing, validation, error mapping, middleware, safe storage and tests.", "go";
