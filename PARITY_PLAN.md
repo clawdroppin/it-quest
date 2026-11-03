@@ -12,7 +12,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | Bash | 23 | 41 | 53 | 27k | 15% |
 | JavaScript | 55 | 106 | 153 | 83k | 47% (done, see below) |
 | SQL | 16 | 33 | 35 | 23k | 13% |
-| C# | 14 | 24 | 39 | 22k | 12% |
+| C# | 40 | 76 | 112 | 60k | 34% (done, see below) |
 | C++ | 14 | 23 | 40 | 24k | 14% |
 | Go | 39 | 74 | 113 | 69k | 39% (done, see below) |
 | HTML/CSS | 13 | 19 | 43 | 21k | 12% |
@@ -369,3 +369,39 @@ Go went from 13 to 39 lessons (74 exercises, 113 quizzes, about 69k words). The 
   - TinyGo on microcontrollers (debouncing, fixed-point sensors) and WebAssembly
   - 2D games with Ebitengine (sub-pixel tilemap physics, pathfinding)
   - procedural generation (seeded mazes, the Game of Life)
+
+## C# (done in this pass)
+
+C# went from 14 to 40 lessons (76 exercises, 112 quizzes, about 60k words). The whole track verifies with 82 checks and 0 problems. The runner compiles with csc against Microsoft.NETCore.App only, so ASP.NET Core, EF Core, xUnit, Blazor, WPF/MAUI/Avalonia, CommunityToolkit.Mvvm, BenchmarkDotNet and Unity are taught with read-only examples. Their exercises rebuild the BCL logic behind them: a reflection-based test runner, a DI container, a change tracker and expression visitors, a route matcher, Problem Details JSON, an EditContext, a binding engine, collection views, a SynchronizationContext pump and a game-loop lifecycle. Concurrent exercises stay deterministic: they use TaskCompletionSource gates, injected TimeProvider clocks and grouped output.
+
+- **Granular fundamentals (4 lessons, inserted into modules 0–2):**
+  - the .NET toolchain, project files, argument parsing and [Flags] enums
+  - strings in depth: StringBuilder, formatting, Unicode text elements
+  - value vs reference types, the GC and IDisposable
+  - generics and collections in depth: an LRU cache, generic math with INumber<T>
+- **Module 6, C# in Depth (8 lessons):**
+  - OOP in depth (template method, decorators)
+  - delegates and events
+  - LINQ internals and custom operators
+  - pattern matching
+  - nullable reference types and a Result<T> type
+  - async in depth (SemaphoreSlim, cancellation, Channels)
+  - reflection and attributes
+  - project: a reflection-discovered job runner
+- **Module 7, Production .NET (7 lessons):**
+  - testing with xUnit and fakes
+  - DI and layered configuration
+  - EF Core change tracking and expression trees
+  - minimal APIs and Problem Details
+  - Blazor components and forms
+  - high-performance C# (Span, stackalloc, ArrayPool, allocation measurement)
+  - project: a worker service with graceful shutdown and health checks
+- **Module 8, Desktop Apps in Depth (4 lessons):**
+  - XAML data binding and a mini binding engine
+  - async commands, navigation and messaging
+  - live collection views and the UI thread
+  - project: an asset desk app with INotifyDataErrorInfo and coalescing undo/redo
+- **Module 9, 🎓 Beyond IT: Game Development (3 lessons):**
+  - Unity's lifecycle and a fixed-timestep accumulator
+  - coroutines as iterators and enemy AI state machines
+  - Godot/MonoGame, seeded dungeon generation and A* pathfinding

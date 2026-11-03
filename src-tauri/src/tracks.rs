@@ -376,17 +376,25 @@ pub fn csharp() -> Track {
         blurb: "Microsoft's .NET language: business systems, web APIs, Azure, Windows tools and Unity games.",
         modules: vec![
             module!(Novice, "0 · Getting Started", "Your first C# programs, variables and compiler errors.", "csharp";
-                "c0_01_welcome.md"),
+                "c0_01_welcome.md", "c0_02_dotnet_toolchain.md"),
             module!(Novice, "1 · Fundamentals", "Types, text, decisions, loops and methods.", "csharp";
-                "c1_01_types.md", "c1_02_control.md", "c1_03_methods.md"),
+                "c1_01_types.md", "c1_02_control.md", "c1_03_methods.md", "c1_04_strings_deep.md", "c1_05_value_reference.md"),
             module!(Intermediate, "2 · Data and Objects", "Lists, dictionaries, LINQ, classes, records and interfaces.", "csharp";
-                "c2_01_collections.md", "c2_02_classes.md"),
+                "c2_01_collections.md", "c2_02_classes.md", "c2_03_generics_collections.md"),
             module!(Advanced, "3 · Real-World C#", "Exceptions, files, JSON, async code and HTTP.", "csharp";
                 "c3_01_errors_files.md", "c3_02_async.md"),
             module!(Expert, "4 · Professional .NET", "Projects, NuGet, testing, dependency injection and Web APIs.", "csharp";
                 "c4_01_professional.md"),
             module!(Expert, "5 · Application Development", "Clean architecture, EF Core and ASP.NET Core, MVVM desktop apps and shipping.", "csharp";
                 "c5_01_architecture.md", "c5_02_data_web.md", "c5_03_desktop.md"),
+            module!(Expert, "6 · C# in Depth", "OOP in depth, delegates and events, LINQ internals, pattern matching, nullable references, async in depth, reflection and attributes.", "csharp";
+                "e6_01_oop_deep.md", "e6_02_delegates_events.md", "e6_03_linq_deep.md", "e6_04_pattern_matching.md", "e6_05_nullable.md", "e6_06_async_deep.md", "e6_07_reflection_attributes.md", "e6_08_project.md"),
+            module!(Expert, "7 · Production .NET", "Testing, dependency injection and configuration, EF Core, ASP.NET Core, Blazor, performance, and a hosted background service.", "csharp";
+                "n7_01_testing.md", "n7_02_di_config.md", "n7_03_efcore.md", "n7_04_minimal_apis.md", "n7_05_blazor.md", "n7_06_performance.md", "n7_07_project.md"),
+            module!(Expert, "8 · Desktop Apps in Depth", "XAML data binding, async commands and navigation, live collections and the UI thread, and an asset desk app with validation and undo.", "csharp";
+                "g8_01_xaml_binding.md", "g8_02_commands_navigation.md", "g8_03_collections_threading.md", "g8_04_project.md"),
+            module!(Expert, "9 · 🎓 Beyond IT: Game Development", "Optional, beyond IT scope: Unity's lifecycle and fixed timestep, coroutines and AI state machines, Godot, MonoGame and procedural generation.", "csharp";
+                "b9_01_unity.md", "b9_02_coroutines_ai.md", "b9_03_procgen.md"),
             build!(Advanced, "🛡 Patch Compliance Reporter", "Check every machine against the security baseline: builds, patches, encryption, AV.", "csharp";
                 "d1_01_patch_report.md"),
             build!(Expert, "🧾 Invoice Manager", "Japan's qualified-invoice tax rules, numbering, payments and an aging report.", "csharp";
