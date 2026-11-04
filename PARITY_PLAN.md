@@ -676,3 +676,11 @@ Terraform went from 5 to 8 lessons, from 3 to 9 exercises, and from 22 to 40 qui
 - **Configuration in depth:** providers, aliases and the lock file, constraint operators, variables and validation, precedence, sensitive values, data sources, the graph and parallelism.
 - **State and plans in depth:** plan symbols, replacement, saved plans, drift and refresh-only, -replace, import blocks with generated config, moved/removed, state commands, backends and locking.
 - **Modules and HCP Terraform:** module sources and versions, boundaries, CLI vs HCP workspaces, run workflows, Sentinel/OPA enforcement levels.
+
+### Cloud Computing (done in this pass)
+
+The general cloud track went from 8 to 11 lessons, from 11 to 17 exercises, and from 46 to 64 quizzes (about 20k words, up from 15k). The new lessons fill the gaps in virtualization, containers and security, which had no exercises. The exercises cover packing VMs onto hosts with overcommit, reserve and anti-affinity plus an N+1 check; choosing a 7 Rs strategy with online vs offline transfer; simulating the Docker build cache with .dockerignore; scoring container hardening; envelope encryption with KEK rotation (toy cipher, labelled as such); and a CIS-style posture check with per-section compliance. The track verifies with 21 checks and 0 problems. New lessons:
+
+- **Virtualization, capacity and migration:** hypervisor resource sharing, overcommit, NUMA, N+1, shared responsibility, the 7 Rs and transfer-time maths.
+- **Containers in depth:** layers, build cache ordering, multi-stage builds, tags vs digests, signing and scanning, namespaces, cgroups and hardening.
+- **Cloud security and compliance:** identity as the perimeter, encryption in transit/at rest/in use, envelope encryption and key management options, secrets, detection, CSPM/CNAPP, compliance reports and common misconfigurations.

@@ -1059,13 +1059,13 @@ pub fn knowledge() -> Vec<Track> {
             blurb: "Virtualization, Docker, Kubernetes, cloud-native design, and CloudOps: landing zones, DR, cost, networking and Python automation.",
             modules: vec![
                 module!(Novice, "0 · Virtualization and Cloud", "Hypervisors, VMs vs containers, cloud models, migration and FinOps.", "cloud";
-                    "cl0_01_virtualization.md"),
+                    "cl0_01_virtualization.md", "cl0_02_virtualization_deep.md"),
                 module!(Intermediate, "1 · Containers", "Images, Dockerfiles, volumes, networks, Compose and container security.", "cloud";
-                    "cl1_01_containers.md"),
+                    "cl1_01_containers.md", "cl1_02_containers_deep.md"),
                 module!(Advanced, "2 · Orchestration and Cloud-Native", "Kubernetes, twelve-factor apps, resilience patterns and serverless.", "cloud";
                     "cl2_01_kubernetes.md", "cl2_02_cloud_native.md"),
-                module!(Advanced, "3 · CloudOps", "Landing zones, identity, tagging, monitoring, patching, backup and DR, cost and cloud networking.", "cloud";
-                    "cl3_01_cloudops.md", "cl3_02_cloud_networking.md"),
+                module!(Advanced, "3 · CloudOps", "Landing zones, identity, tagging, monitoring, patching, backup and DR, cost, networking, security and compliance.", "cloud";
+                    "cl3_01_cloudops.md", "cl3_02_cloud_networking.md", "cl3_03_cloud_security.md"),
                 module!(Advanced, "4 · Cloud Automation with Python", "SDKs, pagination, retries and backoff, safe cleanup scripts, events and cost reports.", "cloud";
                     "cl4_01_cloud_automation.md"),
                 build!(Advanced, "📦 Containerize a Status Board", "A Python service, its Docker image, a Compose stack and a Kubernetes deployment.", "cloud";
