@@ -11,7 +11,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | PowerShell | 46 | 90 | 109 | 58k | 33% (done, see below) |
 | Bash | 45 | 85 | 115 | 55k | 32% (done, see below) |
 | JavaScript | 55 | 106 | 153 | 83k | 47% (done, see below) |
-| SQL | 16 | 33 | 35 | 23k | 13% |
+| SQL | 40 | 109 | 110 | 62k | 35% (done, see below) |
 | C# | 40 | 76 | 112 | 60k | 34% (done, see below) |
 | C++ | 40 | 75 | 111 | 61k | 35% (done, see below) |
 | Go | 39 | 74 | 113 | 69k | 39% (done, see below) |
@@ -505,3 +505,37 @@ PowerShell went from 24 to 46 lessons (90 exercises, 109 quizzes, about 58k word
   - Sudoku with backtracking and the MRV heuristic; N-Queens
   - a System.Drawing plasma bitmap and SVG spirographs
   - note frequencies and writing a WAV file byte by byte
+
+## SQL (done in this pass)
+
+SQL went from 16 to 40 lessons (109 exercises, 110 quizzes, about 62k words; the counts include the two build projects). The whole track verifies with 115 checks and 0 problems, and every runnable example in the new lesson text runs against the company database. Exercises run on Python's SQLite, so PostgreSQL, SQL Server and MySQL features are taught with read-only examples and the exercises use their portable SQLite equivalents (FILTER, ROW_NUMBER for DISTINCT ON, sorted subqueries for string_agg). The runner stops at the first SQL error, so rules that reject changes are shown with `RAISE(IGNORE)` and waitlist tables instead of failing statements.
+
+- **Granular fundamentals (6 lessons, inserted into modules 1–3):**
+  - NULL and three-valued logic: COALESCE, NULLIF, NULLs in aggregates, the NOT IN trap
+  - data types, SQLite affinity and STRICT, integer division, CAST and rounding
+  - joins in depth: self joins, ON vs WHERE in outer joins, semi and anti joins, CROSS JOIN, fan-out
+  - set operations: UNION (ALL), INTERSECT, EXCEPT, VALUES, comparing tables
+  - recursive CTEs: hierarchies, date series, graphs and cycle guards
+  - views, temporary tables, materialised views and generated columns
+- **Module 7, SQL in Depth (6 lessons):**
+  - window frames (ROWS/RANGE), LAG/LEAD, NTILE, named windows, gaps and islands
+  - JSON: json_extract, json_each, building JSON, indexing, PostgreSQL jsonb
+  - text search: LIKE and collations, FTS5 with porter and trigram tokenizers, highlight
+  - dates and time zones: instants vs civil time, modifiers, business-day calendars, fiscal years
+  - constraints, foreign key actions, partial unique indexes, triggers and INSTEAD OF views
+  - project: a help desk SLA report built from layered CTEs
+- **Module 8, Production Databases (6 lessons):**
+  - transactions: anomalies, isolation levels, MVCC, lost updates, deadlocks, savepoints, SKIP LOCKED queues
+  - query tuning: sargable predicates, composite and covering indexes, redundant indexes, N+1
+  - security: least privilege, row-level security, masking, auditing, anonymisation
+  - PostgreSQL, SQL Server and MySQL differences and portable SQL
+  - operations: backups and PITR, replication, migrations, expand/contract, health checks
+  - project: a software licence compliance database with a seat-limit trigger
+- **Module 9, Analytics and Data Warehousing (3 lessons):**
+  - star schemas, grain, date dimensions, semi-additive measures
+  - ETL/ELT: staging, cleaning, deduplication, incremental loads, SCD type 2, data quality gates
+  - project: funnels, cohort retention and power users from an event table
+- **Module 10, 🎓 Beyond IT: Fractals, Graphs and Statistics (3 lessons):**
+  - Sierpinski, Mandelbrot and Rule 90 drawn with recursive CTEs
+  - shortest paths, reachability and the Game of Life in SQL
+  - medians, percentiles, histograms and linear regression

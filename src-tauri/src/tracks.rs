@@ -476,18 +476,26 @@ pub fn sql() -> Track {
         modules: vec![
             module!(Novice, "0 · Getting Started", "Tables, rows, columns and your first SELECT.", "sql";
                 "s0_01_welcome.md"),
-            module!(Novice, "1 · Asking Questions", "Filtering, sorting, calculating and grouping.", "sql";
-                "s1_01_where.md", "s1_02_sorting.md", "s1_03_aggregates.md"),
-            module!(Intermediate, "2 · Relationships and Changes", "Joins, changing data, transactions and table design.", "sql";
-                "s2_01_joins.md", "s2_02_modify.md", "s2_03_create.md"),
-            module!(Advanced, "3 · Powerful Queries", "Subqueries, CTEs, text, dates and CASE.", "sql";
-                "s3_01_subqueries.md", "s3_02_functions.md"),
+            module!(Novice, "1 · Asking Questions", "Filtering, sorting, calculating and grouping, NULL logic and data types.", "sql";
+                "s1_01_where.md", "s1_02_sorting.md", "s1_03_aggregates.md", "s1_04_null.md", "s1_05_types.md"),
+            module!(Intermediate, "2 · Relationships and Changes", "Joins (self, outer, semi and anti), set operations, changing data, transactions and table design.", "sql";
+                "s2_01_joins.md", "s2_02_modify.md", "s2_03_create.md", "s2_04_joins_deep.md", "s2_05_sets.md"),
+            module!(Advanced, "3 · Powerful Queries", "Subqueries, CTEs and recursive CTEs, views, text, dates and CASE.", "sql";
+                "s3_01_subqueries.md", "s3_02_functions.md", "s3_03_recursive.md", "s3_04_views.md"),
             module!(Advanced, "4 · Analytics", "Window functions: rankings, running totals, top N per group.", "sql";
                 "s4_01_window.md"),
             module!(Expert, "5 · Professional Databases", "SQL injection, permissions, normalization and DBA basics.", "sql";
                 "s5_01_professional.md"),
             module!(Expert, "6 · Databases for Applications", "Schema design and constraints, indexes and query plans, pagination, transactions, UPSERT, triggers and migrations.", "sql";
                 "s6_01_schema.md", "s6_02_performance.md", "s6_03_app_patterns.md"),
+            module!(Expert, "7 · SQL in Depth", "Window frames and gaps and islands, JSON, full-text search, dates and time zones, constraints and triggers, and an SLA report.", "sql";
+                "e7_01_windows_deep.md", "e7_02_json.md", "e7_03_text_search.md", "e7_04_dates.md", "e7_05_triggers_constraints.md", "e7_06_project.md"),
+            module!(Expert, "8 · Production Databases", "Isolation and locking, query tuning, database security, PostgreSQL and other dialects, backups, replication and migrations.", "sql";
+                "n8_01_transactions.md", "n8_02_tuning.md", "n8_03_security.md", "n8_04_postgres.md", "n8_05_operations.md", "n8_06_project.md"),
+            module!(Expert, "9 · Analytics and Data Warehousing", "Star schemas, ETL and slowly changing dimensions, data quality, funnels, cohorts and retention.", "sql";
+                "g9_01_star_schema.md", "g9_02_etl.md", "g9_03_project.md"),
+            module!(Expert, "10 · 🎓 Beyond IT: Fractals, Graphs and Statistics", "Optional, beyond IT scope: fractals and cellular automata in recursive SQL, graph algorithms and the Game of Life, and statistics.", "sql";
+                "b10_01_fractals.md", "b10_02_graphs.md", "b10_03_statistics.md"),
             build!(Intermediate, "🗃 IT Asset Inventory", "A real inventory database: schema, reports and a safe Python CLI.", "sql";
                 "t1_01_asset_inventory.md"),
             build!(Expert, "🛒 Shop Order Database", "Write the SQL behind an online shop: no overselling, optimistic locking, triggers, keyset search and rankings.", "sql";
