@@ -741,3 +741,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 - **Route control in depth:** prefix lists, route maps, redistribution and AD, BGP policy attributes and best path.
 - **Automation and assurance in depth:** YANG, NETCONF vs RESTCONF, HTTP status codes, config management tools, IP SLA, NetFlow, SNMPv3, telemetry and syslog.
 - **Switching and security in depth:** STP election and protection, FHRP comparison, ACLs and wildcards, AAA, Layer 2 security and 802.1X.
+
+### DevOps and SRE (done in this pass)
+- New lessons: d0_02 Git internals (blob IDs with hashlib, merge base and ranges), d1_03 deployment strategies (automated canary analysis, sticky feature-flag buckets), d1_04 release engineering (DORA metrics, conventional commits to semver and changelog), d2_02 logs, traces and incidents (structured log queries, trace critical path and self time).
+- Totals now: 16 lessons, 28 exercises, 80 quizzes, about 38k words. Verifies with 34 checks, 0 problems.

@@ -1085,11 +1085,11 @@ pub fn knowledge() -> Vec<Track> {
             blurb: "Git, GitHub Actions, Docker, infrastructure as code, Ansible and GitOps, Prometheus and Grafana, DevSecOps, SLOs and incident response.",
             modules: vec![
                 module!(Novice, "0 · Git", "Commits, branches, merges, pull requests and team workflows.", "devops";
-                    "d0_01_git.md"),
-                module!(Intermediate, "1 · Automate Delivery", "CI/CD pipelines, deployment strategies, Terraform and Ansible.", "devops";
-                    "d1_01_cicd.md", "d1_02_iac.md"),
+                    "d0_01_git.md", "d0_02_git_internals.md"),
+                module!(Intermediate, "1 · Automate Delivery", "CI/CD pipelines, deployment strategies, feature flags, DORA metrics, semantic releases, Terraform and Ansible.", "devops";
+                    "d1_01_cicd.md", "d1_02_iac.md", "d1_03_deployment_strategies.md", "d1_04_release_engineering.md"),
                 module!(Advanced, "2 · Run It", "Metrics, logs, traces, SLOs, error budgets, on-call and postmortems.", "devops";
-                    "d2_01_observability.md"),
+                    "d2_01_observability.md", "d2_02_logs_traces_incidents.md"),
                 module!(Intermediate, "3 · Git and GitHub in Practice", "Hands-on branches, conflicts, rebase, squash, revert and the pull request workflow.", "devops";
                     "d3_01_git_practice.md"),
                 module!(Advanced, "4 · GitHub Actions", "Workflows, jobs, matrices, secrets, OIDC to the cloud, delivery pipelines and pipeline security.", "devops";
