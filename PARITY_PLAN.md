@@ -8,7 +8,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 |---|---:|---:|---:|---:|---:|
 | Rust | 106 | 179 | 254 | 175k | 100% |
 | Python | 84 | 155 | 216 | 103k | 59% (done, see below) |
-| PowerShell | 24 | 46 | 53 | 28k | 16% |
+| PowerShell | 46 | 90 | 109 | 58k | 33% (done, see below) |
 | Bash | 45 | 85 | 115 | 55k | 32% (done, see below) |
 | JavaScript | 55 | 106 | 153 | 83k | 47% (done, see below) |
 | SQL | 16 | 33 | 35 | 23k | 13% |
@@ -473,3 +473,35 @@ Bash went from 23 to 45 lessons (85 exercises, 115 quizzes, about 55k words; the
   - Game of Life and 2048
   - a fixed-point Mandelbrot set and a maze from a seeded random generator (an LCG)
   - an RPN calculator and a Brainf*ck interpreter
+
+## PowerShell (done in this pass)
+
+PowerShell went from 24 to 46 lessons (90 exercises, 109 quizzes, about 58k words; the counts include the build projects). The whole track verifies with 98 checks and 0 problems. The runner is Windows PowerShell 5.1, so exercises avoid PS7-only syntax, and PS7 features are taught with read-only examples. Exercises print exception type names or error ids instead of localized messages, and format numbers with the invariant culture, so the expected output is the same on non-English Windows.
+
+- **Granular fundamentals (4 lessons, inserted into modules 1–3):**
+  - operators in depth: comparison, collection filtering, -like/-match, -f and splatting
+  - script blocks, closures, scopes and dot-sourcing
+  - the pipeline in depth: ValueFromPipeline, begin/process/end and Select-Object tricks
+  - dates, time zones and culture
+- **Module 7, PowerShell in Depth (6 lessons):**
+  - the six output streams, redirection and Write-Information
+  - .NET collections: List, Dictionary, HashSet, Queue and StringBuilder
+  - errors in depth: terminating vs non-terminating, ErrorRecord, $ErrorActionPreference
+  - parallel work with runspace pools (and ForEach-Object -Parallel in PS7)
+  - classes in depth: interfaces, IComparable, static members and Flags enums
+  - project: a configuration drift detector with Test/Set and ShouldProcess
+- **Module 8, Production PowerShell (6 lessons):**
+  - testing: Pester, a small test framework and mocks
+  - performance: arrays vs lists, the pipeline cost, hashtable lookups
+  - security: execution policy, AST scanning for risky code, validation, Export-Clixml secrets
+  - PowerShell 7 and cross-platform scripts: encodings and portable helpers
+  - logging: JSON lines, rotation and exit codes
+  - project: an access review report with rules and an HTML report
+- **Module 9, WPF Apps with MVVM (3 lessons):**
+  - XAML, FindName, events and Grid layout
+  - data binding, INotifyPropertyChanged, ObservableCollection and RelayCommand
+  - project: a help desk ticket app tested headlessly
+- **Module 10, 🎓 Beyond IT: Puzzles, Graphics and Sound (3 lessons):**
+  - Sudoku with backtracking and the MRV heuristic; N-Queens
+  - a System.Drawing plasma bitmap and SVG spirographs
+  - note frequencies and writing a WAV file byte by byte

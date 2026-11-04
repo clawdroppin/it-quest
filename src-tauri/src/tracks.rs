@@ -136,17 +136,27 @@ pub fn powershell() -> Track {
             module!(Novice, "0 · Getting Started", "Cmdlets, help, and the object pipeline.", "powershell";
                 "p0_01_welcome.md", "p0_02_pipeline.md"),
             module!(Novice, "1 · Fundamentals", "Variables, text, decisions, loops and functions.", "powershell";
-                "p1_01_variables.md", "p1_02_strings.md", "p1_03_conditions.md", "p1_04_loops.md", "p1_05_functions.md"),
+                "p1_01_variables.md", "p1_02_strings.md", "p1_03_conditions.md", "p1_04_loops.md", "p1_05_functions.md", "p1_06_operators.md", "p1_07_scriptblocks.md"),
             module!(Intermediate, "2 · Collections and Objects", "Arrays, hashtables, object pipelines and regex.", "powershell";
-                "p2_01_collections.md", "p2_02_objects.md", "p2_03_text.md"),
+                "p2_01_collections.md", "p2_02_objects.md", "p2_03_text.md", "p2_04_pipeline_deep.md"),
             module!(Intermediate, "3 · Files and Windows", "Files, CSV, JSON, errors, and managing a Windows machine.", "powershell";
-                "p3_01_files.md", "p3_02_errors.md", "p3_03_windows_admin.md"),
+                "p3_01_files.md", "p3_02_errors.md", "p3_03_windows_admin.md", "p3_04_dates_culture.md"),
             module!(Advanced, "4 · Admin Automation", "Advanced functions, modules, scheduled tasks, remoting and AD.", "powershell";
                 "p4_01_advanced_functions.md", "p4_02_scripts_modules.md", "p4_03_remoting_ad.md"),
             module!(Expert, "5 · Professional PowerShell", "Classes, .NET, testing, style and security.", "powershell";
                 "p5_01_classes.md", "p5_02_professional.md"),
             module!(Expert, "6 · Building Tools and Apps", "Tool design, REST APIs, secrets, logging, desktop GUIs, CI and publishing.", "powershell";
                 "p6_01_tool_design.md", "p6_02_apis.md", "p6_03_gui_shipping.md"),
+            module!(Expert, "7 · PowerShell in Depth", "Streams and unrolling, .NET collections, error handling, runspaces, classes, and a configuration drift project.", "powershell";
+                "e7_01_output_streams.md", "e7_02_dotnet_collections.md", "e7_03_errors_deep.md",
+                "e7_04_parallel.md", "e7_05_classes_deep.md", "e7_06_project.md"),
+            module!(Expert, "8 · Production PowerShell", "Pester and mocks, performance, security, PowerShell 7 and cross-platform, structured logging, and an access review project.", "powershell";
+                "n8_01_testing.md", "n8_02_performance.md", "n8_03_security.md", "n8_04_ps7_crossplatform.md",
+                "n8_05_logging.md", "n8_06_project.md"),
+            module!(Expert, "9 · WPF Apps with MVVM", "XAML layout and events, data binding, view models and commands, and a help desk app project.", "powershell";
+                "g9_01_wpf_xaml.md", "g9_02_binding_mvvm.md", "g9_03_project.md"),
+            module!(Expert, "10 · 🎓 Beyond IT: Puzzles, Graphics and Sound", "Optional, beyond IT scope: backtracking puzzle solvers, generative bitmaps and SVG, and synthesising WAV audio.", "powershell";
+                "b10_01_puzzles.md", "b10_02_graphics.md", "b10_03_sound.md"),
             build!(Intermediate, "🩺 System Health Monitor", "Check disks, services and uptime; write an HTML report with exit codes.", "powershell";
                 "q1_01_health_monitor.md"),
             build!(Advanced, "👥 User Onboarding", "Turn HR's CSV into accounts, groups, passwords and welcome letters.", "powershell";
