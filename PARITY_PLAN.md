@@ -692,3 +692,11 @@ ITIL went from 4 to 7 lessons, from 0 to 6 checked exercises, and from 25 to 44 
 - **Guiding principles and value streams in practice:** key phrases and traps for each principle, value chain activities in scenarios, and the continual improvement model.
 - **Incident, problem and change in practice:** exam definitions, priority matrices, escalation, major incidents, problem phases and techniques, and change types and authorities.
 - **Service levels and measurement:** SLM, availability (series and parallel), capacity, continuity (RTO, RPO, BIA), metrics, CSFs and KPIs, relationship and supplier management, and XLAs.
+
+### CISSP (done in this pass)
+
+CISSP went from 4 to 7 lessons, from 0 to 6 checked lesson exercises (plus the risk register build), and from 20 to 41 quizzes. The material is managerial and defensive. The exercises cover choosing safeguards by ALE and safeguard value against a risk appetite; checking BIA metrics (RTO + WRT ≤ MTD, backup interval ≤ RPO, recovery site readiness); enforcing Bell-LaPadula (including strong star) and Biba; picking cryptographic operations, counting keys and flagging weak algorithms; building restore chains for full/incremental/differential schedules; and ordering evidence by volatility while validating a chain-of-custody log with hashes. CISSP verifies with 10 checks and 0 problems. New lessons:
+
+- **Domain 1 in depth:** quantitative and qualitative risk, responses and control types, NIST RMF/CSF 2.0, ISO 27001, due care vs due diligence, the policy hierarchy, BCP steps, metrics and tests, personnel and supply chain security, and the canons.
+- **Domains 3 and 5 in depth:** formal models, Common Criteria, the reference monitor, architecture vulnerabilities, cryptography choices and key counts, PKI, access control models, biometrics errors and federation protocols.
+- **Domains 6–8 in depth:** the incident response lifecycle, evidence and order of volatility, logging and monitoring, backups, RAID and 3-2-1, operational controls, assessments and SOC reports, the secure SDLC and CMMI.
