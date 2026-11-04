@@ -886,12 +886,14 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Novice, "0 · Cloud Concepts", "The exams, global infrastructure, shared responsibility, Well-Architected.", "aws";
                     "aw0_01_cloud_concepts.md"),
-                module!(Intermediate, "1 · Core Services", "EC2, S3, EBS, VPC, Route 53, RDS, DynamoDB and more.", "aws";
-                    "aw1_01_compute_storage.md", "aw1_02_network_databases.md"),
-                module!(Advanced, "2 · Security, Billing, Architecture", "IAM, security services, pricing, support and resilient designs.", "aws";
-                    "aw2_01_security_billing.md", "aw2_02_architecture.md"),
-                module!(Advanced, "3 · Solutions Architect Associate", "The SAA-C03 domains, scenario keywords, IAM evaluation, storage classes and sizing.", "aws";
-                    "aw3_01_saa_scenarios.md"),
+                module!(Intermediate, "1 · Core Services", "EC2 purchasing and EBS, S3 classes and lifecycle, VPC routing and firewalls, RDS, Aurora and DynamoDB.", "aws";
+                    "aw1_01_compute_storage.md", "aw1_02_network_databases.md", "aw1_03_ec2_deep.md", "aw1_04_s3_deep.md",
+                    "aw1_05_vpc_deep.md", "aw1_06_databases_deep.md"),
+                module!(Advanced, "2 · Security, Billing, Architecture", "IAM policies and Organizations, monitoring and operations, cost management, serverless and containers.", "aws";
+                    "aw2_01_security_billing.md", "aw2_02_architecture.md", "aw2_03_iam_deep.md", "aw2_04_monitoring_ops.md",
+                    "aw2_05_cost.md", "aw2_06_serverless_containers.md"),
+                module!(Advanced, "3 · Solutions Architect Associate", "The SAA-C03 domains, scenario keywords, DR strategies and Route 53 routing.", "aws";
+                    "aw3_01_saa_scenarios.md", "aw3_02_resilience_dr.md"),
                 build!(Advanced, "📝 Serverless IT Request Form", "API Gateway + Lambda + DynamoDB with SAM, tested offline first.", "aws";
                     "aw9_01_serverless_form.md"),
                 // generated project ideas aws

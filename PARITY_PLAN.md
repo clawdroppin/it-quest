@@ -637,3 +637,11 @@ CCNA went from 6 to 16 lessons, from 0 to 20 exercises, and from 31 to 88 quizze
 - **Switching and routing:** STP root and port elections, Rapid PVST+, PortFast/BPDU Guard, LACP/PAgP and CDP/LLDP; longest prefix match, administrative distance, floating statics, OSPF cost, neighbour states, adjacency requirements and DR/BDR.
 - **Services, security and automation:** NAT terminology and tables, DHCP relay, QoS marking and queuing, SNMPv3, syslog levels; ACL placement, port security, DHCP snooping, DAI, device hardening, AAA and VPNs; RF, AP modes and WLC WLAN setup; planes, REST, JSON, Ansible and Terraform.
 - **New module 3, Troubleshooting:** a layer-by-layer method with the show commands, ping symbols and traceroute patterns that prove each cause.
+
+### AWS Cloud (done in this pass)
+
+AWS went from 7 to 16 lessons, from 3 to 21 exercises, and from 38 to 89 quizzes (about 26k words, up from 10k). The exercises are Python models of AWS behaviour and day-to-day tasks: purchasing and EBS choices, S3 lifecycle and bucket audits, VPC subnet plans and NACL/SG evaluation, DynamoDB capacity, full IAM evaluation with SCPs and boundaries, CloudWatch alarms, CloudTrail investigation, cost estimates and waste, Lambda cost and concurrency, SQS visibility and DLQs, DR strategy choice and Route 53 routing. Prices are labelled as illustrative. The whole track verifies with 25 checks and 0 problems. New lessons:
+
+- **Core services:** EC2 instance families, purchasing options, AMIs and IMDSv2, EBS volume types, placement groups, ELB and Auto Scaling; S3 classes, lifecycle, versioning, Object Lock, replication, encryption and performance; VPC CIDR planning, route tables, NAT, security groups vs NACLs, endpoints, peering, Transit Gateway, VPN and Direct Connect; RDS Multi-AZ vs read replicas, Aurora, DynamoDB keys and capacity, caching and analytics.
+- **Security and operations:** roles, policy types and the full evaluation logic, Organizations, Control Tower and Identity Center; CloudWatch, CloudTrail, Config, EventBridge and Systems Manager; pricing, data transfer, Budgets, Cost Explorer, tagging and optimisation; Lambda, API Gateway, SQS/SNS/EventBridge/Kinesis, Step Functions, ECS/EKS/Fargate.
+- **Solutions Architect:** RTO/RPO, the four DR strategies, AWS Backup, Route 53 routing policies, Global Accelerator, Shield and WAF.
