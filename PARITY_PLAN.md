@@ -708,3 +708,11 @@ PMP went from 3 to 6 lessons, from 0 to 6 checked lesson exercises (plus the cri
 - **People in depth:** servant leadership and power, Tuckman, motivation, Thomas-Kilmann conflict modes, the power/interest grid and engagement matrix, communication channels and methods, RACI, negotiation and group decisions.
 - **Schedule and cost in depth:** estimating techniques and ranges, PERT and path variance, float and dependencies, crashing vs fast tracking, reserves and baselines, EVM and the four EAC formulas, ETC, VAC and TCPI.
 - **Agile, risk, procurement and business:** Scrum and Kanban metrics, prioritisation, EMV and decision trees, threat/opportunity responses, contract types and who bears risk, procurement documents, NPV/IRR/payback/BCR, benefits and organisational change.
+
+### 基本情報技術者 (IPA FE) (done in this pass)
+
+IPA FE went from 7 to 10 lessons, from 4 to 10 lesson exercises, and from 43 to 61 quizzes. The new lessons cover the calculation questions that recur in 科目A, using the Japanese terms the exam uses. The exercises cover 8-bit two's complement with logical and arithmetic shifts and overflow; encoding IEEE 754 single precision by hand, checked against struct (including why 0.1 differs); CPI from an instruction mix, MIPS, multi-level cache access time and pipelines; transfer times, line utilisation, image/audio sizes and RAID capacity; break-even, safety margin and target profit; and ABC analysis with maximax, maximin and expected-value decisions. IPA FE verifies with 14 checks and 0 problems. New lessons:
+
+- **基礎理論 in depth:** 2の補数, シフト演算, 浮動小数点数, the named 誤差 types, information quantities and De Morgan.
+- **テクノロジ系 calculations:** CPU performance, 実効アクセス時間, disk access time, transfer time, data sizes and RAID.
+- **ストラテジ系 calculations:** 損益分岐点, 発注点 and EOQ, 減価償却, ABC分析, investment appraisal, decision principles, PPM and the most-tested laws.

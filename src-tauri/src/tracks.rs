@@ -1141,12 +1141,12 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Novice, "0 · The Exam", "科目A and 科目B, the IPA exam ladder, how to study.", "ipa-fe";
                     "fe0_01_about.md"),
-                module!(Intermediate, "1 · 基礎理論 and 疑似言語", "Numbers, bits, logic, and reading the exam's pseudo-code.", "ipa-fe";
-                    "fe1_01_numbers.md", "fe1_02_pseudocode.md"),
+                module!(Intermediate, "1 · 基礎理論 and 疑似言語", "Numbers, two's complement, shifts, floating point, errors, logic, and the exam's pseudo-code.", "ipa-fe";
+                    "fe1_01_numbers.md", "fe1_02_pseudocode.md", "fe1_03_numbers_deep.md"),
                 module!(Intermediate, "2 · Algorithms", "Data structures, search, sort, recursion and complexity.", "ipa-fe";
                     "fe2_01_algorithms.md"),
-                module!(Advanced, "3 · Technology, Management, Strategy", "Availability, DB, networks, security, projects, business and law.", "ipa-fe";
-                    "fe3_01_technology.md", "fe4_01_management.md"),
+                module!(Advanced, "3 · Technology, Management, Strategy", "Availability, CPU/disk/network calculations, DB, security, projects, break-even, inventory, decisions and law.", "ipa-fe";
+                    "fe3_01_technology.md", "fe3_02_system_calculations.md", "fe4_01_management.md", "fe4_02_strategy_calculations.md"),
                 build!(Advanced, "🧮 科目B Drills", "Ten classic exam algorithms, plus a random tracing quiz.", "ipa-fe";
                     "fe9_01_drills.md"),
                 // generated project ideas ipa-fe
