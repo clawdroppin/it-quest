@@ -832,14 +832,15 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "The baseline security certification: threats, cryptography, architecture, operations and governance.",
             modules: vec![
-                module!(Intermediate, "1 · General Security Concepts", "Controls, zero trust, cryptography and PKI.", "securityplus";
-                    "sp0_01_concepts.md", "sp1_01_crypto.md"),
-                module!(Intermediate, "2 · Threats and Vulnerabilities", "Threat actors, attacks, malware and indicators.", "securityplus";
-                    "sp2_01_threats.md"),
-                module!(Advanced, "3 · Architecture and Operations", "Secure design, data protection, IAM, monitoring and incident response.", "securityplus";
-                    "sp3_01_architecture.md", "sp4_01_operations.md"),
-                module!(Advanced, "4 · Program Management", "Governance, risk, third parties, compliance and audits.", "securityplus";
-                    "sp5_01_governance.md"),
+                module!(Intermediate, "1 · General Security Concepts", "Controls, zero trust, cryptography and PKI, the control matrix, physical security, change management, and applied cryptography (TLS, signatures, password storage, certificates).", "securityplus";
+                    "sp0_01_concepts.md", "sp1_01_crypto.md", "sp1_02_controls_change.md", "sp1_03_crypto_applied.md"),
+                module!(Intermediate, "2 · Threats and Vulnerabilities", "Threat actors, attacks, malware and indicators, social engineering and email security, application vulnerabilities and secure coding.", "securityplus";
+                    "sp2_01_threats.md", "sp2_02_social_engineering.md", "sp2_03_app_vulnerabilities.md"),
+                module!(Advanced, "3 · Architecture and Operations", "Secure design, data protection, IAM, monitoring and incident response, in depth: network architecture, cloud and OT, vulnerability management, identity, forensics and SOC tooling.", "securityplus";
+                    "sp3_01_architecture.md", "sp3_02_secure_network.md", "sp3_03_cloud_iot_ot.md", "sp4_01_operations.md",
+                    "sp4_02_vuln_management.md", "sp4_03_iam_deep.md", "sp4_04_incident_forensics.md", "sp4_05_secops_tools.md"),
+                module!(Advanced, "4 · Program Management", "Governance, risk, third parties, compliance and audits, with SLE/ALE risk calculations, risk registers, BIA, vendor agreements and privacy roles.", "securityplus";
+                    "sp5_01_governance.md", "sp5_02_risk_analysis.md", "sp5_03_third_party_compliance.md"),
                 build!(Advanced, "🛡 Security Guard", "A file integrity monitor and a breach-aware password auditor.", "securityplus";
                     "sp9_01_guard.md"),
                 // generated project ideas securityplus

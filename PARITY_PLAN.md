@@ -609,3 +609,13 @@ Network+ went from 8 to 19 lessons, from 1 to 23 exercises, and from about 40 to
 - **Implementation:** route selection (longest prefix, AD, metric), routing protocols, NAT/PAT and FHRP; trunks, native VLANs, spanning tree, LACP, MTU and switch security; Wi-Fi standards, channel planning, 802.1X/EAP and site surveys.
 - **Operations and security:** SNMP, flows, syslog severities and metrics; MTBF/MTTR, RPO/RTO, DR sites, documentation and change management; attacks and defences, ACL evaluation, segmentation and remote access (IPsec, out-of-band).
 - **New module 4, Troubleshooting in Depth:** the 7-step method, interface counters, err-disabled ports and fibre loss budgets; addressing, routing, service and performance problems with the commands that reveal them.
+
+### CompTIA Security+ (done in this pass)
+
+Security+ went from 7 to 19 lessons, from 1 to 25 exercises, and from 46 to 106 quizzes (about 27k words, up from 8k). The whole track verifies with 29 checks and 0 problems. Content stays defensive: attacks are explained by how to recognise and stop them. Every SY0-701 domain now has depth:
+
+- **General concepts:** the control category and type matrix, physical security, deception technology and change management; applied cryptography (TLS 1.3, signatures, salted and stretched password storage, certificate validation and revocation).
+- **Threats:** social engineering, phishing indicators and email authentication (SPF, DKIM, DMARC); application vulnerabilities with secure coding fixes (parameterised queries, output encoding).
+- **Architecture:** firewall types, zones, failure modes and secure protocols; shared responsibility, IaC scanning, containers, IoT and OT.
+- **Operations:** CVSS, KEV and remediation SLAs; IAM life cycle, federation, MFA, access control models and PAM; incident response, order of volatility, chain of custody and timelines; SIEM correlation, SOAR, EDR and baselines.
+- **Programme management:** SLE, ARO, ALE and control value; risk registers and BIA; vendor assessment, agreements, privacy roles and audits.
