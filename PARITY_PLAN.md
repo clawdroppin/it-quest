@@ -684,3 +684,11 @@ The general cloud track went from 8 to 11 lessons, from 11 to 17 exercises, and 
 - **Virtualization, capacity and migration:** hypervisor resource sharing, overcommit, NUMA, N+1, shared responsibility, the 7 Rs and transfer-time maths.
 - **Containers in depth:** layers, build cache ordering, multi-stage builds, tags vs digests, signing and scanning, namespaces, cgroups and hardening.
 - **Cloud security and compliance:** identity as the perimeter, encryption in transit/at rest/in use, envelope encryption and key management options, secrets, detection, CSPM/CNAPP, compliance reports and common misconfigurations.
+
+### ITIL 4 Foundation (done in this pass)
+
+ITIL went from 4 to 7 lessons, from 0 to 6 checked exercises, and from 25 to 44 quizzes. Each new lesson first restates what the Foundation exam expects, word for word where the syllabus does, then marks workplace practice as **(beyond Foundation)**. The exercises cover an impact × urgency priority matrix with SLA breach reporting; raising problems from recurring incidents and linking them to known errors; availability counted only within agreed service hours, with MTBF and MTRS; KPIs that expose the watermelon effect; value stream mapping with flow efficiency and the bottleneck; and routing changes (standard, emergency, or normal by risk score) with a change freeze. ITIL verifies with 10 checks and 0 problems. New lessons:
+
+- **Guiding principles and value streams in practice:** key phrases and traps for each principle, value chain activities in scenarios, and the continual improvement model.
+- **Incident, problem and change in practice:** exam definitions, priority matrices, escalation, major incidents, problem phases and techniques, and change types and authorities.
+- **Service levels and measurement:** SLM, availability (series and parallel), capacity, continuity (RTO, RPO, BIA), metrics, CSFs and KPIs, relationship and supplier management, and XLAs.
