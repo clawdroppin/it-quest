@@ -758,3 +758,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 - New lessons: vu0_02 SVG geometry (true Bézier bounding box, viewBox meet/slice/none mapping, path data minifier), vu3_02 clean and accessible SVG (accessible icon-only toolbar), vu4_02 colour systems (OKLCH tonal scale with gamut mapping and contrast, light/dark token audit).
 - Note: @@lang is per lesson (the last one wins), so Python and HTML exercises live in separate lessons.
 - Totals now: 8 lessons, 16 exercises, 37 quizzes, about 13k words. Verifies with 16 checks, 0 problems.
+
+### Rust UI (done in this pass)
+- New lessons: ru0_02 app architecture (Elm-style update with snapshot undo/redo and capped history; background search over a channel with stale-result handling), ru2_02 input and gestures (click/double-click/drag recogniser; kinetic scrolling with velocity window and friction), ru4_02 text wrapping and virtual lists (greedy wrap and truncation by chars; fixed and variable-height visible ranges).
+- Totals now: 8 lessons, 19 exercises, about 16k words. Verifies with 19 checks, 0 problems.

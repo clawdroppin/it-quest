@@ -608,16 +608,16 @@ pub fn rust_ui() -> Track {
         lang: Some(Lang::Rust),
         blurb: "Make Rust apps beautiful: egui, iced and Slint, pretty light and dark themes, interactive animated buttons, icons and app icons, layout and polish.",
         modules: vec![
-            module!(Intermediate, "0 · Rust GUI Toolkits", "egui, iced, Slint and Tauri, immediate vs retained mode, widget states and hit testing.", "rustui";
-                "ru0_01_landscape.md"),
+            module!(Intermediate, "0 · Rust GUI Toolkits", "egui, iced, Slint and Tauri, immediate vs retained mode, widget states, hit testing, the Elm architecture, undo and background work.", "rustui";
+                "ru0_01_landscape.md", "ru0_02_app_architecture.md"),
             module!(Intermediate, "1 · Pretty Themes", "Palettes and design tokens, contrast, derived state colours, fonts, egui Visuals and iced themes.", "rustui";
                 "ru1_01_themes.md"),
-            module!(Advanced, "2 · Interactive Animated Buttons", "Easing, interruptible animations, springs, and a custom animated egui button.", "rustui";
-                "ru2_01_animated_buttons.md"),
+            module!(Advanced, "2 · Interactive Animated Buttons", "Easing, interruptible animations, springs, a custom animated egui button, gestures and kinetic scrolling.", "rustui";
+                "ru2_01_animated_buttons.md", "ru2_02_input_gestures.md"),
             module!(Advanced, "3 · Icons and App Icons", "Icon fonts, SVG icons, icons generated and painted in code, and the executable's icon.", "rustui";
                 "ru3_01_icons.md"),
-            module!(Advanced, "4 · Layout and Polish", "Flex layout, text that fits, keyboard focus, accessibility and the polish checklist.", "rustui";
-                "ru4_01_layout_polish.md"),
+            module!(Advanced, "4 · Layout and Polish", "Flex layout, text that fits, word wrapping, virtual lists, keyboard focus, accessibility and the polish checklist.", "rustui";
+                "ru4_01_layout_polish.md", "ru4_02_text_virtual_lists.md"),
         ],
     }
 }
