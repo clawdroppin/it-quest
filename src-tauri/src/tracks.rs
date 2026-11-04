@@ -761,10 +761,12 @@ pub fn knowledge() -> Vec<Track> {
             blurb: "The entry-level IT support certification: hardware, Windows, networking, security and troubleshooting.",
             modules: vec![
                 module!(Novice, "0 · The Exam", "What A+ covers and how to pass it.", "aplus"; "a0_01_about.md"),
-                module!(Novice, "1 · Core 1 (220-1201)", "Hardware, mobile devices, networking, printers, virtualization.", "aplus";
-                    "a1_01_hardware.md", "a1_02_networking.md", "a1_03_printers_troubleshooting.md", "a1_04_virtualization_cloud.md"),
-                module!(Intermediate, "2 · Core 2 (220-1202)", "Windows, other OSs, security and operational procedures.", "aplus";
-                    "a2_01_windows.md", "a2_02_other_os.md", "a2_03_security.md", "a2_04_operations.md"),
+                module!(Novice, "1 · Core 1 (220-1201)", "Hardware, motherboards and power, storage and RAID, mobile devices, networking, ports and DNS, servers and IoT, printers, virtualization and troubleshooting.", "aplus";
+                    "a1_01_hardware.md", "a1_02_networking.md", "a1_03_printers_troubleshooting.md", "a1_04_virtualization_cloud.md", "a1_05_motherboard_power.md", "a1_06_storage_raid.md", "a1_07_mobile.md", "a1_08_network_config.md", "a1_09_network_services.md", "a1_10_troubleshooting.md"),
+                module!(Intermediate, "2 · Core 2 (220-1202)", "Windows, other OSs, security and operational procedures: admin tools, installs and upgrades, networking and sharing, hardening, software and malware troubleshooting, scripting and remote access.", "aplus";
+                    "a2_01_windows.md", "a2_02_other_os.md", "a2_03_security.md", "a2_04_operations.md",
+                    "a2_05_windows_admin.md", "a2_06_os_install.md", "a2_07_windows_networking.md", "a2_08_security_deep.md",
+                    "a2_09_software_troubleshooting.md", "a2_10_scripting_remote.md"),
                 build!(Intermediate, "🩹 Help Desk Triage", "Prioritize calls, suggest likely causes and write ticket notes, in PowerShell.", "aplus";
                     "a9_01_triage.md"),
                 // generated project ideas aplus

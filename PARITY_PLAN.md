@@ -593,3 +593,10 @@ Foundations went from 6 to 20 lessons, from 1 to 29 exercises, and from 24 to 83
 - **Networks:** IPv4 subnetting, private ranges, APIPA and IPv6; switches, VLANs, PoE, cabling and Wi-Fi; the web request chain, HTTP status codes, certificates and the email path (SPF, DKIM, DMARC).
 - **Working in IT:** users, groups, NTFS and Linux permissions, and the joiner/mover/leaver process; the Windows and Linux command line; backups (3-2-1-1-0, RPO and RTO); incident, problem and change management; careers and certifications, including Japan.
 - **New module 3, Data, Software and Automation:** databases and data formats; how software is built, versioned and licensed; scripting IT tasks safely.
+
+### CompTIA A+ (done in this pass)
+
+A+ went from 10 to 22 lessons, from 0 to 24 exercises, and from 51 to 109 quizzes (about 32k words, up from 11k). The whole track verifies with 28 checks and 0 problems. Each Core 220-1201 and 220-1202 objective area now has its own lesson:
+
+- **Core 1:** motherboards, CPUs, RAM and power supplies; storage and RAID; mobile devices; network configuration (DHCP, DNS, Wi-Fi, SOHO); network types, servers, appliances, IoT and legacy systems; the troubleshooting method and hardware symptoms.
+- **Core 2:** Windows admin tools (MMC snap-ins, Event Viewer IDs, sfc/DISM); installs and upgrades (editions, MBR/GPT, file systems, Windows 11 readiness); Windows networking and sharing (domains, profiles, share vs NTFS permissions); workstation, browser, mobile and SOHO hardening, plus data destruction; software, malware and mobile troubleshooting (the 7-step malware removal procedure); script types, script risks and remote access tools.
