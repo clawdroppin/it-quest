@@ -974,9 +974,9 @@ pub fn knowledge() -> Vec<Track> {
             blurb: "Infrastructure as code: HCL, the plan/apply workflow, state, modules, imports and HCP Terraform.",
             modules: vec![
                 module!(Intermediate, "0 · IaC and the Workflow", "The exam, HCL, providers, variables, count and for_each, init/plan/apply.", "terraform";
-                    "tf0_01_iac_workflow.md"),
+                    "tf0_01_iac_workflow.md", "tf0_02_config_deep.md"),
                 module!(Advanced, "1 · State, Modules, HCP Terraform", "Remote state and locking, import and moved blocks, modules, workspaces, policy.", "terraform";
-                    "tf1_01_state_modules.md"),
+                    "tf1_01_state_modules.md", "tf1_02_state_plan_deep.md", "tf1_03_modules_hcp_deep.md"),
                 module!(Advanced, "2 · Testing, CI/CD, Advanced HCL", "dynamic blocks, terraform test, pipelines with OIDC, drift, structure.", "terraform";
                     "tf2_01_testing_ci.md"),
                 module!(Advanced, "3 · Hands-on HCL", "Types, count vs for_each, expressions, functions, refactoring with moved/import, exam checklist.", "terraform";

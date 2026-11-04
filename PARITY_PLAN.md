@@ -668,3 +668,11 @@ CKA went from 5 to 11 lessons, from 4 to 16 exercises, and from 21 to 57 quizzes
 - **Workloads and scheduling:** rollouts and rollbacks, DaemonSets, StatefulSets, Jobs and CronJobs, ConfigMaps and Secrets, requests, limits and QoS, probes, HPA; node affinity, taints and tolerations, topology spread, priority and preemption, cordon/drain, static Pods.
 - **Services, networking and storage:** Service types, EndpointSlices, DNS names, Ingress and the Gateway API; volumes, PVs, PVCs, access modes, reclaim policies, StorageClasses and expansion.
 - **Administration and troubleshooting:** authentication, RBAC, ServiceAccounts, kubeconfig, certificates and Pod Security Admission; kubeadm upgrades, etcd snapshot and restore, and diagnosing Pods, nodes, the control plane and Services.
+
+### Terraform Associate (done in this pass)
+
+Terraform went from 5 to 8 lessons, from 3 to 9 exercises, and from 22 to 40 quizzes (about 13k words, up from 8k). The new exercises model Terraform's own rules: variable precedence across defaults, TF_VAR_, tfvars, auto.tfvars and CLI flags; apply waves and reverse destroy order from the dependency graph with cycle detection; a plan with forces-replacement attributes and create_before_destroy; moved and removed blocks against state; version constraint resolution including `~>`; and HCP Terraform policy checks with advisory, soft-mandatory and hard-mandatory enforcement. The track verifies with 13 checks and 0 problems. New lessons:
+
+- **Configuration in depth:** providers, aliases and the lock file, constraint operators, variables and validation, precedence, sensitive values, data sources, the graph and parallelism.
+- **State and plans in depth:** plan symbols, replacement, saved plans, drift and refresh-only, -replace, import blocks with generated config, moved/removed, state commands, backends and locking.
+- **Modules and HCP Terraform:** module sources and versions, boundaries, CLI vs HCP workspaces, run workflows, Sentinel/OPA enforcement levels.
