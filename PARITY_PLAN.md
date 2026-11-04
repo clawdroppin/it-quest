@@ -745,3 +745,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### DevOps and SRE (done in this pass)
 - New lessons: d0_02 Git internals (blob IDs with hashlib, merge base and ranges), d1_03 deployment strategies (automated canary analysis, sticky feature-flag buckets), d1_04 release engineering (DORA metrics, conventional commits to semver and changelog), d2_02 logs, traces and incidents (structured log queries, trace critical path and self time).
 - Totals now: 16 lessons, 28 exercises, 80 quizzes, about 38k words. Verifies with 34 checks, 0 problems.
+
+### Linux Desktop & Environment (done in this pass)
+- New lessons: le1_02 text tools (grep/sed/awk pipelines on an access log and a messy Windows CSV), le3_02 reliable shell scripts (getopts CLI, safe config parsing without eval), le4_02 systemd services, timers and networking (triaging systemctl output, layer-by-layer network diagnosis).
+- Totals now: 8 lessons, 18 exercises, 40 quizzes, about 13k words. Verifies with 18 checks, 0 problems.
