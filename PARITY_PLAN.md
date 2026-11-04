@@ -716,3 +716,11 @@ IPA FE went from 7 to 10 lessons, from 4 to 10 lesson exercises, and from 43 to 
 - **基礎理論 in depth:** 2の補数, シフト演算, 浮動小数点数, the named 誤差 types, information quantities and De Morgan.
 - **テクノロジ系 calculations:** CPU performance, 実効アクセス時間, disk access time, transfer time, data sizes and RAID.
 - **ストラテジ系 calculations:** 損益分岐点, 発注点 and EOQ, 減価償却, ABC分析, investment appraisal, decision principles, PPM and the most-tested laws.
+
+### Japanese for IT Work (done in this pass)
+
+Japanese went from 5 to 8 lessons, from 0 to 6 checked lesson exercises (plus the trainer build), and from 23 to 41 quizzes. The new lessons cover rule-based grammar, so learners implement the rules and the verifier checks them. The exercises conjugate verbs in all three groups (ます, て, た, ない, potential, with the 行く and ある exceptions); build support sentences (〜てください, 〜ています, 〜てもいいですか, 〜ないでください, できません); transform verbs into 尊敬語 and 謙譲語 ます forms, including the special verbs and the five い verbs; catch double keigo, humble verbs used for customers and ご苦労様; read numbers grouped by 万/億/兆 with sound changes; and read dates and times for a maintenance notice (irregular days, 翌, ふん/ぷん). Japanese verifies with 10 checks and 0 problems. New lessons:
+
+- **Verbs:** the three groups and the -iru/-eru traps, ます, て/た, ない and potential forms, and their workplace uses.
+- **Numbers, money, dates and times:** four-digit grouping, sound changes, irregular day readings, months, hours and minutes, counters.
+- **敬語 forms:** the お/ご patterns, special respectful and humble verbs, common mistakes, and daily support phrases.

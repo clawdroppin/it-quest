@@ -1164,10 +1164,10 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Novice, "0 · Kana", "Hiragana, katakana, sounds, katakana IT words and the JLPT.", "japanese";
                     "jp0_01_kana.md"),
-                module!(Novice, "1 · Polite Basics", "Particles, です/ます, self-introduction, numbers and money.", "japanese";
-                    "jp1_01_basics.md"),
-                module!(Intermediate, "2 · 敬語 and Workplace Culture", "Respectful and humble language, daily phrases, 報連相.", "japanese";
-                    "jp2_01_keigo.md"),
+                module!(Novice, "1 · Polite Basics", "Particles, です/ます, self-introduction, verb forms, numbers, money, dates and times.", "japanese";
+                    "jp1_01_basics.md", "jp1_02_verbs.md", "jp1_03_numbers_dates.md"),
+                module!(Intermediate, "2 · 敬語 and Workplace Culture", "Respectful and humble language, special keigo verbs, common mistakes, daily phrases, 報連相.", "japanese";
+                    "jp2_01_keigo.md", "jp2_02_keigo_forms.md"),
                 module!(Intermediate, "3 · IT Communication", "Business email, incident reports, chat, phone and help desk Japanese.", "japanese";
                     "jp3_01_it_communication.md"),
                 build!(Intermediate, "🈁 Japanese Trainer", "A spaced-repetition trainer with a kana-to-romaji engine, plus an interview kit.", "japanese";
