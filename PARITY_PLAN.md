@@ -731,3 +731,13 @@ The career track went from 5 to 7 lessons, from 0 to 4 checked lesson exercises 
 
 - **Reading offers in depth:** pay components, 固定残業代 legality, 36協定 limits and premiums, hourly base and real hourly pay, take-home rules of thumb, and other clauses to check.
 - **履歴書 and 職務経歴書 in detail:** 和暦 and era changes, the 学歴・職歴 table and its phrases, certifications, and 職務経歴書 formats with quantified results.
+
+### Cisco CCNP Enterprise (done in this pass)
+
+CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the BGP simulator build), and from 17 to 48 quizzes (about 16k words, up from 7k). The exercises model the protocols' own rules: the EIGRP composite metric with feasible successors and variance; OSPF DR/BDR election (non-preemptive) and LSA filtering per area type; Cisco prefix lists with ge/le; route maps with BGP local preference and best-path choice; DSCP decoding, shaper Tc and LLQ share; wireless link budgets in dBm with FSPL; parsing RESTCONF ietf-interfaces JSON; configuration drift with RESTCONF remediation; STP root, root port and designated port election; and extended ACLs with wildcard masks. CCNP verifies with 14 checks and 0 problems. New lessons:
+
+- **QoS and wireless in depth:** DSCP/CoS marking, trust boundaries, LLQ/CBWFQ/WRED, policing vs shaping and the token bucket, RF math, WLC architecture and roaming.
+- **EIGRP and OSPF in depth:** metrics, feasibility, stub routers, OSPF cost, LSA and area types, DR election and neighbour troubleshooting.
+- **Route control in depth:** prefix lists, route maps, redistribution and AD, BGP policy attributes and best path.
+- **Automation and assurance in depth:** YANG, NETCONF vs RESTCONF, HTTP status codes, config management tools, IP SLA, NetFlow, SNMPv3, telemetry and syslog.
+- **Switching and security in depth:** STP election and protection, FHRP comparison, ACLs and wildcards, AAA, Layer 2 security and 802.1X.

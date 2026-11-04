@@ -909,10 +909,11 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "ENCOR and ENARSI: enterprise design, SD-WAN, advanced OSPF and BGP, services, security and automation.",
             modules: vec![
-                module!(Advanced, "0 · Architecture", "The exams, campus and data-centre design, wireless, SD-Access, SD-WAN, virtualization.", "ccnp";
-                    "cp0_01_encor_architecture.md"),
-                module!(Expert, "1 · Routing, Services, Security", "EIGRP, OSPF and BGP in depth, route maps, STP, QoS, AAA, NETCONF/RESTCONF.", "ccnp";
-                    "cp1_01_routing.md", "cp1_02_services_security_automation.md"),
+                module!(Advanced, "0 · Architecture", "The exams, campus and data-centre design, QoS, wireless and RF math, SD-Access, SD-WAN, virtualization.", "ccnp";
+                    "cp0_01_encor_architecture.md", "cp0_02_qos_wireless_deep.md"),
+                module!(Expert, "1 · Routing, Services, Security", "EIGRP, OSPF and BGP in depth, prefix lists, route maps, redistribution, STP, AAA, automation and assurance.", "ccnp";
+                    "cp1_01_routing.md", "cp1_02_services_security_automation.md", "cp1_03_eigrp_ospf_deep.md",
+                    "cp1_04_route_control_deep.md", "cp1_05_automation_assurance_deep.md", "cp1_06_switching_security_deep.md"),
                 build!(Expert, "🧭 BGP Decision Simulator", "Route maps and the full best-path algorithm, in Python.", "ccnp";
                     "cp9_01_bgp_simulator.md"),
                 // generated project ideas ccnp
