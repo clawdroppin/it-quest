@@ -619,3 +619,12 @@ Security+ went from 7 to 19 lessons, from 1 to 25 exercises, and from 46 to 106 
 - **Architecture:** firewall types, zones, failure modes and secure protocols; shared responsibility, IaC scanning, containers, IoT and OT.
 - **Operations:** CVSS, KEV and remediation SLAs; IAM life cycle, federation, MFA, access control models and PAM; incident response, order of volatility, chain of custody and timelines; SIEM correlation, SOAR, EDR and baselines.
 - **Programme management:** SLE, ARO, ALE and control value; risk registers and BIA; vendor assessment, agreements, privacy roles and audits.
+
+### Linux+ (done in this pass)
+
+Linux+ went from 7 to 19 lessons, from 1 to 25 exercises, and from 33 to 93 quizzes (about 24k words, up from 7k). The new exercises are Bash (awk, sed, parameter expansion, associative arrays) working on realistic command output, so they run anywhere Bash does. The whole track verifies with 28 checks and 0 problems. New lessons:
+
+- **System management:** text processing and redirection; processes, signals, cron and systemd timers; apt/dnf/rpm, repositories, kernel modules, sysctl and GRUB; df/du, inodes, fstab, LVM growth and file system repair.
+- **Security:** octal permissions, umask, SUID/SGID/sticky, ACLs, attributes and least-privilege sudoers; shadow aging, SSH keys and sshd hardening, PAM, directory services and auditd; ip/nmcli/netplan, DNS, sockets and host firewalls.
+- **Troubleshooting:** the USE method with vmstat, iostat, free and OOM; boot failures, systemd services, login and file access problems, and SELinux contexts.
+- **New module 4, Scripting, Containers and Automation:** Bash scripting with strict mode and exit codes; Podman/Docker, Containerfiles and container security; Git, Ansible, YAML, IaC and CI/CD.

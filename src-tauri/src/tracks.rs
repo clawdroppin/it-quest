@@ -811,12 +811,16 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Intermediate, "0 · System Management", "The exam, boot process, kernel and file system layout.", "linux";
                     "lx0_01_boot.md"),
-                module!(Intermediate, "1 · Storage, Users and Services", "Partitions, LVM, mounts, accounts, packages, systemd and logs.", "linux";
-                    "lx1_01_storage.md", "lx1_02_users_services.md"),
-                module!(Advanced, "2 · Security and Automation", "Permissions, SELinux, firewalls, SSH, networking, containers, Ansible.", "linux";
-                    "lx2_01_security.md", "lx2_02_networking_automation.md"),
-                module!(Advanced, "3 · Troubleshooting", "Performance, disks, services, networking and boot problems.", "linux";
-                    "lx3_01_troubleshooting.md"),
+                module!(Intermediate, "1 · Storage, Users and Services", "Partitions, LVM, mounts, accounts, packages, systemd and logs, plus text processing, processes and scheduling, packages and the kernel, and storage operations.", "linux";
+                    "lx1_01_storage.md", "lx1_02_users_services.md", "lx1_03_text_processing.md", "lx1_04_processes_scheduling.md",
+                    "lx1_05_packages_kernel.md", "lx1_06_storage_ops.md"),
+                module!(Advanced, "2 · Security and Automation", "Permissions, SELinux, firewalls, SSH, networking, containers, Ansible, then octal permissions, ACLs and sudo, authentication and hardening, and network configuration.", "linux";
+                    "lx2_01_security.md", "lx2_02_networking_automation.md", "lx2_03_permissions_sudo.md", "lx2_04_auth_hardening.md",
+                    "lx2_05_network_config.md"),
+                module!(Advanced, "3 · Troubleshooting", "Performance, disks, services, networking and boot problems, with CPU/memory/I/O diagnosis and boot, service, access and SELinux fixes.", "linux";
+                    "lx3_01_troubleshooting.md", "lx3_02_performance.md", "lx3_03_boot_services.md"),
+                module!(Advanced, "4 · Scripting, Containers and Automation", "Bash scripting, Podman and Docker, Git, Ansible, infrastructure as code and CI/CD.", "linux";
+                    "lx4_01_bash_scripting.md", "lx4_02_containers.md", "lx4_03_git_automation.md"),
                 build!(Advanced, "🖥 Hardened Web Server", "Turn a fresh Ubuntu VM into a secure web server, by hand and with a script.", "linux";
                     "lx9_01_server_build.md"),
                 // generated project ideas linux
