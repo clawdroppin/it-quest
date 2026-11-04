@@ -749,3 +749,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### Linux Desktop & Environment (done in this pass)
 - New lessons: le1_02 text tools (grep/sed/awk pipelines on an access log and a messy Windows CSV), le3_02 reliable shell scripts (getopts CLI, safe config parsing without eval), le4_02 systemd services, timers and networking (triaging systemctl output, layer-by-layer network diagnosis).
 - Totals now: 8 lessons, 18 exercises, 40 quizzes, about 13k words. Verifies with 18 checks, 0 problems.
+
+### UI Animation (done in this pass)
+- New lessons: ua0_02 easing, springs and colour interpolation (spring simulation with damping ratio and settle time; sRGB vs linear vs OKLab blends), ua2_02 CSS and SVG animation (keyframes generator, path morph compatibility and interpolation), ua3_02 performance and accessibility (jank from rAF timings, animation audit against compositing and WCAG motion rules).
+- Totals now: 7 lessons, 14 exercises, 34 quizzes, about 12k words. Verifies with 14 checks, 0 problems.
