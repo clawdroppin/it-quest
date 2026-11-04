@@ -737,12 +737,14 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "Start here: how computers, operating systems and networks work, troubleshooting, security and the cloud.",
             modules: vec![
-                module!(Novice, "0 · Computers", "Hardware, binary, operating systems and booting.", "foundations";
-                    "f0_01_hardware.md", "f0_02_os.md"),
-                module!(Novice, "1 · Networks", "IP addresses, DNS, DHCP, ports and the OSI model.", "foundations";
-                    "f1_01_networks.md"),
-                module!(Novice, "2 · Working in IT", "Troubleshooting, tickets, security, virtualization and cloud.", "foundations";
-                    "f2_01_troubleshooting.md", "f2_02_security_cloud.md"),
+                module!(Novice, "0 · Computers", "Hardware, CPUs and memory, ports and mobile devices, binary, text encodings and files, operating systems and booting.", "foundations";
+                    "f0_01_hardware.md", "f0_02_os.md", "f0_03_cpu_memory.md", "f0_04_devices.md", "f0_05_data.md"),
+                module!(Novice, "1 · Networks", "IP addresses and subnets, IPv6, DNS, DHCP, ports, the OSI model, switches, routers, Wi-Fi, the web and email.", "foundations";
+                    "f1_01_networks.md", "f1_02_ip_subnets.md", "f1_03_network_gear.md", "f1_04_web_email.md"),
+                module!(Novice, "2 · Working in IT", "Troubleshooting, tickets, security, virtualization and cloud, accounts and permissions, the command line, backups, service management and careers.", "foundations";
+                    "f2_01_troubleshooting.md", "f2_02_security_cloud.md", "f2_03_accounts.md", "f2_04_command_line.md", "f2_05_backup.md", "f2_06_itsm.md", "f2_07_careers.md"),
+                module!(Novice, "3 · Data, Software and Automation", "Databases and data formats, how software is built, versioned and licensed, and scripting everyday IT tasks.", "foundations";
+                    "f3_01_databases.md", "f3_02_software.md", "f3_03_automation.md"),
                 build!(Novice, "🧪 Home Lab", "A virtual company network to practise everything on, with a lab notebook.", "foundations";
                     "f9_01_home_lab.md"),
                 // generated project ideas foundations

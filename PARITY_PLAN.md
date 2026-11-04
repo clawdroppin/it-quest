@@ -574,3 +574,22 @@ HTML/CSS went from 13 to 38 lessons (86 exercises, 135 quizzes, about 61k words;
   - generative canvas art
   - pure-CSS illustration
   - an original arcade game (Packet Catcher)
+
+## IT and certification tracks (second pass)
+
+With every language track deepened, the biggest gaps are now the IT and certification tracks. In November 2026 most had 3–10 lessons, under 10k words and almost no exercises. These tracks don't need Rust's length; they need full coverage of their exam objectives or job skills. The target for each:
+
+- every exam domain (or job area) has its own lesson, typically 15–25 lessons per track
+- every lesson has 4+ quizzes, flashcards, drills and two verified exercises (Python, PowerShell or Bash, simulating the real task: subnet calculators, log triage, permission checks, cost estimates)
+- 25k+ words for the big certifications (A+, Network+, Security+, CCNA, AWS, Azure)
+
+Order: Foundations first (the entry point), then A+, Network+, Security+, Linux+, CCNA, then cloud, then management, then Japan.
+
+### Foundations (done in this pass)
+
+Foundations went from 6 to 20 lessons, from 1 to 29 exercises, and from 24 to 83 quizzes (about 28k words, up from 5k). The whole track verifies with 32 checks and 0 problems. New lessons:
+
+- **Computers:** CPUs, cores and the memory hierarchy; ports, docks, displays, printers and mobile devices (MDM, BYOD); text encodings and mojibake, image formats, file types and hashes.
+- **Networks:** IPv4 subnetting, private ranges, APIPA and IPv6; switches, VLANs, PoE, cabling and Wi-Fi; the web request chain, HTTP status codes, certificates and the email path (SPF, DKIM, DMARC).
+- **Working in IT:** users, groups, NTFS and Linux permissions, and the joiner/mover/leaver process; the Windows and Linux command line; backups (3-2-1-1-0, RPO and RTO); incident, problem and change management; careers and certifications, including Japan.
+- **New module 3, Data, Software and Automation:** databases and data formats; how software is built, versioned and licensed; scripting IT tasks safely.
