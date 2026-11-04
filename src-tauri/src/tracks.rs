@@ -632,16 +632,16 @@ pub fn vector_ui() -> Track {
         lang: Some(Lang::Html),
         blurb: "Design app screens, buttons, icons and themes with Penpot (the open-source Figma) and Inkscape (the open-source Illustrator), and turn them into real SVG and CSS.",
         modules: vec![
-            module!(Novice, "0 · Vector Basics", "Vector vs raster, SVG anatomy and paths, setting up Penpot (or self-hosting it) and Inkscape.", "vectorui";
-                "vu0_01_vector_basics.md"),
+            module!(Novice, "0 · Vector Basics", "Vector vs raster, SVG anatomy, path commands and Béziers, viewBox and transforms, setting up Penpot (or self-hosting it) and Inkscape.", "vectorui";
+                "vu0_01_vector_basics.md", "vu0_02_paths_coordinates.md"),
             module!(Intermediate, "1 · Penpot", "Boards, flex and grid layout, components and variants, tokens, prototypes and Inspect.", "vectorui";
                 "vu1_01_penpot.md"),
             module!(Intermediate, "2 · A Button System", "Variants, sizes, states and micro-interactions, from Penpot components to animated CSS.", "vectorui";
                 "vu2_01_button_system.md"),
-            module!(Advanced, "3 · Inkscape Icons", "Paths and nodes, boolean operations, a consistent icon grid, clean SVG export and sprites.", "vectorui";
-                "vu3_01_inkscape.md"),
-            module!(Advanced, "4 · Themes and Design Systems", "Three layers of design tokens, light and dark themes, exporting tokens to CSS and Rust.", "vectorui";
-                "vu4_01_themes_tokens.md"),
+            module!(Advanced, "3 · Inkscape Icons", "Paths and nodes, boolean operations, a consistent icon grid, clean SVG export, optimisation, sprites and accessible icons.", "vectorui";
+                "vu3_01_inkscape.md", "vu3_02_clean_accessible_svg.md"),
+            module!(Advanced, "4 · Themes and Design Systems", "Three layers of design tokens, tonal scales and contrast, light and dark themes, exporting tokens to CSS and Rust.", "vectorui";
+                "vu4_01_themes_tokens.md", "vu4_02_colour_systems.md"),
         ],
     }
 }
