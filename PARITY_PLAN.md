@@ -652,3 +652,11 @@ Azure went from 5 to 11 lessons, from 0 to 12 exercises, and from 27 to 62 quizz
 
 - **Identity and governance:** Entra roles vs Azure RBAC, groups and administrative units, role definitions, scope inheritance, Conditional Access, PIM and managed identities; management groups, Policy effects and initiatives, locks, tags and cost tools.
 - **Administration in depth:** storage redundancy, access tiers, lifecycle, SAS and private endpoints, Azure Files; VM sizes and disks, availability sets and zones, scale sets, App Service plans and slots, containers; VNets, NSGs and ASGs, UDRs, peering, VPN and ExpressRoute, the four load balancers, private DNS; Azure Monitor, KQL, alerts, Application Insights, Network Watcher, Backup and Site Recovery.
+
+### Google Cloud (done in this pass)
+
+Google Cloud went from 4 to 10 lessons, from 0 to 12 exercises, and from 17 to 50 quizzes (about 16k words, up from 6k). The exercises model Google Cloud's own rules: compute choice and SUD/CUD/Spot pricing, VPC firewall priority with implied rules, subnet plans with 4 reserved addresses and GKE secondary ranges, storage class cost with early deletion, BigQuery bytes scanned, IAM inheritance with deny policies, org policy merge/replace, error budgets, multi-window burn-rate alerts, Dataflow-style windows with watermarks and Pub/Sub redelivery with dead-lettering. The whole track verifies with 16 checks and 0 problems. New lessons:
+
+- **Foundations in depth:** machine families, discounts, MIGs, GKE Autopilot vs Standard, Cloud Run; global VPCs, firewall rules and policies, Cloud NAT, Private Google Access, Shared VPC, HA VPN and Interconnect, load balancers; Cloud Storage classes and Bucket Lock, Cloud SQL, AlloyDB, Spanner, Firestore, Bigtable and BigQuery.
+- **Security and reliability:** IAM deny policies and conditions, service accounts without keys, org policy constraints, audit logs and security services; SLIs, SLOs, error budgets, burn-rate alerting, Cloud Monitoring and Logging, incident management.
+- **Design:** the Pub/Sub → Dataflow/Dataproc → BigQuery pipeline, Composer, Dataplex, Datastream and Vertex AI, with clue words for each.
