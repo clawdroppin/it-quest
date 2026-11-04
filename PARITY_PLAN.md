@@ -660,3 +660,11 @@ Google Cloud went from 4 to 10 lessons, from 0 to 12 exercises, and from 17 to 5
 - **Foundations in depth:** machine families, discounts, MIGs, GKE Autopilot vs Standard, Cloud Run; global VPCs, firewall rules and policies, Cloud NAT, Private Google Access, Shared VPC, HA VPN and Interconnect, load balancers; Cloud Storage classes and Bucket Lock, Cloud SQL, AlloyDB, Spanner, Firestore, Bigtable and BigQuery.
 - **Security and reliability:** IAM deny policies and conditions, service accounts without keys, org policy constraints, audit logs and security services; SLIs, SLOs, error budgets, burn-rate alerting, Cloud Monitoring and Logging, incident management.
 - **Design:** the Pub/Sub → Dataflow/Dataproc → BigQuery pipeline, Composer, Dataplex, Datastream and Vertex AI, with clue words for each.
+
+### Certified Kubernetes Administrator (done in this pass)
+
+CKA went from 5 to 11 lessons, from 4 to 16 exercises, and from 21 to 57 quizzes (about 21k words). Each new lesson follows a CKA domain and comes with flashcards, drills and two checked Python exercises that model Kubernetes' own rules: RollingUpdate maxSurge/maxUnavailable rounding, QoS classes and HPA decisions with tolerance, the scheduler's filter phase with its Pending event message, topology spread skew, CoreDNS search domains, Gateway API HTTPRoute precedence and weights, PV/PVC binding with dynamic provisioning, reclaim policies, an RBAC authoriser, Pod Security Standards, a kubeadm upgrade plan with version skew, and Pod triage by state and exit code. The track verifies with 20 checks and 0 problems. New lessons:
+
+- **Workloads and scheduling:** rollouts and rollbacks, DaemonSets, StatefulSets, Jobs and CronJobs, ConfigMaps and Secrets, requests, limits and QoS, probes, HPA; node affinity, taints and tolerations, topology spread, priority and preemption, cordon/drain, static Pods.
+- **Services, networking and storage:** Service types, EndpointSlices, DNS names, Ingress and the Gateway API; volumes, PVs, PVCs, access modes, reclaim policies, StorageClasses and expansion.
+- **Administration and troubleshooting:** authentication, RBAC, ServiceAccounts, kubeconfig, certificates and Pod Security Admission; kubeadm upgrades, etcd snapshot and restore, and diagnosing Pods, nodes, the control plane and Services.

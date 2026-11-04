@@ -951,10 +951,11 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Advanced, "0 · Architecture and kubectl", "The exam, control plane and nodes, kubectl at speed, the core objects.", "cka";
                     "ck0_01_architecture_kubectl.md"),
-                module!(Advanced, "1 · Workloads, Networking, Storage", "Resources and probes, scheduling, Services, NetworkPolicy, volumes.", "cka";
-                    "ck1_01_workloads_networking_storage.md"),
+                module!(Advanced, "1 · Workloads, Networking, Storage", "Rollouts, QoS and autoscaling, scheduling rules, Services, DNS, Gateway API, PVs and StorageClasses.", "cka";
+                    "ck1_01_workloads_networking_storage.md", "ck1_02_workloads_deep.md", "ck1_03_scheduling_deep.md",
+                    "ck1_04_services_gateway.md", "ck1_05_storage_deep.md"),
                 module!(Expert, "2 · Administration and Troubleshooting", "kubeadm upgrades, etcd backup, RBAC, Helm, and a method for fixing anything.", "cka";
-                    "ck2_01_admin_troubleshooting.md"),
+                    "ck2_01_admin_troubleshooting.md", "ck2_02_rbac_security.md", "ck2_03_maintenance_troubleshooting.md"),
                 module!(Expert, "3 · Exam Tasks, Hands On", "The task types on the exam, fastest commands, and the rules behind scheduling, Services, RBAC and NetworkPolicy.", "cka";
                     "ck3_01_exam_tasks.md"),
                 build!(Expert, "🧹 Kubernetes Manifest Linter", "Catch latest tags, missing limits, privileged pods and broken Services before deploy.", "cka";
