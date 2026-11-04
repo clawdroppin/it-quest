@@ -724,3 +724,10 @@ Japanese went from 5 to 8 lessons, from 0 to 6 checked lesson exercises (plus th
 - **Verbs:** the three groups and the -iru/-eru traps, ます, て/た, ない and potential forms, and their workplace uses.
 - **Numbers, money, dates and times:** four-digit grouping, sound changes, irregular day readings, months, hours and minutes, counters.
 - **敬語 forms:** the お/ご patterns, special respectful and humble verbs, common mistakes, and daily support phrases.
+
+### IT Career in Japan (done in this pass)
+
+The career track went from 5 to 7 lessons, from 0 to 4 checked lesson exercises (plus the application kit build), and from 22 to 34 quizzes. The new lessons cover the two places where numbers and form matter most: offers and application documents. Changeable figures (minimum wage, take-home ratio) are marked as examples to update, and the offers lesson says it's general information, not legal advice. The exercises check fixed overtime against the hourly base and the minimum wage, compare offers by real hourly pay, convert dates to 和暦 with 元年 and exact era boundaries, and build a 学歴・職歴 table with the standard phrases and full age. The track verifies with 8 checks and 0 problems. New lessons:
+
+- **Reading offers in depth:** pay components, 固定残業代 legality, 36協定 limits and premiums, hourly base and real hourly pay, take-home rules of thumb, and other clauses to check.
+- **履歴書 and 職務経歴書 in detail:** 和暦 and era changes, the 学歴・職歴 table and its phrases, certifications, and 職務経歴書 formats with quantified results.

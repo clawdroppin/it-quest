@@ -1189,8 +1189,8 @@ pub fn knowledge() -> Vec<Track> {
                     "jc0_01_market.md"),
                 module!(Intermediate, "1 · Visas", "技術・人文知識・国際業務, Highly Skilled Professional, and staying legal.", "japan-career";
                     "jc1_01_visa.md"),
-                module!(Intermediate, "2 · Job Hunting", "Sites, recruiters, 履歴書, 職務経歴書, interviews and reading offers.", "japan-career";
-                    "jc2_01_job_hunting.md"),
+                module!(Intermediate, "2 · Job Hunting", "Sites, recruiters, 履歴書 and 和暦, 職務経歴書, interviews, offers, 固定残業代 and real hourly pay.", "japan-career";
+                    "jc2_01_job_hunting.md", "jc2_02_offers_pay.md", "jc2_03_resume_dates.md"),
                 module!(Intermediate, "3 · Life Admin", "Registration, insurance, pension, tax, housing, leave and resigning.", "japan-career";
                     "jc3_01_life_admin.md"),
                 build!(Intermediate, "🎒 Application Kit", "Résumé templates, an application tracker and an honest offer checker.", "japan-career";
