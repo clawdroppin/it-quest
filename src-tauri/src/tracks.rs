@@ -860,12 +860,15 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "Configure Cisco routers and switches: IOS, VLANs, STP, OSPF, services, security, wireless and automation.",
             modules: vec![
-                module!(Intermediate, "0 · The Exam and IOS", "CCNA 200-301, the IOS command line and basic device setup.", "ccna";
-                    "c0_01_ios.md"),
-                module!(Intermediate, "1 · Switching and Routing", "VLANs, trunks, STP, EtherChannel, static routes and OSPF.", "ccna";
-                    "c1_01_switching.md", "c1_02_routing.md"),
-                module!(Advanced, "2 · Services, Security, Automation", "DHCP, NAT, ACLs, port security, wireless, SDN and APIs.", "ccna";
-                    "c2_01_services_security.md", "c2_02_wireless_automation.md"),
+                module!(Intermediate, "0 · The Exam and Fundamentals", "CCNA 200-301, the IOS command line, subnetting, IPv6 and how switches forward frames.", "ccna";
+                    "c0_01_ios.md", "c0_02_subnetting_wildcards.md", "c0_03_ipv6.md", "c0_04_switching_fundamentals.md"),
+                module!(Intermediate, "1 · Switching and Routing", "VLANs, trunks, STP elections, EtherChannel, route selection and OSPF in depth.", "ccna";
+                    "c1_01_switching.md", "c1_02_routing.md", "c1_03_stp_etherchannel.md", "c1_04_ospf_route_selection.md"),
+                module!(Advanced, "2 · Services, Security, Automation", "NAT, DHCP relay, QoS, syslog, ACLs, layer 2 security, AAA, WLC configuration, REST APIs and Ansible.", "ccna";
+                    "c2_01_services_security.md", "c2_02_wireless_automation.md", "c2_03_ip_services_deep.md", "c2_04_security_deep.md",
+                    "c2_05_wireless_deep.md", "c2_06_automation_deep.md"),
+                module!(Advanced, "3 · Troubleshooting", "Find faults layer by layer with show commands, ping and traceroute.", "ccna";
+                    "c3_01_troubleshooting.md"),
                 build!(Advanced, "🏫 Campus Lab", "Build a two-VLAN campus in Packet Tracer, then parse its show output with Python.", "ccna";
                     "c9_01_campus_lab.md"),
                 // generated project ideas ccna

@@ -628,3 +628,12 @@ Linux+ went from 7 to 19 lessons, from 1 to 25 exercises, and from 33 to 93 quiz
 - **Security:** octal permissions, umask, SUID/SGID/sticky, ACLs, attributes and least-privilege sudoers; shadow aging, SSH keys and sshd hardening, PAM, directory services and auditd; ip/nmcli/netplan, DNS, sockets and host firewalls.
 - **Troubleshooting:** the USE method with vmstat, iostat, free and OOM; boot failures, systemd services, login and file access problems, and SELinux contexts.
 - **New module 4, Scripting, Containers and Automation:** Bash scripting with strict mode and exit codes; Podman/Docker, Containerfiles and container security; Git, Ansible, YAML, IaC and CI/CD.
+
+### Cisco CCNA (done in this pass)
+
+CCNA went from 6 to 16 lessons, from 0 to 20 exercises, and from 31 to 88 quizzes (about 25k words, up from 7.5k). The exercises are Python simulations of what the devices do (MAC learning, STP elections, longest-prefix lookup, PAT, ACL evaluation, port security and DAI) and parsers for real `show` output and controller JSON. The whole track verifies with 24 checks and 0 problems. New lessons:
+
+- **Fundamentals (module 0):** subnetting by block size, VLSM, wildcard masks and summarisation; IPv6 addressing, EUI-64, SLAAC/DHCPv6, NDP and static routes; MAC learning, interface status and errors, duplex mismatches, TCP vs UDP and virtualisation.
+- **Switching and routing:** STP root and port elections, Rapid PVST+, PortFast/BPDU Guard, LACP/PAgP and CDP/LLDP; longest prefix match, administrative distance, floating statics, OSPF cost, neighbour states, adjacency requirements and DR/BDR.
+- **Services, security and automation:** NAT terminology and tables, DHCP relay, QoS marking and queuing, SNMPv3, syslog levels; ACL placement, port security, DHCP snooping, DAI, device hardening, AAA and VPNs; RF, AP modes and WLC WLAN setup; planes, REST, JSON, Ansible and Terraform.
+- **New module 3, Troubleshooting:** a layer-by-layer method with the show commands, ping symbols and traceroute patterns that prove each cause.
