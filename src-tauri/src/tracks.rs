@@ -324,16 +324,24 @@ pub fn html() -> Track {
         modules: vec![
             module!(Novice, "0 · Getting Started", "Elements, tags and the skeleton of every page.", "html";
                 "h0_01_welcome.md"),
-            module!(Novice, "1 · HTML Content", "Links, images, lists, tables and forms.", "html";
-                "h1_01_content.md", "h1_02_forms.md"),
-            module!(Intermediate, "2 · CSS", "Selectors, the box model, flexbox and grid.", "html";
-                "h2_01_css_basics.md", "h2_02_layout.md"),
-            module!(Advanced, "3 · Modern Web Pages", "Responsive design, dark mode, semantics and accessibility.", "html";
-                "h3_01_responsive.md", "h3_02_accessibility.md"),
+            module!(Novice, "1 · HTML Content", "Links, images, lists, tables, forms, text semantics, media and validation.", "html";
+                "h1_01_content.md", "h1_02_forms.md", "h1_03_text_semantics.md", "h1_04_media.md", "h1_05_forms_deep.md"),
+            module!(Intermediate, "2 · CSS", "Selectors, the box model, flexbox and grid, the cascade, units, typography and colour.", "html";
+                "h2_01_css_basics.md", "h2_02_layout.md", "h2_03_cascade.md", "h2_04_selectors.md", "h2_05_typography.md"),
+            module!(Advanced, "3 · Modern Web Pages", "Responsive design, dark mode, semantics, accessibility, positioning and stacking.", "html";
+                "h3_01_responsive.md", "h3_02_accessibility.md", "h3_03_positioning.md"),
             module!(Expert, "4 · Professional Front End", "Web security (XSS, CSP), performance and publishing.", "html";
                 "h4_01_professional.md"),
             module!(Expert, "5 · Web Applications", "The DOM, events, state and render, fetch, storage, routing, components, accessibility and PWAs.", "html";
                 "h5_01_dom_state.md", "h5_02_data.md", "h5_03_apps.md"),
+            module!(Expert, "6 · CSS in Depth", "Grid areas and subgrid, transitions and keyframes, container queries and logical properties, tokens, BEM and cascade layers, SVG icons, and a dashboard.", "html";
+                "e6_01_grid_deep.md", "e6_02_animation.md", "e6_03_modern_responsive.md", "e6_04_architecture.md", "e6_05_svg_icons.md", "e6_06_project.md"),
+            module!(Expert, "7 · Production Front End", "Accessibility patterns and focus, Core Web Vitals and loading, form validation UX, testing and audits, SEO, i18n and Japanese typography, and an accessible request form.", "html";
+                "n7_01_a11y_deep.md", "n7_02_performance.md", "n7_03_forms_ux.md", "n7_04_testing.md", "n7_05_seo_i18n.md", "n7_06_project.md"),
+            module!(Expert, "8 · Web Components and Tooling", "Custom elements, shadow DOM and slots, ES modules and import maps, npm and Vite, and a component-based status board.", "html";
+                "g8_01_web_components.md", "g8_02_modules_tooling.md", "g8_03_project.md"),
+            module!(Expert, "9 · 🎓 Beyond IT: Canvas, CSS Art and Games", "Optional, beyond IT scope: generative art with canvas, illustrations in pure CSS, and an original arcade game.", "html";
+                "b9_01_canvas_art.md", "b9_02_css_art.md", "b9_03_game.md"),
             build!(Intermediate, "🪪 Portfolio and Résumé Site", "Your own responsive site with dark mode and a print-ready résumé.", "html";
                 "i1_01_portfolio.md"),
             build!(Expert, "📅 Habit Tracker PWA", "An installable, offline web app with tested logic, local storage, import/export and full keyboard support.", "html";

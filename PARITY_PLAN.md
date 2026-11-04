@@ -15,7 +15,7 @@ Goal: every programming and scripting track reaches the depth of the Rust track.
 | C# | 40 | 76 | 112 | 60k | 34% (done, see below) |
 | C++ | 40 | 75 | 111 | 61k | 35% (done, see below) |
 | Go | 39 | 74 | 113 | 69k | 39% (done, see below) |
-| HTML/CSS | 13 | 19 | 43 | 21k | 12% |
+| HTML/CSS | 38 | 86 | 135 | 61k | 35% (done, see below) |
 | TypeScript | 39 | 71 | 116 | 75k | 43% (done, see below) |
 
 ## The Rust template
@@ -539,3 +539,38 @@ SQL went from 16 to 40 lessons (109 exercises, 110 quizzes, about 62k words; the
   - Sierpinski, Mandelbrot and Rule 90 drawn with recursive CTEs
   - shortest paths, reachability and the Game of Life in SQL
   - medians, percentiles, histograms and linear regression
+
+## HTML/CSS (done in this pass)
+
+HTML/CSS went from 13 to 38 lessons (86 exercises, 135 quizzes, about 61k words; the counts include the two build projects). The whole track verifies with 92 checks and 0 problems. The HTML checker only lints tag balance and `@@requires`, so every new solution was also loaded in a browser and checked for script errors. The only failures were expected 404s for placeholder media files.
+
+- **Granular fundamentals (7 lessons, inserted into modules 1–3):**
+  - text semantics
+  - media
+  - forms in depth
+  - the cascade and specificity
+  - selectors
+  - typography
+  - positioning and stacking
+- **Module 6, CSS in Depth (6 lessons):**
+  - grid areas, auto-fit/minmax and subgrid
+  - transitions, transforms, keyframes and reduced motion
+  - container queries, logical properties, nesting and popover
+  - design tokens, BEM, utilities and cascade layers
+  - SVG icons, sprites and accessible charts
+  - project: an operations dashboard layout
+- **Module 7, Production Front End (6 lessons):**
+  - ARIA tabs, dialogs, disclosures and live regions
+  - Core Web Vitals, images, fonts and loading
+  - the Constraint Validation API, accessible errors and error summaries
+  - validation, audits, in-page tests and a contrast checker
+  - SEO, Open Graph, JSON-LD, Intl and Japanese typography (ruby, emphasis dots, line breaking)
+  - project: an accessible IT request form
+- **Module 8, Web Components and Tooling (3 lessons):**
+  - custom elements, shadow DOM and slots
+  - ES modules, import maps, npm, Vite and supply-chain security
+  - project: a component-based service status board
+- **Module 9, 🎓 Beyond IT: Canvas, CSS Art and Games (3 lessons):**
+  - generative canvas art
+  - pure-CSS illustration
+  - an original arcade game (Packet Catcher)
