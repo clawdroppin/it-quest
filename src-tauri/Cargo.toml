@@ -1,6 +1,6 @@
 [package]
 name = "it_quest"
-version = "1.4.0"
+version = "1.5.0"
 description = "IT Quest: learn IT skills, languages and certifications from zero"
 authors = ["Jakub"]
 edition = "2024"
