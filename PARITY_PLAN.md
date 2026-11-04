@@ -600,3 +600,12 @@ A+ went from 10 to 22 lessons, from 0 to 24 exercises, and from 51 to 109 quizze
 
 - **Core 1:** motherboards, CPUs, RAM and power supplies; storage and RAID; mobile devices; network configuration (DHCP, DNS, Wi-Fi, SOHO); network types, servers, appliances, IoT and legacy systems; the troubleshooting method and hardware symptoms.
 - **Core 2:** Windows admin tools (MMC snap-ins, Event Viewer IDs, sfc/DISM); installs and upgrades (editions, MBR/GPT, file systems, Windows 11 readiness); Windows networking and sharing (domains, profiles, share vs NTFS permissions); workstation, browser, mobile and SOHO hardening, plus data destruction; software, malware and mobile troubleshooting (the 7-step malware removal procedure); script types, script risks and remote access tools.
+
+### CompTIA Network+ (done in this pass)
+
+Network+ went from 8 to 19 lessons, from 1 to 23 exercises, and from about 40 to 102 quizzes (about 27k words, up from 9k). The whole track verifies with 27 checks and 0 problems. Every N10-009 domain now has depth:
+
+- **Concepts:** cabling, fibre, transceivers and PoE budgets; DNS resolution, zones, DHCP timers and options, NTP/PTP; spine-and-leaf, SDN, SD-WAN, VXLAN, ZTNA/SASE and cloud networking.
+- **Implementation:** route selection (longest prefix, AD, metric), routing protocols, NAT/PAT and FHRP; trunks, native VLANs, spanning tree, LACP, MTU and switch security; Wi-Fi standards, channel planning, 802.1X/EAP and site surveys.
+- **Operations and security:** SNMP, flows, syslog severities and metrics; MTBF/MTTR, RPO/RTO, DR sites, documentation and change management; attacks and defences, ACL evaluation, segmentation and remote access (IPsec, out-of-band).
+- **New module 4, Troubleshooting in Depth:** the 7-step method, interface counters, err-disabled ports and fibre loss budgets; addressing, routing, service and performance problems with the commands that reveal them.

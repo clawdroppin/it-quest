@@ -783,12 +783,17 @@ pub fn knowledge() -> Vec<Track> {
             blurb: "Networks in depth: protocols, subnetting, switching, routing, wireless, security and troubleshooting.",
             modules: vec![
                 module!(Novice, "0 · The Exam", "What Network+ covers.", "networkplus"; "n0_01_about.md"),
-                module!(Intermediate, "1 · Concepts", "OSI, ports and protocols, subnetting and IPv6.", "networkplus";
-                    "n1_01_osi_protocols.md", "n1_02_subnetting.md"),
-                module!(Intermediate, "2 · Implementation", "Switching, VLANs, routing, wireless, WAN and cloud networks.", "networkplus";
-                    "n2_01_switching_routing.md", "n2_02_wireless_wan_cloud.md"),
-                module!(Advanced, "3 · Operations, Security, Troubleshooting", "Services, monitoring, attacks, defences and tools.", "networkplus";
-                    "n3_01_services_security.md", "n3_02_troubleshooting.md"),
+                module!(Intermediate, "1 · Concepts", "OSI, ports and protocols, subnetting and IPv6, cabling and transceivers, DNS/DHCP/NTP in depth, data centre and cloud networking.", "networkplus";
+                    "n1_01_osi_protocols.md", "n1_02_subnetting.md", "n1_03_cabling_media.md", "n1_04_dns_dhcp_time.md",
+                    "n1_05_modern_networks.md"),
+                module!(Intermediate, "2 · Implementation", "Switching, VLANs, routing, wireless, WAN and cloud networks, then routing protocols and NAT, trunks and spanning tree, and Wi-Fi design.", "networkplus";
+                    "n2_01_switching_routing.md", "n2_02_wireless_wan_cloud.md", "n2_03_routing_nat.md", "n2_04_switching_deep.md",
+                    "n2_05_wireless_deep.md"),
+                module!(Advanced, "3 · Operations, Security, Troubleshooting", "Services, monitoring, attacks, defences and tools, plus metrics and logs, high availability and DR, ACLs and remote access.", "networkplus";
+                    "n3_01_services_security.md", "n3_02_troubleshooting.md", "n3_03_monitoring.md", "n3_04_availability_dr.md",
+                    "n3_05_network_security.md"),
+                module!(Advanced, "4 · Troubleshooting in Depth", "The troubleshooting method, interface counters and optics, addressing, routing, service and performance problems.", "networkplus";
+                    "n4_01_physical_troubleshooting.md", "n4_02_service_troubleshooting.md"),
                 build!(Advanced, "🏢 Office Network Planner", "Check a VLAN plan, plan subnets with VLSM, and generate switch config.", "networkplus";
                     "n9_01_office_network.md"),
                 // generated project ideas networkplus
