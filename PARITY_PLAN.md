@@ -700,3 +700,11 @@ CISSP went from 4 to 7 lessons, from 0 to 6 checked lesson exercises (plus the r
 - **Domain 1 in depth:** quantitative and qualitative risk, responses and control types, NIST RMF/CSF 2.0, ISO 27001, due care vs due diligence, the policy hierarchy, BCP steps, metrics and tests, personnel and supply chain security, and the canons.
 - **Domains 3 and 5 in depth:** formal models, Common Criteria, the reference monitor, architecture vulnerabilities, cryptography choices and key counts, PKI, access control models, biometrics errors and federation protocols.
 - **Domains 6–8 in depth:** the incident response lifecycle, evidence and order of volatility, logging and monitoring, backups, RAID and 3-2-1, operational controls, assessments and SOC reports, the secure SDLC and CMMI.
+
+### PMP (done in this pass)
+
+PMP went from 3 to 6 lessons, from 0 to 6 checked lesson exercises (plus the critical path/EVM build), and from 11 to 32 quizzes, across all three exam domains. The exercises cover a power/interest grid with engagement gaps and communication channels; RACI validation (exactly one A, overload, too many consulted); PERT path estimates with sigma bands for deadlines; EVM forecasts choosing the right EAC formula for each situation, with TCPI; release forecasting from a velocity range with scope growth and Little's law; and EMV decision trees with an FPIF contract that reaches its ceiling. PMP verifies with 10 checks and 0 problems. New lessons:
+
+- **People in depth:** servant leadership and power, Tuckman, motivation, Thomas-Kilmann conflict modes, the power/interest grid and engagement matrix, communication channels and methods, RACI, negotiation and group decisions.
+- **Schedule and cost in depth:** estimating techniques and ranges, PERT and path variance, float and dependencies, crashing vs fast tracking, reserves and baselines, EVM and the four EAC formulas, ETC, VAC and TCPI.
+- **Agile, risk, procurement and business:** Scrum and Kanban metrics, prioritisation, EMV and decision trees, threat/opportunity responses, contract types and who bears risk, procurement documents, NPV/IRR/payback/BCR, benefits and organisational change.
