@@ -770,3 +770,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### DaVinci Resolve (done in this pass)
 - New lessons: dr1_02 sync, multicam and pacing (cross-correlation audio sync with sound-travel distance; ASL, shot histogram and snapping cuts to the beat), dr3_02 balancing and skin tones (chart gains and stops; Rec.709 vectorscope hue against the skin line), dr6_02 frame rates and streaming (nearest-frame mapping and 3:2 pulldown; bpp-based ladders by codec and content).
 - Totals now: 11 lessons, 22 exercises, about 19k words. Verifies with 22 checks, 0 problems.
+
+### Blender (done in this pass)
+- New lessons: bl0_02 3D maths (TRS matrices and a parent hierarchy; quaternions, slerp vs Euler lerp, gimbal lock), bl1_02 mesh data (Newell normals and flipped faces; manifold, loose, duplicate and Euler checks with subdivision counts), bl2_02 cameras, light and render budgets (FOV and depth of field; samples, time and deadlines).
+- Totals now: 12 lessons, 24 exercises, about 22k words. Verifies with 24 checks, 0 problems.

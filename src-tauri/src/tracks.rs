@@ -676,12 +676,12 @@ pub fn blender() -> Track {
         lang: Some(Lang::Python),
         blurb: "The full Blender suite: modeling, shading and rendering, animation and rigging, Geometry Nodes, smoke, fire, fluid and physics simulations, Grease Pencil, motion tracking, the node Compositor, the Video Sequence Editor and Python scripting.",
         modules: vec![
-            module!(Novice, "0 · Interface and 3D Space", "Editors and workspaces, navigation, transforms, parenting, collections and the coordinate system.", "blender";
-                "bl0_01_interface.md"),
-            module!(Novice, "1 · Modeling", "Edit Mode tools, clean topology, the modifier stack, hard surface, sculpting, UVs, curves and text.", "blender";
-                "bl1_01_modeling.md"),
-            module!(Intermediate, "2 · Shading and Rendering", "Principled BSDF, shader nodes, procedural materials, lighting, cameras, EEVEE and Cycles.", "blender";
-                "bl2_01_shading_rendering.md"),
+            module!(Novice, "0 · Interface and 3D Space", "Editors and workspaces, navigation, transforms, parenting, collections, the coordinate system, matrices and quaternions.", "blender";
+                "bl0_01_interface.md", "bl0_02_3d_maths.md"),
+            module!(Novice, "1 · Modeling", "Edit Mode tools, clean topology, mesh data and normals, manifold checks, the modifier stack, hard surface, sculpting, UVs, curves and text.", "blender";
+                "bl1_01_modeling.md", "bl1_02_mesh_data.md"),
+            module!(Intermediate, "2 · Shading and Rendering", "Principled BSDF, shader nodes, procedural materials, lighting, lenses and depth of field, EEVEE, Cycles and render budgets.", "blender";
+                "bl2_01_shading_rendering.md", "bl2_02_camera_render_maths.md"),
             module!(Intermediate, "3 · Animation and Rigging", "Keyframes, the Graph Editor, drivers, constraints, armatures, FK/IK, Rigify and shape keys.", "blender";
                 "bl3_01_animation_rigging.md"),
             module!(Intermediate, "4 · Geometry Nodes", "Fields, attributes, instances, scattering, simulation zones and procedural motion graphics.", "blender";
