@@ -804,3 +804,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - tf2_02_validation_tests: validation/precondition/postcondition/check/test comparison; variable validation with can(), a mini terraform test runner with expect_failures.
 - tf2_03_pipelines_drift: saved plans, OIDC, plan risk table, drift and -refresh-only, locking; pipeline gate from plan JSON, drift classification with ignore_changes.
+
+### IPA FE, second pass
+
+- fe2_02_structures_hands_on: 1-based heap index rules, hashing with linear probing, BST shape, binary search counts; heap trace exercise, hash table + binary search comparisons.
+- fe3_03_db_network_hands_on: functional dependencies, closures, candidate keys, 2NF/3NF, SQL NULL rules, subnetting; normal-form analyser and a bitwise subnet calculator.
