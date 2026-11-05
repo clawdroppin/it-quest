@@ -857,3 +857,10 @@ Target for every non-language track: at least 12 lessons, 20 checked exercises, 
 - vu1_03_components_layout: variant matrices, hug/fill/fixed as flexbox; gap and orphan finder, flex row sizing with min/max clamping.
 - vu2_02_form_controls (HTML): labelled text field with helper and error states, native checkbox restyle and role="switch".
 - vu3_03_icon_geometry: keylines, optical correction, pixel snapping, scaling icon sets; crisp-stroke checker, per-size scaling report.
+
+### UI animation, to the floor
+
+- ua0_03_timing_choreography: durations, distance scaling, staggers, overlap; duration model, choreographed timeline with capped stagger.
+- ua1_03_motion_paths: Bézier t vs distance, arc-length tables, tangents and auto-orient, arcs and throws; constant-speed sampling, path orientation and parabola.
+- ua2_03_flip_view_transitions (HTML): WAAPI, FLIP list reorder, View Transitions gallery with fallback and reduced motion.
+- ua3_03_loading_feedback: response-time thresholds, spinner delay/minimum, skeletons, honest progress, optimistic UI; flicker-free spinner plan, EMA progress estimate.

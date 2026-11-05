@@ -655,14 +655,14 @@ pub fn ui_anim() -> Track {
         lang: Some(Lang::Python),
         blurb: "Animated icons, buttons and micro-interactions: motion principles, Synfig Studio's tweening and bones, Glaxnimate and the Lottie format, and playing animations in web, Tauri and Rust apps.",
         modules: vec![
-            module!(Novice, "0 · Motion for Interfaces", "Animation principles for UI, keyframes and interpolation, easing and springs, colour interpolation, formats, and planning a micro-interaction.", "uianim";
-                "ua0_01_motion.md", "ua0_02_easing_springs.md"),
-            module!(Intermediate, "1 · Synfig Studio", "Layers, waypoints and interpolation, path morphing, bones with forward and inverse kinematics, linked parameters and rendering.", "uianim";
-                "ua1_01_synfig.md", "ua1_02_bones_kinematics.md"),
-            module!(Intermediate, "2 · Glaxnimate and Lottie", "Keyframes, easing, trim paths and precomps, the Lottie JSON format inside out, and native CSS and SVG animation.", "uianim";
-                "ua2_01_glaxnimate.md", "ua2_02_css_svg_animation.md"),
-            module!(Advanced, "3 · Animations in Real Apps", "dotlottie-web, lottie-web, Rust players, state-machine buttons, sprite sheets, frame budgets, compositing and reduced motion.", "uianim";
-                "ua3_01_lottie_in_apps.md", "ua3_02_performance_a11y.md"),
+            module!(Novice, "0 · Motion for Interfaces", "Animation principles for UI, keyframes and interpolation, easing and springs, timing and choreography, colour interpolation, formats, and planning a micro-interaction.", "uianim";
+                "ua0_01_motion.md", "ua0_02_easing_springs.md", "ua0_03_timing_choreography.md"),
+            module!(Intermediate, "1 · Synfig Studio", "Layers, waypoints and interpolation, path morphing, bones with forward and inverse kinematics, motion paths at constant speed, linked parameters and rendering.", "uianim";
+                "ua1_01_synfig.md", "ua1_02_bones_kinematics.md", "ua1_03_motion_paths.md"),
+            module!(Intermediate, "2 · Glaxnimate and Lottie", "Keyframes, easing, trim paths and precomps, the Lottie JSON format inside out, native CSS and SVG animation, FLIP and view transitions.", "uianim";
+                "ua2_01_glaxnimate.md", "ua2_02_css_svg_animation.md", "ua2_03_flip_view_transitions.md"),
+            module!(Advanced, "3 · Animations in Real Apps", "dotlottie-web, lottie-web, Rust players, state-machine buttons, sprite sheets, frame budgets, compositing, reduced motion, loading states and progress.", "uianim";
+                "ua3_01_lottie_in_apps.md", "ua3_02_performance_a11y.md", "ua3_03_loading_feedback.md"),
         ],
     }
 }
