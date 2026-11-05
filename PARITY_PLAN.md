@@ -778,3 +778,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### GUI Design (done in this pass)
 - New lessons: gu0_02 layout engines (flex line resolution with freezing; grid track sizing, 1fr vs minmax(0, 1fr)), gu2_02 responsive interfaces (mobile-first dashboard with clamp and pointer queries; container-query card), gu3_02 accessible widgets (native modal dialog with focus return; APG tabs with roving tabindex).
 - Totals now: 12 lessons, 26 exercises, about 30k words. Verifies with 28 checks, 0 problems.
+
+### PMP, second pass
+- New module 2 · Quality, Change and the Exam: pm2_01 quality and integrated change control (control chart with rule of seven; Pareto vital few and change-request routing), pm2_02 exam strategy (pacing analysis from timings; study hours by domain weight and gap).
+- Totals now: 8 lessons, 10 exercises, about 12k words. Verifies with 14 checks, 0 problems.

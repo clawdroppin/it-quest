@@ -1022,6 +1022,8 @@ pub fn knowledge() -> Vec<Track> {
                     "pm0_01_pmp_people.md", "pm0_02_people_deep.md"),
                 module!(Advanced, "1 · Process", "Scope, estimating, critical path and compression, EVM forecasts, risk decisions, procurement, agile and business value.", "pmp";
                     "pm1_01_process.md", "pm1_02_schedule_cost_deep.md", "pm1_03_agile_risk_business.md"),
+                module!(Advanced, "2 · Quality, Change and the Exam", "Control charts and Pareto, cost of quality, integrated change control, closing, situational question rules, pacing and a study plan.", "pmp";
+                    "pm2_01_quality_change.md", "pm2_02_exam_strategy.md"),
                 build!(Advanced, "📅 Office Move: Critical Path and EVM", "The forward/backward pass and earned value formulas, in Python.", "pmp";
                     "pm9_01_schedule_evm.md"),
                 // generated project ideas pmp
