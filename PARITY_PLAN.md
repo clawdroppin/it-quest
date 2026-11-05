@@ -786,3 +786,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### IT career in Japan, second pass
 - New lessons: jc1_02 Highly Skilled Professional points (simplified calculator with salary age limits; planning to 80 points as age changes), jc3_02 take-home pay (social insurance, income tax and resident tax model; resident tax start schedule). Figures are labelled as 2026 example values to check against official sources.
 - Totals now: 9 lessons, 8 exercises, about 13k words. Verifies with 12 checks, 0 problems.
+
+### Japanese, second pass
+- New lessons: jp0_02 kana in depth (Hepburn converter with small kana, っ and ん'; NFKC form normalisation and validation), jp3_02 障害報告 (numbered incident report generator; set phrases and casual-to-polite rewrites).
+- Totals now: 10 lessons, 10 exercises, about 14k words. Verifies with 14 checks, 0 problems.
