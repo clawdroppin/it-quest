@@ -205,3 +205,10 @@ fn main() {
     let (h, m, s) = to_clock(3725);
     println!("{h:02}:{m:02}:{s:02}");
 }
+
+@@flashcards
+tuple :: fixed-size group of values of different types
+t.0 :: first element of a tuple
+destructuring :: let (x, y) = point;
+returning several values :: return a tuple
+() :: the empty tuple, unit

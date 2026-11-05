@@ -393,3 +393,11 @@ fn main() {
     list.complete(0);
     println!("{} remaining, done: {:?}", list.remaining(), list.titles_done());
 }
+
+@@flashcards
+impl block :: where methods are defined
+&self :: method borrows the value
+&mut self :: method can change the value
+self :: method consumes the value
+associated function :: no self, called as Type-colon-colon-name, e.g. new
+Self :: the type the impl is for

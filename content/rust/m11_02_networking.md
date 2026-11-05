@@ -316,3 +316,10 @@ fn main() -> std::io::Result<()> {
     println!("served {}", server.join().unwrap()?);
     Ok(())
 }
+
+@@flashcards
+TcpListener :: accept incoming TCP connections
+TcpStream :: read and write a connection
+reqwest :: HTTP client crate
+timeouts :: always set them on network calls
+UdpSocket :: datagram networking

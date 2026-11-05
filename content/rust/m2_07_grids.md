@@ -258,3 +258,10 @@ fn main() {
         println!("{line}");
     }
 }
+
+@@flashcards
+Vec<Vec<T>> :: a 2D grid, rows of columns
+grid[row][col] :: index a cell
+vec![vec![0; w]; h] :: an h by w grid of zeros
+neighbours :: check bounds before indexing
+flat grid :: index = row * width + col

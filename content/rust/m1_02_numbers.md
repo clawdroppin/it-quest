@@ -198,3 +198,14 @@ fn main() {
     println!("Total: {total}");
     println!("Average: {average}");
 }
+
+@@flashcards
+i32 :: default signed integer, 32 bits
+u8 :: unsigned 8-bit integer, 0 to 255
+usize :: unsigned integer the size of a pointer, used for indexes
+f64 :: default floating-point type
+integer division :: 7 / 2 == 3
+% :: remainder operator
+as :: explicit numeric conversion, e.g. x as f64
+overflow in debug builds :: panics
+1_000_000 :: underscores make number literals readable

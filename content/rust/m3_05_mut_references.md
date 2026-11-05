@@ -236,3 +236,10 @@ fn main() {
     let ok = transfer(&mut alice, &mut bob, 30);
     println!("ok={ok} alice={alice} bob={bob}");
 }
+
+@@flashcards
+&mut x :: mutable borrow
+one &mut XOR many & :: the borrowing rule
+why the rule :: prevents data races and iterator invalidation
+error E0499 :: two mutable borrows at once
+error E0502 :: mutable borrow while immutably borrowed

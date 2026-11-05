@@ -220,3 +220,10 @@ fn main() {
         println!("{}", view(&state));
     }
 }
+
+@@flashcards
+event loop :: wait for input, update state, redraw
+immediate mode :: UI rebuilt every frame from state (egui)
+retained mode :: widget tree kept between frames (GTK, Slint)
+frame :: one pass of drawing the UI
+single source of truth :: the UI reflects the app state

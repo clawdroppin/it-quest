@@ -225,3 +225,12 @@ fn main() {
     health *= 2;
     println!("Health: {health}");
 }
+
+@@flashcards
+&& :: logical and, short-circuits
+|| :: logical or, short-circuits
+! :: logical not
+== and != :: equality comparison
++= :: add and assign
+no ++ operator :: write x += 1
+operator precedence :: * and / before + and -; use parentheses when unsure

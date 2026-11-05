@@ -337,3 +337,11 @@ fn main() {
     println!("{}", Kilograms(2.5) + Kilograms(0.5));
     // speed(time, run) would not compile: the types are different
 }
+
+@@flashcards
+macro_rules! :: declarative macros by pattern
+$x:expr :: a fragment matching an expression
+$(...),* :: repetition
+procedural macros :: derive, attribute and function-like
+macros expand before type checking :: errors can be confusing
+cargo expand :: show macro-expanded code

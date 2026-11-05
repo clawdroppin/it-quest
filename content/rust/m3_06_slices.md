@@ -223,3 +223,10 @@ fn initials(name: &str) -> String {
 fn main() {
     println!("{}", initials("Ada King Lovelace"));
 }
+
+@@flashcards
+slice :: a borrowed view into part of a collection
+&v[1..3] :: elements 1 and 2
+&s[..5] :: first five bytes of a string
+&[i32] :: slice parameter, accepts arrays and vectors
+string slicing on a non-char boundary :: panics

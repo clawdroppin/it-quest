@@ -231,3 +231,11 @@ fn top_three(scores: &[u32]) -> Vec<u32> {
 fn main() {
     println!("{:?}", top_three(&[50, 90, 70, 100, 60]));
 }
+
+@@flashcards
+for x in &v :: borrow each element
+for x in &mut v :: change elements in place, use *x
+for x in v :: consumes the vector
+.enumerate() :: pairs of (index, item)
+.iter().sum() :: add up numbers
+.iter().max() :: Option of the largest element

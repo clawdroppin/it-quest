@@ -279,3 +279,10 @@ fn main() {
     print!("{}", numbered(&[10, 20, 30]));
     print!("{}", numbered(&[Money { cents: 1999 }, Money { cents: 5 }]));
 }
+
+@@flashcards
+T: Display :: T must implement Display
+where clause :: bounds written after the signature
+impl Trait in arguments :: fn show(x: impl Display)
+impl Trait in return :: returns some type implementing the trait
+multiple bounds :: T: Clone + Debug

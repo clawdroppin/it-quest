@@ -156,3 +156,10 @@ Which version change might break your code?
 - 1.4.2 → 1.5.0
 * 1.4.2 → 2.0.0
 ? A new MAJOR version signals breaking changes.
+
+@@flashcards
+crate :: a compilation unit: a library or binary
+crates.io :: the public crate registry
+docs.rs :: documentation for every published crate
+features :: optional parts of a crate, enabled in Cargo.toml
+choosing a crate :: downloads, maintenance, docs, licence

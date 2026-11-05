@@ -125,3 +125,10 @@ fn percentage(part: f64, whole: f64) -> f64 {
 fn main() {
     println!("{}%", percentage(1.0, 4.0));
 }
+
+@@flashcards
+panic! :: stop the program with an error message
+unrecoverable errors :: bugs, broken invariants
+RUST_BACKTRACE=1 :: show where a panic came from
+expect(msg) :: unwrap with your own panic message
+index out of bounds :: a common panic

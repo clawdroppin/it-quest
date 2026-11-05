@@ -104,3 +104,10 @@ Which command suggests more idiomatic ways to write your code?
 * `cargo clippy`
 - `cargo run`
 ? Clippy is a linter: it looks for common mistakes and non-idiomatic patterns. `cargo fmt` only changes formatting.
+
+@@flashcards
+cargo doc --open :: build and open your documentation
+rust-analyzer :: editor language server
+clippy :: linter with hundreds of checks
+rustfmt :: standard code formatter
+rustup :: installs and updates toolchains

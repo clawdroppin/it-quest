@@ -251,3 +251,12 @@ fn main() {
     savings = savings * 2;
     println!("After doubling: {savings}");
 }
+
+@@flashcards
+let :: declares a variable
+immutable by default :: variables can't change unless marked mut
+let mut :: a variable that can be reassigned
+shadowing :: a new let with the same name replaces the old variable
+const :: compile-time constant, type required, SCREAMING_CASE
+type inference :: the compiler works out types from usage
+type annotation :: let x: i32 = 5;

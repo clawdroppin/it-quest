@@ -332,3 +332,12 @@ fn main() {
     let t: Seconds = Minutes(10).into();
     println!("{t}");
 }
+
+@@flashcards
+#[derive(...)] :: generate trait impls automatically
+Debug :: {:?} formatting
+Clone, Copy :: duplication
+PartialEq, Eq :: == comparison
+PartialOrd, Ord :: ordering and sort()
+Hash :: use as a HashMap key
+Default :: Type::default() with zero/empty fields

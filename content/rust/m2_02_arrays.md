@@ -281,3 +281,11 @@ fn reverse(mut numbers: [i32; 6]) -> [i32; 6] {
 fn main() {
     println!("{:?}", reverse([1, 2, 3, 4, 5, 6]));
 }
+
+@@flashcards
+[i32; 5] :: array of 5 i32 values, fixed size
+[0; 10] :: ten zeros
+a.len() :: number of elements
+out-of-bounds index :: panics at run time
+arrays live on the stack :: size known at compile time
+a.iter() :: iterate by reference

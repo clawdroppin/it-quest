@@ -254,3 +254,11 @@ fn main() {
     let open = vec![vec![false; 17]; 17];
     println!("{}", count_paths(&open));
 }
+
+@@flashcards
+measure first :: profile before optimising
+criterion :: benchmarking crate
+release builds :: always benchmark with --release
+avoid allocations in hot loops :: reuse buffers, with_capacity
+flamegraph :: visualise where time is spent
+iterators :: compile to code as fast as manual loops

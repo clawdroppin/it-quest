@@ -229,3 +229,10 @@ fn main() {
     let c = 30;
     println!("{}", sum_refs(&[&a, &b, &c]));
 }
+
+@@flashcards
+&x :: borrow x without taking ownership
+reference :: a pointer guaranteed to be valid
+&str parameters :: accept both &String and string literals
+*r :: dereference
+borrow ends :: after the reference's last use

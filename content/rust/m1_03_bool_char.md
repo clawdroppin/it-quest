@@ -193,3 +193,11 @@ fn main() {
     println!("Is a digit: {}", c.is_numeric());
     println!("Uppercase: {}", c.to_ascii_uppercase());
 }
+
+@@flashcards
+bool :: true or false
+char :: one Unicode scalar value, 4 bytes, single quotes
+'a' vs "a" :: char vs string slice
+is_alphabetic() :: char method checking for a letter
+to_ascii_uppercase() :: uppercase copy of an ASCII char
+c as u32 :: a char's Unicode code point

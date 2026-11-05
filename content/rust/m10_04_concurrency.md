@@ -349,3 +349,13 @@ fn main() {
     println!("total {}", balances.iter().sum::<i64>());
     println!("{ok} transfers succeeded");
 }
+
+@@flashcards
+Send :: safe to move to another thread
+Sync :: safe to share references between threads
+Arc<Mutex<T>> :: shared mutable data across threads
+lock() :: returns a guard; unlocks when dropped
+RwLock :: many readers or one writer
+scoped threads :: thread scope lets threads borrow local data
+atomics :: lock-free counters and flags
+deadlock :: threads waiting on each other's locks

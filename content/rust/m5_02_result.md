@@ -215,3 +215,11 @@ fn main() {
         println!("{t} → {:?}", parse_temp(t));
     }
 }
+
+@@flashcards
+Result<T, E> :: Ok(value) or Err(error)
+recoverable errors :: missing files, bad input
+match on Result :: handle both cases
+unwrap_or_else :: compute a fallback from the error
+map_err :: convert the error type
+is_ok / is_err :: test which variant

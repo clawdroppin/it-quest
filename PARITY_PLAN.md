@@ -842,3 +842,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - le0_02_disks_boot: device names, UUIDs, GPT/ESP, file systems, fstab, UEFI → GRUB → systemd; safe USB-stick finder from lsblk -P, fstab vs blkid checker.
 - le2_02_packages_deep: Debian version rules, holds, ownership and cleanup commands across apt/dnf/pacman, repo trust; dpkg -S ownership report, sort -V outdated check and biggest packages.
+
+### Rust flashcards
+
+- Rust had 40 flashcards across 106 lessons. Added flashcard decks (4–9 cards each) to 76 concept lessons from m0 to m11; projects and the guided g* builds left as they are.

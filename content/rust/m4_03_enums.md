@@ -347,3 +347,10 @@ fn main() {
     let program = vec![Command::Forward(3), Command::TurnRight, Command::Forward(2)];
     println!("{:?}", run(&program));
 }
+
+@@flashcards
+enum :: a type that is one of several variants
+variants with data :: Message::Move { x, y }
+enum vs struct :: either-or vs all-of
+impl on enums :: enums can have methods too
+C-like enum :: variants without data, can be cast to integers

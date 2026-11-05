@@ -362,3 +362,10 @@ If you've worked through everything up to here: congratulations. You can now wri
 Before moving on, it's worth going back to any exercise that felt shaky and solving it again from scratch, without hints.
 
 **Next up:** collections of data — handling not just one value at a time, but lists and tables of them.
+
+@@flashcards
+decompose :: split a problem into smaller functions
+work an example by hand :: before writing code
+rubber duck :: explain the code out loud to find the bug
+small steps :: compile and run often
+edge cases :: empty input, zero, one item, very large values

@@ -314,3 +314,11 @@ fn most_common_letter(text: &str) -> Option<char> {
 fn main() {
     println!("{:?}", most_common_letter("Hello, World!"));
 }
+
+@@flashcards
+HashMap<K, V> :: key-value store, use std collections
+insert :: add or replace a value
+get(&k) :: Option<&V>
+entry(k).or_insert(0) :: get or create a value, e.g. for counting
+contains_key :: test for a key
+iteration order :: unspecified; use BTreeMap for sorted keys

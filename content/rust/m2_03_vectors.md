@@ -309,3 +309,12 @@ fn main() {
     remove_item(&mut list, "milk");
     println!("{:?}", list);
 }
+
+@@flashcards
+Vec<T> :: growable list on the heap
+vec![1, 2, 3] :: macro to create a vector
+push / pop :: add to / remove from the end
+v[i] :: index, panics if out of range
+v.get(i) :: Option<&T>, None if out of range
+len vs capacity :: elements stored vs space allocated
+v.contains(&x) :: membership test

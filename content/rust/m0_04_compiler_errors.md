@@ -150,3 +150,11 @@ fn main() {
     println!("\"Quotes\" need escaping.");
     println!("Braces come in pairs.");
 }
+
+@@flashcards
+error[E0308] :: mismatched types
+reading an error :: start at the first error; later ones often follow from it
+-->  file:line:col :: where the compiler found the problem
+help: lines :: the compiler's suggested fix
+warning :: code compiles, but something looks wrong
+rustc --explain E0382 :: long explanation of an error code

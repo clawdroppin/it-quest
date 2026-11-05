@@ -199,3 +199,9 @@ After moving `evaluate` into `calc.rs`, `main.rs` says "function `evaluate` is p
 - Rename the file
 - Move `main` into `calc.rs`
 ? Items in a module are private unless marked `pub`.
+
+@@flashcards
+mod utils; :: loads src/utils.rs (or src/utils/mod.rs)
+nested module file :: src/utils/math.rs for mod math inside utils
+pub use :: re-export an item
+lib.rs + main.rs :: a library crate and a binary in one package

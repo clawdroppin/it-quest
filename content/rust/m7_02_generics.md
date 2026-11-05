@@ -273,3 +273,9 @@ fn main() {
     let empty: [f64; 0] = [];
     println!("{:?}", last_of(&empty));
 }
+
+@@flashcards
+generic function :: fn largest<T: PartialOrd>(list: &[T]) -> &T
+generic struct :: struct Point<T> { x: T, y: T }
+monomorphisation :: a copy of generic code per concrete type, no run-time cost
+Option<T> and Vec<T> :: generic types from the standard library

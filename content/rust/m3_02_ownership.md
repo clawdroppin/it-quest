@@ -193,3 +193,11 @@ fn main() {
     let file = add_suffix(file);
     println!("{file}");
 }
+
+@@flashcards
+ownership rule 1 :: each value has one owner
+ownership rule 2 :: when the owner goes out of scope, the value is dropped
+move :: assigning a String to another variable transfers ownership
+use after move :: compile error E0382
+passing to a function :: moves the value unless it is Copy or borrowed
+returning a value :: moves ownership back to the caller

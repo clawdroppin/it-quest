@@ -989,3 +989,10 @@ What does `#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]` d
 * Hides the console window in release builds, while keeping it in debug builds
 - Enables debugging
 ? It applies `windows_subsystem = "windows"` only when debug assertions are off, which is the case in release builds.
+
+@@flashcards
+cargo build --release :: optimised binary
+target triple :: e.g. x86_64-pc-windows-msvc
+windows_subsystem = "windows" :: hide the console window
+cargo-bundle / installers :: package for users
+icons and metadata :: set in the build or bundle config

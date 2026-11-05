@@ -122,3 +122,10 @@ fn main() {
     let total: i32 = numbers.iter().sum();
     println!("Total: {total}");
 }
+
+@@flashcards
+stack :: fast, fixed-size values, freed when the function returns
+heap :: dynamic size, allocated at run time
+String data :: lives on the heap; the pointer, length and capacity on the stack
+drop :: freeing a value when its owner goes out of scope
+no garbage collector :: Rust frees memory at known points

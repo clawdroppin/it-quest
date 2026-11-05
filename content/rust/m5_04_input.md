@@ -337,3 +337,10 @@ fn main() {
     println!("average: {}", sum as f64 / numbers.len() as f64);
     println!("skipped: {skipped}");
 }
+
+@@flashcards
+stdin().read_line(&mut s) :: read one line into a String
+read_line keeps the newline :: call trim()
+parsing a typed number :: s.trim().parse::<i32>()
+invalid input :: parse returns Err; ask again
+lines() on stdin().lock() :: read many lines

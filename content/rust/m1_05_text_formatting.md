@@ -251,3 +251,13 @@ fn main() {
     message.push_str(" Welcome to Rust Quest.");
     println!("{message}");
 }
+
+@@flashcards
+{} :: Display formatting
+{:?} :: Debug formatting
+{:#?} :: pretty-printed Debug
+{name} :: inline variable capture in format strings
+{:.2} :: two decimal places
+{:>8} :: right-align in 8 columns
+{:08.3} :: zero-padded width 8, 3 decimals
+format! :: like println! but returns a String

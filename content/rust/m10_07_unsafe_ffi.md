@@ -314,3 +314,11 @@ fn main() {
     let status = unsafe { stats(std::ptr::null(), 3, std::ptr::null_mut()) };
     println!("{status}");
 }
+
+@@flashcards
+unsafe :: lets you do five extra things the compiler can't check
+raw pointers :: *const T and *mut T
+extern "C" :: call or expose C functions
+safe wrapper :: hide unsafe code behind a safe API
+SAFETY comment :: explain why an unsafe block is sound
+Miri :: detects undefined behaviour in tests

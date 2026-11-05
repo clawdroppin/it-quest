@@ -300,3 +300,11 @@ fn main() {
     println!("{:?}", resolve(&table, &["full"], false));
     println!("{:?}", resolve(&table, &["postgres"], false));
 }
+
+@@flashcards
+workspace :: several crates sharing one Cargo.lock and target
+cargo features :: optional functionality flags
+cargo publish :: upload to crates.io
+cargo audit :: check for known vulnerabilities
+build.rs :: build script run before compiling
+MSRV :: minimum supported Rust version

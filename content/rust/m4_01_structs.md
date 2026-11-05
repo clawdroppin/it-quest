@@ -403,3 +403,11 @@ fn main() {
     println!("To read: {:?}", unread_titles(&shelf));
     println!("Total pages: {}", total_pages(&shelf));
 }
+
+@@flashcards
+struct :: named group of fields
+field init shorthand :: User { name, age }
+struct update syntax :: User { age: 30, ..other }
+tuple struct :: struct Point(i32, i32);
+unit struct :: struct Marker;
+#[derive(Debug)] :: allow {:?} printing

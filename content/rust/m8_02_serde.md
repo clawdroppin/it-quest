@@ -228,3 +228,11 @@ Why does `serde_json::from_str` return a `Result`?
 * Because the text might not be valid JSON, or might not match your type
 - It doesn't; it always succeeds
 ? Data from files can be damaged or edited by hand, so loading must handle errors.
+
+@@flashcards
+serde :: framework for serialising and deserialising
+#[derive(Serialize, Deserialize)] :: make a struct convertible
+serde_json to_string_pretty :: struct to formatted JSON
+serde_json from_str :: JSON to struct
+#[serde(default)] :: use Default for missing fields
+#[serde(rename = "x")] :: different name in the JSON

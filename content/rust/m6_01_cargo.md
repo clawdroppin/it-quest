@@ -145,3 +145,11 @@ What is `Cargo.toml` for?
 - Your program's code
 - Compiled output
 ? Code goes in `src/`; compiled output goes in `target/`.
+
+@@flashcards
+Cargo.toml :: project manifest: name, version, dependencies
+Cargo.lock :: exact versions used; commit it for applications
+cargo build --release :: optimised build in target/release
+cargo check :: type-check without producing a binary, fast
+cargo add serde :: add a dependency
+semver in Cargo.toml :: "1.2" means >=1.2.0, <2.0.0

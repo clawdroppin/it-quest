@@ -373,3 +373,10 @@ fn main() {
     println!("{:?}", pending(&files, &[1, 4]));
     println!("{:?}", pending(&["0001_a.sql", "0001_b.sql"], &[]));
 }
+
+@@flashcards
+sqlx :: async SQL with compile-time checked queries
+rusqlite :: SQLite bindings
+parameterised queries :: prevent SQL injection
+migrations :: versioned schema changes
+connection pool :: reuse database connections

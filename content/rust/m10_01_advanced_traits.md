@@ -402,3 +402,10 @@ fn main() {
     println!("{a} {b} {c}");
     println!("{}", Rgb::try_from(&[1, 2][..]).is_err());
 }
+
+@@flashcards
+associated type :: type Item; inside a trait
+operator overloading :: implement Add, Mul and friends
+supertrait :: trait B: A requires A
+fully qualified syntax :: <Type as Trait>::method, for ambiguity
+blanket impl :: impl<T: Display> MyTrait for T

@@ -286,3 +286,12 @@ fn main() {
     println!("{:?}", email_of(&users, 1));
     println!("{:?}", email_of(&users, 2));
 }
+
+@@flashcards
+Option<T> :: Some(value) or None
+no null :: absence is explicit in the type
+unwrap() :: the value, or panic on None
+unwrap_or(default) :: the value, or a default
+map :: transform the value inside Some
+is_some / is_none :: test which variant
+? on Option :: return None early

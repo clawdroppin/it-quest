@@ -388,3 +388,10 @@ fn main() {
     }
     println!("total: {}", total_area(&shapes));
 }
+
+@@flashcards
+trait :: a set of methods a type can implement
+impl Trait for Type :: implement a trait
+default method :: a trait method with a body
+orphan rule :: implement a trait only if you own the trait or the type
+impl Display :: makes {} formatting work

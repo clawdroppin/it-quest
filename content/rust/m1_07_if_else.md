@@ -368,3 +368,10 @@ fn ticket_price(age: u32, is_tuesday: bool) -> u32 {
 fn main() {
     println!("Adult on Tuesday: {}", ticket_price(30, true));
 }
+
+@@flashcards
+if needs a bool :: no truthy integers in Rust
+if as an expression :: let x = if a { 1 } else { 2 };
+both branches same type :: required when if is used as a value
+else if :: chain more conditions
+no parentheses needed :: if x > 5 { ... }

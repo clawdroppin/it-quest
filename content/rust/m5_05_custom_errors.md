@@ -250,3 +250,11 @@ fn main() {
     println!("{}", Money { cents: 1205 });
     println!("{}", Money { cents: -350 });
 }
+
+@@flashcards
+custom error enum :: one variant per failure kind
+impl Display :: human-readable error message
+impl std Error trait :: makes it a proper error type
+impl From<io Error> :: lets ? convert automatically
+thiserror :: crate that derives these impls
+anyhow :: crate with a flexible error type for applications

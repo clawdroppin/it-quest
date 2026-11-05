@@ -424,3 +424,10 @@ fn main() {
         }
     }
 }
+
+@@flashcards
+separate logic from I/O :: easier to test
+model / view / storage :: a common app split
+lib.rs for logic :: main.rs stays thin
+newtype :: struct Meters(f64) for type safety
+make invalid states unrepresentable :: use enums and types

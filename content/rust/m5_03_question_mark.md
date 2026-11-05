@@ -216,3 +216,10 @@ fn main() {
     println!("{:?}", total("apple,3,0.5\nbread,1,2.25\n"));
     println!("{:?}", total("apple,3,0.5\nbread,one,2.25"));
 }
+
+@@flashcards
+? operator :: return the error early, otherwise unwrap Ok
+? needs a compatible return type :: Result or Option
+From conversion :: ? converts errors with From
+Box<dyn Error> :: a catch-all error type for small programs
+main returning Result :: fn main() -> Result<(), Box<dyn Error>>

@@ -169,3 +169,12 @@ I love Rust!
 fn main() {
     println!("Hello, world!\nMy name is Ferris.\nI love Rust!");
 }
+
+@@flashcards
+fn main() :: the function where every Rust program starts
+println! :: macro that prints a line of text
+the ! in println! :: marks a macro, not a function
+semicolon ; :: ends a statement
+cargo new :: creates a new project folder
+cargo run :: builds and runs the project
+src/main.rs :: the entry file of a binary crate

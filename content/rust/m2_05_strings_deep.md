@@ -308,3 +308,14 @@ fn title_case(text: &str) -> String {
 fn main() {
     println!("{}", title_case("the lord of the RINGS"));
 }
+
+@@flashcards
+String :: owned, growable UTF-8 text
+&str :: borrowed string slice
+push_str :: append a &str to a String
+s.len() :: length in bytes, not characters
+s.chars() :: iterate Unicode characters
+no s[0] :: strings can't be indexed by integer
+split_whitespace() :: iterate words
+trim() :: remove leading and trailing whitespace
+parse() :: convert text to a number, returns Result

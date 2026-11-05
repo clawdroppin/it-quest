@@ -337,3 +337,11 @@ fn main() {
     println!("{:?}", bus.emit("click", "open"));
     println!("{:?}", bus.emit("scroll", "down"));
 }
+
+@@flashcards
+static dispatch :: generics, resolved at compile time
+dynamic dispatch :: dyn Trait, via a vtable at run time
+Box<dyn Trait> :: owned trait object
+&dyn Trait :: borrowed trait object
+object safety :: no generic methods, no Self returns
+trade-off :: generics are faster, dyn gives smaller code and mixed collections

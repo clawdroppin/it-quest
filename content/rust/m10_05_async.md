@@ -391,3 +391,12 @@ fn main() {
     println!("{}", log.borrow().join(" "));
     println!("{:?}", finished);
 }
+
+@@flashcards
+async fn :: returns a Future
+.await :: wait for a future without blocking the thread
+runtime :: tokio executes futures
+tokio main attribute :: #[tokio::main] starts a runtime for main
+tokio spawn :: run a task concurrently
+join! :: wait for several futures
+async for I/O :: many network connections; threads for CPU work

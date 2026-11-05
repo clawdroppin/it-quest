@@ -296,3 +296,11 @@ fn main() {
         println!("{} {}", p.score, p.name);
     }
 }
+
+@@flashcards
+closure :: anonymous function |x| x + 1
+captures :: closures can use variables from their scope
+move closure :: takes ownership of captured variables
+Fn :: closure that only reads captures
+FnMut :: closure that changes captures
+FnOnce :: closure that consumes captures, callable once

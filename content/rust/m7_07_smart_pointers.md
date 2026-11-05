@@ -224,3 +224,12 @@ fn main() {
     let e = Expr::Sub(num(10.0), Box::new(Expr::Mul(Box::new(Expr::Div(num(6.0), num(2.0))), num(3.0))));
     println!("{} = {}", show(&e), eval(&e));
 }
+
+@@flashcards
+Box<T> :: owned value on the heap
+recursive types :: need Box, e.g. linked lists and trees
+Rc<T> :: shared ownership, single thread, reference counted
+RefCell<T> :: borrow rules checked at run time
+Rc<RefCell<T>> :: shared, mutable data in one thread
+Arc<T> :: atomic Rc for threads
+Weak<T> :: non-owning reference that breaks Rc cycles

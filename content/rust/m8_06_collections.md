@@ -333,3 +333,10 @@ fn main() {
 }
 @@text
 You now know the whole "standard toolbox" of collections. When you design an app, picking the right one is half the work: a note app's tags are a `HashSet`, a report is a `BTreeMap`, an undo stack is a `Vec` or `VecDeque`. You'll use all of them in the Guided Builds.
+
+@@flashcards
+VecDeque :: queue with fast push and pop at both ends
+BTreeMap :: sorted map
+HashSet :: unique values, fast membership
+BinaryHeap :: max-heap priority queue
+choose by access pattern :: index, key, order, uniqueness

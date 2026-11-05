@@ -455,3 +455,12 @@ fn main() {
     let even_sum: u64 = Fibonacci::new().take_while(|&n| n < 100).filter(|n| n % 2 == 0).sum();
     println!("{even_sum}");
 }
+
+@@flashcards
+Iterator trait :: next() returns Option<Item>
+lazy :: adapters do nothing until consumed
+map / filter :: transform / keep items
+collect() :: build a collection from an iterator
+sum / count / fold :: consume into one value
+iter vs into_iter vs iter_mut :: &T, T, &mut T
+zip, chain, take, skip :: combine and slice iterators

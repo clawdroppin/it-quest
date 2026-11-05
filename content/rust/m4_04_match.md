@@ -328,3 +328,12 @@ fn shipping_cost(zone: &str, weight_kg: u32) -> u32 {
 fn main() {
     println!("{}", shipping_cost("international", 3));
 }
+
+@@flashcards
+match :: compare a value against patterns
+exhaustive :: every possible case must be handled
+_ :: catch-all pattern
+binding in patterns :: Some(x) => uses x
+match guard :: Some(x) if x > 5 =>
+| in patterns :: 1 | 2 => matches either
+ranges in patterns :: 1..=9 =>

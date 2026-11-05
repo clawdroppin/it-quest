@@ -123,3 +123,11 @@ fn main() {
     println!("4. Wait 3 minutes");
     println!("5. Enjoy!");
 }
+
+@@flashcards
+program :: instructions a computer follows, step by step
+source code :: the human-readable text of a program
+compiler :: turns source code into a machine-code executable
+rustc :: the Rust compiler
+executable :: a file the operating system can run
+compiled vs interpreted :: Rust compiles ahead of time; Python interprets at run time

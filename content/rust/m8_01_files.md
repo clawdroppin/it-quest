@@ -320,3 +320,11 @@ fn main() {
         Err(e) => println!("error: {e}"),
     }
 }
+
+@@flashcards
+read_to_string :: read a whole file into a String (std fs)
+fs write :: write a whole file at once
+File open + BufReader :: read a file line by line
+OpenOptions :: append, create, truncate options
+Path and PathBuf :: borrowed and owned file paths
+io Result :: file operations return Result

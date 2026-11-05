@@ -322,3 +322,11 @@ fn main() {
 }
 @@text
 That's the core of concurrent programming in Rust: `spawn` + `move` to start work, `join` to wait for a result, channels to send messages, and `Arc<Mutex<…>>` for the rare case where data must be shared. In the GUI module you'll combine these with egui to keep an app responsive while it works.
+
+@@flashcards
+Instant now / elapsed :: measure durations
+thread sleep(Duration) :: pause the current thread
+thread spawn :: start a new thread
+join() :: wait for a thread and get its result
+move closure for threads :: give the thread ownership of data
+SystemTime :: wall-clock time

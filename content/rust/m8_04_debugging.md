@@ -220,3 +220,10 @@ fn main() {
     println!("{}", longest_streak(&[9]));
     println!("{}", longest_streak(&[]));
 }
+
+@@flashcards
+dbg!(x) :: print file, line and value, returns x
+eprintln! :: print to stderr
+RUST_BACKTRACE=1 :: backtrace on panic
+debugger :: CodeLLDB in VS Code, breakpoints
+binary search the bug :: narrow down where values go wrong

@@ -460,3 +460,13 @@ fn collatz_steps(n: u64) -> u32 {
 fn main() {
     println!("6 takes {} steps", collatz_steps(6));
 }
+
+@@flashcards
+loop :: repeats forever until break
+break value :: returns a value from loop
+while :: repeats while a condition is true
+for x in 0..5 :: 0, 1, 2, 3, 4
+0..=5 :: inclusive range, includes 5
+continue :: skip to the next iteration
+'outer: loop label :: break 'outer leaves nested loops
+(1..10).rev() :: iterate backwards

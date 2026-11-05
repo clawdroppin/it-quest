@@ -246,3 +246,9 @@ fn main() {
     println!("{:?}", parse_move("move 3 -2"));
     println!("{:?}", parse_move("jump 1 1"));
 }
+
+@@flashcards
+if let Some(x) = opt :: run code for one pattern
+while let :: loop while a pattern matches, e.g. stack.pop()
+let else :: let Some(x) = opt else { return; };
+matches! :: macro returning bool for a pattern

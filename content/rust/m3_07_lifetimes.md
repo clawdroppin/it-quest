@@ -226,3 +226,11 @@ fn main() {
 You now understand the part of Rust that most people find hardest. Don't worry if it doesn't feel completely natural yet; it takes practice, and you'll get plenty. From here on, compiler errors about borrowing should look like puzzles you know how to solve rather than mysteries.
 
 **Next up:** structs and enums, which let you create your own types and model real-world data properly.
+
+@@flashcards
+lifetime :: how long a reference is valid
+'a :: a lifetime parameter
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str :: the result lives as long as both inputs
+lifetime elision :: the compiler fills in common lifetimes
+dangling reference :: prevented at compile time
+'static :: lives for the whole program, e.g. string literals

@@ -304,3 +304,11 @@ fn report(a: f64, b: f64, c: f64) -> String {
 fn main() {
     println!("{}", report(6.0, 7.5, 9.0));
 }
+
+@@flashcards
+fn name(x: i32) -> i32 :: function with a parameter and return type
+parameter types :: always required in function signatures
+last expression without ; :: the function's return value
+return :: early exit from a function
+() :: the unit type, returned when nothing else is
+snake_case :: naming style for functions and variables

@@ -169,3 +169,10 @@ Why is the first build of an eframe project slow?
 * Cargo compiles eframe and all its dependencies once; later builds reuse them
 - It downloads Windows updates
 ? The dependencies are built once and cached in `target`.
+
+@@flashcards
+eframe :: runs egui apps natively and on the web
+eframe App trait :: implement update() to draw each frame
+CentralPanel :: the main area of the window
+ui.label / ui.button :: text and a clickable button
+button clicked() :: true in the frame it was clicked

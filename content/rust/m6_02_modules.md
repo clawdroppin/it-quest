@@ -253,3 +253,11 @@ fn main() {
     println!("{} {} {}", c.increment(), c.increment(), c.increment());
     println!("value: {}", c.value());
 }
+
+@@flashcards
+mod :: declares a module
+pub :: makes an item visible outside its module
+private by default :: items are private to their module
+use :: bring a path into scope
+crate root :: main.rs or lib.rs
+super :: the parent module

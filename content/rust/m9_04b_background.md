@@ -316,3 +316,10 @@ Why does `check_job` use `try_recv` and not `recv`?
 - `try_recv` is faster at receiving messages
 * `recv` waits for a message, which would freeze the GUI until the worker sends one
 ? Nothing in `ui()` may wait. `try_recv` returns at once, message or not.
+
+@@flashcards
+never block update() :: the UI freezes
+background thread + channel :: do slow work off the UI thread
+mpsc channel :: send results back to the UI
+try_recv :: check for results without waiting
+request_repaint :: wake the UI when new data arrives

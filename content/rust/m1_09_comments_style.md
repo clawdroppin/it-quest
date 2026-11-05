@@ -176,3 +176,11 @@ fn main() {
     println!("Tax: {:.2}", tax);
     println!("Take-home pay: {:.2}", take_home_pay);
 }
+
+@@flashcards
+// :: line comment
+/// :: doc comment for the item below
+//! :: doc comment for the enclosing module or crate
+cargo fmt :: formats code with rustfmt
+cargo clippy :: lints for common mistakes and style
+comment why, not what :: the code already says what

@@ -170,3 +170,10 @@ fn main() {
     println!("name2 = {name2}");
     println!("list2 = {:?}", list2);
 }
+
+@@flashcards
+Copy :: simple stack types are duplicated instead of moved
+Copy types :: integers, floats, bool, char, tuples of Copy types
+clone() :: explicit deep copy
+String is not Copy :: it owns heap data
+clone cost :: can be expensive; borrow instead when you can

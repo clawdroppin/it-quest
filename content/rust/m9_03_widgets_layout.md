@@ -371,3 +371,11 @@ What does `ui.add_enabled(false, egui::Button::new("Save"))` do?
 * Shows the button greyed out so it can't be clicked
 - Clicks the button
 ? Disabled widgets are visible but inactive.
+
+@@flashcards
+ui.horizontal :: lay out children in a row
+ui.vertical :: lay out children in a column
+text_edit_singleline :: text box bound to a String
+checkbox / slider :: widgets bound to bool / number
+ScrollArea :: scrollable region
+SidePanel / TopBottomPanel :: docked panels

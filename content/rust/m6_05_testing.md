@@ -328,3 +328,12 @@ mod tests {
         assert_eq!(slugify(""), "");
     }
 }
+
+@@flashcards
+#[test] :: marks a test function
+#[cfg(test)] mod tests :: test module compiled only for tests
+assert_eq!(a, b) :: fail if not equal, showing both values
+#[should_panic] :: test passes only if it panics
+cargo test :: build and run all tests
+tests/ folder :: integration tests using the public API
+doc tests :: code examples in /// comments are run

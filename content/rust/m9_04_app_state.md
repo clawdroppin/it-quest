@@ -287,3 +287,9 @@ Why does the shopping list collect an `Action` instead of deleting inside the lo
 * Computed from the items when drawing, every frame
 - Saved to a file
 ? Derived values should be computed, so they can never be out of date.
+
+@@flashcards
+app struct :: holds all UI state between frames
+&mut self in update :: widgets change state directly
+derived values :: compute from state, don't store twice
+persistence :: save state with serde on exit

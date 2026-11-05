@@ -307,3 +307,11 @@ fn main() {
     }
     println!("{} of {} allocated", count_allocations(&names), names.len());
 }
+
+@@flashcards
+struct with a reference :: needs a lifetime parameter
+elision rule 1 :: each input reference gets its own lifetime
+elision rule 2 :: one input lifetime is used for all outputs
+elision rule 3 :: with &self, the output gets self's lifetime
+T: 'a :: T outlives 'a
+'static bound :: owns its data or only holds 'static references
