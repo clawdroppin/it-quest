@@ -794,3 +794,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### CISSP, second pass
 - New lessons: cs0_03 asset security (NIST 800-88 sanitisation choices; retention with legal holds and over-retention), cs1_03 network and identity in depth (Kerberos service-ticket checks with skew and replay; separation-of-duties, privilege and leaver review).
 - Totals now: 9 lessons, 10 exercises, about 15k words. Verifies with 14 checks, 0 problems.
+
+### ITIL, second pass
+
+- it0_02_value_offerings: utility vs warranty classifier (flags services missing either), service offerings composed of goods, access and actions with monthly cost and imposed risk.
+- it2_04_config_events_knowledge: CMDB impact analysis (reverse dependency walk, shared CIs), event filtering with thresholds, deduplication and host-down correlation; release vs deployment and knowledge management in the text.

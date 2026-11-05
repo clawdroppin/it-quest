@@ -1121,12 +1121,12 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "IT service management: value, the service value system, guiding principles and the daily practices.",
             modules: vec![
-                module!(Novice, "0 · Key Concepts", "Services, value, outcomes, utility and warranty.", "itil";
-                    "it0_01_concepts.md"),
+                module!(Novice, "0 · Key Concepts", "Services, value, outcomes, utility and warranty, offerings and relationships.", "itil";
+                    "it0_01_concepts.md", "it0_02_value_offerings.md"),
                 module!(Intermediate, "1 · The Service Value System", "Four dimensions, seven guiding principles, the value chain.", "itil";
                     "it1_01_svs.md", "it1_02_principles_value_streams.md"),
-                module!(Intermediate, "2 · Practices", "Incident, problem, request, change, service desk, SLM and more.", "itil";
-                    "it2_01_practices.md", "it2_02_incident_problem_change.md", "it2_03_service_levels_measurement.md"),
+                module!(Intermediate, "2 · Practices", "Incident, problem, change, SLM, configuration, events, releases and knowledge.", "itil";
+                    "it2_01_practices.md", "it2_02_incident_problem_change.md", "it2_03_service_levels_measurement.md", "it2_04_config_events_knowledge.md"),
                 build!(Intermediate, "⏱ Service Desk Kit", "An SLA clock with Japanese business hours and holidays, plus the process documents.", "itil";
                     "it9_01_service_desk_kit.md"),
                 // generated project ideas itil
