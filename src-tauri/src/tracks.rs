@@ -592,8 +592,8 @@ pub fn gimp() -> Track {
                 "gm1_01_layers_selections.md", "gm1_02_transforms_resampling.md"),
             module!(Intermediate, "2 · Colour and Retouching", "Histograms, Levels and Curves, black and white, hue and saturation, healing and cloning, sharpening and noise reduction.", "gimp";
                 "gm2_01_colour_retouch.md", "gm2_02_sharpen_denoise.md"),
-            module!(Advanced, "3 · Text, Filters and Automation", "Text and painting, how filters work, exporting for every destination, batch jobs and Python plug-ins.", "gimp";
-                "gm3_01_filters_automation.md"),
+            module!(Advanced, "3 · Text, Filters and Automation", "Text and painting, how filters work, shadows, outlines and glows, legible text and scrims, exporting, batch jobs and Python plug-ins.", "gimp";
+                "gm3_01_filters_automation.md", "gm3_02_effects_legibility.md"),
         ],
     }
 }
