@@ -809,3 +809,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - fe2_02_structures_hands_on: 1-based heap index rules, hashing with linear probing, BST shape, binary search counts; heap trace exercise, hash table + binary search comparisons.
 - fe3_03_db_network_hands_on: functional dependencies, closures, candidate keys, 2NF/3NF, SQL NULL rules, subnetting; normal-form analyser and a bitwise subnet calculator.
+
+### CCNP, second pass
+
+- cp0_03_overlays_tunnels: encapsulation overhead table, PMTUD black holes, GRE/IPsec/VXLAN/LISP; tunnel MTU and MSS sizing, LISP map-cache lookup with priority/weight and negative replies.
+- cp1_07_ipv6_multicast: IPv6 address types, EUI-64, solicited-node, multicast MAC mapping, IGMP, PIM and RPF; EUI-64/solicited-node/classifier exercise, multicast MAC collisions and RPF checks.
