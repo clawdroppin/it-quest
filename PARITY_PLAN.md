@@ -837,3 +837,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### GIMP, third pass
 
 - gm3_02_effects_legibility: shadows, outlines, glows from alpha, non-destructive effects, text contrast and scrims; dilation/offset-blur compositing, text colour and scrim opacity for AAA.
+
+### Linux desktop, third pass
+
+- le0_02_disks_boot: device names, UUIDs, GPT/ESP, file systems, fstab, UEFI → GRUB → systemd; safe USB-stick finder from lsblk -P, fstab vs blkid checker.
+- le2_02_packages_deep: Debian version rules, holds, ownership and cleanup commands across apt/dnf/pacman, repo trust; dpkg -S ownership report, sort -V outdated check and biggest packages.
