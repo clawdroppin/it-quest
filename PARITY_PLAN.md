@@ -782,3 +782,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### PMP, second pass
 - New module 2 · Quality, Change and the Exam: pm2_01 quality and integrated change control (control chart with rule of seven; Pareto vital few and change-request routing), pm2_02 exam strategy (pacing analysis from timings; study hours by domain weight and gap).
 - Totals now: 8 lessons, 10 exercises, about 12k words. Verifies with 14 checks, 0 problems.
+
+### IT career in Japan, second pass
+- New lessons: jc1_02 Highly Skilled Professional points (simplified calculator with salary age limits; planning to 80 points as age changes), jc3_02 take-home pay (social insurance, income tax and resident tax model; resident tax start schedule). Figures are labelled as 2026 example values to check against official sources.
+- Totals now: 9 lessons, 8 exercises, about 13k words. Verifies with 12 checks, 0 problems.
