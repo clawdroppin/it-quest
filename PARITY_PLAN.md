@@ -814,3 +814,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - cp0_03_overlays_tunnels: encapsulation overhead table, PMTUD black holes, GRE/IPsec/VXLAN/LISP; tunnel MTU and MSS sizing, LISP map-cache lookup with priority/weight and negative replies.
 - cp1_07_ipv6_multicast: IPv6 address types, EUI-64, solicited-node, multicast MAC mapping, IGMP, PIM and RPF; EUI-64/solicited-node/classifier exercise, multicast MAC collisions and RPF checks.
+
+### GCP, second pass
+
+- gc2_03_migration_dr: migration phases and strategies, waves, DR patterns and data-service RPOs; wave planner with chatty pairs and strategy hints, cheapest DR pattern per workload with cost.
+- gc2_04_load_balancing_scaling: four-question load balancer choice, MIG autoscaling formula and controls; LB chooser, autoscaler simulation with stabilisation and VM-hours.

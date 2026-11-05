@@ -933,8 +933,8 @@ pub fn knowledge() -> Vec<Track> {
                     "gc0_01_gcp_foundations.md", "gc0_02_compute_deep.md", "gc0_03_networking_deep.md", "gc0_04_storage_databases.md"),
                 module!(Expert, "1 · Security and Reliability", "IAM, deny and org policies, audit logs, VPC Service Controls, SLOs, error budgets, DR and cost.", "gcp";
                     "gc1_01_security_reliability.md", "gc1_02_iam_deep.md", "gc1_03_operations_sre.md"),
-                module!(Expert, "2 · Design and Case Studies", "Reading requirements, mapping them to services, worked designs and data pipelines.", "gcp";
-                    "gc2_01_design_case_studies.md", "gc2_02_data_pipelines.md"),
+                module!(Expert, "2 · Design and Case Studies", "Reading requirements, worked designs, data pipelines, migration waves, DR patterns, load balancers and autoscaling.", "gcp";
+                    "gc2_01_design_case_studies.md", "gc2_02_data_pipelines.md", "gc2_03_migration_dr.md", "gc2_04_load_balancing_scaling.md"),
                 build!(Expert, "🔎 IAM Policy Auditor", "Find public access, basic roles and outsiders in exported IAM policies.", "gcp";
                     "gc9_01_iam_auditor.md"),
                 // generated project ideas gcp
