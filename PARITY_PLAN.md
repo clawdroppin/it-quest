@@ -828,3 +828,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### UI animation, third pass
 
 - ua1_02_bones_kinematics: bones, FK, two-bone IK, skeleton deformation weights, render settings; FK keyframe interpolation, IK with both bend directions and clamping.
+
+### Japan career, third pass
+
+- jc0_02_listings_cities: 募集要項 fields, SES signals, holiday terms, city comparison; listing screener with SES/contract warnings, after-rent city comparison.
+- jc3_03_leave_resigning: statutory leave table, carry-over and 5-day rule, notice, bonus timing, between-jobs admin; leave balance tracker, last-day planner.
