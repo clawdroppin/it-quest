@@ -799,3 +799,8 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - it0_02_value_offerings: utility vs warranty classifier (flags services missing either), service offerings composed of goods, access and actions with monthly cost and imposed risk.
 - it2_04_config_events_knowledge: CMDB impact analysis (reverse dependency walk, shared CIs), event filtering with thresholds, deduplication and host-down correlation; release vs deployment and knowledge management in the text.
+
+### Terraform, second pass
+
+- tf2_02_validation_tests: validation/precondition/postcondition/check/test comparison; variable validation with can(), a mini terraform test runner with expect_failures.
+- tf2_03_pipelines_drift: saved plans, OIDC, plan risk table, drift and -refresh-only, locking; pipeline gate from plan JSON, drift classification with ignore_changes.
