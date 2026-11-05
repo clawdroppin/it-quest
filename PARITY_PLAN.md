@@ -790,3 +790,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### Japanese, second pass
 - New lessons: jp0_02 kana in depth (Hepburn converter with small kana, っ and ん'; NFKC form normalisation and validation), jp3_02 障害報告 (numbered incident report generator; set phrases and casual-to-polite rewrites).
 - Totals now: 10 lessons, 10 exercises, about 14k words. Verifies with 14 checks, 0 problems.
+
+### CISSP, second pass
+- New lessons: cs0_03 asset security (NIST 800-88 sanitisation choices; retention with legal holds and over-retention), cs1_03 network and identity in depth (Kerberos service-ticket checks with skew and replay; separation-of-duties, privilege and leaver review).
+- Totals now: 9 lessons, 10 exercises, about 15k words. Verifies with 14 checks, 0 problems.
