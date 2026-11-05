@@ -154,3 +154,70 @@ What's the Japanese phrase for "Please wait a moment" (polite)?
 = shoushou omachi kudasai
 = shoushouomachikudasai
 ? 少々 = a little, お待ちください = please wait.
+
+@@exercise Assemble and check a business email
+Build a Japanese business email from parts in the expected order (宛名 recipient, 挨拶 greeting, 名乗り introducing yourself, 本文 body, 結び closing, 署名 signature), choosing the greeting by relationship. Then check drafts for missing parts and common mistakes: a missing 様 in the recipient line, no closing phrase, or a casual opening.
+@@lang python
+@@starter
+GREETINGS = {"first contact": "突然のご連絡失礼いたします。", "existing client": "いつもお世話になっております。", "internal": "お疲れ様です。"}
+CLOSINGS = ("よろしくお願いいたします。", "よろしくお願い申し上げます。")
+drafts = {
+    "good": ["株式会社ABC", "鈴木様", "いつもお世話になっております。", "XYZ株式会社の田中です。", "メンテナンス日程についてご連絡いたします。", "何卒よろしくお願いいたします。", "田中"],
+    "no 様": ["株式会社ABC", "鈴木", "いつもお世話になっております。", "XYZ株式会社の田中です。", "資料を送付いたします。", "よろしくお願いいたします。", "田中"],
+    "casual": ["株式会社ABC", "鈴木様", "こんにちは！", "田中です。", "資料送ります。", "田中"],
+}
+
+def build(company, person, relationship, me, body):
+    raise NotImplementedError
+
+def check(lines):
+    raise NotImplementedError
+@@expected
+株式会社ABC
+鈴木様
+突然のご連絡失礼いたします。
+XYZ株式会社のスミスです。
+求人情報を拝見し、ご連絡いたしました。
+履歴書を添付いたします。
+よろしくお願いいたします。
+XYZ株式会社 スミス
+--
+good: ok
+no 様: recipient needs 様 (or 御中 for a company)
+casual: opening 「こんにちは！」 is too casual; use 「いつもお世話になっております。」; no closing such as 「よろしくお願いいたします。」
+@@requires
+def build
+def check
+GREETINGS[
+CLOSINGS
+@@hint
+`build` returns the list [company, person + "様", GREETINGS[relationship], f"{my_company}の{name}です。", *body, CLOSINGS[0], signature]. `check` looks at line 2 for 様 (or 御中, which goes on a company with no person), at line 3 for one of the greetings, and for a closing anywhere with `any(line.endswith(c) for c in CLOSINGS)`.
+@@solution
+GREETINGS = {"first contact": "突然のご連絡失礼いたします。", "existing client": "いつもお世話になっております。", "internal": "お疲れ様です。"}
+CLOSINGS = ("よろしくお願いいたします。", "よろしくお願い申し上げます。")
+drafts = {
+    "good": ["株式会社ABC", "鈴木様", "いつもお世話になっております。", "XYZ株式会社の田中です。", "メンテナンス日程についてご連絡いたします。", "何卒よろしくお願いいたします。", "田中"],
+    "no 様": ["株式会社ABC", "鈴木", "いつもお世話になっております。", "XYZ株式会社の田中です。", "資料を送付いたします。", "よろしくお願いいたします。", "田中"],
+    "casual": ["株式会社ABC", "鈴木様", "こんにちは！", "田中です。", "資料送ります。", "田中"],
+}
+
+def build(company, person, relationship, me, body):
+    my_company, name = me
+    return [company, f"{person}様", GREETINGS[relationship], f"{my_company}の{name}です。", *body, CLOSINGS[0], f"{my_company} {name}"]
+
+def check(lines):
+    problems = []
+    if not (lines[1].endswith("様") or lines[1].endswith("御中")):
+        problems.append("recipient needs 様 (or 御中 for a company)")
+    if lines[2] not in GREETINGS.values():
+        problems.append(f"opening 「{lines[2]}」 is too casual; use 「{GREETINGS['existing client']}」")
+    if not any(line.endswith(c) for line in lines for c in CLOSINGS):
+        problems.append("no closing such as 「よろしくお願いいたします。」")
+    return problems
+
+email = build("株式会社ABC", "鈴木", "first contact", ("XYZ株式会社", "スミス"), ["求人情報を拝見し、ご連絡いたしました。", "履歴書を添付いたします。"])
+print("\n".join(email))
+print("--")
+for name, lines in drafts.items():
+    problems = check(lines)
+    print(f"{name}: {'ok' if not problems else '; '.join(problems)}")

@@ -132,3 +132,69 @@ What's the standard greeting to colleagues at work (also used to start internal 
 = otsukaresama desu
 = otsukaresamadesu
 ? Used from morning to evening.
+
+@@exercise Uchi and soto: who gets honorifics?
+In Japanese business, how you refer to people depends on who you're talking to. To an outside customer, your own colleagues and boss are "inside" (内): no さん and no titles after the name, and humble verbs. The customer's people are "outside" (外): 様 or a title, and respectful verbs. Write a function that picks the right form for a person and a company in each situation, and show the classic trap: your own manager, mentioned to a customer.
+@@lang python
+@@starter
+people = {
+    "田中": {"company": "own", "title": "部長"},
+    "佐藤": {"company": "own", "title": None},
+    "鈴木": {"company": "client", "title": "課長"},
+    "山本": {"company": "client", "title": None},
+}
+
+def refer(name, listener):
+    raise NotImplementedError
+
+def company(which, listener, written=True):
+    raise NotImplementedError
+@@expected
+talking to a colleague:
+  田中: 田中部長
+  佐藤: 佐藤さん
+  鈴木: 鈴木課長
+  山本: 山本様
+talking to a client:
+  田中: 部長の田中
+  佐藤: 佐藤
+  鈴木: 鈴木課長
+  山本: 山本様
+own company to a client: 弊社
+client's company, email: 貴社 / speech: 御社
+trap: to a client, say 「部長の田中は席を外しております」, not 「田中部長はいらっしゃいません」
+@@requires
+def refer
+弊社
+御社
+貴社
+@@hint
+If the listener is from your own company, use name + title (or さん) for colleagues. If the listener is outside, refer to your own people by bare surname (or 「部長の田中」), and to the client's people with title or 様. Companies: your own is 弊社 (or 当社 internally). The listener's company is 御社 in speech and 貴社 in writing.
+@@solution
+people = {
+    "田中": {"company": "own", "title": "部長"},
+    "佐藤": {"company": "own", "title": None},
+    "鈴木": {"company": "client", "title": "課長"},
+    "山本": {"company": "client", "title": None},
+}
+
+def refer(name, listener):
+    p = people[name]
+    if p["company"] == "own" and listener == "client":
+        return f"{p['title']}の{name}" if p["title"] else name
+    if p["company"] == "own":
+        return f"{name}{p['title']}" if p["title"] else f"{name}さん"
+    return f"{name}{p['title']}" if p["title"] else f"{name}様"
+
+def company(which, listener, written=True):
+    if which == "own":
+        return "弊社" if listener == "client" else "当社"
+    return "貴社" if written else "御社"
+
+for listener in ("colleague", "client"):
+    print(f"talking to a {listener}:")
+    for name in people:
+        print(f"  {name}: {refer(name, listener)}")
+print("own company to a client:", company("own", "client"))
+print("client's company, email:", company("client", "client", written=True), "/ speech:", company("client", "client", written=False))
+print(f"trap: to a client, say 「{refer('田中', 'client')}は席を外しております」, not 「田中部長はいらっしゃいません」")

@@ -864,3 +864,10 @@ Target for every non-language track: at least 12 lessons, 20 checked exercises, 
 - ua1_03_motion_paths: Bézier t vs distance, arc-length tables, tangents and auto-orient, arcs and throws; constant-speed sampling, path orientation and parabola.
 - ua2_03_flip_view_transitions (HTML): WAAPI, FLIP list reorder, View Transitions gallery with fallback and reduced motion.
 - ua3_03_loading_feedback: response-time thresholds, spinner delay/minimum, skeletons, honest progress, optimistic UI; flicker-free spinner plan, EMA progress estimate.
+
+### Japanese, to the floor
+
+- New exercises appended (at the end, existing order untouched) to the four lessons that had none: kana conversion (jp0_01), 自己紹介 builder and politeness check (jp1_01), uchi/soto references (jp2_01), business email builder and checker (jp3_01).
+- jp1_04_particles: core particles, は vs が, に vs で; particle-by-role sentence builder, は/が rules.
+- jp2_03_meetings_phone: meeting flow and phrases, 根回し, 議事録, phone handling; minutes generator, phone message memo.
+- jp3_03_it_kanji: on/kun readings, sound changes, IT compounds, Leitner boxes; longest-match furigana, Leitner review simulation.

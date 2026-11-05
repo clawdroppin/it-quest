@@ -134,3 +134,46 @@ Write しょうがい (incident) in romaji.
 = shōgai
 = shogai
 ? しょ = sho, う lengthens the o.
+
+@@exercise Convert between hiragana and katakana
+In Unicode, each katakana character sits exactly 0x60 code points after its hiragana partner (あ U+3042, ア U+30A2). Write converters in both directions that leave other characters (kanji, ASCII, the long-vowel mark ー) unchanged, and use them to write IT loanwords in katakana and check whether a word is "all katakana".
+@@lang python
+@@starter
+words = ["さーばー", "ねっとわーく", "ぱすわーど", "ろぐいん", "クラウド", "データベース"]
+
+def to_katakana(text):
+    raise NotImplementedError
+
+def to_hiragana(text):
+    raise NotImplementedError
+@@expected
+さーばー     katakana サーバー     hiragana さーばー     all katakana? False
+ねっとわーく   katakana ネットワーク   hiragana ねっとわーく   all katakana? False
+ぱすわーど    katakana パスワード    hiragana ぱすわーど    all katakana? False
+ろぐいん     katakana ログイン     hiragana ろぐいん     all katakana? False
+クラウド     katakana クラウド     hiragana くらうど     all katakana? True
+データベース   katakana データベース   hiragana でーたべーす   all katakana? True
+あ U+3042, ア U+30A2, difference 0x60
+@@requires
+def to_katakana
+0x60
+ord(
+chr(
+@@hint
+Hiragana runs from U+3041 to U+3096, and katakana from U+30A1 to U+30F6. For each character, if it's in the source range add (or subtract) 0x60 with `chr(ord(c) + 0x60)`, otherwise keep it. "All katakana" means every character is in the katakana range or is ー.
+@@solution
+words = ["さーばー", "ねっとわーく", "ぱすわーど", "ろぐいん", "クラウド", "データベース"]
+
+def to_katakana(text):
+    return "".join(chr(ord(c) + 0x60) if "ぁ" <= c <= "ゖ" else c for c in text)
+
+def to_hiragana(text):
+    return "".join(chr(ord(c) - 0x60) if "ァ" <= c <= "ヶ" else c for c in text)
+
+def all_katakana(text):
+    return all("ァ" <= c <= "ヶ" or c == "ー" for c in text)
+
+for w in words:
+    k, h = to_katakana(w), to_hiragana(w)
+    print(f"{w:<8} katakana {k:<8} hiragana {h:<8} all katakana? {all_katakana(w)}")
+print(f"あ U+{ord('あ'):04X}, ア U+{ord('ア'):04X}, difference 0x{ord('ア') - ord('あ'):X}")

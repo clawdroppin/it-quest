@@ -127,3 +127,66 @@ Fill in the particle: 会社＿働きます (I work AT a company).
 What's 50万円 in yen, written as a number? (digits only)
 = 500000
 ? 50 × 10,000.
+
+@@exercise Build and check a 自己紹介
+Assemble a polite self-introduction from a profile in the standard order (opening, name, origin, job or skills, what you're looking for, closing), then check any draft sentences: every sentence should end in a polite form (です, ます, ました, ません or ください), and casual endings (だ, だよ, する, した) should be flagged with a polite suggestion.
+@@lang python
+@@starter
+profile = {"family": "スミス", "given": "アレックス", "country": "カナダ", "job": "インフラエンジニア",
+           "years": 4, "skills": ["Linux", "AWS"], "goal": "日本のIT企業で働きたいと思っています"}
+draft = ["カナダから来ました。", "Linuxが得意だ。", "AWSの資格を持っています。", "よろしく。", "日本語を勉強する。"]
+POLITE = ("です。", "ます。", "ました。", "ません。", "ください。")
+
+def introduce(p):
+    raise NotImplementedError
+@@expected
+はじめまして。
+アレックス・スミスと申します。
+カナダから参りました。
+インフラエンジニアとして4年働いています。
+LinuxとAWSが得意です。
+日本のIT企業で働きたいと思っています。
+どうぞよろしくお願いいたします。
+-- checking the draft
+ok    カナダから来ました。
+fix   Linuxが得意だ。 -> Linuxが得意です。
+ok    AWSの資格を持っています。
+fix   よろしく。 -> よろしくお願いいたします。
+fix   日本語を勉強する。 -> 日本語を勉強します。
+@@requires
+def introduce
+POLITE
+endswith
+@@hint
+Build the lines with f-strings: 「はじめまして。」, 「{given}・{family}と申します。」 (foreign names are usually written given name first, joined with ・), 「{country}から参りました。」, 「{job}として{years}年働いています。」, 「{skills}が得意です。」 (join with 「と」), the goal + 「。」, and 「どうぞよろしくお願いいたします。」. To check a draft, use `s.endswith(POLITE)`. Suggest fixes with a small dict such as {"だ。": "です。", "する。": "します。", "よろしく。": "よろしくお願いいたします。"}.
+@@solution
+profile = {"family": "スミス", "given": "アレックス", "country": "カナダ", "job": "インフラエンジニア",
+           "years": 4, "skills": ["Linux", "AWS"], "goal": "日本のIT企業で働きたいと思っています"}
+draft = ["カナダから来ました。", "Linuxが得意だ。", "AWSの資格を持っています。", "よろしく。", "日本語を勉強する。"]
+POLITE = ("です。", "ます。", "ました。", "ません。", "ください。")
+FIXES = {"よろしく。": "よろしくお願いいたします。", "だ。": "です。", "する。": "します。", "した。": "しました。"}
+
+def introduce(p):
+    return [
+        "はじめまして。",
+        f"{p['given']}・{p['family']}と申します。",  # foreign names: given・family, joined with ・
+        f"{p['country']}から参りました。",
+        f"{p['job']}として{p['years']}年働いています。",
+        f"{'と'.join(p['skills'])}が得意です。",
+        f"{p['goal']}。",
+        "どうぞよろしくお願いいたします。",
+    ]
+
+for line in introduce(profile):
+    print(line)
+print("-- checking the draft")
+for s in draft:
+    if s.endswith(POLITE):
+        print(f"ok    {s}")
+        continue
+    fixed = s
+    for casual, polite in FIXES.items():
+        if s.endswith(casual):
+            fixed = s[: -len(casual)] + polite
+            break
+    print(f"fix   {s} -> {fixed}")

@@ -1167,12 +1167,12 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Novice, "0 · Kana", "Hiragana, katakana, sounds, romaji, small kana and long vowels, kana as data, katakana IT words and the JLPT.", "japanese";
                     "jp0_01_kana.md", "jp0_02_kana_systems.md"),
-                module!(Novice, "1 · Polite Basics", "Particles, です/ます, self-introduction, verb forms, numbers, money, dates and times.", "japanese";
-                    "jp1_01_basics.md", "jp1_02_verbs.md", "jp1_03_numbers_dates.md"),
-                module!(Intermediate, "2 · 敬語 and Workplace Culture", "Respectful and humble language, special keigo verbs, common mistakes, daily phrases, 報連相.", "japanese";
-                    "jp2_01_keigo.md", "jp2_02_keigo_forms.md"),
-                module!(Intermediate, "3 · IT Communication", "Business email, 障害報告 structure and phrases, status updates, chat, phone and help desk Japanese.", "japanese";
-                    "jp3_01_it_communication.md", "jp3_02_incident_reports.md"),
+                module!(Novice, "1 · Polite Basics", "Particles in depth, です/ます, self-introduction, verb forms, numbers, money, dates and times.", "japanese";
+                    "jp1_01_basics.md", "jp1_02_verbs.md", "jp1_03_numbers_dates.md", "jp1_04_particles.md"),
+                module!(Intermediate, "2 · 敬語 and Workplace Culture", "Respectful and humble language, special keigo verbs, uchi and soto, common mistakes, daily phrases, 報連相, meetings, 議事録 and phone calls.", "japanese";
+                    "jp2_01_keigo.md", "jp2_02_keigo_forms.md", "jp2_03_meetings_phone.md"),
+                module!(Intermediate, "3 · IT Communication", "Business email, 障害報告 structure and phrases, status updates, chat, phone and help desk Japanese, IT kanji and a study system.", "japanese";
+                    "jp3_01_it_communication.md", "jp3_02_incident_reports.md", "jp3_03_it_kanji.md"),
                 build!(Intermediate, "🈁 Japanese Trainer", "A spaced-repetition trainer with a kana-to-romaji engine, plus an interview kit.", "japanese";
                     "jp9_01_trainer.md"),
                 // generated project ideas japanese
