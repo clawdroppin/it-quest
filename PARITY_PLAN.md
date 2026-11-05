@@ -846,3 +846,14 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### Rust flashcards
 
 - Rust had 40 flashcards across 106 lessons. Added flashcard decks (4–9 cards each) to 76 concept lessons from m0 to m11; projects and the guided g* builds left as they are.
+
+### Parity floor
+
+Target for every non-language track: at least 12 lessons, 20 checked exercises, 60 quiz questions and 20k words. Language tracks are measured against Rust separately.
+
+### Vector UI, to the floor
+
+- vu1_02_type_spacing: modular type scale, rem, line height, 4-point grid; scale generator, spacing audit with proximity check.
+- vu1_03_components_layout: variant matrices, hug/fill/fixed as flexbox; gap and orphan finder, flex row sizing with min/max clamping.
+- vu2_02_form_controls (HTML): labelled text field with helper and error states, native checkbox restyle and role="switch".
+- vu3_03_icon_geometry: keylines, optical correction, pixel snapping, scaling icon sets; crisp-stroke checker, per-size scaling report.

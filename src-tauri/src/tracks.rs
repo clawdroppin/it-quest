@@ -634,12 +634,12 @@ pub fn vector_ui() -> Track {
         modules: vec![
             module!(Novice, "0 · Vector Basics", "Vector vs raster, SVG anatomy, path commands and Béziers, viewBox and transforms, setting up Penpot (or self-hosting it) and Inkscape.", "vectorui";
                 "vu0_01_vector_basics.md", "vu0_02_paths_coordinates.md"),
-            module!(Intermediate, "1 · Penpot", "Boards, flex and grid layout, components and variants, tokens, prototypes and Inspect.", "vectorui";
-                "vu1_01_penpot.md"),
-            module!(Intermediate, "2 · A Button System", "Variants, sizes, states and micro-interactions, from Penpot components to animated CSS.", "vectorui";
-                "vu2_01_button_system.md"),
-            module!(Advanced, "3 · Inkscape Icons", "Paths and nodes, boolean operations, a consistent icon grid, clean SVG export, optimisation, sprites and accessible icons.", "vectorui";
-                "vu3_01_inkscape.md", "vu3_02_clean_accessible_svg.md"),
+            module!(Intermediate, "1 · Penpot", "Boards, flex and grid layout, type and spacing scales, variant matrices, hug and fill sizing, tokens, prototypes and Inspect.", "vectorui";
+                "vu1_01_penpot.md", "vu1_02_type_spacing.md", "vu1_03_components_layout.md"),
+            module!(Intermediate, "2 · A Button System", "Variants, sizes, states and micro-interactions, then text fields, checkboxes and switches, from Penpot components to CSS.", "vectorui";
+                "vu2_01_button_system.md", "vu2_02_form_controls.md"),
+            module!(Advanced, "3 · Inkscape Icons", "Paths and nodes, boolean operations, a consistent icon grid, keylines and pixel snapping, clean SVG export, optimisation, sprites and accessible icons.", "vectorui";
+                "vu3_01_inkscape.md", "vu3_02_clean_accessible_svg.md", "vu3_03_icon_geometry.md"),
             module!(Advanced, "4 · Themes and Design Systems", "Three layers of design tokens, tonal scales and contrast, light and dark themes, exporting tokens to CSS and Rust.", "vectorui";
                 "vu4_01_themes_tokens.md", "vu4_02_colour_systems.md"),
         ],
