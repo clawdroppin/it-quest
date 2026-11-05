@@ -762,3 +762,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### Rust UI (done in this pass)
 - New lessons: ru0_02 app architecture (Elm-style update with snapshot undo/redo and capped history; background search over a channel with stale-result handling), ru2_02 input and gestures (click/double-click/drag recogniser; kinetic scrolling with velocity window and friction), ru4_02 text wrapping and virtual lists (greedy wrap and truncation by chars; fixed and variable-height visible ranges).
 - Totals now: 8 lessons, 19 exercises, about 16k words. Verifies with 19 checks, 0 problems.
+
+### GIMP (done in this pass)
+- New lessons: gm0_02 image data (bit depth, compression, formats, EXIF privacy; size and RLE maths, orientation and metadata cleaning), gm1_02 transforms and resampling (nearest vs bilinear with pixel centres, aliasing, rotated canvas and crop with aspect), gm2_02 blur, sharpening and noise (Gaussian kernel and unsharp mask halos, mean vs median on salt-and-pepper).
+- Totals now: 7 lessons, 17 exercises, about 13k words. Verifies with 17 checks, 0 problems.
