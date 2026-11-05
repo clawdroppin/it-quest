@@ -819,3 +819,12 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 
 - gc2_03_migration_dr: migration phases and strategies, waves, DR patterns and data-service RPOs; wave planner with chatty pairs and strategy hints, cheapest DR pattern per workload with cost.
 - gc2_04_load_balancing_scaling: four-question load balancer choice, MIG autoscaling formula and controls; LB chooser, autoscaler simulation with stabilisation and VM-hours.
+
+### PMP, third pass
+
+- pm1_04_scope_procurement: RTM, 100% rule, contract types and incentive maths; WBS rollup with traceability gaps and gold plating, CPFF/CPIF/FPIF payments and PTA.
+- pm1_05_resources_communication: leveling vs smoothing, float, channels, push/pull/interactive; histogram smoothing within float, communication planning.
+
+### UI animation, third pass
+
+- ua1_02_bones_kinematics: bones, FK, two-bone IK, skeleton deformation weights, render settings; FK keyframe interpolation, IK with both bend directions and clamping.

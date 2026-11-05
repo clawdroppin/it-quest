@@ -657,8 +657,8 @@ pub fn ui_anim() -> Track {
         modules: vec![
             module!(Novice, "0 · Motion for Interfaces", "Animation principles for UI, keyframes and interpolation, easing and springs, colour interpolation, formats, and planning a micro-interaction.", "uianim";
                 "ua0_01_motion.md", "ua0_02_easing_springs.md"),
-            module!(Intermediate, "1 · Synfig Studio", "Layers, waypoints and interpolation, path morphing, bones, linked parameters and rendering.", "uianim";
-                "ua1_01_synfig.md"),
+            module!(Intermediate, "1 · Synfig Studio", "Layers, waypoints and interpolation, path morphing, bones with forward and inverse kinematics, linked parameters and rendering.", "uianim";
+                "ua1_01_synfig.md", "ua1_02_bones_kinematics.md"),
             module!(Intermediate, "2 · Glaxnimate and Lottie", "Keyframes, easing, trim paths and precomps, the Lottie JSON format inside out, and native CSS and SVG animation.", "uianim";
                 "ua2_01_glaxnimate.md", "ua2_02_css_svg_animation.md"),
             module!(Advanced, "3 · Animations in Real Apps", "dotlottie-web, lottie-web, Rust players, state-machine buttons, sprite sheets, frame budgets, compositing and reduced motion.", "uianim";
@@ -1020,8 +1020,8 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Advanced, "0 · The Exam and People", "PMP mindset, servant leadership, teams, conflict and stakeholders.", "pmp";
                     "pm0_01_pmp_people.md", "pm0_02_people_deep.md"),
-                module!(Advanced, "1 · Process", "Scope, estimating, critical path and compression, EVM forecasts, risk decisions, procurement, agile and business value.", "pmp";
-                    "pm1_01_process.md", "pm1_02_schedule_cost_deep.md", "pm1_03_agile_risk_business.md"),
+                module!(Advanced, "1 · Process", "Scope and traceability, estimating, critical path and compression, EVM forecasts, risk decisions, contract math, resources, communication, agile and business value.", "pmp";
+                    "pm1_01_process.md", "pm1_02_schedule_cost_deep.md", "pm1_03_agile_risk_business.md", "pm1_04_scope_procurement.md", "pm1_05_resources_communication.md"),
                 module!(Advanced, "2 · Quality, Change and the Exam", "Control charts and Pareto, cost of quality, integrated change control, closing, situational question rules, pacing and a study plan.", "pmp";
                     "pm2_01_quality_change.md", "pm2_02_exam_strategy.md"),
                 build!(Advanced, "📅 Office Move: Critical Path and EVM", "The forward/backward pass and earned value formulas, in Python.", "pmp";
