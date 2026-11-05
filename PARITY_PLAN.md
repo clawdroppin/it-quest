@@ -766,3 +766,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### GIMP (done in this pass)
 - New lessons: gm0_02 image data (bit depth, compression, formats, EXIF privacy; size and RLE maths, orientation and metadata cleaning), gm1_02 transforms and resampling (nearest vs bilinear with pixel centres, aliasing, rotated canvas and crop with aspect), gm2_02 blur, sharpening and noise (Gaussian kernel and unsharp mask halos, mean vs median on salt-and-pepper).
 - Totals now: 7 lessons, 17 exercises, about 13k words. Verifies with 17 checks, 0 problems.
+
+### DaVinci Resolve (done in this pass)
+- New lessons: dr1_02 sync, multicam and pacing (cross-correlation audio sync with sound-travel distance; ASL, shot histogram and snapping cuts to the beat), dr3_02 balancing and skin tones (chart gains and stops; Rec.709 vectorscope hue against the skin line), dr6_02 frame rates and streaming (nearest-frame mapping and 3:2 pulldown; bpp-based ladders by codec and content).
+- Totals now: 11 lessons, 22 exercises, about 19k words. Verifies with 22 checks, 0 problems.

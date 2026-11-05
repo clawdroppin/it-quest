@@ -709,18 +709,18 @@ pub fn resolve() -> Track {
         modules: vec![
             module!(Novice, "0 · Pages, Projects and Timecode", "The pages, project settings, media management, proxies, frame rates and timecode.", "resolve";
                 "dr0_01_basics.md"),
-            module!(Novice, "1 · Editing", "The Cut and Edit pages, essential edits, trimming, storytelling, titles, speed and EDLs.", "resolve";
-                "dr1_01_editing.md"),
+            module!(Novice, "1 · Editing", "The Cut and Edit pages, essential edits, trimming, storytelling, titles, speed, EDLs, sync, multicam and pacing.", "resolve";
+                "dr1_01_editing.md", "dr1_02_sync_pacing.md"),
             module!(Intermediate, "2 · Fusion", "Node-based compositing, keyframes and modifiers, tracking, keying, macros and motion graphics.", "resolve";
                 "dr2_01_fusion.md"),
-            module!(Intermediate, "3 · Color Grading", "Nodes, lift/gamma/gain, secondaries, shot matching, groups and LUTs.", "resolve";
-                "dr3_01_color.md"),
+            module!(Intermediate, "3 · Color Grading", "Nodes, lift/gamma/gain, secondaries, chart balancing, shot matching, skin tones, groups and LUTs.", "resolve";
+                "dr3_01_color.md", "dr3_02_balance_matching.md"),
             module!(Advanced, "4 · Scopes and Colour Management", "Waveforms and vectorscopes, log footage, DaVinci Wide Gamut, ACES and HDR.", "resolve";
                 "dr4_01_color_management.md"),
             module!(Advanced, "5 · Fairlight Audio", "Editing and mixing dialogue, music and effects, EQ, compression, ducking and loudness.", "resolve";
                 "dr5_01_fairlight.md"),
-            module!(Advanced, "6 · Deliver", "Codecs, bitrates and file sizes, export recipes, alpha, subtitles and quality checks.", "resolve";
-                "dr6_01_deliver.md"),
+            module!(Advanced, "6 · Deliver", "Codecs, bitrates and file sizes, export recipes, alpha, subtitles, frame-rate conversion, streaming ladders and quality checks.", "resolve";
+                "dr6_01_deliver.md", "dr6_02_framerates_streaming.md"),
             module!(Expert, "7 · Scripting and Workflow", "The Python API, automation, collaboration, project structure and a full creative pipeline.", "resolve";
                 "dr7_01_scripting_workflow.md"),
         ],
