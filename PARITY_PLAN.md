@@ -774,3 +774,7 @@ CCNP went from 4 to 9 lessons, from 0 to 10 checked lesson exercises (plus the B
 ### Blender (done in this pass)
 - New lessons: bl0_02 3D maths (TRS matrices and a parent hierarchy; quaternions, slerp vs Euler lerp, gimbal lock), bl1_02 mesh data (Newell normals and flipped faces; manifold, loose, duplicate and Euler checks with subdivision counts), bl2_02 cameras, light and render budgets (FOV and depth of field; samples, time and deadlines).
 - Totals now: 12 lessons, 24 exercises, about 22k words. Verifies with 24 checks, 0 problems.
+
+### GUI Design (done in this pass)
+- New lessons: gu0_02 layout engines (flex line resolution with freezing; grid track sizing, 1fr vs minmax(0, 1fr)), gu2_02 responsive interfaces (mobile-first dashboard with clamp and pointer queries; container-query card), gu3_02 accessible widgets (native modal dialog with focus return; APG tabs with roving tabindex).
+- Totals now: 12 lessons, 26 exercises, about 30k words. Verifies with 28 checks, 0 problems.

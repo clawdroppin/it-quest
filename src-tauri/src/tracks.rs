@@ -534,14 +534,14 @@ pub fn gui() -> Track {
         lang: Some(Lang::Html),
         blurb: "Build windows and apps people enjoy using: GUIs in many languages, colour and type, interactive controls, cute animations and your own icons.",
         modules: vec![
-            module!(Novice, "0 · GUI Foundations", "Windows, widgets, the event loop, layouts and keeping logic out of the window.", "gui";
-                "gu0_01_foundations.md"),
+            module!(Novice, "0 · GUI Foundations", "Windows, widgets, the event loop, how layout engines size flex and grid, and keeping logic out of the window.", "gui";
+                "gu0_01_foundations.md", "gu0_02_layout_engines.md"),
             module!(Intermediate, "1 · Desktop GUIs in Every Language", "WinForms, WPF and XAML binding, PowerShell windows, Electron and Tauri, Qt and Fyne.", "gui";
                 "gu1_01_desktop_languages.md"),
-            module!(Intermediate, "2 · Making It Pretty", "Colour, spacing scales, typography, depth, and light and dark themes.", "gui";
-                "gu2_01_pretty.md"),
-            module!(Intermediate, "3 · Interactive Controls", "Button states, toggles, sliders, toasts, spinners and keyboard access.", "gui";
-                "gu3_01_interactive.md"),
+            module!(Intermediate, "2 · Making It Pretty", "Colour, spacing scales, typography, depth, light and dark themes, fluid sizes and container queries.", "gui";
+                "gu2_01_pretty.md", "gu2_02_responsive.md"),
+            module!(Intermediate, "3 · Interactive Controls", "Button states, toggles, sliders, toasts, spinners, keyboard access, accessible dialogs and tabs.", "gui";
+                "gu3_01_interactive.md", "gu3_02_accessible_widgets.md"),
             module!(Advanced, "4 · Cute Animations", "Transitions, keyframes, easing, micro-interactions and animating desktop GUIs.", "gui";
                 "gu4_01_css_animation.md", "gu4_02_animation_code.md"),
             module!(Advanced, "5 · Icon Creation", "Hand-written SVG icons, a consistent set, animated icons, and exporting app icons.", "gui";
