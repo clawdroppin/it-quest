@@ -7,8 +7,8 @@ IT Quest is a free, offline desktop app for Windows and Linux. Every lesson has 
 | | |
 |---|---|
 | 39 tracks | 11 languages, 17 certifications and IT skills, Japanese, the Japan career path, and creative extras: GUI design, Rust UI themes, vector UI design, UI animation, Blender, DaVinci Resolve, the Linux desktop and GIMP |
-| 850+ lesson pages | novice to expert, with 2,800+ quiz questions and 7,300+ flashcards |
-| 1,400+ exercises | checked automatically: output, tests and required code |
+| 950+ lesson pages | novice to expert, with 3,300+ quiz questions and 8,800+ flashcards |
+| 1,600+ exercises | checked automatically: output, tests and required code |
 | 112 projects | guided builds with starters, tests and finished versions, plus open-ended project briefs |
 
 ## Download
