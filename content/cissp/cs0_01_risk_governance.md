@@ -146,3 +146,73 @@ A control costs ¥300,000 a year and lowers ALE from ¥1,000,000 to ¥400,000. W
 = 300000
 = 300,000
 ? 1,000,000 − 400,000 − 300,000 = 300,000.
+
+@@exercise Think like a manager
+CISSP questions often have several technically correct answers; the best one follows the manager's priorities: human safety first, then legal and regulatory obligations, then governance (policy, senior management decisions), then business needs, and technical fixes last. Within the same priority, assessing and planning comes before acting. Pick the best answer for each scenario.
+@@lang python
+@@starter
+PRIORITY = ["safety", "legal", "governance", "business", "technical"]
+
+scenarios = {
+    "Fire alarm during a ransomware outbreak": [
+        ("Isolate infected servers first", "technical", "act"),
+        ("Evacuate staff from the building", "safety", "act"),
+        ("Notify the regulator", "legal", "act"),
+    ],
+    "New privacy law affects customer data": [
+        ("Encrypt every database now", "technical", "act"),
+        ("Assess which data and processes the law covers", "legal", "assess"),
+        ("Update the privacy policy immediately", "legal", "act"),
+    ],
+    "Business wants to skip MFA for executives": [
+        ("Disable MFA as asked", "business", "act"),
+        ("Present the risk to senior management and record their decision", "governance", "assess"),
+        ("Secretly keep MFA enabled", "technical", "act"),
+    ],
+}
+
+def best_answer(options):
+    raise NotImplementedError
+
+for name, options in scenarios.items():
+    text, kind, step = best_answer(options)
+    print(f"{name}\n  -> {text} ({kind}, {step})")
+@@expected
+Fire alarm during a ransomware outbreak
+  -> Evacuate staff from the building (safety, act)
+New privacy law affects customer data
+  -> Assess which data and processes the law covers (legal, assess)
+Business wants to skip MFA for executives
+  -> Present the risk to senior management and record their decision (governance, assess)
+@@requires
+def best_answer
+PRIORITY.index(
+@@hint
+Sort by a key of `(PRIORITY.index(kind), 0 if step == "assess" else 1)` and take the first option.
+@@solution
+PRIORITY = ["safety", "legal", "governance", "business", "technical"]
+
+scenarios = {
+    "Fire alarm during a ransomware outbreak": [
+        ("Isolate infected servers first", "technical", "act"),
+        ("Evacuate staff from the building", "safety", "act"),
+        ("Notify the regulator", "legal", "act"),
+    ],
+    "New privacy law affects customer data": [
+        ("Encrypt every database now", "technical", "act"),
+        ("Assess which data and processes the law covers", "legal", "assess"),
+        ("Update the privacy policy immediately", "legal", "act"),
+    ],
+    "Business wants to skip MFA for executives": [
+        ("Disable MFA as asked", "business", "act"),
+        ("Present the risk to senior management and record their decision", "governance", "assess"),
+        ("Secretly keep MFA enabled", "technical", "act"),
+    ],
+}
+
+def best_answer(options):
+    return min(options, key=lambda o: (PRIORITY.index(o[1]), 0 if o[2] == "assess" else 1))
+
+for name, options in scenarios.items():
+    text, kind, step = best_answer(options)
+    print(f"{name}\n  -> {text} ({kind}, {step})")

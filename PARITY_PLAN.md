@@ -887,3 +887,10 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - gm1_03_cutouts_alpha: halos, Color to Alpha, Foreground Select, chroma key, spill; Color to Alpha, soft chroma key with despill.
 - gm2_03_white_balance_colour_management: white balance, ICC assign vs convert, intents, soft proofing, TAC; grey world vs white patch, CMYK with an ink limit.
 - gm3_03_web_indexed_dither: indexed colour, Floyd–Steinberg vs ordered, sprite sheets, srcset; dithering, export widths and sheet layout.
+
+### cissp (now 13 lessons, 20 exercises, 79 quizzes)
+- cs0_04_law_ethics_privacy: canons, law types, IP, GDPR/APPI, Wassenaar; breach deadline calculator, ethics by canon.
+- cs1_04_secure_design_physical: design principles, zero trust, shared responsibility, ICS, CPTED, fire, power; responsibility matrix review, DC environment check.
+- cs2_03_software_security_deep: SDLC controls, SAST/DAST/IAST/SCA, SBOM and supply chain, APIs; pipeline gate, SBOM vs advisories.
+- cs2_04_assessment_audit_deep: test types, SOC 1/2/3 and Type I/II, sampling, KPIs/KRIs; control sample evaluation, vulnerability metrics with coverage.
+- Exercises appended to cs0_01 (think like a manager) and cs1_01 (key counts, brute-force time).

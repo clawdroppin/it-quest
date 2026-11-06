@@ -997,12 +997,12 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "Security leadership across all eight domains: risk, assets, architecture, networks, identity, testing, operations, software.",
             modules: vec![
-                module!(Advanced, "0 · Governance, Risk and Assets", "The exam, thinking like a manager, risk math, continuity, law, data roles and classification, retention and sanitisation.", "cissp";
-                    "cs0_01_risk_governance.md", "cs0_02_risk_bcp_deep.md", "cs0_03_asset_security.md"),
-                module!(Expert, "1 · Architecture, Crypto, Networks, Identity", "Security models, cryptography, physical and network security, IPsec and zero trust, Kerberos, federation and the identity lifecycle.", "cissp";
-                    "cs1_01_architecture_network_iam.md", "cs1_02_models_crypto_deep.md", "cs1_03_network_iam_deep.md"),
-                module!(Expert, "2 · Assessment, Operations, Software", "Audits and testing, incidents and forensics, backups, secure development.", "cissp";
-                    "cs2_01_assessment_operations_software.md", "cs2_02_operations_deep.md"),
+                module!(Advanced, "0 · Governance, Risk and Assets", "The exam, thinking like a manager, risk math, continuity, law, data roles and classification, retention and sanitisation, ethics canons, law, IP and breach notification.", "cissp";
+                    "cs0_01_risk_governance.md", "cs0_02_risk_bcp_deep.md", "cs0_03_asset_security.md", "cs0_04_law_ethics_privacy.md"),
+                module!(Expert, "1 · Architecture, Crypto, Networks, Identity", "Security models, cryptography, physical and network security, IPsec and zero trust, Kerberos, federation and the identity lifecycle, secure design, cloud responsibility and physical security.", "cissp";
+                    "cs1_01_architecture_network_iam.md", "cs1_02_models_crypto_deep.md", "cs1_03_network_iam_deep.md", "cs1_04_secure_design_physical.md"),
+                module!(Expert, "2 · Assessment, Operations, Software", "Audits and testing, incidents and forensics, backups, secure development, SOC reports, sampling, metrics, SAST/DAST/SCA and SBOMs.", "cissp";
+                    "cs2_01_assessment_operations_software.md", "cs2_02_operations_deep.md", "cs2_03_software_security_deep.md", "cs2_04_assessment_audit_deep.md"),
                 build!(Expert, "📊 Quantitative Risk Register", "ALE, safeguard value, treatments and BIA checks, in yen.", "cissp";
                     "cs9_01_risk_register.md"),
                 // generated project ideas cissp

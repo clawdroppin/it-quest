@@ -131,3 +131,50 @@ privilege creep :: access accumulating as people change jobs
 How many symmetric keys are needed for 10 people to each communicate privately with every other?
 = 45
 ? n(n−1)/2 = 10 × 9 / 2.
+
+@@exercise Key counts and brute-force time
+Compare key management for symmetric and asymmetric cryptography: symmetric needs n(n−1)/2 keys for n people to talk privately in pairs, asymmetric needs 2n (a key pair each). Then estimate the average brute-force time (half the keyspace) for several key lengths at 10¹² guesses per second, in years.
+@@lang python
+@@starter
+def symmetric_keys(n):
+    raise NotImplementedError
+
+def asymmetric_keys(n):
+    raise NotImplementedError
+
+def brute_force_years(bits, rate=1e12):
+    raise NotImplementedError
+
+for n in (2, 10, 100, 1000):
+    print(f"{n:>5} people: symmetric {symmetric_keys(n):>7}  asymmetric {asymmetric_keys(n):>5}")
+for bits in (40, 56, 80, 128):
+    print(f"{bits:>3}-bit key: {brute_force_years(bits):.3g} years on average")
+@@expected
+    2 people: symmetric       1  asymmetric     4
+   10 people: symmetric      45  asymmetric    20
+  100 people: symmetric    4950  asymmetric   200
+ 1000 people: symmetric  499500  asymmetric  2000
+ 40-bit key: 1.74e-08 years on average
+ 56-bit key: 0.00114 years on average
+ 80-bit key: 1.92e+04 years on average
+128-bit key: 5.39e+18 years on average
+@@requires
+def symmetric_keys
+def brute_force_years
+2 ** (bits - 1)
+@@hint
+`n * (n - 1) // 2` and `2 * n`. The average search covers half the keyspace: `2 ** (bits - 1)` guesses, divided by the rate gives seconds; divide by `365.25 * 24 * 3600` for years.
+@@solution
+def symmetric_keys(n):
+    return n * (n - 1) // 2
+
+def asymmetric_keys(n):
+    return 2 * n
+
+def brute_force_years(bits, rate=1e12):
+    return 2 ** (bits - 1) / rate / (365.25 * 24 * 3600)
+
+for n in (2, 10, 100, 1000):
+    print(f"{n:>5} people: symmetric {symmetric_keys(n):>7}  asymmetric {asymmetric_keys(n):>5}")
+for bits in (40, 56, 80, 128):
+    print(f"{bits:>3}-bit key: {brute_force_years(bits):.3g} years on average")
