@@ -79,6 +79,11 @@ Which command tells you how long a script block takes?
 - Trace-Command -Duration
 ? Measure first, so you fix the part that's actually slow.
 
+@@drill
+Which cmdlet measures how long a script block takes?
+= Measure-Command
+? Measure-Command { ... } returns a TimeSpan.
+
 @@flashcards
 `Measure-Command` :: time a script block
 `Stopwatch` :: precise timing

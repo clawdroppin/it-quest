@@ -83,6 +83,11 @@ In a parametric curve such as x = sin(3t), y = sin(4t), what does t do?
 - It's the colour
 ? Step t in small increments and join the points to draw the curve.
 
+@@drill
+Which text-based image format can you write with plain strings?
+= SVG
+? Scalable Vector Graphics is XML.
+
 @@flashcards
 `System.Drawing.Bitmap` :: pixel image (GDI+)
 `Graphics.FromImage` :: draw on a bitmap

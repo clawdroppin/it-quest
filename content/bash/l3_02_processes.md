@@ -98,6 +98,12 @@ Which command shows the log of the `sshd` service since the last boot?
 - `dmesg sshd`
 ? `-u` selects the unit, `-b` the current boot.
 
+@@drill
+Which command shows the logs for a systemd service?
+= journalctl -u
+= journalctl
+? journalctl -u nginx --since today.
+
 @@flashcards
 ps aux :: List all processes
 kill / kill -9 :: Ask a process to stop / force it

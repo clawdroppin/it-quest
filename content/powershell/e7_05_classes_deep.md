@@ -90,6 +90,13 @@ Why implement `System.IComparable` on a class?
 - 7
 ? Flags combine bits: 1 + 4.
 
+@@drill
+Which attribute on an enum lets its values be combined as bit flags?
+= [Flags()]
+= [Flags]
+= Flags
+? [Flags()] enum Perm { Read = 1; Write = 2 }.
+
 @@flashcards
 `class B : A` :: inheritance
 `: base(...)` :: call the parent constructor

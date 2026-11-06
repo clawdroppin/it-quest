@@ -145,6 +145,12 @@ Why use `Import-PowerShellDataFile` for config instead of dot-sourcing `config.p
 - It encrypts the file
 ? A config file is often editable by more people than the script. It must not be able to run commands.
 
+@@drill
+Which cmdlet calls a REST API and converts the JSON response to objects?
+= Invoke-RestMethod
+= irm
+? Invoke-WebRequest returns the raw response.
+
 @@flashcards
 `Invoke-RestMethod` :: calls a REST API; JSON responses become objects
 `ConvertTo-Json -Depth` :: object to JSON (default depth is only 2)

@@ -77,6 +77,11 @@ Why avoid `ls` and `curl` in cross-platform scripts?
 - They need admin rights
 ? Use Get-ChildItem and Invoke-WebRequest.
 
+@@drill
+Which automatic variable is `$true` when PowerShell 7 runs on Linux?
+= $IsLinux
+? $IsWindows and $IsMacOS exist too.
+
 @@flashcards
 `powershell.exe` :: Windows PowerShell 5.1
 `pwsh` :: PowerShell 7

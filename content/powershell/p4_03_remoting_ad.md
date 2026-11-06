@@ -100,6 +100,11 @@ A user is locked out of their domain account. Which cmdlet unlocks it?
 - `Reset-ADPassword`
 ? `Unlock-ADAccount -Identity user`. `Search-ADAccount -LockedOut` finds all locked accounts.
 
+@@drill
+Which cmdlet runs a script block on remote computers?
+= Invoke-Command
+? Invoke-Command -ComputerName srv1, srv2 { ... }.
+
 @@flashcards
 WinRM ports :: 5985 (HTTP) and 5986 (HTTPS)
 Invoke-Command :: Run a script block on one or many remote computers

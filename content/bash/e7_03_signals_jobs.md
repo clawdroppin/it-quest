@@ -101,6 +101,13 @@ Why use `trap ... EXIT` for cleanup rather than putting `rm` at the end of the s
 - It's required by POSIX
 ? One cleanup point for every way out.
 
+@@drill
+Which signal does Ctrl+C send?
+= SIGINT
+= INT
+= 2
+? trap 'cleanup' INT handles it.
+
 @@flashcards
 SIGINT (2) :: Ctrl+C
 SIGTERM (15) :: polite stop (kill default)

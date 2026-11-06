@@ -91,6 +91,11 @@ What's the fast replacement for `$(cat file)`?
 - `$(source file)`
 ? Bash reads the file without starting cat.
 
+@@drill
+Which builtin replaces `$(basename "$f")` without starting a process? Write the expansion.
+= ${f##*/}
+? ## removes the longest matching prefix.
+
 @@flashcards
 fork + exec :: cost of starting a process
 `$(< file)` :: read a file without cat

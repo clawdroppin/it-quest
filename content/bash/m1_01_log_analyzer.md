@@ -304,5 +304,11 @@ echo "All tests passed"
 10.0.0.4 - - [31/Oct/2026:10:10:00 +0000] "GET /old-page HTTP/1.1" 404 153 "-" "Mozilla/5.0"
 198.51.100.2 - - [31/Oct/2026:10:15:00 +0000] "GET /checkout HTTP/1.1" 200 4096 "-" "Mozilla/5.0"
 203.0.113.7 - - [31/Oct/2026:10:20:00 +0000] "GET /phpmyadmin/ HTTP/1.1" 404 153 "-" "curl/8.0"
+
+@@drill
+Which command counts repeated adjacent lines (after sorting)?
+= uniq -c
+? sort | uniq -c | sort -rn.
+
 @@text
 🎉 You can now answer "what's happening on this web server?" in seconds, on any Linux box, with no extra software. That's a skill people notice in SOC, sysadmin and DevOps interviews.

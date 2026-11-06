@@ -100,6 +100,13 @@ Which uses the current culture?
 - `$x.ToString([cultureinfo]::InvariantCulture)`
 ? Interpolation and casts are invariant; -f and Get-Date parsing are culture-aware.
 
+@@drill
+Which DateTime method converts a time to UTC?
+= ToUniversalTime
+= ToUniversalTime()
+= .ToUniversalTime()
+? Store and compare times in UTC.
+
 @@flashcards
 `.AddDays(-30)` :: 30 days ago
 `$b - $a` :: a TimeSpan

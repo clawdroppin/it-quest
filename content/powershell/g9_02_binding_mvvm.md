@@ -90,6 +90,11 @@ What happens to a button bound to a command whose CanExecute returns false?
 - Nothing
 ? Raise CanExecuteChanged when the answer may have changed.
 
+@@drill
+Which interface tells a WPF view that a property has changed?
+= INotifyPropertyChanged
+? Raise PropertyChanged with the property name.
+
 @@flashcards
 MVVM :: Model, View, ViewModel
 `DataContext` :: object that bindings read from

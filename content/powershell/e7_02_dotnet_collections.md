@@ -84,6 +84,14 @@ Which collection gives fast lookups of a user by name?
 - A string joined with commas
 ? Dictionary lookups take the same time however many items there are.
 
+@@drill
+Which .NET generic type is the fast replacement for adding to an array with `+=`?
+= List[T]
+= System.Collections.Generic.List[T]
+= List
+= [System.Collections.Generic.List[object]]
+? Add() appends without copying the whole array.
+
 @@flashcards
 `List[T]` :: growable typed list
 `HashSet[T]` :: unique values, fast lookup

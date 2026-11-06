@@ -107,6 +107,11 @@ Inside a class method, how do you read the object's Name property?
 - $self.Name
 ? Class methods don't see properties as plain variables; use $this.
 
+@@drill
+Which keyword defines a class in PowerShell?
+= class
+? class Server { [string]$Name }.
+
 @@flashcards
 class Name { } :: define a class
 [type]$Property :: a typed property

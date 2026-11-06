@@ -77,6 +77,13 @@ Tasks A needs B, and B needs C. In what order must they run?
 - Any order
 ? A topological sort runs every dependency before the task that needs it.
 
+@@drill
+What's the name of an ordering where every task runs after all of its dependencies?
+= topological order
+= topological sort
+= topological ordering
+? It only exists if the dependencies have no cycle.
+
 @@flashcards
 topological sort :: order where dependencies come first
 `declare -F` :: list function names

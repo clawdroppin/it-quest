@@ -74,6 +74,11 @@ After editing `sshd_config` on a remote server, what's the safe way to apply it?
 - Nothing, changes apply instantly
 ? Your existing session stays open, so you can fix a mistake if the new login fails.
 
+@@drill
+Which command shows free space on mounted file systems in human-readable units?
+= df -h
+? du -sh shows the size of a folder instead.
+
 @@flashcards
 apt / dnf :: Package managers for Debian/Ubuntu / Red Hat family
 lsblk :: Show disks and partitions as a tree

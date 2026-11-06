@@ -79,6 +79,11 @@ Does `^[0-9]{1,3}(\.[0-9]{1,3}){3}$` fully validate an IPv4 address?
 - Only with grep -P
 ? Shape by regex, range by arithmetic.
 
+@@drill
+Which `grep` option enables extended regular expressions?
+= -E
+? grep -E 'error|fail'.
+
 @@flashcards
 `grep -E` :: extended regex
 `grep -o` :: only the match

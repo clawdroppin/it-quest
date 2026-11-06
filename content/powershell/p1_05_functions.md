@@ -92,6 +92,11 @@ Which parameter declaration makes `-Name` required?
 - $Name!
 ? PowerShell prompts for a mandatory parameter if it's missing (or fails when non-interactive).
 
+@@drill
+How do you call `Add-Item` with two arguments, 1 and 2? (no parentheses, no comma)
+= Add-Item 1 2
+? Add-Item(1, 2) passes one array.
+
 @@flashcards
 function Verb-Noun { param(...) } :: define a function
 Call: Mul 3 4 :: arguments are separated by spaces, not commas

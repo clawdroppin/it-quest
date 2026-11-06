@@ -86,6 +86,11 @@ What does `local -n ref=$1` create?
 - A number variable
 ? Namerefs need Bash 4.3+.
 
+@@drill
+Which expression gives the number of elements in array `a`?
+= ${#a[@]}
+? ${#a} would be the length of the first element.
+
 @@flashcards
 `a+=(x)` :: append to an array
 `${#a[@]}` :: number of items

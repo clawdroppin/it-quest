@@ -74,6 +74,11 @@ What does pressing Tab do while typing a command or file name?
 - Opens the help page
 ? Tab completion saves typing and avoids typos.
 
+@@drill
+Which command shows the manual page for a command?
+= man
+? man ls; press q to quit.
+
 @@flashcards
 shell :: The program that reads your commands; Bash is the most common
 pwd :: Print the current (working) directory

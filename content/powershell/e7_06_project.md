@@ -77,6 +77,11 @@ What does a drift report compare?
 - The script's code with its tests
 ? Each item is either compliant or drifted, with the expected and actual values.
 
+@@drill
+What do the two halves of the Test / Set pattern do? Name the one that changes nothing.
+= Test
+? Test reports drift; Set fixes it.
+
 @@flashcards
 desired state :: how the system should be
 drift :: difference between desired and actual

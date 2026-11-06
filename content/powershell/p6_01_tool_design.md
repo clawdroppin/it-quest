@@ -173,6 +173,12 @@ Why list functions explicitly in a manifest's `FunctionsToExport` instead of `'*
 - It's needed for code signing
 ? With `*`, PowerShell has to import the module just to discover what's in it.
 
+@@drill
+Which property gives custom objects a type name for formatting?
+= PSTypeName
+= pstypename
+? [pscustomobject]@{ PSTypeName = 'My.Server'; ... }.
+
 @@flashcards
 `Get-Verb` :: lists the approved verbs for command names
 `[OutputType()]` :: documents what a command returns (used by tab completion)

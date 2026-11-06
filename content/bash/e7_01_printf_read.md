@@ -80,6 +80,11 @@ Why does `while read -r line` sometimes skip the last line of a file?
 - IFS removes it
 ? Add `|| [[ -n $line ]]`.
 
+@@drill
+Which `read` option stops backslashes being treated as escapes?
+= -r
+? Always use read -r.
+
 @@flashcards
 `%-10s` :: left-aligned in 10 columns
 `%05d` :: zero-padded integer

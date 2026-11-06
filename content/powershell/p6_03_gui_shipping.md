@@ -143,6 +143,11 @@ How do you share a module with the whole company so people can `Install-Module` 
 - Paste it into a Group Policy
 ? An internal feed gives versioning and updates, like the PowerShell Gallery but private.
 
+@@drill
+Which .NET assembly do you load for WinForms?
+= System.Windows.Forms
+? Add-Type -AssemblyName System.Windows.Forms.
+
 @@flashcards
 WinForms :: classic .NET GUI library: Form, TextBox, Button, DataGridView
 WPF :: .NET GUI library with XAML layouts

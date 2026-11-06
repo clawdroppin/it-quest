@@ -89,6 +89,12 @@ What does `${!key}` do?
 - Exports key
 ? Indirect expansion.
 
+@@drill
+Which expansion gives `file` from `file.txt` stored in `$f`?
+= ${f%.txt}
+= ${f%.*}
+? % removes the shortest matching suffix.
+
 @@flashcards
 `${v:-d}` :: default if unset or empty
 `${v:=d}` :: default and assign

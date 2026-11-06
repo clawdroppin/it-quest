@@ -80,6 +80,12 @@ What does `trap 'resized=1' WINCH` handle?
 - Ctrl+W
 ? SIGWINCH = window change.
 
+@@drill
+Which command saves the terminal settings so the dashboard can restore them on exit?
+= stty -g
+= saved_stty=$(stty -g)
+? Restore them with stty "$saved_stty" in an EXIT trap.
+
 @@flashcards
 state → render → input :: the TUI loop
 `\e[H` :: cursor home (redraw without clearing)

@@ -84,6 +84,13 @@ What's the safe replacement for `eval "$name=\$value"`?
 - `let $name=$value`
 ? printf -v assigns without running the value as code (still validate the name itself).
 
+@@drill
+Which option makes a pipeline fail if any command in it fails?
+= pipefail
+= set -o pipefail
+= -o pipefail
+? Without it, only the last command's status counts.
+
 @@flashcards
 `( ... )` :: subshell: changes don't escape
 `{ ...; }` :: group: same shell

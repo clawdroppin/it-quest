@@ -66,6 +66,11 @@ Which finding is typical in a user access review?
 - A department with many users
 ? Leavers with active accounts are a classic audit failure.
 
+@@drill
+Which cmdlet turns objects into an HTML table?
+= ConvertTo-Html
+? Add -Fragment to build part of a page.
+
 @@flashcards
 access review :: periodic check of who has access
 leaver :: person who left the company

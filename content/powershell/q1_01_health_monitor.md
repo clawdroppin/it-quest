@@ -353,5 +353,11 @@ $findings | Where-Object Level -ne 'OK' | Format-Table Level, Check, Target, Det
 Write-Host "Report written to $OutFile"
 if (-not $NoOpen) { Invoke-Item $OutFile }
 exit (Get-ExitCode -Findings $findings)
+
+@@drill
+Which CIM class reports logical disks and their free space?
+= Win32_LogicalDisk
+? Get-CimInstance Win32_LogicalDisk.
+
 @@text
 🎉 This is a real portfolio piece: a tested, scheduled monitoring script with an HTML report. In an interview, explain *why* the checks are separate from the data collection. That one design decision is what makes it testable.

@@ -108,6 +108,11 @@ You need to check whether a server's port 3389 (RDP) is reachable from your PC. 
 - `Resolve-DnsName`
 ? `Test-Connection` is ping only (ICMP). `Test-NetConnection -Port` tries a TCP connection.
 
+@@drill
+Which cmdlet queries hardware and OS information through CIM?
+= Get-CimInstance
+? Get-CimInstance Win32_OperatingSystem.
+
 @@flashcards
 Get-Service / Restart-Service :: List and restart Windows services
 Get-WinEvent -FilterHashtable :: Fast, filtered event log queries

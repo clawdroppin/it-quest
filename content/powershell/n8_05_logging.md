@@ -89,6 +89,11 @@ Why put a correlation ID in every log line of one run?
 - Windows requires it
 ? Search for one ID to see a run's whole story.
 
+@@drill
+Which cmdlet records everything in a session to a file?
+= Start-Transcript
+? Stop it with Stop-Transcript.
+
 @@flashcards
 log levels :: DEBUG, INFO, WARN, ERROR, FATAL
 JSON lines :: one JSON object per line

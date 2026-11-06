@@ -121,6 +121,12 @@ Why is `while IFS= read -r line; do ...; done < file` better than `for line in $
 - It sorts the lines
 ? for over $(cat ...) splits on whitespace and expands wildcards.
 
+@@drill
+Write the loop header that reads a file line by line into `line` (the `while` part only).
+= while IFS= read -r line
+= while IFS= read -r line; do
+? Then: do ... done < file.
+
 @@flashcards
 for x in a b c :: loop over words
 for f in *.log :: loop over matching files

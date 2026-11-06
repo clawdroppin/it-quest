@@ -339,5 +339,13 @@ root ALL=(ALL:ALL) ALL
 deploy ALL=(ALL) NOPASSWD: ALL
 @@file sample_root/etc/sudoers.d/backup
 backup ALL=(root) NOPASSWD: /usr/bin/rsync
+
+@@drill
+Which `find` option matches files with the SUID bit set?
+= -perm -4000
+= -perm /4000
+= -perm -u+s
+? SUID programs run with their owner's permissions.
+
 @@text
 🎉 This is how security auditing starts: turn a hardening checklist into automated checks that anyone can rerun. Mention **CIS Benchmarks** and **Lynis** in interviews, and that you've written checks like these yourself.

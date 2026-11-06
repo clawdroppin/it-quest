@@ -59,6 +59,11 @@ Why does N-Queens backtracking only need to check columns and diagonals, not row
 - Rows are checked at the very end
 ? Building the solution row by row removes one whole class of conflicts.
 
+@@drill
+What's the name of the technique that tries a choice, recurses, and undoes the choice if it leads nowhere?
+= backtracking
+? Sudoku and N-Queens solvers both use it.
+
 @@flashcards
 backtracking :: try, recurse, undo on failure
 constraint check :: reject invalid choices early

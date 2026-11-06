@@ -76,6 +76,12 @@ What does `Get-Service` send down the pipeline?
 - An HTML table
 ? Formatting into a table happens only at the end, for display.
 
+@@drill
+Which cmdlet shows the help for another command?
+= Get-Help
+= help
+? Get-Help Get-Process -Examples.
+
 @@flashcards
 Get-Command :: Find commands, for example `Get-Command *dns*`
 Get-Help :: Show a command's help; add `-Examples` for examples

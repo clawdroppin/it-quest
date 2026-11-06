@@ -96,6 +96,11 @@ In what order does `for (k in arr)` visit keys?
 - Reverse order
 ? gawk can set PROCINFO["sorted_in"].
 
+@@drill
+Which awk option passes a shell value in as a variable?
+= -v
+? awk -v limit="$max" '$3 > limit'.
+
 @@flashcards
 `pattern { action }` :: an awk rule
 `BEGIN` / `END` :: before / after all input

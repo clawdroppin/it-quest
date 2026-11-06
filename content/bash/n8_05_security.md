@@ -96,6 +96,11 @@ What's wrong with `tmp=/tmp/backup.$$`?
 - Nothing
 ? mktemp creates a unique file atomically with safe permissions.
 
+@@drill
+Which argument tells most commands that the options have ended?
+= --
+? rm -- "$file" is safe even if the name starts with -.
+
 @@flashcards
 `--` :: end of options
 `./*` :: glob that can't produce options

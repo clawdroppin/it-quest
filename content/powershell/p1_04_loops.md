@@ -85,6 +85,12 @@ Inside `ForEach-Object`, which variable is the current object?
 - $args[0]
 ? In a foreach statement you name the variable yourself.
 
+@@drill
+Which automatic variable holds the current object in a ForEach-Object script block?
+= $_
+= $PSItem
+? $PSItem is the long name for $_.
+
 @@flashcards
 foreach ($x in $list) :: loop statement over a collection
 ForEach-Object { $_ } :: run a block for each piped object

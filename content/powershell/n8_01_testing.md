@@ -98,6 +98,11 @@ What is `TestDrive:`?
 - A registry hive
 ? Use it for file-handling tests.
 
+@@drill
+Which Pester command replaces a real command with a fake one during a test?
+= Mock
+? Mock Get-Service { ... }.
+
 @@flashcards
 `Describe` / `Context` / `It` :: group / sub-group / test
 `BeforeAll` / `BeforeEach` :: setup

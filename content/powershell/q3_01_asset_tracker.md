@@ -798,5 +798,11 @@ $search.Add_TextChanged({ Update-Grid })
 $form.Controls.AddRange(@($search, $grid))
 $form.Add_Shown({ Update-Grid; $search.Focus() })
 [void]$form.ShowDialog()
+
+@@drill
+Which cmdlet loads a module from a path or by name?
+= Import-Module
+? Import-Module ./AssetTracker.
+
 @@text
 🎉 You've written a PowerShell module the way Microsoft's own modules are built: a manifest, safe commands with `-WhatIf`, pipeline support, tests, and a GUI for colleagues who'll never open a console.

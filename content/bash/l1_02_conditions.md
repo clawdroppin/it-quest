@@ -113,6 +113,11 @@ What does `[[ $file == *.log ]]` test?
 - Whether $file is empty
 ? An unquoted right side of == in [[ ]] is a pattern.
 
+@@drill
+Which special variable holds the exit status of the last command?
+= $?
+? 0 means success.
+
 @@flashcards
 exit status 0 :: success (true) in the shell
 [[ -f file ]] :: true if a regular file exists

@@ -99,6 +99,11 @@ Why write `$null -eq $x` instead of `$x -eq $null`?
 - It works with strings only
 ? PSScriptAnalyzer warns about `$x -eq $null`.
 
+@@drill
+Which operator compares strings case-sensitively for equality?
+= -ceq
+? -eq ignores case by default.
+
 @@flashcards
 `-ceq` :: case-sensitive equals
 `-like` :: wildcard match

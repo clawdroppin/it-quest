@@ -69,6 +69,13 @@ Why does Bash need fixed-point tricks for the Mandelbrot set?
 - Floats are too fast
 ? Scale every number by, say, 1000 and keep all maths in whole numbers.
 
+@@drill
+Bash arithmetic has no decimals. What's the name of the technique of scaling numbers by a fixed factor, such as 1000?
+= fixed-point arithmetic
+= fixed point
+= fixed-point
+? Store 1.5 as 1500 and divide at the end.
+
 @@flashcards
 fixed-point :: integers scaled by a constant
 `a * b / S` :: fixed-point multiply

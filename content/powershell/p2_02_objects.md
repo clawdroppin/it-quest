@@ -82,6 +82,12 @@ Which command adds up a property across objects, like the total size of files?
 - Select-Object -Sum
 ? Measure-Object also gives -Average, -Minimum and -Maximum.
 
+@@drill
+Which cmdlet groups objects by a property?
+= Group-Object
+= group
+? Get-Service | Group-Object Status.
+
 @@flashcards
 Where-Object :: keep objects that match a condition
 Select-Object :: choose properties, or first/last N objects

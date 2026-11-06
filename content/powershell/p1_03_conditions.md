@@ -105,6 +105,11 @@ What is `'web01' -like 'web*'`?
 - 'web*'
 ? -like uses wildcards: * for any characters, ? for one.
 
+@@drill
+Which operator checks whether a collection contains a value?
+= -contains
+? @('a','b') -contains 'a' is $true.
+
 @@flashcards
 -eq / -ne :: equal / not equal (case-insensitive for text)
 -gt -ge -lt -le :: numeric and text ordering

@@ -80,6 +80,12 @@ Why pad text before adding colour codes?
 - tput requires it
 ? `printf '%-8s'` would count the invisible bytes.
 
+@@drill
+Which tput capability resets all colours and styles?
+= sgr0
+= tput sgr0
+? Use it after coloured output.
+
 @@flashcards
 `\e[...m` :: SGR: set style
 `\e[0m` :: reset

@@ -87,6 +87,11 @@ What does `-ErrorAction SilentlyContinue` do?
 - Retries the command
 ? Use it only when an error is truly expected and harmless.
 
+@@drill
+Which -ErrorAction value turns a non-terminating error into one that `catch` sees?
+= Stop
+? -ErrorAction Stop.
+
 @@flashcards
 terminating error :: Stops the command; caught by try/catch
 non-terminating error :: Reported, but the command carries on with the next item

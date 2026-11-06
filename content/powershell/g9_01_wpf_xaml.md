@@ -89,6 +89,13 @@ Why must long-running work not run directly in a click handler?
 - WPF cancels it after 5 seconds
 ? Use a runspace and Dispatcher.Invoke for updates.
 
+@@drill
+Which .NET class loads a XAML string into a WPF window?
+= XamlReader
+= System.Windows.Markup.XamlReader
+= [Windows.Markup.XamlReader]
+? [Windows.Markup.XamlReader]::Parse($xaml).
+
 @@flashcards
 XAML :: XML description of a WPF UI
 `x:Name` :: names a control

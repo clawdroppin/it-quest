@@ -85,6 +85,13 @@ Why does the ticket list use an ObservableCollection?
 - It's faster than an array for reading
 ? Bindings watch the collection's change events.
 
+@@drill
+Which collection type updates a bound WPF list automatically when items are added?
+= ObservableCollection
+= ObservableCollection[T]
+= System.Collections.ObjectModel.ObservableCollection
+? A plain List doesn't notify the view.
+
 @@flashcards
 `DataTemplate` :: look of one list item
 `ItemsSource` :: the list a control shows

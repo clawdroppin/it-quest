@@ -87,6 +87,11 @@ What does JEA provide?
 - Automatic patching
 ? Just Enough Administration.
 
+@@drill
+What does JEA stand for?
+= just enough administration
+? Constrained remoting endpoints with limited commands.
+
 @@flashcards
 `Invoke-Expression` :: runs a string as code (avoid)
 `ValidatePattern` / `ValidateSet` :: parameter allow-lists

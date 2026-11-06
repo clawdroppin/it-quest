@@ -80,6 +80,13 @@ Why use `jq -n --arg msg "$msg" '{text: $msg}'` instead of `"{\"text\":\"$msg\"}
 - Bash can't print braces
 ? Build structured data with a tool that knows the format.
 
+@@drill
+Which `curl` option makes it fail with an error on HTTP 4xx and 5xx responses?
+= -f
+= --fail
+= --fail-with-body
+? Otherwise curl exits 0 for an error page.
+
 @@flashcards
 `curl -fsS` :: fail on HTTP errors, quiet, show errors
 `-w '%{http_code}'` :: print the status code

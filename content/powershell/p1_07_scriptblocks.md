@@ -91,6 +91,12 @@ What does `$add = { param($a, $b) $a + $b }; & $add 2 3` output?
 - { param($a, $b) $a + $b }
 ? & runs a script block; param() declares its parameters.
 
+@@drill
+Which operator runs a script block stored in a variable?
+= &
+= & $sb
+? & $sb, or $sb.Invoke().
+
 @@flashcards
 `{ ... }` :: a script block
 `& $sb` :: call in a child scope

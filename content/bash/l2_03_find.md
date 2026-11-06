@@ -78,6 +78,11 @@ Why use `find ... -print0 | xargs -0` instead of plain `| xargs`?
 - It sorts the results
 ? -print0 separates names with a null byte, which can't appear in a file name.
 
+@@drill
+Which `find` option matches files modified more than 7 days ago?
+= -mtime +7
+? -mtime -7 means within the last 7 days.
+
 @@flashcards
 find -name :: Find by name, e.g. find /etc -name "*.conf"
 find -mtime +30 :: Modified more than 30 days ago

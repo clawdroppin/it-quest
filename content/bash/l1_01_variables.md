@@ -118,6 +118,12 @@ What does `echo $(( 7 / 2 ))` print?
 - an error
 ? Bash arithmetic is integer-only and truncates.
 
+@@drill
+Write the syntax that captures a command's output into a variable called `now` from `date`.
+= now=$(date)
+= now="$(date)"
+? No spaces around = in Bash assignments.
+
 @@flashcards
 name=value :: assign (no spaces around =)
 "$name" :: use a variable, quoted

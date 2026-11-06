@@ -108,6 +108,11 @@ What is `trap cleanup EXIT` for?
 - Exiting when cleanup fails
 ? Ideal for removing temporary files and locks.
 
+@@drill
+Which builtin parses short options like `-v` and `-o file`?
+= getopts
+? while getopts 'vo:' opt; do ... done.
+
 @@flashcards
 set -e :: Exit when a command fails
 set -u :: Error on unset variables

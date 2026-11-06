@@ -92,6 +92,12 @@ Which declaration creates an associative array in Bash?
 - array owner
 ? -a is an indexed array; -A is an associative array (Bash 4+).
 
+@@drill
+Which `declare` option creates an associative array?
+= -A
+= declare -A
+? declare -A owner=([web01]=ana).
+
 @@flashcards
 declare -A map :: associative array (dictionary)
 "${!map[@]}" :: the keys of an associative array

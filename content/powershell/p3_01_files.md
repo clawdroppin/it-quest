@@ -90,6 +90,11 @@ Which command turns JSON text into objects?
 - Get-Content -AsObject
 ? ConvertTo-Json goes the other way; use -Depth for nested objects.
 
+@@drill
+Which cmdlet reads a CSV file into objects?
+= Import-Csv
+? Each column becomes a property.
+
 @@flashcards
 Join-Path :: Safely combine folder and file names into a path
 Test-Path :: True if a file, folder or registry key exists

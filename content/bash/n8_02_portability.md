@@ -86,6 +86,12 @@ Why is testing with `bash --posix` not enough to prove a script is POSIX-compati
 - It requires a different shebang
 ? Test with dash or BusyBox, and run ShellCheck.
 
+@@drill
+Which test command is POSIX: `[ ]` or `[[ ]]`?
+= [ ]
+= [
+? [[ ]] is a Bash extension.
+
 @@flashcards
 dash :: Debian/Ubuntu /bin/sh
 BusyBox ash :: Alpine's shell

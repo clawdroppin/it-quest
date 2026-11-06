@@ -99,6 +99,12 @@ What's the safest way to collect results from parallel tasks?
 - Use $global:results
 ? Shared non-thread-safe collections can lose data.
 
+@@drill
+Which ForEach-Object parameter in PowerShell 7 sets how many script blocks run at once?
+= -ThrottleLimit
+= ThrottleLimit
+? The default is 5.
+
 @@flashcards
 `Start-Job` :: background job in a new process
 `Receive-Job` :: get a job's output

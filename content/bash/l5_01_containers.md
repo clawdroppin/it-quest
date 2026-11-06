@@ -101,6 +101,12 @@ Why copy `requirements.txt` and install packages before copying the rest of the 
 - pip can't see other files
 ? Layers are rebuilt from the first changed instruction onward.
 
+@@drill
+Which command lists running containers?
+= docker ps
+= podman ps
+? Add -a to include stopped ones.
+
 @@flashcards
 image :: A packaged, read-only template for containers
 container :: A running (or stopped) instance of an image

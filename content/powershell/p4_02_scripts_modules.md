@@ -104,6 +104,12 @@ Which file type is a PowerShell module's code?
 - `.dll` only
 ? `.psm1` holds the code; `.psd1` is the manifest (metadata).
 
+@@drill
+Which file extension does a script module use?
+= .psm1
+= psm1
+? A .psd1 manifest describes it.
+
 @@flashcards
 Execution policy :: Controls whether scripts may run (Restricted, RemoteSigned, AllSigned, Bypass); not a security boundary
 RemoteSigned :: Local scripts run; downloaded scripts must be signed

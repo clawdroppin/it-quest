@@ -83,6 +83,11 @@ What does pressing the Up arrow send to a program reading the terminal?
 - The number 38
 ? Read one key, and if it's ESC, read the rest.
 
+@@drill
+Which Bash keyword builds a numbered menu from a list?
+= select
+? select opt in Start Stop Quit; do ... done.
+
 @@flashcards
 `select x in a b c` :: numbered menu
 `PS3` :: select's prompt

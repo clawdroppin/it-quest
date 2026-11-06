@@ -97,6 +97,11 @@ What is splatting?
 - Writing output to several files
 ? Get-ChildItem @params is easier to read than one very long line.
 
+@@drill
+Which symbol splats a hashtable of parameters into a command?
+= @
+? Get-ChildItem @params.
+
 @@flashcards
 @() :: Array syntax; also forces command output into an array
 @{} :: Hashtable syntax: key = value pairs

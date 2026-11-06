@@ -108,6 +108,13 @@ You're enabling `ufw` on a remote server over SSH. What must you do first?
 - nothing, ufw allows SSH by default
 ? Enabling a default-deny firewall without allowing SSH drops your own connection.
 
+@@drill
+Which command lists listening TCP and UDP ports with their processes?
+= ss -tulpn
+= ss -tlnp
+= ss
+? The modern replacement for netstat.
+
 @@flashcards
 ip a / ip r :: Addresses / routing table (gateway)
 dig / nslookup :: DNS lookups

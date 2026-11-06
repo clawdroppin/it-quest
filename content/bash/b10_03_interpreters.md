@@ -70,6 +70,11 @@ In a stack machine, what does the `+` instruction do?
 - Moves to the next instruction
 ? RPN works because every operator takes its inputs from the stack.
 
+@@drill
+What does RPN stand for?
+= reverse polish notation
+? 3 4 + means 3 + 4.
+
 @@flashcards
 tokenise / parse / evaluate :: interpreter stages
 RPN :: operators after operands

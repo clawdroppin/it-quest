@@ -126,6 +126,12 @@ How does a Bash function hand back a string to its caller?
 - Functions can't return strings
 ? return only sets the exit status (0-255).
 
+@@drill
+Which special parameter holds all script arguments as separate words when quoted?
+= "$@"
+= $@
+? Always quote it: "$@".
+
 @@flashcards
 name() { ... } :: define a function
 $1, $2, $# :: arguments and how many there are

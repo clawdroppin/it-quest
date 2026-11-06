@@ -90,6 +90,12 @@ What's the benefit of a `run` wrapper that prints commands in dry-run mode?
 - It's required by git
 ? Build commands as arrays so printing and running use the same data.
 
+@@drill
+In Conventional Commits, which type prefix marks a new feature?
+= feat
+= feat:
+? fix: is a bug fix; feat! or BREAKING CHANGE is a major change.
+
 @@flashcards
 Conventional Commits :: `type(scope)!: subject`
 `feat` :: minor bump

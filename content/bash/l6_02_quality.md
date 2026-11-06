@@ -140,6 +140,11 @@ A cron job runs every 5 minutes but sometimes takes 7. How do you stop two copie
 - Use `nohup`
 ? The lock is released automatically when the first copy exits, even if it crashes.
 
+@@drill
+Which tool finds common bugs in shell scripts?
+= shellcheck
+? Run it on every script.
+
 @@flashcards
 ShellCheck :: Bash linter; explains each warning (SC2086, ...)
 `# shellcheck disable=SC2034` :: silence one warning on the next line

@@ -93,6 +93,13 @@ In `Compare-Object $a $b`, what does `=>` mean?
 - The item changed
 ? `<=` points at the reference set.
 
+@@drill
+Which cmdlet shows the differences between two sets of objects?
+= Compare-Object
+= compare
+= diff
+? <= and => show which side each item is on.
+
 @@flashcards
 ByValue :: binds the whole object by type
 ByPropertyName :: binds a property with the parameter's name

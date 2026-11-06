@@ -79,6 +79,14 @@ A note is one octave above A4 (440 Hz). What is its frequency?
 - 1760 Hz
 ? Each octave doubles the frequency; each semitone multiplies it by 2^(1/12).
 
+@@drill
+How many samples per second does CD-quality audio use?
+= 44100
+= 44,100
+= 44.1 khz
+= 44100 hz
+? The WAV header records the sample rate.
+
 @@flashcards
 sample :: one amplitude measurement
 sample rate :: samples per second

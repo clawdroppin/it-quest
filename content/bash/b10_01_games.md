@@ -76,6 +76,12 @@ In a grid stored as a flat array, what is the index of row r, column c when the 
 - W * (r + c)
 ? Row r starts at r * W; add the column to move along it.
 
+@@drill
+Which Bash variable gives a random number from 0 to 32767?
+= $RANDOM
+= RANDOM
+? $((RANDOM % 6 + 1)) rolls a die.
+
 @@flashcards
 `board[y * W + x]` :: 2D grid in a flat array
 `(x + dx + W) % W` :: wrap-around coordinate

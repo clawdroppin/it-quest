@@ -118,6 +118,13 @@ What does `[ValidateSet('Low', 'High')]` on a parameter do?
 - Makes the parameter mandatory
 ? Validation attributes check input before the function body runs.
 
+@@drill
+Which attribute turns a function into an advanced function with -Verbose and -WhatIf support?
+= [CmdletBinding()]
+= CmdletBinding
+= [CmdletBinding(SupportsShouldProcess)]
+? Add SupportsShouldProcess for -WhatIf.
+
 @@flashcards
 [CmdletBinding()] :: Makes a function an advanced function, with -Verbose, -ErrorAction and more
 ValueFromPipeline :: A parameter that receives objects from the pipeline

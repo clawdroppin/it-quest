@@ -66,6 +66,13 @@ Which pipeline is a mistake?
 - `Get-Process | Measure-Object`
 ? `Format-*` turns objects into display data. Anything after it no longer sees `Status`. Format last.
 
+@@drill
+Which cmdlet keeps only the objects that match a condition?
+= Where-Object
+= where
+= ?
+? Get-Process | Where-Object CPU -gt 100.
+
 @@flashcards
 Where-Object :: Filter: keep objects that match a condition
 Select-Object :: Pick properties, or `-First`/`-Last` N objects; `-ExpandProperty` gives plain values

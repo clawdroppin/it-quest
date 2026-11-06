@@ -393,5 +393,11 @@ Your manager is $($p.Manager). The IT help desk is at extension 4357 (H-E-L-P).
 $plan | Export-Csv -Path (Join-Path $OutDir 'onboarding_plan.csv') -NoTypeInformation -Encoding UTF8
 Write-Host "Done: $($plan.Count) people. Letters and the plan are in $OutDir"
 Write-Host 'Hand letters over in person or by a secure channel, and delete them afterwards: they contain passwords.' -ForegroundColor Yellow
+
+@@drill
+Which cmdlet writes objects to a CSV file?
+= Export-Csv
+? Add -NoTypeInformation in Windows PowerShell 5.1.
+
 @@text
 🎉 Account automation is one of the most valued skills on a help desk or sysadmin team. Talk about the **dry run by default**, the **cryptographic random passwords**, and the **unique-name handling** in interviews. Those details show you think about safety, not just speed.

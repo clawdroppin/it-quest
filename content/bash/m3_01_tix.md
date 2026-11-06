@@ -679,5 +679,11 @@ install:
 
 uninstall:
 	rm -rf $(LIBDIR) $(BINDIR)/tix $(COMPDIR)/tix
+
+@@drill
+Which `mktemp` call creates a temporary file safely?
+= mktemp
+? tmp=$(mktemp) and remove it in a trap.
+
 @@text
 🎉 You've built a real command-line application: subcommands, option parsing, safe file updates, exit codes, tests, completion and an installer. It's the same structure as tools used by millions of people.

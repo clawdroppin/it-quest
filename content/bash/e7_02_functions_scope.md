@@ -101,6 +101,11 @@ Why does `count=0; inc() { ((count++)); }; v=$(inc); echo $count` print 0?
 - count is local
 ? Call it directly (`inc`) to change the global.
 
+@@drill
+Which keyword makes a variable visible only inside a function (and functions it calls)?
+= local
+? Without it, variables are global.
+
 @@flashcards
 `return n` :: exit status 0–255
 `$(f)` :: capture stdout (subshell)

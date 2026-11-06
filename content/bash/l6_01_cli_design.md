@@ -149,6 +149,11 @@ Why read a config file with a `while read` loop instead of `source config`?
 - `while read` handles comments automatically
 ? Config files are often editable by more people than the script itself. Parse them as data.
 
+@@drill
+Which exit code do command-line tools conventionally use for a usage error?
+= 2
+? 1 for general errors, 2 for bad usage.
+
 @@flashcards
 stdout / stderr :: data / messages and errors (`>&2`)
 exit codes :: 0 success, 1 error, 2 wrong usage (by convention)

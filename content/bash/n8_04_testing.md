@@ -86,6 +86,12 @@ What does Bats' `run` do?
 - Starts a container
 ? Then assert on $status and $output.
 
+@@drill
+What is the name of the standard test framework for Bash?
+= bats
+= bats-core
+? Each @test is a test case.
+
 @@flashcards
 Bats `@test` :: one test case
 `run cmd` :: capture $status, $output, $lines

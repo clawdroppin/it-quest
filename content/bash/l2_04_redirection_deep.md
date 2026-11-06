@@ -91,6 +91,12 @@ Why does `printf '1\n2\n' | while read -r x; do ((n++)); done; echo $n` print no
 - ((n++)) is invalid
 ? Use `done < <(printf ...)` instead.
 
+@@drill
+Write the redirection that sends both stdout and stderr to `log.txt` (portable order).
+= > log.txt 2>&1
+= >log.txt 2>&1
+? Order matters: 2>&1 copies wherever stdout points now.
+
 @@flashcards
 fd 0 / 1 / 2 :: stdin / stdout / stderr
 `>&2` :: write to stderr

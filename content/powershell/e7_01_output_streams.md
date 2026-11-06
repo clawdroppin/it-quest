@@ -87,6 +87,11 @@ Which stream should progress messages go to, so `$data = Get-Report` captures on
 - They can't be separated
 ? Only the success stream is captured by assignment.
 
+@@drill
+Which stream number is the error stream?
+= 2
+? 1 is success output; 2>&1 merges errors into it.
+
 @@flashcards
 stream 1 :: success / output (data)
 stream 2 :: error

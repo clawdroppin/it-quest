@@ -125,6 +125,11 @@ Your 600-line Bash script now parses JSON from three APIs and does floating-poin
 - Nothing, Bash scales fine
 ? Know your tools' limits. Bash glues programs together; it isn't meant for complex data.
 
+@@drill
+Which directory is the standard place for locally installed programs?
+= /usr/local/bin
+? Package managers own /usr/bin.
+
 @@flashcards
 `PREFIX` :: install root: `/usr/local` (everyone) or `~/.local` (one user)
 `install -Dm755 src dest` :: create folders, copy, and set permissions in one step

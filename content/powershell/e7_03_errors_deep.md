@@ -103,6 +103,11 @@ What does `finally` guarantee?
 - That the script continues
 ? Use it for cleanup.
 
+@@drill
+Which automatic variable holds the most recent errors?
+= $Error
+? $Error[0] is the newest.
+
 @@flashcards
 non-terminating error :: reported, execution continues
 terminating error :: statement stops

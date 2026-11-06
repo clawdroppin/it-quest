@@ -80,6 +80,11 @@ What is JEA?
 - A code signing certificate
 ? JEA lets a help desk operator run exactly the commands they need, as admin, without being admin.
 
+@@drill
+Which module lints PowerShell scripts?
+= PSScriptAnalyzer
+? Invoke-ScriptAnalyzer -Path .
+
 @@flashcards
 Pester :: PowerShell's test framework: Describe, It, Should
 PSScriptAnalyzer :: Linter that finds bad practices in scripts
