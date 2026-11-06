@@ -916,3 +916,8 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 ### linuxenv (now 12 lessons, 26 exercises, 63 quizzes, ~20.2k words)
 - le1_03_users_security: UIDs, groups, sudo and visudo, ACLs, setuid, capabilities, ufw, SSH keys, LUKS, AppArmor/SELinux; account audit, sshd_config check.
 - le4_03_display_audio: Wayland vs X11, portals, logical pixels and scaling, PipeWire/WirePlumber, Bluetooth profiles; monitor layout, no-sound triage.
+
+### terraform (now 12 lessons, 20 exercises, 62 quizzes, ~22.5k words)
+- tf3_02_secrets_security: sensitive propagation, state as a secret, ephemeral resources and write-only args, OIDC, scanners; state secret finder, output sensitivity check.
+- tf3_03_providers_multi_env: required_providers and the lock file, constraints, aliases and module providers maps, environment layouts, Infracost; provider resolution, plan cost estimate.
+- Exercises appended to tf0_01 (command sequence check), tf1_01 (workspace state paths) and tf2_01 (dynamic block expansion).

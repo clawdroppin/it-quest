@@ -980,8 +980,8 @@ pub fn knowledge() -> Vec<Track> {
                     "tf1_01_state_modules.md", "tf1_02_state_plan_deep.md", "tf1_03_modules_hcp_deep.md"),
                 module!(Advanced, "2 · Testing, CI/CD, Advanced HCL", "dynamic blocks, validation and conditions, terraform test, pipeline gates, drift.", "terraform";
                     "tf2_01_testing_ci.md", "tf2_02_validation_tests.md", "tf2_03_pipelines_drift.md"),
-                module!(Advanced, "3 · Hands-on HCL", "Types, count vs for_each, expressions, functions, refactoring with moved/import, exam checklist.", "terraform";
-                    "tf3_01_hcl_hands_on.md"),
+                module!(Advanced, "3 · Hands-on HCL", "Types, count vs for_each, expressions, functions, refactoring with moved/import, exam checklist, secrets and state security, OIDC, provider aliases, the lock file, environments and cost.", "terraform";
+                    "tf3_01_hcl_hands_on.md", "tf3_02_secrets_security.md", "tf3_03_providers_multi_env.md"),
                 build!(Advanced, "🧾 Terraform Plan Reviewer", "Read plan JSON and block data loss and open ports before apply.", "terraform";
                     "tf9_01_plan_reviewer.md"),
                 // generated project ideas terraform

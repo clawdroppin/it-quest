@@ -166,3 +166,90 @@ static analysis :: tflint, Trivy, Checkov
 OIDC in CI :: short-lived cloud credentials, no stored keys
 -detailed-exitcode :: 0 none, 1 error, 2 changes
 blast radius :: split state so one mistake can't destroy everything
+
+@@exercise Expand a dynamic block
+Simulate what a `dynamic "ingress"` block produces: for each element of `var.rules` (iterated in order, like a list), write one nested `ingress` block with the `content` attributes, where `ingress.value.x` in the template (the iterator is named after the block) refers to the element's field. Elements with `enabled = false` are filtered out by the `for_each` expression `[for r in var.rules : r if r.enabled]`. Print the resulting HCL.
+@@lang python
+@@starter
+rules = [
+    {"port": 443, "cidr": "0.0.0.0/0", "description": "HTTPS", "enabled": True},
+    {"port": 80, "cidr": "0.0.0.0/0", "description": "HTTP redirect", "enabled": True},
+    {"port": 22, "cidr": "203.0.113.0/24", "description": "SSH from office", "enabled": False},
+    {"port": 5432, "cidr": "10.0.0.0/16", "description": "Postgres from VPC", "enabled": True},
+]
+content = {"from_port": "ingress.value.port", "to_port": "ingress.value.port", "protocol": '"tcp"',
+           "cidr_blocks": "[ingress.value.cidr]", "description": "ingress.value.description"}
+
+def render_value(template, element):
+    raise NotImplementedError
+
+def expand(rules, content):
+    raise NotImplementedError
+
+print('resource "aws_security_group" "web" {')
+print('  name = "web"')
+print(expand(rules, content))
+print("}")
+@@expected
+resource "aws_security_group" "web" {
+  name = "web"
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS"
+  }
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP redirect"
+  }
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+    description = "Postgres from VPC"
+  }
+}
+@@requires
+def render_value
+def expand
+r["enabled"]
+@@hint
+In `render_value`, replace each `ingress.value.<field>` with the field's value: numbers as they are, strings in double quotes (use `re.sub(r"ingress\.value\.(\w+)", ...)`). `expand` keeps `[r for r in rules if r["enabled"]]` and builds `  ingress {`, one `    key = value` line per content item (pad the key to the longest key), and `  }` for each.
+@@solution
+import re
+
+rules = [
+    {"port": 443, "cidr": "0.0.0.0/0", "description": "HTTPS", "enabled": True},
+    {"port": 80, "cidr": "0.0.0.0/0", "description": "HTTP redirect", "enabled": True},
+    {"port": 22, "cidr": "203.0.113.0/24", "description": "SSH from office", "enabled": False},
+    {"port": 5432, "cidr": "10.0.0.0/16", "description": "Postgres from VPC", "enabled": True},
+]
+content = {"from_port": "ingress.value.port", "to_port": "ingress.value.port", "protocol": '"tcp"',
+           "cidr_blocks": "[ingress.value.cidr]", "description": "ingress.value.description"}
+
+def render_value(template, element):
+    def sub(m):
+        v = element[m.group(1)]
+        return str(v) if isinstance(v, (int, float)) else f'"{v}"'
+    return re.sub(r"ingress\.value\.(\w+)", sub, template)
+
+def expand(rules, content):
+    width = max(len(k) for k in content)
+    blocks = []
+    for r in [r for r in rules if r["enabled"]]:
+        lines = ["  ingress {"]
+        lines += [f"    {k:<{width}} = {render_value(v, r)}" for k, v in content.items()]
+        lines.append("  }")
+        blocks.append("\n".join(lines))
+    return "\n".join(blocks)
+
+print('resource "aws_security_group" "web" {')
+print('  name = "web"')
+print(expand(rules, content))
+print("}")

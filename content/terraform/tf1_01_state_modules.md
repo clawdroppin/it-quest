@@ -168,3 +168,54 @@ create_before_destroy :: build the replacement first
 @@drill
 Which lifecycle argument makes a plan fail if a resource would be destroyed?
 = prevent_destroy
+
+@@exercise Where does each workspace's state live?
+With the S3 backend, the `default` workspace stores its state at `key`, and every other workspace at `<workspace_key_prefix>/<workspace>/<key>` (the prefix defaults to `env:`). Given a backend configuration and the workspaces, print each state path, the resource names a configuration would produce with `"${var.app}-${terraform.workspace}"`, and flag workspace names that would make invalid S3 bucket names (bucket names allow only lowercase letters, digits, dots and hyphens, 3–63 characters).
+@@lang python
+@@starter
+import re
+
+backend = {"bucket": "acme-tf-state", "key": "network/terraform.tfstate"}
+app = "shop"
+workspaces = ["default", "dev", "staging", "Feature_Login", "prod"]
+
+def state_path(backend, workspace):
+    raise NotImplementedError
+
+def bucket_name(app, workspace):
+    raise NotImplementedError
+
+for ws in workspaces:
+    name, ok = bucket_name(app, ws)
+    print(f"{ws:<14} s3://{backend['bucket']}/{state_path(backend, ws):<42} bucket {name}" + ("" if ok else "  INVALID"))
+@@expected
+default        s3://acme-tf-state/network/terraform.tfstate                  bucket shop-default
+dev            s3://acme-tf-state/env:/dev/network/terraform.tfstate         bucket shop-dev
+staging        s3://acme-tf-state/env:/staging/network/terraform.tfstate     bucket shop-staging
+Feature_Login  s3://acme-tf-state/env:/Feature_Login/network/terraform.tfstate bucket shop-Feature_Login  INVALID
+prod           s3://acme-tf-state/env:/prod/network/terraform.tfstate        bucket shop-prod
+@@requires
+def state_path
+workspace_key_prefix
+@@hint
+`prefix = backend.get("workspace_key_prefix", "env:")`. The default workspace returns `backend["key"]`; others return `f"{prefix}/{workspace}/{backend['key']}"`. For the bucket name, build `f"{app}-{workspace}"` and test it with `re.fullmatch(r"[a-z0-9.-]{3,63}", name)`.
+@@solution
+import re
+
+backend = {"bucket": "acme-tf-state", "key": "network/terraform.tfstate"}
+app = "shop"
+workspaces = ["default", "dev", "staging", "Feature_Login", "prod"]
+
+def state_path(backend, workspace):
+    if workspace == "default":
+        return backend["key"]
+    prefix = backend.get("workspace_key_prefix", "env:")
+    return f"{prefix}/{workspace}/{backend['key']}"
+
+def bucket_name(app, workspace):
+    name = f"{app}-{workspace}"
+    return name, bool(re.fullmatch(r"[a-z0-9.-]{3,63}", name))
+
+for ws in workspaces:
+    name, ok = bucket_name(app, ws)
+    print(f"{ws:<14} s3://{backend['bucket']}/{state_path(backend, ws):<42} bucket {name}" + ("" if ok else "  INVALID"))

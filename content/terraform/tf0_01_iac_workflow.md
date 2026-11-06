@@ -160,3 +160,68 @@ apply -replace :: force recreation (replaces taint)
 @@drill
 Which environment variable turns on Terraform's detailed logs? (just the name)
 = TF_LOG
+
+@@exercise Check a command sequence
+Check sequences of Terraform commands that people ran (or put in a pipeline) against the workflow rules: `init` must come before `validate`, `plan`, `apply` or `destroy`; `fmt -check` and `validate` should come before `plan` in CI; in CI, `apply` must use the saved plan file from an earlier `plan -out`; and `destroy` should never appear in a CI pipeline for production. Print the problems for each sequence, or "ok".
+@@lang python
+@@starter
+sequences = {
+    "laptop, first try": ["plan", "apply"],
+    "laptop, good": ["init", "fmt", "validate", "plan", "apply"],
+    "ci, missing checks": ["init", "plan -out=tfplan", "apply tfplan"],
+    "ci, unsaved plan": ["init", "fmt -check", "validate", "plan", "apply -auto-approve"],
+    "ci, good": ["init", "fmt -check", "validate", "plan -out=tfplan", "apply tfplan"],
+    "ci prod, cleanup job": ["init", "fmt -check", "validate", "destroy -auto-approve"],
+}
+
+def check(name, commands):
+    raise NotImplementedError
+
+for name, commands in sequences.items():
+    problems = check(name, commands)
+    print(f"{name:<22} " + ("ok" if not problems else "; ".join(problems)))
+@@expected
+laptop, first try      'plan' before init; 'apply' before init
+laptop, good           ok
+ci, missing checks     run fmt -check and validate before plan
+ci, unsaved plan       apply without the saved plan file
+ci, good               ok
+ci prod, cleanup job   destroy in a production pipeline
+@@requires
+def check
+startswith("plan -out")
+@@hint
+Use the first word of each command (`c.split()[0]`). Track whether `init` has been seen. For names starting with "ci", require "fmt" and "validate" before the first "plan", require that every `apply` has an argument that matches a file saved by an earlier `c.startswith("plan -out")`, and flag `destroy` when "prod" is in the name.
+@@solution
+sequences = {
+    "laptop, first try": ["plan", "apply"],
+    "laptop, good": ["init", "fmt", "validate", "plan", "apply"],
+    "ci, missing checks": ["init", "plan -out=tfplan", "apply tfplan"],
+    "ci, unsaved plan": ["init", "fmt -check", "validate", "plan", "apply -auto-approve"],
+    "ci, good": ["init", "fmt -check", "validate", "plan -out=tfplan", "apply tfplan"],
+    "ci prod, cleanup job": ["init", "fmt -check", "validate", "destroy -auto-approve"],
+}
+
+def check(name, commands):
+    problems, seen, saved = [], [], set()
+    ci = name.startswith("ci")
+    for c in commands:
+        word = c.split()[0]
+        if word in ("validate", "plan", "apply", "destroy") and "init" not in seen:
+            problems.append(f"'{word}' before init")
+        if ci and word == "plan" and not ("fmt" in seen and "validate" in seen):
+            problems.append("run fmt -check and validate before plan")
+        if c.startswith("plan -out"):
+            saved.add(c.split("=", 1)[1])
+        if ci and word == "apply":
+            args = c.split()[1:]
+            if not any(a in saved for a in args):
+                problems.append("apply without the saved plan file")
+        if ci and word == "destroy" and "prod" in name:
+            problems.append("destroy in a production pipeline")
+        seen.append(word)
+    return problems
+
+for name, commands in sequences.items():
+    problems = check(name, commands)
+    print(f"{name:<22} " + ("ok" if not problems else "; ".join(problems)))
