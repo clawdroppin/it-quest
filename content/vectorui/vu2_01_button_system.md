@@ -101,6 +101,14 @@ In Penpot, how do you organise Primary/Secondary × S/M/L × Default/Hover/Press
 - Separate pages per state
 ? Copies can then switch properties in the sidebar.
 
+@@quiz
+How should a disabled button differ from an enabled one?
+* Visibly muted, not focusable or clickable, and ideally with nearby text explaining why it is disabled
+- Hidden completely
+- Exactly the same, so the layout doesn't shift
+- Red, to signal an error
+? Disabled states that don't explain themselves frustrate users; sometimes it's better to keep the button enabled and validate on click.
+
 @@flashcards
 primary / secondary / ghost / destructive :: button variants by importance
 icon-only button :: needs a tooltip and an accessible label

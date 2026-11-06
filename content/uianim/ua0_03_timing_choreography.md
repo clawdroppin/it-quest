@@ -24,6 +24,26 @@ Easing decides how a motion feels, and **timing** decides whether it feels right
 - **Shared element / continuity**: an element that moves from one place to another (a thumbnail growing into a detail view) should keep its identity, so the eye follows it.
 - **One focal motion**: if everything moves, nothing stands out.
 
+## Reviewing motion like an editor
+
+Timing is easiest to judge when you stop watching the whole animation and look at it the way an editor scrubs a cut. A few habits help:
+
+- **Slow it down.** Browser dev tools can play animations at 25% or 10% speed (Chrome and Firefox both have an Animations panel). At reduced speed you can see an element that starts a frame too late, an overshoot that's bigger than intended, or two moves that collide.
+- **Step frame by frame.** Record the screen and step through it in a video player. Count frames: at 60 fps, 200 ms is 12 frames, and a 50 ms stagger is 3 frames. If an item's motion is only visible for two or three frames, it reads as a flicker, not a move.
+- **Watch the start and the end separately.** Most problems sit at the edges: an element that jumps when the animation begins because its starting state wasn't set, or a little snap at the end because the final keyframe doesn't match the resting style.
+- **Check it with real content.** A list stagger that feels good with five items can take forever with fifty. Cap the total: either cap the number of staggered items (animate the first eight, show the rest at once) or shrink the stagger as the count grows so the whole group finishes within about 400–500 ms.
+- **Try it repeatedly.** An animation you see once in a demo might be seen hundreds of times a day by a real user. Anything that delays an action they repeat often should be short or removed.
+
+## Choreography checklist
+
+Before you ship a sequence, run through these questions:
+
+1. Does every move have a **reason**: showing where something came from, where it went, or what changed?
+2. Is there one **lead** element, with the others following it rather than competing?
+3. Do related elements **share an easing curve and a direction**, so they look like one gesture?
+4. Does the sequence still make sense with **reduced motion** turned on, using fades or instant changes instead of movement?
+5. Does any element wait for an animation to finish before it accepts input? It shouldn't; interfaces must stay usable during motion.
+
 @@quiz
 About how long should a button press feedback animation last?
 * 80–150 ms

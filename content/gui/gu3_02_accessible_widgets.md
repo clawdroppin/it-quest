@@ -71,6 +71,14 @@ What does `showModal()` on a `<dialog>` give you?
 - A tooltip
 ? Prefer it to a hand-built modal.
 
+@@quiz
+In a tabs widget, which keys should move between tabs once focus is on the tab list?
+* The arrow keys (with Home and End for the first and last tab)
+- Tab and Shift+Tab only
+- Page Up and Page Down only
+- Any letter key
+? Tab moves into and out of the tab list; arrows move within it (roving tabindex).
+
 @@flashcards
 APG :: ARIA Authoring Practices Guide
 first rule of ARIA :: use native elements

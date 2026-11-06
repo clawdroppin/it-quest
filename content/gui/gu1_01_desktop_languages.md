@@ -223,6 +223,14 @@ In Qt, what are signals and slots?
 - Styles and themes
 ? `connect(button, &QPushButton::clicked, handler)` runs the handler when the button emits `clicked`.
 
+@@quiz
+Why must a long task in a desktop GUI run off the UI thread?
+* The UI thread runs the event loop; blocking it freezes repainting and input until the task ends
+- The UI thread has less memory
+- Only background threads can read files
+- The operating system forbids file access from the UI thread
+? Run the work on a worker thread or async task and marshal the result back to the UI thread.
+
 @@flashcards
 WinForms :: classic C# Windows GUI: controls with properties and `+=` event handlers
 WPF :: C# + XAML; draws everything itself, so it's fully styleable and animatable

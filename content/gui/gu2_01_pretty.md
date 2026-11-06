@@ -133,6 +133,14 @@ Why should a status never be shown by colour alone?
 - It's slower
 ? "✓ Running" in green and "✕ Stopped" in red work for everyone.
 
+@@quiz
+Why use a spacing scale such as 4, 8, 12, 16, 24, 32 instead of any value that looks right?
+* Consistent steps make layouts look deliberate and keep designers and code in agreement
+- Browsers only support those values
+- It makes pages load faster
+- Screen readers need it
+? A small set of tokens removes hundreds of one-off decisions.
+
 @@flashcards
 design token :: a named design decision: `--accent`, `--space-3`, `--radius`
 spacing scale :: a short list of allowed gaps, e.g. 4, 8, 16, 24, 40

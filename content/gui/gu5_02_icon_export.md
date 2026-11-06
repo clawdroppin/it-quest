@@ -130,6 +130,14 @@ Why might you generate SVG icons with code?
 - It makes them load faster than inline SVG
 ? A few lines of string formatting can create hundreds of consistent icons.
 
+@@quiz
+Why do macOS and iOS icons need extra care compared with Windows icons?
+* The platform applies its own rounded-square mask, so the artwork must fill the grid without its own rounded corners or padding baked in the wrong way
+- They must be monochrome
+- They can only be 16 × 16 pixels
+- They must be saved as .ico files
+? Follow each platform's template grid and let the system shape the icon.
+
 @@flashcards
 app icon :: the app's face on the taskbar, dock, Start menu and home screen
 squint test :: blur or shrink the icon: is it still recognisable?

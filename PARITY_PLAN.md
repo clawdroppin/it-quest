@@ -948,3 +948,9 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 ### cka (now 12 lessons, 20 exercises, 63 quizzes, ~26k words)
 - ck2_04_helm_kustomize_extensions: Helm releases, revisions and value precedence, --reuse-values, Kustomize bases/overlays, generators and patches, CRDs and operators, admission phases and webhooks, CNI/CSI/CRI troubleshooting; Helm values resolver, Kustomize overlay builder.
 - Exercises appended to ck0_01 (triage kubectl get pods output) and ck2_01 (diagnose node conditions).
+
+### Stragglers found by the full scan
+- gui: +7 quizzes (spring motion, platform icon masks, grid fr maths, clamp, tab keyboard, UI thread, spacing scale) -> 60.
+- uianim: new sections on reviewing motion, FLIP/View Transitions pitfalls, and matching feedback to wait times -> ~20.5k words.
+- vectorui: +3 quizzes and new sections on SVG clean-up, decorative vs meaningful SVG, combining type and spacing systems, and form validation -> 60 quizzes, ~20.3k words.
+- Every track now meets the floor of 12 lessons, 20 exercises, 60 quizzes and 20k words.

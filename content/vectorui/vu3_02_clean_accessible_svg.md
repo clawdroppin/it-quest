@@ -33,6 +33,28 @@ Use `fill="currentColor"` or `stroke="currentColor"` in icons so they take the t
 - Don't rely on colour alone: pair a red error icon with text.
 - A `<title>` also shows as a tooltip in browsers; it's not a replacement for a visible label.
 
+## A clean-up pass, step by step
+
+Exported SVG from design tools is usually correct but heavy. A typical clean-up pass, in order:
+
+1. **Remove editor data**: Inkscape's `sodipodi:` and `inkscape:` attributes, Penpot or Figma IDs, `<metadata>` blocks, and empty `<g>` groups. Inkscape's *Save As → Optimized SVG* or SVGO handles most of this.
+2. **Round coordinates** to one or two decimal places. `M12.000001 4.999998` and `M12 5` look identical on screen, and the shorter file is easier to read in a diff.
+3. **Merge and simplify paths.** Several shapes with the same fill can often be one path, and boolean operations leave behind extra nodes that a simplify step removes. Check the result visually, because aggressive simplification rounds off corners.
+4. **Replace fixed colours with `currentColor`** for single-colour icons, so the icon takes the text colour of its parent and works in light and dark themes without separate files.
+5. **Keep the `viewBox`, drop fixed `width` and `height`** (or set them in CSS), so the icon scales cleanly.
+6. **Check the result** at the sizes you actually use (16, 20, 24 px) and in both themes.
+
+Keep the original, editable source file (with layers and guides) next to the optimized one. Clean-up is a one-way step: you don't want to edit minified paths by hand.
+
+## Decorative or meaningful?
+
+Every SVG on a page is one of two kinds, and each needs different markup:
+
+- **Decorative** (an icon next to a text label, a background flourish): hide it from assistive technology with `aria-hidden="true"` and make sure it can't receive focus (`focusable="false"` for old Edge, and no `tabindex`).
+- **Meaningful** (an icon-only button, a chart, a logo that is the only link to the home page): give it a name. For an inline SVG, use `role="img"` with `aria-label`, or a `<title>` referenced by `aria-labelledby`. For an icon-only button, it's often simpler to put the label on the button itself (`<button aria-label="Close">`) and keep the SVG decorative inside it.
+
+For charts and diagrams, a short name isn't enough: add a longer description (`<desc>` or nearby text) or a data table, so someone who can't see the shapes gets the same information.
+
 @@quiz
 Which attribute must you keep for an icon to scale correctly?
 - width

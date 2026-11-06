@@ -20,6 +20,20 @@ Good interfaces look calm because their sizes aren't arbitrary. Font sizes come 
 - **Inner ≤ outer**: the padding inside a group should be smaller than the space between groups (the **proximity** principle from Gestalt), or items won't look grouped.
 - Penpot's flex layout gap and padding map directly to CSS `gap` and `padding`. Store them as spacing tokens (`space.2 = 8px`).
 
+## Putting the systems together
+
+Type and spacing scales work best when they're designed together, because text sizes and gaps sit side by side in every component:
+
+- **Tie line height to the spacing grid.** On a 4 px grid, choose line heights that are multiples of 4 (a 16 px body size with a 24 px line height, a 20 px subheading with 28 px). Then text blocks stack neatly with your spacing tokens and baselines line up across columns.
+- **Space by relationship.** Use smaller gaps between things that belong together (a label and its field: 4–8 px) and larger gaps between groups (between form sections: 24–32 px). This is the Gestalt principle of **proximity**, and it does more to organise a screen than lines and boxes.
+- **Limit the number of sizes in use.** A screen with eight different font sizes looks chaotic even if each is on the scale. Most interfaces need about five: caption, body, subheading, heading and a display size for rare large titles.
+- **Mind the measure.** Body text is most comfortable at about 45–75 characters per line. In CSS, `max-width: 65ch` on text containers keeps paragraphs readable on wide screens.
+- **Use weight and colour before size.** To create hierarchy within a component, a semibold weight or a muted secondary colour is often better than another size step.
+
+## Checking your work
+
+Turn on the layout grid in Penpot and look at a screen at 100% zoom. Ask: do the gaps fall on the grid? Do related items sit closer together than unrelated ones? Can you name every font size you used and say why it's that size? If a value doesn't fit, it's usually a sign that a token is missing, or that a one-off value crept in and should be replaced with the nearest step.
+
 @@quiz
 What does a modular type scale with ratio 1.25 and base 16 px give for the next size up?
 - 18 px

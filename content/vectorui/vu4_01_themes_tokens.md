@@ -93,6 +93,14 @@ In dark themes, how is elevation usually shown?
 - It isn't shown
 ? Shadows are hard to see on dark backgrounds.
 
+@@quiz
+Why should components reference semantic tokens such as `color.surface` rather than primitives like `gray.50`?
+* Themes can then remap the semantic token to a different primitive without touching any component
+- Primitive tokens can't be exported
+- Semantic tokens render faster
+- Penpot only supports semantic tokens
+? The semantic layer is the switch a dark or high-contrast theme flips.
+
 @@flashcards
 design system :: tokens, components and rules shared by design and code
 primitive token :: a raw value (indigo.500)

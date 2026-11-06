@@ -26,6 +26,33 @@ Some of the most important animations in an app are about **waiting**: spinners,
 
 Show the result **before the server confirms** (a "like" turns red immediately), then roll back with a clear message if the request fails. Animate the rollback gently, so the change is noticed.
 
+## Matching feedback to the wait
+
+The right feedback depends on how long the user waits, and you rarely know that in advance. A practical policy:
+
+| Expected wait | Feedback |
+|---|---|
+| under ~100 ms | nothing; the change feels instant |
+| 100 ms to 1 s | a subtle change on the control itself (a pressed state, a small inline spinner) |
+| 1 to ~5 s | a skeleton or spinner in the area that will change |
+| over ~5 s, or unknown | a determinate progress bar with text, and a way to cancel or keep working |
+
+Two timing tricks make this robust:
+
+- **Delay before showing.** Don't show a spinner until about 300 ms have passed. Fast responses then never flash a spinner at all, which looks calmer than a 50 ms flicker.
+- **Minimum display time.** Once a spinner is shown, keep it for at least about 500 ms, so it doesn't appear and vanish in a jarring blink.
+
+## Optimistic UI
+
+For actions that almost always succeed (liking a post, ticking a to-do, renaming a file), you can update the interface **immediately** and send the request in the background. If the request fails, roll the change back and say so clearly ("Couldn't save, try again"). Optimistic updates remove waiting entirely, but only use them where a rollback is cheap and understandable; never for payments or deletes the user can't undo.
+
+## Success and error states
+
+Feedback doesn't end when the wait does:
+
+- **Success** should be quick and quiet: a checkmark that draws itself in 300 ms, a toast that disappears after a few seconds, or simply the new content appearing.
+- **Errors** must stay until the user has read them, say what happened in plain words, and offer the next step (retry, edit the input, contact support). Shaking a field is a nice cue, but always pair it with text, and keep the shake small and short so it's not distracting or a problem for motion-sensitive users.
+
 @@quiz
 A request usually finishes in 60 ms but sometimes takes 2 s. How do you avoid a flickering spinner?
 * Delay showing the spinner by ~300 ms, and keep it visible at least ~500 ms once shown

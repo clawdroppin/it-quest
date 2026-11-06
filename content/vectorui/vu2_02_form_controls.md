@@ -22,6 +22,20 @@ After buttons, form controls are the components every app needs, and the ones mo
 
 Keep control colours in the same token layers as buttons: `--control-border`, `--control-border-hover`, `--control-focus`, `--control-error`, `--control-bg-disabled`. Then dark mode and theming work for every control at once.
 
+## Validation that helps
+
+How and when a form reports errors matters as much as how its controls look:
+
+- **Validate on blur, not on every keystroke.** Telling someone their email is invalid after they've typed the first letter is noise. Check when they leave the field, and then re-check as they type once an error is showing, so the message disappears the moment it's fixed.
+- **Put the message next to the field**, below it, in text, with an icon and colour as extra cues. Link it to the input with `aria-describedby` so screen readers read it, and set `aria-invalid="true"` on the field.
+- **Say how to fix it.** "Enter a date like 2026-11-06" beats "Invalid date".
+- **On submit, move focus to the first error** (or to an error summary at the top that links to each field), so keyboard and screen-reader users aren't left guessing why nothing happened.
+- **Don't clear what the user typed** when there's an error. Re-entering a long form because one field was wrong is the fastest way to lose people.
+
+## Design states for every control
+
+When you design a form control in Penpot, draw the full set of states before handing it off: **default, hover, focus, filled, disabled, read-only, error and success**. Each needs a clear difference, and the focus state needs a visible ring with at least 3:1 contrast against the background. Put the states in a variant matrix so developers can see them all at once and nothing is invented during implementation.
+
 @@quiz
 Why isn't placeholder text a substitute for a label?
 * It disappears when the user types and is usually low contrast

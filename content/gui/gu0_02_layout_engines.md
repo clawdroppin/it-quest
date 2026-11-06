@@ -73,6 +73,14 @@ With `box-sizing: border-box`, what does `width: 200px` include?
 - Margin only
 ? Margin is always outside.
 
+@@quiz
+A grid has `grid-template-columns: 200px 1fr 2fr` and is 800 px wide with no gaps. How wide is the last column?
+* 400 px
+- 200 px
+- 300 px
+- 533 px
+? The fixed 200 px comes off first; the remaining 600 px splits 1:2, so 200 px and 400 px.
+
 @@flashcards
 measure :: child reports desired size
 arrange :: parent sets final position and size

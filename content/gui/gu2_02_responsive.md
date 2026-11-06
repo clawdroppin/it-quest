@@ -80,6 +80,14 @@ Which media feature detects a touch screen as the main pointer?
 - Requires media queries
 ? Intrinsic responsive grid.
 
+@@quiz
+What does `font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem)` do on a very wide screen?
+* Stops growing at 1.25rem
+- Keeps growing with the viewport forever
+- Falls back to 1rem
+- Ignores the user's browser font size
+? clamp(min, preferred, max) keeps the fluid value between the two limits.
+
 @@flashcards
 intrinsic layout :: adapts without breakpoints
 auto-fit + minmax :: responsive grid

@@ -37,6 +37,19 @@ document.startViewTransition(() => update());
 - Style with `::view-transition-old(name)`, `::view-transition-new(name)` and `::view-transition-group(name)`.
 - Respect `prefers-reduced-motion` by skipping the transition or shortening it.
 
+## Common mistakes and how to avoid them
+
+- **Measuring after the change, but before layout.** FLIP's "Last" step needs the new layout. Reading `getBoundingClientRect()` forces the browser to calculate it, which is what you want, but read *all* the positions first and then write all the transforms. Interleaving reads and writes for many elements causes **layout thrashing**, where the browser recalculates layout once per element.
+- **Animating `width` and `top` instead of transforms.** The whole point of FLIP is that the expensive change happens once, and the animation itself only touches `transform` and `opacity`, which the compositor can handle on its own.
+- **Forgetting about scale distortion.** When FLIP scales a card from small to large, its text and border radius scale too and look stretched mid-animation. Fixes: counter-scale the children (apply the inverse scale to an inner wrapper), animate a background element while the content cross-fades, or let View Transitions handle it with snapshots.
+- **Duplicate `view-transition-name` values.** Each name must be unique on the page at the moment the snapshot is taken. If two elements share a name, the transition is skipped and an error is logged. In lists, generate names from item IDs (`view-transition-name: card-42`).
+- **Leaving users waiting.** `document.startViewTransition()` pauses rendering while it captures the old state and runs your update callback. If the callback waits for a slow network request, the page appears frozen. Fetch the data first, then start the transition with an update that only changes the DOM.
+- **Ignoring support.** Wrap View Transitions in a feature check (`if (!document.startViewTransition) { update(); return; }`) so browsers without it simply change instantly. The Web Animations API is supported everywhere modern, but `animation.finished` and `commitStyles()` are worth checking in your target browsers.
+
+## Choosing the right tool
+
+Use a **CSS transition** for a simple state change on one element, the **Web Animations API** when you need control from script (pause, reverse, chain with promises), **FLIP** for elements that move because the layout changed, and **View Transitions** when a whole view or route changes and you want shared elements to morph between the two states.
+
 @@quiz
 In FLIP, what does the Invert step do?
 * Applies a transform that puts each element back where it was before the change

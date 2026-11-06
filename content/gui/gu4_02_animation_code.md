@@ -185,6 +185,14 @@ In tkinter, how do you run an animation without freezing the window?
 - `canvas.animate()`
 ? A sleep loop blocks the event loop; `after` lets it keep handling events between frames.
 
+@@quiz
+A spring animation has high stiffness and low damping. How does it move?
+* Fast, and it overshoots and oscillates before settling
+- Slowly, with no overshoot
+- Linearly, at constant speed
+- It never reaches the target
+? Damping removes energy; with little of it the value bounces around the target.
+
 @@flashcards
 progress :: `p = elapsed / duration`, clamped to 0..1
 lerp :: `a + (b - a) * t`: the value between a and b

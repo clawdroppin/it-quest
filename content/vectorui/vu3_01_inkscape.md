@@ -103,6 +103,14 @@ Why keep straight edges on whole or half pixels?
 - It's required by SVG
 ? A 2 px stroke centred on a whole pixel covers two full pixels.
 
+@@quiz
+What does Path → Object to Path do to a text object?
+* Converts the letters into plain path outlines, so the font is no longer needed (and the text is no longer editable)
+- Makes the text follow a path
+- Exports the text as a font file
+- Adds an outline stroke to the text
+? Do it on a copy for logos and icons that must render the same everywhere.
+
 @@flashcards
 Node tool (N) :: edit path nodes and handles
 cusp / smooth / symmetric :: node types
