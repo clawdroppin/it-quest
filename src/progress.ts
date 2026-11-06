@@ -43,6 +43,50 @@ export interface Progress {
   ai: AiSettings;
   /** The Rust Quest progress import offer was answered. */
   rustQuestAsked: boolean;
+  /** How many entries of KEY_MIGRATIONS have been applied to this progress. */
+  keyMigrations: number;
+}
+
+/**
+ * Quiz and drill answers are keyed by block position. When content changes move a block,
+ * add a migration here (old key -> new key, all applied at once) instead of losing the answer.
+ * Never edit or reorder an existing entry: saved progress records how many have run.
+ */
+const KEY_MIGRATIONS: Record<string, string>[] = [
+  // 1.6.2: lesson-floor quizzes were inserted before these drills.
+  {
+    "bash/l0-filesystem!3": "bash/l0-filesystem!4",
+    "bash/l2-grep-sed-awk!3": "bash/l2-grep-sed-awk!5",
+    "bash/l2-pipes!3": "bash/l2-pipes!5",
+    "bash/l4-cron!3": "bash/l4-cron!4",
+    "cpp/x1-types!4": "cpp/x1-types!5",
+    "gui/gu0-layout-engines!7": "gui/gu0-layout-engines!8",
+    "gui/gu0-layout-engines!8": "gui/gu0-layout-engines!9",
+    "gui/gu2-responsive!7": "gui/gu2-responsive!8",
+    "gui/gu2-responsive!8": "gui/gu2-responsive!9",
+    "gui/gu3-accessible-widgets!7": "gui/gu3-accessible-widgets!8",
+    "gui/gu3-accessible-widgets!8": "gui/gu3-accessible-widgets!9",
+    "powershell/p1-strings!3": "powershell/p1-strings!5",
+    "powershell/p1-variables!3": "powershell/p1-variables!5",
+    "powershell/p2-regex!3": "powershell/p2-regex!5",
+    "sql/s1-where!3": "sql/s1-where!5",
+  },
+];
+
+/** Renames the keys of one answer map; every move reads the old map, so chains like 7->8, 8->9 work. */
+function remapKeys<T>(answers: Record<string, T>, moves: Record<string, string>): Record<string, T> {
+  const out: Record<string, T> = {};
+  for (const [k, v] of Object.entries(answers)) if (!(k in moves)) out[k] = v;
+  for (const [from, to] of Object.entries(moves)) if (from in answers) out[to] = answers[from];
+  return out;
+}
+
+export function migrateKeys(p: Progress) {
+  for (let i = p.keyMigrations; i < KEY_MIGRATIONS.length; i++) {
+    p.quiz = remapKeys(p.quiz, KEY_MIGRATIONS[i]);
+    p.drills = remapKeys(p.drills, KEY_MIGRATIONS[i]);
+  }
+  p.keyMigrations = KEY_MIGRATIONS.length;
 }
 
 export function defaultProgress(): Progress {
@@ -64,6 +108,7 @@ export function defaultProgress(): Progress {
     zoom: 1,
     ai: { base_url: "http://localhost:11434/v1", model: "", hints_only: true, include_context: true, can_edit: true },
     rustQuestAsked: false,
+    keyMigrations: KEY_MIGRATIONS.length,
   };
 }
 
@@ -76,6 +121,8 @@ export async function loadProgress() {
   if (saved) {
     const d = defaultProgress();
     state = { ...d, ...saved, ai: { ...d.ai, ...(saved.ai ?? {}) }, track: { ...d.track, ...(saved.track ?? {}) } };
+    state.keyMigrations = saved.keyMigrations ?? 0;
+    migrateKeys(state);
   }
   return saved != null;
 }

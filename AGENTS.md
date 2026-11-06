@@ -40,6 +40,7 @@ Sections start with `@@` at the beginning of a line (full reference at the top o
 Rules that keep things working:
 
 - **Never change an existing lesson id or exercise order**: progress keys are `<lesson id>#<exercise index>`.
+- **Add new `@@quiz`, `@@drill`, `@@flashcards` and `@@text` blocks after the lesson's last quiz, drill or project**, never in front of one. Quiz and drill answers are keyed by block position (`<lesson id>?<block>`, `<lesson id>!<block>`). If a block has to move, add an entry to `KEY_MIGRATIONS` in `src/progress.ts`. Extra text inside an existing `@@text` section is always safe.
 - Cert tracks have `lang: None`; their exercises need `@@lang python` (or another language).
 - Projects whose folder ends in `_finished` must pass their own tests in `--verify` (Python: `python -m unittest`; C#: `dotnet run -- --test`; C++: `tests.cpp`; JS/TS: `node --test`; PowerShell: `tests.ps1`; Bash: `tests.sh`; Go: `go test`).
 - Project language is detected from file names (`Cargo.toml`, `go.mod`, `.csproj`, `.cpp`, `.ts`, `.py`, `.ps1`, `.sh`, `.js`, `.sql`, `.html`, in that order).
