@@ -77,6 +77,22 @@ Why is `$results = foreach (...) { ... }` better than `$results += ...` inside t
 - `foreach` sorts the results
 ? Arrays have a fixed size; `+=` builds a new one every time.
 
+@@quiz
+Inside `ForEach-Object`, which variable is the current object?
+* $_ (also called $PSItem)
+- $this
+- $item
+- $args[0]
+? In a foreach statement you name the variable yourself.
+
+@@flashcards
+foreach ($x in $list) :: loop statement over a collection
+ForEach-Object { $_ } :: run a block for each piped object
+for ($i = 0; $i -lt 5; $i++) :: counting loop
+while / do-until :: loop on a condition
+break / continue :: leave the loop / next item
+$results = foreach (...) { ... } :: collect output efficiently
+
 @@exercise Server list
 Print `Pinging <name>` for each server in `$servers`, then a final line `Done: 3 servers` (use the count, don't type 3).
 @@starter

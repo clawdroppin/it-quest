@@ -82,6 +82,14 @@ After `Import-Csv`, what type is each column's value?
 - a hashtable
 ? CSV has no types. Cast with `[int]$_.Age` when you need numbers.
 
+@@quiz
+Which command turns JSON text into objects?
+* ConvertFrom-Json
+- Import-Csv
+- ConvertTo-Json
+- Get-Content -AsObject
+? ConvertTo-Json goes the other way; use -Depth for nested objects.
+
 @@flashcards
 Join-Path :: Safely combine folder and file names into a path
 Test-Path :: True if a file, folder or registry key exists

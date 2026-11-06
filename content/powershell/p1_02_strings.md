@@ -79,6 +79,24 @@ What does `'Cost: $5'` print?
 - `$null`
 ? Use `-ceq` for a case-sensitive comparison.
 
+@@quiz
+What does `'{0:N1} GB free' -f 12.345` produce?
+* 12.3 GB free
+- 12.345 GB free
+- {0:N1} GB free
+- 12 GB free
+? N1 formats a number with one decimal place.
+
+@@flashcards
+'single' :: literal text, no variables expanded
+"double $var" :: variables and $() expanded
+$() :: subexpression inside a double-quoted string
+-f :: format operator: '{0} {1}' -f a, b
+-like :: wildcard match, case-insensitive
+.ToUpper() / .Trim() / .Split() :: common string methods
+here-string :: @' ... '@ multi-line text
+`n :: newline (the backtick is the escape character)
+
 @@drill
 Which operator joins the array `$names` into one string separated by commas? Write the full expression.
 = $names -join ","

@@ -84,6 +84,23 @@ What does a function return?
 - the last variable assigned
 ? Every uncaptured value is output. `Write-Host` messages are not.
 
+@@quiz
+Which parameter declaration makes `-Name` required?
+* [Parameter(Mandatory)][string]$Name
+- [string]$Name = $null
+- [required]$Name
+- $Name!
+? PowerShell prompts for a mandatory parameter if it's missing (or fails when non-interactive).
+
+@@flashcards
+function Verb-Noun { param(...) } :: define a function
+Call: Mul 3 4 :: arguments are separated by spaces, not commas
+param() :: declare parameters
+[switch]$Force :: an on/off parameter
+Mandatory :: the parameter must be supplied
+everything is output :: any uncaptured value is returned
+$script: / $global: :: scope modifiers
+
 @@exercise Uptime text
 Write `Format-Uptime` with a parameter `-Minutes` (an int) that returns text like `2d 3h 15m`. Leave out parts that are zero at the front: `95` minutes is `1h 35m`, `5` is `5m`.
 @@starter

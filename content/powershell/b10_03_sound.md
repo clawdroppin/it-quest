@@ -71,6 +71,14 @@ Why does BinaryWriter suit the WAV format?
 - It plays the sound
 ? `[int16]1000` becomes E8 03.
 
+@@quiz
+A note is one octave above A4 (440 Hz). What is its frequency?
+* 880 Hz
+- 440 Hz
+- 660 Hz
+- 1760 Hz
+? Each octave doubles the frequency; each semitone multiplies it by 2^(1/12).
+
 @@flashcards
 sample :: one amplitude measurement
 sample rate :: samples per second

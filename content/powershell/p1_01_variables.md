@@ -55,6 +55,23 @@ You can also fix a variable's type: `[int]$port = "443"` stores the number 443, 
 ```powershell
 "I am $env:USERNAME on $env:COMPUTERNAME"
 ```
+## Strongly typed variables
+
+By default a variable can hold anything, and it changes type when you assign something new. Putting a type in front of the variable **fixes** its type: every later assignment is converted, or fails.
+
+```powershell
+[int]$retries = 3
+$retries = "5"          # converted to the number 5
+$retries + 1
+[datetime]$deadline = '2026-12-01'
+$deadline.DayOfWeek
+```
+
+This catches mistakes early, which is useful in scripts that take input from files or users. Common types: `[int]`, `[double]`, `[string]`, `[bool]`, `[datetime]`, `[string[]]` (an array of strings) and `[hashtable]`.
+
+## $null and empty values
+
+`$null` means "no value". Unset variables are `$null`, and so is the result of a command that found nothing. When you compare, put `$null` on the **left**: `$null -eq $result`. With an array on the left, `-eq` filters the array instead of answering true or false, which gives confusing results.
 
 @@quiz
 What does `"5" + 5` give in PowerShell?
@@ -71,6 +88,22 @@ What is `1GB / 1MB`?
 - 1
 - an error, GB isn't a number
 ? PowerShell's size suffixes are binary: 1 KB = 1024 bytes, 1 MB = 1024 KB, 1 GB = 1024 MB.
+
+@@quiz
+After `[int]$n = 3` and then `$n = '7'`, what is `$n`?
+* The number 7
+- The string '7'
+- An error
+- 3, because the assignment is ignored
+? A typed variable converts every new value to its type.
+
+@@flashcards
+$name = value :: create or change a variable
+[int]$n :: a variable fixed to one type
+1GB, 1MB, 1KB :: size constants in bytes
+$null :: no value; compare with $null on the left
+$true / $false :: boolean values
+$PSVersionTable :: shows the PowerShell version
 
 @@drill
 Which variable holds the current computer's name? (type the full variable)

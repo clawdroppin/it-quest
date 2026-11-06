@@ -82,6 +82,22 @@ Why use single quotes in `-replace '(\w+)@(\w+)', '$2\$1'`?
 - It doesn't matter
 ? Single quotes keep `$1` literal so `-replace` can use it as a group reference.
 
+@@quiz
+What does `'a,b,,c' -split ','` produce?
+* Four items: a, b, an empty string and c
+- Three items: a, b and c
+- One item
+- An error
+? Empty items are kept; filter them with Where-Object if needed.
+
+@@flashcards
+-match :: regex test; groups in $Matches
+$Matches[1] :: the first capture group
+-replace 'pattern', 'new' :: regex replace ($1 for groups)
+-split :: split text by a regex
+Select-String :: search files for a pattern (like grep)
+(?<name>...) :: named group, read as $Matches.name
+
 @@drill
 Write a regex that matches an IPv4-looking address like `10.0.0.4` (digits and dots; don't worry about values over 255).
 = \d+\.\d+\.\d+\.\d+

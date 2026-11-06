@@ -74,6 +74,24 @@ What does `@{ Name = 'GB'; Expression = { $_.Length / 1GB } }` do inside `Select
 - Creates a hashtable
 ? A calculated property: a name plus a script block that computes the value for each object.
 
+@@quiz
+Which command adds up a property across objects, like the total size of files?
+* Measure-Object -Property Length -Sum
+- Group-Object -Sum
+- Sort-Object Length
+- Select-Object -Sum
+? Measure-Object also gives -Average, -Minimum and -Maximum.
+
+@@flashcards
+Where-Object :: keep objects that match a condition
+Select-Object :: choose properties, or first/last N objects
+Sort-Object :: order objects by a property
+Group-Object :: group objects by a property, with counts
+Measure-Object :: count, sum, average, min, max
+calculated property :: @{ Name = 'GB'; Expression = { ... } }
+[pscustomobject]@{ } :: build your own object
+Export-Csv -NoTypeInformation :: save objects as CSV
+
 @@exercise Stale accounts
 Print the names of users who are **enabled** and haven't logged on for **90 days or more**, sorted alphabetically.
 @@starter

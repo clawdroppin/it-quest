@@ -38,6 +38,19 @@ In an interactive window, `Update-Help` (as administrator) downloads the full he
 ## Aliases
 
 Familiar names work too: `ls` and `dir` are aliases for `Get-ChildItem`, `cd` for `Set-Location`, `cat` for `Get-Content`. Aliases are fine at the prompt, but **write full names in scripts**, so the next person can read them.
+## Objects, not text
+
+The biggest difference between PowerShell and older shells such as cmd or Bash is that commands pass **objects** to each other, not lines of text. `Get-Service` doesn't print a table and leave you to cut columns out of it; it produces service objects with properties like `Name`, `Status` and `StartType`. The table you see is only how PowerShell *displays* them at the end.
+
+```powershell
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 3 Name, Id
+```
+
+That line asks for process objects, sorts them by their `CPU` property, and keeps three objects with two properties each. No text parsing, no counting columns. This is why PowerShell scripts tend to be shorter and break less often when the output format changes.
+
+## Windows PowerShell and PowerShell 7
+
+There are two editions. **Windows PowerShell 5.1** (`powershell.exe`) is built into every Windows machine. **PowerShell 7** (`pwsh.exe`) is the modern, cross-platform version that also runs on Linux and macOS. Almost everything in this course works in both; where they differ, the lessons say so.
 
 @@quiz
 What is the naming pattern of PowerShell cmdlets?
@@ -54,6 +67,14 @@ You want to know what properties the objects from `Get-Service` have. Which comm
 - `Get-Command Get-Service`
 - `Show-Properties Get-Service`
 ? `Get-Member` (alias `gm`) lists the type, properties and methods of whatever is piped into it.
+
+@@quiz
+What does `Get-Service` send down the pipeline?
+* Service objects with properties such as Name and Status
+- Lines of text
+- A single string with all services
+- An HTML table
+? Formatting into a table happens only at the end, for display.
 
 @@flashcards
 Get-Command :: Find commands, for example `Get-Command *dns*`

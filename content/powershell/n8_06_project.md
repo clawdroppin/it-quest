@@ -58,6 +58,14 @@ Why HtmlEncode values inserted into a hand-built HTML report?
 - To support Japanese characters
 ? Reports are opened by managers' browsers: treat data as untrusted.
 
+@@quiz
+Which finding is typical in a user access review?
+* An enabled account for someone who has left the company
+- A user with a long display name
+- A user whose password is 14 characters
+- A department with many users
+? Leavers with active accounts are a classic audit failure.
+
 @@flashcards
 access review :: periodic check of who has access
 leaver :: person who left the company

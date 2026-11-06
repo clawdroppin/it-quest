@@ -56,6 +56,30 @@ A condition can be a script block using `$_`. `switch -Wildcard` and `switch -Re
 ## $null checks
 
 Put `$null` on the **left**: `if ($null -eq $result)`. If `$result` were an array, `$result -eq $null` would filter the array instead of answering yes or no. PSScriptAnalyzer warns about this too.
+## Comparison operators are words
+
+Because `>` and `<` are **redirection** in a shell (they write output to files), PowerShell uses words for comparisons:
+
+| Operator | Meaning |
+|---|---|
+| `-eq`, `-ne` | equal, not equal |
+| `-gt`, `-ge`, `-lt`, `-le` | greater than, greater or equal, less than, less or equal |
+| `-like`, `-notlike` | wildcard match: `'web01' -like 'web*'` |
+| `-match`, `-notmatch` | regular expression match |
+| `-in`, `-contains` | membership: `'ssh' -in $allowed`, `$allowed -contains 'ssh'` |
+| `-and`, `-or`, `-not` (or `!`) | combine conditions |
+
+Text comparisons are **case-insensitive** by default: `'SERVER' -eq 'server'` is true. Add a `c` for case-sensitive versions: `-ceq`, `-clike`, `-cmatch`.
+
+```powershell
+$disk = 8
+$role = 'Web'
+if ($disk -lt 10 -and $role -eq 'web') { 'web server low on disk' }
+'db01' -like 'db*'
+'WEB01' -ceq 'web01'
+```
+
+Writing `if ($free > 10)` is a classic mistake: it creates a file called `10` and the condition is always true.
 
 @@quiz
 What does `if ($free > 10) { ... }` do?
@@ -72,6 +96,23 @@ Which condition is true?
 - `'Server01' -eq 'Server1'`
 - `5 -in 1, 2, 3`
 ? `-like` ignores case; `-clike` doesn't.
+
+@@quiz
+What is `'web01' -like 'web*'`?
+* True
+- False
+- An error, because -like needs a regex
+- 'web*'
+? -like uses wildcards: * for any characters, ? for one.
+
+@@flashcards
+-eq / -ne :: equal / not equal (case-insensitive for text)
+-gt -ge -lt -le :: numeric and text ordering
+-like :: wildcard match with * and ?
+-match :: regular expression match
+-in / -contains :: is the value in the list?
+-ceq :: case-sensitive equality
+switch :: compare one value against many cases
 
 @@exercise Service health
 `$status` is a Windows service status. Print `healthy` if it's `Running`, `starting` if it's `StartPending`, and `ALERT: <status>` for anything else.

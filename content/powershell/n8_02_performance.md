@@ -71,6 +71,14 @@ What does "filter left" mean?
 - Filter in a left join
 ? Less data transferred, less work.
 
+@@quiz
+Which command tells you how long a script block takes?
+* Measure-Command { ... }
+- Get-Time { ... }
+- Start-Stopwatch
+- Trace-Command -Duration
+? Measure first, so you fix the part that's actually slow.
+
 @@flashcards
 `Measure-Command` :: time a script block
 `Stopwatch` :: precise timing

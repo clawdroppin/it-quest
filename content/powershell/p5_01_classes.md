@@ -58,6 +58,30 @@ $sw = [System.Diagnostics.Stopwatch]::StartNew(); Start-Sleep -Milliseconds 50; 
 ```
 
 `Add-Type -AssemblyName System.Windows.Forms` even gives you GUI dialogs. Hash a file with `Get-FileHash -Algorithm SHA256`, which you'll use when verifying downloads.
+## When to use a class
+
+PowerShell scripts usually work fine with `[pscustomobject]` and hashtables. Reach for a class when you want:
+
+- **Validation in one place**: a constructor that refuses a server name that's empty, or a port outside 1–65535.
+- **Behaviour that belongs to the data**: a `Ticket` object with `Close()` and `Escalate()` methods.
+- **Real types** for parameters: `function Send-Alert([Alert]$Alert)` rejects anything that isn't an `Alert`.
+
+```powershell
+class Server {
+    [string]$Name
+    [int]$Port
+    Server([string]$name, [int]$port) {
+        if ($port -lt 1 -or $port -gt 65535) { throw "Bad port $port" }
+        $this.Name = $name
+        $this.Port = $port
+    }
+    [string] ToString() { return "$($this.Name):$($this.Port)" }
+}
+$s = [Server]::new('web01', 443)
+"$s"
+```
+
+Two quirks to remember: inside methods you must use **`$this`** to reach properties, and methods only return what you pass to **`return`** (unlike functions, where all output is returned). Classes defined in a script are also hard to reload in the same session: if you change a class, start a new PowerShell window.
 
 @@quiz
 In a class method declared `[int] Count() { ... }`, how is the result returned?
@@ -74,6 +98,23 @@ Why use an `enum` for a severity instead of a plain string?
 - Strings can't be compared
 - Enums are required in classes
 ? An enum limits a value to known names, and they compare by their numbers.
+
+@@quiz
+Inside a class method, how do you read the object's Name property?
+* $this.Name
+- $Name
+- $_.Name
+- $self.Name
+? Class methods don't see properties as plain variables; use $this.
+
+@@flashcards
+class Name { } :: define a class
+[type]$Property :: a typed property
+constructor :: method named like the class
+$this :: the current object inside a method
+return :: required for values from class methods
+enum Severity { Low; High } :: a fixed set of names
+create an object :: [Name]::new()
 
 @@exercise A Server class
 Write a class `Server` with properties `[string]$Name`, `[int]$CpuPercent` and `[int]$FreeDiskGB`, a constructor taking those three values, and a method `[string] Health()` that returns `critical` if CPU is **over 90** or free disk is **under 5**, `warning` if CPU is over 75 or free disk under 20, otherwise `ok`.

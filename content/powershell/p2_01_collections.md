@@ -89,6 +89,14 @@ Why wrap command output in `@( )`?
 - To turn it into a hashtable
 ? Without `@()`, one result is a single object, and zero results is `$null`.
 
+@@quiz
+What is splatting?
+* Passing a hashtable of parameters to a command with @name instead of $name
+- Joining arrays together
+- Splitting a string into an array
+- Writing output to several files
+? Get-ChildItem @params is easier to read than one very long line.
+
 @@flashcards
 @() :: Array syntax; also forces command output into an array
 @{} :: Hashtable syntax: key = value pairs

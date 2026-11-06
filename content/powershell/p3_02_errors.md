@@ -79,6 +79,14 @@ Inside a `catch` block, how do you get the error message?
 - `$catch.Message`
 ? `$_` is the ErrorRecord; its `.Exception.Message` is the text.
 
+@@quiz
+What does `-ErrorAction SilentlyContinue` do?
+* Hides the error and carries on (the error is still recorded in $Error)
+- Stops the script
+- Turns the error into a terminating error
+- Retries the command
+? Use it only when an error is truly expected and harmless.
+
 @@flashcards
 terminating error :: Stops the command; caught by try/catch
 non-terminating error :: Reported, but the command carries on with the next item

@@ -51,6 +51,14 @@ Why choose the empty cell with the fewest candidates first?
 - It's required for correctness
 ? Also called the "minimum remaining values" heuristic.
 
+@@quiz
+Why does N-Queens backtracking only need to check columns and diagonals, not rows?
+* The search places exactly one queen per row, so two queens can never share a row
+- Rows are checked automatically by PowerShell
+- Queens can share rows
+- Rows are checked at the very end
+? Building the solution row by row removes one whole class of conflicts.
+
 @@flashcards
 backtracking :: try, recurse, undo on failure
 constraint check :: reject invalid choices early

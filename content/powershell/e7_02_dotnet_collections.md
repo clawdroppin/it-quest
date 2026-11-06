@@ -76,6 +76,14 @@ Why is `$a += $item` slow in a loop over 100,000 items?
 - Only on Windows
 ? Pass [StringComparer]::OrdinalIgnoreCase.
 
+@@quiz
+Which collection gives fast lookups of a user by name?
+* A Dictionary[string, object] (or a hashtable) keyed by name
+- An array searched with Where-Object
+- A List[string]
+- A string joined with commas
+? Dictionary lookups take the same time however many items there are.
+
 @@flashcards
 `List[T]` :: growable typed list
 `HashSet[T]` :: unique values, fast lookup

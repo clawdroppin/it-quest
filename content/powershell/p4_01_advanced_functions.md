@@ -110,6 +110,14 @@ What does `[CmdletBinding(SupportsShouldProcess)]` give your function?
 - automatic logging to a file
 ? Then `if ($PSCmdlet.ShouldProcess(...))` guards the part that makes changes.
 
+@@quiz
+What does `[ValidateSet('Low', 'High')]` on a parameter do?
+* Rejects any value other than Low or High, and enables tab completion of those values
+- Converts the value to upper case
+- Sets a default value
+- Makes the parameter mandatory
+? Validation attributes check input before the function body runs.
+
 @@flashcards
 [CmdletBinding()] :: Makes a function an advanced function, with -Verbose, -ErrorAction and more
 ValueFromPipeline :: A parameter that receives objects from the pipeline

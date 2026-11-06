@@ -75,6 +75,14 @@ Why format SVG coordinates with the invariant culture?
 - Browsers only read US English
 ? 12,5 is two numbers in SVG.
 
+@@quiz
+In a parametric curve such as x = sin(3t), y = sin(4t), what does t do?
+* It's the parameter that moves along the curve; each value of t gives one point
+- It's the line thickness
+- It's the time the script takes
+- It's the colour
+? Step t in small increments and join the points to draw the curve.
+
 @@flashcards
 `System.Drawing.Bitmap` :: pixel image (GDI+)
 `Graphics.FromImage` :: draw on a bitmap

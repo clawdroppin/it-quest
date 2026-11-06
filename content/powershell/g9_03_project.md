@@ -77,6 +77,14 @@ What does a DataTemplate define?
 - The sort order
 ? One template, applied to every item.
 
+@@quiz
+Why does the ticket list use an ObservableCollection?
+* It notifies the UI when items are added or removed, so the list updates by itself
+- It saves tickets to disk
+- It sorts tickets automatically
+- It's faster than an array for reading
+? Bindings watch the collection's change events.
+
 @@flashcards
 `DataTemplate` :: look of one list item
 `ItemsSource` :: the list a control shows

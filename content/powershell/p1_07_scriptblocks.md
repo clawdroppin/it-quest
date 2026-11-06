@@ -83,6 +83,14 @@ Why does `{ "n is $n" }` print the last value of `$n` when called after a loop?
 - It's a bug in PowerShell
 ? Late binding vs closures.
 
+@@quiz
+What does `$add = { param($a, $b) $a + $b }; & $add 2 3` output?
+* 5
+- 23
+- An error
+- { param($a, $b) $a + $b }
+? & runs a script block; param() declares its parameters.
+
 @@flashcards
 `{ ... }` :: a script block
 `& $sb` :: call in a child scope

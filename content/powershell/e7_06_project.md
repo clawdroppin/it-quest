@@ -69,6 +69,14 @@ Why use `Import-PowerShellDataFile` for a baseline instead of dot-sourcing a .ps
 - It's required by DSC
 ? A .psd1 is a hashtable literal, read safely.
 
+@@quiz
+What does a drift report compare?
+* The desired configuration (the baseline) against the current state of the machine
+- Two backups of the same file
+- Today's logs with yesterday's
+- The script's code with its tests
+? Each item is either compliant or drifted, with the expected and actual values.
+
 @@flashcards
 desired state :: how the system should be
 drift :: difference between desired and actual

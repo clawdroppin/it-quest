@@ -81,6 +81,14 @@ What should an unattended script do at the end?
 - Restart the computer
 ? Exit codes drive alerts and retries.
 
+@@quiz
+Why put a correlation ID in every log line of one run?
+* So all lines from that run can be found together, even when several runs or machines write to the same log
+- It encrypts the log
+- It makes lines shorter
+- Windows requires it
+? Search for one ID to see a run's whole story.
+
 @@flashcards
 log levels :: DEBUG, INFO, WARN, ERROR, FATAL
 JSON lines :: one JSON object per line
