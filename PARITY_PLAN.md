@@ -894,3 +894,10 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - cs2_03_software_security_deep: SDLC controls, SAST/DAST/IAST/SCA, SBOM and supply chain, APIs; pipeline gate, SBOM vs advisories.
 - cs2_04_assessment_audit_deep: test types, SOC 1/2/3 and Type I/II, sampling, KPIs/KRIs; control sample evaluation, vulnerability metrics with coverage.
 - Exercises appended to cs0_01 (think like a manager) and cs1_01 (key counts, brute-force time).
+
+### itil (now 13 lessons, 20 exercises, 78 quizzes, ~25.6k words)
+- it1_03_continual_improvement: CI model, CIR, PDCA/Lean/Kaizen, baselines; register prioritisation, progress vs baseline with paired metrics.
+- it1_04_customer_journey_experience: DSV journey, touchpoints, moments of truth, NPS/CSAT/CES, XLAs; survey scoring, watermelon finder.
+- it2_05_requests_service_desk: service requests, catalogue, desk structures, shift-left, desk metrics; request routing, desk dashboard.
+- it2_06_assets_finance_suppliers: ITAM/SAM, CapEx/OpEx, showback/chargeback, suppliers and underpinning contracts; licence position, showback.
+- Exercises appended to it0_01 (outputs/outcomes/costs/risks) and it1_01 (which guiding principle).

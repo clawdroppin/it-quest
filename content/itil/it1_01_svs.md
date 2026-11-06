@@ -130,3 +130,76 @@ continual improvement model :: Vision → now → target → how → act → che
 How many guiding principles does ITIL 4 have? (a number)
 = 7
 ? Learn the exact wording; the exam uses it.
+
+@@exercise Which guiding principle?
+Match each situation to the guiding principle it applies, using keyword rules (the first rule whose keywords appear wins), and report any situation no rule matches so a person can decide.
+@@lang python
+@@starter
+RULES = [
+    ("Optimize and automate", ["automate", "script", "robot"]),
+    ("Start where you are", ["existing", "reuse", "from scratch"]),
+    ("Progress iteratively with feedback", ["small steps", "pilot", "feedback"]),
+    ("Collaborate and promote visibility", ["share", "dashboard", "involve"]),
+    ("Think and work holistically", ["end to end", "all four dimensions", "whole"]),
+    ("Keep it simple and practical", ["remove", "fewer", "simplify"]),
+    ("Focus on value", ["customer", "value", "outcome"]),
+]
+
+situations = [
+    "Before replacing the tool from scratch, check which existing workflows work well",
+    "Run a two-week pilot of the new form and gather feedback",
+    "Simplify the change form: remove fields nobody uses",
+    "Put the backlog on a dashboard everyone can see",
+    "Automate password resets after streamlining the steps",
+    "Ask what outcome the customer actually needs from the report",
+    "Order more coffee for the service desk",
+]
+
+def principle_for(text):
+    raise NotImplementedError
+
+for s in situations:
+    print(f"{principle_for(s) or 'no match (ask a person)':<36} {s}")
+@@expected
+Start where you are                  Before replacing the tool from scratch, check which existing workflows work well
+Progress iteratively with feedback   Run a two-week pilot of the new form and gather feedback
+Keep it simple and practical         Simplify the change form: remove fields nobody uses
+Collaborate and promote visibility   Put the backlog on a dashboard everyone can see
+Optimize and automate                Automate password resets after streamlining the steps
+Focus on value                       Ask what outcome the customer actually needs from the report
+no match (ask a person)              Order more coffee for the service desk
+@@requires
+def principle_for
+.lower()
+@@hint
+Lower-case the text once, then loop over `RULES` and return the principle of the first rule where `any(k in text for k in keywords)`. Return `None` if nothing matches.
+@@solution
+RULES = [
+    ("Optimize and automate", ["automate", "script", "robot"]),
+    ("Start where you are", ["existing", "reuse", "from scratch"]),
+    ("Progress iteratively with feedback", ["small steps", "pilot", "feedback"]),
+    ("Collaborate and promote visibility", ["share", "dashboard", "involve"]),
+    ("Think and work holistically", ["end to end", "all four dimensions", "whole"]),
+    ("Keep it simple and practical", ["remove", "fewer", "simplify"]),
+    ("Focus on value", ["customer", "value", "outcome"]),
+]
+
+situations = [
+    "Before replacing the tool from scratch, check which existing workflows work well",
+    "Run a two-week pilot of the new form and gather feedback",
+    "Simplify the change form: remove fields nobody uses",
+    "Put the backlog on a dashboard everyone can see",
+    "Automate password resets after streamlining the steps",
+    "Ask what outcome the customer actually needs from the report",
+    "Order more coffee for the service desk",
+]
+
+def principle_for(text):
+    text = text.lower()
+    for principle, keywords in RULES:
+        if any(k in text for k in keywords):
+            return principle
+    return None
+
+for s in situations:
+    print(f"{principle_for(s) or 'no match (ask a person)':<36} {s}")

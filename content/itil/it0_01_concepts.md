@@ -86,3 +86,73 @@ service relationship management :: Joint activities to ensure ongoing value co-c
 Which ITIL term means "fit for use"?
 = warranty
 ? Utility + warranty = value.
+
+@@exercise Outputs, outcomes, costs and risks
+ITIL defines value as the perceived benefits, usefulness and importance of something, and a service as enabling value co-creation by facilitating outcomes customers want to achieve without them having to manage specific costs and risks. Classify each statement about a cloud email service as an output (what the provider delivers), an outcome (a result the consumer wants), a cost removed, a cost imposed, a risk removed or a risk imposed, then summarise.
+@@lang python
+@@starter
+statements = [
+    ("Mailboxes are provisioned within an hour", "provider delivers"),
+    ("Sales staff can reply to customers from their phones", "consumer result"),
+    ("No need to buy and maintain mail servers", "consumer no longer pays"),
+    ("Monthly per-user subscription fee", "consumer now pays"),
+    ("Provider handles spam filtering and patching", "consumer no longer worries"),
+    ("Customer data now sits with a third party", "consumer now worries"),
+    ("Daily backups are taken", "provider delivers"),
+    ("Contracts are signed faster", "consumer result"),
+]
+
+def classify(hint):
+    raise NotImplementedError
+
+summary = {}
+for text, hint in statements:
+    kind = classify(hint)
+    summary[kind] = summary.get(kind, 0) + 1
+    print(f"{kind:<14} {text}")
+print(", ".join(f"{k}: {v}" for k, v in sorted(summary.items())))
+@@expected
+output         Mailboxes are provisioned within an hour
+outcome        Sales staff can reply to customers from their phones
+cost removed   No need to buy and maintain mail servers
+cost imposed   Monthly per-user subscription fee
+risk removed   Provider handles spam filtering and patching
+risk imposed   Customer data now sits with a third party
+output         Daily backups are taken
+outcome        Contracts are signed faster
+cost imposed: 1, cost removed: 1, outcome: 2, output: 2, risk imposed: 1, risk removed: 1
+@@requires
+def classify
+"outcome"
+@@hint
+Map the hint text to the term with a dictionary: "provider delivers" is "output", "consumer result" is "outcome", "consumer no longer pays" is "cost removed", "consumer now pays" is "cost imposed", "consumer no longer worries" is "risk removed" and "consumer now worries" is "risk imposed".
+@@solution
+statements = [
+    ("Mailboxes are provisioned within an hour", "provider delivers"),
+    ("Sales staff can reply to customers from their phones", "consumer result"),
+    ("No need to buy and maintain mail servers", "consumer no longer pays"),
+    ("Monthly per-user subscription fee", "consumer now pays"),
+    ("Provider handles spam filtering and patching", "consumer no longer worries"),
+    ("Customer data now sits with a third party", "consumer now worries"),
+    ("Daily backups are taken", "provider delivers"),
+    ("Contracts are signed faster", "consumer result"),
+]
+
+TERMS = {
+    "provider delivers": "output",
+    "consumer result": "outcome",
+    "consumer no longer pays": "cost removed",
+    "consumer now pays": "cost imposed",
+    "consumer no longer worries": "risk removed",
+    "consumer now worries": "risk imposed",
+}
+
+def classify(hint):
+    return TERMS[hint]
+
+summary = {}
+for text, hint in statements:
+    kind = classify(hint)
+    summary[kind] = summary.get(kind, 0) + 1
+    print(f"{kind:<14} {text}")
+print(", ".join(f"{k}: {v}" for k, v in sorted(summary.items())))
