@@ -586,14 +586,14 @@ pub fn gimp() -> Track {
         lang: Some(Lang::Python),
         blurb: "Edit photos and make graphics with GIMP 3: layers, selections and masks, colour correction, retouching, text, filters and automation with Python.",
         modules: vec![
-            module!(Novice, "0 · GIMP Basics", "The interface and tools, pixels and print size, image modes, bit depth, compression, formats and metadata, saving XCF and exporting.", "gimp";
-                "gm0_01_basics.md", "gm0_02_formats_compression.md"),
-            module!(Intermediate, "1 · Layers, Selections and Masks", "The layer stack, blend modes, every selection tool and mode, layer masks, transforms and resampling.", "gimp";
-                "gm1_01_layers_selections.md", "gm1_02_transforms_resampling.md"),
-            module!(Intermediate, "2 · Colour and Retouching", "Histograms, Levels and Curves, black and white, hue and saturation, healing and cloning, sharpening and noise reduction.", "gimp";
-                "gm2_01_colour_retouch.md", "gm2_02_sharpen_denoise.md"),
-            module!(Advanced, "3 · Text, Filters and Automation", "Text and painting, how filters work, shadows, outlines and glows, legible text and scrims, exporting, batch jobs and Python plug-ins.", "gimp";
-                "gm3_01_filters_automation.md", "gm3_02_effects_legibility.md"),
+            module!(Novice, "0 · GIMP Basics", "The interface and tools, pixels and print size, image modes, bit depth, compression, formats and metadata, saving XCF and exporting, guides, measuring, alignment and paths.", "gimp";
+                "gm0_01_basics.md", "gm0_02_formats_compression.md", "gm0_03_precision_paths.md"),
+            module!(Intermediate, "1 · Layers, Selections and Masks", "The layer stack, blend modes, every selection tool and mode, layer masks, transforms and resampling, cutouts, Color to Alpha and chroma keying.", "gimp";
+                "gm1_01_layers_selections.md", "gm1_02_transforms_resampling.md", "gm1_03_cutouts_alpha.md"),
+            module!(Intermediate, "2 · Colour and Retouching", "Histograms, Levels and Curves, black and white, hue and saturation, healing and cloning, sharpening and noise reduction, white balance, ICC profiles and print.", "gimp";
+                "gm2_01_colour_retouch.md", "gm2_02_sharpen_denoise.md", "gm2_03_white_balance_colour_management.md"),
+            module!(Advanced, "3 · Text, Filters and Automation", "Text and painting, how filters work, shadows, outlines and glows, legible text and scrims, exporting, batch jobs and Python plug-ins, indexed colour, dithering, sprite sheets and responsive exports.", "gimp";
+                "gm3_01_filters_automation.md", "gm3_02_effects_legibility.md", "gm3_03_web_indexed_dither.md"),
         ],
     }
 }

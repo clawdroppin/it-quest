@@ -881,3 +881,9 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - ru1_02_colour_maths: HSL, linear-light mixing, compositing; RGB↔HSL with lighten, linear mix and source-over.
 - ru3_02_vector_paths: adaptive Bézier flattening, non-zero vs even-odd; flattening, point-in-polygon for both rules.
 - ru4_03_dpi_responsive: logical vs physical pixels, snapping, size classes with hysteresis; pixel snapping, breakpoint state machine.
+
+### gimp (now 12 lessons, 27 exercises, 64 quizzes, ~22.4k words)
+- gm0_03_precision_paths: guides, grids, Measure/Straighten, alignment, paths; measure and straighten with crop, align and distribute.
+- gm1_03_cutouts_alpha: halos, Color to Alpha, Foreground Select, chroma key, spill; Color to Alpha, soft chroma key with despill.
+- gm2_03_white_balance_colour_management: white balance, ICC assign vs convert, intents, soft proofing, TAC; grey world vs white patch, CMYK with an ink limit.
+- gm3_03_web_indexed_dither: indexed colour, Floyd–Steinberg vs ordered, sprite sheets, srcset; dithering, export widths and sheet layout.
