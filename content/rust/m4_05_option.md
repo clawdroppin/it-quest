@@ -162,6 +162,14 @@ When is `.unwrap()` a reasonable choice?
 * When `None` would only happen because of a bug, so crashing is acceptable
 ? For "normal" missing values, use `match`, `if let`, `unwrap_or` or `?` instead.
 
+@@quiz
+What does `maybe.unwrap_or(0)` return when `maybe` is `None`?
+* 0
+- None
+- It panics
+- An error
+? unwrap_or supplies a default instead of panicking.
+
 @@exercise Safe division
 Write `safe_divide`, which returns `None` when dividing by zero, and `Some(result)` otherwise.
 

@@ -65,6 +65,38 @@ Inside, `x`, `a`, `op` and `b` are `&&str` (references to the elements). Functio
 
 A helper `parse_number(token, memory)` handles both real numbers and the word `mem`, so `evaluate` can use `?` on it.
 
+@@quiz
+Why keep `evaluate(line, memory)` free of `println!` and input reading?
+* Pure logic is easy to test: give it text, check the Result
+- println! doesn't work in functions
+- To make it run faster
+- Rust forbids I/O in functions returning Result
+? main handles input and output; evaluate only calculates.
+
+@@quiz
+What should the calculator do when the user divides by zero?
+* Return an `Err` such as `CalcError::DivideByZero` and show a message
+- Panic and exit
+- Return 0
+- Return infinity silently
+? An interactive tool should report the problem and keep running.
+
+@@quiz
+Why match on a slice of tokens like `[a, op, b]`?
+* Each pattern describes one valid shape of input, and anything else falls to an error arm
+- Slices are faster than strings
+- match only works on slices
+- To sort the tokens
+? Slice patterns make the parser short and readable.
+
+@@flashcards
+CalcError :: an enum of everything that can go wrong
+impl Display for CalcError :: readable error messages
+Result<f64, CalcError> :: a number, or what went wrong
+split_whitespace :: break a line into tokens
+slice pattern :: match tokens.as_slice() { [a, op, b] => ... }
+memory :: the last result, reused in the next calculation
+
 @@exercise 🏆 Part 1: The calculator's brain
 Write the `Display` implementation for `CalcError`, plus `parse_number` and `evaluate`. The checker tests `evaluate` with many inputs. Error messages must match the table above exactly.
 @@starter

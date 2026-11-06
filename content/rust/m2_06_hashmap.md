@@ -159,6 +159,14 @@ Why might a `HashMap` print its entries in a different order each time?
 - It sorts by value
 ? Sort the keys yourself, or use a `BTreeMap`, when order matters.
 
+@@quiz
+What does `map.get("key")` return?
+* `Some(&value)` if the key exists, otherwise `None`
+- The value directly
+- An empty string when missing
+- It panics when missing
+? map["key"] panics if the key is missing; get doesn't.
+
 @@exercise Word frequencies
 Write `word_counts`, which counts how often each word appears in the text. Words should be compared in **lowercase**, so "The" and "the" count as the same word.
 @@starter

@@ -146,6 +146,14 @@ A struct is `pub` but one of its fields is not. What can code outside the module
 - Nothing at all with the struct
 ? Field visibility is separate. Private fields can only be accessed through the module's public methods.
 
+@@quiz
+What does `use crate::shop::Item;` do?
+* Lets you write `Item` instead of the full path in this file or module
+- Copies Item into the current module
+- Makes Item public
+- Downloads a crate
+? use only creates a shortcut to the path.
+
 @@exercise Temperature module
 Create a module `convert` with two **public** functions, `c_to_f(c: f64) -> f64` and `f_to_c(f: f64) -> f64`. Put the shared constants in **private** items inside the module: `const RATIO: f64 = 1.8;` and `const OFFSET: f64 = 32.0;`.
 

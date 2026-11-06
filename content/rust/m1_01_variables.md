@@ -141,6 +141,14 @@ Which variable name follows Rust's style?
 - `2nd_player`
 ? Rust variables use `snake_case`. `2nd_player` starts with a digit, which isn't allowed.
 
+@@quiz
+What does shadowing let you do?
+* Declare a new variable with the same name, possibly with a different type
+- Change an immutable variable in place
+- Delete a variable
+- Make a variable global
+? `let x = x.trim();` creates a new x; the old one is hidden.
+
 @@exercise Your info card
 Create three variables: `name` with the value `"Alex"`, `city` with the value `"Prague"`, and `year` with the value `2026`. Then print them using placeholders so the output is exactly:
 

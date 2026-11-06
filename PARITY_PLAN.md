@@ -962,3 +962,14 @@ Rust (106 lessons) and Python (84) are the flagships; every other language track
 - html: h1_06_tables (caption, scope, spans, tabular numbers, sticky headers, scroll regions, aria-sort) and h5_04_offline_storage (storage choices, IndexedDB, service worker lifecycle, caching strategies, outbox, manifest).
 - bash: l3_04_ssh_rsync (keys, agent, config resolution, ProxyJump, tunnels, hardening, rsync and safe deploys); ssh config resolver, rsync mirror plan. New sections in l1_01, l1_02, l1_03 and l1_04.
 - powershell: p3_05_scheduled_automation (scheduled tasks, exit codes, logging, secrets, idempotence); trigger next-run calculator, test-then-set.
+
+## Lesson floor (every lesson, every track)
+
+Floor per lesson: at least 3 quizzes, a flashcard deck, and 600 words of text.
+
+- JavaScript, Python, PowerShell, Bash, SQL: done in earlier commits.
+- C++, C#, Go, HTML/CSS, TypeScript: an extra quiz on each project and "Beyond IT" lesson, plus flashcards on the early lessons that had none.
+- A+ and Network+ intro lessons: exam strategy, study plans and the troubleshooting methodology. A+ virtualization gains VM troubleshooting and shared responsibility; Linux networking gains bottom-up network troubleshooting.
+- Rust: 54 lessons raised to the floor. The m0 to m8 lessons got an extra quiz each; the project lessons (grade book, inventory, calculator, movies) got three quizzes and flashcards; the thread pool and key-value store got flashcards.
+
+The scan (no lesson under 3 quizzes, missing flashcards, or under 600 words) now comes back empty for every track.

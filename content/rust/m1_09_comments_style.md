@@ -128,6 +128,14 @@ What is a good comment?
 - `// code`
 ? Good comments explain **why** something is done, which the code alone can't tell you.
 
+@@quiz
+Which tool formats Rust code automatically in the standard style?
+* `cargo fmt` (rustfmt)
+- `cargo build`
+- `cargo clippy`
+- `rustc --style`
+? Clippy suggests improvements; fmt fixes formatting.
+
 @@exercise Remove the magic numbers
 This program works, but it's full of magic numbers. Make it readable:
 

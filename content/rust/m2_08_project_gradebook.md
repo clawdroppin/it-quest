@@ -47,6 +47,39 @@ fn main() {
 - To print the grade counts in A–F order even though a HashMap has no order, loop over `['A', 'B', 'C', 'D', 'F']` and look each one up — use `0` if it's missing: `grade_counts.get(&g).copied().unwrap_or(0)`.
 - To print names joined by `", "`, collect them into a `Vec<&str>` and use `join`.
 
+@@quiz
+Which data structure fits "count how many students got each letter grade"?
+* A `HashMap<char, u32>` from grade to count
+- A single `Vec<u32>`
+- A tuple
+- A `String`
+? Look up each letter and add one: the counting pattern.
+
+@@quiz
+Why split the grade book into small functions such as `average` and `letter`?
+* Each one can be written, tested and fixed on its own
+- Rust doesn't allow long functions
+- Small functions run faster
+- It hides the code from users
+? Breaking a problem into pieces is the core programming skill.
+
+@@quiz
+How do you work out an average of `u32` scores as a decimal number?
+* Sum them, convert to `f64`, and divide by the count as `f64`
+- Divide the u32 sum by the count; integers keep decimals
+- Use `.avg()` on the vector
+- Multiply by 100 first
+? Integer division throws the fraction away.
+
+@@flashcards
+(&str, Vec<u32>) :: one student: name plus scores
+HashMap<char, u32> :: letter grade to count
+sort_by(|a, b| b.0.total_cmp(&a.0)) :: sort by an f64, highest first
+unwrap_or(0) :: use 0 when a grade has no count
+as f64 :: convert an integer to a decimal number
+average :: sum / count, as f64
+plan first :: understand, choose data, break into pieces, then code
+
 @@exercise 🏆 Module project: Grade book
 Write the grade book. The students are already in the starter code. Grade thresholds: **A** ≥ 90, **B** ≥ 80, **C** ≥ 70, **D** ≥ 60, otherwise **F**.
 

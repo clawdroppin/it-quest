@@ -148,6 +148,14 @@ What does `"a,b,,c".split(',').count()` return?
 - `5`
 ? Splitting on `,` gives `"a"`, `"b"`, `""` (the empty piece between the two commas) and `"c"`.
 
+@@quiz
+What does `"42".parse::<i32>()` return?
+* `Ok(42)`, a Result, because parsing can fail
+- 42 directly
+- "42"
+- None
+? Handle Err for text like "abc".
+
 @@exercise Count the vowels
 Write `count_vowels`, which counts the vowels (a, e, i, o, u) in some text, **ignoring case**.
 @@starter

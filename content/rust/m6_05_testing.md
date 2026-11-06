@@ -134,6 +134,14 @@ What does `#[cfg(test)]` on the tests module do?
 - It makes the tests run faster
 ? `cfg` means "configuration": the module only exists in test builds.
 
+@@quiz
+Which command runs the tests in a Cargo project?
+* `cargo test`
+- `cargo run --tests`
+- `cargo check`
+- `rustc --test-all`
+? Add a name to run only matching tests: cargo test parse.
+
 @@exercise Write your own tests
 The function `clamp` is given and works correctly. Your job is to write a test module for it with **at least three tests**:
 

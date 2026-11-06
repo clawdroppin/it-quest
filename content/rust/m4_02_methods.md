@@ -140,6 +140,14 @@ How do you call an associated function `new` on type `Shop`?
 - `new Shop()`
 ? Associated functions are called on the type with `::`.
 
+@@quiz
+Which `self` does a method that consumes the struct take?
+* `self`
+- `&self`
+- `&mut self`
+- `Self::`
+? Taking self by value moves the struct into the method.
+
 @@exercise Temperature type
 Implement methods for `Temperature`, which stores degrees Celsius:
 

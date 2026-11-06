@@ -124,6 +124,14 @@ In `grid[2][5]`, what does the `2` select?
 - It gives 0
 ? Check `if r > 0` before subtracting from an index.
 
+@@quiz
+How many cells does a 3 × 4 grid have, and how do you visit them all?
+* 12, with a loop over the rows and an inner loop over the columns
+- 7, with a single loop
+- 12, with three separate loops
+- 34, with nested loops
+? Rows times columns; nested loops reach every cell.
+
 @@exercise Tic-tac-toe winner
 Write `winner`, which looks at a 3×3 board and returns the winner: `'X'`, `'O'`, or `' '` (a space) if nobody has won. A player wins with three of their marks in a row, column or diagonal.
 @@starter

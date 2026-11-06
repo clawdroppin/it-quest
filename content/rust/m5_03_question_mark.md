@@ -115,6 +115,14 @@ Where can you use `?` on a `Result`?
 - Only in `main`
 ? The function must be able to return the error — so it must return a `Result` (or `Option`, for `Option`s).
 
+@@quiz
+How do you use `?` on an `Option` inside a function that returns `Result`?
+* Convert it first with `.ok_or(error)?`
+- You can't use ? at all there
+- Just write `option?`
+- Use `.unwrap()?`
+? ok_or turns None into Err(error) so ? can pass it up.
+
 @@exercise Read a coordinate
 Write `parse_point`, which turns text like `"3,-4"` into a tuple `(3, -4)`. Use `?` for every step:
 

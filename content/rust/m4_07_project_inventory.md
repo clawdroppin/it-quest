@@ -50,6 +50,38 @@ A useful helper you'll need: `find_mut`, a version of `find` that returns `Optio
 
 Notice how the methods protect the shop's data: nobody can sell stock that doesn't exist, and gold always matches what was sold. **The rules live in one place.**
 
+@@quiz
+Why model an item's category as an enum instead of a `String`?
+* The compiler only allows valid categories, and match checks that you handle every one
+- Strings can't be stored in structs
+- Enums use less code to print
+- Strings can't be compared
+? Typos like "Weapn" become impossible.
+
+@@quiz
+Why does `sell(&mut self, name: &str, quantity: u32) -> bool` take `&mut self`?
+* Selling changes the shop: it lowers the item's quantity and adds gold
+- Because name is a &str
+- Methods always need &mut self
+- So the shop is moved into the method
+? Reading-only methods like report and stock_value take &self.
+
+@@quiz
+Why return `Option<&Item>` from `find(name)`?
+* The item may not exist, and Option makes the caller handle that
+- Options are faster than references
+- To copy the item
+- Rust requires it for all methods
+? None means not found; no special values needed.
+
+@@flashcards
+struct Item :: name, category, price and quantity together
+enum Category :: Weapon, Armor, Potion: one of a fixed set
+impl Inventory :: methods for the inventory
+&mut self :: method that changes the struct
+Option<&Item> :: an item, or None if not found
+find_mut :: get a mutable reference to change an item in place
+
 @@exercise 🏆 Part 1: The shop's methods
 Implement all the methods from the table. The types are given. The checker tests every method.
 @@starter

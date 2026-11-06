@@ -111,6 +111,22 @@ fn main() {
 - `[9, 2, 3]`
 ? `remove(0)` takes out the first element (1), leaving `[2, 3]`. Then `push(9)` adds 9 at the end.
 
+@@quiz
+What does `v.pop()` return?
+* An `Option`: `Some(last item)`, or `None` if the vector is empty
+- The last item directly
+- The first item
+- Nothing
+? Option makes you handle the empty case.
+
+@@quiz
+Which creates an empty vector of strings?
+* `let v: Vec<String> = Vec::new();`
+- `let v = [];`
+- `let v = Vec<String>;`
+- `let v = new Vec();`
+? vec![] also works when the type can be inferred.
+
 @@text
 ## Passing lists to functions
 

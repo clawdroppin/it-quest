@@ -128,6 +128,14 @@ for (i, x) in v.iter().enumerate() {
 - `[2, 3, 4]`
 ? Indexes 1 and 2 (the end, 3, is excluded): values 2 and 3.
 
+@@quiz
+What does `for (i, x) in v.iter().enumerate()` give you?
+* Each item along with its index, starting at 0
+- Only the indexes
+- The items in reverse
+- Pairs of neighbouring items
+? enumerate pairs a counter with each item.
+
 @@exercise Running total
 Write `running_total`, which returns a new vector where each element is the sum of all elements **up to and including** that position.
 

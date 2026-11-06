@@ -87,6 +87,14 @@ Which of these types is **not** `Copy`?
 - `a` becomes empty
 ? `clone` makes a full, separate copy and leaves the original alone.
 
+@@quiz
+Why isn't `String` a `Copy` type?
+* It owns heap memory, so a bitwise copy would make two owners free the same memory
+- Strings are too long
+- Because it's mutable
+- Rust has no copyable text
+? Copy is only for simple values with no owned resources.
+
 @@exercise Two separate lists
 This program wants a list of `weekdays`, and a separate list `all_days` that also includes the weekend. But it doesn't compile because `weekdays` is moved. Fix it using `.clone()` so the output is:
 

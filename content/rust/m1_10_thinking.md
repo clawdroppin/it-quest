@@ -144,6 +144,14 @@ fn main() {
 - An infinite loop
 ? Ranges with `..` exclude the end. Use `1..=10` to include it.
 
+@@quiz
+What does "tracing" code mean?
+* Following it line by line on paper, writing down each variable's value
+- Deleting lines until it works
+- Running it many times
+- Copying it into another file
+? Tracing finds bugs that are invisible when you only read the code.
+
 @@exercise Prime checker
 Write `is_prime` yourself (try **not** to look at the example above — reconstruct it from the pseudocode, or from your own understanding).
 

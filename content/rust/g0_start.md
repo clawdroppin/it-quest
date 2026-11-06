@@ -63,3 +63,34 @@ llama.cpp's `llama-server` and Jan work too: choose them, or type the address of
 You don't need an AI at all to do the builds: the lessons, hints and finished code have everything.
 
 Ready? Start with the **Focus Timer**.
+
+@@quiz
+In a guided build, what should you do when a step's check fails?
+* Read the message, compare your code with the step's instructions, and fix one thing at a time
+- Skip to the next step
+- Delete the whole project and start again
+- Copy the final solution straight away
+? Each step builds on the last, so fix it before moving on.
+
+@@quiz
+Why are the builds split into many small steps?
+* Each step adds one idea you can check before moving on, so mistakes stay small and easy to find
+- Because the compiler can only handle short files
+- To make the project take longer
+- So you never have to write code yourself
+? Small steps with feedback are how real programmers work too.
+
+@@quiz
+What's a good way to use an AI model while learning?
+* Ask it to explain an error or a concept, then write the code yourself
+- Paste every task in and copy the answer
+- Never read its explanation
+- Use it instead of running your code
+? You learn by doing; use AI as a tutor, not a replacement.
+
+@@flashcards
+guided build :: a project split into small, checked steps
+step check :: tests that confirm a step works before you move on
+hint :: a nudge toward the answer without giving it away
+AI tutor :: ask it to explain, then write the code yourself
+

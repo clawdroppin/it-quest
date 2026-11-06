@@ -172,6 +172,14 @@ What is a match guard?
 - The `_` arm
 ? Guards let an arm match only when an extra condition holds.
 
+@@quiz
+What does `_` do in a `match`?
+* Matches any value that earlier arms didn't
+- Matches nothing
+- Matches only zero
+- Ends the program
+? Put it last, as the catch-all arm.
+
 @@exercise Rock, paper, scissors
 Define an enum `Hand` with `Rock`, `Paper` and `Scissors`, and an enum `Outcome` with `Win`, `Lose` and `Draw` (derive `Debug` and `PartialEq` on both).
 

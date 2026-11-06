@@ -148,6 +148,14 @@ You need to store books *and* songs in one list. Which do you use?
 - `Vec<impl Describe>`
 ? Generics pick one concrete type per use. Trait objects allow mixing types.
 
+@@quiz
+What does `fn show(item: impl Display)` mean?
+* item can be any type that implements Display
+- item must be a String
+- item is displayed automatically
+- item is a trait object stored on the heap
+? It's shorthand for fn show<T: Display>(item: T).
+
 @@exercise Smallest and largest
 Write a generic function `min_max<T: PartialOrd + Copy>(items: &[T]) -> Option<(T, T)>` that returns the smallest and the largest item as a tuple, or `None` if the slice is empty. Go through the list once.
 

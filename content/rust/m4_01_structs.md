@@ -201,6 +201,14 @@ Which type should a struct field use to store a person's name?
 - `char`
 ? Fields should usually own their data. `&str` would need lifetime annotations.
 
+@@quiz
+What does `Point { x: 1, ..p }` do?
+* Creates a new Point with x set to 1 and the other fields taken from p
+- Copies p exactly
+- Adds 1 to p.x
+- It's a syntax error
+? This is struct update syntax.
+
 @@exercise Define a Book
 Define a struct `Book` with fields `title` (`String`), `author` (`String`), `pages` (`u32`) and `read` (`bool`), and derive `Debug`.
 

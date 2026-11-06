@@ -125,6 +125,22 @@ What's the main advantage of an error enum over a `String` error?
 - It can't fail
 ? Variants make each failure a distinct, checkable case.
 
+@@quiz
+What does implementing `From<ParseIntError> for MyError` let you do?
+* Use `?` on a parse result inside a function that returns `Result<_, MyError>`
+- Print MyError
+- Compare two errors
+- Turn MyError into a number
+? ? calls From::from to convert the error automatically.
+
+@@quiz
+Why implement `Display` for your error type?
+* So it can be shown to users with a readable message using `{}`
+- To make it faster
+- So ? works
+- It's needed to create the enum
+? Debug ({:?}) is for developers; Display is for users.
+
 @@exercise Password checker
 Define an enum `PasswordError` with variants `TooShort(usize)` (holding the actual length), `NoDigit` and `NoUppercase`, deriving `Debug` and `PartialEq`. Implement `Display` for it with these messages:
 

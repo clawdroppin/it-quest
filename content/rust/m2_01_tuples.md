@@ -105,6 +105,14 @@ What's the type of `(10, 'x')`?
 - `tuple`
 ? A tuple type lists each part's type in order.
 
+@@quiz
+How do you unpack `let p = (3, 4);` into two variables?
+* `let (x, y) = p;`
+- `let x, y = p;`
+- `let [x, y] = p;`
+- `let x = p[0]; let y = p[1];`
+? This is called destructuring.
+
 @@exercise Divide with remainder
 Write `divide`, which returns **both** the result of integer division and the remainder as a tuple. For example, `divide(17, 5)` returns `(3, 2)`.
 @@starter

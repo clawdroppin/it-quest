@@ -87,6 +87,14 @@ println!("C");
 * A, B, C
 ? Code runs top to bottom, one instruction after another.
 
+@@quiz
+What is source code?
+* The text of a program that people write and read
+- The machine code the CPU runs
+- A password for a program
+- The program's output
+? The compiler turns source code into machine code.
+
 @@exercise Put things in order
 This program is supposed to print the steps of making tea **in the correct order**, but the lines are mixed up.
 

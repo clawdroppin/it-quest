@@ -117,6 +117,14 @@ Why doesn't this compile?
 - Vectors can't be printed
 ? Passing `v` to `take` moves ownership into the function, and the vector is dropped when `take` ends.
 
+@@quiz
+After calling `take(s)` where `fn take(x: String)`, can you still use `s`?
+* No; ownership moved into the function
+- Yes, always
+- Only if s is mutable
+- Only inside a loop
+? Pass &s instead if the function only needs to read it.
+
 @@exercise Who owns the name?
 This program doesn't compile: `greet` takes ownership of `name`, so `main` can't use it afterwards.
 

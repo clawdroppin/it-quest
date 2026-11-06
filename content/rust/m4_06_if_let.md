@@ -96,6 +96,22 @@ In `let Some(x) = maybe else { ... };`, what must the `else` block do?
 - Assign a value to `x`
 ? After `let else`, the code continues only if `x` exists, so the `else` must not fall through.
 
+@@quiz
+When is `if let` better than `match`?
+* When you only care about one pattern and want to ignore the rest
+- When you need to handle every variant
+- Never
+- Only for numbers
+? if let Some(x) = opt { ... } is shorter than a two-arm match.
+
+@@quiz
+What does `while let Some(top) = stack.pop() { ... }` do?
+* Loops until the stack is empty, handling each popped item
+- Pops one item only
+- Loops forever
+- Pushes items onto the stack
+? The loop stops when pop returns None.
+
 @@exercise Sum the valid numbers
 A list of text values comes from a messy form. Write `sum_valid`, which adds up all the entries that are valid whole numbers, and ignores the rest. Use `if let` (or `let else` with `continue`).
 

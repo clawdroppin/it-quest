@@ -92,6 +92,14 @@ When is a value's memory freed in Rust?
 * When its owner goes out of scope (at the closing `}`)
 ? Rust inserts the cleanup automatically at the end of the owner's scope.
 
+@@quiz
+Why are numbers like `i32` usually stored on the stack?
+* Their size is fixed and known when the program is compiled
+- They're too big for the heap
+- The heap only stores numbers
+- Stack memory never runs out
+? Data that can grow, like a String's text, goes on the heap.
+
 @@exercise Fix the scope
 This program tries to use a variable outside the block where it was created. Fix it **without removing any `println!`**, by moving the `let total` line so that `total` lives long enough. The output should be:
 

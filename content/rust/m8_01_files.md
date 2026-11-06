@@ -124,6 +124,14 @@ Your program loads `save.txt` at startup, but on the very first run the file doe
 - Ask the user to create the file
 ? A missing save file is normal on the first run. Other errors (like permission denied) should still be reported.
 
+@@quiz
+Which builds a path portably, with the right separator on every OS?
+* `Path::new("saves").join("game.txt")`
+- `"saves" + "\\" + "game.txt"`
+- `format!("saves/{}", name)` on Windows only
+- `fs::path("saves", "game.txt")`
+? PathBuf and join handle separators for you.
+
 @@exercise A notes file
 Write two functions:
 

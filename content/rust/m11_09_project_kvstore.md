@@ -63,6 +63,14 @@ What is lazy expiry?
 - Sweeping all keys every millisecond
 ? Active sweeps clean up keys nobody reads.
 
+@@flashcards
+TTL :: time to live: how long a key stays valid
+lazy expiry :: expired keys are removed when they're next read
+injected clock :: pass now in so tests control time
+snapshot :: the whole store written to disk
+write then rename :: makes saving atomic: never a half-written file
+escaping :: protect separator characters inside stored values
+
 @@exercise The store with expiry
 Implement the in-memory store.
 

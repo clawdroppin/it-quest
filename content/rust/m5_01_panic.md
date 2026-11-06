@@ -88,6 +88,14 @@ What's the advantage of `expect("...")` over `unwrap()`?
 - It's faster
 ? Both panic on `None`/`Err`; `expect` gives a meaningful message.
 
+@@quiz
+What does `assert!(index < len, "index too big")` do when the condition is false?
+* Panics with the message
+- Returns false
+- Prints a warning and continues
+- Does nothing in normal builds
+? Use assert! for conditions that should never be false if the code is correct.
+
 @@exercise Guard the input
 Write `percentage(part, whole)`, which returns `part / whole * 100`. It should **panic with a clear message** if `whole` is 0 — use `assert!` with the message `"whole must not be zero"`.
 

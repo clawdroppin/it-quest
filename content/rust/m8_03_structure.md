@@ -116,6 +116,14 @@ What's the advantage of parsing input into an enum like `Command`?
 - It makes typing faster
 ? Convert messy input to a precise type once, at the edge of your program.
 
+@@quiz
+Where do you read command-line arguments in Rust?
+* `std::env::args()`, which yields the program name and then each argument
+- `std::io::stdin()`
+- `main(args)`
+- `std::args::read()`
+? Skip the first item, which is the program's own name.
+
 @@exercise Parse the commands
 Write `parse_command(line: &str) -> Result<Command, String>` for a to-do app. You'll reuse this exact function in the project at the end of this module.
 

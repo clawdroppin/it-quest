@@ -198,6 +198,14 @@ What's wrong with this? `let x = if ready { 1 } else { "no" };`
 - There should be semicolons after `1` and `"no"`
 ? An `if` expression must produce one type, whichever branch runs.
 
+@@quiz
+Why does `if count { ... }` fail when `count` is an `i32`?
+* Rust conditions must be `bool`; write `if count > 0` instead
+- Integers can't be used in functions
+- if needs parentheses
+- count must be mutable
+? Rust never treats numbers as true or false.
+
 @@exercise Even or odd
 Write `even_or_odd`, which returns `"even"` if the number is even and `"odd"` otherwise.
 

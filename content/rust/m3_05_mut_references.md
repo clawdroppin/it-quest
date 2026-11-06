@@ -126,6 +126,14 @@ What's needed to change an `i32` through `r: &mut i32`?
 - `&r += 1;`
 ? `*r` is the value behind the reference.
 
+@@quiz
+Why does Rust forbid two `&mut` references to the same value at once?
+* It prevents data races and surprising changes by making sure only one place can modify data at a time
+- To save memory
+- Because references are slow
+- It's a temporary limitation
+? One writer or many readers, never both.
+
 @@exercise Double everything
 Write `double_all`, which **changes** the vector it's given, doubling every number. It returns nothing.
 @@starter

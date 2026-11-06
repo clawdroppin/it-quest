@@ -187,6 +187,14 @@ Why is it useful that `match` must cover every variant?
 - It isn't useful; it's just a rule
 ? Exhaustiveness checking turns "forgot a case" bugs into compile errors.
 
+@@quiz
+Which enum definition lets a `Shape` carry its size?
+* `enum Shape { Circle(f64), Rect { w: f64, h: f64 } }`
+- `enum Shape { Circle = f64 }`
+- `enum Shape(f64, f64)`
+- `struct Shape { Circle, Rect }`
+? Each variant can hold its own data.
+
 @@exercise Coin values
 Define an enum `Coin` with variants `Penny`, `Nickel`, `Dime` and `Quarter`, and implement a method `value(&self) -> u32` that returns its value in cents (1, 5, 10, 25).
 

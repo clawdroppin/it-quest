@@ -121,6 +121,14 @@ In `fn pick<'a>(x: &'a str, y: &'a str) -> &'a str`, what does `'a` do?
 - It copies the strings
 ? Lifetime annotations describe relationships; they never change how long values live.
 
+@@quiz
+What does a `'static` lifetime on `&'static str` mean?
+* The reference is valid for the whole program, as with string literals
+- The string can never be read
+- The string lives on the stack
+- The string is mutable
+? String literals are stored in the program binary.
+
 @@exercise Fix the dangling reference
 `make_label` tries to return a reference to a `String` it created inside itself. Fix it so it returns an owned `String`. Output:
 

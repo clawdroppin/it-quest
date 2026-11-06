@@ -114,6 +114,14 @@ Do generics make your program slower?
 - Only for structs
 ? This is called monomorphization: generic code is as fast as hand-written code for each type.
 
+@@quiz
+What does `struct Pair<T> { a: T, b: T }` allow?
+* A pair of any one type, such as `Pair<i32>` or `Pair<String>`
+- A pair of two different types
+- Only numbers
+- Only references
+? Use struct Pair<A, B> for two different types.
+
 @@exercise A generic Stack
 Write a generic struct `Stack<T>` that holds its items in a `Vec<T>` (field `items`), with these methods:
 

@@ -134,6 +134,14 @@ What does `println!("[{:>5}]", 42);` print?
 - `[00042]`
 ? `>` means right-aligned in a space 5 characters wide: three spaces, then `42`.
 
+@@quiz
+What does `println!("{:.2}", 3.14159);` print?
+* 3.14
+- 3.14159
+- 3.1
+- 3
+? .2 means two digits after the decimal point.
+
 @@exercise Café receipt
 Print this receipt **exactly**, using width, alignment and `.2` precision formatting (not by typing the spaces yourself):
 

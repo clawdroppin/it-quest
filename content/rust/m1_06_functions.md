@@ -174,6 +174,14 @@ Why does this fail to compile? `fn five() -> i32 { 5; }`
 - Functions can't return numbers
 ? Remove the semicolon: `fn five() -> i32 { 5 }`.
 
+@@quiz
+How do you write a function that takes an `i32` and returns an `i32`?
+* `fn double(n: i32) -> i32 { n * 2 }`
+- `fn double(n) { return n * 2 }`
+- `function double(n: i32): i32 { n * 2 }`
+- `fn double(i32 n) -> i32 { n * 2 }`
+? Parameters need types; -> gives the return type.
+
 @@exercise Square it
 Write the body of the function `square` so that it returns its parameter multiplied by itself. `main` is already there so you can try it with ▶ Run. When you press ✔ Check, the checker will call your function with several different numbers.
 @@starter

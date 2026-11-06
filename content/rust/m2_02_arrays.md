@@ -158,6 +158,14 @@ What does `[7; 3]` create?
 - `[3, 3, 3, 3, 3, 3, 3]`
 ? `[value; count]` repeats `value` `count` times.
 
+@@quiz
+What happens when you run `a[10]` on an array of length 4 with an index known only at runtime?
+* The program panics with an index out of bounds error
+- It returns 0
+- It returns the last element
+- It reads random memory
+? Rust checks bounds, which prevents a whole class of security bugs.
+
 @@exercise Weekly weather report
 Using the `temps` array (Monday to Sunday) and the `days` array, print the report below. Find the hottest and coldest days with a loop — you'll need to remember the **index** of the hottest/coldest day, so you can look up its name in `days`.
 

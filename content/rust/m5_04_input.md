@@ -150,6 +150,22 @@ Why do we call `.trim()` on input from `read_line`?
 - Because `read_line` returns a number
 ? The Enter key adds a newline at the end of the input.
 
+@@quiz
+What does `read_line` do with the `String` you pass it?
+* Appends the line, including the newline, to the end of it
+- Replaces its contents
+- Returns a new String and leaves it unchanged
+- Deletes it
+? Clear the String with .clear() before reusing it in a loop.
+
+@@quiz
+How do you keep asking until the user types a valid number?
+* A `loop` that reads, tries `parse`, and `break`s with the value when it's `Ok`
+- Call parse once and unwrap
+- Use an if statement
+- Restart the program on bad input
+? loop { ... break value; } returns the value from the loop.
+
 @@exercise Greeting with input
 Write a program that reads a **name** and a **birth year** (one per line) and prints a greeting with their age **in 2026**. The input box already contains:
 

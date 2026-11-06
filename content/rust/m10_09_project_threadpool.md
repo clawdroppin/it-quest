@@ -68,6 +68,14 @@ How do workers know to stop when the pool is dropped?
 - They check the time
 ? Then `Drop` joins every worker.
 
+@@flashcards
+thread pool :: a fixed set of worker threads that take jobs from a queue
+Job :: Box<dyn FnOnce() + Send + 'static>
+mpsc channel :: sends jobs from the pool to the workers
+Arc<Mutex<Receiver>> :: lets several workers share one receiver
+Drop for ThreadPool :: closes the channel and joins every worker
+JoinHandle::join :: wait for a thread to finish
+
 @@exercise Build the thread pool
 Complete `ThreadPool`:
 

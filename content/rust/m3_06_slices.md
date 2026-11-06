@@ -121,6 +121,14 @@ What is the best type for a parameter that only reads text?
 - `&String`
 ? `&str` accepts literals, borrowed `String`s and slices of either.
 
+@@quiz
+What does `&v[2..]` give you for `let v = vec![1, 2, 3, 4];`?
+* A slice `[3, 4]`
+- `[2, 3, 4]`
+- `[1, 2]`
+- The number 3
+? 2.. means from index 2 to the end.
+
 @@exercise Middle part
 Write `middle`, which returns a slice of the list **without its first and last elements**. If the list has 2 or fewer elements, return an empty slice (`&[]`).
 @@starter

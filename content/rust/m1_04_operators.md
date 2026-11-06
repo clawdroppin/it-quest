@@ -133,6 +133,14 @@ let y = {
 - Nothing — it's a compile error
 ? The last line `a * a` has no semicolon, so it is the block's value: 9.
 
+@@quiz
+What is `17 % 5`?
+* 2
+- 3
+- 3.4
+- 12
+? % gives the remainder after division: 17 = 3 × 5 + 2.
+
 @@exercise Rectangle calculator
 Calculate the **area** (width × height) and **perimeter** (the distance all the way around: 2 × width + 2 × height) of a rectangle and print:
 

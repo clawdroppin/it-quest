@@ -103,6 +103,14 @@ A loop over a list never processes the last item. What kind of bug is it most li
 - A memory leak
 ? Boundaries are the most common place for bugs. Check your ranges and comparisons.
 
+@@quiz
+What's the first step when fixing a bug?
+* Reproduce it reliably, so you know when it's fixed
+- Rewrite the function
+- Add println! everywhere
+- Update the compiler
+? If you can't make it happen, you can't be sure you fixed it.
+
 @@exercise Find the bug: the average
 `average` should return the average of the numbers, as an `f64`, or `0.0` for an empty list. One test fails. Find out why and fix the bug.
 @@starter

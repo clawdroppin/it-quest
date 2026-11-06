@@ -112,6 +112,14 @@ When should a function return `Result` instead of `Option`?
 - When it never fails
 ? `Result` carries an error value explaining the failure; `Option` just says "nothing".
 
+@@quiz
+What does `result.unwrap_or_else(|e| { eprintln!("{e}"); 0 })` do with an `Err`?
+* Runs the closure, which prints the error and returns 0 as the value
+- Panics
+- Returns the error
+- Ignores the closure
+? unwrap_or_else computes a fallback only when needed.
+
 @@exercise Validate a username
 Write `validate_username`, which returns `Ok(())` if the username is valid, or an `Err` with the **exact** message for the first rule that's broken:
 

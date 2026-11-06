@@ -145,6 +145,14 @@ You print the contents of a `HashMap` twice in different runs, and the order is 
 * `HashMap` doesn't keep any order; use `BTreeMap` (or sort) if order matters
 ? Hash-based collections are fast because they don't care about order.
 
+@@quiz
+Which collection is best for a queue where you add at the back and take from the front?
+* `VecDeque`, with `push_back` and `pop_front`
+- `Vec` with remove(0)
+- `HashSet`
+- `BTreeMap`
+? Vec::remove(0) shifts every item; VecDeque does it in constant time.
+
 @@exercise Unique visitors
 `unique_visitors` gets a list of names (one per visit, people can visit many times) and returns **how many different people** visited. Use a `HashSet`.
 @@starter

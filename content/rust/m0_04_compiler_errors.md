@@ -100,6 +100,14 @@ Your program has 5 errors. What's the best strategy?
 * Fix the first error, then compile again
 ? Later errors are often *caused* by the first one. Fix it, recompile, and see what's left.
 
+@@quiz
+What's the difference between a compiler error and a warning?
+* An error stops the program from being built; a warning points out something suspicious but still builds
+- Warnings stop the build too
+- Errors only appear when the program runs
+- There's no difference
+? Fix warnings anyway: they often point to real bugs.
+
 @@exercise Fix the bugs
 This program has **three** mistakes. Use the compiler's messages to find and fix them. When it's fixed, it should print:
 

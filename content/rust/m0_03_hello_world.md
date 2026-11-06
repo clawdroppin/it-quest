@@ -93,6 +93,14 @@ Which line prints exactly `Say "cheese"`?
 - `println!(Say "cheese");`
 ? Inside a string, a `"` must be written as `\"`, otherwise the string would end there.
 
+@@quiz
+What's the difference between `println!` and `print!`?
+* `println!` adds a new line at the end; `print!` doesn't
+- `print!` is faster
+- `println!` prints in colour
+- There's no difference
+? Use print! when you want to continue on the same line.
+
 @@exercise Introduce yourself
 Write a program that prints **exactly** these three lines:
 

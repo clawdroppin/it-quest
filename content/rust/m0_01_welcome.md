@@ -38,6 +38,13 @@ Don't worry about what any of that means yet — the next lessons explain every 
 3. **Errors are normal.** Even experienced programmers see compiler errors all day long. An error isn't failure — it's the compiler helping you.
 4. **Struggle a little before using hints.** The 💡 Hint and 👀 Solution buttons exist, but the learning happens while you're figuring it out.
 5. **Short, regular sessions beat marathons.** 30–60 minutes a day will get you much further than one long session a week.
+## A plan for each lesson
+
+1. Read the lesson once and run every example.
+2. Change the examples: different numbers, different text. Predict what will happen before you run them.
+3. Answer the quiz questions without scrolling back up. If you get one wrong, read its explanation.
+4. Do the exercise. Get stuck for a few minutes before you open a hint, because the struggle is where you learn.
+5. Review your flashcards the next day.
 
 @@quiz
 What does the **✔ Check** button do?
@@ -45,6 +52,29 @@ What does the **✔ Check** button do?
 * It runs your code and tests whether it solves the exercise
 - It shows the solution
 ? Exactly. **▶ Run** just runs your program; **✔ Check** also verifies that it does what the exercise asks.
+
+@@quiz
+You don't understand an error message. What's a good first move?
+* Read it slowly from the top; it usually names the line and what's wrong
+- Ignore it and check again
+- Close the app
+- Delete all your code
+? Rust's error messages are among the most helpful of any language.
+
+@@quiz
+How do you learn programming fastest?
+* Type and run code yourself, change it and see what happens
+- Only read lessons without coding
+- Memorise every keyword first
+- Copy solutions without running them
+? Experimenting is how ideas stick.
+
+@@flashcards
+✔ Check :: runs your code and the tests for the exercise
+starter code :: the code you begin an exercise with
+hint :: a nudge if you're stuck
+solution :: the answer; try first before looking
+println! :: prints a line of text
 
 @@text
 ## Your first exercise

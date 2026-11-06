@@ -58,6 +58,38 @@ let old_gems = library.matching(|m| m.year < 2000 && m.rating >= 8);
 let unwatched_comedies = library.matching(|m| !m.watched && m.genre == Genre::Comedy);
 ```
 
+@@quiz
+Why does `count_by_genre` return a `BTreeMap` instead of a `HashMap`?
+* A BTreeMap keeps its keys sorted, so the report always appears in the same order
+- BTreeMaps are always faster
+- HashMaps can't count
+- BTreeMaps use no memory
+? Deterministic output is easier to read and test.
+
+@@quiz
+Why does `average_rating` return `Option<f64>`?
+* An empty library has no average, so it returns None instead of dividing by zero
+- Ratings may be negative
+- f64 can't be returned directly
+- To round the result
+? Option makes the empty case explicit.
+
+@@quiz
+What does `matching(&self, test: impl Fn(&Movie) -> bool)` let callers do?
+* Pass any condition as a closure, such as `|m| m.year < 2000`
+- Only search by title
+- Change movies while searching
+- Sort the movies
+? One flexible method replaces many specific search functions.
+
+@@flashcards
+enum Genre :: a fixed set of movie genres
+Library :: owns a Vec<Movie>
+Vec<&Movie> :: results that borrow from the library
+impl Fn(&Movie) -> bool :: a closure that tests a movie
+BTreeMap<Genre, usize> :: counts per genre, sorted by key
+Option<f64> :: an average, or None when there are no ratings
+
 @@exercise 🏆 Part 1: The library
 Implement every method in the table. The types are given. Try to use iterator methods for the searches and statistics.
 @@starter

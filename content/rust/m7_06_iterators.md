@@ -207,6 +207,14 @@ Which gives the number of words longer than 3 letters?
 - `words.iter().find(|w| w.len() > 3)`
 ? `filter` keeps the matching items; `count` counts them.
 
+@@quiz
+What does `.filter(|x| ...).count()` return?
+* The number of items for which the closure returned true
+- The filtered items
+- The sum of the items
+- true or false
+? count is a consumer: it runs the chain and returns a usize.
+
 @@exercise Pipeline practice
 Implement each function with an **iterator chain** (no `for` loops):
 

@@ -166,6 +166,14 @@ How do you sort `players` by score, highest first?
 - `players.sort_by(|a, b| a.score > b.score)`
 ? `sort_by` needs an `Ordering`; comparing `b` to `a` reverses the order.
 
+@@quiz
+What does `move` in front of a closure do?
+* Makes the closure take ownership of the variables it uses
+- Makes the closure run on another thread
+- Lets it change its parameters
+- Moves the closure into a struct
+? Needed when the closure outlives the current function, as with threads.
+
 @@exercise Keep the matching items
 Write a function `keep<F: Fn(i32) -> bool>(items: &[i32], test: F) -> Vec<i32>` that returns a new vector with only the items for which `test` returns `true`.
 

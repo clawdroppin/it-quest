@@ -188,6 +188,14 @@ A GUI wants to check, every frame, whether a worker thread has sent a result, wi
 - `handle.join()`
 ? `recv` and `join` both wait. `try_recv` returns immediately whether or not something arrived.
 
+@@quiz
+How do you measure how long a piece of code takes?
+* `let start = Instant::now();` before it and `start.elapsed()` after
+- `thread::sleep`
+- Count the lines
+- `Duration::now()`
+? elapsed returns a Duration you can print with {:?}.
+
 @@exercise Format a duration
 Timers show time as `minutes:seconds`. Write `mm_ss`, which turns a `Duration` into text like `"04:05"`: minutes and seconds, each with **two digits** (ignore any fraction of a second). Minutes can go above 59 (`"75:00"` is fine).
 @@starter
