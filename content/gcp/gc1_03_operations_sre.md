@@ -203,3 +203,69 @@ for i in range(len(hours)):
         print(f"hour {i:>2}: {state} -> {new} (1h {b1:.1f}, 6h {b6:.1f}, 24h {b24:.2f})")
         state = new
 print("final:", state)
+
+@@exercise Compute SLIs and the error budget from request logs
+From a day of load balancer request logs, compute two SLIs. **Availability**: good requests divided by valid requests, where 5xx responses are bad and 4xx responses are excluded as client errors (except 429, which counts as bad because the service shed load). **Latency**: the share of good requests served in under 300 ms. Compare each with its SLO over a 28-day window and report how much error budget this day used.
+@@lang python
+@@starter
+import random
+
+random.seed(7)
+logs = []
+for _ in range(20_000):
+    r = random.random()
+    status = 503 if r < 0.004 else 429 if r < 0.005 else 404 if r < 0.03 else 200
+    latency = random.expovariate(1 / 50) + (400 if random.random() < 0.006 else 0)
+    logs.append((status, latency))
+
+SLOS = {"availability": 0.999, "latency": 0.99}
+WINDOW_DAYS = 28
+
+def slis(logs):
+    raise NotImplementedError
+
+def budget_used(sli, slo, days=WINDOW_DAYS):
+    raise NotImplementedError
+
+values = slis(logs)
+for name, slo in SLOS.items():
+    sli = values[name]
+    print(f"{name:<12} SLI {sli:.4%}  SLO {slo:.1%}  {'meets' if sli >= slo else 'misses'} the target; "
+          f"this day used {budget_used(sli, slo):.0%} of the {WINDOW_DAYS}-day budget")
+@@expected
+availability SLI 99.4421%  SLO 99.9%  misses the target; this day used 20% of the 28-day budget
+latency      SLI 99.1610%  SLO 99.0%  meets the target; this day used 3% of the 28-day budget
+@@requires
+def slis
+def budget_used
+s != 429
+@@hint
+Valid requests are those that aren't 4xx, plus 429s (`status == 429` counts as valid and bad). Good means a status below 500 and not 429. Latency is measured over the good requests: the share with `latency < 300`. The budget for one day is `(1 - slo)`; spread over the window, one day at `1 - sli` uses `(1 - sli) / ((1 - slo) * days)` of the whole budget.
+@@solution
+import random
+
+random.seed(7)
+logs = []
+for _ in range(20_000):
+    r = random.random()
+    status = 503 if r < 0.004 else 429 if r < 0.005 else 404 if r < 0.03 else 200
+    latency = random.expovariate(1 / 50) + (400 if random.random() < 0.006 else 0)
+    logs.append((status, latency))
+
+SLOS = {"availability": 0.999, "latency": 0.99}
+WINDOW_DAYS = 28
+
+def slis(logs):
+    valid = [(s, l) for s, l in logs if not (400 <= s < 500) or s == 429]
+    good = [(s, l) for s, l in valid if s < 500 and s != 429]
+    fast = [1 for s, l in good if l < 300]
+    return {"availability": len(good) / len(valid), "latency": len(fast) / len(good)}
+
+def budget_used(sli, slo, days=WINDOW_DAYS):
+    return (1 - sli) / ((1 - slo) * days)
+
+values = slis(logs)
+for name, slo in SLOS.items():
+    sli = values[name]
+    print(f"{name:<12} SLI {sli:.4%}  SLO {slo:.1%}  {'meets' if sli >= slo else 'misses'} the target; "
+          f"this day used {budget_used(sli, slo):.0%} of the {WINDOW_DAYS}-day budget")

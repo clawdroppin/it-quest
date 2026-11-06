@@ -98,3 +98,99 @@ hot path / cold path :: Bigtable (recent, fast) / BigQuery (history, analytics)
 "quickly" vs "long-term" :: lift and shift now / re-architect later
 200 TB, slow link :: Transfer Appliance
 streaming pattern :: Pub/Sub → Dataflow → BigQuery
+
+@@exercise Turn case-study statements into requirements
+The Professional Cloud Architect case studies mix **business** requirements (cost, compliance, time to market) with **technical** ones (latency, availability, scale). Sort each statement into a category with keyword rules, mark it business or technical, and attach the Google Cloud capability it points to. Then print the requirements grouped by category, in the order the categories first appear.
+@@lang python
+@@starter
+RULES = [
+    ("compliance", "business", ("gdpr", "residency", "audit", "pci"), "Assured Workloads, org policy resource locations, Cloud Audit Logs"),
+    ("cost", "business", ("cost", "budget", "capex", "spend"), "committed use discounts, autoscaling, budgets and alerts"),
+    ("availability", "technical", ("downtime", "99.9", "outage", "failover"), "regional or multi-region deployment, managed instance groups, Cloud SQL HA"),
+    ("latency", "technical", ("latency", " ms", "global users"), "global external Application Load Balancer, Cloud CDN"),
+    ("scale", "technical", ("spike", "peak", "millions", "scale"), "autoscaling, Cloud Run, Pub/Sub buffering"),
+    ("operations", "business", ("ops team", "managed", "toil", "small team"), "managed services (Cloud Run, GKE Autopilot, BigQuery)"),
+]
+statements = [
+    "Customer data for EU users must stay in the EU to meet GDPR.",
+    "Reduce infrastructure spend by 30% within a year.",
+    "The checkout service must survive a zone outage with no downtime.",
+    "Global users complain about page latency above 400 ms.",
+    "Traffic spikes 20x during the annual sale.",
+    "We have a small team and want less time patching servers.",
+    "Move off the ageing data centre before the lease ends.",
+]
+
+def classify(statement):
+    raise NotImplementedError
+
+groups = {}
+for s in statements:
+    raise NotImplementedError
+for category, items in groups.items():
+    print(category.upper())
+    for kind, statement, capability in items:
+        print(f"  [{kind}] {statement}")
+        print(f"      -> {capability}")
+@@expected
+COMPLIANCE
+  [business] Customer data for EU users must stay in the EU to meet GDPR.
+      -> Assured Workloads, org policy resource locations, Cloud Audit Logs
+COST
+  [business] Reduce infrastructure spend by 30% within a year.
+      -> committed use discounts, autoscaling, budgets and alerts
+AVAILABILITY
+  [technical] The checkout service must survive a zone outage with no downtime.
+      -> regional or multi-region deployment, managed instance groups, Cloud SQL HA
+LATENCY
+  [technical] Global users complain about page latency above 400 ms.
+      -> global external Application Load Balancer, Cloud CDN
+SCALE
+  [technical] Traffic spikes 20x during the annual sale.
+      -> autoscaling, Cloud Run, Pub/Sub buffering
+OPERATIONS
+  [business] We have a small team and want less time patching servers.
+      -> managed services (Cloud Run, GKE Autopilot, BigQuery)
+OTHER
+  [business] Move off the ageing data centre before the lease ends.
+      -> clarify with the stakeholders
+@@requires
+def classify
+groups.setdefault(
+@@hint
+`classify` lowercases the statement and returns the first rule whose keywords appear in it, as `(category, kind, capability)`; return `("other", "business", "clarify with the stakeholders")` when nothing matches. In the loop, `groups.setdefault(category, []).append((kind, statement, capability))` keeps first-appearance order.
+@@solution
+RULES = [
+    ("compliance", "business", ("gdpr", "residency", "audit", "pci"), "Assured Workloads, org policy resource locations, Cloud Audit Logs"),
+    ("cost", "business", ("cost", "budget", "capex", "spend"), "committed use discounts, autoscaling, budgets and alerts"),
+    ("availability", "technical", ("downtime", "99.9", "outage", "failover"), "regional or multi-region deployment, managed instance groups, Cloud SQL HA"),
+    ("latency", "technical", ("latency", " ms", "global users"), "global external Application Load Balancer, Cloud CDN"),
+    ("scale", "technical", ("spike", "peak", "millions", "scale"), "autoscaling, Cloud Run, Pub/Sub buffering"),
+    ("operations", "business", ("ops team", "managed", "toil", "small team"), "managed services (Cloud Run, GKE Autopilot, BigQuery)"),
+]
+statements = [
+    "Customer data for EU users must stay in the EU to meet GDPR.",
+    "Reduce infrastructure spend by 30% within a year.",
+    "The checkout service must survive a zone outage with no downtime.",
+    "Global users complain about page latency above 400 ms.",
+    "Traffic spikes 20x during the annual sale.",
+    "We have a small team and want less time patching servers.",
+    "Move off the ageing data centre before the lease ends.",
+]
+
+def classify(statement):
+    text = statement.lower()
+    for category, kind, keywords, capability in RULES:
+        if any(k in text for k in keywords):
+            return category, kind, capability
+    return "other", "business", "clarify with the stakeholders"
+
+groups = {}
+for s in statements:
+    category, kind, capability = classify(s)
+    groups.setdefault(category, []).append((kind, s, capability))
+for category, items in groups.items():
+    print(category.upper())
+    for kind, statement, capability in items:
+        print(f"  [{kind}] {statement}")
+        print(f"      -> {capability}")

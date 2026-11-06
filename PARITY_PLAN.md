@@ -934,3 +934,6 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 ### ccnp (now 12 lessons, 20 exercises, 64 quizzes, ~24.2k words)
 - cp1_08_fhrp_nat_deep: HSRP v1/v2 election, preempt and tracking, VRRP, GLBP AVG/AVF, NAT terms and types, order of operations; HSRP election simulator, PAT translation table.
 - Exercises appended to cp0_01 (MAC learning and flooding), cp1_01 (AD and longest prefix match), cp1_02 (AAA method-list fallback) and cp1_07 (IPv6 /64 plan from a /48).
+
+### gcp (now 12 lessons, 20 exercises, 60 quizzes, ~22.3k words)
+- Exercises appended to gc0_01 (project ID validation), gc1_01 (VPC Service Controls ingress/egress), gc2_01 (case-study requirement classification) and gc1_03 (availability and latency SLIs from logs).

@@ -128,3 +128,80 @@ Two independent copies with 99% availability each run in parallel. What's the co
 = 99.99
 = 99.99%
 ? 1 − (0.01 × 0.01) = 0.9999.
+
+@@exercise Evaluate a VPC Service Controls perimeter
+A service perimeter protects **restricted services** (here Cloud Storage and BigQuery) for the projects inside it. A call to a restricted service is allowed when the caller and the target project are in the same perimeter. A call from **outside** into the perimeter needs a matching **ingress rule**; a call from **inside** to a project outside needs a matching **egress rule**. Services that aren't restricted aren't checked by the perimeter (IAM still applies). Evaluate each request and say why.
+@@lang python
+@@starter
+perimeter = {
+    "projects": {"prj-data", "prj-analytics"},
+    "restricted": {"storage.googleapis.com", "bigquery.googleapis.com"},
+    "ingress": [{"identity": "sa-etl@prj-ingest.iam.gserviceaccount.com", "source": "prj-ingest", "service": "storage.googleapis.com"}],
+    "egress": [{"identity": "sa-report@prj-analytics.iam.gserviceaccount.com", "target": "prj-partner", "service": "bigquery.googleapis.com"}],
+}
+requests = [
+    ("sa-bi@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-data", "bigquery.googleapis.com"),
+    ("sa-etl@prj-ingest.iam.gserviceaccount.com", "prj-ingest", "prj-data", "storage.googleapis.com"),
+    ("sa-etl@prj-ingest.iam.gserviceaccount.com", "prj-ingest", "prj-data", "bigquery.googleapis.com"),
+    ("dev@example.com", "laptop", "prj-data", "storage.googleapis.com"),
+    ("sa-report@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-partner", "bigquery.googleapis.com"),
+    ("sa-bi@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-partner", "storage.googleapis.com"),
+    ("dev@example.com", "laptop", "prj-data", "compute.googleapis.com"),
+]
+
+def evaluate(identity, source, target, service):
+    raise NotImplementedError
+
+for identity, source, target, service in requests:
+    print(f"{identity.split('@')[0]:<10} {source:>13} -> {target:<13} {service.split('.')[0]:<9} {evaluate(identity, source, target, service)}")
+@@expected
+sa-bi      prj-analytics -> prj-data      bigquery  allowed (both inside the perimeter)
+sa-etl        prj-ingest -> prj-data      storage   allowed (ingress rule)
+sa-etl        prj-ingest -> prj-data      bigquery  DENIED (no ingress rule)
+dev               laptop -> prj-data      storage   DENIED (no ingress rule)
+sa-report  prj-analytics -> prj-partner   bigquery  allowed (egress rule)
+sa-bi      prj-analytics -> prj-partner   storage   DENIED (no egress rule)
+dev               laptop -> prj-data      compute   allowed (service not restricted; IAM still applies)
+@@requires
+def evaluate
+perimeter["egress"]
+@@hint
+If the service isn't in `restricted`, return "allowed (service not restricted)". Work out whether the source and target are inside (`in perimeter["projects"]`). Both inside: allowed. Outside to inside: look for an ingress rule matching identity, source and service. Inside to outside: look in `perimeter["egress"]` for a rule matching identity, target and service. Otherwise it's denied, naming the missing rule.
+@@solution
+perimeter = {
+    "projects": {"prj-data", "prj-analytics"},
+    "restricted": {"storage.googleapis.com", "bigquery.googleapis.com"},
+    "ingress": [{"identity": "sa-etl@prj-ingest.iam.gserviceaccount.com", "source": "prj-ingest", "service": "storage.googleapis.com"}],
+    "egress": [{"identity": "sa-report@prj-analytics.iam.gserviceaccount.com", "target": "prj-partner", "service": "bigquery.googleapis.com"}],
+}
+requests = [
+    ("sa-bi@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-data", "bigquery.googleapis.com"),
+    ("sa-etl@prj-ingest.iam.gserviceaccount.com", "prj-ingest", "prj-data", "storage.googleapis.com"),
+    ("sa-etl@prj-ingest.iam.gserviceaccount.com", "prj-ingest", "prj-data", "bigquery.googleapis.com"),
+    ("dev@example.com", "laptop", "prj-data", "storage.googleapis.com"),
+    ("sa-report@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-partner", "bigquery.googleapis.com"),
+    ("sa-bi@prj-analytics.iam.gserviceaccount.com", "prj-analytics", "prj-partner", "storage.googleapis.com"),
+    ("dev@example.com", "laptop", "prj-data", "compute.googleapis.com"),
+]
+
+def evaluate(identity, source, target, service):
+    if service not in perimeter["restricted"]:
+        return "allowed (service not restricted; IAM still applies)"
+    src_in = source in perimeter["projects"]
+    dst_in = target in perimeter["projects"]
+    if src_in and dst_in:
+        return "allowed (both inside the perimeter)"
+    if dst_in:
+        for rule in perimeter["ingress"]:
+            if (rule["identity"], rule["source"], rule["service"]) == (identity, source, service):
+                return "allowed (ingress rule)"
+        return "DENIED (no ingress rule)"
+    if src_in:
+        for rule in perimeter["egress"]:
+            if (rule["identity"], rule["target"], rule["service"]) == (identity, target, service):
+                return "allowed (egress rule)"
+        return "DENIED (no egress rule)"
+    return "allowed (neither side is in the perimeter)"
+
+for identity, source, target, service in requests:
+    print(f"{identity.split('@')[0]:<10} {source:>13} -> {target:<13} {service.split('.')[0]:<9} {evaluate(identity, source, target, service)}")

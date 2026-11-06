@@ -158,3 +158,89 @@ What's the minimum storage duration (in days) of the Coldline class?
 @@drill
 What's the region name of Tokyo in Google Cloud?
 = asia-northeast1
+
+@@exercise Validate project IDs
+A project ID is permanent and globally unique, so it's worth checking before `gcloud projects create`. The rules: **6 to 30 characters**; only **lowercase letters, digits and hyphens**; it must **start with a letter** and **not end with a hyphen**; and it can't contain restricted strings such as `google`, `null`, `undefined` or `ssl`. Print every rule each candidate breaks, and suggest a fixed ID (lowercased, invalid characters turned into hyphens, a letter prefix added if needed, trimmed to 30 characters with no trailing hyphen).
+@@lang python
+@@starter
+import re
+
+RESTRICTED = ("google", "null", "undefined", "ssl")
+candidates = ["acme-prod-billing", "Acme_Prod", "1st-project", "web-", "my-google-app",
+              "dev", "acme-data-platform-analytics-europe-west1", "shop-ssl-proxy"]
+
+def problems(pid):
+    raise NotImplementedError
+
+def suggest(pid):
+    raise NotImplementedError
+
+for pid in candidates:
+    issues = problems(pid)
+    if not issues:
+        print(f"{pid:<44} ok")
+    else:
+        print(f"{pid:<44} {'; '.join(issues)}")
+        print(f"{'':<44} suggestion: {suggest(pid)}")
+@@expected
+acme-prod-billing                            ok
+Acme_Prod                                    only lowercase letters, digits and hyphens; must start with a lowercase letter
+                                             suggestion: acme-prod
+1st-project                                  must start with a lowercase letter
+                                             suggestion: p-1st-project
+web-                                         length 4 (must be 6-30); can't end with a hyphen
+                                             suggestion: web-proj
+my-google-app                                contains 'google'
+                                             suggestion: my-app
+dev                                          length 3 (must be 6-30)
+                                             suggestion: dev-proj
+acme-data-platform-analytics-europe-west1    length 41 (must be 6-30)
+                                             suggestion: acme-data-platform-analytics-e
+shop-ssl-proxy                               contains 'ssl'
+                                             suggestion: shop-proxy
+@@requires
+def problems
+def suggest
+re.fullmatch(r"[a-z0-9-]+", pid)
+@@hint
+Check the length, then `re.fullmatch(r"[a-z0-9-]+", pid)` for the character set, then `pid[0].isalpha()` (and lowercase), `pid.endswith("-")`, and each restricted string. For the suggestion, lowercase, replace anything outside `[a-z0-9-]` with `-` via `re.sub`, remove the restricted words, add a `p-` prefix if it doesn't start with a letter, cut to 30 characters and strip hyphens from the end; pad short IDs with `-proj`.
+@@solution
+import re
+
+RESTRICTED = ("google", "null", "undefined", "ssl")
+candidates = ["acme-prod-billing", "Acme_Prod", "1st-project", "web-", "my-google-app",
+              "dev", "acme-data-platform-analytics-europe-west1", "shop-ssl-proxy"]
+
+def problems(pid):
+    issues = []
+    if not 6 <= len(pid) <= 30:
+        issues.append(f"length {len(pid)} (must be 6-30)")
+    if not re.fullmatch(r"[a-z0-9-]+", pid):
+        issues.append("only lowercase letters, digits and hyphens")
+    if not ("a" <= pid[0] <= "z"):
+        issues.append("must start with a lowercase letter")
+    if pid.endswith("-"):
+        issues.append("can't end with a hyphen")
+    for word in RESTRICTED:
+        if word in pid.lower():
+            issues.append(f"contains '{word}'")
+    return issues
+
+def suggest(pid):
+    s = re.sub(r"[^a-z0-9-]", "-", pid.lower())
+    for word in RESTRICTED:
+        s = s.replace(word, "")
+    s = re.sub(r"-+", "-", s).strip("-")
+    if not s or not s[0].isalpha():
+        s = "p-" + s
+    if len(s) < 6:
+        s += "-proj"
+    return s[:30].rstrip("-")
+
+for pid in candidates:
+    issues = problems(pid)
+    if not issues:
+        print(f"{pid:<44} ok")
+    else:
+        print(f"{pid:<44} {'; '.join(issues)}")
+        print(f"{'':<44} suggestion: {suggest(pid)}")
