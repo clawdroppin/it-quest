@@ -58,6 +58,23 @@ Which finds devices that are **not assigned** to anyone?
 - nothing, LIKE needs `*`
 ? In SQL, `%` is the wildcard for any number of characters (`_` for exactly one).
 
+@@quiz
+Which condition matches status 'open' or 'pending'?
+* WHERE status IN ('open', 'pending')
+- WHERE status = 'open', 'pending'
+- WHERE status = 'open' AND status = 'pending'
+- WHERE status LIKE ('open', 'pending')
+? IN is shorter than chaining ORs.
+
+@@flashcards
+WHERE :: keep only rows that match a condition
+= <> < > <= >= :: comparison operators
+AND / OR / NOT :: combine conditions (use brackets with OR)
+IN (...) :: matches any value in the list
+BETWEEN a AND b :: inclusive range
+LIKE 'Dell%' :: pattern: % any text, _ one character
+IS NULL :: test for a missing value (never = NULL)
+
 @@drill
 Write the WHERE condition (without the word WHERE) for tickets whose priority is 1 or 2. Use IN.
 = priority IN (1, 2)

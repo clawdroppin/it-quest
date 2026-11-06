@@ -70,6 +70,14 @@ Which `tar` command **extracts** `backup.tar.gz`?
 - `gzip -x backup.tar.gz`
 ? x = extract, z = gzip, f = file. `-c` creates, `-t` lists.
 
+@@quiz
+Why use `find ... -print0 | xargs -0` instead of plain `| xargs`?
+* File names with spaces or newlines are passed safely
+- It's faster
+- It deletes files
+- It sorts the results
+? -print0 separates names with a null byte, which can't appear in a file name.
+
 @@flashcards
 find -name :: Find by name, e.g. find /etc -name "*.conf"
 find -mtime +30 :: Modified more than 30 days ago

@@ -45,6 +45,14 @@ Why enforce the seat limit with a trigger rather than only in the self-service p
 - Triggers are required for foreign keys
 ? Rules in the database protect all writers.
 
+@@quiz
+What does a foreign key from installations to licences guarantee?
+* Every installation refers to a licence that actually exists
+- Each licence is installed once
+- Licences are sorted
+- Installations can't be deleted
+? Referential integrity stops orphan rows.
+
 @@flashcards
 true-up :: paying the vendor for over-deployed seats
 valid licence :: starts <= today < expires

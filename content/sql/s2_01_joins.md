@@ -68,6 +68,14 @@ Which pattern finds departments that have **no** employees?
 - `SELECT * FROM departments WHERE employees IS NULL`
 ? LEFT JOIN keeps unmatched rows with NULLs; then filter for those NULLs.
 
+@@quiz
+Why give tables aliases like `FROM employees e JOIN departments d`?
+* To write shorter column references such as e.name and d.name, and to tell same-named columns apart
+- Joins require aliases
+- It makes the query faster
+- It renames the tables permanently
+? Aliases are also required when joining a table to itself.
+
 @@flashcards
 JOIN ... ON :: Combine rows from two tables where the ON condition matches
 INNER JOIN :: Only rows with a match on both sides

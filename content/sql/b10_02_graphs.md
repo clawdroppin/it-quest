@@ -66,6 +66,14 @@ In the SQL Game of Life, what does the table store?
 - The generation number only
 ? Sparse storage makes the neighbour count a simple join.
 
+@@quiz
+How is a network of routers stored as a graph in SQL?
+* A table of edges: one row per link with the two endpoints (and a cost)
+- One column per router
+- A single text field
+- A view with no rows
+? Recursive CTEs walk the edges table.
+
 @@flashcards
 edge table :: (src, dst, cost)
 undirected edge :: store both directions

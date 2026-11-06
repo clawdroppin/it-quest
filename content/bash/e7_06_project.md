@@ -69,6 +69,14 @@ How does the runner detect a dependency cycle?
 - Cycles can't happen
 ? Three states: unvisited, visiting, done.
 
+@@quiz
+Tasks A needs B, and B needs C. In what order must they run?
+* C, then B, then A
+- A, B, C
+- B, C, A
+- Any order
+? A topological sort runs every dependency before the task that needs it.
+
 @@flashcards
 topological sort :: order where dependencies come first
 `declare -F` :: list function names

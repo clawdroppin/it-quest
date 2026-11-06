@@ -49,6 +49,14 @@ Which query shows all columns of the `devices` table?
 - `SHOW devices.*;`
 ? `*` means every column.
 
+@@quiz
+Which query returns only the name and os columns of devices?
+* SELECT name, os FROM devices;
+- SELECT * FROM devices WHERE name, os;
+- GET name, os FROM devices;
+- SELECT devices(name, os);
+? List the columns you want after SELECT, separated by commas.
+
 @@flashcards
 database :: Organized, stored data a program can query
 table :: Rows (records) and columns (fields)

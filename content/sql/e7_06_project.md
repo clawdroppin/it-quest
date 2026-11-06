@@ -61,6 +61,14 @@ How should an SLA report treat a ticket that's still open?
 - Count it as breached always
 ? Old open tickets are often the worst breaches.
 
+@@quiz
+Which join keeps tickets that have no matching SLA target, so they show up as a problem?
+* LEFT JOIN from tickets to targets
+- INNER JOIN
+- CROSS JOIN
+- A UNION
+? Rows with a NULL target reveal missing configuration.
+
 @@flashcards
 population :: the set of rows a report counts
 as-of time :: fixed "now" for measuring open items

@@ -61,6 +61,14 @@ Why does `a * b` need to be divided by the scale once in fixed-point?
 - To avoid negative numbers
 ? (a·S)(b·S) = ab·S².
 
+@@quiz
+Why does Bash need fixed-point tricks for the Mandelbrot set?
+* Bash arithmetic only handles integers
+- Bash has no loops
+- Bash can't print characters
+- Floats are too fast
+? Scale every number by, say, 1000 and keep all maths in whole numbers.
+
 @@flashcards
 fixed-point :: integers scaled by a constant
 `a * b / S` :: fixed-point multiply

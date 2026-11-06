@@ -66,6 +66,14 @@ You started a command that won't stop. Which key combination interrupts it?
 - Esc
 ? Ctrl+C sends SIGINT, which stops most programs. (Ctrl+Z *pauses* it in the background instead.)
 
+@@quiz
+What does pressing Tab do while typing a command or file name?
+* Completes the name (press twice to list the options)
+- Runs the command
+- Inserts four spaces
+- Opens the help page
+? Tab completion saves typing and avoids typos.
+
 @@flashcards
 shell :: The program that reads your commands; Bash is the most common
 pwd :: Print the current (working) directory

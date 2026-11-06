@@ -118,6 +118,15 @@ What does `echo $(( 7 / 2 ))` print?
 - an error
 ? Bash arithmetic is integer-only and truncates.
 
+@@flashcards
+name=value :: assign (no spaces around =)
+"$name" :: use a variable, quoted
+$(command) :: command substitution: capture output
+$(( 2 + 3 )) :: arithmetic
+${name:-default} :: default when unset or empty
+export NAME :: pass a variable to child processes
+readonly :: a variable that can't change
+
 @@exercise Disk percentage
 `used` and `total` are given in GB. Print `Disk is 71% full` using integer arithmetic (don't type 71).
 @@starter

@@ -83,6 +83,14 @@ A script works when you run it, but fails from cron with "command not found". Th
 - Cron only runs at night
 ? Cron doesn't load your shell profile.
 
+@@quiz
+What does `0 2 * * 1` in a crontab mean?
+* 02:00 every Monday
+- Every 2 minutes
+- 02:00 on the 1st of every month
+- Every hour on Mondays
+? Fields: minute, hour, day of month, month, day of week (0 or 7 is Sunday).
+
 @@drill
 Write the cron schedule (the five time fields) for **every Monday at 06:00**.
 = 0 6 * * 1

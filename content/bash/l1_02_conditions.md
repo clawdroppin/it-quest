@@ -105,6 +105,24 @@ Which test checks whether `/etc/nginx` is a **directory**?
 - `[[ /etc/nginx == dir ]]`
 ? `-d` is "is a directory", `-f` "is a regular file", `-e` "exists".
 
+@@quiz
+What does `[[ $file == *.log ]]` test?
+* Whether the file name ends in .log (glob pattern match)
+- Whether a file called *.log exists
+- Whether the file contains .log
+- Whether $file is empty
+? An unquoted right side of == in [[ ]] is a pattern.
+
+@@flashcards
+exit status 0 :: success (true) in the shell
+[[ -f file ]] :: true if a regular file exists
+[[ -d dir ]] :: true if a directory exists
+[[ -z $s ]] :: true if the string is empty
+(( n > 5 )) :: numeric test
+cmd && echo ok :: run the second only if the first succeeds
+cmd || echo failed :: run the second only if the first fails
+case $x in ... esac :: match one value against patterns
+
 @@exercise Disk alert
 `usage` holds a disk usage percentage. Print `CRITICAL` if it's 90 or more, `WARNING` if it's 75 or more, otherwise `OK`.
 @@starter

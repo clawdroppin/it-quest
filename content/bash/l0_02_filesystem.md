@@ -93,6 +93,14 @@ Where do you look for system configuration files on Linux?
 - nothing
 ? `>` overwrites. `>>` appends.
 
+@@quiz
+What does `ls *.log` list?
+* Files in the current folder whose names end in .log
+- Every log file on the system
+- A file literally named *.log only
+- Folders called log
+? The shell expands the wildcard before ls even runs.
+
 @@drill
 Which command shows the **last 20 lines** of `/var/log/syslog`?
 = tail -n 20 /var/log/syslog

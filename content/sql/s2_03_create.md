@@ -79,6 +79,14 @@ What type should money use?
 - BOOLEAN
 ? Floating point can't represent many decimals exactly: 0.1 + 0.2 isn't 0.3.
 
+@@quiz
+What does a FOREIGN KEY on `devices.employee_id` do?
+* Makes sure each employee_id refers to an existing employee
+- Makes employee_id unique
+- Creates the employees table
+- Encrypts the column
+? It stops devices pointing to employees that don't exist.
+
 @@flashcards
 PRIMARY KEY :: Uniquely identifies each row; unique and not null
 FOREIGN KEY (REFERENCES) :: Must point at an existing row in another table

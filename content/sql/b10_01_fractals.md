@@ -63,6 +63,14 @@ In the Mandelbrot iteration, when is a point considered to have escaped?
 - When y = 0
 ? Once |z| > 2 it's guaranteed to grow forever.
 
+@@quiz
+What makes a CTE recursive?
+* It refers to itself: an anchor query plus a part that builds on the previous rows
+- It uses ORDER BY
+- It runs in a loop written in Python
+- It has more than one SELECT
+? WITH RECURSIVE stops when the recursive part returns no new rows.
+
 @@flashcards
 Mandelbrot step :: x' = x² − y² + cx, y' = 2xy + cy
 escape condition :: x² + y² > 4

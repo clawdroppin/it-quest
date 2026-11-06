@@ -63,6 +63,14 @@ What does the A in ACID stand for?
 - Audited
 ? Atomicity is why a money transfer can't leave the debit done but the credit missing.
 
+@@quiz
+What's a safe habit before running an UPDATE or DELETE?
+* Run a SELECT with the same WHERE clause first, and do the change inside a transaction
+- Always omit WHERE
+- Restart the database
+- Use DISTINCT
+? If the SELECT shows the wrong rows, the UPDATE would have changed the wrong rows.
+
 @@flashcards
 INSERT INTO t (cols) VALUES (...) :: Add a row
 UPDATE t SET col = value WHERE ... :: Change rows (WHERE!)

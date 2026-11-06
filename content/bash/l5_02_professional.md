@@ -84,6 +84,24 @@ What does `wait` do after starting jobs with `&`?
 - Waits for user input
 ? Without `wait`, the script could end before the jobs finish.
 
+@@quiz
+Which declaration creates an associative array in Bash?
+* declare -A owner
+- declare -a owner
+- owner=()
+- array owner
+? -a is an indexed array; -A is an associative array (Bash 4+).
+
+@@flashcards
+declare -A map :: associative array (dictionary)
+"${!map[@]}" :: the keys of an associative array
+"${map[@]}" :: the values
+cmd & :: run in the background
+wait :: wait for background jobs
+xargs -P 4 :: run up to four commands in parallel
+<(cmd) :: process substitution: output as a file
+<<'EOF' :: here-doc without variable expansion
+
 @@exercise Group by owner
 `servers` lists `host owner` pairs. Using an **associative array**, print each owner followed by their hosts (comma-separated, in input order), owners sorted alphabetically.
 @@starter

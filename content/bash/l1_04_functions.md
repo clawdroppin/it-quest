@@ -118,6 +118,23 @@ Why use `local` inside functions?
 - It exports the variable
 ? Bash variables are global by default.
 
+@@quiz
+How does a Bash function hand back a string to its caller?
+* It prints it, and the caller captures it with $(function)
+- With return "text"
+- By setting $RESULT automatically
+- Functions can't return strings
+? return only sets the exit status (0-255).
+
+@@flashcards
+name() { ... } :: define a function
+$1, $2, $# :: arguments and how many there are
+"$@" :: all arguments, each kept intact
+local :: a variable visible only inside the function
+return n :: exit status of the function (0 = success)
+result=$(fn) :: capture what the function prints
+>&2 :: send messages to standard error
+
 @@exercise Size in MB
 Write `to_mb` that takes a number of **bytes** and prints it in whole **megabytes** (1 MB = 1048576 bytes), rounded down.
 @@starter

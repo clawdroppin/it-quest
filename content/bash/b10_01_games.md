@@ -68,6 +68,14 @@ Why must the Game of Life compute the next generation into a new array?
 - It's faster
 ? Double buffering.
 
+@@quiz
+In a grid stored as a flat array, what is the index of row r, column c when the width is W?
+* r * W + c
+- c * W + r
+- r + c
+- W * (r + c)
+? Row r starts at r * W; add the column to move along it.
+
 @@flashcards
 `board[y * W + x]` :: 2D grid in a flat array
 `(x + dx + W) % W` :: wrap-around coordinate

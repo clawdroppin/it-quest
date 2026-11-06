@@ -113,6 +113,24 @@ In `while read -r user shell; do ...; done < users.txt`, a line is `ana /bin/bas
 - empty
 ? `read` splits the line on whitespace: the first word goes into `user`, the rest into `shell`.
 
+@@quiz
+Why is `while IFS= read -r line; do ...; done < file` better than `for line in $(cat file)`?
+* It reads whole lines, keeping spaces and backslashes, instead of splitting on every space
+- It's the only loop that works on files
+- for can't read files
+- It sorts the lines
+? for over $(cat ...) splits on whitespace and expands wildcards.
+
+@@flashcards
+for x in a b c :: loop over words
+for f in *.log :: loop over matching files
+for ((i=0; i<5; i++)) :: C-style counting loop
+while cond; do ... done :: loop while a command succeeds
+while IFS= read -r line :: read a file line by line
+{1..10} :: brace expansion: 1 to 10
+break / continue :: leave the loop / next round
+shopt -s nullglob :: unmatched globs expand to nothing
+
 @@exercise Server checklist
 Print `- <name>` for each server in the array, then `Total: 4`. Use the array's length, don't type 4.
 @@starter

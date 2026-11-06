@@ -84,6 +84,25 @@ In awk, what is `$NF`?
 - the file name
 ? `NF` is the number of fields, so `$NF` is the last one. `NR` is the line number.
 
+@@quiz
+What does `sed -i 's/old/new/g' config.txt` do?
+* Replaces every 'old' with 'new' in the file itself
+- Prints the file with replacements but leaves it unchanged
+- Deletes lines containing old
+- Replaces only the first line
+? -i edits in place; test without it first, or use -i.bak to keep a backup.
+
+@@flashcards
+grep pattern file :: print matching lines
+grep -v :: lines that do NOT match
+grep -i / -c / -n :: ignore case / count / line numbers
+grep -E :: extended regular expressions
+sed 's/a/b/g' :: replace a with b on every line
+sed -n '5,10p' :: print lines 5 to 10
+awk '{print $2}' :: print the second column
+$NF :: the last field in awk
+awk -F: :: use : as the field separator
+
 @@drill
 Write the sed command (reading from a pipe) that replaces **every** `http://` with `https://` on each line.
 = sed 's|http://|https://|g'

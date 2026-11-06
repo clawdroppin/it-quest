@@ -44,6 +44,22 @@ SELECT * FROM compromised;
 ```
 
 *IPs with 3+ failures that then logged in successfully*: the same "probably guessed a password" rule as the Log Sentinel build, now in SQL. Security tools (SIEMs like Splunk and Microsoft Sentinel) use query languages built on these exact ideas.
+## Correlated subqueries and EXISTS
+
+A **correlated** subquery refers to the outer query's current row, so it runs once per row:
+
+```sql,norun
+SELECT e.name
+FROM employees e
+WHERE EXISTS (
+    SELECT 1 FROM devices d
+    WHERE d.employee_id = e.id AND d.os = 'Windows 10'
+);
+```
+
+This lists employees who still have at least one Windows 10 device. `EXISTS` is true as soon as one matching row is found, so the database can stop looking. `NOT EXISTS` is the safe way to ask "has none": unlike `NOT IN`, it isn't confused by NULLs (if the subquery of a `NOT IN` returns a single NULL, the whole condition becomes unknown and no rows come back).
+
+A subquery can also appear in the `SELECT` list, for example `(SELECT COUNT(*) FROM devices d WHERE d.employee_id = e.id) AS device_count`. It reads clearly, but on large tables a `LEFT JOIN` with `GROUP BY` is often faster. Choose the version that's easiest to read first, and change it only if it's measurably slow.
 
 @@quiz
 `WHERE salary > (SELECT AVG(salary) FROM employees)`: what does the subquery return?
@@ -60,6 +76,22 @@ Why use a CTE (`WITH ...`) instead of nesting subqueries?
 - It makes changes to the table
 - It's always faster
 ? CTEs are about readability; performance is usually the same.
+
+@@quiz
+Why is NOT EXISTS usually safer than NOT IN for 'employees with no devices'?
+* NOT IN returns no rows at all if the subquery contains a NULL
+- NOT EXISTS is the only one SQLite supports
+- NOT IN can't use subqueries
+- NOT EXISTS sorts the results
+? Comparisons with NULL are unknown, which poisons NOT IN.
+
+@@flashcards
+subquery :: a query inside another query
+scalar subquery :: returns one value, e.g. (SELECT AVG(x) ...)
+IN (subquery) :: matches any value the subquery returns
+EXISTS :: true if the subquery returns any row
+correlated subquery :: refers to the outer row
+CTE :: WITH name AS (...) SELECT ... : a named step
 
 @@exercise Above-average spenders
 Show device `type`s whose **average price** is above the average price of **all** devices, with the type's average rounded to a whole number as `avg_price`. Most expensive first.

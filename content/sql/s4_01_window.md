@@ -68,6 +68,14 @@ Scores 90, 90, 80. What does `DENSE_RANK()` give?
 - 2, 2, 1
 ? DENSE_RANK leaves no gaps after ties; RANK would give 1, 1, 3.
 
+@@quiz
+What does `LAG(total) OVER (ORDER BY day)` return for each row?
+* The total from the previous row in day order
+- The total of all previous rows
+- The next row's total
+- The smallest total
+? LAG and LEAD look backwards and forwards; useful for day-over-day changes.
+
 @@flashcards
 OVER () :: Turns an aggregate into a window function
 PARTITION BY :: Groups for a window function, keeping every row

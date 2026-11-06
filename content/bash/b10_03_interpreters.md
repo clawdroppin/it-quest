@@ -62,6 +62,14 @@ Why pre-compute matching brackets before running a Brainf*ck program?
 - To print errors
 ? A stack pass makes jumps O(1).
 
+@@quiz
+In a stack machine, what does the `+` instruction do?
+* Pops the top two values, adds them and pushes the result
+- Pushes the number 1
+- Adds every value on the stack
+- Moves to the next instruction
+? RPN works because every operator takes its inputs from the stack.
+
 @@flashcards
 tokenise / parse / evaluate :: interpreter stages
 RPN :: operators after operands

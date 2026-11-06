@@ -75,6 +75,22 @@ Which builds a report column that says 'Expired' when the warranty date is befor
 - `COALESCE(warranty_until, 'Expired')`
 ? CASE is SQL's if/else for values.
 
+@@quiz
+In SQLite, which expression gives the date 30 days from today?
+* date('now', '+30 days')
+- now() + 30
+- today + 30
+- DATEADD(30)
+? Each database has its own date functions; SQLite uses modifiers like '+30 days'.
+
+@@flashcards
+UPPER / LOWER / TRIM :: change case, remove spaces
+LENGTH / SUBSTR :: text length / part of a text
+|| :: join text in SQLite and PostgreSQL
+COALESCE(a, b) :: first value that isn't NULL
+date('now') :: today's date in SQLite
+CASE WHEN ... THEN ... ELSE ... END :: if/else in a query
+
 @@exercise Warranty report
 For every device with a warranty date, show `asset_tag`, `warranty_until` and `warranty`: `expired` if the date is before `2026-10-31`, `expiring` if it's within the next **180 days** (up to and including `2027-04-29`), otherwise `ok`. Order by warranty date.
 @@starter

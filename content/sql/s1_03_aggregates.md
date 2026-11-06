@@ -44,6 +44,20 @@ ORDER BY failures DESC;
 ```
 
 That's a brute-force detector in six lines. The order of the clauses is always: `SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY … LIMIT`.
+## Grouping by more than one column
+
+`GROUP BY` can take several columns, giving one row per **combination**:
+
+```sql,norun
+SELECT department, os, COUNT(*) AS devices
+FROM devices
+GROUP BY department, os
+ORDER BY department, devices DESC;
+```
+
+Every column in the `SELECT` must either be in the `GROUP BY` or be inside an aggregate function (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`). Otherwise the database can't know which of the group's values to show. SQLite and older MySQL quietly pick one at random, which hides bugs; PostgreSQL and SQL Server refuse the query.
+
+Two more aggregate tricks are worth knowing: `COUNT(DISTINCT os)` counts the different values, and a conditional count, `SUM(CASE WHEN os = 'Linux' THEN 1 ELSE 0 END)`, counts only the matching rows within each group, so one query can produce a whole table of figures.
 
 @@quiz
 What's the difference between `WHERE` and `HAVING`?
@@ -60,6 +74,14 @@ What's the difference between `WHERE` and `HAVING`?
 - 4
 - NULL
 ? COUNT(column) skips NULLs. COUNT(*) would be 14.
+
+@@quiz
+Which query counts the different operating systems in use?
+* SELECT COUNT(DISTINCT os) FROM devices;
+- SELECT DISTINCT COUNT(os) FROM devices;
+- SELECT COUNT(os) FROM devices GROUP BY os;
+- SELECT SUM(os) FROM devices;
+? COUNT(DISTINCT col) counts unique non-NULL values.
 
 @@flashcards
 COUNT(*) :: Number of rows

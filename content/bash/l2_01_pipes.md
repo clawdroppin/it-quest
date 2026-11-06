@@ -72,6 +72,25 @@ Which command saves both normal output and errors of `backup.sh` into `log.txt`?
 - `./backup.sh | log.txt`
 ? `2>&1` sends stderr to wherever stdout is going. Order matters: first `> log.txt`, then `2>&1`.
 
+@@quiz
+What does `cmd 2>/dev/null` do?
+* Throws away the command's error messages and keeps normal output
+- Throws away all output
+- Saves errors to a file called null
+- Runs the command twice
+? 2 is standard error; /dev/null discards whatever is written to it.
+
+@@flashcards
+| :: send one command's output into the next
+> file :: write output to a file (replacing it)
+>> file :: append output to a file
+2> file :: redirect error messages
+&> file :: redirect output and errors
+sort | uniq -c :: count identical lines
+wc -l :: count lines
+head / tail -n 5 :: first / last five lines
+tee :: write to a file and pass output on
+
 @@drill
 Write a pipeline that prints the unique values of the **first** field of `ips.txt` (space-separated), sorted.
 = cut -d' ' -f1 ips.txt | sort -u
