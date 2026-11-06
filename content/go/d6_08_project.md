@@ -59,6 +59,14 @@ Why add jitter to backoff delays?
 - It isn't useful
 ? Synchronized retries cause "thundering herd" load spikes.
 
+@@quiz
+How does the link checker avoid checking the same URL twice?
+* It keeps a set (map) of URLs already seen
+- It sorts the URLs
+- It checks each URL only on even levels
+- HTTP caches do it automatically
+? Normalize URLs before adding them so trivial differences don't defeat the check.
+
 @@flashcards
 BFS crawl :: process the frontier one depth at a time
 Frontier :: URLs to visit at the current depth

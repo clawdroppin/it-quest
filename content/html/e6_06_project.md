@@ -50,6 +50,14 @@ A wide table on a phone pushes the whole page sideways. Best fix?
 - Use `white-space: nowrap` on the body
 ? Contain the overflow instead of letting it break the page.
 
+@@quiz
+Which layout tool fits the dashboard's overall page areas (header, sidebar, main)?
+* CSS Grid with named template areas
+- Floats
+- A table
+- Absolute positioning
+? grid-template-areas makes the layout readable and easy to change per breakpoint.
+
 @@flashcards
 page layout :: grid areas + media query
 KPI tiles :: auto-fit minmax

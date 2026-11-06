@@ -40,6 +40,14 @@ Why run the task outside the queue's lock?
 - Locks can't be held during function calls
 ? Hold locks only around the shared queue.
 
+@@quiz
+How does a caller get the result of a task submitted to the pool?
+* Through the std::future returned by submit, using .get()
+- By reading a global variable
+- The pool prints it
+- By polling the queue
+? .get() waits for the result and rethrows any exception from the task.
+
 @@flashcards
 Thread pool :: fixed workers + task queue
 `std::packaged_task<R()>` :: task linked to a future

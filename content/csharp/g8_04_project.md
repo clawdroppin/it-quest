@@ -52,6 +52,14 @@ Why coalesce consecutive edits of the same field?
 - To make redo impossible
 ? Merge within a short time window.
 
+@@quiz
+What does the Undo stack store in the asset desk app?
+* Commands that know how to reverse a change
+- Screenshots of the window
+- The whole database after every keypress
+- Only the last value
+? Each entry captures what changed so it can be put back.
+
 @@flashcards
 `INotifyDataErrorInfo` :: per-property validation errors
 `ErrorsChanged` :: tell bindings to re-read errors

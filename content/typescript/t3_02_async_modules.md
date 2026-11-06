@@ -116,6 +116,15 @@ Why write `import type { Cidr } from "./subnet.ts"`?
 - It makes the import faster to type
 ? Type-only imports keep the runtime and the type layers clearly apart.
 
+@@flashcards
+Promise<T> :: a value of type T that arrives later
+async function :: returns Promise<T>
+await :: unwraps a Promise<T> to T
+Promise.all :: wait for all; rejects on the first failure
+Promise.allSettled :: wait for all and report each result
+import type :: import only types (erased at runtime)
+export :: make a value or type available to other modules
+
 @@exercise Check them all
 Write `checkAll(hosts, probe)` that runs `probe` on every host **at the same time** and returns `{ up: string[]; down: string[] }`. A probe that **rejects** counts as down (use `Promise.allSettled`). Keep the hosts' original order in each list.
 @@starter

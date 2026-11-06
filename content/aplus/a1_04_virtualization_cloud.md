@@ -23,6 +23,29 @@
 | **File synchronization** | OneDrive, Google Drive, Dropbox keep files in sync |
 
 Deployment models: **public** (AWS, Azure), **private** (a company's own cloud), **hybrid** (both, connected), **community** (shared by organizations with common needs).
+## Troubleshooting virtual machines
+
+A+ scenarios often describe a VM that won't behave. The usual causes:
+
+| Symptom | Likely cause |
+|---|---|
+| The hypervisor says virtualization isn't supported | VT-x / AMD-V is turned off in the UEFI settings |
+| The host slows to a crawl when VMs start | Not enough RAM: each VM reserves its own memory |
+| The VM has no internet access | The virtual switch or network mode is wrong (internal or host-only instead of NAT or bridged) |
+| Other PCs on the LAN can't reach the VM | It's on NAT; switch to bridged so it gets its own address on the real network |
+| The host's disk fills up | Dynamically expanding virtual disks and old snapshots keep growing |
+
+**Snapshots are not backups.** A snapshot depends on the original virtual disk. If that disk is lost, the snapshot is lost with it. Delete snapshots once you no longer need them, because long chains slow the VM down.
+
+## Who is responsible for what
+
+In the cloud, security is a **shared responsibility**. The provider always secures the physical data centre and hardware. What the customer secures depends on the service model:
+
+- **IaaS:** the customer manages the operating system, patches, applications and data.
+- **PaaS:** the provider manages the OS; the customer manages the application and data.
+- **SaaS:** the provider runs nearly everything. The customer still manages **users, permissions and their data**.
+
+Whatever the model, user accounts and the data people put into the service are always the customer's job.
 
 @@quiz
 A technician wants VMs that appear on the office network with their own IP addresses from the office DHCP server. Which virtual network mode?
@@ -55,6 +78,22 @@ Why open a suspicious email attachment inside a VM instead of on your PC?
 - VMs are faster
 - Antivirus doesn't work on PCs
 ? Isolation is one of virtualization's main security uses (use an isolated network too).
+
+@@quiz
+A VM needs to be reachable from other computers on the office network with its own IP address. Which network mode should you use?
+* Bridged
+- NAT
+- Host-only
+- Internal
+? Bridged puts the VM directly on the physical network; NAT hides it behind the host.
+
+@@quiz
+In a SaaS email service, what is still the customer's responsibility?
+* Managing user accounts, permissions and the data users store
+- Patching the mail servers
+- Physical security of the data centre
+- Replacing failed disks
+? The provider runs the platform; identities and data stay with the customer.
 
 @@flashcards
 snapshot :: Saved VM state for rollback; not a backup

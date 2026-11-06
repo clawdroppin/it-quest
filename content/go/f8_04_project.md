@@ -65,6 +65,14 @@ Why store a version number in the settings file?
 - To encrypt it
 ? Breaking users' configs on upgrade is a classic desktop app bug.
 
+@@quiz
+Why must the dashboard update widgets on Fyne's UI thread?
+* UI toolkits aren't thread-safe; changes from other goroutines must be handed to the UI thread
+- Goroutines can't call functions
+- It's faster
+- Fyne has no goroutines
+? Use fyne.Do (or data binding) from background goroutines.
+
 @@flashcards
 Sliding window :: keep only the last N samples
 Hysteresis :: require persistence before changing state

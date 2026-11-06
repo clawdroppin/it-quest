@@ -106,6 +106,15 @@ In a `switch` expression, what does `_ => "unknown"` do?
 - it doesn't compile
 ? `name?.Length` gives `null` because `name` is null, and `?? -1` replaces that null with -1.
 
+@@flashcards
+if / else if / else :: choose a branch
+ternary :: cond ? a : b
+switch expression :: x switch { 1 => "one", _ => "other" }
+for / foreach / while :: loops
+string? :: a string that may be null
+?. :: null-conditional: stop if null
+?? :: use a fallback when null
+
 @@exercise HTTP status classes
 Write the body of `Classify(int code)` with a `switch` expression: 200–299 → `"success"`, 300–399 → `"redirect"`, 400–499 → `"client error"`, 500–599 → `"server error"`, anything else → `"invalid"`.
 @@starter

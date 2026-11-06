@@ -70,6 +70,14 @@ Why resolve collisions one axis at a time?
 - Diagonal movement is impossible
 ? Move X, fix X; move Y, fix Y.
 
+@@quiz
+How often does Ebitengine call a game's Update method by default?
+* 60 times per second
+- Once per second
+- As fast as possible
+- Only when a key is pressed
+? Draw may run at the display's rate; Update runs at a fixed tick rate (TPS).
+
 @@flashcards
 `Update()` :: fixed 60 TPS game logic
 `Draw(screen)` :: render the state

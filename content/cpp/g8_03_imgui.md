@@ -48,6 +48,14 @@ Why does a loop of `Button("Restart")` calls need PushID?
 - It sorts the buttons
 ? `PushID(i)` mixes i into the ID hash.
 
+@@quiz
+Where does an immediate-mode GUI keep the application's state?
+* In your own variables; the UI is rebuilt from them every frame
+- In widget objects created once
+- In a separate XML file
+- In the GPU
+? That's why ImGui code reads like ordinary straight-line code.
+
 @@flashcards
 Immediate mode :: UI described anew every frame
 Retained mode :: persistent widget objects (Qt, WPF)

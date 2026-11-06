@@ -47,6 +47,14 @@ Why mask the unused bits of the last word after a bitmap NOT?
 - It isn't necessary
 ? 1000 items use 1024 bits; 24 are padding.
 
+@@quiz
+How many 8-bit values does SWAR process at once in a 64-bit register?
+* 8
+- 4
+- 16
+- 64
+? 64 bits divided into 8-bit lanes gives eight lanes.
+
 @@flashcards
 SIMD :: one instruction, many values
 SSE / AVX2 / AVX-512 :: x86 SIMD extensions (16/32/64 bytes)

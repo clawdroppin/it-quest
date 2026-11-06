@@ -141,6 +141,14 @@ What happens in a `switch` case without `break`?
 - The default case runs
 ? This "fall-through" is occasionally useful (several cases sharing code), but usually a bug.
 
+@@flashcards
+range-for :: for (const auto& x : items)
+pass by value :: the function gets a copy
+pass by reference T& :: the function can change the caller's variable
+const T& :: read-only access without copying
+overloading :: same name, different parameter types
+std::pair / struct :: return several values
+
 @@exercise Normalize in place
 Write `void normalize(std::string& host)` that removes spaces at both ends and makes the text lower case, changing the caller's string.
 @@starter

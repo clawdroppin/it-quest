@@ -68,6 +68,14 @@ In `Query<Row, Selected extends keyof Row>`, what is the result type of `run()`?
 - Selected[]
 ? Only the selected columns are present.
 
+@@quiz
+Why does the builder reject `.where("agee", 30)` at compile time?
+* The column parameter is typed as keyof Row, and 'agee' isn't a key
+- It checks the database at runtime
+- Strings are never allowed
+- where() takes no arguments
+? Typos in column names become type errors.
+
 @@flashcards
 Accumulating generics :: each chained call returns a builder with a refined type parameter
 `Pick<Row, Selected>` :: result row with selected columns

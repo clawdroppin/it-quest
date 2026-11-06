@@ -64,6 +64,14 @@ Why must a length-prefixed protocol enforce a maximum frame size?
 - It doesn't need to
 ? Check the length before allocating.
 
+@@quiz
+Why convert integers with htonl/ntohl (or std::byteswap) before sending them?
+* Network protocols use big-endian byte order, while most CPUs are little-endian
+- To compress them
+- To encrypt them
+- Sockets only accept strings
+? Both sides must agree on the byte order of multi-byte numbers.
+
 @@flashcards
 Asio :: async I/O library (epoll/kqueue/IOCP)
 `io_context::run()` :: event loop

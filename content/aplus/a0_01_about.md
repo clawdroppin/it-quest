@@ -25,6 +25,32 @@ Each exam: up to **90 questions in 90 minutes**, multiple choice plus **performa
 5. A good plan: Core 1 in 4–6 weeks, Core 2 in 4–6 weeks, around an hour a day.
 
 > Exam tip: CompTIA questions often ask for the **BEST** or **FIRST** step. Several answers may work; pick the one that follows the troubleshooting methodology, is least disruptive, and is safest for data.
+## Reading a question the CompTIA way
+
+Most wrong answers on A+ aren't caused by not knowing the topic. They're caused by misreading the question. Use this routine on every question:
+
+1. **Read the last sentence first.** It tells you what's being asked: the cause, the next step, the best tool, the most likely problem.
+2. **Underline the qualifiers in your head:** *FIRST*, *NEXT*, *BEST*, *MOST likely*, *LEAST*. "What should the technician do NEXT?" means some steps have already been done. Work out where you are in the troubleshooting process.
+3. **Find the clue in the scenario.** "The laptop works when plugged in" points to the battery. "Only one user is affected" points away from the server. Scenarios rarely contain details that don't matter.
+4. **Eliminate first.** Usually two answers are clearly wrong. Pick between the remaining two using safety, the troubleshooting order and the least disruptive change.
+5. **Flag and move on.** Don't spend five minutes on one question. Mark it, answer your best guess, and come back at the end.
+
+## Performance-based questions
+
+PBQs usually appear at the start of the exam and take longer. Many people skip them, answer all the multiple-choice questions, and then return with the time that's left. Typical PBQs ask you to:
+
+- match connectors or cable types to their uses,
+- configure a SOHO router's wireless security and port forwarding,
+- put the steps of malware removal or troubleshooting in order,
+- choose the right Windows tool or command for each task.
+
+You don't have to get a PBQ completely right, because partial credit is common. Don't leave one empty.
+
+## Exam day
+
+- Bring two forms of ID for a test centre. For an online exam, clear your desk and test your webcam and connection the day before.
+- Your score report lists the objectives where you were weakest. If you don't pass, it tells you exactly what to study next.
+- A+ certifications are valid for **three years**. You renew them with continuing education or by passing a higher certification such as Network+ or Security+.
 
 @@quiz
 How many exams do you need to pass for CompTIA A+?
@@ -41,6 +67,22 @@ A question asks for the FIRST thing a technician should do. Two answers would bo
 - Pick the fastest fix even if it risks data
 - Pick the most expensive solution
 ? CompTIA rewards method and safety: gather information, back up, then make the smallest change.
+
+@@quiz
+What should you do with a performance-based question you're unsure about?
+* Give your best attempt; partial credit is possible, and you can flag it and come back
+- Leave it blank so it doesn't count
+- Restart the exam
+- Spend as long as it takes before moving on
+? Unanswered PBQs score nothing; a partial answer may score some points.
+
+@@quiz
+How long is an A+ certification valid before it must be renewed?
+* Three years
+- One year
+- Five years
+- For life
+? Renew with continuing education units or a higher CompTIA certification.
 
 @@flashcards
 A+ Core 1 :: Mobile devices, networking, hardware, virtualization & cloud, HW/network troubleshooting

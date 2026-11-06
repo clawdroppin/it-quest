@@ -55,6 +55,14 @@ What does `aria-activedescendant` do on a listbox?
 - Hides inactive options
 ? It's the standard pattern for keyboard-driven lists.
 
+@@quiz
+Why give keyboard shortcuts a visible hint in the UI?
+* Users discover them without reading documentation
+- Shortcuts don't work without hints
+- It's required by Tauri
+- It makes the app faster
+? Show them in tooltips, menus or a command palette.
+
 @@flashcards
 View model :: UI state and behaviour without rendering
 Command palette :: search-driven list of every app action

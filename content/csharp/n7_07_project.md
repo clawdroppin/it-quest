@@ -59,6 +59,14 @@ What happens to a BackgroundService that ignores its stopping token?
 - It throws at startup
 ? Always pass the token on.
 
+@@quiz
+What is a readiness health check for?
+* Telling a load balancer or orchestrator whether the service can take work right now
+- Measuring CPU temperature
+- Restarting the process
+- Logging every request
+? Liveness asks 'is it alive?'; readiness asks 'can it serve?'.
+
 @@flashcards
 `IHostedService` :: StartAsync / StopAsync
 `BackgroundService` :: ExecuteAsync(stoppingToken)

@@ -159,6 +159,16 @@ Why does a base class with virtual functions need `virtual ~Base() = default;`?
 - To prevent copying
 ? Without it, `delete basePtr` on a derived object is undefined behaviour.
 
+@@flashcards
+class :: data plus the functions that work on it
+constructor :: runs when an object is created
+destructor ~T() :: runs when an object goes out of scope
+RAII :: tie a resource's lifetime to an object
+const method :: promises not to change the object
+virtual :: call the derived class's version through a base pointer
+override :: the compiler checks you're overriding something
+std::unique_ptr :: single owner, deletes automatically
+
 @@exercise Bandwidth counter
 Complete the `Counter` class: `add(bytes)` adds to the total; `total()` returns it; `average()` returns the average per `add` call as a `double` (0 if none). Make the read-only methods `const`. Adding a negative number must throw `std::invalid_argument`.
 @@starter

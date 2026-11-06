@@ -63,6 +63,14 @@ What makes a maze "perfect"?
 - It has one entrance
 ? A spanning tree of the grid.
 
+@@quiz
+In cellular-automaton cave generation, what does each step do?
+* Turns each cell into wall or floor depending on how many neighbouring walls it has
+- Picks a random cell to flip
+- Deletes the outer walls
+- Draws straight corridors
+? A few smoothing steps turn noise into natural-looking caves.
+
 @@flashcards
 Seed :: starting value that fixes a random sequence
 `rand.NewPCG` :: seedable generator (math/rand/v2)

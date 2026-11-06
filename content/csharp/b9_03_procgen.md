@@ -58,6 +58,14 @@ What makes A* find a shortest path on a grid?
 - Using diagonal moves
 ? Manhattan distance is admissible for 4-way movement.
 
+@@quiz
+What does A* add to plain breadth-first search?
+* A heuristic estimate of the remaining distance, so it explores promising cells first
+- Random moves
+- Diagonal movement only
+- A limit on the path length
+? With an admissible heuristic such as Manhattan distance, the path is still the shortest.
+
 @@flashcards
 Seed :: makes randomness reproducible
 Room placement :: random rectangles + corridors

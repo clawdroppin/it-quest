@@ -136,6 +136,15 @@ What does `template <std::integral T>` add over `template <typename T>`?
 - Nothing
 ? Concepts state the requirements of a template and give readable errors.
 
+@@flashcards
+template <typename T> :: code that works for many types
+instantiation :: the compiler generates code for each type used
+concept :: a named requirement on a template type (C++20)
+std::integral :: concept for integer types
+class template :: e.g. std::vector<T>
+lambda :: [](int x) { return x * 2; }
+auto parameter :: void f(auto x) is a short template
+
 @@exercise Generic maximum by key
 Write a template `maxBy(const std::vector<T>& items, KeyFn key)` that returns the item with the largest `key(item)`. Assume the vector isn't empty. It must work for both calls in `main`.
 @@starter

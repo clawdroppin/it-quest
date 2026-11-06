@@ -112,6 +112,15 @@ Which return type should an async method with no result have (outside event hand
 - `object`
 ? `async void` can't be awaited, and its exceptions can crash the program.
 
+@@flashcards
+async / await :: write non-blocking code that reads like normal code
+Task / Task<T> :: an operation that finishes later
+Task.WhenAll :: wait for several tasks
+CancellationToken :: ask an operation to stop
+HttpClient :: HTTP requests; reuse one instance
+.Result / .Wait() :: block on a task (avoid)
+lock :: protect shared data between threads
+
 @@exercise Check all hosts
 `ProbeAsync` pretends to check a host (it waits and returns whether it's up). Check all hosts **at the same time** with `Task.WhenAll`, then print `<host>: up/down` in the original order and `2/4 up`.
 @@starter

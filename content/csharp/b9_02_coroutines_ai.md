@@ -52,6 +52,14 @@ Do coroutines run on a separate thread?
 - Only in builds
 ? They're iterators driven by the game loop.
 
+@@quiz
+In a state machine for an enemy, what triggers a change from Patrol to Chase?
+* A transition condition, such as the player coming within range
+- A random timer only
+- The frame rate
+- Restarting the game
+? Each state checks its transitions every update.
+
 @@flashcards
 Coroutine :: iterator resumed by the engine
 `yield return null` :: next frame

@@ -51,6 +51,16 @@ Images come from **registries** (Docker Hub, Quay, a company registry). Containe
 
 - Others: **Puppet**, **Chef**, **SaltStack** (agent-based), **Terraform** (infrastructure as code), **cloud-init** (configures new cloud VMs on first boot), CI/CD pipelines.
 - Shell scripting (the Bash track): variables, tests, loops, functions, exit codes, `set -euo pipefail`. **Python** is common for bigger automation.
+## Troubleshooting network problems in order
+
+When a Linux server "has no network", work from the bottom of the stack up, so you don't chase DNS when the cable is unplugged:
+
+1. **Link:** `ip link` shows whether the interface is `UP` and has a carrier. `ethtool eth0` shows speed and duplex.
+2. **Address:** `ip a` should show the expected IP. No address usually means a DHCP or configuration problem.
+3. **Gateway:** `ip route` should show a default route. Test it with `ping -c 3 <gateway>`.
+4. **Beyond the gateway:** `ping -c 3 1.1.1.1` tests routing without DNS. `tracepath` or `traceroute` shows where packets stop.
+5. **Name resolution:** `dig example.com` or `resolvectl query example.com`. If an IP works and a name doesn't, the problem is DNS.
+6. **The service itself:** `ss -tulpn` shows whether something is listening on the port. Check the firewall with `firewall-cmd --list-all` or `nft list ruleset`.
 
 @@quiz
 Which command shows which processes are listening on which TCP and UDP ports?
@@ -91,6 +101,14 @@ Which tool configures a brand new cloud VM (users, packages, files) on its first
 - GRUB
 - fail2ban
 ? Cloud providers pass "user data" to cloud-init.
+
+@@quiz
+A server can ping 1.1.1.1 but `curl https://example.com` fails with "could not resolve host". What is the most likely problem?
+* DNS resolution
+- The network cable
+- The default gateway
+- The web server's TLS certificate
+? Reaching an IP proves link, address and routing work; failing names points to DNS.
 
 @@flashcards
 ip a / ip route :: Addresses / routes

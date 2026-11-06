@@ -141,6 +141,15 @@ Why use an interface like `ICheck`?
 - It stops a class from having methods
 ? Interfaces let you add new implementations without changing the code that uses them.
 
+@@flashcards
+class :: reference type with identity
+record :: data type with value equality
+property { get; set; } :: a field with accessors
+init :: can only be set while creating the object
+interface :: a contract of members a class implements
+enum :: a fixed set of named constants
+constructor :: sets up a new object
+
 @@exercise Inventory record
 Complete the `Asset` record and `Report` so the program prints the assets older than 5 years in 2026, oldest first, then the count:
 

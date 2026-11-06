@@ -55,6 +55,14 @@ Why inject a clock and an id generator into the service?
 - To support multiple time zones
 ? Hidden dependencies on time and randomness make tests flaky.
 
+@@quiz
+Why model incident status as a union of string literals?
+* The compiler checks every status value and can verify switch statements are exhaustive
+- Strings are faster than numbers
+- Unions are stored in the database
+- It's required by Node
+? Add a status and the compiler points to every place that must handle it.
+
 @@flashcards
 MTTA :: mean time to acknowledge
 MTTR :: mean time to resolve

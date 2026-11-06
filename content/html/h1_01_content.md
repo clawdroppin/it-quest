@@ -123,6 +123,15 @@ In a table, what's the difference between `<th>` and `<td>`?
 - No difference
 ? Header cells help screen readers announce what column a value is in.
 
+@@flashcards
+<a href> :: a link
+<img alt> :: an image with a text alternative
+<ul> / <ol> :: unordered / ordered list
+<li> :: list item
+<strong> / <em> :: important / emphasised text
+<table> / <tr> / <th> / <td> :: table, row, header cell, data cell
+target="_blank" rel="noopener" :: open a link safely in a new tab
+
 @@exercise Help desk links
 Make a page with an `<h1>` `Help desk`, and an unordered list of three links: `Reset password` to `https://passwords.example.jp`, `Status page` to `https://status.example.jp`, and `Email us` to `mailto:helpdesk@example.jp`. Add an image of a logo from `https://placehold.co/120x40?text=IT` with a meaningful `alt`.
 @@starter

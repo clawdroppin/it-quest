@@ -117,6 +117,15 @@ What does `using (var w = new StreamWriter(p)) { ... }` guarantee?
 - The file is created only if it doesn't exist
 ? `using` calls `Dispose()` at the end of the block, which closes the file.
 
+@@flashcards
+try / catch / finally :: handle and clean up after errors
+throw :: raise an exception
+File.ReadAllText / WriteAllText :: whole-file read and write
+File.ReadLines :: read lazily, line by line
+Path.Combine :: build paths portably
+using :: dispose a resource automatically
+JsonSerializer.Serialize / Deserialize :: JSON with System.Text.Json
+
 @@exercise Parse a config file safely
 `ParseLine` gets lines like `timeout = 30`. Return the key and the number as a tuple. Throw `FormatException` with the message `bad line: <line>` if there's no `=` or the value isn't a whole number. The loop prints good lines and catches bad ones.
 @@starter

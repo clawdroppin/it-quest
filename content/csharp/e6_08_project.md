@@ -48,6 +48,14 @@ What does `typeof(IJob).IsAssignableFrom(t)` check?
 - Whether IJob has a constructor
 ? The core of plugin discovery.
 
+@@quiz
+Why load jobs through an interface like IJob?
+* The scheduler can run any job type, including plugins it has never seen, without knowing their classes
+- Interfaces make jobs faster
+- C# requires interfaces for classes
+- To prevent jobs from failing
+? Discovery finds types implementing IJob; the scheduler only depends on the interface.
+
 @@flashcards
 Plugin discovery :: scan types for an interface or attribute
 `IsAssignableFrom` :: "can this type be used as that type?"

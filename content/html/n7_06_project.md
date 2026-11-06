@@ -42,6 +42,14 @@ After a successful submit replaces the form, where should focus go?
 - To the browser address bar
 ? Without moving focus, it's lost on a removed element.
 
+@@quiz
+How should the form show an error for one field?
+* Text next to the field, linked with aria-describedby, and aria-invalid on the input
+- A red border only
+- An alert() popup
+- Clearing the field
+? Colour alone doesn't reach everyone; linked text is read by screen readers.
+
 @@flashcards
 `<fieldset>` + `<legend>` :: group related fields
 `noindex` :: keep internal pages out of search

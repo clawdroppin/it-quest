@@ -43,6 +43,14 @@ Which tool catches a heap buffer overflow at runtime?
 - CMake
 ? Compile with -fsanitize=address (or /fsanitize=address).
 
+@@quiz
+Which of these is undefined behaviour in C++?
+* Signed integer overflow
+- Unsigned integer wrap-around
+- Dividing doubles by zero to get infinity
+- Comparing two pointers to the same array
+? Unsigned arithmetic wraps by definition; signed overflow lets the compiler assume it never happens.
+
 @@flashcards
 UB :: no requirements on behaviour
 AddressSanitizer :: out-of-bounds, use-after-free

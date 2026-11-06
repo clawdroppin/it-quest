@@ -71,6 +71,14 @@ What is switch bounce?
 - A TinyGo error
 ? One press can look like many presses without debouncing.
 
+@@quiz
+Why is TinyGo used instead of the standard Go compiler for microcontrollers?
+* It produces much smaller binaries and supports bare-metal targets with no operating system
+- It's faster to type
+- Standard Go has no goroutines
+- TinyGo is an interpreter
+? A microcontroller may only have tens of kilobytes of RAM.
+
 @@flashcards
 TinyGo :: LLVM-based Go compiler for small targets
 `machine` package :: pins, I²C, SPI, UART on the board

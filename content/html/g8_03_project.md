@@ -33,6 +33,14 @@ How should the page theme all three components consistently?
 - Avoid shadow DOM
 ? Custom properties cross the shadow boundary.
 
+@@quiz
+Why use custom elements with Shadow DOM for the status board components?
+* Each component's markup and styles are encapsulated and can't clash with the page
+- They load faster than HTML
+- They don't need JavaScript
+- Search engines require it
+? CSS custom properties still pass through, which is how theming works.
+
 @@flashcards
 board :: fetch, loading state, error + retry, refresh
 row :: dot + text state + since + disclosure

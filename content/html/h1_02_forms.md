@@ -108,6 +108,16 @@ How do you connect a `<label>` to its input?
 - `aria-input="true"`
 ? A connected label can be clicked to focus the field, and is read by screen readers.
 
+@@flashcards
+<form action method> :: where and how to send data
+name :: the key the server receives
+<label for="id"> :: connect a label to an input
+type="email" / "number" / "date" :: specialised inputs
+required :: field must be filled in
+pattern :: regular expression the value must match
+autocomplete :: helps browsers and password managers fill fields
+method="post" :: send data in the request body
+
 @@exercise Account request form
 Make a form that posts to `/accounts` with: a required text input `fullname` with a label, a required email input `email` with a label, a `<select>` named `dept` with options `sales`, `it` and `hr`, and a submit button. Every input needs an `id` matching its label's `for`.
 @@starter

@@ -46,6 +46,14 @@ What does an open circuit breaker do?
 - Restarts the agent
 ? After the cooldown, one trial request decides whether to close it.
 
+@@quiz
+Why give each event an ID when shipping logs with retries?
+* So the server can drop duplicates when a batch is retried after a timeout
+- To sort them alphabetically
+- To compress them
+- IDs make batches smaller
+? Retries plus idempotent IDs give at-least-once delivery without duplicates.
+
 @@flashcards
 Batching :: flush on count, bytes or age
 Exponential backoff :: double the wait after each failure

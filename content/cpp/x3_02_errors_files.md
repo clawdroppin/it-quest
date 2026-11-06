@@ -146,6 +146,14 @@ What does `std::optional<int>` hold?
 - Makes the path absolute
 ? `std::filesystem::path` overloads `/` for joining.
 
+@@flashcards
+throw std::runtime_error :: raise an exception
+catch (const std::exception& e) :: catch by const reference
+std::optional<T> :: a value or nothing
+std::ifstream / std::ofstream :: read / write files
+std::filesystem::path :: portable paths; / joins them
+std::istringstream :: split and parse text
+
 @@exercise Parse key=value config
 Read the config from input. Skip empty lines and lines starting with `#`. For each `key=value` line, store it in a `std::map` (trim spaces around key and value). Lines without `=` print `line <n>: missing '='` (counting all lines from 1). At the end, print each key and value as `key -> value`, sorted.
 @@stdin

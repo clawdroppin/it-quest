@@ -113,6 +113,16 @@ What is `(ip >> 24) & 0xFF` for a 32-bit IPv4 address?
 - The whole address
 ? Shifting right by 24 moves the top 8 bits down; `& 0xFF` keeps only those 8 bits.
 
+@@flashcards
+int / long long :: whole numbers (at least 32 / 64 bits)
+std::uint8_t :: exactly 8 bits, unsigned (0-255)
+double :: floating-point number
+std::string :: text that manages its own memory
+std::format / std::print :: modern formatted output (C++20/23)
+std::getline(std::cin, s) :: read a whole line
+std::string::npos :: find() result when nothing is found
+static_cast<int>(x) :: explicit conversion
+
 @@drill
 Which header gives you exact-size types like `std::uint32_t`?
 = <cstdint>

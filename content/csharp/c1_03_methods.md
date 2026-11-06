@@ -125,6 +125,15 @@ What does `var (a, b) = (1, 2);` do?
 - Declares `a` as a function
 ? Tuples can be taken apart into separate variables like this.
 
+@@flashcards
+void :: method returns nothing
+optional parameter :: int count = 4
+named argument :: Ping(host: "a", count: 2)
+tuple return :: (int min, int max) Range()
+out parameter :: int.TryParse(s, out var n)
+overloading :: same name, different parameters
+static :: belongs to the class, not an instance
+
 @@exercise Subnet host count
 Write `HostsInSubnet(int prefix)` that returns the number of usable hosts in an IPv4 subnet with that prefix length: 2^(32 − prefix) − 2. Special cases: `/31` → 2 (point-to-point links) and `/32` → 1. Use `long`, because `/0` is huge.
 @@starter

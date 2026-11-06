@@ -47,6 +47,14 @@ What happens if a button handler performs a 3-second blocking network call?
 - Only that button freezes
 ? Use async APIs or a worker thread.
 
+@@quiz
+Where should the monitor's settings file live?
+* In the per-user application data folder, not next to the executable
+- In C:\Windows
+- Inside the executable
+- In the temporary folder
+? Program folders are often read-only for normal users.
+
 @@flashcards
 Event loop :: processes input, paint, timers, posted events
 `QTimer` :: repeating or single-shot timer
