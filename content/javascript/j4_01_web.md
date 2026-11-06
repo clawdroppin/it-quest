@@ -85,6 +85,14 @@ A user says "the dashboard shows no data". Where in DevTools do you look first t
 - The Lighthouse tab
 ? The Network tab shows each request's status code and response.
 
+@@quiz
+Which method finds the first element matching a CSS selector?
+* `document.querySelector(".alert")`
+- `document.getElementsByCss(".alert")`
+- `document.find(".alert")`
+- `document.select(".alert")`
+? querySelectorAll returns every match.
+
 @@flashcards
 HTML :: The structure of a page
 CSS :: The appearance: selector { property: value; }

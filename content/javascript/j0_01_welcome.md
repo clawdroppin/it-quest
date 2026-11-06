@@ -43,6 +43,24 @@ console.log(`${host} has ${freeGB} GB free (${freeGB < 50 ? "low!" : "ok"})`);
 /* a comment
    over several lines */
 ```
+## Reading error messages
+
+Mistakes are part of programming, and JavaScript tells you what went wrong if you read the message carefully:
+
+```javascript,norun
+console.log(servr);
+// ReferenceError: servr is not defined
+```
+
+- **ReferenceError**: you used a name that doesn't exist, usually a typo.
+- **TypeError**: you did something a value can't do, like calling `undefined()` or reading a property of `null`.
+- **SyntaxError**: the code isn't valid JavaScript at all: a missing bracket or quote. Nothing runs until it's fixed.
+
+The message includes a **line number**. Start there, but remember the real mistake is sometimes a line or two earlier (a bracket that was never closed). When you're stuck, `console.log` the values just before the failing line: most bugs are a value that isn't what you expected.
+
+## Semicolons, case and style
+
+JavaScript is **case-sensitive**: `Server` and `server` are different names, and `Console.log` doesn't exist. Names use **camelCase** (`freeDiskGb`, `maxRetries`), constants that never change are sometimes written `UPPER_CASE`, and classes use `PascalCase`. Indent with two spaces, which is the common style in JavaScript projects, and let a formatter such as Prettier keep it consistent.
 
 @@quiz
 Which declaration should you use for a value that never gets reassigned?
@@ -59,6 +77,14 @@ What does `` `${2 + 2} servers` `` produce?
 - `2 + 2 servers`
 - an error
 ? Inside backticks, `${ }` evaluates the expression.
+
+@@quiz
+`console.log(Total)` fails with "ReferenceError: Total is not defined", but the code has `const total = 5;`. Why?
+* JavaScript is case-sensitive, so `Total` and `total` are different names
+- `const` values can't be printed
+- console.log only prints strings
+- The variable must be declared with `var`
+? Check spelling and capitals first when you see a ReferenceError.
 
 @@flashcards
 console.log :: Print values to the console

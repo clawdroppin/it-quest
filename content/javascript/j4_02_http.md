@@ -88,6 +88,14 @@ Which method creates a new resource in a REST API?
 - HEAD
 ? POST creates; GET reads; PUT/PATCH update; DELETE removes.
 
+@@quiz
+Your API receives a request for a ticket ID that doesn't exist. Which status code fits?
+* 404 Not Found
+- 200 OK with an empty body
+- 500 Internal Server Error
+- 301 Moved Permanently
+? 5xx means the server failed; a missing resource is the client asking for something that isn't there.
+
 @@flashcards
 GET / POST / PATCH / DELETE :: Read / create / update / delete
 200 / 201 / 204 :: OK / Created / No Content

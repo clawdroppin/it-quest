@@ -92,6 +92,24 @@ What does `#failures` in a class mean?
 - A field that can't change
 ? Private fields start with `#`. `web.#failures` outside the class is a syntax error.
 
+@@quiz
+When does a `finally` block run?
+* Always, whether the try block succeeded or threw
+- Only when an error was thrown
+- Only when no error was thrown
+- Only if there is no catch block
+? Use finally for clean-up such as closing files or connections.
+
+@@flashcards
+try / catch / finally :: run, handle errors, always clean up
+throw new Error(msg) :: raise an error with a stack trace
+class X extends Error :: your own error type
+instanceof :: check an error's (or object's) class
+constructor :: runs when you create an object with new
+#field :: private field, only visible inside the class
+static :: belongs to the class, not each object
+get / set :: computed properties
+
 @@exercise Validate a hostname
 Write `validateHostname(name)` that returns the name in lowercase if it's valid, and otherwise **throws** an `Error` whose message starts with `invalid hostname`. Valid: 1 to 63 characters, letters, digits and hyphens only, not starting or ending with a hyphen.
 @@starter

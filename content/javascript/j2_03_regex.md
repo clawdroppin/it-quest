@@ -38,6 +38,20 @@ console.log("a, b;c  d".split(/[,;\s]+/));
 ```
 
 Masking secrets before writing logs, like the third line, is a real security practice.
+## Testing and building patterns
+
+- `regex.test(text)` returns true or false: the quickest check ("does this look like an IP?").
+- Flags change how a pattern matches: `i` ignores case, `g` finds all matches, `m` makes `^` and `$` match at each line, `u` handles Unicode properly.
+- Build a pattern from user input with care: characters like `.`, `*` and `(` have special meanings. Escape them first: `text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")`, or use plain string methods (`includes`, `startsWith`) when you don't need a pattern at all.
+- Anchor patterns that must match the whole value: `/^\d{3}-\d{4}$/` checks a whole postcode, while `/\d{3}-\d{4}/` would also match inside "abc123-4567xyz".
+
+```javascript
+const isPostcode = (s) => /^\d{3}-\d{4}$/.test(s);
+console.log(isPostcode("150-0002"), isPostcode("1500002"), isPostcode("x150-0002"));
+console.log(/error/i.test("ERROR: disk full"));
+```
+
+Regular expressions are powerful but easy to make unreadable. Name the groups, keep each pattern small, and write a few test strings next to it, including ones that should **not** match.
 
 @@quiz
 Which call returns **all** IP-looking matches in a string?
@@ -46,6 +60,32 @@ Which call returns **all** IP-looking matches in a string?
 - `/\d+/.test(text)`
 - `text.split(/\d/)`
 ? Without `g`, `match` returns only the first match (with its groups).
+
+@@quiz
+Which flag makes a regular expression ignore upper and lower case?
+* `i`
+- `g`
+- `m`
+- `c`
+? /error/i matches "Error", "ERROR" and "error".
+
+@@quiz
+Why anchor a validation pattern with `^` and `$`?
+* So the whole value must match, not just part of it
+- To make it faster
+- To ignore case
+- To find all matches
+? Without anchors, "abc150-0002xyz" would pass a postcode check.
+
+@@flashcards
+regex.test(s) :: true if the pattern matches
+s.match(re) :: first match with groups (all matches with g)
+s.matchAll(re) :: iterator of every match with groups (needs g)
+(?<name>...) :: named group, read from match.groups.name
+flag i :: ignore case
+flag g :: global: all matches
+^ and $ :: start and end of the string
+\d \w \s :: digit, word character, whitespace
 
 @@exercise Mask secrets
 Write `maskSecrets(text)` that replaces the value of every `password=`, `token=` and `apikey=` (any case) with `***`. A value runs until `&`, a space, or the end.

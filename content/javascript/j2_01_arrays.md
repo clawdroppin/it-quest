@@ -80,6 +80,24 @@ Which method gives the **total** of a property across an array?
 - `find`
 ? `reduce((sum, x) => sum + x.value, 0)`.
 
+@@quiz
+What does `["web01", "db01", "web02"].filter((s) => s.startsWith("web"))` return?
+* `["web01", "web02"]`
+- `true`
+- `["db01"]`
+- `2`
+? filter keeps the items for which the function returns true.
+
+@@flashcards
+map :: new array with each item transformed
+filter :: new array with only the items that pass a test
+reduce :: combine all items into one value
+find :: the first item that passes a test (or undefined)
+some / every :: does any / does every item pass?
+sort((a, b) => a - b) :: numeric ascending sort
+toSorted :: sorted copy, leaves the original alone
+includes :: is this value in the array?
+
 @@exercise Online servers
 Using `filter` and `map`, return the **names** of servers whose `status` is `"up"`, in `upNames(servers)`.
 @@starter

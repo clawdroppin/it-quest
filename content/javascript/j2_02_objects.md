@@ -76,6 +76,14 @@ JSON is stricter than JavaScript: keys need double quotes, no trailing commas, n
 - `""`
 ? Optional chaining `?.` stops and returns undefined instead of throwing.
 
+@@quiz
+`JSON.parse('{"port": 8080}').port + 1` gives...
+* `8081`
+- `"80801"`
+- `NaN`
+- an error
+? JSON numbers become JavaScript numbers; JSON.parse builds real values.
+
 @@flashcards
 Object.keys / values / entries :: Arrays of an object's keys / values / [key, value] pairs
 destructuring :: const { name, ip } = server

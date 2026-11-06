@@ -76,6 +76,14 @@ Which files belong in Git for a Node project?
 - only `package.json`
 ? `npm install` (or `npm ci`) recreates node_modules from the lock file.
 
+@@quiz
+What is `package-lock.json` for?
+* It records the exact versions installed, so every install gets the same dependencies
+- It stops other people editing package.json
+- It stores your npm password
+- It lists files to ignore in Git
+? Commit it, and use npm ci in CI to install exactly those versions.
+
 @@flashcards
 require / module.exports :: CommonJS modules (classic Node)
 import / export :: ES modules (the modern standard)

@@ -57,6 +57,22 @@ function maxLoad(...loads) {           // collects all arguments into an array
 }
 console.log(maxLoad(0.4, 2.1, 1.7));
 ```
+## Pure functions
+
+A **pure** function returns a result based only on its arguments and changes nothing outside itself. `square(5)` is always 25 and touches nothing else. Pure functions are easy to test and reuse, so put your logic in them and keep the parts that print, read files or call the network separate and small.
+
+```javascript
+// pure: the same input always gives the same output
+const toGb = (bytes) => bytes / 1024 ** 3;
+
+// not pure: depends on and changes outside state
+let total = 0;
+function addToTotal(n) { total += n; return total; }
+
+console.log(toGb(5 * 1024 ** 3), addToTotal(2), addToTotal(2));
+```
+
+Calling `addToTotal(2)` twice gives different answers, which is exactly what makes code like that hard to debug when it's spread across a program.
 
 @@quiz
 What does `const double = (x) => x * 2;` return for `double(4)`?
@@ -73,6 +89,24 @@ What is a closure?
 - The last line of a function
 - A function with no parameters
 ? Closures let `makeCounter` keep `count` private between calls.
+
+@@quiz
+With `function greet(name, greeting = "Hello")` from above, what does `greet("Ana")` return?
+* `"Hello, Ana!"`
+- `"undefined, Ana!"`
+- an error, because `greeting` is missing
+- `"Ana, Hello!"`
+? Default parameters are used when the argument isn't passed.
+
+@@flashcards
+function :: a named, reusable block of code
+default parameter :: function f(x = 10): used when x isn't passed
+arrow function :: (a, b) => a + b
+expression body :: an arrow without braces returns its expression
+closure :: a function plus the variables it remembers
+rest parameter :: ...args collects arguments into an array
+spread :: ...array expands an array into arguments
+pure function :: same input, same output, no side effects
 
 @@exercise Default parameters
 Write `formatAlert(host, message, level = "WARN")` that returns `[LEVEL] host: message`.

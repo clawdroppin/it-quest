@@ -94,6 +94,16 @@ Five health checks take 1 second each. How long does `await Promise.all(checks)`
 - it retries automatically
 ? Only network failures (DNS, refused connection, timeout) make fetch throw.
 
+@@flashcards
+Promise :: a value that will be ready later (or fail)
+async function :: always returns a promise; can use await
+await :: pause until a promise settles
+Promise.all :: wait for all; fails if any fails
+Promise.allSettled :: wait for all; reports each result
+Promise.race :: settles with the first to finish
+fetch :: HTTP request; throws only on network failure
+res.ok :: true for status 200-299
+
 @@exercise Timeout wrapper
 Write `withTimeout(promise, ms)` that resolves with the promise's value if it settles within `ms` milliseconds, and **rejects** with an Error whose message is `timeout after <ms> ms` otherwise.
 @@starter

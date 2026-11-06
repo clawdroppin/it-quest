@@ -52,6 +52,11 @@ console.log(10 < 9);               // false
 In an `if`, these count as false: `false`, `0`, `""`, `null`, `undefined`, `NaN`. Everything else is true, including `"0"` and `[]`.
 
 `null` means "no value, on purpose"; `undefined` means "never set". The `??` operator picks a default only for those two: `port ?? 80`.
+## Numbers that look wrong
+
+Because numbers are stored in binary floating point, decimals like 0.1 can't be stored exactly. For money, count in the **smallest unit** (yen, or cents) as whole numbers, and format only for display. When you need exact large integers, such as IDs from a database, JavaScript has **BigInt**: `12345678901234567890n`. Ordinary numbers are only exact up to `Number.MAX_SAFE_INTEGER` (about 9 quadrillion).
+
+For display, `toLocaleString` formats numbers for a language and region: `(1234567.891).toLocaleString("en-US")` gives "1,234,567.891", and `Intl.NumberFormat("ja-JP", { style: "currency", currency: "JPY" })` formats yen.
 
 @@quiz
 What does `"5" + 3` evaluate to?
@@ -76,6 +81,16 @@ Which comparison should you use in JavaScript?
 - `8080 8080`
 - `0 8080`
 ? `||` replaces any falsy value (including 0). `??` only replaces null and undefined.
+
+@@flashcards
+=== :: strict equality: no type conversion
+== :: loose equality: converts types first (avoid)
+NaN :: "not a number"; test with Number.isNaN
+?? :: default only for null or undefined
+|| :: default for any falsy value
+falsy values :: false, 0, "", null, undefined, NaN
+toFixed(n) :: format with n decimals (returns a string)
+padStart(3, "0") :: "7" becomes "007"
 
 @@exercise Bytes to human
 Write `humanSize(bytes)` that returns a string with one decimal: under 1024 → `"512 B"` (no decimal for bytes), under 1024² → `"1.5 KB"`, under 1024³ → `"MB"`, otherwise `"GB"`.
