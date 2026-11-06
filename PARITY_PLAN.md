@@ -871,3 +871,13 @@ Target for every non-language track: at least 12 lessons, 20 checked exercises, 
 - jp1_04_particles: core particles, は vs が, に vs で; particle-by-role sentence builder, は/が rules.
 - jp2_03_meetings_phone: meeting flow and phrases, 根回し, 議事録, phone handling; minutes generator, phone message memo.
 - jp3_03_it_kanji: on/kun readings, sound changes, IT compounds, Leitner boxes; longest-match furigana, Leitner review simulation.
+
+## True parity pass (floor: 12 lessons, 20 exercises, 60 quizzes, 20k words)
+
+Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terraform, ipa-fe → azure, ccnp, gcp, resolve → cloud, cka, blender; then language tracks against Rust.
+
+### rustui (now 12 lessons, 27 exercises, 60 quizzes, ~23.5k words)
+- ru0_03_accessibility_keyboard: AccessKit tree, roles and names, roving focus; tree audit, grid keyboard navigation.
+- ru1_02_colour_maths: HSL, linear-light mixing, compositing; RGB↔HSL with lighten, linear mix and source-over.
+- ru3_02_vector_paths: adaptive Bézier flattening, non-zero vs even-odd; flattening, point-in-polygon for both rules.
+- ru4_03_dpi_responsive: logical vs physical pixels, snapping, size classes with hysteresis; pixel snapping, breakpoint state machine.
