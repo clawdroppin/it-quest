@@ -131,3 +131,86 @@ KGI / KPI :: Goal indicator / performance indicator
 What does CV stand for in EVM? (two words)
 = cost variance
 ? CV = EV − AC.
+
+@@exercise Critical path on an arrow diagram (アローダイアグラム)
+In an arrow diagram, activities are arrows between numbered nodes (結合点). Compute each node's earliest time (最早結合点時刻, the maximum over incoming arrows) and latest time (最遅結合点時刻, the minimum over outgoing arrows, working backwards from the end), each activity's total float, and the critical path (クリティカルパス). Dummy activities (ダミー) have duration 0.
+@@lang python
+@@starter
+activities = [
+    ("A", 1, 2, 3), ("B", 1, 3, 5), ("C", 2, 4, 4), ("D", 3, 4, 2),
+    ("E", 3, 5, 6), ("dummy", 4, 5, 0), ("F", 4, 6, 3), ("G", 5, 6, 4),
+]
+nodes = sorted({n for _, a, b, _ in activities for n in (a, b)})
+
+def earliest(activities, nodes):
+    raise NotImplementedError
+
+def latest(activities, nodes, end_time):
+    raise NotImplementedError
+
+es = earliest(activities, nodes)
+lt = latest(activities, nodes, es[nodes[-1]])
+print("node earliest latest")
+for n in nodes:
+    print(f"{n:>4} {es[n]:>8} {lt[n]:>6}")
+critical = []
+for name, a, b, d in activities:
+    total_float = lt[b] - es[a] - d
+    if total_float == 0 and name != "dummy":
+        critical.append(name)
+    print(f"{name:<6} {a}->{b} duration {d}  total float {total_float}")
+print("critical path:", " -> ".join(critical), f"({es[nodes[-1]]} days)")
+@@expected
+node earliest latest
+   1        0      0
+   2        3      7
+   3        5      5
+   4        7     11
+   5       11     11
+   6       15     15
+A      1->2 duration 3  total float 4
+B      1->3 duration 5  total float 0
+C      2->4 duration 4  total float 4
+D      3->4 duration 2  total float 4
+E      3->5 duration 6  total float 0
+dummy  4->5 duration 0  total float 4
+F      4->6 duration 3  total float 5
+G      5->6 duration 4  total float 0
+critical path: B -> E -> G (15 days)
+@@requires
+def earliest
+def latest
+max(
+@@hint
+Nodes are numbered in order, so process them ascending for the earliest times: `es[b] = max(es[b], es[a] + d)` for each arrow into b (start with every node at 0). For the latest times, start every node at `end_time` and go through the arrows from the highest start node down: `lt[a] = min(lt[a], lt[b] - d)`. Total float = `lt[b] - es[a] - d`.
+@@solution
+activities = [
+    ("A", 1, 2, 3), ("B", 1, 3, 5), ("C", 2, 4, 4), ("D", 3, 4, 2),
+    ("E", 3, 5, 6), ("dummy", 4, 5, 0), ("F", 4, 6, 3), ("G", 5, 6, 4),
+]
+nodes = sorted({n for _, a, b, _ in activities for n in (a, b)})
+
+def earliest(activities, nodes):
+    es = {n: 0 for n in nodes}
+    for _, a, b, d in sorted(activities, key=lambda x: x[1]):
+        es[b] = max(es[b], es[a] + d)
+    return es
+
+def latest(activities, nodes, end_time):
+    lt = {n: end_time for n in nodes}
+    for _, a, b, d in sorted(activities, key=lambda x: -x[2]):
+        lt[a] = min(lt[a], lt[b] - d)
+    return lt
+
+es = earliest(activities, nodes)
+lt = latest(activities, nodes, es[nodes[-1]])
+print("node earliest latest")
+for n in nodes:
+    print(f"{n:>4} {es[n]:>8} {lt[n]:>6}")
+critical = []
+for name, a, b, d in activities:
+    total_float = lt[b] - es[a] - d
+    if total_float == 0 and name != "dummy":
+        critical.append(name)
+    print(f"{name:<6} {a}->{b} duration {d}  total float {total_float}")
+print("critical path:", " -> ".join(critical), f"({es[nodes[-1]]} days)")

@@ -921,3 +921,8 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - tf3_02_secrets_security: sensitive propagation, state as a secret, ephemeral resources and write-only args, OIDC, scanners; state secret finder, output sensitivity check.
 - tf3_03_providers_multi_env: required_providers and the lock file, constraints, aliases and module providers maps, environment layouts, Infracost; provider resolution, plan cost estimate.
 - Exercises appended to tf0_01 (command sequence check), tf1_01 (workspace state paths) and tf2_01 (dynamic block expansion).
+
+### ipa-fe (now 14 lessons, 20 exercises, 84 quizzes, ~21.9k words)
+- fe2_03_graphs_rpn: stacks, queues, 逆ポーランド記法, traversal orders, adjacency matrices, BFS, Dijkstra; shunting-yard and RPN evaluation, BFS and Dijkstra.
+- fe3_04_security_hands_on: salts and stretching, key roles, HMAC vs signatures, access control, log patterns; PBKDF2 storage, login attack classifier.
+- Exercises appended to fe0_01 (pass estimate) and fe4_01 (arrow diagram critical path).

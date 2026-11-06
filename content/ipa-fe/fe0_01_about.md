@@ -85,3 +85,74 @@ ITパスポート :: Level 1, for every working person
 What's the Japanese abbreviation-style nickname for 基本情報技術者試験? (two kanji words, 4 characters)
 = 基本情報
 ? 「基本情報、受かりました!」
+
+@@exercise Did I pass, and what should I study next?
+科目A and 科目B are each scored out of 1000 (by IRT, so scores aren't a simple percentage), and you pass only if **both** reach 600. From practice results by field, estimate each 科目's score as the weighted share of correct answers × 1000, decide pass or fail, and list the two weakest fields (lowest accuracy) to study next, with roughly how many of the 60 科目A (41 technology, 7 management, 12 strategy) or 20 科目B questions they carry.
+@@lang python
+@@starter
+practice = {
+    "A": {"基礎理論": (12, 20), "アルゴリズム": (8, 10), "コンピュータシステム": (14, 18), "データベース": (5, 10),
+          "ネットワーク": (6, 10), "セキュリティ": (9, 12), "マネジメント": (7, 10), "ストラテジ": (8, 10)},
+    "B": {"アルゴリズムとプログラミング": (9, 16), "情報セキュリティ": (3, 4)},
+}
+WEIGHTS = {"A": {"基礎理論": 7, "アルゴリズム": 5, "コンピュータシステム": 11, "データベース": 5,
+                 "ネットワーク": 5, "セキュリティ": 8, "マネジメント": 7, "ストラテジ": 12},
+           "B": {"アルゴリズムとプログラミング": 16, "情報セキュリティ": 4}}
+
+def estimate(subject):
+    raise NotImplementedError
+
+def weakest(subject, n=2):
+    raise NotImplementedError
+
+for s in ("A", "B"):
+    score = estimate(s)
+    print(f"科目{s}: about {score} / 1000 -> {'pass' if score >= 600 else 'below 600'}")
+    for field, acc, weight in weakest(s):
+        print(f"    study {field}: {acc:.0%} correct, about {weight} questions on the exam")
+result = all(estimate(s) >= 600 for s in ("A", "B"))
+print("overall:", "pass" if result else "not yet: both 科目 need 600")
+@@expected
+科目A: about 713 / 1000 -> pass
+    study データベース: 50% correct, about 5 questions on the exam
+    study 基礎理論: 60% correct, about 7 questions on the exam
+科目B: about 600 / 1000 -> pass
+    study アルゴリズムとプログラミング: 56% correct, about 16 questions on the exam
+    study 情報セキュリティ: 75% correct, about 4 questions on the exam
+overall: pass
+@@requires
+def estimate
+def weakest
+WEIGHTS[subject]
+@@hint
+For each field, accuracy is `correct / total`. The estimate is `round(sum(acc * weight) / sum(weights) * 1000)` with the weights from `WEIGHTS[subject]`. For the weakest fields, sort by accuracy (lowest first) and take the first `n`, returning `(field, accuracy, weight)`.
+@@solution
+practice = {
+    "A": {"基礎理論": (12, 20), "アルゴリズム": (8, 10), "コンピュータシステム": (14, 18), "データベース": (5, 10),
+          "ネットワーク": (6, 10), "セキュリティ": (9, 12), "マネジメント": (7, 10), "ストラテジ": (8, 10)},
+    "B": {"アルゴリズムとプログラミング": (9, 16), "情報セキュリティ": (3, 4)},
+}
+WEIGHTS = {"A": {"基礎理論": 7, "アルゴリズム": 5, "コンピュータシステム": 11, "データベース": 5,
+                 "ネットワーク": 5, "セキュリティ": 8, "マネジメント": 7, "ストラテジ": 12},
+           "B": {"アルゴリズムとプログラミング": 16, "情報セキュリティ": 4}}
+
+def accuracy(subject):
+    return {field: c / t for field, (c, t) in practice[subject].items()}
+
+def estimate(subject):
+    weights = WEIGHTS[subject]
+    acc = accuracy(subject)
+    return round(sum(acc[f] * weights[f] for f in weights) / sum(weights.values()) * 1000)
+
+def weakest(subject, n=2):
+    acc = accuracy(subject)
+    fields = sorted(acc, key=lambda f: acc[f])[:n]
+    return [(f, acc[f], WEIGHTS[subject][f]) for f in fields]
+
+for s in ("A", "B"):
+    score = estimate(s)
+    print(f"科目{s}: about {score} / 1000 -> {'pass' if score >= 600 else 'below 600'}")
+    for field, acc, weight in weakest(s):
+        print(f"    study {field}: {acc:.0%} correct, about {weight} questions on the exam")
+result = all(estimate(s) >= 600 for s in ("A", "B"))
+print("overall:", "pass" if result else "not yet: both 科目 need 600")
