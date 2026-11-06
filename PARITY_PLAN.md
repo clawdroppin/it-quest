@@ -906,3 +906,9 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - pm0_03_motivation_leadership: Maslow, Herzberg, X/Y/Z, McClelland, Vroom, situational leadership, power, distributed teams; style chooser, time-zone overlap rotation.
 - pm1_06_flow_forecasting: Kanban, WIP limits, Little's law, CFDs, Monte Carlo; flow metrics from a board, seeded Monte Carlo forecast.
 - pm2_03_benefits_change: NPV/IRR/payback/BCR, opportunity and sunk cost, benefits ownership, ADKAR/Kotter/Satir/Bridges, transition; project ranking, benefits and ADKAR gaps.
+
+### japan-career (now 14 lessons, 20 exercises, 71 quizzes, ~23.5k words)
+- jc1_03_visa_changes_pr: 14-day notifications, renewal and 特例期間, re-entry, permanent residence routes; deadline planner, PR eligibility.
+- jc2_04_interviews_tests: 選考 flow, SPI and coding tests, common questions, manners, 候補日; slot formatter, answer checker.
+- jc3_04_housing_contracts: listings, 初期費用, lease types, 更新料, 原状回復, moving admin; listing parser, initial and two-year costs.
+- Exercises appended to jc0_01 (employer types) and jc1_01 (does the offer fit 技人国).

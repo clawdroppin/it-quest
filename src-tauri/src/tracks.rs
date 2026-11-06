@@ -1190,12 +1190,12 @@ pub fn knowledge() -> Vec<Track> {
             modules: vec![
                 module!(Novice, "0 · The Market", "SIer, SES, in-house, 社内SE and 外資系; roles and salaries; reading listings and comparing cities.", "japan-career";
                     "jc0_01_market.md", "jc0_02_listings_cities.md"),
-                module!(Intermediate, "1 · Visas", "技術・人文知識・国際業務, Highly Skilled Professional points and planning, and staying legal.", "japan-career";
-                    "jc1_01_visa.md", "jc1_02_hsp_points.md"),
-                module!(Intermediate, "2 · Job Hunting", "Sites, recruiters, 履歴書 and 和暦, 職務経歴書, interviews, offers, 固定残業代 and real hourly pay.", "japan-career";
-                    "jc2_01_job_hunting.md", "jc2_02_offers_pay.md", "jc2_03_resume_dates.md"),
-                module!(Intermediate, "3 · Life Admin", "Registration, insurance, pension, tax, take-home pay and resident tax timing, housing, paid leave balances, resigning and timing your last day.", "japan-career";
-                    "jc3_01_life_admin.md", "jc3_02_take_home_pay.md", "jc3_03_leave_resigning.md"),
+                module!(Intermediate, "1 · Visas", "技術・人文知識・国際業務, Highly Skilled Professional points and planning, staying legal, job changes, renewals, re-entry and permanent residence.", "japan-career";
+                    "jc1_01_visa.md", "jc1_02_hsp_points.md", "jc1_03_visa_changes_pr.md"),
+                module!(Intermediate, "2 · Job Hunting", "Sites, recruiters, 履歴書 and 和暦, 職務経歴書, interviews, offers, 固定残業代 and real hourly pay, the selection flow, SPI, common questions and 候補日.", "japan-career";
+                    "jc2_01_job_hunting.md", "jc2_02_offers_pay.md", "jc2_03_resume_dates.md", "jc2_04_interviews_tests.md"),
+                module!(Intermediate, "3 · Life Admin", "Registration, insurance, pension, tax, take-home pay and resident tax timing, housing, paid leave balances, resigning and timing your last day, listings, 初期費用, leases and 原状回復.", "japan-career";
+                    "jc3_01_life_admin.md", "jc3_02_take_home_pay.md", "jc3_03_leave_resigning.md", "jc3_04_housing_contracts.md"),
                 build!(Intermediate, "🎒 Application Kit", "Résumé templates, an application tracker and an honest offer checker.", "japan-career";
                     "jc9_01_application_kit.md"),
                 // generated project ideas japan-career

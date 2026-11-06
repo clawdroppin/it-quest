@@ -95,3 +95,65 @@ Who is a licensed specialist who can handle visa applications?
 Within how many days must you register your address after moving in? (a number)
 = 14
 ? At the city or ward office.
+
+@@exercise Does the offer fit 技術・人文知識・国際業務?
+Screen job offers against the basic requirements for the engineering part of the status: a related degree or 専門士 diploma, or about 10 years of relevant experience, or a qualification from the IT notice (IT告示); professional work (not simple labour); and pay at least equal to a Japanese employee in the same role. Print "likely fits" or the problems to raise with the employer and a 行政書士.
+@@lang python
+@@starter
+IT_NOTICE = {"基本情報技術者", "応用情報技術者", "情報処理安全確保支援士"}
+
+offers = [
+    {"who": "Aiko", "degree": "computer science", "years": 2, "certs": set(), "duties": "backend development", "simple_labour": False, "pay": 4_200_000, "peer_pay": 4_000_000},
+    {"who": "Ben", "degree": None, "years": 4, "certs": {"基本情報技術者"}, "duties": "network operations", "simple_labour": False, "pay": 3_800_000, "peer_pay": 3_800_000},
+    {"who": "Chen", "degree": "history", "years": 1, "certs": set(), "duties": "infrastructure engineer", "simple_labour": False, "pay": 3_600_000, "peer_pay": 3_600_000},
+    {"who": "Dana", "degree": "electronics", "years": 3, "certs": set(), "duties": "warehouse picking", "simple_labour": True, "pay": 2_600_000, "peer_pay": 3_000_000},
+    {"who": "Eiji", "degree": None, "years": 11, "certs": set(), "duties": "SRE", "simple_labour": False, "pay": 6_000_000, "peer_pay": 5_500_000},
+]
+RELATED = {"computer science", "information engineering", "electronics", "mathematics"}
+
+def problems(o):
+    raise NotImplementedError
+
+for o in offers:
+    found = problems(o)
+    print(f"{o['who']:<5} " + ("likely fits" if not found else "check: " + "; ".join(found)))
+@@expected
+Aiko  likely fits
+Ben   likely fits
+Chen  check: degree field doesn't match: show how the studies relate, or use experience or an IT notice exam
+Dana  check: 'warehouse picking' is simple labour, not covered by this status; pay ¥2,600,000 is below a Japanese peer's ¥3,000,000
+Eiji  likely fits
+@@requires
+def problems
+& IT_NOTICE
+@@hint
+The background is fine if the degree is in `RELATED`, or `years >= 10`, or `o["certs"] & IT_NOTICE` isn't empty. Then add a problem if `simple_labour` is true, and if `pay < peer_pay`. A degree outside the field isn't automatically a no, so suggest showing how the studies relate, or using experience or an IT notice exam instead.
+@@solution
+IT_NOTICE = {"基本情報技術者", "応用情報技術者", "情報処理安全確保支援士"}
+
+offers = [
+    {"who": "Aiko", "degree": "computer science", "years": 2, "certs": set(), "duties": "backend development", "simple_labour": False, "pay": 4_200_000, "peer_pay": 4_000_000},
+    {"who": "Ben", "degree": None, "years": 4, "certs": {"基本情報技術者"}, "duties": "network operations", "simple_labour": False, "pay": 3_800_000, "peer_pay": 3_800_000},
+    {"who": "Chen", "degree": "history", "years": 1, "certs": set(), "duties": "infrastructure engineer", "simple_labour": False, "pay": 3_600_000, "peer_pay": 3_600_000},
+    {"who": "Dana", "degree": "electronics", "years": 3, "certs": set(), "duties": "warehouse picking", "simple_labour": True, "pay": 2_600_000, "peer_pay": 3_000_000},
+    {"who": "Eiji", "degree": None, "years": 11, "certs": set(), "duties": "SRE", "simple_labour": False, "pay": 6_000_000, "peer_pay": 5_500_000},
+]
+RELATED = {"computer science", "information engineering", "electronics", "mathematics"}
+
+def problems(o):
+    found = []
+    background = o["degree"] in RELATED or o["years"] >= 10 or bool(o["certs"] & IT_NOTICE)
+    if not background:
+        if o["degree"]:
+            found.append("degree field doesn't match: show how the studies relate, or use experience or an IT notice exam")
+        else:
+            found.append("no degree, under 10 years' experience and no IT notice exam")
+    if o["simple_labour"]:
+        found.append(f"'{o['duties']}' is simple labour, not covered by this status")
+    if o["pay"] < o["peer_pay"]:
+        found.append(f"pay ¥{o['pay']:,} is below a Japanese peer's ¥{o['peer_pay']:,}")
+    return found
+
+for o in offers:
+    found = problems(o)
+    print(f"{o['who']:<5} " + ("likely fits" if not found else "check: " + "; ".join(found)))

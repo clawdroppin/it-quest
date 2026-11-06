@@ -96,3 +96,83 @@ What's the Japanese term for a company's internal IT engineer? (社内...)
 = shanai SE
 = 社内se
 ? 社内 = inside the company, SE = system engineer.
+
+@@exercise Sort employers by type
+Classify company descriptions into the employer types from this lesson using keyword rules (the first matching rule wins), then print the type with a note on what to ask in the interview.
+@@lang python
+@@starter
+RULES = [
+    ("外資系", ["global headquarters", "外資", "us-based", "european parent"]),
+    ("SES", ["client site", "客先常駐", "準委任", "engineers dispatched"]),
+    ("SIer", ["system integration", "受託開発", "prime contractor", "元請け"]),
+    ("社内SE", ["社内se", "internal it", "corporate it", "情報システム部"]),
+    ("in-house (自社開発)", ["our own product", "自社サービス", "自社開発", "saas"]),
+]
+ASK = {
+    "外資系": "reporting lines to headquarters, English use, and job security",
+    "SES": "which clients, how projects are assigned, and the commercial layer (商流)",
+    "SIer": "where the company sits in the subcontracting chain and what you'll build",
+    "社内SE": "the size of the IT team and how much is outsourced",
+    "in-house (自社開発)": "the tech stack, release cycle and product roadmap",
+}
+companies = {
+    "Company A": "We place engineers at client sites (客先常駐) on 準委任 contracts.",
+    "Company B": "A Japanese subsidiary of a US-based cloud company, reporting to global headquarters.",
+    "Company C": "We run our own product: a SaaS for restaurant reservations, built 自社開発.",
+    "Company D": "Prime contractor (元請け) for government system integration projects.",
+    "Company E": "Manufacturer looking for a 社内SE to join the 情報システム部.",
+    "Company F": "Trading company with a big warehouse.",
+}
+
+def employer_type(description):
+    raise NotImplementedError
+
+for name, desc in companies.items():
+    kind = employer_type(desc)
+    print(f"{name}: {kind or 'unclear: ask what the IT team does'}" + (f" -> ask about {ASK[kind]}" if kind else ""))
+@@expected
+Company A: SES -> ask about which clients, how projects are assigned, and the commercial layer (商流)
+Company B: 外資系 -> ask about reporting lines to headquarters, English use, and job security
+Company C: in-house (自社開発) -> ask about the tech stack, release cycle and product roadmap
+Company D: SIer -> ask about where the company sits in the subcontracting chain and what you'll build
+Company E: 社内SE -> ask about the size of the IT team and how much is outsourced
+Company F: unclear: ask what the IT team does
+@@requires
+def employer_type
+.lower()
+@@hint
+Lower-case the description (Japanese text is unaffected), loop over `RULES`, and return the first type where any keyword is in the text. Return `None` if nothing matches.
+@@solution
+RULES = [
+    ("外資系", ["global headquarters", "外資", "us-based", "european parent"]),
+    ("SES", ["client site", "客先常駐", "準委任", "engineers dispatched"]),
+    ("SIer", ["system integration", "受託開発", "prime contractor", "元請け"]),
+    ("社内SE", ["社内se", "internal it", "corporate it", "情報システム部"]),
+    ("in-house (自社開発)", ["our own product", "自社サービス", "自社開発", "saas"]),
+]
+ASK = {
+    "外資系": "reporting lines to headquarters, English use, and job security",
+    "SES": "which clients, how projects are assigned, and the commercial layer (商流)",
+    "SIer": "where the company sits in the subcontracting chain and what you'll build",
+    "社内SE": "the size of the IT team and how much is outsourced",
+    "in-house (自社開発)": "the tech stack, release cycle and product roadmap",
+}
+companies = {
+    "Company A": "We place engineers at client sites (客先常駐) on 準委任 contracts.",
+    "Company B": "A Japanese subsidiary of a US-based cloud company, reporting to global headquarters.",
+    "Company C": "We run our own product: a SaaS for restaurant reservations, built 自社開発.",
+    "Company D": "Prime contractor (元請け) for government system integration projects.",
+    "Company E": "Manufacturer looking for a 社内SE to join the 情報システム部.",
+    "Company F": "Trading company with a big warehouse.",
+}
+
+def employer_type(description):
+    text = description.lower()
+    for kind, keywords in RULES:
+        if any(k in text for k in keywords):
+            return kind
+    return None
+
+for name, desc in companies.items():
+    kind = employer_type(desc)
+    print(f"{name}: {kind or 'unclear: ask what the IT team does'}" + (f" -> ask about {ASK[kind]}" if kind else ""))
