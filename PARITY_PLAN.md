@@ -940,3 +940,7 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 
 ### resolve (now 12 lessons, 24 exercises, 60 quizzes, ~22.4k words)
 - dr0_02_media_collaboration: storage maths and the 3-2-1 rule, Clone Tool, Media Management and relinking, proxies vs optimized media vs render cache, Smart and Power Bins, local/network/Blackmagic Cloud libraries, bin locking, backups and .dra archives; shoot storage planner, Smart Bin rule evaluator.
+
+### cloud (now 12 lessons, 20 exercises, 70 quizzes, ~24.4k words)
+- cl3_04_storage_data: block/file/object, durability vs availability, storage classes and lifecycle, managed databases, CAP, partitioning and consistent hashing, egress and bulk transfer, data protection; lifecycle cost simulator, modulo vs consistent hashing.
+- Exercise appended to cl2_02 (circuit breaker state machine).

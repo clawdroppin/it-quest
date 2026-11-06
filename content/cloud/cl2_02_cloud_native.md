@@ -118,3 +118,74 @@ event-driven :: Services react to events, loosely coupled
 What's the word for an operation that has the same effect whether you do it once or many times?
 = idempotent
 ? PUT and DELETE should be idempotent; POST usually isn't.
+
+@@exercise Circuit breaker
+@@concepts objects, conditions, loops
+A circuit breaker stops a service from hammering a dependency that is down. **Closed**: calls go through, and after 3 consecutive failures it **opens**. **Open**: calls fail fast without touching the dependency until a 10-second cool-down has passed, then the breaker goes **half-open**. **Half-open**: one trial call goes through; success closes the breaker, failure opens it again for another cool-down. Run the timeline of calls and print what happens to each.
+@@starter
+class CircuitBreaker:
+    def __init__(self, threshold=3, cooldown=10):
+        self.threshold = threshold
+        self.cooldown = cooldown
+        self.state = "closed"
+        self.failures = 0
+        self.opened_at = None
+
+    def call(self, now, dependency_ok):
+        raise NotImplementedError
+
+calls = [(0, True), (1, False), (2, False), (3, False), (4, True), (8, True),
+         (13, False), (15, True), (24, True), (25, True), (26, False)]
+cb = CircuitBreaker()
+for now, ok in calls:
+    result = cb.call(now, ok)
+    print(f"t={now:>2}s dependency {'up  ' if ok else 'down'} -> {result:<32} state={cb.state}")
+@@expected
+t= 0s dependency up   -> success                          state=closed
+t= 1s dependency down -> failure (1/3)                    state=closed
+t= 2s dependency down -> failure (2/3)                    state=closed
+t= 3s dependency down -> failure, breaker opens           state=open
+t= 4s dependency up   -> rejected (fail fast)             state=open
+t= 8s dependency up   -> rejected (fail fast)             state=open
+t=13s dependency down -> failure, breaker opens again     state=open
+t=15s dependency up   -> rejected (fail fast)             state=open
+t=24s dependency up   -> success (trial)                  state=closed
+t=25s dependency up   -> success                          state=closed
+t=26s dependency down -> failure (1/3)                    state=closed
+@@requires
+def call
+self.state = "half-open"
+@@hint
+If the state is "open" and `now - self.opened_at < self.cooldown`, return "rejected (fail fast)". Otherwise, if it's open, switch to "half-open" first. Then make the call: on success reset `failures` and set "closed"; on failure, increase `failures`, and open the breaker (recording `opened_at = now`) if it was half-open or the failures reached the threshold.
+@@solution
+class CircuitBreaker:
+    def __init__(self, threshold=3, cooldown=10):
+        self.threshold = threshold
+        self.cooldown = cooldown
+        self.state = "closed"
+        self.failures = 0
+        self.opened_at = None
+
+    def call(self, now, dependency_ok):
+        if self.state == "open":
+            if now - self.opened_at < self.cooldown:
+                return "rejected (fail fast)"
+            self.state = "half-open"
+        trial = self.state == "half-open"
+        if dependency_ok:
+            self.failures = 0
+            self.state = "closed"
+            return "success (trial)" if trial else "success"
+        self.failures += 1
+        if trial or self.failures >= self.threshold:
+            self.state = "open"
+            self.opened_at = now
+            return "failure, breaker opens" + (" again" if trial else "")
+        return f"failure ({self.failures}/{self.threshold})"
+
+calls = [(0, True), (1, False), (2, False), (3, False), (4, True), (8, True),
+         (13, False), (15, True), (24, True), (25, True), (26, False)]
+cb = CircuitBreaker()
+for now, ok in calls:
+    result = cb.call(now, ok)
+    print(f"t={now:>2}s dependency {'up  ' if ok else 'down'} -> {result:<32} state={cb.state}")

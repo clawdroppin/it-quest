@@ -1067,8 +1067,8 @@ pub fn knowledge() -> Vec<Track> {
                     "cl1_01_containers.md", "cl1_02_containers_deep.md"),
                 module!(Advanced, "2 · Orchestration and Cloud-Native", "Kubernetes, twelve-factor apps, resilience patterns and serverless.", "cloud";
                     "cl2_01_kubernetes.md", "cl2_02_cloud_native.md"),
-                module!(Advanced, "3 · CloudOps", "Landing zones, identity, tagging, monitoring, patching, backup and DR, cost, networking, security and compliance.", "cloud";
-                    "cl3_01_cloudops.md", "cl3_02_cloud_networking.md", "cl3_03_cloud_security.md"),
+                module!(Advanced, "3 · CloudOps", "Landing zones, identity, tagging, monitoring, patching, backup and DR, cost, networking, security and compliance, storage, databases and sharding.", "cloud";
+                    "cl3_01_cloudops.md", "cl3_02_cloud_networking.md", "cl3_03_cloud_security.md", "cl3_04_storage_data.md"),
                 module!(Advanced, "4 · Cloud Automation with Python", "SDKs, pagination, retries and backoff, safe cleanup scripts, events and cost reports.", "cloud";
                     "cl4_01_cloud_automation.md"),
                 build!(Advanced, "📦 Containerize a Status Board", "A Python service, its Docker image, a Compose stack and a Kubernetes deployment.", "cloud";
