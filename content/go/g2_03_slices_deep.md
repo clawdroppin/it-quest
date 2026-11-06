@@ -132,6 +132,12 @@ What's the idiomatic set type in Go?
 - `map[string]bool` is the only option
 ? map[string]bool also works, but struct{} uses no memory per value.
 
+@@drill
+Which built-in returns how many elements a slice can hold before reallocating?
+= cap
+= cap()
+? len is the current length.
+
 @@flashcards
 Slice header :: pointer, length, capacity
 `cap(s)` :: room before append must reallocate

@@ -182,6 +182,11 @@ What does "accept interfaces, return structs" mean?
 - Interfaces must be exported
 ? Callers get flexibility in and full APIs out.
 
+@@drill
+Write the compile-time check that `*Server` implements `Handler`.
+= var _ Handler = (*Server)(nil)
+? It fails to compile if a method is missing.
+
 @@flashcards
 Implicit interface :: satisfied by having the methods
 `any` :: alias for `interface{}`

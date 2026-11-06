@@ -181,6 +181,11 @@ Why does the build project's `Run` take the prober function as a parameter?
 - For logging
 ? Dependency injection with plain functions is idiomatic Go.
 
+@@drill
+Which command adds missing and removes unused module requirements?
+= go mod tidy
+? Run it before committing.
+
 @@flashcards
 `go mod init <path>` :: start a module
 `go mod tidy` :: sync dependencies with the imports

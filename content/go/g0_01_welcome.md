@@ -108,6 +108,12 @@ What's printed by `var n int; fmt.Println(n)`?
 - A compile error
 ? Every type has a zero value. Ints start at 0.
 
+@@drill
+Which command runs a Go program without building a binary you keep?
+= go run
+= go run .
+? go build makes a binary.
+
 @@flashcards
 `package main` + `func main()` :: an executable program
 `x := v` :: declare and infer the type

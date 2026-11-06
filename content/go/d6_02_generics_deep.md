@@ -141,6 +141,11 @@ Can a method declare its own type parameters in Go?
 - Only in interfaces
 ? `func Map[T, U any](...)`, not `func (s List[T]) Map[U any]`.
 
+@@drill
+Which built-in constraint allows `==` and `!=`?
+= comparable
+? Map keys must be comparable.
+
 @@flashcards
 Type parameter :: `func F[T any](x T)`
 Constraint :: interface restricting a type parameter

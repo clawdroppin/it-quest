@@ -84,6 +84,12 @@ Why use `log.LogInformation("Disk {Drive} at {Pct}%", d, p)` instead of `$"Disk 
 - It's encrypted
 ? Message templates keep the structure.
 
+@@drill
+What's the name of the bug where a singleton holds a scoped service?
+= captive dependency
+= a captive dependency
+? The scoped service lives far longer than intended.
+
 @@flashcards
 Singleton :: one instance per app
 Scoped :: one per request/scope

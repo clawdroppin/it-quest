@@ -114,6 +114,12 @@ Why does Fyne need a C compiler on Windows?
 - It doesn't
 ? MSYS2's MinGW gcc is the common choice.
 
+@@drill
+Which Fyne function creates a new application?
+= app.New
+= app.New()
+? a := app.New(); w := a.NewWindow("Hi").
+
 @@flashcards
 `app.NewWithID` :: create a Fyne app with a preferences ID
 `a.NewWindow` :: create a window

@@ -97,6 +97,12 @@ What does `go build -gcflags=-m` show?
 - CPU profile
 ? "escapes to heap" lines show allocations.
 
+@@drill
+Which tool analyses Go CPU and memory profiles?
+= pprof
+= go tool pprof
+? go tool pprof cpu.out.
+
 @@flashcards
 `-benchmem` :: allocations per op in benchmarks
 benchstat :: statistically compare benchmark runs

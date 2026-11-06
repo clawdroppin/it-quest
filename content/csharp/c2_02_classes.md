@@ -141,6 +141,11 @@ Why use an interface like `ICheck`?
 - It stops a class from having methods
 ? Interfaces let you add new implementations without changing the code that uses them.
 
+@@drill
+Which keyword declares a type with value-based equality and concise syntax?
+= record
+? record Point(int X, int Y);
+
 @@flashcards
 class :: reference type with identity
 record :: data type with value equality

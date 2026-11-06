@@ -141,6 +141,13 @@ What happens in a `switch` case without `break`?
 - The default case runs
 ? This "fall-through" is occasionally useful (several cases sharing code), but usually a bug.
 
+@@drill
+Write the parameter type for reading a `std::string` without copying or changing it.
+= const std::string&
+= const std::string &
+= std::string const&
+? Or std::string_view.
+
 @@flashcards
 range-for :: for (const auto& x : items)
 pass by value :: the function gets a copy

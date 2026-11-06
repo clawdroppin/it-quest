@@ -213,6 +213,11 @@ Several goroutines do `counts[k]++` on the same map with no lock. What's the ris
 - A compile error
 ? Protect it with a `sync.Mutex`, or use `sync.Map`. Find races with `-race`.
 
+@@drill
+Which keyword starts a goroutine?
+= go
+? go worker(jobs).
+
 @@flashcards
 `go f()` :: run f in a new goroutine
 `sync.WaitGroup` :: wait for a group of goroutines

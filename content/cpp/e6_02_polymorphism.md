@@ -83,6 +83,12 @@ What is object slicing?
 - Using string_view
 ? Hold polymorphic objects by pointer or reference.
 
+@@drill
+Which function applies a visitor to whichever type a `std::variant` holds?
+= std::visit
+= visit
+? std::visit(overloaded{...}, v).
+
 @@flashcards
 `virtual` :: dispatch at runtime through the vtable
 `= 0` :: pure virtual (abstract)

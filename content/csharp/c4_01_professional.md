@@ -129,6 +129,12 @@ A config file contains a database password. Where should it go instead?
 - The README
 ? Anything in code or committed config ends up in Git history.
 
+@@drill
+Which attribute marks an xUnit test method?
+= [Fact]
+= Fact
+? [Theory] runs one test with many inputs.
+
 @@flashcards
 `dotnet new console` :: create a console app project
 `dotnet add package X` :: add a NuGet package

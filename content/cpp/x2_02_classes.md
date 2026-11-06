@@ -159,6 +159,11 @@ Why does a base class with virtual functions need `virtual ~Base() = default;`?
 - To prevent copying
 ? Without it, `delete basePtr` on a derived object is undefined behaviour.
 
+@@drill
+Which keyword asks the compiler to check that a function really overrides a base class function?
+= override
+? void draw() const override;
+
 @@flashcards
 class :: data plus the functions that work on it
 constructor :: runs when an object is created

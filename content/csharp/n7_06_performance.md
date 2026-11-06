@@ -95,6 +95,12 @@ Why return rented arrays to `ArrayPool`?
 - To zero the data
 ? Forgetting to return just means more allocations later.
 
+@@drill
+Which type is a view over contiguous memory without copying?
+= Span<T>
+= Span
+? It can only live on the stack.
+
 @@flashcards
 `Span<T>` :: stack-only view over memory
 `ReadOnlySpan<char>` :: allocation-free string slicing

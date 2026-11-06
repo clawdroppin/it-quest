@@ -98,6 +98,12 @@ What does `[NotNullWhen(true)] out string? owner` tell the compiler?
 - owner is optional
 ? Same contract as Dictionary.TryGetValue.
 
+@@drill
+Which operator tells the compiler a value isn't null, without checking?
+= !
+= null-forgiving operator
+? name!.Length. Use sparingly.
+
 @@flashcards
 `string?` :: may be null
 `?.` :: call only if not null

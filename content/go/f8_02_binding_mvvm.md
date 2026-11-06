@@ -77,6 +77,13 @@ When is a Fyne data listener first called?
 - Never automatically
 ? So the UI starts in sync with the data.
 
+@@drill
+Which Fyne package provides observable data that widgets update from?
+= binding
+= fyne.io/fyne/v2/data/binding
+= data/binding
+? binding.NewString().
+
 @@flashcards
 `binding.NewString()` :: observable string
 `NewEntryWithData` :: two-way bound entry

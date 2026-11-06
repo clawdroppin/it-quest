@@ -113,6 +113,11 @@ What does `nameof(Server.Cores)` produce?
 - A PropertyInfo
 ? Refactoring-safe names.
 
+@@drill
+Which operator gives a member's name as a string, checked by the compiler?
+= nameof
+? nameof(Customer.Email).
+
 @@flashcards
 `typeof(T)` :: Type at compile time
 `obj.GetType()` :: runtime type

@@ -62,6 +62,12 @@ What causes the classic UI deadlock?
 - ObservableCollection
 ? Use await all the way.
 
+@@drill
+Which collection notifies the UI when items are added or removed?
+= ObservableCollection
+= ObservableCollection<T>
+? Change it only on the UI thread.
+
 @@flashcards
 `ObservableCollection<T>` :: raises CollectionChanged
 Collection view :: filter, sort, group a source

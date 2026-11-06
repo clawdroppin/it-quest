@@ -155,6 +155,13 @@ Why avoid `.Result` on tasks in ASP.NET Core?
 - It disables logging
 ? Use `await`. Async I/O lets a few threads serve thousands of requests.
 
+@@drill
+Which EF Core method saves tracked changes to the database?
+= SaveChanges
+= SaveChangesAsync
+= SaveChanges()
+? await db.SaveChangesAsync().
+
 @@flashcards
 `GroupBy(...).Select(g => new { g.Key, Total = g.Sum(...) })` :: group and aggregate with LINQ
 `Skip(n).Take(m)` :: paging

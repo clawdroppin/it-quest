@@ -67,6 +67,11 @@ Why use a weak-reference messenger?
 - It works across processes
 ? It avoids a classic event-handler memory leak.
 
+@@drill
+Which interface do WPF and MAUI buttons bind to for actions?
+= ICommand
+? Execute and CanExecute.
+
 @@flashcards
 `ICommand` :: Execute / CanExecute / CanExecuteChanged
 `AsyncRelayCommand` :: async command with IsRunning

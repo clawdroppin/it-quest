@@ -1005,5 +1005,11 @@ public static class Tests
   </PropertyGroup>
 
 </Project>
+
+@@drill
+Which C# type should you use for money?
+= decimal
+? double can't store 0.1 exactly.
+
 @@text
 🎉 Line-of-business applications like this one (invoicing, inventory, HR, booking) are what most .NET developers in Japan build, often for 業務システム projects. You now know the shape of them: a domain with rules, use cases behind interfaces, swappable storage, and tests that run in milliseconds.

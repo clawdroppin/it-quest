@@ -54,6 +54,12 @@ Why give each event an ID when shipping logs with retries?
 - IDs make batches smaller
 ? Retries plus idempotent IDs give at-least-once delivery without duplicates.
 
+@@drill
+What do you call sending several log events in one request instead of one at a time?
+= batching
+= batch
+? Fewer requests, less overhead.
+
 @@flashcards
 Batching :: flush on count, bytes or age
 Exponential backoff :: double the wait after each failure

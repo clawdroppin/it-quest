@@ -778,5 +778,11 @@ https://www.iana.org/help/example-domains
 tcp://one.one.one.one:53         # Cloudflare DNS over TCP
 tcp://localhost:22               # SSH on this machine (probably down on Windows)
 http://localhost:8080/health     # your own service, if it's running
+
+@@drill
+Which `http.Client` field limits how long a whole request may take?
+= Timeout
+? The default client has no timeout.
+
 @@text
 🎉 You've written the kind of small, fast, dependency-free tool Go is famous for. Put it in a container, schedule it, and point it at the services you look after: it will notice the outage before your users do.

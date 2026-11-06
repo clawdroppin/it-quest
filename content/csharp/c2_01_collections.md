@@ -112,6 +112,13 @@ What does `nums.Where(n => n > 2).Select(n => n * 10)` give for `[1, 2, 3, 4]`?
 - `30`
 ? `Where` keeps 3 and 4, then `Select` multiplies each by 10.
 
+@@drill
+Which LINQ method keeps only items matching a condition?
+= Where
+= Where()
+= .Where
+? items.Where(x => x.Active).
+
 @@flashcards
 `List<T>` :: a growable list of items of type T
 `Dictionary<K,V>` :: key → value lookup

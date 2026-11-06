@@ -883,5 +883,13 @@ int main(int argc, char** argv) {
     }
     return 0;
 }
+
+@@drill
+What's the name of a log that only ever adds records at the end?
+= append-only log
+= append-only
+= append only log
+? Replaying it rebuilds the database after a crash.
+
 @@text
 🎉 Write-ahead logs, atomic renames, compaction and torn-write handling are the foundations of every database, file system and message queue. You now understand what "durable" means and what it costs.

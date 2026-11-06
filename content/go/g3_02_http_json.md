@@ -165,6 +165,12 @@ Why `defer resp.Body.Close()`?
 - To print the body
 ? Unclosed bodies leak connections and file descriptors.
 
+@@drill
+Which function decodes JSON bytes into a struct?
+= json.Unmarshal
+= Unmarshal
+? json.NewDecoder reads from a stream.
+
 @@flashcards
 `json:"name,omitempty"` :: JSON name, left out when zero
 `json.Marshal(v)` :: Go value to JSON bytes

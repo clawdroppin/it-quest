@@ -106,6 +106,11 @@ In a `switch` expression, what does `_ => "unknown"` do?
 - it doesn't compile
 ? `name?.Length` gives `null` because `name` is null, and `?? -1` replaces that null with -1.
 
+@@drill
+Which operator returns a fallback when the left side is null?
+= ??
+? name ?? "unknown".
+
 @@flashcards
 if / else if / else :: choose a branch
 ternary :: cond ? a : b

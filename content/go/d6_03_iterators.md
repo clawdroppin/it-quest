@@ -172,6 +172,11 @@ Why can an iterator over `Naturals()` (infinite) be used safely with `Take`?
 - It can't
 ? Laziness lets pipelines stop early.
 
+@@drill
+Which package defines `Seq` and `Seq2` iterator types?
+= iter
+? func(yield func(V) bool).
+
 @@flashcards
 Range-over-func :: `for v := range f` where f takes a yield callback
 `iter.Seq[V]` :: `func(yield func(V) bool)`

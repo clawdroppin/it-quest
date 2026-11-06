@@ -60,6 +60,11 @@ What does the Undo stack store in the asset desk app?
 - Only the last value
 ? Undo applies the old value; redo applies the new one.
 
+@@drill
+Which interface reports per-property validation errors to WPF?
+= INotifyDataErrorInfo
+? The view shows the errors next to each field.
+
 @@flashcards
 `INotifyDataErrorInfo` :: per-property validation errors
 `ErrorsChanged` :: tell bindings to re-read errors

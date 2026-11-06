@@ -78,6 +78,11 @@ How often does Ebitengine call a game's Update method by default?
 - Only when a key is pressed
 ? Draw may run at the display's rate; Update runs at a fixed tick rate (TPS).
 
+@@drill
+Which Ebitengine method do you implement to draw a frame?
+= Draw
+? Update changes state; Draw renders it.
+
 @@flashcards
 `Update()` :: fixed 60 TPS game logic
 `Draw(screen)` :: render the state

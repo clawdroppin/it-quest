@@ -73,6 +73,12 @@ Why must the dashboard update widgets on Fyne's UI thread?
 - Fyne has no goroutines
 ? Use fyne.Do (or data binding) from background goroutines.
 
+@@drill
+Which `os` function gives the per-user config folder?
+= os.UserConfigDir
+= UserConfigDir
+? Settings there survive upgrades.
+
 @@flashcards
 Sliding window :: keep only the last N samples
 Hysteresis :: require persistence before changing state

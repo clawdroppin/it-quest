@@ -99,6 +99,13 @@ Why use `#pragma once` in headers?
 - To compile the header separately
 ? Older code uses #ifndef include guards for the same thing.
 
+@@drill
+Which build stage combines object files into an executable?
+= linker
+= the linker
+= linking
+? "undefined reference" is a linker error.
+
 @@flashcards
 Preprocessor :: #include, #define, #ifdef: text substitution
 Translation unit :: one .cpp after preprocessing

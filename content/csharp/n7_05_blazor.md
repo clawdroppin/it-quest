@@ -91,6 +91,12 @@ How does a child component tell its parent something happened?
 - With JavaScript
 ? `OnRestarted.InvokeAsync(name)`.
 
+@@drill
+Which file extension does a Blazor component use?
+= .razor
+= razor
+? Markup and C# together.
+
 @@flashcards
 `.razor` :: Blazor component file
 `[Parameter]` :: input from the parent

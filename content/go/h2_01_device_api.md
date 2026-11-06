@@ -1834,5 +1834,11 @@ func envOr(key, fallback string) string {
 	}
 	return fallback
 }
+
+@@drill
+Which HTTP status code means a request conflicts with existing data, such as a duplicate ID?
+= 409
+? 409 Conflict.
+
 @@text
 🎉 Routing, validation, error mapping, middleware, concurrency-safe storage, graceful shutdown and tests: this is the skeleton of most Go services running in production.

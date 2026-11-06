@@ -197,6 +197,12 @@ Why use `decimal` rather than `double` for prices?
 - decimal uses less memory
 ? Floating-point binary fractions are approximations. Money must be exact.
 
+@@drill
+What's the name of an object defined by its values rather than an identity, such as Money?
+= value object
+= a value object
+? Two value objects with the same values are equal.
+
 @@flashcards
 Clean Architecture :: Domain ← Application ← Infrastructure / Web; dependencies point inward
 entity :: has an identity that persists while its data changes

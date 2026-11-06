@@ -63,6 +63,11 @@ Why resolve platformer collisions one axis at a time?
 - To avoid floating point
 ? Move x, resolve; move y, resolve.
 
+@@drill
+What does ECS stand for in game architecture?
+= entity component system
+? Entities are IDs; components hold data; systems hold behaviour.
+
 @@flashcards
 Game loop :: input → update → render, every frame
 `GetFrameTime()` :: seconds since last frame (raylib)

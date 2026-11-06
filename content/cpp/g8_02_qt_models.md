@@ -77,6 +77,11 @@ In QML, what happens after `color = "blue"` on a property that was bound to an e
 - Nothing changes
 ? Use Qt.binding(...) to create a new binding from JavaScript.
 
+@@drill
+Which Qt class do you subclass to provide data for a QTableView?
+= QAbstractTableModel
+? Implement rowCount, columnCount and data.
+
 @@flashcards
 `QAbstractTableModel` :: base for table models
 Role :: kind of data for a cell (display, colour, ...)

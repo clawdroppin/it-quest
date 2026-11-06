@@ -65,6 +65,12 @@ In `template <class T> void f(T&& x)`, what is `T&&`?
 - An error
 ? Only with deduced T.
 
+@@drill
+Which function casts a value to an rvalue so it can be moved from?
+= std::move
+= move
+? std::move doesn't move anything itself; it allows a move.
+
 @@flashcards
 lvalue :: named object with an address
 rvalue :: temporary or std::move'd object

@@ -145,6 +145,12 @@ What does a fuzz test do with a failing input it finds?
 - Ignores it
 ? Every crash becomes a permanent regression test.
 
+@@drill
+Which test function prefix makes Go run a fuzz test?
+= Fuzz
+= FuzzXxx
+? func FuzzParse(f *testing.F).
+
 @@flashcards
 `_test.go` :: test file, excluded from normal builds
 `t.Run(name, f)` :: subtest

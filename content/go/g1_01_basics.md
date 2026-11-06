@@ -161,6 +161,12 @@ Does a Go `switch` case fall through into the next one?
 - Only in the default case
 ? The opposite of C, Java and JavaScript.
 
+@@drill
+Which `strconv` function converts a string to an int?
+= strconv.Atoi
+= Atoi
+? n, err := strconv.Atoi("42").
+
 @@flashcards
 `strings.TrimSpace(s)` :: remove spaces at both ends
 `strings.Fields(s)` :: split on any whitespace

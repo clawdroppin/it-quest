@@ -65,6 +65,11 @@ Why debounce a button?
 - To prevent overheating
 ? Wait for the reading to be stable for a few samples.
 
+@@drill
+Which keyword tells the compiler that a hardware register can change on its own, so every read must really happen?
+= volatile
+? Memory-mapped registers are declared volatile.
+
 @@flashcards
 `setup()` / `loop()` :: Arduino program structure
 `volatile` :: every access is real

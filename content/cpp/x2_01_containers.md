@@ -140,6 +140,12 @@ What's the difference between `std::map` and `std::unordered_map`?
 - None: they're aliases
 ? Use `unordered_map` for fast lookups, `map` when you need keys in order.
 
+@@drill
+Which container keeps its keys sorted?
+= std::map
+= map
+? std::unordered_map uses hashing and has no order.
+
 @@flashcards
 `std::vector<T>` :: growable array; the default container
 `v.push_back(x)` :: add to the end

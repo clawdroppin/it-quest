@@ -136,6 +136,11 @@ What does `template <std::integral T>` add over `template <typename T>`?
 - Nothing
 ? Concepts state the requirements of a template and give readable errors.
 
+@@drill
+Which C++20 keyword names a set of requirements on a template parameter?
+= concept
+? template <std::integral T>.
+
 @@flashcards
 template <typename T> :: code that works for many types
 instantiation :: the compiler generates code for each type used

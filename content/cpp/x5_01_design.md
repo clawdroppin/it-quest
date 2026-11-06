@@ -210,6 +210,13 @@ In CMake, why build the logic as a library (`add_library`) and `main.cpp` as a s
 - vcpkg requires it
 ? One library, two consumers: the program and the tests.
 
+@@drill
+What's the name of a class with only pure virtual functions, used as an interface?
+= abstract class
+= an abstract class
+= interface
+? virtual void send(const Msg&) = 0;
+
 @@flashcards
 header (`.hpp`) / source (`.cpp`) :: interface / implementation, compiled separately
 `#pragma once` :: include this header only once per compilation

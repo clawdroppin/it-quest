@@ -67,6 +67,12 @@ How does the link checker avoid checking the same URL twice?
 - HTTP caches do it automatically
 ? Normalize URLs before adding them so trivial differences don't defeat the check.
 
+@@drill
+What's the name of the retry strategy that doubles the wait after each failure?
+= exponential backoff
+= backoff
+? Add jitter so clients don't retry in sync.
+
 @@flashcards
 BFS crawl :: process the frontier one depth at a time
 Frontier :: URLs to visit at the current depth

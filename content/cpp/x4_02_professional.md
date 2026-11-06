@@ -127,6 +127,14 @@ What does `-fsanitize=address` do?
 - Makes the program faster
 ? AddressSanitizer is one of the best tools for finding memory bugs. Use it in tests.
 
+@@drill
+Which `std::mutex` helper locks in its constructor and unlocks in its destructor?
+= std::lock_guard
+= lock_guard
+= std::scoped_lock
+= scoped_lock
+? RAII for locks.
+
 @@flashcards
 `#pragma once` :: include this header at most once
 linker error :: a declared function has no definition linked in

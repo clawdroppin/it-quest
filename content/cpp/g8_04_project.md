@@ -55,6 +55,11 @@ Where should the monitor's settings file live?
 - In the temporary folder
 ? Program folders are often read-only for normal users.
 
+@@drill
+Which Qt class stores application settings in the right place for each OS?
+= QSettings
+? The registry on Windows, files on Linux and macOS.
+
 @@flashcards
 Event loop :: processes input, paint, timers, posted events
 `QTimer` :: repeating or single-shot timer

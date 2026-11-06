@@ -169,6 +169,11 @@ Which identifier is exported from a Go package?
 - `parse_port`
 ? A capital first letter means exported.
 
+@@drill
+Which keyword runs a call when the surrounding function returns?
+= defer
+? defer f.Close().
+
 @@flashcards
 `func f(a, b int) (int, error)` :: two parameters, two results
 `if err != nil { return err }` :: the standard error check

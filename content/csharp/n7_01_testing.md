@@ -104,6 +104,12 @@ Which test double records how it was called so the test can check it afterwards?
 - Fixture
 ? E.g. a mailer that stores every message.
 
+@@drill
+Which xUnit attribute supplies inline data to a [Theory]?
+= [InlineData]
+= InlineData
+? [InlineData(1, 2, 3)].
+
 @@flashcards
 `[Fact]` :: a test without parameters
 `[Theory]` + `[InlineData]` :: data-driven test

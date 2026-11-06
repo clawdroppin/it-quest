@@ -76,6 +76,12 @@ What does `"日本".size()` return for a UTF-8 string?
 - It depends on the font
 ? Each of these characters takes 3 bytes.
 
+@@drill
+Which type views a string without owning or copying it?
+= std::string_view
+= string_view
+? Don't let it outlive the string it points into.
+
 @@flashcards
 `std::string_view` :: non-owning view of characters
 `std::format("{:>8}", x)` :: right-align in 8 columns

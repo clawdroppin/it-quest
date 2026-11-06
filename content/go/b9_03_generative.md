@@ -71,6 +71,14 @@ In cellular-automaton cave generation, what does each step do?
 - Draws straight corridors
 ? A few smoothing steps turn noise into natural-looking caves.
 
+@@drill
+What makes a random generator produce the same sequence every run?
+= a seed
+= seed
+= a fixed seed
+= the same seed
+? rand.New(rand.NewPCG(seed, 0)).
+
 @@flashcards
 Seed :: starting value that fixes a random sequence
 `rand.NewPCG` :: seedable generator (math/rand/v2)

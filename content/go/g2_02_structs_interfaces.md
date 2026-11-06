@@ -214,6 +214,11 @@ Your type has a method `String() string`. What happens when you `fmt.Println` it
 - It prints the memory address
 ? That's the `fmt.Stringer` interface.
 
+@@drill
+Which interface does a type implement by having `Error() string`?
+= error
+? Go interfaces are satisfied implicitly.
+
 @@flashcards
 `type T struct { ... }` :: a struct type
 `func (t T) M()` :: a method with a value receiver

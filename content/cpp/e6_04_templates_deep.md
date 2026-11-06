@@ -86,6 +86,11 @@ What does `static_assert(crc32("123456789") == 0xCBF43926)` cost at runtime?
 - A function call
 ? A failing static_assert stops the build.
 
+@@drill
+Which form of `if` discards the untaken branch at compile time?
+= if constexpr
+? The discarded branch doesn't even have to compile for that type.
+
 @@flashcards
 `typename... Ts` :: template parameter pack
 `sizeof...(args)` :: number of pack elements

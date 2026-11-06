@@ -48,6 +48,12 @@ How does a caller get the result of a task submitted to the pool?
 - By polling the queue
 ? .get() waits for the result and rethrows any exception from the task.
 
+@@drill
+Which class wraps a callable so its result can be collected through a `std::future`?
+= std::packaged_task
+= packaged_task
+? get_future() gives the matching future.
+
 @@flashcards
 Thread pool :: fixed workers + task queue
 `std::packaged_task<R()>` :: task linked to a future

@@ -146,6 +146,12 @@ Why use a multi-stage Dockerfile for a Go service?
 - It allows running several services in one container
 ? The build stage has the Go toolchain; the final stage has just the binary.
 
+@@drill
+Which standard-library package provides structured logging?
+= log/slog
+= slog
+? slog.Info("started", "port", 8080).
+
 @@flashcards
 `httptest.NewRecorder` / `httptest.NewServer` :: test a handler in memory / with a real local server
 `go test -race` :: detect data races

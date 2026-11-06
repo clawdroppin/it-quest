@@ -83,6 +83,12 @@ When does an object spawned during a frame get its first Update?
 - After the next FixedUpdate only
 ? Awake runs immediately, Start and Update next frame.
 
+@@drill
+Which Unity method runs at a fixed timestep, for physics?
+= FixedUpdate
+= FixedUpdate()
+? Update runs once per rendered frame.
+
 @@flashcards
 GameObject :: container with a Transform
 Component :: behaviour attached to a GameObject

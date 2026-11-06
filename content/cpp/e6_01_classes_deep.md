@@ -69,6 +69,12 @@ What does `auto operator<=>(const Version&) const = default;` give you?
 - String conversion
 ? Add `operator== = default` for equality too (it's implied when <=> is defaulted).
 
+@@drill
+How many special member functions does the rule of five cover?
+= 5
+= five
+? Destructor, copy constructor, copy assignment, move constructor, move assignment.
+
 @@flashcards
 Rule of zero :: let members manage resources; write no special members
 Rule of five :: destructor + copy ctor/assign + move ctor/assign

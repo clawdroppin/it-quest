@@ -79,6 +79,12 @@ Why is TinyGo used instead of the standard Go compiler for microcontrollers?
 - TinyGo is an interpreter
 ? A microcontroller may only have tens of kilobytes of RAM.
 
+@@drill
+What's the usual "hello world" program for a microcontroller called?
+= blinky
+= blink
+? Toggle an LED in a loop.
+
 @@flashcards
 TinyGo :: LLVM-based Go compiler for small targets
 `machine` package :: pins, I²C, SPI, UART on the board

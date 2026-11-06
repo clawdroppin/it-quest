@@ -109,6 +109,12 @@ Which status fits creating a resource successfully?
 - 302 Found
 ? 204 is typical for a successful DELETE.
 
+@@drill
+Which `http.Server` method stops accepting connections and waits for active ones?
+= Shutdown
+= Shutdown()
+? srv.Shutdown(ctx) gives in-flight requests time to finish.
+
 @@flashcards
 `"GET /hosts/{name}"` :: method + wildcard pattern (Go 1.22)
 `r.PathValue("name")` :: read a wildcard

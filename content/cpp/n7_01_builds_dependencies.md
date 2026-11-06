@@ -76,6 +76,11 @@ What does `^10.0.0` usually mean in a version constraint?
 - 10.0.x only
 ? `~10.0` would mean at least 10.0.0 and below 10.1.0.
 
+@@drill
+Which CMake command links a library to a target?
+= target_link_libraries
+? Modern CMake: work with targets, not global variables.
+
 @@flashcards
 `add_library` / `add_executable` :: define targets
 `target_link_libraries` :: dependencies with PUBLIC/PRIVATE/INTERFACE

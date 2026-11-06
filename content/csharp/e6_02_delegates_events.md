@@ -103,6 +103,13 @@ Why use `event` instead of a public delegate field?
 - Events are asynchronous
 ? An event protects the invocation list.
 
+@@drill
+Which delegate type takes an `int` and returns a `bool`? Write it.
+= Func<int, bool>
+= Func<int,bool>
+= Predicate<int>
+? Action<T> returns nothing.
+
 @@flashcards
 Delegate :: type-safe reference to a method
 `Func<T, TResult>` :: delegate that returns a value

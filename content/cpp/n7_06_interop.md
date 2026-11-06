@@ -69,6 +69,12 @@ Why does a C API take a `void* user` argument next to a callback?
 - To return errors
 ? The callback casts it back to the real type.
 
+@@drill
+Which declaration stops C++ name mangling so C code can call a function?
+= extern "C"
+= extern c
+? extern "C" int add(int, int);
+
 @@flashcards
 `extern "C"` :: C linkage: no name mangling
 Opaque handle :: pointer to an undefined struct type

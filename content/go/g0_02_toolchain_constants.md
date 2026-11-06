@@ -144,6 +144,11 @@ How are names exported from a Go package?
 - By listing them in go.mod
 ? `Parse` is exported, `parse` isn't.
 
+@@drill
+Which identifier counts up automatically inside a `const` block?
+= iota
+? Used for enumerations.
+
 @@flashcards
 `go run .` :: compile and run
 `go build` :: produce a static binary

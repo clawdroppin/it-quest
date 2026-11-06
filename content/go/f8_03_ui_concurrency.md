@@ -81,6 +81,12 @@ With a 300 ms debounce, the user types at 0, 100 and 150 ms and then stops. When
 - At 0 ms
 ? 300 ms after the last keystroke.
 
+@@drill
+Which Fyne function runs code on the UI thread from a goroutine?
+= fyne.Do
+= fyne.DoAndWait
+? Never touch widgets directly from background goroutines.
+
 @@flashcards
 UI thread :: the only goroutine allowed to touch widgets
 `fyne.Do` :: run on the UI thread, don't wait

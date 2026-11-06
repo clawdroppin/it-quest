@@ -73,6 +73,11 @@ What makes a function a coroutine?
 - Running on another thread
 ? Its return type's promise_type controls it.
 
+@@drill
+Which keyword suspends a coroutine and hands a value to the caller?
+= co_yield
+? co_await waits; co_return finishes.
+
 @@flashcards
 `std::ranges::sort(r, {}, proj)` :: sort by projection
 `std::views::filter` :: lazy filter

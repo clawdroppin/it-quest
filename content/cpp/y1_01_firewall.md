@@ -688,5 +688,14 @@ icmp 10.10.50.7   8.8.8.8        0
 icmp 10.10.3.41   8.8.8.8        0
 tcp  172.16.9.9   192.168.1.10   443
 tcp  10.10.3.41   192.168.1.30   3389
+
+@@drill
+In a first-match firewall, which rule decides a packet's fate?
+= the first matching rule
+= first match
+= first matching rule
+= the first match
+? Order rules from specific to general.
+
 @@text
 🎉 You've built the core of a packet filter. In an interview, "I wrote a first-match ACL engine with shadowed-rule detection in C++" shows both programming and networking skills, which is exactly the combination infrastructure teams look for.

@@ -108,6 +108,12 @@ Why compile with `-Wall -Wextra` or `/W4`?
 - It removes warnings
 ? Many C++ bugs compile fine. Warnings are free bug reports.
 
+@@drill
+Which header gives you `std::cout`?
+= <iostream>
+= iostream
+? #include <iostream>.
+
 @@flashcards
 `#include <iostream>` :: bring in console input/output
 `int main()` :: where every C++ program starts

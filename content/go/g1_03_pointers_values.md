@@ -100,6 +100,11 @@ Is it safe in Go to return a pointer to a local variable?
 - Only for structs
 ? The garbage collector keeps it alive.
 
+@@drill
+Which operator takes the address of a variable?
+= &
+? * follows a pointer to its value.
+
 @@flashcards
 `&x` :: address of x (a pointer)
 `*p` :: the value p points to

@@ -166,6 +166,11 @@ What does "handle errors once" mean?
 - Never wrap errors
 ? Logging and returning creates duplicate log entries.
 
+@@drill
+Which `fmt.Errorf` verb wraps an error so errors.Is can find it?
+= %w
+? fmt.Errorf("loading config: %w", err).
+
 @@flashcards
 `fmt.Errorf("...: %w", err)` :: wrap with context
 Sentinel error :: package-level error value to compare with errors.Is

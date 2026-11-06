@@ -84,6 +84,13 @@ What does `logger.With("request_id", id)` return?
 - A handler
 ? Loggers are immutable; With creates a child.
 
+@@drill
+Which slog handler writes logs as JSON?
+= JSONHandler
+= slog.JSONHandler
+= NewJSONHandler
+? slog.New(slog.NewJSONHandler(os.Stdout, nil)).
+
 @@flashcards
 `slog.NewJSONHandler` :: JSON lines output
 `slog.NewTextHandler` :: key=value output

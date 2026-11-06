@@ -100,6 +100,13 @@ Why shouldn't a DbContext be registered as a singleton?
 - Singletons can't be async
 ? Scoped per request is the norm.
 
+@@drill
+Which EF Core method loads related entities in the same query?
+= Include
+= Include()
+= .Include
+? Avoids the N+1 problem.
+
 @@flashcards
 `DbContext` :: unit of work + change tracker
 `DbSet<T>` :: queryable table

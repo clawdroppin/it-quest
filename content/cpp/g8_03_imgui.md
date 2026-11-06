@@ -56,6 +56,12 @@ Where does an immediate-mode GUI keep the application's state?
 - In the GPU
 ? That's why ImGui code reads like ordinary straight-line code.
 
+@@drill
+Which ImGui function draws a button and returns true when it's clicked?
+= ImGui::Button
+= Button
+? if (ImGui::Button("Save")) save();
+
 @@flashcards
 Immediate mode :: UI described anew every frame
 Retained mode :: persistent widget objects (Qt, WPF)

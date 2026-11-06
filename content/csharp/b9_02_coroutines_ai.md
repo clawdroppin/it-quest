@@ -60,6 +60,12 @@ In a state machine for an enemy, what triggers a change from Patrol to Chase?
 - Restarting the game
 ? Each state checks its transitions every update.
 
+@@drill
+Which keyword pauses a Unity coroutine until the next step?
+= yield return
+= yield
+? yield return new WaitForSeconds(1);
+
 @@flashcards
 Coroutine :: iterator resumed by the engine
 `yield return null` :: next frame

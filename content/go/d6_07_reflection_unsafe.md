@@ -122,6 +122,12 @@ When should you reach for reflection?
 - Never
 ? It's slower and loses compile-time checks.
 
+@@drill
+Which `reflect.StructField` method reads a struct tag such as `json`?
+= Tag.Get
+= Get
+? field.Tag.Get("json").
+
 @@flashcards
 `reflect.TypeOf` :: describe a value's type
 `reflect.ValueOf` :: wrap a value for inspection

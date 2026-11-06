@@ -68,6 +68,11 @@ Why seed the random generator in property-based tests?
 - To avoid duplicates
 ? Print the seed with every failure.
 
+@@drill
+Which GoogleTest macro checks equality and stops the test on failure?
+= ASSERT_EQ
+? EXPECT_EQ reports the failure but continues.
+
 @@flashcards
 `TEST(Suite, Name)` :: GoogleTest test
 `TEST_F` :: test with a fixture

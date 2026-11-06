@@ -108,6 +108,12 @@ What is `"🗼".Length`?
 - 3
 ? Emoji outside the Basic Multilingual Plane need a surrogate pair in UTF-16.
 
+@@drill
+Which class builds a long string efficiently in a loop?
+= StringBuilder
+= System.Text.StringBuilder
+? Strings are immutable; += copies every time.
+
 @@flashcards
 `StringBuilder` :: efficient text building
 `StringComparison.Ordinal` :: byte-wise, culture-free comparison

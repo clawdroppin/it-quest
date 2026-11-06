@@ -51,6 +51,11 @@ Which of these is undefined behaviour in C++?
 - Comparing two pointers to the same array
 ? Unsigned arithmetic wraps by definition; signed overflow lets the compiler assume it never happens.
 
+@@drill
+Which compiler flag enables AddressSanitizer in GCC and Clang?
+= -fsanitize=address
+? It catches use-after-free and buffer overflows at runtime.
+
 @@flashcards
 UB :: no requirements on behaviour
 AddressSanitizer :: out-of-bounds, use-after-free

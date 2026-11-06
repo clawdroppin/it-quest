@@ -78,6 +78,11 @@ What does `[CallerMemberName]` give you?
 - A stack trace
 ? `OnPropertyChanged()` inside the `Name` setter receives "Name".
 
+@@drill
+Which binding mode updates both the view and the view model?
+= TwoWay
+? OneWay only updates the view.
+
 @@flashcards
 XAML :: markup that constructs UI objects
 DataContext :: inherited binding source

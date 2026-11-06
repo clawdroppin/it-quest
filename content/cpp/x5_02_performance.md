@@ -130,6 +130,12 @@ What does `-fsanitize=address` do?
 - Hides addresses from attackers
 ? AddressSanitizer turns silent memory corruption into an immediate, precise error report.
 
+@@drill
+Which `std::chrono` clock should you use to measure elapsed time?
+= steady_clock
+= std::chrono::steady_clock
+? system_clock can jump when the time is adjusted.
+
 @@flashcards
 `std::chrono::steady_clock` :: a monotonic clock for measuring durations
 Release vs Debug :: optimized (-O2, /O2) vs debuggable; benchmark only Release

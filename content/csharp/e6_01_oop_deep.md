@@ -120,6 +120,11 @@ What's the decorator pattern?
 - A UI styling technique
 ? `new CachingStorage(new LoggingStorage(new FileStorage()))`.
 
+@@drill
+Which keyword prevents a class from being inherited?
+= sealed
+? sealed class Invoice { ... }.
+
 @@flashcards
 `abstract` :: must be overridden; class can't be instantiated
 `virtual` / `override` :: overridable / overriding member

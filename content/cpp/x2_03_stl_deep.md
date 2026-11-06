@@ -93,6 +93,14 @@ Why might a sorted `vector` beat a `map` for lookups?
 - vectors are always smaller
 ? Measure, but don't assume map is faster.
 
+@@drill
+Which vector operation can invalidate all iterators when it grows the capacity?
+= push_back
+= push_back()
+= emplace_back
+= insert
+? The elements move to a new block of memory.
+
 @@flashcards
 `std::vector` :: default container, contiguous
 `std::deque` :: fast at both ends

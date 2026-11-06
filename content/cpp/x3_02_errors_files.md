@@ -146,6 +146,12 @@ What does `std::optional<int>` hold?
 - Makes the path absolute
 ? `std::filesystem::path` overloads `/` for joining.
 
+@@drill
+Which type holds either a value or nothing?
+= std::optional
+= optional
+? std::nullopt means nothing.
+
 @@flashcards
 throw std::runtime_error :: raise an exception
 catch (const std::exception& e) :: catch by const reference

@@ -84,6 +84,12 @@ What is moc?
 - A layout engine
 ? CMake's AUTOMOC runs it for you.
 
+@@drill
+Which Qt function links a signal to a slot?
+= connect
+= QObject::connect
+? connect(button, &QPushButton::clicked, this, &Window::save).
+
 @@flashcards
 `QApplication::exec()` :: run the event loop
 Signal :: event announced by an object

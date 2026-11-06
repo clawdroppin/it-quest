@@ -121,6 +121,12 @@ Which is the idiomatic null check in modern C#?
 - `object.Equals(x)`
 ? Pattern checks can't be changed by operator overloading.
 
+@@drill
+Which pattern keyword matches when a value is not null? Write the pattern.
+= is not null
+= not null
+? if (x is not null) { ... }.
+
 @@flashcards
 `x switch { ... }` :: switch expression
 `int n when n > 0` :: pattern with a guard

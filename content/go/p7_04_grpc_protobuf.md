@@ -109,6 +109,12 @@ Which gRPC status should a lookup for a missing record return?
 - Unavailable
 ? Clients can branch on it with status.Code(err).
 
+@@drill
+Which file extension holds Protocol Buffers definitions?
+= .proto
+= proto
+? protoc generates Go code from it.
+
 @@flashcards
 gRPC :: RPC over HTTP/2 with protobuf
 `.proto` :: schema for messages and services

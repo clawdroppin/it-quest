@@ -135,6 +135,11 @@ What does `go test -race` do?
 - Benchmarks goroutines
 ? It only finds races that actually occur in that run.
 
+@@drill
+Which flag runs Go tests with the race detector?
+= -race
+? go test -race ./...
+
 @@flashcards
 `context.Context` :: cancellation, deadline and request values
 `ctx.Done()` :: channel closed on cancellation

@@ -105,6 +105,11 @@ What does `-ldflags "-X main.version=1.4.0"` do?
 - Strips the binary
 ? A common way to embed version info.
 
+@@drill
+Which package parses command-line flags?
+= flag
+? flag.String("addr", ":8080", "listen address").
+
 @@flashcards
 `flag.Parse()` :: parse os.Args
 `flag.Args()` :: positional arguments

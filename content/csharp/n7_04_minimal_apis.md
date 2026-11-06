@@ -85,6 +85,13 @@ What should a 500 response contain for an unexpected exception?
 - Nothing at all
 ? Stack traces help attackers.
 
+@@drill
+Which standard JSON error format does ASP.NET Core use for API errors?
+= Problem Details
+= problemdetails
+= rfc 9457
+? type, title, status, detail.
+
 @@flashcards
 `MapGet` / `MapPost` :: minimal API endpoints
 `MapGroup` :: shared prefix and settings

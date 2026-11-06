@@ -112,6 +112,12 @@ Why might `db.Orders.AsEnumerable().Where(o => o.Total > 1000)` be slow?
 - It isn't slow
 ? Keep queries IQueryable until the filtering is done.
 
+@@drill
+What's the name of LINQ's behaviour of not running a query until you enumerate it?
+= deferred execution
+= lazy evaluation
+? Call ToList() to run it once.
+
 @@flashcards
 Deferred execution :: query runs when enumerated
 `ToList()` :: materialize once

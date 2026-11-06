@@ -176,6 +176,11 @@ Why use `signal.NotifyContext` and `srv.Shutdown`?
 - So the server ignores signals
 ? Without it, a deployment cuts off requests halfway through.
 
+@@drill
+Which Go 1.22 route pattern matches only GET requests to `/devices/{id}`?
+= GET /devices/{id}
+? mux.HandleFunc("GET /devices/{id}", h).
+
 @@flashcards
 `mux.HandleFunc("GET /x/{id}", h)` :: Go 1.22+ route with a method and a wildcard
 `r.PathValue("id")` :: the value of a path wildcard

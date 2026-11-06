@@ -70,6 +70,11 @@ When does struct-of-arrays beat array-of-structs?
 - Never; it's just style
 ? Fewer bytes per element means fewer cache lines loaded.
 
+@@drill
+How many bytes is a typical CPU cache line?
+= 64
+? Data used together should live together.
+
 @@flashcards
 Cache line :: 64 bytes loaded at once
 Cache miss :: data not in cache: ~100 ns trip to RAM

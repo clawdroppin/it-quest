@@ -109,6 +109,12 @@ Why return `IReadOnlyList<T>` from a class instead of its internal `List<T>`?
 - It sorts the list
 ? Encapsulation through interfaces.
 
+@@drill
+Which collection gives fast lookups of unique values?
+= HashSet
+= HashSet<T>
+? Contains is O(1) on average.
+
 @@flashcards
 Generic type :: `class Box<T>`
 Generic method :: `T Largest<T>(...)`

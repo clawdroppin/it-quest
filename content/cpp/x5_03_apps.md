@@ -177,6 +177,12 @@ Your C++ server reads a 4-byte length from the network, then copies that many by
 - That the client is on the same subnet
 ? Trusting lengths from the network is the classic buffer overflow. Validate every field.
 
+@@drill
+Which design pattern turns actions into objects that can be undone and scripted?
+= command pattern
+= command
+? Each command knows how to do and undo itself.
+
 @@flashcards
 command pattern :: actions as objects with execute/undo
 undo/redo stacks :: done list + undone list; a new action clears redo

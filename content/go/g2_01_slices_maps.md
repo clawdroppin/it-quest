@@ -127,6 +127,11 @@ You print a map with a `for range` loop twice. Is the order the same?
 - Only for string keys
 ? Sort the keys when the order matters (reports, tests).
 
+@@drill
+Which built-in adds elements to a slice?
+= append
+? s = append(s, x); always use the result.
+
 @@flashcards
 `[]string{"a"}` :: a slice literal
 `s = append(s, x)` :: add to a slice (assign back!)

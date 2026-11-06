@@ -141,6 +141,11 @@ How can a buffered channel act as a semaphore?
 - With select default only
 ? `sem := make(chan struct{}, 5)`.
 
+@@drill
+Which statement waits on several channel operations at once?
+= select
+? Add a default case to make it non-blocking.
+
 @@flashcards
 `select` :: wait on several channel operations
 `default` in select :: don't block

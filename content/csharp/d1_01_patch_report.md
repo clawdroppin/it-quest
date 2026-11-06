@@ -536,5 +536,12 @@ osk-srv-03,Windows Server 2022,20348.4171,2026-10-09,yes,yes
   "maxPatchAgeDays": 30,
   "requireEncryption": true
 }
+
+@@drill
+Which LINQ method groups items by a key?
+= GroupBy
+= GroupBy()
+? patches.GroupBy(p => p.Server).
+
 @@text
 🎉 This is the kind of tool that gets noticed in an IT team: it turns "I think we're fine" into a number, plus a list of what to fix. Put it on GitHub with a README and a screenshot of the report.

@@ -56,6 +56,11 @@ Why load jobs through an interface like IJob?
 - To prevent jobs from failing
 ? Discovery finds types implementing IJob; the scheduler only depends on the interface.
 
+@@drill
+Which .NET 8 class lets tests control the current time?
+= TimeProvider
+? Use FakeTimeProvider in tests.
+
 @@flashcards
 Plugin discovery :: scan types for an interface or attribute
 `IsAssignableFrom` :: "can this type be used as that type?"

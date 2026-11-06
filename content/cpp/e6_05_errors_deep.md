@@ -74,6 +74,13 @@ What happens when a `noexcept` function throws?
 - It becomes an error code
 ? noexcept is a promise the compiler relies on.
 
+@@drill
+Which exception-safety guarantee says an operation either succeeds or leaves the state unchanged?
+= strong
+= strong guarantee
+= the strong guarantee
+? The basic guarantee only promises no leaks and valid state.
+
 @@flashcards
 nothrow guarantee :: never throws
 Strong guarantee :: commit or roll back

@@ -66,6 +66,13 @@ What does A* add to plain breadth-first search?
 - A limit on the path length
 ? With an admissible heuristic such as Manhattan distance, the path is still the shortest.
 
+@@drill
+Which pathfinding algorithm uses a heuristic to explore promising cells first?
+= A*
+= a star
+= a-star
+? Manhattan distance is a common heuristic on grids.
+
 @@flashcards
 Seed :: makes randomness reproducible
 Room placement :: random rectangles + corridors

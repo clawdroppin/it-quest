@@ -117,6 +117,12 @@ What does `using (var w = new StreamWriter(p)) { ... }` guarantee?
 - The file is created only if it doesn't exist
 ? `using` calls `Dispose()` at the end of the block, which closes the file.
 
+@@drill
+Which class serializes objects to JSON in modern .NET?
+= JsonSerializer
+= System.Text.Json.JsonSerializer
+? JsonSerializer.Serialize(obj).
+
 @@flashcards
 try / catch / finally :: handle and clean up after errors
 throw :: raise an exception

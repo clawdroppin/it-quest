@@ -67,6 +67,11 @@ What is a readiness health check for?
 - Logging every request
 ? Liveness asks 'is it alive?'; readiness asks 'can it serve?'.
 
+@@drill
+Which base class does a .NET worker service usually inherit from?
+= BackgroundService
+? Override ExecuteAsync(CancellationToken).
+
 @@flashcards
 `IHostedService` :: StartAsync / StopAsync
 `BackgroundService` :: ExecuteAsync(stoppingToken)

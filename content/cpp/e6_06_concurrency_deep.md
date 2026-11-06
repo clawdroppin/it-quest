@@ -79,6 +79,12 @@ What does a `std::jthread` do in its destructor?
 - Nothing
 ? A joinable std::thread would terminate the program.
 
+@@drill
+Which C++20 thread class joins automatically in its destructor and supports stop tokens?
+= std::jthread
+= jthread
+? std::thread terminates the program if not joined.
+
 @@flashcards
 `std::lock_guard` :: lock for a scope
 `std::unique_lock` :: movable lock, works with condition variables

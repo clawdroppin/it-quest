@@ -125,6 +125,11 @@ What does `var (a, b) = (1, 2);` do?
 - Declares `a` as a function
 ? Tuples can be taken apart into separate variables like this.
 
+@@drill
+Which keyword marks a parameter the method must assign before returning?
+= out
+? int.TryParse(s, out var n).
+
 @@flashcards
 void :: method returns nothing
 optional parameter :: int count = 4

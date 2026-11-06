@@ -112,6 +112,12 @@ Which return type should an async method with no result have (outside event hand
 - `object`
 ? `async void` can't be awaited, and its exceptions can crash the program.
 
+@@drill
+Which method waits for several tasks to finish?
+= Task.WhenAll
+= WhenAll
+? await Task.WhenAll(tasks).
+
 @@flashcards
 async / await :: write non-blocking code that reads like normal code
 Task / Task<T> :: an operation that finishes later

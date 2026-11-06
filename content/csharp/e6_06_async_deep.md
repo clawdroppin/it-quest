@@ -127,6 +127,11 @@ What does a bounded channel do when it's full?
 - Grows without limit
 ? Backpressure protects memory.
 
+@@drill
+Which class limits how many async operations run at once?
+= SemaphoreSlim
+? await sem.WaitAsync(); try { ... } finally { sem.Release(); }.
+
 @@flashcards
 `CancellationToken` :: cooperative cancellation signal
 `CancelAfter` :: timeout on a token source

@@ -109,6 +109,11 @@ Why do `[Flags]` enum values use 1, 2, 4, 8...?
 - Enums require powers of two
 ? `Read | Write` = 3.
 
+@@drill
+Which command builds and runs a .NET project?
+= dotnet run
+? dotnet build only compiles.
+
 @@flashcards
 .NET SDK :: compiler and tools
 .NET runtime :: runs compiled apps

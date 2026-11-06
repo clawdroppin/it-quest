@@ -101,6 +101,11 @@ Why can `Server* p = &servers[0]` break after `servers.push_back(x)`?
 - It can't break
 ? Iterators, pointers and references into a vector are invalidated by reallocation.
 
+@@drill
+Which keyword is the null pointer value in modern C++?
+= nullptr
+? Don't use NULL or 0.
+
 @@flashcards
 `T&` :: reference: alias, never null, can't re-bind
 `T*` :: pointer: address, may be null, can re-point

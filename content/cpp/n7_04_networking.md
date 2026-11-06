@@ -72,6 +72,14 @@ Why convert integers with htonl/ntohl (or std::byteswap) before sending them?
 - Sockets only accept strings
 ? Both sides must agree on the byte order of multi-byte numbers.
 
+@@drill
+TCP delivers a byte stream, not messages. What do you add so the receiver knows where a message ends?
+= framing
+= a length prefix
+= length prefix
+= a delimiter
+? Usually a length prefix or a delimiter.
+
 @@flashcards
 Asio :: async I/O library (epoll/kqueue/IOCP)
 `io_context::run()` :: event loop

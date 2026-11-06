@@ -103,6 +103,12 @@ Can a table name be passed as a placeholder (`SELECT * FROM $1`)?
 - Only in transactions
 ? The database must know the structure of the query before binding values.
 
+@@drill
+Which `*sql.DB` method starts a transaction?
+= Begin
+= BeginTx
+? tx, err := db.BeginTx(ctx, nil).
+
 @@flashcards
 `sql.Open` :: create a pool (doesn't connect)
 `PingContext` :: check the connection

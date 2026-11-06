@@ -143,6 +143,12 @@ Why are memory-safety bugs so important in security?
 - They can't be exploited, only crash
 ? A large share of serious CVEs in big C/C++ projects are memory-safety bugs. That's why Rust, Go and C# are popular for new security-sensitive code.
 
+@@drill
+Which function creates a `std::unique_ptr`?
+= std::make_unique
+= make_unique
+? auto p = std::make_unique<Server>("web01");
+
 @@flashcards
 `&x` :: the address of x
 `*p` :: the value p points at

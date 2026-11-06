@@ -98,6 +98,11 @@ Why use `strings.Builder` instead of `s += x` in a loop?
 - Builder is required by gofmt
 ? Builder grows a buffer and copies once at the end.
 
+@@drill
+Which type holds one Unicode code point?
+= rune
+? A rune is an int32.
+
 @@flashcards
 `byte` :: alias for uint8
 `rune` :: alias for int32, a Unicode code point

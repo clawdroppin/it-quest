@@ -171,6 +171,13 @@ Which UI framework runs the same XAML app on Windows, macOS and Linux?
 - WinUI 3
 ? WPF, WinForms and WinUI are Windows-only. MAUI covers Windows, macOS, Android and iOS, but not Linux desktop.
 
+@@drill
+What does MVVM stand for?
+= model-view-viewmodel
+= model view viewmodel
+= model, view, viewmodel
+? The ViewModel exposes state and commands to the View.
+
 @@flashcards
 MVVM :: Model, View (XAML), ViewModel (properties + commands, testable)
 data binding :: `{Binding Title}` connects a control to a ViewModel property

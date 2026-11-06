@@ -117,6 +117,12 @@ The compiler reports `main.cs(4,12): error CS0103: The name 'hostname' does not 
 - It's a runtime error, so in the output
 ? C# errors are `(line,column)`. CS0103 usually means a misspelling or a missing declaration.
 
+@@drill
+Which method prints a line to the console?
+= Console.WriteLine
+= Console.WriteLine()
+? Console.WriteLine("Hello");
+
 @@flashcards
 `Console.WriteLine(x)` :: print x and a new line
 `Console.Write(x)` :: print x without a new line

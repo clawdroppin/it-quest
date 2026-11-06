@@ -196,6 +196,12 @@ What's wrong with this? `db.Query("SELECT * FROM devices WHERE owner = '" + owne
 - Strings can't be concatenated in Go
 ? `db.QueryContext(ctx, "... WHERE owner = $1", owner)` sends the value separately from the SQL.
 
+@@drill
+By convention, which top-level folder holds packages other modules can't import?
+= internal
+= internal/
+? The compiler enforces it.
+
 @@flashcards
 `cmd/<name>/main.go` :: one folder per program in a module
 `internal/` :: packages that only this module can import

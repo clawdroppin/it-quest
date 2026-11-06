@@ -102,6 +102,11 @@ Do two separate `class` instances with the same field values compare equal with 
 - Only in Release builds
 ? Use a record for data-like types.
 
+@@drill
+Which keyword declares a value type?
+= struct
+? class declares a reference type.
+
 @@flashcards
 Value type :: variable holds the data (struct, int, enum)
 Reference type :: variable holds a reference (class, array, string)
