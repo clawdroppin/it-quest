@@ -67,6 +67,41 @@ echo "Backing up $src to $dest"
 
 Save it, make it executable with `chmod +x backup.sh`, run it with `./backup.sh /etc /backup`. The first line, the **shebang**, tells Linux which interpreter runs the file.
 
+## Writing functions you can trust
+
+Bash functions behave differently from functions in most languages, so a few rules save a lot of debugging:
+
+- **Use `local` for every variable** a function sets. Without it, the variable is global and silently overwrites a variable of the same name in the caller. `local` also works for arrays: `local -a items=()`.
+- **Return data on standard output, status with `return`.** `return` only carries a number from 0 to 255 (0 means success). To hand back a string, `echo` it and capture it with `result=$(my_function)`. Keep diagnostic messages on **standard error** (`echo "warning" >&2`) so they don't end up mixed into the captured result.
+- **Command substitution runs in a subshell.** Changes a function makes to variables are lost when you call it as `$(fn)`. If a function must set several values, either print them on separate lines and read them, or use a **nameref**: `local -n out=$1; out=value` writes into the variable whose name the caller passed.
+- **Check arguments early.** `(( $# == 2 )) || { echo "usage: copy_to SRC DEST" >&2; return 2; }` makes misuse obvious instead of failing halfway through.
+- **Quote `"$@"`** to pass all arguments on unchanged, spaces included. `$*` and unquoted `$@` split them apart.
+- **Name functions with verbs** (`backup_db`, `is_port_open`), and prefix helper functions in a shared library with a short namespace (`log_info`, `log_warn`) so they don't collide with commands.
+
+```bash
+log() { printf '%s %s\n' "[$1]" "$2" >&2; }
+
+max_of() {
+  local best=$1 n
+  shift
+  for n in "$@"; do
+    (( n > best )) && best=$n
+  done
+  echo "$best"
+}
+
+is_even() { (( $1 % 2 == 0 )); }
+
+biggest=$(max_of 4 17 9 12)
+log info "computing"
+echo "max: $biggest"
+if is_even "$biggest"; then echo even; else echo odd; fi
+```
+
+`is_even` shows a useful pattern: a function whose **exit status** is the answer, so it reads naturally in `if` and `&&`. The last command's status becomes the function's status, so no explicit `return` is needed.
+
+Finally, keep functions short. When a function grows past a screen, or needs data structures more complex than arrays and associative arrays, it's often a sign the job has outgrown Bash and would be clearer in Python.
+
 @@quiz
 How does a Bash function give back a text result?
 * It prints it (echo), and the caller captures it with `$( )`

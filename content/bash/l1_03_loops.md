@@ -73,6 +73,30 @@ for s in "${servers[@]}"; do echo "- $s"; done
 
 `"${servers[@]}"` (in quotes) gives each item as its own word, even ones with spaces.
 
+## Loop control and common pitfalls
+
+- **`break`** leaves the loop and **`continue`** skips to the next iteration. Both take a number for nested loops: `break 2` leaves two levels.
+- **C-style loops** are handy for counters: `for ((i = 1; i <= 5; i++)); do ...; done`.
+- **Brace expansion** builds lists: `{1..5}`, `{01..10}` (zero-padded), `{a..e}`, `{0..100..10}`. It happens before variables are expanded, so `{1..$n}` doesn't work; use `seq 1 "$n"` or a C-style loop.
+- **Don't loop over `ls` output.** `for f in $(ls)` breaks on names with spaces and newlines. Use a glob, `for f in *.log`, and guard against no matches with `shopt -s nullglob` (or `[[ -e $f ]] || continue`).
+- **Pipes run loops in a subshell.** In `cat file | while read -r line; do count=$((count + 1)); done`, the `count` you see after the loop is unchanged, because the loop ran in a child process. Redirect instead: `while read -r line; do ...; done < file`, or use process substitution `< <(command)`.
+- **Read lines safely** with `while IFS= read -r line`: `IFS=` keeps leading spaces and `-r` keeps backslashes. If the last line has no trailing newline, add `|| [[ -n $line ]]` to the condition so it isn't skipped.
+
+```bash
+for i in {1..10}; do
+  (( i % 2 == 0 )) && continue
+  (( i > 7 )) && break
+  echo "odd: $i"
+done
+count=0
+while IFS= read -r line; do
+  count=$((count + 1))
+done < <(printf 'a\nb\nc\n')
+echo "lines: $count"
+```
+
+When a loop does something slow per item (a network call, a compression), think about whether the items could run in parallel. `xargs -P 4` or GNU `parallel` run several at once, as the professional-scripting lesson shows.
+
 @@quiz
 Why is `for f in $(ls)` a bad idea?
 * File names with spaces get split into several words

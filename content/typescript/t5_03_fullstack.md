@@ -228,3 +228,47 @@ function parseHosts(data: unknown): Result<Host[]> {
 }
 
 console.log(parseHosts([{ name: "web01", up: true, latencyMs: 12 }, { name: "db01", up: false }]));
+
+@@exercise A typed route table
+Front end and back end can share one table of routes. Write the type `PathParams<P>`, which turns a path like `"/hosts/:id/checks/:checkId"` into `{ id: string; checkId: string }` using template literal types, and a function `buildUrl(path, params, query?)` that fills in the parameters (URL-encoded), appends a query string from the optional object (skipping `undefined` values, keys in the given order), and throws `Error("missing param: <name>")` if a parameter has no value at runtime.
+@@starter
+type PathParams<P extends string> = Record<string, string>; // TODO: derive the names from P
+
+function buildUrl<P extends string>(path: P, params: PathParams<P>, query?: Record<string, string | number | undefined>): string {
+  throw new Error("TODO: not done yet");
+}
+
+@@tests
+check(buildUrl("/hosts/:id", { id: "web01" }), "/hosts/web01", "one param");
+check(buildUrl("/hosts/:id/checks/:checkId", { id: "db 01", checkId: "disk/var" }), "/hosts/db%2001/checks/disk%2Fvar", "params are encoded");
+check(buildUrl("/hosts", {}, { page: 2, q: "tokyo dc", sort: undefined }), "/hosts?page=2&q=tokyo+dc", "query string, undefined skipped");
+let message = "";
+try { buildUrl("/hosts/:id", {} as any); } catch (e) { message = (e as Error).message; }
+check(message, "missing param: id", "missing param is an error");
+const typed: PathParams<"/a/:x/b/:y"> = { x: "1", y: "2" };
+check(Object.keys(typed), ["x", "y"], "the type accepts exactly the path's params");
+@@hint
+Recursive template literal type: `P extends `${string}:${infer Name}/${infer Rest}` ? { [K in Name]: string } & PathParams<`/${Rest}`> : P extends `${string}:${infer Name}` ? { [K in Name]: string } : {}`. At runtime, `path.replace(/:(\w+)/g, (_, name) => ...)` with `encodeURIComponent`, and `URLSearchParams` for the query.
+@@solution
+type PathParams<P extends string> =
+  P extends `${string}:${infer Name}/${infer Rest}`
+    ? { [K in Name]: string } & PathParams<`/${Rest}`>
+    : P extends `${string}:${infer Name}`
+      ? { [K in Name]: string }
+      : {};
+
+function buildUrl<P extends string>(path: P, params: PathParams<P>, query?: Record<string, string | number | undefined>): string {
+  const values = params as Record<string, string | undefined>;
+  const filled = path.replace(/:(\w+)/g, (_, name: string) => {
+    const value = values[name];
+    if (value === undefined) throw new Error(`missing param: ${name}`);
+    return encodeURIComponent(value);
+  });
+  if (!query) return filled;
+  const search = new URLSearchParams();
+  for (const [key, value] of Object.entries(query)) {
+    if (value !== undefined) search.append(key, String(value));
+  }
+  const qs = search.toString();
+  return qs ? `${filled}?${qs}` : filled;
+}

@@ -71,6 +71,24 @@ esac
 
 Each pattern ends with `)`, each branch with `;;`, and `esac` is `case` backwards (as `fi` is `if`).
 
+## [ ], [[ ]] and (( )): which test to use
+
+Bash has three ways to test things, and mixing them up causes subtle bugs:
+
+- **`[ ... ]`** is the old POSIX `test` command. It's an ordinary command, so every variable must be quoted (`[ "$name" = "ana" ]`), `<` and `>` are redirections rather than comparisons, and `&&` can't go inside it. Use it only in scripts that must run under plain `sh`.
+- **`[[ ... ]]`** is Bash's own test. Variables inside don't need quoting against word splitting, `&&`, `||` and `!` work inside, `==` matches **glob patterns** (`[[ $file == *.log ]]`), and `=~` matches **regular expressions** (`[[ $ip =~ ^[0-9]+\.[0-9]+ ]]`, with groups in `BASH_REMATCH`). Quote the right-hand side when you want a literal match instead of a pattern.
+- **`(( ... ))`** is for **numbers**: `(( count > 10 ))`, `(( n % 2 == 0 ))`. Inside it, variables don't need `$`, and the comparison operators are the familiar `<`, `>`, `==`. Its exit status is success when the result is non-zero.
+
+A classic mistake is comparing numbers as strings: `[[ 10 < 9 ]]` is **true**, because `<` inside `[[ ]]` compares text, and "1" sorts before "9". Use `(( 10 < 9 ))` or `[[ 10 -lt 9 ]]` for numbers.
+
+```bash
+file=report.log
+[[ $file == *.log ]] && echo "a log file"
+[[ 10 < 9 ]] && echo "as text, 10 sorts before 9"
+(( 10 < 9 )) || echo "as numbers, 10 is not less than 9"
+if [[ "192.168.1.20" =~ ^([0-9]+)\.([0-9]+) ]]; then echo "first octet ${BASH_REMATCH[1]}"; fi
+```
+
 @@quiz
 What does an exit code of `0` mean?
 * success

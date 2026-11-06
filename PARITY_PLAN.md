@@ -954,3 +954,11 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - uianim: new sections on reviewing motion, FLIP/View Transitions pitfalls, and matching feedback to wait times -> ~20.5k words.
 - vectorui: +3 quizzes and new sections on SVG clean-up, decorative vs meaningful SVG, combining type and spacing systems, and form validation -> 60 quizzes, ~20.3k words.
 - Every track now meets the floor of 12 lessons, 20 exercises, 60 quizzes and 20k words.
+
+## Language tier (second floor: 40 lessons, 75 exercises, 110 quizzes, 60k words)
+Rust (106 lessons) and Python (84) are the flagships; every other language track now meets this floor.
+- go: g2_04_templates_regexp (text/template, html/template escaping, RE2 regexp, named groups); on-call handover template, access-log parser.
+- typescript: t3_03_iterators_generators (iteration protocol, generators, lazy pipelines, async generators); lazy helpers, async pagination. Exercises appended to t4_01 (semver ranges) and t5_03 (typed route table with template literal types).
+- html: h1_06_tables (caption, scope, spans, tabular numbers, sticky headers, scroll regions, aria-sort) and h5_04_offline_storage (storage choices, IndexedDB, service worker lifecycle, caching strategies, outbox, manifest).
+- bash: l3_04_ssh_rsync (keys, agent, config resolution, ProxyJump, tunnels, hardening, rsync and safe deploys); ssh config resolver, rsync mirror plan. New sections in l1_01, l1_02, l1_03 and l1_04.
+- powershell: p3_05_scheduled_automation (scheduled tasks, exit codes, logging, secrets, idempotence); trigger next-run calculator, test-then-set.

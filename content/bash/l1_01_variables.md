@@ -72,6 +72,28 @@ export APP_ENV=production   # export: child programs see it too
 
 `PATH` is the list of folders searched for commands: `echo "$PATH" | tr ':' '\n'`.
 
+## Naming, scope and defaults
+
+A few habits keep variables from biting you in longer scripts:
+
+- **Lower case for your own variables**, upper case for environment variables and constants. `PATH`, `HOME` and `USER` are environment variables; if you name your own variable `PATH`, you've just broken every command after it.
+- **No spaces around `=`**. `name = ana` runs a command called `name` with the arguments `=` and `ana`.
+- **Variables are global by default**, even when set inside a function. Use `local` inside functions (covered in the functions lesson) so they don't leak.
+- **`readonly`** stops a value being changed later: `readonly CONFIG_DIR=/etc/myapp`.
+- **Default values** come from parameter expansion: `${name:-guest}` uses `guest` when `name` is unset or empty, `${name:=guest}` also assigns it, and `${name:?name is required}` stops the script with that message. These make scripts friendly to override from the environment: `LOG_LEVEL=${LOG_LEVEL:-info}`.
+- **`set -u`** makes using an unset variable an error instead of an empty string, which catches typos like `$fiel` for `$file`. Combine it with the `:-` default for variables that are allowed to be missing.
+
+```bash
+unset nickname
+echo "Hello, ${nickname:-friend}"
+retries=${RETRIES:-3}
+echo "Will retry $retries times"
+readonly app=inventory
+echo "App: $app, home: $HOME"
+```
+
+To see what's defined, `declare -p name` prints a variable with its attributes, `env` lists exported (environment) variables, and `set | less` shows everything including functions. When a script behaves differently from your terminal, check whether a variable was **exported**: child processes only see exported variables.
+
 @@quiz
 What's wrong with `name = "web01"`?
 * The spaces: Bash runs a command called `name` with the arguments `=` and `web01`

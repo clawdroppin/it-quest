@@ -139,8 +139,9 @@ pub fn powershell() -> Track {
                 "p1_01_variables.md", "p1_02_strings.md", "p1_03_conditions.md", "p1_04_loops.md", "p1_05_functions.md", "p1_06_operators.md", "p1_07_scriptblocks.md"),
             module!(Intermediate, "2 · Collections and Objects", "Arrays, hashtables, object pipelines and regex.", "powershell";
                 "p2_01_collections.md", "p2_02_objects.md", "p2_03_text.md", "p2_04_pipeline_deep.md"),
-            module!(Intermediate, "3 · Files and Windows", "Files, CSV, JSON, errors, and managing a Windows machine.", "powershell";
-                "p3_01_files.md", "p3_02_errors.md", "p3_03_windows_admin.md", "p3_04_dates_culture.md"),
+            module!(Intermediate, "3 · Files and Windows", "Files, CSV, JSON, errors, managing a Windows machine, and scripts that run unattended.", "powershell";
+                "p3_01_files.md", "p3_02_errors.md", "p3_03_windows_admin.md", "p3_04_dates_culture.md",
+                "p3_05_scheduled_automation.md"),
             module!(Advanced, "4 · Admin Automation", "Advanced functions, modules, scheduled tasks, remoting and AD.", "powershell";
                 "p4_01_advanced_functions.md", "p4_02_scripts_modules.md", "p4_03_remoting_ad.md"),
             module!(Expert, "5 · Professional PowerShell", "Classes, .NET, testing, style and security.", "powershell";
@@ -185,8 +186,8 @@ pub fn bash() -> Track {
                 "l1_01_variables.md", "l1_02_conditions.md", "l1_03_loops.md", "l1_04_functions.md", "l1_05_expansion.md", "l1_06_arrays.md"),
             module!(Intermediate, "2 · Text Power Tools", "Pipes, redirection, grep, sed, awk, find and archives.", "bash";
                 "l2_01_pipes.md", "l2_02_grep_sed_awk.md", "l2_03_find.md", "l2_04_redirection_deep.md", "l2_05_regex.md"),
-            module!(Intermediate, "3 · Linux Administration", "Permissions, processes, systemd, logs and networking.", "bash";
-                "l3_01_permissions.md", "l3_02_processes.md", "l3_03_networking.md"),
+            module!(Intermediate, "3 · Linux Administration", "Permissions, processes, systemd, logs, networking, SSH and rsync.", "bash";
+                "l3_01_permissions.md", "l3_02_processes.md", "l3_03_networking.md", "l3_04_ssh_rsync.md"),
             module!(Advanced, "4 · Automation and Servers", "Robust scripts, scheduling, packages, disks and hardening.", "bash";
                 "l4_01_robust_scripts.md", "l4_02_cron.md", "l4_03_packages_storage.md"),
             module!(Expert, "5 · Containers and Expert Bash", "Docker, associative arrays, parallel jobs and Git.", "bash";
@@ -286,8 +287,8 @@ pub fn typescript() -> Track {
                 "t1_01_types.md", "t1_02_objects_interfaces.md", "t1_03_tuples_literals.md"),
             module!(Intermediate, "2 · Functions and Narrowing", "Generics, discriminated unions and type guards.", "typescript";
                 "t2_01_functions_generics.md", "t2_02_narrowing.md", "t2_03_function_types.md"),
-            module!(Advanced, "3 · Real-World TypeScript", "Classes, utility types, async code, APIs and modules.", "typescript";
-                "t3_01_classes_utility.md", "t3_02_async_modules.md"),
+            module!(Advanced, "3 · Real-World TypeScript", "Classes, utility types, async code, APIs, modules, iterators and generators.", "typescript";
+                "t3_01_classes_utility.md", "t3_02_async_modules.md", "t3_03_iterators_generators.md"),
             module!(Expert, "4 · Professional TypeScript", "tsconfig, testing, declarations, migration and runtime validation.", "typescript";
                 "t4_01_professional.md"),
             module!(Expert, "5 · Application Architecture", "Domain modeling with types, ports and adapters, events, and full-stack TypeScript.", "typescript";
@@ -325,7 +326,7 @@ pub fn html() -> Track {
             module!(Novice, "0 · Getting Started", "Elements, tags and the skeleton of every page.", "html";
                 "h0_01_welcome.md"),
             module!(Novice, "1 · HTML Content", "Links, images, lists, tables, forms, text semantics, media and validation.", "html";
-                "h1_01_content.md", "h1_02_forms.md", "h1_03_text_semantics.md", "h1_04_media.md", "h1_05_forms_deep.md"),
+                "h1_01_content.md", "h1_02_forms.md", "h1_03_text_semantics.md", "h1_04_media.md", "h1_05_forms_deep.md", "h1_06_tables.md"),
             module!(Intermediate, "2 · CSS", "Selectors, the box model, flexbox and grid, the cascade, units, typography and colour.", "html";
                 "h2_01_css_basics.md", "h2_02_layout.md", "h2_03_cascade.md", "h2_04_selectors.md", "h2_05_typography.md"),
             module!(Advanced, "3 · Modern Web Pages", "Responsive design, dark mode, semantics, accessibility, positioning and stacking.", "html";
@@ -333,7 +334,7 @@ pub fn html() -> Track {
             module!(Expert, "4 · Professional Front End", "Web security (XSS, CSP), performance and publishing.", "html";
                 "h4_01_professional.md"),
             module!(Expert, "5 · Web Applications", "The DOM, events, state and render, fetch, storage, routing, components, accessibility and PWAs.", "html";
-                "h5_01_dom_state.md", "h5_02_data.md", "h5_03_apps.md"),
+                "h5_01_dom_state.md", "h5_02_data.md", "h5_03_apps.md", "h5_04_offline_storage.md"),
             module!(Expert, "6 · CSS in Depth", "Grid areas and subgrid, transitions and keyframes, container queries and logical properties, tokens, BEM and cascade layers, SVG icons, and a dashboard.", "html";
                 "e6_01_grid_deep.md", "e6_02_animation.md", "e6_03_modern_responsive.md", "e6_04_architecture.md", "e6_05_svg_icons.md", "e6_06_project.md"),
             module!(Expert, "7 · Production Front End", "Accessibility patterns and focus, Core Web Vitals and loading, form validation UX, testing and audits, SEO, i18n and Japanese typography, and an accessible request form.", "html";
@@ -366,8 +367,9 @@ pub fn go() -> Track {
                 "g0_01_welcome.md", "g0_02_toolchain_constants.md"),
             module!(Novice, "1 · Fundamentals", "Types, strings, control flow, functions and errors.", "go";
                 "g1_01_basics.md", "g1_02_functions_errors.md", "g1_03_pointers_values.md", "g1_04_strings_runes.md"),
-            module!(Intermediate, "2 · Data", "Slices, maps, structs, methods and interfaces.", "go";
-                "g2_01_slices_maps.md", "g2_02_structs_interfaces.md", "g2_03_slices_deep.md"),
+            module!(Intermediate, "2 · Data", "Slices, maps, structs, methods and interfaces, text templates and regular expressions.", "go";
+                "g2_01_slices_maps.md", "g2_02_structs_interfaces.md", "g2_03_slices_deep.md",
+                "g2_04_templates_regexp.md"),
             module!(Advanced, "3 · Concurrency and Networks", "Goroutines, channels, worker pools, HTTP and JSON.", "go";
                 "g3_01_concurrency.md", "g3_02_http_json.md"),
             module!(Expert, "4 · Professional Go", "Modules, table-driven tests, generics and shipping binaries.", "go";

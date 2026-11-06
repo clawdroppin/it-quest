@@ -194,3 +194,68 @@ function loadConfig(env: Record<string, string | undefined>): Config {
   if (problems.length > 0 || !dbUrl || !isLevel(level)) throw new Error(problems.join("; "));
   return { port, logLevel: level, dbUrl };
 }
+
+@@exercise Compare versions and check ranges
+Package managers decide which versions are acceptable from ranges in `package.json`. Write `parse(v)` for `MAJOR.MINOR.PATCH` (returning a tuple, and throwing `Error("bad version: <v>")` for anything else), `compare(a, b)` returning -1, 0 or 1, and `satisfies(v, range)` for three range forms: an exact version `1.2.3`, a caret `^1.2.3` (same major, at least that version; for `0.x`, the same minor too) and a tilde `~1.2.3` (same major and minor, at least that version). Pre-release tags are out of scope.
+@@starter
+type Version = [number, number, number];
+
+function parse(v: string): Version {
+  throw new Error("TODO: not done yet");
+}
+
+function compare(a: string, b: string): -1 | 0 | 1 {
+  throw new Error("TODO: not done yet");
+}
+
+function satisfies(v: string, range: string): boolean {
+  throw new Error("TODO: not done yet");
+}
+
+@@tests
+check(parse("10.2.33"), [10, 2, 33], "parse");
+let message = "";
+try { parse("1.2"); } catch (e) { message = (e as Error).message; }
+check(message, "bad version: 1.2", "parse rejects bad input");
+check(compare("1.10.0", "1.9.9"), 1, "numeric, not string, comparison");
+check(compare("2.0.0", "2.0.0"), 0, "equal");
+check(["1.10.0", "1.2.0", "0.9.1", "1.2.10"].sort(compare), ["0.9.1", "1.2.0", "1.2.10", "1.10.0"], "sort with compare");
+check(satisfies("1.4.0", "^1.2.3"), true, "caret allows newer minor");
+check(satisfies("2.0.0", "^1.2.3"), false, "caret blocks the next major");
+check(satisfies("1.2.2", "^1.2.3"), false, "caret blocks older versions");
+check(satisfies("0.3.9", "^0.3.1"), true, "caret on 0.x allows patches");
+check(satisfies("0.4.0", "^0.3.1"), false, "caret on 0.x blocks the next minor");
+check(satisfies("1.2.9", "~1.2.3"), true, "tilde allows patches");
+check(satisfies("1.3.0", "~1.2.3"), false, "tilde blocks the next minor");
+check(satisfies("1.2.3", "1.2.3"), true, "exact match");
+@@hint
+`parse` can use `/^(\d+)\.(\d+)\.(\d+)$/` and `Number`. `compare` loops over the three parts. In `satisfies`, strip a leading `^` or `~` to get the base; the version must be `compare(v, base) >= 0`, then check the parts that must stay the same: tilde keeps major and minor; caret keeps major, plus minor when the base major is 0.
+@@solution
+type Version = [number, number, number];
+
+function parse(v: string): Version {
+  const m = /^(\d+)\.(\d+)\.(\d+)$/.exec(v);
+  if (!m) throw new Error(`bad version: ${v}`);
+  return [Number(m[1]), Number(m[2]), Number(m[3])];
+}
+
+function compare(a: string, b: string): -1 | 0 | 1 {
+  const pa = parse(a);
+  const pb = parse(b);
+  for (let i = 0; i < 3; i++) {
+    if (pa[i] !== pb[i]) return pa[i] < pb[i] ? -1 : 1;
+  }
+  return 0;
+}
+
+function satisfies(v: string, range: string): boolean {
+  const op = range[0] === "^" || range[0] === "~" ? range[0] : "";
+  const base = range.slice(op.length);
+  if (op === "") return compare(v, base) === 0;
+  if (compare(v, base) < 0) return false;
+  const [vMajor, vMinor] = parse(v);
+  const [bMajor, bMinor] = parse(base);
+  if (op === "~") return vMajor === bMajor && vMinor === bMinor;
+  if (bMajor === 0) return vMajor === 0 && vMinor === bMinor;
+  return vMajor === bMajor;
+}
