@@ -926,3 +926,7 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - fe2_03_graphs_rpn: stacks, queues, 逆ポーランド記法, traversal orders, adjacency matrices, BFS, Dijkstra; shunting-yard and RPN evaluation, BFS and Dijkstra.
 - fe3_04_security_hands_on: salts and stretching, key roles, HMAC vs signatures, access control, log patterns; PBKDF2 storage, login attack classifier.
 - Exercises appended to fe0_01 (pass estimate) and fe4_01 (arrow diagram critical path).
+
+### azure (now 12 lessons, 20 exercises, 69 quizzes, ~23.7k words)
+- az2_06_apps_keyvault: App Service tiers and slots, Functions hosting plans, ACI/Container Apps/AKS/ACR, managed identities, Key Vault RBAC, soft delete and purge protection; tier choice and slot swap, Functions cost, Key Vault access and recovery.
+- Exercises appended to az0_01 (composite SLA), az1_01 (database choice), az1_02 (Conditional Access), az1_04 (budget forecast alerts) and az2_05 (stateful metric alert).

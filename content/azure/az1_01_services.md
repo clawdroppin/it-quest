@@ -133,3 +133,59 @@ Cosmos DB :: Global multi-model NoSQL
 Which storage redundancy keeps three copies within a single data centre? (abbreviation)
 = LRS
 ? Locally redundant storage: cheapest, least resilient.
+
+@@exercise Choose a database service
+Choose an Azure database service for each workload with simple rules: SQL Server features such as SQL Agent jobs, cross-database queries or CLR mean **Azure SQL Managed Instance**; a lift-and-shift needing OS access means **SQL Server on an Azure VM**; global distribution with multi-region writes or a document model means **Azure Cosmos DB**; PostgreSQL or MySQL apps use the **Azure Database for PostgreSQL/MySQL flexible server**; otherwise a new relational app gets **Azure SQL Database**, on the serverless tier if usage is intermittent.
+@@lang python
+@@starter
+workloads = {
+    "HR app (new, relational, busy 9-18 only)": {"engine": "sqlserver", "intermittent": True},
+    "Legacy ERP using SQL Agent and cross-db queries": {"engine": "sqlserver", "features": {"sql_agent", "cross_db"}},
+    "Global shopping cart, writes in Tokyo and Frankfurt": {"model": "document", "multi_region_writes": True},
+    "Django site on PostgreSQL": {"engine": "postgresql"},
+    "Vendor app that needs a custom OS agent on the DB server": {"engine": "sqlserver", "os_access": True},
+    "New order system, steady load": {"engine": "sqlserver"},
+}
+
+def choose(w):
+    raise NotImplementedError
+
+for name, w in workloads.items():
+    print(f"{name:<55} -> {choose(w)}")
+@@expected
+HR app (new, relational, busy 9-18 only)                -> Azure SQL Database (serverless)
+Legacy ERP using SQL Agent and cross-db queries         -> Azure SQL Managed Instance
+Global shopping cart, writes in Tokyo and Frankfurt     -> Azure Cosmos DB
+Django site on PostgreSQL                               -> Azure Database for PostgreSQL flexible server
+Vendor app that needs a custom OS agent on the DB server -> SQL Server on an Azure VM
+New order system, steady load                           -> Azure SQL Database
+@@requires
+def choose
+"Azure SQL Managed Instance"
+@@hint
+Check the rules in this order: `os_access`, then multi-region writes or a document model, then the PostgreSQL/MySQL engines, then any of the SQL Server instance features, and finally Azure SQL Database (serverless if `intermittent`). Use `w.get(key)` so missing keys are fine.
+@@solution
+INSTANCE_FEATURES = {"sql_agent", "cross_db", "clr", "service_broker"}
+
+workloads = {
+    "HR app (new, relational, busy 9-18 only)": {"engine": "sqlserver", "intermittent": True},
+    "Legacy ERP using SQL Agent and cross-db queries": {"engine": "sqlserver", "features": {"sql_agent", "cross_db"}},
+    "Global shopping cart, writes in Tokyo and Frankfurt": {"model": "document", "multi_region_writes": True},
+    "Django site on PostgreSQL": {"engine": "postgresql"},
+    "Vendor app that needs a custom OS agent on the DB server": {"engine": "sqlserver", "os_access": True},
+    "New order system, steady load": {"engine": "sqlserver"},
+}
+
+def choose(w):
+    if w.get("os_access"):
+        return "SQL Server on an Azure VM"
+    if w.get("multi_region_writes") or w.get("model") == "document":
+        return "Azure Cosmos DB"
+    if w.get("engine") in ("postgresql", "mysql"):
+        return f"Azure Database for {'PostgreSQL' if w['engine'] == 'postgresql' else 'MySQL'} flexible server"
+    if w.get("features", set()) & INSTANCE_FEATURES:
+        return "Azure SQL Managed Instance"
+    return "Azure SQL Database" + (" (serverless)" if w.get("intermittent") else "")
+
+for name, w in workloads.items():
+    print(f"{name:<55} -> {choose(w)}")

@@ -266,3 +266,66 @@ for target, op in operations:
     else:
         ok = True
     print(f"{op:<8} {target:<30} lock={lock or 'none':<24} {'succeeds' if ok else 'blocked'}")
+
+@@exercise Budget alerts on actual and forecast spend
+A budget can alert on **actual** cost and on **forecasted** cost. Using the daily costs so far this month, forecast the month-end total with a simple linear projection, and print which alert thresholds (50%, 80%, 100% of the budget, each on actual and on forecast) have fired.
+@@lang python
+@@starter
+import calendar
+from datetime import date
+
+budget = 400_000
+today = date(2026, 6, 12)
+daily = [9_800, 10_200, 11_000, 10_500, 12_000, 18_500, 19_000, 18_800, 19_500, 20_100, 19_900, 20_400]
+THRESHOLDS = [0.5, 0.8, 1.0]
+
+def forecast(daily, today):
+    raise NotImplementedError
+
+def fired(actual, projected):
+    raise NotImplementedError
+
+actual = sum(daily)
+projected = forecast(daily, today)
+print(f"actual so far ¥{actual:,} ({actual / budget:.0%}), forecast ¥{projected:,.0f} ({projected / budget:.0%})")
+for alert in fired(actual, projected):
+    print("alert:", alert)
+@@expected
+actual so far ¥189,700 (47%), forecast ¥539,929 (135%)
+alert: forecast cost will reach 50% of the budget
+alert: forecast cost will reach 80% of the budget
+alert: forecast cost will reach 100% of the budget
+@@requires
+def forecast
+def fired
+monthrange(
+@@hint
+Days in the month come from `calendar.monthrange(today.year, today.month)[1]`. A linear projection is `actual + average of the last 7 days × remaining days` (the recent days reflect the new, higher spend). An alert fires when `actual >= t * budget` (type "actual") or `projected >= t * budget` (type "forecast").
+@@solution
+import calendar
+from datetime import date
+
+budget = 400_000
+today = date(2026, 6, 12)
+daily = [9_800, 10_200, 11_000, 10_500, 12_000, 18_500, 19_000, 18_800, 19_500, 20_100, 19_900, 20_400]
+THRESHOLDS = [0.5, 0.8, 1.0]
+
+def forecast(daily, today):
+    days = calendar.monthrange(today.year, today.month)[1]
+    recent = daily[-7:]
+    return sum(daily) + sum(recent) / len(recent) * (days - len(daily))
+
+def fired(actual, projected):
+    alerts = []
+    for t in THRESHOLDS:
+        if actual >= t * budget:
+            alerts.append(f"actual cost reached {t:.0%} of the budget")
+        if projected >= t * budget:
+            alerts.append(f"forecast cost will reach {t:.0%} of the budget")
+    return alerts
+
+actual = sum(daily)
+projected = forecast(daily, today)
+print(f"actual so far ¥{actual:,} ({actual / budget:.0%}), forecast ¥{projected:,.0f} ({projected / budget:.0%})")
+for alert in fired(actual, projected):
+    print("alert:", alert)

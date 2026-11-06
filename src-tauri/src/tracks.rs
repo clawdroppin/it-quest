@@ -1043,9 +1043,9 @@ pub fn knowledge() -> Vec<Track> {
                     "az0_01_concepts.md"),
                 module!(Intermediate, "1 · Services and Governance", "Compute, networking, storage, Entra ID, RBAC inheritance, Policy effects, locks and cost.", "azure";
                     "az1_01_services.md", "az1_02_identity_governance.md", "az1_03_entra_rbac.md", "az1_04_policy_cost.md"),
-                module!(Advanced, "2 · Administration (AZ-104)", "Az PowerShell, CLI and Bicep; storage, compute, networking, monitoring and backup in depth.", "azure";
+                module!(Advanced, "2 · Administration (AZ-104)", "Az PowerShell, CLI and Bicep; storage, compute, networking, monitoring and backup in depth, plus App Service, Functions, containers and Key Vault.", "azure";
                     "az2_01_admin.md", "az2_02_storage_deep.md", "az2_03_compute_deep.md", "az2_04_networking_deep.md",
-                    "az2_05_monitor_backup.md"),
+                    "az2_05_monitor_backup.md", "az2_06_apps_keyvault.md"),
                 build!(Advanced, "🧾 Governance Audit", "Find untagged spend, open ports and public data with PowerShell, then enforce it with Policy.", "azure";
                     "az9_01_governance_lab.md"),
                 // generated project ideas azure

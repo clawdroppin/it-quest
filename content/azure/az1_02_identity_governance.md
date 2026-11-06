@@ -131,3 +131,80 @@ composite SLA :: Multiply the SLAs of dependent services
 Which built-in Azure role can manage everything, including granting access to others?
 = Owner
 ? Contributor can manage resources but not access.
+
+@@exercise Evaluate Conditional Access policies
+Evaluate sign-ins against Conditional Access policies. Each policy has conditions (users, apps, locations, client type) and a grant control: block, or require MFA and/or a compliant device. A sign-in must satisfy **every** policy that applies, and any applicable block wins. Print the outcome for each sign-in.
+@@lang python
+@@starter
+policies = [
+    {"name": "Block legacy auth", "users": "all", "apps": "all", "client": "legacy", "locations": "any", "grant": {"block"}},
+    {"name": "MFA outside office", "users": "all", "apps": "all", "client": "modern", "locations": "untrusted", "grant": {"mfa"}},
+    {"name": "Admins: MFA + compliant device", "users": "admins", "apps": "azure-portal", "client": "modern", "locations": "any", "grant": {"mfa", "compliant"}},
+]
+signins = [
+    {"user": "aiko", "admin": False, "app": "outlook", "client": "modern", "trusted": True, "mfa": False, "compliant": False},
+    {"user": "aiko", "admin": False, "app": "outlook", "client": "modern", "trusted": False, "mfa": True, "compliant": False},
+    {"user": "ben", "admin": False, "app": "outlook", "client": "legacy", "trusted": True, "mfa": False, "compliant": True},
+    {"user": "chen", "admin": True, "app": "azure-portal", "client": "modern", "trusted": True, "mfa": True, "compliant": False},
+    {"user": "chen", "admin": True, "app": "azure-portal", "client": "modern", "trusted": False, "mfa": True, "compliant": True},
+]
+
+def applies(policy, s):
+    raise NotImplementedError
+
+def evaluate(s):
+    raise NotImplementedError
+
+for s in signins:
+    where = "office" if s["trusted"] else "outside"
+    print(f"{s['user']:<5} {s['app']:<13} {s['client']:<7} {where:<8} -> {evaluate(s)}")
+@@expected
+aiko  outlook       modern  office   -> granted (no policy applies)
+aiko  outlook       modern  outside  -> granted (1 policy satisfied)
+ben   outlook       legacy  office   -> BLOCKED by Block legacy auth
+chen  azure-portal  modern  office   -> needs compliant device
+chen  azure-portal  modern  outside  -> granted (2 policies satisfied)
+@@requires
+def applies
+def evaluate
+"block" in
+@@hint
+A policy applies when the users match (`"all"`, or `"admins"` and the user is an admin), the app matches (`"all"` or equal), the client type matches, and the location matches (`"any"`, or `"untrusted"` and the sign-in isn't trusted). In `evaluate`, collect the applicable policies; if any has `"block" in grant`, the result is blocked; otherwise list the unmet requirements (mfa, compliant device), or "granted".
+@@solution
+policies = [
+    {"name": "Block legacy auth", "users": "all", "apps": "all", "client": "legacy", "locations": "any", "grant": {"block"}},
+    {"name": "MFA outside office", "users": "all", "apps": "all", "client": "modern", "locations": "untrusted", "grant": {"mfa"}},
+    {"name": "Admins: MFA + compliant device", "users": "admins", "apps": "azure-portal", "client": "modern", "locations": "any", "grant": {"mfa", "compliant"}},
+]
+signins = [
+    {"user": "aiko", "admin": False, "app": "outlook", "client": "modern", "trusted": True, "mfa": False, "compliant": False},
+    {"user": "aiko", "admin": False, "app": "outlook", "client": "modern", "trusted": False, "mfa": True, "compliant": False},
+    {"user": "ben", "admin": False, "app": "outlook", "client": "legacy", "trusted": True, "mfa": False, "compliant": True},
+    {"user": "chen", "admin": True, "app": "azure-portal", "client": "modern", "trusted": True, "mfa": True, "compliant": False},
+    {"user": "chen", "admin": True, "app": "azure-portal", "client": "modern", "trusted": False, "mfa": True, "compliant": True},
+]
+
+def applies(policy, s):
+    users_ok = policy["users"] == "all" or (policy["users"] == "admins" and s["admin"])
+    app_ok = policy["apps"] in ("all", s["app"])
+    client_ok = policy["client"] == s["client"]
+    location_ok = policy["locations"] == "any" or (policy["locations"] == "untrusted" and not s["trusted"])
+    return users_ok and app_ok and client_ok and location_ok
+
+def evaluate(s):
+    matching = [p for p in policies if applies(p, s)]
+    if any("block" in p["grant"] for p in matching):
+        return "BLOCKED by " + ", ".join(p["name"] for p in matching if "block" in p["grant"])
+    missing = set()
+    for p in matching:
+        if "mfa" in p["grant"] and not s["mfa"]:
+            missing.add("MFA")
+        if "compliant" in p["grant"] and not s["compliant"]:
+            missing.add("compliant device")
+    if missing:
+        return "needs " + " and ".join(sorted(missing))
+    return "granted" + (f" ({len(matching)} {'policy' if len(matching) == 1 else 'policies'} satisfied)" if matching else " (no policy applies)")
+
+for s in signins:
+    where = "office" if s["trusted"] else "outside"
+    print(f"{s['user']:<5} {s['app']:<13} {s['client']:<7} {where:<8} -> {evaluate(s)}")

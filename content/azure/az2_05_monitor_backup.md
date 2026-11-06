@@ -269,3 +269,48 @@ for rule, n in counts.items():
     print(f"{rule:<8} {n}")
 print("Total recovery points:", len(kept))
 print("Oldest kept:", min(kept), "kept by", ", ".join(kept_by(min(kept))))
+
+@@exercise Evaluate a stateful metric alert
+A metric alert checks the **average CPU over the last 5 minutes**, evaluated **every minute**, and fires when it's above 80%. It's stateful: it fires once when the condition becomes true and resolves only after the condition has been false for **3 consecutive evaluations**. Walk through per-minute CPU samples and print when the alert fires and resolves.
+@@lang python
+@@starter
+cpu = [40, 45, 50, 85, 95, 97, 99, 92, 90, 70, 60, 85, 50, 40, 35, 30, 30, 30, 30, 30]
+WINDOW, THRESHOLD, RESOLVE_AFTER = 5, 80, 3
+
+def evaluate(samples):
+    raise NotImplementedError
+
+for minute, avg, event in evaluate(cpu):
+    print(f"minute {minute:>2}: avg {avg:5.1f}%  {event}")
+@@expected
+minute  7: avg  85.2%  FIRED
+minute 14: avg  61.0%  RESOLVED (below threshold for 3 evaluations)
+@@requires
+def evaluate
+RESOLVE_AFTER
+@@hint
+Start at minute `WINDOW` (index `WINDOW - 1`) so a full window exists; `avg = sum(samples[m - WINDOW + 1 : m + 1]) / WINDOW`. Keep `firing` and a counter of consecutive false evaluations. When not firing and avg > THRESHOLD, fire. When firing, reset the counter if the condition is true, otherwise increase it and resolve when it reaches RESOLVE_AFTER. Report only the evaluations where something happens.
+@@solution
+cpu = [40, 45, 50, 85, 95, 97, 99, 92, 90, 70, 60, 85, 50, 40, 35, 30, 30, 30, 30, 30]
+WINDOW, THRESHOLD, RESOLVE_AFTER = 5, 80, 3
+
+def evaluate(samples):
+    events, firing, clear = [], False, 0
+    for m in range(WINDOW - 1, len(samples)):
+        avg = sum(samples[m - WINDOW + 1 : m + 1]) / WINDOW
+        breach = avg > THRESHOLD
+        if not firing and breach:
+            firing, clear = True, 0
+            events.append((m + 1, avg, "FIRED"))
+        elif firing:
+            if breach:
+                clear = 0
+            else:
+                clear += 1
+                if clear == RESOLVE_AFTER:
+                    firing = False
+                    events.append((m + 1, avg, f"RESOLVED (below threshold for {RESOLVE_AFTER} evaluations)"))
+    return events
+
+for minute, avg, event in evaluate(cpu):
+    print(f"minute {minute:>2}: avg {avg:5.1f}%  {event}")

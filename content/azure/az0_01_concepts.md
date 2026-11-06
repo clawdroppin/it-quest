@@ -100,3 +100,60 @@ Azure Arc :: Manage resources outside Azure
 What is the container in Azure that you delete to remove a whole project's resources at once? (two words)
 = resource group
 ? Resources can be moved between groups, but each is in exactly one.
+
+@@exercise Composite SLAs
+Work out the availability of an architecture: services that all must work multiply their SLAs (in series), and redundant copies that can each serve traffic combine as 1 − (1 − a)ⁿ (in parallel). Compute the composite SLA for a single-region design and for an active-active design across two regions behind Front Door, and the downtime each allows per month (30 days).
+@@lang python
+@@starter
+SLA = {"front_door": 0.9999, "app_service": 0.9995, "sql_db": 0.9999, "storage": 0.999}
+
+def series(*slas):
+    raise NotImplementedError
+
+def parallel(sla, copies):
+    raise NotImplementedError
+
+def downtime_minutes(sla, days=30):
+    return (1 - sla) * days * 24 * 60
+
+region = series(SLA["app_service"], SLA["sql_db"], SLA["storage"])
+designs = {
+    "single region": region,
+    "single region + Front Door": series(SLA["front_door"], region),
+    "two regions active-active": series(SLA["front_door"], parallel(region, 2)),
+}
+for name, sla in designs.items():
+    print(f"{name:<28} {sla * 100:.4f}%  ~{downtime_minutes(sla):6.1f} min/month")
+@@expected
+single region                99.8401%  ~  69.1 min/month
+single region + Front Door   99.8301%  ~  73.4 min/month
+two regions active-active    99.9897%  ~   4.4 min/month
+@@requires
+def series
+def parallel
+** copies
+@@hint
+`series` multiplies all the values together (start from 1.0). `parallel` is `1 - (1 - sla) ** copies`.
+@@solution
+SLA = {"front_door": 0.9999, "app_service": 0.9995, "sql_db": 0.9999, "storage": 0.999}
+
+def series(*slas):
+    result = 1.0
+    for s in slas:
+        result *= s
+    return result
+
+def parallel(sla, copies):
+    return 1 - (1 - sla) ** copies
+
+def downtime_minutes(sla, days=30):
+    return (1 - sla) * days * 24 * 60
+
+region = series(SLA["app_service"], SLA["sql_db"], SLA["storage"])
+designs = {
+    "single region": region,
+    "single region + Front Door": series(SLA["front_door"], region),
+    "two regions active-active": series(SLA["front_door"], parallel(region, 2)),
+}
+for name, sla in designs.items():
+    print(f"{name:<28} {sla * 100:.4f}%  ~{downtime_minutes(sla):6.1f} min/month")
