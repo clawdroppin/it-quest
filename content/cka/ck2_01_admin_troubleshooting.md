@@ -150,3 +150,81 @@ kubectl apply -k :: apply a Kustomize directory
 @@drill
 Which port does etcd listen on for clients?
 = 2379
+
+@@exercise Diagnose node conditions
+`kubectl describe node` shows **conditions**: `Ready` should be True, and `MemoryPressure`, `DiskPressure`, `PIDPressure` and `NetworkUnavailable` should be False. When the kubelet stops reporting, `Ready` becomes **Unknown**. Diagnose each node from its conditions and taints, and print the likely cause and the first commands to run on the node.
+@@lang python
+@@starter
+nodes = {
+    "cp1": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": []},
+    "w1": {"Ready": "Unknown", "MemoryPressure": "Unknown", "DiskPressure": "Unknown", "PIDPressure": "Unknown", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/unreachable"]},
+    "w2": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "True", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/disk-pressure"]},
+    "w3": {"Ready": "False", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "True", "taints": ["node.kubernetes.io/not-ready"]},
+    "w4": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/unschedulable"]},
+}
+
+def diagnose(name, c):
+    raise NotImplementedError
+
+for name, conditions in nodes.items():
+    cause, commands = diagnose(name, conditions)
+    print(f"{name}: {cause}")
+    for cmd in commands:
+        print(f"    {cmd}")
+@@expected
+cp1: healthy
+w1: kubelet stopped posting status (kubelet down, node off, or network cut)
+    ssh w1
+    systemctl status kubelet
+    journalctl -u kubelet --since -15m
+w2: disk is nearly full; the kubelet is evicting Pods and garbage-collecting images
+    df -h /var/lib/kubelet /var/lib/containerd
+    crictl rmi --prune
+w3: pod network not configured: CNI plugin missing or broken
+    ls /etc/cni/net.d /opt/cni/bin
+    kubectl get pods -n kube-system -o wide | grep w3
+w4: cordoned: running Pods stay, new Pods won't be scheduled
+    kubectl uncordon w4  # once maintenance is finished
+@@requires
+def diagnose
+== "Unknown"
+@@hint
+Check in order: `Ready == "Unknown"` (the kubelet stopped posting status: check `systemctl status kubelet` and `journalctl -u kubelet`); `NetworkUnavailable == "True"` (CNI: look at `/etc/cni/net.d` and the CNI Pods); each pressure condition (free disk, memory or PIDs; the kubelet is evicting Pods); the `unschedulable` taint (the node was cordoned: `kubectl uncordon`); otherwise healthy.
+@@solution
+nodes = {
+    "cp1": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": []},
+    "w1": {"Ready": "Unknown", "MemoryPressure": "Unknown", "DiskPressure": "Unknown", "PIDPressure": "Unknown", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/unreachable"]},
+    "w2": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "True", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/disk-pressure"]},
+    "w3": {"Ready": "False", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "True", "taints": ["node.kubernetes.io/not-ready"]},
+    "w4": {"Ready": "True", "MemoryPressure": "False", "DiskPressure": "False", "PIDPressure": "False", "NetworkUnavailable": "False", "taints": ["node.kubernetes.io/unschedulable"]},
+}
+
+PRESSURE = {
+    "DiskPressure": ("disk is nearly full; the kubelet is evicting Pods and garbage-collecting images",
+                     ["df -h /var/lib/kubelet /var/lib/containerd", "crictl rmi --prune"]),
+    "MemoryPressure": ("memory is low; the kubelet is evicting BestEffort and Burstable Pods first",
+                       ["free -m", "kubectl top pods -A --sort-by=memory"]),
+    "PIDPressure": ("too many processes; a Pod may be fork-bombing",
+                    ["ps -e --no-headers | wc -l", "kubectl describe node {n}"]),
+}
+
+def diagnose(name, c):
+    if c["Ready"] == "Unknown":
+        return ("kubelet stopped posting status (kubelet down, node off, or network cut)",
+                ["ssh " + name, "systemctl status kubelet", "journalctl -u kubelet --since -15m"])
+    if c["NetworkUnavailable"] == "True":
+        return ("pod network not configured: CNI plugin missing or broken",
+                ["ls /etc/cni/net.d /opt/cni/bin", "kubectl get pods -n kube-system -o wide | grep " + name])
+    for condition, (cause, commands) in PRESSURE.items():
+        if c[condition] == "True":
+            return cause, [cmd.format(n=name) for cmd in commands]
+    if "node.kubernetes.io/unschedulable" in c["taints"]:
+        return ("cordoned: running Pods stay, new Pods won't be scheduled",
+                [f"kubectl uncordon {name}  # once maintenance is finished"])
+    return "healthy", []
+
+for name, conditions in nodes.items():
+    cause, commands = diagnose(name, conditions)
+    print(f"{name}: {cause}")
+    for cmd in commands:
+        print(f"    {cmd}")

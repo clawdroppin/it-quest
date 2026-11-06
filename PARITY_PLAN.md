@@ -944,3 +944,7 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 ### cloud (now 12 lessons, 20 exercises, 70 quizzes, ~24.4k words)
 - cl3_04_storage_data: block/file/object, durability vs availability, storage classes and lifecycle, managed databases, CAP, partitioning and consistent hashing, egress and bulk transfer, data protection; lifecycle cost simulator, modulo vs consistent hashing.
 - Exercise appended to cl2_02 (circuit breaker state machine).
+
+### cka (now 12 lessons, 20 exercises, 63 quizzes, ~26k words)
+- ck2_04_helm_kustomize_extensions: Helm releases, revisions and value precedence, --reuse-values, Kustomize bases/overlays, generators and patches, CRDs and operators, admission phases and webhooks, CNI/CSI/CRI troubleshooting; Helm values resolver, Kustomize overlay builder.
+- Exercises appended to ck0_01 (triage kubectl get pods output) and ck2_01 (diagnose node conditions).

@@ -131,3 +131,108 @@ Secret :: base64, not encrypted by default
 Which directory holds the static pod manifests on a kubeadm node?
 = /etc/kubernetes/manifests
 = /etc/kubernetes/manifests/
+
+@@exercise Triage kubectl get pods output
+On the exam, the first look at a broken namespace is `kubectl get pods -A`. Parse that output and report the Pods that need attention: any whose READY count is short (for example `0/1` or `1/2`), whose STATUS isn't `Running` or `Completed`, or that have restarted more than 5 times. Print a count per namespace and the first command you'd run next for each problem Pod.
+@@lang python
+@@starter
+OUTPUT = """NAMESPACE     NAME                              READY   STATUS             RESTARTS        AGE
+kube-system   coredns-7db6d8ff4d-2xkqp          1/1     Running            0               3d
+kube-system   kube-proxy-8k2lw                  1/1     Running            0               3d
+kube-system   etcd-controlplane                 1/1     Running            2 (3d ago)      3d
+shop          web-6d4cf56db6-9tq7x              1/1     Running            0               2h
+shop          web-6d4cf56db6-k2l5n              0/1     CrashLoopBackOff   14 (2m ago)     2h
+shop          api-5f8b7c9d4-x7wq2               1/2     Running            0               40m
+shop          migrate-8hx2c                     0/1     Completed          0               2h
+shop          worker-77d9c5b6f-q4rtz            0/1     ImagePullBackOff   0               15m
+monitoring    prometheus-0                      1/1     Running            9 (1h ago)      5d
+monitoring    grafana-6b9f5c7d8-zz8m4           0/1     Pending            0               10m"""
+
+def parse(output):
+    raise NotImplementedError
+
+def problems(pod):
+    raise NotImplementedError
+
+NEXT = {"CrashLoopBackOff": "kubectl logs {name} -n {ns} --previous",
+        "ImagePullBackOff": "kubectl describe pod {name} -n {ns}  # check the image name and pull secret",
+        "Pending": "kubectl describe pod {name} -n {ns}  # read the scheduler events",
+        "not ready": "kubectl describe pod {name} -n {ns}  # check the readiness probe",
+        "restarts": "kubectl logs {name} -n {ns} --previous"}
+
+pods = parse(OUTPUT)
+per_ns = {}
+for pod in pods:
+    issues = problems(pod)
+    if not issues:
+        continue
+    per_ns[pod["ns"]] = per_ns.get(pod["ns"], 0) + 1
+    print(f"{pod['ns']}/{pod['name']}: {', '.join(issues)}")
+    print("    next:", NEXT[issues[0]].format(name=pod["name"], ns=pod["ns"]))
+print("problem pods per namespace:", per_ns)
+@@expected
+shop/web-6d4cf56db6-k2l5n: CrashLoopBackOff
+    next: kubectl logs web-6d4cf56db6-k2l5n -n shop --previous
+shop/api-5f8b7c9d4-x7wq2: not ready
+    next: kubectl describe pod api-5f8b7c9d4-x7wq2 -n shop  # check the readiness probe
+shop/worker-77d9c5b6f-q4rtz: ImagePullBackOff
+    next: kubectl describe pod worker-77d9c5b6f-q4rtz -n shop  # check the image name and pull secret
+monitoring/prometheus-0: restarts
+    next: kubectl logs prometheus-0 -n monitoring --previous
+monitoring/grafana-6b9f5c7d8-zz8m4: Pending
+    next: kubectl describe pod grafana-6b9f5c7d8-zz8m4 -n monitoring  # read the scheduler events
+problem pods per namespace: {'shop': 3, 'monitoring': 2}
+@@requires
+def parse
+def problems
+.split("/")
+@@hint
+Skip the header line and split each line on whitespace: namespace, name, ready, status, then the restart count is the next field (the "(2m ago)" part is extra fields you can ignore). Turn READY into two ints with `.split("/")`. A Pod is a problem if its status isn't Running or Completed (use the status as the issue name), if it's Running but ready < total ("not ready"), or if restarts > 5 ("restarts"). Completed Pods are fine at 0/1.
+@@solution
+OUTPUT = """NAMESPACE     NAME                              READY   STATUS             RESTARTS        AGE
+kube-system   coredns-7db6d8ff4d-2xkqp          1/1     Running            0               3d
+kube-system   kube-proxy-8k2lw                  1/1     Running            0               3d
+kube-system   etcd-controlplane                 1/1     Running            2 (3d ago)      3d
+shop          web-6d4cf56db6-9tq7x              1/1     Running            0               2h
+shop          web-6d4cf56db6-k2l5n              0/1     CrashLoopBackOff   14 (2m ago)     2h
+shop          api-5f8b7c9d4-x7wq2               1/2     Running            0               40m
+shop          migrate-8hx2c                     0/1     Completed          0               2h
+shop          worker-77d9c5b6f-q4rtz            0/1     ImagePullBackOff   0               15m
+monitoring    prometheus-0                      1/1     Running            9 (1h ago)      5d
+monitoring    grafana-6b9f5c7d8-zz8m4           0/1     Pending            0               10m"""
+
+def parse(output):
+    pods = []
+    for line in output.splitlines()[1:]:
+        f = line.split()
+        ready, total = (int(x) for x in f[2].split("/"))
+        pods.append({"ns": f[0], "name": f[1], "ready": ready, "total": total,
+                     "status": f[3], "restarts": int(f[4])})
+    return pods
+
+def problems(pod):
+    issues = []
+    if pod["status"] not in ("Running", "Completed"):
+        issues.append(pod["status"])
+    elif pod["status"] == "Running" and pod["ready"] < pod["total"]:
+        issues.append("not ready")
+    if pod["restarts"] > 5 and "CrashLoopBackOff" not in issues:
+        issues.append("restarts")
+    return issues
+
+NEXT = {"CrashLoopBackOff": "kubectl logs {name} -n {ns} --previous",
+        "ImagePullBackOff": "kubectl describe pod {name} -n {ns}  # check the image name and pull secret",
+        "Pending": "kubectl describe pod {name} -n {ns}  # read the scheduler events",
+        "not ready": "kubectl describe pod {name} -n {ns}  # check the readiness probe",
+        "restarts": "kubectl logs {name} -n {ns} --previous"}
+
+pods = parse(OUTPUT)
+per_ns = {}
+for pod in pods:
+    issues = problems(pod)
+    if not issues:
+        continue
+    per_ns[pod["ns"]] = per_ns.get(pod["ns"], 0) + 1
+    print(f"{pod['ns']}/{pod['name']}: {', '.join(issues)}")
+    print("    next:", NEXT[issues[0]].format(name=pod["name"], ns=pod["ns"]))
+print("problem pods per namespace:", per_ns)
