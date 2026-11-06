@@ -142,6 +142,12 @@ What does `println!("{:.2}", 3.14159);` print?
 - 3
 ? .2 means two digits after the decimal point.
 
+@@drill
+Which macro builds a `String` with placeholders, without printing it?
+= format!
+= format
+? let s = format!("{name} is {age}");
+
 @@exercise Café receipt
 Print this receipt **exactly**, using width, alignment and `.2` precision formatting (not by typing the spaces yourself):
 

@@ -123,6 +123,11 @@ Which of these is a `char`?
 - `x`
 ? Single quotes make a `char`. Double quotes make a string. A bare `x` is a variable name.
 
+@@drill
+Which operator means "and" for booleans?
+= &&
+? || means or; ! means not.
+
 @@exercise Can they ride?
 A theme park ride has rules: you must be **at least 140 cm tall**, and **either** be at least 12 years old **or** be with an adult.
 

@@ -1434,3 +1434,10 @@ What is an "invariant"?
 - A variable that can't be changed
 - A type that can't be generic
 ? Keeping invariants in one place (like `delete`) makes the rest of the code simpler and safer.
+
+@@drill
+Which serde_json function turns a struct into a pretty-printed JSON string?
+= to_string_pretty
+= serde_json::to_string_pretty
+? Easy to read and diff.
+

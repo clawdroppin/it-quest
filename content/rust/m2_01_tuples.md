@@ -113,6 +113,11 @@ How do you unpack `let p = (3, 4);` into two variables?
 - `let x = p[0]; let y = p[1];`
 ? This is called destructuring.
 
+@@drill
+How do you get the first element of tuple `t`?
+= t.0
+? Tuple fields are numbered from 0.
+
 @@exercise Divide with remainder
 Write `divide`, which returns **both** the result of integer division and the remainder as a tuple. For example, `divide(17, 5)` returns `(3, 2)`.
 @@starter

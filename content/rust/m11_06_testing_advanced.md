@@ -127,6 +127,12 @@ Which kind of code most needs a fuzz target?
 - Unit tests
 ? Fuzzers find inputs that make parsers panic or hang.
 
+@@drill
+Which folder holds integration tests in a Cargo project?
+= tests
+= tests/
+? Each file there is compiled as its own crate.
+
 @@flashcards
 Unit test :: a test inside `src/` in `#[cfg(test)] mod tests`, can see private items
 Integration test :: a file in `tests/`, compiled as a separate crate against the public API

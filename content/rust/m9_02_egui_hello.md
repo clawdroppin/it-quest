@@ -170,6 +170,11 @@ Why is the first build of an eframe project slow?
 - It downloads Windows updates
 ? The dependencies are built once and cached in `target`.
 
+@@drill
+Which crate runs an egui app in a native window?
+= eframe
+? eframe::run_native(...).
+
 @@flashcards
 eframe :: runs egui apps natively and on the web
 eframe App trait :: implement update() to draw each frame

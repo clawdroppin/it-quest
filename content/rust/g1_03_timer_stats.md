@@ -1359,3 +1359,11 @@ Why does `tasks_on` return a `BTreeMap` and not a `HashMap`?
 - It makes saving faster
 - It resets the settings every time the app starts
 ? Without it, adding a new setting would make every existing save file unreadable.
+
+@@drill
+Which serde derive lets a struct be saved as JSON?
+= Serialize
+= #[derive(Serialize)]
+= serde::Serialize
+? Add Deserialize to load it back.
+

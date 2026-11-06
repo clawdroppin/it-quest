@@ -156,6 +156,11 @@ What does `fn show(item: impl Display)` mean?
 - item is a trait object stored on the heap
 ? It's shorthand for fn show<T: Display>(item: T).
 
+@@drill
+Which keyword moves long trait bounds after the signature?
+= where
+? fn f<T>(x: T) where T: Display + Clone.
+
 @@exercise Smallest and largest
 Write a generic function `min_max<T: PartialOrd + Copy>(items: &[T]) -> Option<(T, T)>` that returns the smallest and the largest item as a tuple, or `None` if the slice is empty. Go through the list once.
 

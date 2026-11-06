@@ -95,6 +95,13 @@ Why isn't `String` a `Copy` type?
 - Rust has no copyable text
 ? Copy is only for simple values with no owned resources.
 
+@@drill
+Which method makes an explicit deep copy of a `String`?
+= clone
+= clone()
+= .clone()
+? let b = a.clone();
+
 @@exercise Two separate lists
 This program wants a list of `weekdays`, and a separate list `all_days` that also includes the weekend. But it doesn't compile because `weekdays` is moved. Fix it using `.clone()` so the output is:
 

@@ -120,6 +120,11 @@ What does `result.unwrap_or_else(|e| { eprintln!("{e}"); 0 })` do with an `Err`?
 - Ignores the closure
 ? unwrap_or_else computes a fallback only when needed.
 
+@@drill
+Which `Result` variant holds an error?
+= Err
+? Ok holds the success value.
+
 @@exercise Validate a username
 Write `validate_username`, which returns `Ok(())` if the username is valid, or an `Err` with the **exact** message for the first rule that's broken:
 

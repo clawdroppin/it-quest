@@ -1014,3 +1014,9 @@ Why does `storage::save` write a temporary file and then rename it?
 - JSON requires it
 - It's faster than writing directly
 ? Write-then-rename is a classic technique for crash-safe saving.
+
+@@drill
+Which crate provides `Serialize` and `Deserialize`?
+= serde
+? With serde_json for the JSON format.
+

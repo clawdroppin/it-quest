@@ -372,6 +372,13 @@ What does `ui.add_enabled(false, egui::Button::new("Save"))` do?
 - Clicks the button
 ? Disabled widgets are visible but inactive.
 
+@@drill
+Which egui method lays widgets out side by side?
+= horizontal
+= ui.horizontal
+= horizontal()
+? ui.horizontal(|ui| { ... }).
+
 @@flashcards
 ui.horizontal :: lay out children in a row
 ui.vertical :: lay out children in a column

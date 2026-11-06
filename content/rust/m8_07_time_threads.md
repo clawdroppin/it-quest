@@ -196,6 +196,13 @@ How do you measure how long a piece of code takes?
 - `Duration::now()`
 ? elapsed returns a Duration you can print with {:?}.
 
+@@drill
+Which function starts a new thread?
+= thread::spawn
+= std::thread::spawn
+= spawn
+? It returns a JoinHandle.
+
 @@exercise Format a duration
 Timers show time as `minutes:seconds`. Write `mm_ss`, which turns a `Duration` into text like `"04:05"`: minutes and seconds, each with **two digits** (ignore any fraction of a second). Minutes can go above 59 (`"75:00"` is fine).
 @@starter

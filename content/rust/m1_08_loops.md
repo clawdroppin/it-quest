@@ -234,6 +234,11 @@ println!("{x}");
 - `40`
 ? 0 + 10 = 10, then 10 + 20 = 30, then 30 + 30 = 60.
 
+@@drill
+Which range includes both 1 and 10?
+= 1..=10
+? 1..10 stops at 9.
+
 @@exercise Sum up to n
 Write `sum_to(n)`, which returns 1 + 2 + 3 + … + n. For `n = 0` the answer is 0. Use a loop.
 @@starter

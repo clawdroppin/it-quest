@@ -990,6 +990,12 @@ What does `#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]` d
 - Enables debugging
 ? It applies `windows_subsystem = "windows"` only when debug assertions are off, which is the case in release builds.
 
+@@drill
+Which flag builds an optimized version of your program?
+= --release
+= cargo build --release
+? Debug builds are much slower.
+
 @@flashcards
 cargo build --release :: optimised binary
 target triple :: e.g. x86_64-pc-windows-msvc

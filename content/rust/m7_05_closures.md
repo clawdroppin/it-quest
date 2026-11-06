@@ -174,6 +174,11 @@ What does `move` in front of a closure do?
 - Moves the closure into a struct
 ? Needed when the closure outlives the current function, as with threads.
 
+@@drill
+Which keyword makes a closure take ownership of what it captures?
+= move
+? thread::spawn(move || ...).
+
 @@exercise Keep the matching items
 Write a function `keep<F: Fn(i32) -> bool>(items: &[i32], test: F) -> Vec<i32>` that returns a new vector with only the items for which `test` returns `true`.
 

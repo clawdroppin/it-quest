@@ -164,6 +164,11 @@ Why use `Vec<Box<dyn Shape>>` instead of `Vec<Circle>`?
 - Because `Vec<Circle>` doesn't compile
 ? Trait objects let different concrete types live together, as long as they share the trait.
 
+@@drill
+Which keyword defines shared behaviour that types can implement?
+= trait
+? trait Describe { fn describe(&self) -> String; }.
+
 @@exercise Animals that speak
 Define a trait `Animal` with two required methods, `name(&self) -> String` and `sound(&self) -> String`, and a **default** method `speak(&self) -> String` that returns `"<name> says <sound>!"`.
 

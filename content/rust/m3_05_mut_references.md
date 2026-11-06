@@ -134,6 +134,11 @@ Why does Rust forbid two `&mut` references to the same value at once?
 - It's a temporary limitation
 ? One writer or many readers, never both.
 
+@@drill
+Write the type of a mutable reference to an `i32`.
+= &mut i32
+? Only one at a time.
+
 @@exercise Double everything
 Write `double_all`, which **changes** the vector it's given, doubling every number. It returns nothing.
 @@starter

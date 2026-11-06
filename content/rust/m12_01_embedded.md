@@ -110,6 +110,12 @@ Why are volatile reads and writes needed for hardware registers?
 - They're required for floats
 ? A register write can start a motor; it must happen exactly as written.
 
+@@drill
+Which crate-level attribute builds without the standard library?
+= #![no_std]
+= no_std
+? Microcontrollers have no operating system.
+
 @@flashcards
 no_std :: Rust without the standard library, only `core` (and optionally `alloc`)
 PAC :: peripheral access crate generated from a chip's SVD file

@@ -1213,3 +1213,10 @@ Why is the undo log saved to a file and not just kept in memory?
 - Because `Vec<Move>` is too large for memory
 - serde requires it
 ? An undo that disappears when you close the window isn't much of a safety net.
+
+@@drill
+What do you call the record of moves that lets the organizer put files back?
+= undo log
+= the undo log
+? Each move is saved before it happens.
+

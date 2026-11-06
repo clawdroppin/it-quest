@@ -185,6 +185,12 @@ Why can't you `impl Display for Vec<String>` in your crate?
 - You need `unsafe`
 ? `struct Lines(Vec<String>)` is yours, so you can implement anything for it.
 
+@@drill
+Which trait from `std::ops` lets you use `+` on your own type?
+= Add
+= std::ops::Add
+? impl Add for Money { type Output = Money; ... }.
+
 @@exercise Money with operators
 Implement a `Money` type that stores **cents** as an `i64`:
 

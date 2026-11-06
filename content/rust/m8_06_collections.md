@@ -153,6 +153,12 @@ Which collection is best for a queue where you add at the back and take from the
 - `BTreeMap`
 ? Vec::remove(0) shifts every item; VecDeque does it in constant time.
 
+@@drill
+Which collection stores each value at most once, with fast lookups?
+= HashSet
+= std::collections::HashSet
+? insert returns false for duplicates.
+
 @@exercise Unique visitors
 `unique_visitors` gets a list of names (one per visit, people can visit many times) and returns **how many different people** visited. Use a `HashSet`.
 @@starter

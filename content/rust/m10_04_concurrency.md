@@ -163,6 +163,13 @@ What does Rust **not** prevent?
 - Using a `RefCell` from two threads
 ? Take locks in a consistent order, or prefer channels.
 
+@@drill
+Which smart pointer shares ownership across threads?
+= Arc
+= Arc<T>
+= std::sync::Arc
+? Combine with Mutex for shared mutable state.
+
 @@exercise Parallel word count
 Count word frequencies across many lines using **scoped threads**. `count_words(lines: &[&str], workers: usize) -> BTreeMap<String, usize>`:
 

@@ -215,6 +215,13 @@ What does `.filter(|x| ...).count()` return?
 - true or false
 ? count is a consumer: it runs the chain and returns a usize.
 
+@@drill
+Which iterator method gathers results into a collection such as a Vec?
+= collect
+= collect()
+= .collect()
+? let v: Vec<_> = iter.collect();
+
 @@exercise Pipeline practice
 Implement each function with an **iterator chain** (no `for` loops):
 

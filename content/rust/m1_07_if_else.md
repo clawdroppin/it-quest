@@ -206,6 +206,11 @@ Why does `if count { ... }` fail when `count` is an `i32`?
 - count must be mutable
 ? Rust never treats numbers as true or false.
 
+@@drill
+Which type must an `if` condition have?
+= bool
+? Rust never treats numbers as true or false.
+
 @@exercise Even or odd
 Write `even_or_odd`, which returns `"even"` if the number is even and `"odd"` otherwise.
 

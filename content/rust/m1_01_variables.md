@@ -149,6 +149,11 @@ What does shadowing let you do?
 - Make a variable global
 ? `let x = x.trim();` creates a new x; the old one is hidden.
 
+@@drill
+Which keyword makes a variable changeable?
+= mut
+? let mut count = 0;
+
 @@exercise Your info card
 Create three variables: `name` with the value `"Alex"`, `city` with the value `"Prague"`, and `year` with the value `2026`. Then print them using placeholders so the output is exactly:
 

@@ -479,3 +479,11 @@ Why are dates stored as `"YYYY-MM-DD"` strings?
 - Rust has no way to store dates
 - It uses less memory
 ? This standard format (ISO 8601) is easy to sort and group. For complex date maths you'd use a crate like `chrono`.
+
+@@drill
+Which integer unit should the ledger store money in to avoid floating-point errors?
+= cents
+= cent
+= minor units
+? Store 12.34 as 1234 cents.
+

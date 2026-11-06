@@ -570,3 +570,11 @@ The sidebar stores the clicked note in `pending_select` instead of opening it ri
 * While looping over `vault.notes`, it's borrowed, so we can't call a `&mut self` method like `select` in the loop
 - It makes the app faster
 ? The action pattern: remember what to do, and do it when the borrow is over.
+
+@@drill
+Which egui widget edits several lines of text?
+= TextEdit::multiline
+= multiline
+= egui::TextEdit::multiline
+? ui.text_edit_multiline(&mut text) is the shortcut.
+

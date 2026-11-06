@@ -99,6 +99,11 @@ What does `std::hint::black_box` do in a benchmark?
 - Turns off optimisation for the whole program
 ? Otherwise the compiler may compute the answer at compile time.
 
+@@drill
+Which crate is the standard choice for statistically sound benchmarks?
+= criterion
+? cargo bench runs them.
+
 @@exercise From O(n²) to O(n)
 Two functions are written the slow way. Rewrite them to be fast while giving the same answers:
 

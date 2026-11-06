@@ -108,6 +108,11 @@ What's the difference between a compiler error and a warning?
 - There's no difference
 ? Fix warnings anyway: they often point to real bugs.
 
+@@drill
+In `--> main.rs:7:12`, which number is the line?
+= 7
+? 12 is the column.
+
 @@exercise Fix the bugs
 This program has **three** mistakes. Use the compiler's messages to find and fix them. When it's fixed, it should print:
 

@@ -88,6 +88,11 @@ What's a good way to use an AI model while learning?
 - Use it instead of running your code
 ? You learn by doing; use AI as a tutor, not a replacement.
 
+@@drill
+Which Cargo command builds and runs the project in the current folder?
+= cargo run
+? Each guided build is a Cargo project you run this way.
+
 @@flashcards
 guided build :: a project split into small, checked steps
 step check :: tests that confirm a step works before you move on

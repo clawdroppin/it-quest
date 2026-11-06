@@ -288,6 +288,13 @@ Why does the shopping list collect an `Action` instead of deleting inside the lo
 - Saved to a file
 ? Derived values should be computed, so they can never be out of date.
 
+@@drill
+What's the name of the pattern where widgets record what to do and the change happens after the loop, avoiding borrow conflicts?
+= action pattern
+= the action pattern
+= actions
+? Collect actions, then apply them.
+
 @@flashcards
 app struct :: holds all UI state between frames
 &mut self in update :: widgets change state directly

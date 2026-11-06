@@ -129,6 +129,11 @@ What does `&v[2..]` give you for `let v = vec![1, 2, 3, 4];`?
 - The number 3
 ? 2.. means from index 2 to the end.
 
+@@drill
+Write the best parameter type for a function that only reads text.
+= &str
+? It accepts both String and string literals.
+
 @@exercise Middle part
 Write `middle`, which returns a slice of the list **without its first and last elements**. If the list has 2 or fewer elements, return an empty slice (`&[]`).
 @@starter

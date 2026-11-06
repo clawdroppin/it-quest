@@ -94,6 +94,12 @@ Where does all of an egui app's state live?
 - In global variables
 ? Data and UI state are fields of your struct. The widgets are just drawn from them every frame.
 
+@@drill
+Which GUI style redraws the whole interface from your state every frame?
+= immediate mode
+= immediate-mode
+? egui is immediate mode; most toolkits are retained mode.
+
 @@exercise A tiny event loop
 Let's simulate a GUI without a window. The "app" has a click counter and a text box. Events arrive one at a time; for each one, `update` changes the state, and then `view` "draws" it as a line of text.
 

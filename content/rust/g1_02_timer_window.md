@@ -527,3 +527,12 @@ Why does `update_title` remember the last title in a field?
 * Angle 0 points to the right; subtracting a quarter turn starts the arc at the top, like a clock
 - Because radians need it
 ? Without it, the ring would start filling from the 3 o'clock position.
+
+@@drill
+Which egui `Context` method asks for another frame to be drawn so a timer keeps ticking?
+= request_repaint
+= request_repaint()
+= request_repaint_after
+= ctx.request_repaint()
+? Without it, egui only redraws on input.
+

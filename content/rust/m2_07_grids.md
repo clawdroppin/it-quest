@@ -132,6 +132,11 @@ How many cells does a 3 × 4 grid have, and how do you visit them all?
 - 34, with nested loops
 ? Rows times columns; nested loops reach every cell.
 
+@@drill
+Which type is used for indexes in Rust?
+= usize
+? Subtracting below 0 panics, so check edges first.
+
 @@exercise Tic-tac-toe winner
 Write `winner`, which looks at a 3×3 board and returns the winner: `'X'`, `'O'`, or `' '` (a space) if nobody has won. A player wins with three of their marks in a row, column or diagonal.
 @@starter

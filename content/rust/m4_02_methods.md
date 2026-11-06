@@ -148,6 +148,11 @@ Which `self` does a method that consumes the struct take?
 - `Self::`
 ? Taking self by value moves the struct into the method.
 
+@@drill
+Which keyword starts a block of methods for a type?
+= impl
+? impl Shop { fn new() -> Self { ... } }.
+
 @@exercise Temperature type
 Implement methods for `Temperature`, which stores degrees Celsius:
 

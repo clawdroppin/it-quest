@@ -136,6 +136,11 @@ Which tool formats Rust code automatically in the standard style?
 - `rustc --style`
 ? Clippy suggests improvements; fmt fixes formatting.
 
+@@drill
+Which keyword declares a constant?
+= const
+? const SECONDS_PER_HOUR: u32 = 3600;
+
 @@exercise Remove the magic numbers
 This program works, but it's full of magic numbers. Make it readable:
 

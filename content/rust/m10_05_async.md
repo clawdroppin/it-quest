@@ -151,6 +151,12 @@ Which workload suits async best?
 - A one-off script making one HTTP request
 ? CPU-bound work wants threads or Rayon.
 
+@@drill
+Which keyword waits for a future to finish inside an async function?
+= .await
+= await
+? let body = fetch(url).await?;
+
 @@exercise Async functions and errors
 Using the provided `block_on` and `yield_now`, write:
 

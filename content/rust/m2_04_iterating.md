@@ -136,6 +136,13 @@ What does `for (i, x) in v.iter().enumerate()` give you?
 - Pairs of neighbouring items
 ? enumerate pairs a counter with each item.
 
+@@drill
+Which iterator method pairs each item with its index?
+= enumerate
+= enumerate()
+= .enumerate()
+? for (i, x) in v.iter().enumerate().
+
 @@exercise Running total
 Write `running_total`, which returns a new vector where each element is the sum of all elements **up to and including** that position.
 

@@ -156,6 +156,13 @@ What does `"42".parse::<i32>()` return?
 - None
 ? Handle Err for text like "abc".
 
+@@drill
+Which `str` method iterates over characters?
+= chars
+= chars()
+= .chars()
+? for c in text.chars().
+
 @@exercise Count the vowels
 Write `count_vowels`, which counts the vowels (a, e, i, o, u) in some text, **ignoring case**.
 @@starter

@@ -152,6 +152,14 @@ What does "tracing" code mean?
 - Copying it into another file
 ? Tracing finds bugs that are invisible when you only read the code.
 
+@@drill
+What's the name of a bug where a loop runs one time too many or too few?
+= off-by-one
+= off by one
+= off-by-one error
+= off-by-one bug
+? Check whether your range should include its end.
+
 @@exercise Prime checker
 Write `is_prime` yourself (try **not** to look at the example above — reconstruct it from the pseudocode, or from your own understanding).
 

@@ -166,6 +166,13 @@ What happens when you run `a[10]` on an array of length 4 with an index known on
 - It reads random memory
 ? Rust checks bounds, which prevents a whole class of security bugs.
 
+@@drill
+Which method gives the number of elements in an array or vector?
+= len
+= len()
+= .len()
+? a.len().
+
 @@exercise Weekly weather report
 Using the `temps` array (Monday to Sunday) and the `days` array, print the report below. Find the hottest and coldest days with a loop — you'll need to remember the **index** of the hottest/coldest day, so you can look up its name in `days`.
 

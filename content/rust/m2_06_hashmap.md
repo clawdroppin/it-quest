@@ -167,6 +167,13 @@ What does `map.get("key")` return?
 - It panics when missing
 ? map["key"] panics if the key is missing; get doesn't.
 
+@@drill
+Which HashMap method gets an entry so you can insert a default and update it?
+= entry
+= entry()
+= .entry()
+? *counts.entry(word).or_insert(0) += 1;
+
 @@exercise Word frequencies
 Write `word_counts`, which counts how often each word appears in the text. Words should be compared in **lowercase**, so "The" and "the" count as the same word.
 @@starter

@@ -101,6 +101,13 @@ What's the difference between `println!` and `print!`?
 - There's no difference
 ? Use print! when you want to continue on the same line.
 
+@@drill
+What's the name of the function where every Rust program starts?
+= main
+= main()
+= fn main
+? fn main() { ... }.
+
 @@exercise Introduce yourself
 Write a program that prints **exactly** these three lines:
 

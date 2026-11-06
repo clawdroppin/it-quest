@@ -185,6 +185,12 @@ When should you prefer a function over a macro?
 - When you need variable arguments
 ? Macros are for what functions can't express.
 
+@@drill
+Which macro defines a declarative macro?
+= macro_rules!
+= macro_rules
+? macro_rules! square { ($x:expr) => { $x * $x }; }
+
 @@exercise A hashmap! literal macro
 Write a macro `hashmap!` that builds a `HashMap` from `key => value` pairs, with an optional trailing comma, and that also works with no pairs at all. Then write `max_of!`: given one or more expressions, it returns the largest (use recursion in the macro: one expression returns itself; otherwise compare the first with `max_of!` of the rest using `std::cmp::max`).
 @@starter

@@ -95,6 +95,13 @@ What is source code?
 - The program's output
 ? The compiler turns source code into machine code.
 
+@@drill
+What's the name of the program that turns Rust source code into a program the computer can run?
+= compiler
+= the compiler
+= rustc
+? Rust's compiler is called rustc.
+
 @@exercise Put things in order
 This program is supposed to print the steps of making tea **in the correct order**, but the lines are mixed up.
 

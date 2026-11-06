@@ -173,6 +173,11 @@ Which trait can you **never** derive?
 * `Display`
 ? Display is how users see your type, so you must decide yourself.
 
+@@drill
+Which derivable trait gives a type a default value?
+= Default
+? #[derive(Default)] and Settings::default().
+
 @@exercise Sortable cards
 Define an enum `Suit` with variants `Clubs, Diamonds, Hearts, Spades` (in that order) and a struct `Card` with fields `rank: u8` and `suit: Suit`.
 

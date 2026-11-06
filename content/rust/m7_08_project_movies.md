@@ -82,6 +82,12 @@ What does `matching(&self, test: impl Fn(&Movie) -> bool)` let callers do?
 - Sort the movies
 ? One flexible method replaces many specific search functions.
 
+@@drill
+Which map type keeps its keys sorted?
+= BTreeMap
+= std::collections::BTreeMap
+? HashMap has no order.
+
 @@flashcards
 enum Genre :: a fixed set of movie genres
 Library :: owns a Vec<Movie>

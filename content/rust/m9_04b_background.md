@@ -317,6 +317,13 @@ Why does `check_job` use `try_recv` and not `recv`?
 * `recv` waits for a message, which would freeze the GUI until the worker sends one
 ? Nothing in `ui()` may wait. `try_recv` returns at once, message or not.
 
+@@drill
+Which channel method checks for a message without blocking the GUI?
+= try_recv
+= try_recv()
+= .try_recv()
+? recv() would freeze the window.
+
 @@flashcards
 never block update() :: the UI freezes
 background thread + channel :: do slow work off the UI thread

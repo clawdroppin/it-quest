@@ -200,6 +200,12 @@ After moving `evaluate` into `calc.rs`, `main.rs` says "function `evaluate` is p
 - Move `main` into `calc.rs`
 ? Items in a module are private unless marked `pub`.
 
+@@drill
+Which line in `main.rs` loads the module in `shop.rs`?
+= mod shop;
+= mod shop
+? use only creates shortcuts; mod loads the file.
+
 @@flashcards
 mod utils; :: loads src/utils.rs (or src/utils/mod.rs)
 nested module file :: src/utils/math.rs for mod math inside utils

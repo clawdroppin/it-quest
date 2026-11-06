@@ -124,6 +124,13 @@ Where do you read command-line arguments in Rust?
 - `std::args::read()`
 ? Skip the first item, which is the program's own name.
 
+@@drill
+Which function returns the command-line arguments?
+= std::env::args
+= env::args
+= args
+? The first item is the program's name.
+
 @@exercise Parse the commands
 Write `parse_command(line: &str) -> Result<Command, String>` for a to-do app. You'll reuse this exact function in the project at the end of this module.
 

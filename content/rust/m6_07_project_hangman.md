@@ -427,3 +427,12 @@ Why doesn't `game.rs` print anything?
 * Code outside the module changing the state in ways that break the rules (like resetting `wrong` or reading `word`)
 - The compiler optimizing the struct away
 ? The only way to change a `Game` is through its methods, which always follow the rules.
+
+@@drill
+Which `Vec` method checks whether a letter is already in `guessed`?
+= contains
+= contains()
+= .contains()
+= guessed.contains(&letter)
+? guessed.contains(&letter) takes a reference.
+

@@ -145,6 +145,11 @@ Which tool detects undefined behaviour in unsafe code by interpreting it?
 - bindgen
 ? Run your tests under Miri when you write unsafe code.
 
+@@drill
+Which keyword marks a block where you may dereference raw pointers?
+= unsafe
+? You promise the compiler the code is sound.
+
 @@exercise A safe wrapper over raw pointers
 Implement two functions using raw pointers, each wrapped in a safe API:
 

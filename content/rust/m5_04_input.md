@@ -166,6 +166,13 @@ How do you keep asking until the user types a valid number?
 - Restart the program on bad input
 ? loop { ... break value; } returns the value from the loop.
 
+@@drill
+Which method removes the newline from input read by `read_line`?
+= trim
+= trim()
+= .trim()
+? input.trim().parse::<i32>().
+
 @@exercise Greeting with input
 Write a program that reads a **name** and a **birth year** (one per line) and prints a greeting with their age **in 2026**. The input box already contains:
 

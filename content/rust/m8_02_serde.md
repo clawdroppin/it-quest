@@ -229,6 +229,12 @@ Why does `serde_json::from_str` return a `Result`?
 - It doesn't; it always succeeds
 ? Data from files can be damaged or edited by hand, so loading must handle errors.
 
+@@drill
+Which serde_json function parses a JSON string into a struct?
+= from_str
+= serde_json::from_str
+? let data: Save = serde_json::from_str(&text)?;
+
 @@flashcards
 serde :: framework for serialising and deserialising
 #[derive(Serialize, Deserialize)] :: make a struct convertible

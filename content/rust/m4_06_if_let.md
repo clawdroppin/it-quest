@@ -112,6 +112,13 @@ What does `while let Some(top) = stack.pop() { ... }` do?
 - Pushes items onto the stack
 ? The loop stops when pop returns None.
 
+@@drill
+Which construct gets a value out of a pattern or leaves the function?
+= let else
+= let ... else
+= let-else
+? let Some(x) = maybe else { return; };
+
 @@exercise Sum the valid numbers
 A list of text values comes from a messy form. Write `sum_valid`, which adds up all the entries that are valid whole numbers, and ignores the rest. Use `if let` (or `let else` with `continue`).
 

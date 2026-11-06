@@ -63,6 +63,13 @@ What is lazy expiry?
 - Sweeping all keys every millisecond
 ? Active sweeps clean up keys nobody reads.
 
+@@drill
+After writing the snapshot to a temporary file, which `std::fs` function replaces the old file in one step?
+= rename
+= fs::rename
+= std::fs::rename
+? A crash leaves either the old file or the new one, never half of each.
+
 @@flashcards
 TTL :: time to live: how long a key stays valid
 lazy expiry :: expired keys are removed when they're next read

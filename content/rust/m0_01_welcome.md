@@ -69,6 +69,12 @@ How do you learn programming fastest?
 - Copy solutions without running them
 ? Experimenting is how ideas stick.
 
+@@drill
+Which macro prints a line of text?
+= println!
+= println
+? println!("Hello");
+
 @@flashcards
 ✔ Check :: runs your code and the tests for the exercise
 starter code :: the code you begin an exercise with

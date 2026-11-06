@@ -74,6 +74,12 @@ Why return `Option<&Item>` from `find(name)`?
 - Rust requires it for all methods
 ? None means not found; no special values needed.
 
+@@drill
+Which method finds an item and gives a mutable reference to change it?
+= find_mut
+= find_mut()
+? fn find_mut(&mut self, name: &str) -> Option<&mut Item>.
+
 @@flashcards
 struct Item :: name, category, price and quantity together
 enum Category :: Weapon, Armor, Potion: one of a fixed set

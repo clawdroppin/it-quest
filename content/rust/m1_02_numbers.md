@@ -132,6 +132,11 @@ What is `20 % 6`?
 - `0`
 ? 20 = 6 × 3 + **2**, so the remainder is 2.
 
+@@drill
+What is `7 / 2` with integers in Rust?
+= 3
+? Integer division drops the fraction; 7.0 / 2.0 is 3.5.
+
 @@exercise Minutes to hours
 A movie is `135` minutes long. Using **integer division** `/` and **remainder** `%`, calculate the hours and the leftover minutes, then print:
 

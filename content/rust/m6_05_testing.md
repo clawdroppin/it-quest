@@ -142,6 +142,12 @@ Which command runs the tests in a Cargo project?
 - `rustc --test-all`
 ? Add a name to run only matching tests: cargo test parse.
 
+@@drill
+Which attribute marks a function as a test?
+= #[test]
+= test
+? Run tests with cargo test.
+
 @@exercise Write your own tests
 The function `clamp` is given and works correctly. Your job is to write a test module for it with **at least three tests**:
 

@@ -96,6 +96,13 @@ What does `assert!(index < len, "index too big")` do when the condition is false
 - Does nothing in normal builds
 ? Use assert! for conditions that should never be false if the code is correct.
 
+@@drill
+Which method unwraps a value but panics with your own message?
+= expect
+= expect()
+= .expect()
+? file.expect("config file missing").
+
 @@exercise Guard the input
 Write `percentage(part, whole)`, which returns `part / whole * 100`. It should **panic with a clear message** if `whole` is 0 — use `assert!` with the message `"whole must not be zero"`.
 

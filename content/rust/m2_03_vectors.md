@@ -127,6 +127,12 @@ Which creates an empty vector of strings?
 - `let v = new Vec();`
 ? vec![] also works when the type can be inferred.
 
+@@drill
+Which macro creates a vector with values?
+= vec!
+= vec
+? let v = vec![1, 2, 3];
+
 @@text
 ## Passing lists to functions
 

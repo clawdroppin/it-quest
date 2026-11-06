@@ -118,6 +118,12 @@ How does Tauri differ from Electron?
 - It can't use JavaScript
 ? Electron ships its own Chromium and Node.js.
 
+@@drill
+Which tool generates the JavaScript glue for Rust compiled to WebAssembly?
+= wasm-bindgen
+= wasm-pack
+? wasm-pack wraps wasm-bindgen and packages the result.
+
 @@flashcards
 WebAssembly :: portable, sandboxed binary instruction format run by browsers and runtimes
 Linear memory :: the single resizable byte array a Wasm module uses

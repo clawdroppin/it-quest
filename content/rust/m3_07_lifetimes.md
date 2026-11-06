@@ -129,6 +129,12 @@ What does a `'static` lifetime on `&'static str` mean?
 - The string is mutable
 ? String literals are stored in the program binary.
 
+@@drill
+Which lifetime lasts for the whole program?
+= 'static
+= static
+? String literals are &'static str.
+
 @@exercise Fix the dangling reference
 `make_label` tries to return a reference to a `String` it created inside itself. Fix it so it returns an owned `String`. Output:
 

@@ -123,6 +123,11 @@ How do you use `?` on an `Option` inside a function that returns `Result`?
 - Use `.unwrap()?`
 ? ok_or turns None into Err(error) so ? can pass it up.
 
+@@drill
+Which operator returns an error early from a function that returns Result?
+= ?
+? let n = s.parse::<i32>()?;
+
 @@exercise Read a coordinate
 Write `parse_point`, which turns text like `"3,-4"` into a tuple `(3, -4)`. Use `?` for every step:
 

@@ -119,6 +119,11 @@ How does Bevy know which systems can run in parallel?
 - From comments
 ? Two systems writing the same component run one after the other.
 
+@@drill
+Which Rust game engine is built around an ECS?
+= Bevy
+? Systems are plain functions that query components.
+
 @@flashcards
 Game loop :: input, update, render, repeated every frame
 Fixed time step :: physics updates with a constant delta using an accumulator

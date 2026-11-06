@@ -413,3 +413,11 @@ Where would you add the code for a new `undo <id>` command?
 - Only in `main.rs`
 - In `storage.rs`
 ? Each layer handles its own part. The compiler will point at the `match` that's missing the new variant.
+
+@@drill
+Which `Vec` method keeps only the items for which a closure returns true?
+= retain
+= retain()
+= .retain()
+? tasks.retain(|t| !t.done).
+

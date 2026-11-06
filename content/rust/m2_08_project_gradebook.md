@@ -71,6 +71,13 @@ How do you work out an average of `u32` scores as a decimal number?
 - Multiply by 100 first
 ? Integer division throws the fraction away.
 
+@@drill
+Which method compares two `f64` values for sorting?
+= total_cmp
+= total_cmp()
+= .total_cmp
+? f64 isn't Ord because of NaN.
+
 @@flashcards
 (&str, Vec<u32>) :: one student: name plus scores
 HashMap<char, u32> :: letter grade to count

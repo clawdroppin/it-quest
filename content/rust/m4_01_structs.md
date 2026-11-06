@@ -209,6 +209,13 @@ What does `Point { x: 1, ..p }` do?
 - It's a syntax error
 ? This is struct update syntax.
 
+@@drill
+Which attribute lets you print a struct with `{:?}`?
+= #[derive(Debug)]
+= derive(Debug)
+= Debug
+? Put it above the struct.
+
 @@exercise Define a Book
 Define a struct `Book` with fields `title` (`String`), `author` (`String`), `pages` (`u32`) and `read` (`bool`), and derive `Debug`.
 

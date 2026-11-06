@@ -133,6 +133,13 @@ Can you delete a published crate version from crates.io?
 - Only for 0.x versions
 ? Builds that depend on it must keep working.
 
+@@drill
+What do you call a set of crates that share one Cargo.lock and target folder?
+= workspace
+= a workspace
+= cargo workspace
+? [workspace] members = [...] in the root Cargo.toml.
+
 @@exercise Cargo's version matching
 Write SemVer parsing and Cargo's **caret** matching:
 

@@ -105,6 +105,11 @@ Which command suggests more idiomatic ways to write your code?
 - `cargo run`
 ? Clippy is a linter: it looks for common mistakes and non-idiomatic patterns. `cargo fmt` only changes formatting.
 
+@@drill
+Which comment syntax writes documentation for the item below it?
+= ///
+? cargo doc --open builds the docs.
+
 @@flashcards
 cargo doc --open :: build and open your documentation
 rust-analyzer :: editor language server

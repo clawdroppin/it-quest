@@ -170,6 +170,11 @@ What does `maybe.unwrap_or(0)` return when `maybe` is `None`?
 - An error
 ? unwrap_or supplies a default instead of panicking.
 
+@@drill
+Which `Option` variant means there's no value?
+= None
+? Some(x) holds a value.
+
 @@exercise Safe division
 Write `safe_divide`, which returns `None` when dividing by zero, and `Some(result)` otherwise.
 

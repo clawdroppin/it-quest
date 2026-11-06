@@ -121,6 +121,11 @@ When is an enum better than trait objects?
 - When you need dynamic dispatch
 ? Open sets (plugins) suit trait objects.
 
+@@drill
+Which keyword marks a trait object that uses dynamic dispatch?
+= dyn
+? Box<dyn Shape>.
+
 @@exercise A text pipeline
 Write a pipeline of text stages. The `Stage` trait has `name(&self) -> String` and `apply(&self, input: String) -> String`. Implement three stages:
 

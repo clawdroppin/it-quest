@@ -132,6 +132,13 @@ Which builds a path portably, with the right separator on every OS?
 - `fs::path("saves", "game.txt")`
 ? PathBuf and join handle separators for you.
 
+@@drill
+Which function reads a whole file into a `String`?
+= fs::read_to_string
+= read_to_string
+= std::fs::read_to_string
+? It returns a Result.
+
 @@exercise A notes file
 Write two functions:
 

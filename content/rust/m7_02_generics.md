@@ -122,6 +122,11 @@ What does `struct Pair<T> { a: T, b: T }` allow?
 - Only references
 ? Use struct Pair<A, B> for two different types.
 
+@@drill
+Which letter is conventionally used for a single generic type parameter?
+= T
+? fn first<T>(items: &[T]) -> &T.
+
 @@exercise A generic Stack
 Write a generic struct `Stack<T>` that holds its items in a `Vec<T>` (field `items`), with these methods:
 

@@ -180,6 +180,11 @@ What does `_` do in a `match`?
 - Ends the program
 ? Put it last, as the catch-all arm.
 
+@@drill
+Which pattern matches anything that earlier arms didn't?
+= _
+? Put it last.
+
 @@exercise Rock, paper, scissors
 Define an enum `Hand` with `Rock`, `Paper` and `Scissors`, and an enum `Outcome` with `Win`, `Lose` and `Draw` (derive `Debug` and `PartialEq` on both).
 

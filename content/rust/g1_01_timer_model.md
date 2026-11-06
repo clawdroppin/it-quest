@@ -376,3 +376,10 @@ The timer is a "state machine". Which part of the code describes its arrows (the
 * `next_phase`
 - `Settings::default`
 ? `next_phase` decides, for each state, which state comes next.
+
+@@drill
+Which `std::time` type measures a span of time, such as 25 minutes?
+= Duration
+= std::time::Duration
+? Duration::from_secs(25 * 60).
+

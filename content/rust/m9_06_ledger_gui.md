@@ -784,3 +784,10 @@ Why is the form's amount stored as a `String` in `Form` instead of an `i64`?
 * While typing, the text can be incomplete or invalid ("12." or "abc"); it's converted to cents only when submitted
 - To save memory
 ? The text box edits a String buffer. Validation turns it into real data, or an error message.
+
+@@drill
+Which egui panel fills whatever space the other panels leave?
+= CentralPanel
+= egui::CentralPanel
+? Add side and top panels first, then the central one.
+

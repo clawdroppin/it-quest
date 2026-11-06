@@ -111,6 +111,12 @@ What's the first step when fixing a bug?
 - Update the compiler
 ? If you can't make it happen, you can't be sure you fixed it.
 
+@@drill
+Which macro prints an expression with its file, line and value, and returns the value?
+= dbg!
+= dbg
+? let y = dbg!(x * 2);
+
 @@exercise Find the bug: the average
 `average` should return the average of the numbers, as an `f64`, or `0.0` for an empty list. One test fails. Find out why and fix the bug.
 @@starter

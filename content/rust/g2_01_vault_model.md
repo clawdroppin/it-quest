@@ -350,3 +350,11 @@ Why does `valid_name` use `name.chars().count()` and not `name.len()`?
 * `len()` counts bytes, and letters like é or emoji take more than one byte
 - `chars().count()` is faster
 ? A limit on what the user sees should count characters, not bytes.
+
+@@drill
+Which `str` method checks whether text contains another piece of text?
+= contains
+= contains()
+= .contains
+? Lowercase both sides for case-insensitive search.
+

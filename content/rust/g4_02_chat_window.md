@@ -591,3 +591,11 @@ Why does `input_row` consume the Enter key *before* adding the `TextEdit`?
 * The streamed text is added to that empty message, but the model shouldn't receive an empty answer in its history
 - Because `request_body` deletes empty messages
 ? Build what you send first, then prepare the place the answer will go.
+
+@@drill
+Which `std::sync::mpsc` function creates a channel for sending tokens from the worker thread to the GUI?
+= channel
+= mpsc::channel
+= channel()
+? let (tx, rx) = mpsc::channel();
+

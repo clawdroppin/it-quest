@@ -1334,3 +1334,11 @@ After creating a note at index 0, the code does `self.selected = self.selected.m
 - The app would crash
 * The open note's index would now point at a different note, so unsaved text could be saved into the wrong note
 ? Inserting at the front shifts every index by one.
+
+@@drill
+Which `std::fs` function renames or moves a file?
+= rename
+= fs::rename
+= std::fs::rename
+? fs::rename(old, new)?
+

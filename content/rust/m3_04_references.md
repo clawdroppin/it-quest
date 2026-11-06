@@ -123,6 +123,11 @@ Why is `&str` a better parameter type than `&String`?
 - It's faster to type
 ? A &String converts to &str automatically.
 
+@@drill
+Which symbol creates a reference (a borrow)?
+= &
+? print_len(&name).
+
 @@exercise Borrow, don't move
 `describe` takes ownership of the vector, so `main` can't print the vector afterwards. Change `describe` to **borrow** the list instead (use `&[i32]`), and update the call. Output:
 

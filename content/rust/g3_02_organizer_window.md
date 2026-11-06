@@ -511,3 +511,11 @@ The checkbox needs a `&mut bool`, but the enabled categories are a `HashSet`. Wh
 - Stores a `bool` field for every category instead
 - Uses `HashSet::get_mut`
 ? Bridging between the GUI's shape and your data's shape with a local variable is a common pattern.
+
+@@drill
+Which `std::fs` function lists the entries in a folder?
+= read_dir
+= fs::read_dir
+= std::fs::read_dir
+? Each entry is a Result<DirEntry>.
+

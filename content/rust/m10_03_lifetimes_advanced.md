@@ -156,6 +156,13 @@ When is `Cow<str>` a good return type?
 - Never; use `String`
 ? It avoids allocating in the common case.
 
+@@drill
+Which type holds either borrowed or owned data, cloning only when needed?
+= Cow
+= Cow<str>
+= std::borrow::Cow
+? Clone on write.
+
 @@exercise A zero-copy key=value parser
 Parse lines like `name = Ferris` into `Pair<'a> { key: &'a str, value: &'a str }` that **borrow** from the input:
 

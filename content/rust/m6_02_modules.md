@@ -154,6 +154,11 @@ What does `use crate::shop::Item;` do?
 - Downloads a crate
 ? use only creates a shortcut to the path.
 
+@@drill
+Which keyword makes an item visible outside its module?
+= pub
+? Everything is private by default.
+
 @@exercise Temperature module
 Create a module `convert` with two **public** functions, `c_to_f(c: f64) -> f64` and `f_to_c(f: f64) -> f64`. Put the shared constants in **private** items inside the module: `const RATIO: f64 = 1.8;` and `const OFFSET: f64 = 32.0;`.
 

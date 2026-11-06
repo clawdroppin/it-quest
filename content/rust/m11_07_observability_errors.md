@@ -120,6 +120,11 @@ When is `unwrap()`/`expect()` appropriate in production code?
 - Never in any situation
 ? Recoverable failures belong in `Result`.
 
+@@drill
+Which crate derives error types for libraries?
+= thiserror
+? Applications often use anyhow instead.
+
 @@flashcards
 thiserror :: derive macro crate for precise error enums in libraries
 anyhow :: catch-all error type with context for applications

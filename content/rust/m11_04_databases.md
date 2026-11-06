@@ -130,6 +130,11 @@ A migration already ran in production and has a typo in a column default. What d
 - Ignore it
 ? Old migrations must stay as they ran, or environments drift apart.
 
+@@drill
+Which crate talks to SQLite synchronously?
+= rusqlite
+? sqlx is async and checks queries at compile time.
+
 @@exercise A repository and a service
 Implement an in-memory repository and a service with business rules on top of it.
 

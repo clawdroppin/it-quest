@@ -141,6 +141,12 @@ What is `17 % 5`?
 - 12
 ? % gives the remainder after division: 17 = 3 × 5 + 2.
 
+@@drill
+Write the compound assignment that adds 5 to `score`.
+= score += 5
+= score += 5;
+? Short for score = score + 5.
+
 @@exercise Rectangle calculator
 Calculate the **area** (width × height) and **perimeter** (the distance all the way around: 2 × width + 2 × height) of a rectangle and print:
 

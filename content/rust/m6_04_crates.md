@@ -157,6 +157,12 @@ Which version change might break your code?
 * 1.4.2 → 2.0.0
 ? A new MAJOR version signals breaking changes.
 
+@@drill
+Which command adds a crate to your project's dependencies?
+= cargo add
+= cargo add rand
+? cargo add rand.
+
 @@flashcards
 crate :: a compilation unit: a library or binary
 crates.io :: the public crate registry

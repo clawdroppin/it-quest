@@ -89,6 +89,13 @@ Why match on a slice of tokens like `[a, op, b]`?
 - To sort the tokens
 ? Slice patterns make the parser short and readable.
 
+@@drill
+Which method turns a `Vec<&str>` into a slice you can match with patterns like `[a, op, b]`?
+= as_slice
+= as_slice()
+= .as_slice()
+? match tokens.as_slice() { ... }.
+
 @@flashcards
 CalcError :: an enum of everything that can go wrong
 impl Display for CalcError :: readable error messages

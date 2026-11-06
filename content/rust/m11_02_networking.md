@@ -115,6 +115,12 @@ When would you choose UDP over TCP?
 - Never
 ? UDP has no connection, ordering or retransmission.
 
+@@drill
+Which `std::net` type listens for incoming TCP connections?
+= TcpListener
+= std::net::TcpListener
+? TcpListener::bind("127.0.0.1:7878")?
+
 @@exercise A tiny key-value protocol
 Write the protocol logic for a line-based server. `handle_line(store: &mut HashMap<String, String>, line: &str) -> String` understands:
 

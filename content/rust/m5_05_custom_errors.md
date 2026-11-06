@@ -141,6 +141,12 @@ Why implement `Display` for your error type?
 - It's needed to create the enum
 ? Debug ({:?}) is for developers; Display is for users.
 
+@@drill
+Which trait do you implement so `?` can convert another error into yours?
+= From
+= From<T>
+? impl From<ParseIntError> for MyError.
+
 @@exercise Password checker
 Define an enum `PasswordError` with variants `TooShort(usize)` (holding the actual length), `NoDigit` and `NoUppercase`, deriving `Debug` and `PartialEq`. Implement `Display` for it with these messages:
 

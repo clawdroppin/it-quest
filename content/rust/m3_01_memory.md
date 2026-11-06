@@ -100,6 +100,12 @@ Why are numbers like `i32` usually stored on the stack?
 - Stack memory never runs out
 ? Data that can grow, like a String's text, goes on the heap.
 
+@@drill
+Which memory region stores the text of a `String`?
+= heap
+= the heap
+? The pointer, length and capacity live on the stack.
+
 @@exercise Fix the scope
 This program tries to use a variable outside the block where it was created. Fix it **without removing any `println!`**, by moving the `let total` line so that `total` lives long enough. The output should be:
 

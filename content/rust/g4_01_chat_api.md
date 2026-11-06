@@ -383,3 +383,9 @@ Which status code means "OK"?
 - 404
 - 500
 ? 2xx is success, 4xx means the request was wrong, 5xx means the server had a problem.
+
+@@drill
+Which crate does the chat client use to make HTTP requests?
+= ureq
+? A small, blocking HTTP client.
+

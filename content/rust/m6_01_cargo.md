@@ -146,6 +146,11 @@ What is `Cargo.toml` for?
 - Compiled output
 ? Code goes in `src/`; compiled output goes in `target/`.
 
+@@drill
+Which file lists a Cargo project's name, version and dependencies?
+= Cargo.toml
+? Cargo.lock records the exact versions used.
+
 @@flashcards
 Cargo.toml :: project manifest: name, version, dependencies
 Cargo.lock :: exact versions used; commit it for applications

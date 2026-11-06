@@ -137,6 +137,12 @@ What happens if you call `.borrow_mut()` on a `RefCell` that's already mutably b
 - It waits until the first borrow ends
 ? RefCell enforces the borrowing rules while the program runs.
 
+@@drill
+Which smart pointer gives shared ownership with a reference count (single thread)?
+= Rc
+= Rc<T>
+? Arc is the thread-safe version.
+
 @@exercise An expression tree
 Extend the expression tree with subtraction (`Sub`) and division (`Div`), then write two functions:
 

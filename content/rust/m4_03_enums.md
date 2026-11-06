@@ -195,6 +195,11 @@ Which enum definition lets a `Shape` carry its size?
 - `struct Shape { Circle, Rect }`
 ? Each variant can hold its own data.
 
+@@drill
+Which keyword defines a type that is one of several variants?
+= enum
+? enum Direction { Up, Down, Left, Right }.
+
 @@exercise Coin values
 Define an enum `Coin` with variants `Penny`, `Nickel`, `Dime` and `Quarter`, and implement a method `value(&self) -> u32` that returns its value in cents (1, 5, 10, 25).
 

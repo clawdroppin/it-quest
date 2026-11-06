@@ -329,3 +329,11 @@ Why does the organizer make a complete plan before moving anything?
 * Windows treats `Cat.png` and `cat.png` as the same file, so the comparison must ignore case
 - `HashSet` can't store capital letters
 ? Otherwise the plan might move `Cat.png` onto an existing `cat.png`.
+
+@@drill
+Which `Path` method returns a file's extension?
+= extension
+= extension()
+= .extension()
+? It returns Option<&OsStr>.
+

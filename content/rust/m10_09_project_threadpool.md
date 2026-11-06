@@ -68,6 +68,11 @@ How do workers know to stop when the pool is dropped?
 - They check the time
 ? Then `Drop` joins every worker.
 
+@@drill
+Which trait must a job implement to be sent to another thread?
+= Send
+? Job = Box<dyn FnOnce() + Send + 'static>.
+
 @@flashcards
 thread pool :: a fixed set of worker threads that take jobs from a queue
 Job :: Box<dyn FnOnce() + Send + 'static>

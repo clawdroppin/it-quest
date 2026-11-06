@@ -125,6 +125,12 @@ After calling `take(s)` where `fn take(x: String)`, can you still use `s`?
 - Only inside a loop
 ? Pass &s instead if the function only needs to read it.
 
+@@drill
+How many owners can a value have at a time?
+= 1
+= one
+? When the owner goes out of scope, the value is dropped.
+
 @@exercise Who owns the name?
 This program doesn't compile: `greet` takes ownership of `name`, so `main` can't use it afterwards.
 

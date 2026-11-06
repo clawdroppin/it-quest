@@ -182,6 +182,11 @@ How do you write a function that takes an `i32` and returns an `i32`?
 - `fn double(i32 n) -> i32 { n * 2 }`
 ? Parameters need types; -> gives the return type.
 
+@@drill
+Which symbol comes before a function's return type?
+= ->
+? fn double(n: i32) -> i32.
+
 @@exercise Square it
 Write the body of the function `square` so that it returns its parameter multiplied by itself. `main` is already there so you can try it with ▶ Run. When you press ✔ Check, the checker will call your function with several different numbers.
 @@starter
