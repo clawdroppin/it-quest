@@ -80,6 +80,12 @@ Which Node call is safe with a user-supplied file name?
 - `exec("gzip " + userFile)`
 ? With a string, the shell interprets `; rm -rf ~` in the name. An argument array is never parsed by a shell.
 
+@@drill
+Which built-in Node.js module provides `test` and `describe`?
+= node:test
+= test
+? Run it with node --test.
+
 @@flashcards
 node --test :: Run Node's built-in test runner
 assert.deepEqual :: Compare arrays/objects in tests

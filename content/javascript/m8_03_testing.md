@@ -130,6 +130,12 @@ What's the best way to make code easy to test?
 - Write tests after release
 ? Dependency injection means fewer, simpler mocks.
 
+@@drill
+Which `node:assert` function compares objects by their contents?
+= deepStrictEqual
+= assert.deepStrictEqual
+? strictEqual compares identity for objects.
+
 @@flashcards
 `node --test` :: run the built-in test runner
 `describe` / `test` :: group and define tests

@@ -204,6 +204,12 @@ Why start a test server on port `0`?
 - It disables the network
 ? `server.address().port` tells you which port you got.
 
+@@drill
+Which `http` function creates a server in Node.js?
+= createServer
+= http.createServer
+? http.createServer((req, res) => { ... }).
+
 @@flashcards
 `http.createServer((req, res) => …)` :: Node's built-in web server
 `res.writeHead(status, headers)` + `res.end(body)` :: send a response

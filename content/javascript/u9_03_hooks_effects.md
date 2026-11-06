@@ -115,6 +115,12 @@ What should an effect that starts an interval return?
 - A promise
 ? Cleanup runs before the next effect and on unmount.
 
+@@drill
+Which React hook runs code after rendering, such as subscribing or fetching?
+= useEffect
+= useEffect()
+? Return a cleanup function to undo it.
+
 @@flashcards
 Rules of Hooks :: call hooks at the top level, in the same order every render
 `useEffect` :: run side effects after render

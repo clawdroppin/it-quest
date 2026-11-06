@@ -116,6 +116,12 @@ Which array method returns a new sorted array without changing the original?
 - splice
 ? `toSorted`, `toReversed`, `toSpliced` and `with` are the non-mutating versions.
 
+@@drill
+Which built-in function makes a deep copy of an object?
+= structuredClone
+= structuredClone()
+? Spread {...obj} only copies one level.
+
 @@flashcards
 Destructuring :: unpack values: `const { a, b } = obj`, `const [x, y] = arr`
 Rename while destructuring :: `const { ip: address } = server`

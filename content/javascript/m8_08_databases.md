@@ -110,6 +110,14 @@ Can a column name in ORDER BY be passed as a query parameter?
 - Only with an ORM
 ? Building SQL from unchecked identifiers is still injection.
 
+@@drill
+What should you always use instead of building SQL strings from user input?
+= parameters
+= parameterized queries
+= query parameters
+= placeholders
+? The driver keeps data separate from SQL.
+
 @@flashcards
 `node:sqlite` :: built-in synchronous SQLite driver
 Prepared statement :: compiled SQL with placeholders, run with values

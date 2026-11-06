@@ -131,6 +131,11 @@ Which property attribute stops a property from showing up in `Object.keys` and `
 - hidden: true
 ? Built-in methods like `Array.prototype.map` are non-enumerable.
 
+@@drill
+Which built-in object wraps another object and intercepts its operations?
+= Proxy
+? new Proxy(target, handler).
+
 @@flashcards
 Symbol :: unique primitive, used as a collision-free key
 `Symbol.for(key)` :: shared symbol from the global registry

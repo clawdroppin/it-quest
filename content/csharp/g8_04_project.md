@@ -54,11 +54,11 @@ Why coalesce consecutive edits of the same field?
 
 @@quiz
 What does the Undo stack store in the asset desk app?
-* Commands that know how to reverse a change
+* Entries recording the property, its old value and its new value
 - Screenshots of the window
 - The whole database after every keypress
 - Only the last value
-? Each entry captures what changed so it can be put back.
+? Undo applies the old value; redo applies the new one.
 
 @@flashcards
 `INotifyDataErrorInfo` :: per-property validation errors

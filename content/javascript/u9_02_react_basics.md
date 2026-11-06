@@ -123,6 +123,12 @@ When should you use `setCount((c) => c + 1)` instead of `setCount(count + 1)`?
 - Only for strings
 ? Each render's `count` is a fixed snapshot.
 
+@@drill
+Which React hook gives a component a piece of state?
+= useState
+= useState()
+? const [count, setCount] = useState(0).
+
 @@flashcards
 Vite :: fast dev server and build tool for front-end apps
 JSX :: HTML-like syntax compiled to function calls

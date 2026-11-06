@@ -564,5 +564,12 @@ test("the API end to end", async (t) => {
 
   assert.equal(saves, 2, "every successful change is saved");
 });
+
+@@drill
+Which HTTP status code means the request body failed validation?
+= 400
+= 422
+? 400 Bad Request, or 422 Unprocessable Content.
+
 @@text
 🎉 You've built the core of an ITSM tool: validation, SLAs, state changes, filtering and a tested REST API. When an interviewer asks "have you worked with APIs?", you can say you've *built* one, and explain what each status code you return means.

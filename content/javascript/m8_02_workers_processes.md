@@ -115,6 +115,12 @@ How do worker threads exchange data with the main thread?
 - They can't
 ? Each worker has its own memory and event loop.
 
+@@drill
+Which `child_process` function runs a program with an argument array and no shell?
+= execFile
+= spawn
+? Never build a shell string from user input.
+
 @@flashcards
 Worker thread :: separate JS thread with its own event loop
 `workerData` :: initial data passed to a worker

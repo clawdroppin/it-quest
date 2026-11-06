@@ -90,6 +90,13 @@ What does subtracting two Date objects give?
 - NaN
 ? Divide by 3,600,000 for hours.
 
+@@drill
+Which Date method gives an ISO 8601 string in UTC?
+= toISOString
+= toISOString()
+= .toISOString()
+? For example 2026-11-06T14:00:00.000Z.
+
 @@flashcards
 Epoch :: 1970-01-01T00:00:00Z; Date stores ms since then
 `getUTCMonth()` :: 0-based month in UTC

@@ -1358,5 +1358,11 @@ $("links").addEventListener("click", async (e) => {
 });
 
 load();
+
+@@drill
+Which HTTP method is used to delete a resource?
+= DELETE
+? DELETE /links/42.
+
 @@text
 🎉 You've built every layer of a web application yourself: HTTP routing, input validation, safe file storage, security headers and a reactive front end. Frameworks will now feel like shortcuts you understand rather than magic you depend on.

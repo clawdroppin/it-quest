@@ -74,6 +74,11 @@ In a toolbar using roving tabindex, what does Tab do?
 - Closes the toolbar
 ? Only one item in the group is in the tab order.
 
+@@drill
+Which attribute gives an icon-only button its accessible name?
+= aria-label
+? Screen readers announce it.
+
 @@flashcards
 WCAG 2.2 AA :: the usual accessibility standard to meet
 Semantic HTML :: using elements for their meaning (button, nav, label)

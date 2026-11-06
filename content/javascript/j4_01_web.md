@@ -93,6 +93,12 @@ Which method finds the first element matching a CSS selector?
 - `document.select(".alert")`
 ? querySelectorAll returns every match.
 
+@@drill
+Which DOM property sets text safely, without parsing HTML?
+= textContent
+= .textContent
+? innerHTML would run injected markup.
+
 @@flashcards
 HTML :: The structure of a page
 CSS :: The appearance: selector { property: value; }

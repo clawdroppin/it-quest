@@ -117,6 +117,13 @@ What's the main reason Tauri apps are much smaller than Electron apps?
 - Electron includes Python
 ? The trade-off is small rendering differences between platforms.
 
+@@drill
+In Electron, which script exposes a safe API from the main process to the page?
+= preload
+= preload script
+= the preload script
+? Use contextBridge.exposeInMainWorld.
+
 @@flashcards
 Electron :: desktop apps with bundled Chromium and Node.js
 Tauri :: desktop/mobile apps with the OS web view and a Rust back end

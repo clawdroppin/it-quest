@@ -95,6 +95,11 @@ What does `const level = cpu > 80 ? "high" : "normal";` set when `cpu` is 80?
 - an error
 ? 80 > 80 is false, so the value after the colon is used.
 
+@@drill
+Which statement compares one value against many `case` labels?
+= switch
+? Remember break, or execution falls through.
+
 @@flashcards
 if / else if / else :: choose one branch by condition
 ternary :: condition ? valueIfTrue : valueIfFalse

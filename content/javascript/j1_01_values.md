@@ -82,6 +82,11 @@ Which comparison should you use in JavaScript?
 - `0 8080`
 ? `||` replaces any falsy value (including 0). `??` only replaces null and undefined.
 
+@@drill
+Which operator compares two values without type conversion?
+= ===
+? == converts types first, with surprising results.
+
 @@flashcards
 === :: strict equality: no type conversion
 == :: loose equality: converts types first (avoid)

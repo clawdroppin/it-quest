@@ -90,6 +90,13 @@ How do you test whether a circle overlaps a rectangle?
 - Draw both and compare pixels
 ? This handles edges and corners correctly.
 
+@@drill
+Which browser function schedules the next frame of a game loop?
+= requestAnimationFrame
+= window.requestAnimationFrame
+= requestAnimationFrame()
+? It runs in step with the display and pauses in hidden tabs.
+
 @@flashcards
 Canvas 2D :: immediate-mode drawing API on a bitmap
 `requestAnimationFrame` :: schedule drawing for the next display frame

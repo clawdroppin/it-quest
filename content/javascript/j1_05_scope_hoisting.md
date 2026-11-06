@@ -116,6 +116,12 @@ What happens when you read a `let` variable before its declaration line?
 - It works if the variable is a number
 ? `var` would give `undefined`, which hides bugs.
 
+@@drill
+What's the name of the period before a `let` variable's declaration, when using it throws?
+= temporal dead zone
+= tdz
+? Variables declared with var are undefined there instead.
+
 @@flashcards
 Block scope :: `let` and `const` exist only inside their `{ }`
 Function scope :: `var` exists in the whole function

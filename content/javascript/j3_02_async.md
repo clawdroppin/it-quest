@@ -94,6 +94,12 @@ Five health checks take 1 second each. How long does `await Promise.all(checks)`
 - it retries automatically
 ? Only network failures (DNS, refused connection, timeout) make fetch throw.
 
+@@drill
+Which Promise method waits for all promises and rejects as soon as one fails?
+= Promise.all
+= all
+? Promise.allSettled reports each result instead.
+
 @@flashcards
 Promise :: a value that will be ready later (or fail)
 async function :: always returns a promise; can use await

@@ -187,6 +187,12 @@ The app needs `DATABASE_URL` but it isn't set. When should the app fail?
 - After 10 retries
 ? Failing fast turns a confusing runtime error into an obvious deployment error.
 
+@@drill
+Which `crypto` function derives a slow, salted hash for storing passwords?
+= scrypt
+= crypto.scrypt
+? Never store passwords themselves.
+
 @@flashcards
 validate at the boundary :: check untrusted input once, at the edge; return all errors with 400
 `crypto.scryptSync(pw, salt, 32)` :: slow salted password hash in Node

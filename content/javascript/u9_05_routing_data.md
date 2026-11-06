@@ -97,6 +97,12 @@ What does stale-while-revalidate mean?
 - Cache data forever
 ? Users see something instantly and get fresh data shortly after.
 
+@@drill
+Which History API method changes the URL without reloading the page?
+= pushState
+= history.pushState
+? Listen for popstate to handle Back.
+
 @@flashcards
 SPA :: single-page app; switches screens without full page loads
 History API :: pushState and popstate for URL changes

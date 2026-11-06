@@ -100,6 +100,13 @@ What frequency is one octave above A4 (440 Hz)?
 - 220 Hz
 ? An octave doubles the frequency: 12 semitones × 2^(1/12) each.
 
+@@drill
+Which browser API generates and plays sound from code?
+= Web Audio API
+= Web Audio
+= AudioContext
+? new AudioContext() creates oscillators and effects.
+
 @@flashcards
 Creative coding :: programming as an artistic medium
 p5.js :: beginner-friendly creative coding library

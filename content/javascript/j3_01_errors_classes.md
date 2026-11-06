@@ -100,6 +100,11 @@ When does a `finally` block run?
 - Only if there is no catch block
 ? Use finally for clean-up such as closing files or connections.
 
+@@drill
+Which keyword makes one class inherit from another?
+= extends
+? class NotFound extends Error { ... }.
+
 @@flashcards
 try / catch / finally :: run, handle errors, always clean up
 throw new Error(msg) :: raise an error with a stack trace

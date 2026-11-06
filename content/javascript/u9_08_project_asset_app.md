@@ -88,6 +88,11 @@ Why prefix exported CSV cells starting with `=` or `+` with a `'`?
 - To mark comments
 ? A cell like `=HYPERLINK(...)` could trick users or leak data.
 
+@@drill
+Undo keeps a list of earlier states. What is the list of undone states that redo uses called in this lesson?
+= future
+? Every new action pushes onto past and clears future.
+
 @@flashcards
 Domain layer :: pure business logic without UI or framework code
 Undo history :: past / present / future states

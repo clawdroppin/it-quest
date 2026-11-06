@@ -122,6 +122,13 @@ What's different about `this` in arrow functions?
 - It's always undefined
 ? This makes arrows ideal for callbacks inside methods.
 
+@@drill
+Which function method returns a new function with `this` fixed?
+= bind
+= bind()
+= .bind
+? call and apply invoke the function immediately.
+
 @@flashcards
 `this` rule :: decided by how a function is called, not where it's defined
 Method call :: `obj.f()` → `this` is obj

@@ -91,6 +91,11 @@ Which Node.js versions should you use for servers?
 - Whatever npm installs
 ? LTS versions get security fixes for about 30 months.
 
+@@drill
+Which JavaScript engine do Chrome and Node.js use?
+= V8
+? Firefox uses SpiderMonkey; Safari uses JavaScriptCore.
+
 @@flashcards
 V8 :: Google's JavaScript engine used by Chrome and Node.js
 Runtime :: engine plus APIs and an event loop (browser, Node.js, Deno, Bun)

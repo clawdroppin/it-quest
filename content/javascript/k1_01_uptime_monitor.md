@@ -497,5 +497,12 @@ main().catch((e) => {
   { "name": "Wikipedia", "url": "https://www.wikipedia.org" },
   { "name": "Broken on purpose", "url": "https://nonexistent.invalid" }
 ]
+
+@@drill
+Which `AbortSignal` method makes a fetch give up after a number of milliseconds?
+= timeout
+= AbortSignal.timeout
+? fetch(url, { signal: AbortSignal.timeout(5000) }).
+
 @@text
 🎉 You've built the core of a commercial product: parallel checks with timeouts, state-change alerting, history and a status page, all tested without touching the internet. That last part, testing network code against a local server, is a technique many professionals never learn.

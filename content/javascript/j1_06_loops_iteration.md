@@ -104,6 +104,13 @@ What does `break outer;` do?
 - Throws an error
 ? Labels let break and continue target an outer loop.
 
+@@drill
+Which loop iterates over the values of an array?
+= for...of
+= for of
+= for-of
+? for...in iterates over keys.
+
 @@flashcards
 `for...of` :: loop over values of an iterable
 `for...in` :: loop over enumerable keys of an object

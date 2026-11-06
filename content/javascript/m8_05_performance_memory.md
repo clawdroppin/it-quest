@@ -99,6 +99,11 @@ What is a memory leak in JavaScript?
 - Reading uninitialised memory
 ? Unbounded caches and forgotten listeners are common causes.
 
+@@drill
+Which Node.js flag starts the inspector so Chrome DevTools can profile the process?
+= --inspect
+? Then open chrome://inspect.
+
 @@flashcards
 Profiling :: measuring where a program spends time
 Flame graph :: visualisation of time per call stack

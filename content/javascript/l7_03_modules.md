@@ -111,6 +111,13 @@ What does `"^7.2.0"` allow npm to install?
 - 7.2.x only
 ? `^` allows minor and patch updates within the same major.
 
+@@drill
+Which package.json field makes Node treat .js files as ES modules?
+= "type": "module"
+= type
+= type: module
+? Without it, .js files are CommonJS.
+
 @@flashcards
 `export default` :: the module's main export; one per module
 Named export :: `export function f()`, imported with `{ f }`

@@ -92,6 +92,12 @@ What is JSX?
 - A JSON format
 ? `<b>{x}</b>` becomes something like `jsx("b", { children: x })`.
 
+@@drill
+What's the name of the process where a framework compares the new UI tree with the old one?
+= reconciliation
+= diffing
+? Only the differences are applied to the DOM.
+
 @@flashcards
 Declarative UI :: describe the result for the current state
 Virtual DOM :: plain objects describing the UI

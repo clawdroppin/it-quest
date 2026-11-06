@@ -115,6 +115,12 @@ Why does `["1", "2", "3"].map(parseInt)` return `[1, NaN, NaN]`?
 - map only works with arrow functions
 ? Use `.map((s) => parseInt(s, 10))` or `.map(Number)`.
 
+@@drill
+What's the name of the technique that delays a function until calls stop for a while?
+= debounce
+= debouncing
+? Throttle runs at most once per interval instead.
+
 @@flashcards
 Pure function :: output depends only on input; no side effects
 Higher-order function :: takes or returns functions

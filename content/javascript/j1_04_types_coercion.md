@@ -105,6 +105,11 @@ What does `typeof null` return?
 - `"none"`
 ? A bug from 1995 that can't be fixed without breaking the web.
 
+@@drill
+What does `0.1 + 0.2 === 0.3` evaluate to?
+= false
+? Floating-point numbers can't store 0.1 exactly; compare with a small tolerance.
+
 @@flashcards
 Primitive types :: number, bigint, string, boolean, undefined, null, symbol
 Falsy values :: false, 0, -0, 0n, "", null, undefined, NaN

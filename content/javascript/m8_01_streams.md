@@ -121,6 +121,12 @@ What does `writable.write()` returning `false` mean?
 - The data was compressed
 ? Ignoring it lets memory grow without limit.
 
+@@drill
+Which `stream` function connects streams and handles errors and cleanup?
+= pipeline
+= stream.pipeline
+? await pipeline(source, transform, destination).
+
 @@flashcards
 Readable stream :: source of data chunks
 Writable stream :: destination for data chunks

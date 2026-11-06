@@ -77,6 +77,11 @@ Why anchor a validation pattern with `^` and `$`?
 - To find all matches
 ? Without anchors, "abc150-0002xyz" would pass a postcode check.
 
+@@drill
+Which regex flag finds every match, not just the first?
+= g
+? Combine with matchAll to loop over matches.
+
 @@flashcards
 regex.test(s) :: true if the pattern matches
 s.match(re) :: first match with groups (all matches with g)

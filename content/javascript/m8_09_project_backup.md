@@ -75,6 +75,12 @@ Why plan before applying changes?
 - To avoid hashing
 ? Separate deciding from doing.
 
+@@drill
+Which `crypto` function creates a hash object for checking whether a file changed?
+= createHash
+= crypto.createHash
+? createHash("sha256").update(data).digest("hex").
+
 @@flashcards
 Incremental backup :: copy only what changed since last time
 Manifest :: saved list of files with size, mtime and hash

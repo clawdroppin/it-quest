@@ -196,6 +196,12 @@ What does debouncing a search box do?
 - Cancels the search if the user types too fast
 ? Fewer requests, less flicker, and less load on the server.
 
+@@drill
+What's the name of the technique of handling child events with one listener on a parent?
+= event delegation
+= delegation
+? Check event.target.closest(...) inside the handler.
+
 @@flashcards
 state → render :: the page is drawn from one source of truth
 dispatch(action) :: one place where state changes (Redux, useReducer)

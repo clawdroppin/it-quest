@@ -125,6 +125,12 @@ In a subclass constructor, what must happen before you use `this`?
 - Return an object
 ? The parent constructor creates and initialises the object first.
 
+@@drill
+Which function returns an object's prototype?
+= Object.getPrototypeOf
+= Object.getPrototypeOf()
+? Avoid the old __proto__ property.
+
 @@flashcards
 Prototype :: object another object falls back to for missing properties
 Prototype chain :: obj → its prototype → ... → Object.prototype → null

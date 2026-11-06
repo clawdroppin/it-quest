@@ -95,6 +95,12 @@ What does a correlation (request) ID let you do?
 - Count users
 ? Pass it in a header to downstream services.
 
+@@drill
+Which endpoint path is the common convention for a health check?
+= /health
+= /healthz
+? Return 200 when the service can work.
+
 @@flashcards
 Structured logging :: one JSON object per log line
 Log levels :: debug, info, warn, error

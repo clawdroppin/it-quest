@@ -125,6 +125,15 @@ How do you keep a CPU-heavy task from freezing a Node.js server?
 - Use var instead of let
 ? Marking a function async doesn't make its loops non-blocking.
 
+@@drill
+Which runs first: a resolved promise's `.then` callback or a `setTimeout(fn, 0)` callback?
+= then
+= .then
+= the promise
+= promise
+= the then callback
+? Microtasks run before the next macrotask.
+
 @@flashcards
 Event loop :: runs callbacks from queues when the call stack is empty
 Run to completion :: a function is never interrupted by other JS code

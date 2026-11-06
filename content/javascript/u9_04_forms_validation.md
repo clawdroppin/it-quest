@@ -81,6 +81,11 @@ What's the benefit of a schema library like Zod?
 - It sends emails
 ? `safeParse` returns either cleaned data or structured errors.
 
+@@drill
+Which HTML attribute makes a field mandatory?
+= required
+? The browser blocks submission until it's filled.
+
 @@flashcards
 Controlled input :: value held in component state
 Uncontrolled input :: value held by the DOM, read on submit

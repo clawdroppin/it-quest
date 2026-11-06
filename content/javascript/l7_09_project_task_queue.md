@@ -70,6 +70,12 @@ Why limit concurrency when checking 500 hosts?
 - It's required by fetch
 ? Unlimited parallelism can look like a denial-of-service attack.
 
+@@drill
+What's the name of the maximum number of tasks a queue runs at once?
+= concurrency
+= concurrency limit
+? Extra tasks wait until a slot frees up.
+
 @@flashcards
 Concurrency limit :: maximum number of tasks running at once
 Priority queue :: highest priority first; FIFO among equals

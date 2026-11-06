@@ -84,6 +84,12 @@ What is `package-lock.json` for?
 - It lists files to ignore in Git
 ? Commit it, and use npm ci in CI to install exactly those versions.
 
+@@drill
+Which Node.js module reads and writes files with promises?
+= fs/promises
+= node:fs/promises
+? import { readFile } from "node:fs/promises".
+
 @@flashcards
 require / module.exports :: CommonJS modules (classic Node)
 import / export :: ES modules (the modern standard)

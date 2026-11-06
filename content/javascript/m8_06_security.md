@@ -110,6 +110,11 @@ Is Node's `vm` module a safe sandbox for untrusted code?
 - Only on Linux
 ? Use separate processes, containers or isolates designed for it.
 
+@@drill
+Which property name is the classic way to pollute every object's prototype?
+= __proto__
+? Reject it when merging untrusted JSON.
+
 @@flashcards
 XSS :: injected script running in users' browsers
 `textContent` :: sets text safely, no HTML parsing

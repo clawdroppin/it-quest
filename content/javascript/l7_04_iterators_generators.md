@@ -119,6 +119,11 @@ How do you consume an async generator?
 - `await gen()`
 ? It awaits each value in turn.
 
+@@drill
+Which symbol names the method that makes an object iterable?
+= Symbol.iterator
+? for...of calls obj[Symbol.iterator]().
+
 @@flashcards
 Iterable :: has `[Symbol.iterator]()`
 Iterator :: object with `next()` → `{ value, done }`

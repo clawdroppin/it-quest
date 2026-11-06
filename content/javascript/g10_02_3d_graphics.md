@@ -90,6 +90,13 @@ Why do far-away points look smaller in a perspective projection?
 - Cameras zoom out automatically
 ? This is the divide by w after projection.
 
+@@drill
+Which small GPU program decides the colour of each pixel?
+= fragment shader
+= a fragment shader
+= pixel shader
+? The vertex shader positions the corners first.
+
 @@flashcards
 WebGL / WebGPU :: browser APIs for GPU rendering
 three.js :: popular 3D library for the web

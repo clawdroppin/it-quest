@@ -96,6 +96,11 @@ Your API receives a request for a ticket ID that doesn't exist. Which status cod
 - 301 Moved Permanently
 ? 5xx means the server failed; a missing resource is the client asking for something that isn't there.
 
+@@drill
+Which HTTP status code means "Created"?
+= 201
+? Return it after a successful POST that creates something.
+
 @@flashcards
 GET / POST / PATCH / DELETE :: Read / create / update / delete
 200 / 201 / 204 :: OK / Created / No Content

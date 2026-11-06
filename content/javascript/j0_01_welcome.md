@@ -86,6 +86,11 @@ What does `` `${2 + 2} servers` `` produce?
 - The variable must be declared with `var`
 ? Check spelling and capitals first when you see a ReferenceError.
 
+@@drill
+Which keyword declares a variable that can't be reassigned?
+= const
+? Use let when the value needs to change.
+
 @@flashcards
 console.log :: Print values to the console
 const :: A variable that can't be reassigned

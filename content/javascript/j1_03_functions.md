@@ -98,6 +98,14 @@ With `function greet(name, greeting = "Hello")` from above, what does `greet("An
 - `"Ana, Hello!"`
 ? Default parameters are used when the argument isn't passed.
 
+@@drill
+Write an arrow function that takes `n` and returns `n * 2`.
+= n => n * 2
+= (n) => n * 2
+= n=>n*2
+= (n)=>n*2
+? No braces means the expression is returned.
+
 @@flashcards
 function :: a named, reusable block of code
 default parameter :: function f(x = 10): used when x isn't passed

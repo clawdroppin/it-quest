@@ -104,6 +104,12 @@ What's the main use of a WeakMap?
 - Iterating in random order
 ? Keys must be objects and can't be listed.
 
+@@drill
+Write the expression that removes duplicates from array `a` and gives back an array.
+= [...new Set(a)]
+= Array.from(new Set(a))
+? A Set keeps each value once.
+
 @@flashcards
 Map :: key-value collection with any key type, ordered, has size
 Set :: collection of unique values

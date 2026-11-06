@@ -142,6 +142,11 @@ Which is a programmer error rather than an operational error?
 - A full disk
 ? Programmer errors are bugs; fix the code instead of handling them.
 
+@@drill
+Which option links a new error to the error that caused it?
+= cause
+? new Error("save failed", { cause: err }).
+
 @@flashcards
 TypeError :: wrong type, e.g. calling undefined
 RangeError :: number out of allowed range

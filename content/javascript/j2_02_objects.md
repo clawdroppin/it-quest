@@ -84,6 +84,12 @@ JSON is stricter than JavaScript: keys need double quotes, no trailing commas, n
 - an error
 ? JSON numbers become JavaScript numbers; JSON.parse builds real values.
 
+@@drill
+Which function turns a JavaScript object into a JSON string?
+= JSON.stringify
+= JSON.stringify()
+? JSON.parse does the reverse.
+
 @@flashcards
 Object.keys / values / entries :: Arrays of an object's keys / values / [key, value] pairs
 destructuring :: const { name, ip } = server

@@ -105,6 +105,11 @@ What does AES-GCM's authentication tag provide?
 - A shorter key
 ? Decryption fails if the data was modified.
 
+@@drill
+Which Node.js class holds raw bytes?
+= Buffer
+? Buffer.from("hi", "utf8").
+
 @@flashcards
 ArrayBuffer :: raw binary memory
 Uint8Array :: typed array view of bytes

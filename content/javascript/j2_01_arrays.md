@@ -88,6 +88,13 @@ What does `["web01", "db01", "web02"].filter((s) => s.startsWith("web"))` return
 - `2`
 ? filter keeps the items for which the function returns true.
 
+@@drill
+Which array method combines all items into one value?
+= reduce
+= reduce()
+= .reduce
+? arr.reduce((sum, n) => sum + n, 0).
+
 @@flashcards
 map :: new array with each item transformed
 filter :: new array with only the items that pass a test
