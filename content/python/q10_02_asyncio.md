@@ -172,6 +172,12 @@ What should you do after catching `asyncio.CancelledError`?
 - Call sys.exit
 ? Swallowing cancellation breaks timeouts and shutdown.
 
+@@drill
+Which asyncio class limits how many coroutines run a section at once?
+= Semaphore
+= asyncio.Semaphore
+? async with sem: ...
+
 @@flashcards
 Event loop :: runs coroutines, switching at await points
 Task :: a scheduled coroutine, created with `asyncio.create_task`

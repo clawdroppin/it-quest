@@ -81,6 +81,13 @@ Two columns have a correlation of 0.9. What can you conclude?
 - The data is wrong
 ? A third factor may drive both.
 
+@@drill
+Which pandas method gives count, mean, std and quartiles for each column?
+= describe
+= describe()
+= df.describe()
+? A fast first look at any dataset.
+
 @@flashcards
 Mean :: average; sensitive to outliers
 Median :: middle value; robust to outliers

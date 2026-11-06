@@ -94,6 +94,13 @@ Which call copies a whole folder tree?
 - `pathlib.Path(src).copy(dst)`
 ? shutil.copy copies one file; copytree copies a directory and everything in it.
 
+@@drill
+Which module function runs an external command and waits for it to finish?
+= subprocess.run
+= subprocess.run()
+= run
+? Pass a list of arguments and check=True to raise on failure.
+
 @@flashcards
 `subprocess.run([...], capture_output=True, text=True)` :: run a command and get its output
 exit code 0 :: success (any other number: failure)

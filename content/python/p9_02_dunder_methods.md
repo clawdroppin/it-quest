@@ -145,6 +145,11 @@ What does `functools.total_ordering` need from you?
 - `__cmp__`
 ? It fills in the rest.
 
+@@drill
+Which special method makes `len(obj)` work?
+= __len__
+? Return an int.
+
 @@flashcards
 Dunder method :: a special method like `__len__` that Python calls for syntax and built-ins
 `__repr__` :: developer-facing representation, used in containers and the REPL

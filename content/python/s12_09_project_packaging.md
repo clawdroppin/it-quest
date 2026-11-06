@@ -118,6 +118,11 @@ Where do files added with `--add-data` live at runtime in one-file mode?
 - In the registry
 ? Resolve paths relative to `sys._MEIPASS` when it exists.
 
+@@drill
+Which tool bundles a Python app and its interpreter into one executable?
+= PyInstaller
+? pyinstaller --onefile app.py.
+
 @@flashcards
 PyInstaller :: bundles Python, your code and dependencies into an executable
 `--onefile` :: single executable that extracts itself at start

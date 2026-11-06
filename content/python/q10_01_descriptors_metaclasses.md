@@ -165,6 +165,11 @@ What's the default metaclass of every class?
 - class
 ? `type(SomeClass)` is `type`.
 
+@@drill
+Which special method runs when a class is subclassed?
+= __init_subclass__
+? A simpler alternative to many metaclass uses.
+
 @@flashcards
 Descriptor :: class attribute object controlling access via `__get__`/`__set__`
 Data descriptor :: defines `__set__` or `__delete__`; takes priority over the instance dict

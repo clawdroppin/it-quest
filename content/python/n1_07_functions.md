@@ -100,6 +100,11 @@ What does a function return if it has no `return` statement?
 - The last value it printed
 ? Printing and returning are different: print shows a value, return hands it back.
 
+@@drill
+Which keyword defines a function?
+= def
+? def greet(name):
+
 @@flashcards
 def name(params): :: define a function
 return :: hand a value back to the caller

@@ -135,5 +135,12 @@ Oct 31 11:45:30 web01 sshd[1402]: Failed password for invalid user oracle from 1
 Oct 31 11:45:33 web01 sshd[1402]: Failed password for invalid user postgres from 192.0.2.99 port 33002 ssh2
 Oct 31 11:45:37 web01 sshd[1402]: Failed password for root from 192.0.2.99 port 33003 ssh2
 Oct 31 11:45:40 web01 sshd[1402]: Disconnected from invalid user postgres 192.0.2.99 port 33002 [preauth]
+
+@@drill
+Which `re` function tries to match a pattern at the start of a string?
+= re.match
+= match
+? re.search looks anywhere in the string.
+
 @@text
 When all six tests pass, `python peek.py` prints the first events. On to step 2: the detection rules.

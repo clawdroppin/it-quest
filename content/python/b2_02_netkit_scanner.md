@@ -472,5 +472,13 @@ class ScanTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+@@drill
+Which socket method returns an error code instead of raising when a connection fails?
+= connect_ex
+= connect_ex()
+= socket.connect_ex
+? 0 means the port accepted the connection.
+
 @@text
 🎉 You now own a toolkit you'll actually use. Keep it in your GitHub portfolio, and keep using `python main.py vlsm ...` to check your answers when you practice subnetting for Network+ and CCNA.

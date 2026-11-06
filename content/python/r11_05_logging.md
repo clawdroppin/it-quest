@@ -132,6 +132,12 @@ Why use `contextvars` for a request ID?
 - It writes to disk
 ? A plain global would be overwritten by the next request.
 
+@@drill
+Which logging handler starts a new file when the current one gets too big?
+= RotatingFileHandler
+= logging.handlers.RotatingFileHandler
+? TimedRotatingFileHandler rotates by time.
+
 @@flashcards
 Logger :: named source of log records, `getLogger(__name__)`
 Handler :: sends records somewhere (console, file, network)

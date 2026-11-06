@@ -107,5 +107,11 @@ class PlanningTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+@@drill
+What is the subnet mask for a /24 network?
+= 255.255.255.0
+? 24 one-bits: three full octets.
+
 @@text
 > Tip: `ipaddress.ip_network(cidr, strict=False)` accepts addresses with host bits set, like `10.1.2.3/24`. `ip_network((int_address, prefix))` builds a network from a number, handy for VLSM: convert the starting address with `int(...)`, round it **up** to a multiple of the block size, and move along.

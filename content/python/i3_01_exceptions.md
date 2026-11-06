@@ -99,6 +99,11 @@ What does `raise ValueError("port must be 1-65535")` do?
 - Returns the message as a string
 ? Raise errors for invalid input, and catch them where you can handle them.
 
+@@drill
+Which exception does `int("abc")` raise?
+= ValueError
+? The type is right (str) but the value can't be converted.
+
 @@flashcards
 try / except :: run code and handle errors it raises
 except ValueError as e :: catch one type and keep the error

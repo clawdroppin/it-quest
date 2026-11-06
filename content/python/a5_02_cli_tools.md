@@ -90,6 +90,11 @@ Why use `logging` instead of `print` in a tool?
 - logging encrypts the output
 ? logging.info, warning and error can be filtered by level.
 
+@@drill
+Which standard-library module parses command-line options and builds `--help`?
+= argparse
+? argparse.ArgumentParser().
+
 @@flashcards
 argparse :: command-line options with --help for free
 add_argument("--dry-run", action="store_true") :: an on/off flag

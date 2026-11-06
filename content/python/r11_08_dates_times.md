@@ -125,6 +125,11 @@ Which clock should you use to measure how long an operation took?
 - date.today()
 ? They never jump when the system clock changes.
 
+@@drill
+Which standard-library module provides IANA time zones such as "Asia/Tokyo"?
+= zoneinfo
+? ZoneInfo("Asia/Tokyo").
+
 @@flashcards
 timedelta :: a duration
 Naive datetime :: no time zone attached

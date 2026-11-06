@@ -126,6 +126,14 @@ What does a `with` block guarantee for a context manager?
 - The block runs twice
 ? Files, locks and connections all use this.
 
+@@drill
+Which `functools` decorator keeps a wrapped function's name and docstring?
+= wraps
+= functools.wraps
+= @wraps
+= @functools.wraps
+? Use it on the inner wrapper function.
+
 @@flashcards
 first-class functions :: functions can be stored and passed around
 decorator :: a function that wraps another function

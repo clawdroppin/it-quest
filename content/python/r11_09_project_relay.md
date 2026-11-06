@@ -63,6 +63,12 @@ Why deduplicate alerts within a time window?
 - To make alerts faster
 ? Count repeats instead of re-sending.
 
+@@drill
+What's the name of the rate-limiting algorithm that refills tokens at a steady rate?
+= token bucket
+= token bucket algorithm
+? Each request spends a token; bursts use the saved ones.
+
 @@flashcards
 Webhook :: an HTTP request one system sends another when something happens
 Token bucket :: rate limiter with burst capacity and a refill rate

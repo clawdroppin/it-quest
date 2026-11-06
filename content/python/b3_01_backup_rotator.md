@@ -476,5 +476,12 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+@@drill
+Which `shutil` function creates a .zip or .tar.gz archive of a folder?
+= make_archive
+= shutil.make_archive
+? shutil.make_archive(base_name, "zip", folder).
+
 @@text
 🎉 Backups, checksums, retention, dry runs, scheduling: these are the habits that make people trust a sysadmin. Mention this project in interviews, and be ready to explain the **3-2-1 rule**: 3 copies of your data, on 2 different kinds of storage, 1 of them off-site.

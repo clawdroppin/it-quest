@@ -133,6 +133,11 @@ Can you use pack and grid in the same container?
 - Only with place
 ? Nest frames instead.
 
+@@drill
+Which geometry manager places widgets in rows and columns?
+= grid
+? pack stacks; place uses coordinates.
+
 @@flashcards
 pack :: stacks widgets along a side; good for toolbars and status bars
 grid :: rows and columns; good for forms

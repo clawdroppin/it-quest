@@ -216,6 +216,12 @@ Which error should become HTTP 500 "internal error"?
 - A wrong password
 ? Expected problems get specific answers (400, 404, 401). An unexpected exception is a bug: log it, and don't show the details to users.
 
+@@drill
+What's the name of the pattern where a function receives the objects it depends on instead of creating them?
+= dependency injection
+= di
+? It makes code easy to test with fakes.
+
 @@flashcards
 layered architecture :: interface → use cases → domain, with storage swappable; dependencies point inward
 dependency injection :: give an object what it needs (repo, clock) instead of letting it create them

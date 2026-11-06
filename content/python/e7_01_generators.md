@@ -106,6 +106,11 @@ What does `itertools.islice(gen, 5)` do?
 - Repeats a generator five times
 ? Use it to take part of an infinite or very long iterator.
 
+@@drill
+Which keyword turns a function into a generator?
+= yield
+? Each yield hands out one value and pauses the function.
+
 @@flashcards
 iterable :: something you can loop over
 iterator :: gives one item at a time with next()

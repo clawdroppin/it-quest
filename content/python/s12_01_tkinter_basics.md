@@ -143,6 +143,13 @@ Why prefer `ttk` widgets?
 - ttk works without a window
 ? Use tk only for widgets ttk doesn't have (Text, Canvas, Listbox, Menu).
 
+@@drill
+Which method starts Tkinter's event loop?
+= mainloop
+= mainloop()
+= root.mainloop()
+? Nothing appears until it runs.
+
 @@flashcards
 Tkinter :: Python's built-in GUI toolkit
 Widget :: a GUI element such as a button or entry

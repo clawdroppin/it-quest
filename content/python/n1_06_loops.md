@@ -111,6 +111,11 @@ What does `for i in range(3): print(i)` print?
 - 3
 ? range(3) starts at 0 and stops before 3.
 
+@@drill
+Which keyword leaves a loop immediately?
+= break
+? continue skips to the next round instead.
+
 @@flashcards
 for x in items :: repeat for each item
 range(5) :: 0, 1, 2, 3, 4

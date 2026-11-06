@@ -149,6 +149,12 @@ What's `assert_never` for?
 - Raising warnings
 ? If a new case is added and unhandled, the checker reports it.
 
+@@drill
+Which `typing` construct restricts a value to a few exact strings?
+= Literal
+= typing.Literal
+? Literal["low", "high"].
+
 @@flashcards
 Generic :: code parameterised over types, `def f[T](x: T) -> T`
 TypeVar :: older syntax for a type parameter

@@ -139,6 +139,12 @@ What does `zip([1, 2, 3], ["a", "b"])` produce?
 - ["1a", "2b", "3"]
 ? zip stops at the shortest input unless `strict=True`.
 
+@@drill
+Which built-in walks two lists side by side, pairing their items?
+= zip
+= zip()
+? for name, ip in zip(names, ips):
+
 @@flashcards
 `range(a, b, step)` :: numbers from a up to but not including b
 `enumerate(items, start=1)` :: pairs of (index, item)

@@ -155,6 +155,11 @@ Which enum type lets you combine members with `|`?
 - Enum
 ? `Perm.READ | Perm.WRITE`.
 
+@@drill
+Which keyword starts a structural pattern-matching block?
+= match
+? Each pattern is a case.
+
 @@flashcards
 Enum :: a fixed set of named constant members
 IntEnum / StrEnum :: enum members that also behave like ints / strings

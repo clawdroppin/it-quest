@@ -122,6 +122,14 @@ When should you prefer a normal loop over a comprehension?
 - When filtering
 ? Comprehensions are for building values.
 
+@@drill
+Write a list comprehension that squares every `n` in `nums`.
+= [n * n for n in nums]
+= [n*n for n in nums]
+= [n ** 2 for n in nums]
+= [n**2 for n in nums]
+? [expression for item in iterable].
+
 @@flashcards
 List comprehension :: `[expr for x in items if cond]`
 Dict comprehension :: `{k: v for k, v in pairs}`

@@ -119,6 +119,12 @@ What minimum contrast ratio does WCAG require for normal text?
 - 10:1
 ? Large text needs 3:1.
 
+@@drill
+Which ttk widget shows rows and columns of data?
+= Treeview
+= ttk.Treeview
+? Set show="headings" for a plain table.
+
 @@flashcards
 Treeview :: ttk table/tree widget
 `show="headings"` :: Treeview as a plain table without the tree column

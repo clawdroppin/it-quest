@@ -95,6 +95,12 @@ Where should you start reading a Python traceback?
 - KeyError
 ? The type (a string) is fine for int(), but this particular value can't be converted.
 
+@@drill
+Which kind of error do you get when you forget a closing parenthesis?
+= SyntaxError
+= syntax error
+? Python can't even start running the file.
+
 @@flashcards
 SyntaxError :: invalid Python: missing bracket, quote or colon
 IndentationError :: line indentation doesn't line up

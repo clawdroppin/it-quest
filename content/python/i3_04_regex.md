@@ -87,6 +87,11 @@ Why write regex patterns as raw strings like `r"\d+"`?
 - To make the match case-insensitive
 ? Without r, Python would treat some backslash sequences as escapes first.
 
+@@drill
+Which regex shorthand matches any single digit?
+= \d
+? \d+ matches one or more digits.
+
 @@flashcards
 `\d` / `\w` / `\s` :: digit / word character / whitespace
 `+` / `*` / `?` :: one or more / zero or more / optional

@@ -122,6 +122,13 @@ When should you use processes instead of threads for background work?
 - For updating widgets
 ? Threads are fine for waiting on I/O.
 
+@@drill
+Which widget method schedules a function to run on the GUI thread after a delay?
+= after
+= after()
+= root.after
+? Use it to poll a queue filled by a worker thread.
+
 @@flashcards
 Event loop :: the single Tk thread that processes events and redraws
 Golden rule :: only the main thread touches widgets

@@ -114,6 +114,11 @@ What does `ipaddress.ip_address("10.0.0.5") in ipaddress.ip_network("10.0.0.0/24
 - "10.0.0.0/24"
 ? The in operator checks whether an address belongs to a network.
 
+@@drill
+How many usable host addresses does a /26 IPv4 network have?
+= 62
+? 64 addresses minus the network and broadcast addresses.
+
 @@flashcards
 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 :: the private (RFC 1918) IPv4 ranges
 127.0.0.1 :: loopback: this computer itself

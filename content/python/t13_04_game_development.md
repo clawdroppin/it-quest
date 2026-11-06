@@ -91,6 +91,12 @@ Which algorithm finds the shortest path on a grid where every step costs the sam
 - Binary search
 ? A* adds a heuristic to search fewer cells.
 
+@@drill
+What's the name of the time since the last frame, used to make movement frame-rate independent?
+= delta time
+= dt
+? position += speed * dt.
+
 @@flashcards
 Game loop :: input, update, draw, repeated every frame
 Delta time :: seconds since the last frame; scales movement

@@ -83,6 +83,13 @@ How should you compare two floats for equality?
 - With is
 ? Floating-point results carry small rounding errors.
 
+@@drill
+Which NumPy function creates an array of evenly spaced numbers over an interval with a given count?
+= linspace
+= np.linspace
+= numpy.linspace
+? np.linspace(0, 1, 5) gives five points.
+
 @@flashcards
 ndarray :: NumPy's fast, fixed-type, contiguous array
 Vectorisation :: operating on whole arrays instead of loops

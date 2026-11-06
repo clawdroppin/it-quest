@@ -92,6 +92,13 @@ What is `requirements.txt` (or the dependencies in pyproject.toml) for?
 - Configuring the editor
 ? pip install -r requirements.txt recreates the environment.
 
+@@drill
+Write the command that creates a virtual environment in a folder called `.venv`.
+= python -m venv .venv
+= python3 -m venv .venv
+= py -m venv .venv
+? Then activate it before installing packages.
+
 @@flashcards
 `python -m venv .venv` :: create a virtual environment
 `pip freeze > requirements.txt` :: record exact package versions

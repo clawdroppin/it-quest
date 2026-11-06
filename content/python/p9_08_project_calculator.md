@@ -79,6 +79,12 @@ Why is `eval()` dangerous for user formulas?
 - It ignores variables
 ? Write a small parser that only allows what you define.
 
+@@drill
+What's the name of the parsing technique where each grammar rule becomes a function?
+= recursive descent
+= recursive descent parsing
+? expression() calls term(), which calls factor().
+
 @@flashcards
 Tokenizer (lexer) :: turns text into tokens
 Parser :: turns tokens into a syntax tree

@@ -123,6 +123,12 @@ How should you check for None?
 - `x.isnone()`
 ? `not x` is also true for 0, "" and [].
 
+@@drill
+Which built-in returns True if at least one item in a list is truthy?
+= any
+= any()
+? all() needs every item to be truthy.
+
 @@flashcards
 Truthy :: any value that counts as true in a condition
 Falsy values :: False, None, 0, 0.0, "", [], {}, set(), ()

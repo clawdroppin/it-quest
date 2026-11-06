@@ -154,6 +154,13 @@ What does EAFP mean?
 - Evaluate all functions positionally
 ? The opposite is LBYL, look before you leap.
 
+@@drill
+Which decorator from `abc` marks a method that subclasses must implement?
+= @abstractmethod
+= abstractmethod
+= abc.abstractmethod
+? The class can't be instantiated until it's implemented.
+
 @@flashcards
 Duck typing :: any object with the right methods works
 EAFP :: try the operation and catch the exception

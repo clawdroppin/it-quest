@@ -73,6 +73,12 @@ Why does `print(Hello)` (without quotes) fail?
 - The brackets are wrong
 ? Quotes make text; a bare word is a name.
 
+@@drill
+Which function prints text to the screen?
+= print
+= print()
+? print("Hello").
+
 @@flashcards
 print() :: show a value in the output
 "text" :: a string: text in quotes

@@ -111,6 +111,12 @@ What type are environment variable values?
 - bytes
 ? Convert and validate them.
 
+@@drill
+Which `os` mapping holds environment variables?
+= os.environ
+= environ
+? os.environ.get("DB_URL").
+
 @@flashcards
 Twelve-factor config :: settings that vary between environments live outside the code, usually in env vars
 Precedence :: flags > environment > config file > defaults

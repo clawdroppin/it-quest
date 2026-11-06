@@ -101,6 +101,13 @@ Which loop gives you both the key and the value?
 - `for port in ports.keys():`
 ? .items() yields (key, value) pairs.
 
+@@drill
+Which dict method returns a default instead of raising KeyError for a missing key?
+= get
+= get()
+= .get
+? d.get("key", 0).
+
 @@flashcards
 `d[key]` :: the value for key; KeyError if missing
 `d.get(key, default)` :: the value, or default if the key is missing

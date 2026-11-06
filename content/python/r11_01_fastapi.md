@@ -138,6 +138,11 @@ Why use `response_model` on an endpoint?
 - It adds authentication
 ? E.g. never return a password hash.
 
+@@drill
+Which library does FastAPI use to validate request data?
+= pydantic
+? Define a BaseModel and FastAPI validates JSON against it.
+
 @@flashcards
 FastAPI :: type-hint-driven async web framework with automatic docs
 Pydantic :: data validation and parsing from type hints

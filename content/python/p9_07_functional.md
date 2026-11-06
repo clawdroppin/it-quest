@@ -159,6 +159,15 @@ Which keyword lets an inner function rebind a variable of the enclosing function
 - static
 ? `global` refers to module-level names.
 
+@@drill
+Which `functools` decorator caches a function's results?
+= lru_cache
+= functools.lru_cache
+= @lru_cache
+= cache
+= functools.cache
+? Great for expensive pure functions.
+
 @@flashcards
 lambda :: anonymous one-expression function
 Closure :: inner function capturing variables from its enclosing scope

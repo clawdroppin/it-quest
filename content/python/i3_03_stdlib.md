@@ -102,6 +102,11 @@ How do you get the date 30 days from now?
 - `date.today(30)`
 ? Arithmetic on datetimes uses timedelta.
 
+@@drill
+Which module should you use to generate a secure random token?
+= secrets
+? secrets.token_hex(16); random is not for security.
+
 @@flashcards
 `from datetime import datetime, timedelta` :: dates/times, and durations to add to them
 `strftime` / `strptime` :: date → text / text → date

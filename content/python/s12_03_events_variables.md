@@ -110,6 +110,12 @@ Why must keystroke validation accept an empty string?
 - It doesn't matter
 ? Check completeness on submit.
 
+@@drill
+Which Tk variable class holds text bound to an Entry?
+= StringVar
+= tk.StringVar
+? IntVar and BooleanVar hold other types.
+
 @@flashcards
 `bind(sequence, handler)` :: react to any event; handler gets an event object
 `<Control-s>` :: event sequence for Ctrl+S

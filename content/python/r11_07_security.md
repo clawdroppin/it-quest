@@ -125,6 +125,12 @@ What's the safe way to run `ping` on a user-supplied host?
 - `eval("ping " + host)`
 ? A list of arguments isn't interpreted by a shell.
 
+@@drill
+Which `hmac` function compares two digests without leaking timing information?
+= compare_digest
+= hmac.compare_digest
+? A plain == can stop at the first different byte.
+
 @@flashcards
 `secrets` :: cryptographically secure random tokens and choices
 Cryptographic hash :: fixed-size fingerprint; one-way and collision-resistant (SHA-256)

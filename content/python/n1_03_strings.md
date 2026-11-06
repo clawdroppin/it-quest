@@ -116,6 +116,13 @@ What is `"server"[0:3]`?
 - `"ver"`
 ? A slice includes the start index and stops before the end index.
 
+@@drill
+What does `"python"[1:4]` give?
+= yth
+= "yth"
+= 'yth'
+? From index 1 up to (not including) 4.
+
 @@flashcards
 `s.strip()` :: remove whitespace from both ends
 `s.lower()` / `s.upper()` :: change case

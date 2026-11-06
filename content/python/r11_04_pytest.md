@@ -151,6 +151,13 @@ What does `Mock(side_effect=[1, 2])` do when called three times?
 - Raises immediately
 ? A list side effect is consumed one value per call.
 
+@@drill
+Which decorator runs one pytest test with many inputs?
+= @pytest.mark.parametrize
+= pytest.mark.parametrize
+= parametrize
+? Each case is reported separately.
+
 @@flashcards
 pytest :: the standard Python test framework, plain functions with assert
 Fixture :: reusable setup/teardown injected by parameter name

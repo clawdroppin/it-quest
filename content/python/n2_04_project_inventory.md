@@ -42,6 +42,12 @@ What does `sorted(assets, key=lambda a: a["location"])` do?
 - Groups assets by location
 ? key tells sorted which value to compare.
 
+@@drill
+Which built-in sorts any iterable and returns a new list?
+= sorted
+= sorted()
+? list.sort() sorts in place and returns None.
+
 @@flashcards
 list of dicts :: one dict per record, e.g. per asset
 dict of dicts :: records keyed by an ID

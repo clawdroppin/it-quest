@@ -103,6 +103,12 @@ What does `with self.assertRaises(ValueError):` test?
 - That the function returns None
 ? Testing failure cases is as important as testing the happy path.
 
+@@drill
+Which command discovers and runs unittest tests from the project folder?
+= python -m unittest
+= python3 -m unittest
+? Add -v for one line per test.
+
 @@flashcards
 assert x == y :: stop with an error if the condition is false
 unittest.TestCase :: a class whose test_ methods are run

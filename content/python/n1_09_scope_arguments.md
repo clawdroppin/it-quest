@@ -157,6 +157,11 @@ What type does `*args` collect extra positional arguments into?
 - set
 ? `**kwargs` collects keyword arguments into a dict.
 
+@@drill
+What value should you use as a default instead of a mutable `[]`?
+= None
+? def add(item, items=None): then create the list inside.
+
 @@flashcards
 LEGB :: Local, Enclosing, Global, Built-in: the name lookup order
 UnboundLocalError :: reading a local variable before it's assigned in that function

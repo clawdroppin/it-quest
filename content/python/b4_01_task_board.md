@@ -1642,5 +1642,13 @@ class WebTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+@@drill
+Which built-in decorator turns a class into a data holder with an automatic `__init__`?
+= @dataclass
+= dataclass
+= dataclasses.dataclass
+? From the dataclasses module.
+
 @@text
 🎉 You've written a layered application with a schema that can evolve, business rules with tests, an API and two user interfaces. That's the shape of most business software, and you'll recognise it in every Django, Rails, Spring or .NET codebase you open.

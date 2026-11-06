@@ -194,6 +194,11 @@ What's the "N+1 queries" problem?
 - A migration numbering mistake
 ? 100 tickets → 101 queries. The fix is a JOIN, or the ORM's eager loading (`selectinload`, `select_related`).
 
+@@drill
+Which character is SQLite's placeholder for a query parameter in Python's sqlite3?
+= ?
+? cur.execute("SELECT * FROM t WHERE id = ?", (id,)).
+
 @@flashcards
 `sqlite3.connect("app.db")` :: open or create a SQLite database file
 `conn.row_factory = sqlite3.Row` :: rows can be read by column name

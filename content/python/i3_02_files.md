@@ -100,6 +100,13 @@ Which pathlib call gives the file name without the folder, from `Path("logs/app.
 - `.stem`, which is "app.log"
 ? .stem is "app", .suffix is ".log", .parent is "logs".
 
+@@drill
+Which `pathlib` method reads a whole file as a string?
+= read_text
+= read_text()
+= Path.read_text
+? Path("notes.txt").read_text(encoding="utf-8").
+
 @@flashcards
 `with open(p, encoding="utf-8") as f:` :: open a file; it's closed automatically after the block
 mode `"w"` :: write: erases the existing file

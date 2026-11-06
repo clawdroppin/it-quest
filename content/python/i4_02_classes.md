@@ -111,6 +111,11 @@ What's the difference between `__str__` and `__repr__`?
 - __str__ is only used in files
 ? print uses __str__; the interactive prompt and lists use __repr__.
 
+@@drill
+What is the name of the method that sets up a new object?
+= __init__
+? It runs when you call the class, like Server("web01").
+
 @@flashcards
 class :: a blueprint for objects
 __init__ :: sets up a new object

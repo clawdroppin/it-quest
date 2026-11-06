@@ -109,6 +109,11 @@ How do you get type errors reported before running the code?
 - Use print statements
 ? Hints are for tools and readers; Python itself ignores them at runtime.
 
+@@drill
+Write the type hint for "a list of strings".
+= list[str]
+? Older code writes List[str] from typing.
+
 @@flashcards
 type hint :: def f(x: int) -> str: documents expected types
 str | None :: a string or None

@@ -115,6 +115,12 @@ After `primary, backup = "web01", "web02"` and then `primary, backup = backup, p
 - a tuple of both values
 ? The right side is evaluated first, then assigned.
 
+@@drill
+Which built-in function tells you the type of a value?
+= type
+= type()
+? type(42) is int.
+
 @@flashcards
 variable :: a name that refers to a value
 = :: assign a value to a name

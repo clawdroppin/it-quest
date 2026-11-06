@@ -72,6 +72,13 @@ Which task is classification?
 - Computing an average
 ? Classification predicts a category.
 
+@@drill
+What's the name of the data you hold back to check a model on examples it hasn't seen?
+= test set
+= the test set
+= test data
+? Never tune your model on it.
+
 @@flashcards
 Supervised learning :: learning from labelled examples
 Regression :: predicts a number

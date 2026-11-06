@@ -94,6 +94,12 @@ What does `"a,b,c".split(",")` give?
 - `["a,b,c"]`
 ? split breaks a string into a list at each separator.
 
+@@drill
+Which function converts the text "42" into the number 42?
+= int
+= int()
+? input() always returns a string.
+
 @@flashcards
 input() :: read a line typed by the user (always a string)
 int() / float() :: convert text to a whole number / decimal

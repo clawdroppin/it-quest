@@ -95,6 +95,11 @@ What does `response.raise_for_status()` do?
 - Converts the body to JSON
 ? It turns HTTP errors into Python exceptions you can catch.
 
+@@drill
+Which HTTP status code means "Not Found"?
+= 404
+? 4xx codes are client errors.
+
 @@flashcards
 HTTP 200 / 201 / 204 :: OK / Created / No Content
 HTTP 401 vs 403 :: not authenticated vs not allowed

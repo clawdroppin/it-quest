@@ -137,6 +137,11 @@ What is a wheel?
 - A lock file
 ? `.whl` files install without a build step.
 
+@@drill
+Which file holds a modern Python project's metadata and dependencies?
+= pyproject.toml
+? It replaced setup.py and setup.cfg.
+
 @@flashcards
 pyproject.toml :: standard project configuration and metadata file
 Build backend :: tool that builds wheels and sdists (hatchling, setuptools...)

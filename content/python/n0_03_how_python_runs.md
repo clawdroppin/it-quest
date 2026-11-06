@@ -90,6 +90,13 @@ Why might a typo inside an `if` branch go unnoticed until later?
 - Bytecode hides it
 ? Tests and type checkers find these earlier.
 
+@@drill
+What value does `__name__` have when a file is run directly?
+= __main__
+= "__main__"
+= '__main__'
+? When imported, it's the module's name instead.
+
 @@flashcards
 CPython :: the standard Python interpreter, written in C
 Bytecode :: the simpler instructions Python compiles source code into

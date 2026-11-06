@@ -116,6 +116,12 @@ In asyncio, what does `await asyncio.gather(*tasks)` do?
 - Starts them in separate processes
 ? While one task waits on I/O, the event loop runs others.
 
+@@drill
+Which `asyncio` function runs several coroutines concurrently and waits for all of them?
+= gather
+= asyncio.gather
+? await asyncio.gather(*coros).
+
 @@flashcards
 I/O-bound :: mostly waiting (network, disk): use threads or asyncio
 CPU-bound :: mostly computing: use processes (ProcessPoolExecutor)

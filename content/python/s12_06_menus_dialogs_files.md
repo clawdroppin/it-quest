@@ -115,6 +115,12 @@ How should a file be saved so a crash can't corrupt it?
 - Use pickle
 ? `os.replace` is atomic on the same file system.
 
+@@drill
+Which module provides the standard Open and Save dialogs?
+= filedialog
+= tkinter.filedialog
+? filedialog.askopenfilename().
+
 @@flashcards
 `tk.Menu` :: menu bars, submenus and context menus
 `add_cascade` :: attach a submenu

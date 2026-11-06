@@ -126,6 +126,11 @@ Which tool can sample a running production Python process without modifying it?
 - pdb
 ? It reads the process's stacks from outside.
 
+@@drill
+Which standard-library module times small code snippets accurately?
+= timeit
+? python -m timeit "sum(range(1000))".
+
 @@flashcards
 timeit :: accurate timing of small snippets
 cProfile :: deterministic profiler showing time per function

@@ -140,6 +140,12 @@ When should you use `is` instead of `==`?
 - Always, it's faster
 ? `is` compares identity, not value.
 
+@@drill
+Which `copy` function copies nested lists all the way down?
+= deepcopy
+= copy.deepcopy
+? copy.copy only copies the outer list.
+
 @@flashcards
 Reference :: a name pointing at an object; assignment copies the reference, not the object
 `is` :: same object (identity)

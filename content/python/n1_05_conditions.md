@@ -102,6 +102,11 @@ What does `bool("")` return?
 - an error
 ? Empty strings, 0, empty lists and None are "falsy".
 
+@@drill
+Which keyword adds another condition after an `if`?
+= elif
+? Short for "else if".
+
 @@flashcards
 == :: equal to (one = assigns, two compare)
 != :: not equal to

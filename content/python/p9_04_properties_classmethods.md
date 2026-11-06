@@ -151,6 +151,12 @@ What does `__slots__` do?
 - Makes the class immutable
 ? There's no per-instance `__dict__`.
 
+@@drill
+Which decorator makes a method behave like an attribute?
+= @property
+= property
+? Add @x.setter to control assignment.
+
 @@flashcards
 `@property` :: a method accessed like an attribute
 `@x.setter` :: method run when assigning to property x, used for validation

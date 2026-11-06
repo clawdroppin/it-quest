@@ -144,6 +144,12 @@ How do you import a module whose name is in a string?
 - `__import__` is forbidden
 ? Avoid eval; importlib is the proper API.
 
+@@drill
+Which built-in gets an attribute by its name as a string?
+= getattr
+= getattr()
+? getattr(obj, "run")().
+
 @@flashcards
 Introspection :: examining objects at runtime
 `getattr(obj, name, default)` :: attribute by string name

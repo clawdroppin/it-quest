@@ -143,6 +143,12 @@ What does `Counter(levels)["DEBUG"]` return if DEBUG never appeared?
 - -1
 ? Counters treat missing keys as zero.
 
+@@drill
+Which `collections` class groups values without checking whether the key exists?
+= defaultdict
+= collections.defaultdict
+? groups = defaultdict(list).
+
 @@flashcards
 `sorted(items, key=f)` :: new list sorted by f(item)
 Stable sort :: equal items keep their original order

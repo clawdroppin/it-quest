@@ -393,6 +393,13 @@ Oct 31 11:45:30 web01 sshd[1402]: Failed password for invalid user oracle from 1
 Oct 31 11:45:33 web01 sshd[1402]: Failed password for invalid user postgres from 192.0.2.99 port 33002 ssh2
 Oct 31 11:45:37 web01 sshd[1402]: Failed password for root from 192.0.2.99 port 33003 ssh2
 Oct 31 11:45:40 web01 sshd[1402]: Disconnected from invalid user postgres 192.0.2.99 port 33002 [preauth]
+
+@@drill
+Which `collections` class counts failed logins per IP in one line?
+= Counter
+= collections.Counter
+? Counter(ips).most_common(5).
+
 @@text
 🎉 You've built a real security tool. Ideas to take it further:
 

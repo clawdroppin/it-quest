@@ -37,6 +37,12 @@ Some lines in the log don't match your pattern. What should a robust analyser do
 - Delete them from the file
 ? Real logs always contain surprises: partial writes, stack traces, other formats.
 
+@@drill
+Which `Counter` method returns the n most frequent items?
+= most_common
+= most_common()
+? counts.most_common(5).
+
 @@flashcards
 for line in f :: read a file one line at a time
 re.match / re.search :: match at the start / anywhere

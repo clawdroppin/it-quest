@@ -77,6 +77,13 @@ Why add jitter to retry delays?
 - It's required by HTTP
 ? Synchronised retries can overload a recovering service.
 
+@@drill
+What's the name of an ordering of jobs where every job comes after its dependencies?
+= topological order
+= topological sort
+= topological ordering
+? Only possible when the graph has no cycles.
+
 @@flashcards
 Directed graph :: nodes connected by one-way edges
 Topological order :: every node after its dependencies

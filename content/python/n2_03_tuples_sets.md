@@ -103,6 +103,11 @@ What is `{1, 2, 2, 3}`?
 - Nothing happens
 ? Tuples are immutable; build a new tuple instead.
 
+@@drill
+What does `len({1, 2, 2, 3})` return?
+= 3
+? Sets keep each value only once.
+
 @@flashcards
 tuple :: fixed, ordered group: (a, b)
 set :: unique items, fast membership: {a, b}

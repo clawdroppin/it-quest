@@ -239,6 +239,11 @@ Your tkinter app freezes for 10 seconds while it downloads a report. What's the 
 - Make the window smaller
 ? The GUI thread draws the window and handles clicks. If it's busy downloading, nothing else happens.
 
+@@drill
+What does WSGI stand for?
+= web server gateway interface
+? The standard interface between Python web apps and servers.
+
 @@flashcards
 WSGI :: Python's standard interface between web servers and web apps (sync)
 ASGI :: the async version, used by FastAPI and Starlette

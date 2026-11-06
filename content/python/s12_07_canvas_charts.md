@@ -96,6 +96,12 @@ How do you animate without threads in Tkinter?
 - Call update() in a while loop forever
 ? The event loop stays responsive between frames.
 
+@@drill
+Which Canvas method draws a rectangle?
+= create_rectangle
+= create_rectangle()
+? canvas.create_rectangle(x0, y0, x1, y1, fill="blue").
+
 @@flashcards
 Canvas :: drawing surface with movable items
 Item id :: number returned by `create_*`, used to change the item

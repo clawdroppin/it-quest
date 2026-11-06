@@ -96,6 +96,11 @@ What is `2 + 3 * 4`?
 - 9
 ? Multiplication happens before addition; use brackets to change the order.
 
+@@drill
+What is `7 // 2`?
+= 3
+? // is floor division; 7 / 2 is 3.5.
+
 @@flashcards
 `//` :: floor division: the whole part of a division (7 // 2 is 3)
 `%` :: modulo: the remainder of a division (7 % 2 is 1)

@@ -108,6 +108,12 @@ Which gives you each CSV row as a dictionary keyed by the header names?
 - `f.readlines()`
 ? DictWriter does the reverse for writing.
 
+@@drill
+Which `json` function turns a Python dict into a JSON string?
+= json.dumps
+= dumps
+? dumps = dump to string; dump writes to a file.
+
 @@flashcards
 `json.loads(text)` / `json.dumps(obj)` :: JSON text → Python / Python → JSON text
 `json.load(f)` / `json.dump(obj, f, indent=2)` :: the same, with files

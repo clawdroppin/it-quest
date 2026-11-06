@@ -126,6 +126,11 @@ What's the most effective way to process a 50 GB log in Python?
 - Load it into a dict
 ? Streaming keeps memory constant.
 
+@@drill
+Which module creates references that don't keep an object alive?
+= weakref
+? Useful for caches and observers.
+
 @@flashcards
 Reference count :: number of references to an object; freed at zero
 Cycle collector :: `gc` module; frees unreachable reference cycles

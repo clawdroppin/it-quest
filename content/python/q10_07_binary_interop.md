@@ -152,6 +152,11 @@ What happens if you declare wrong argtypes for a C function in ctypes?
 - Nothing
 ? ctypes has no safety checks; it's Python's `unsafe`.
 
+@@drill
+Which `struct` format prefix means network (big-endian) byte order?
+= !
+? struct.pack("!H", 443).
+
 @@flashcards
 bytes :: immutable sequence of numbers 0–255
 bytearray :: mutable bytes

@@ -154,6 +154,12 @@ Why define `class DiskFullError(BackupError)`?
 - To avoid a traceback
 ? Exception hierarchies let callers choose how precise to be.
 
+@@drill
+Which built-in calls the parent class's version of a method?
+= super
+= super()
+? super().__init__(name).
+
 @@flashcards
 Inheritance :: a subclass reuses and specialises a parent class (IS-A)
 Composition :: an object holds other objects and delegates to them (HAS-A)

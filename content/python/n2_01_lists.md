@@ -104,6 +104,13 @@ What does `[x * 2 for x in [1, 2, 3]]` produce?
 - `[2, 4, 6, 8]`
 ? A list comprehension builds a new list from an expression and a loop.
 
+@@drill
+Which list method adds one item to the end?
+= append
+= append()
+= .append
+? extend adds every item from another list.
+
 @@flashcards
 `lst.append(x)` :: add x to the end of the list
 `lst.pop()` :: remove and return the last item

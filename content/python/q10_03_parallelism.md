@@ -134,6 +134,11 @@ Which is best for 500 HTTP requests using a blocking library like `requests`?
 - multiprocessing.Manager
 ? The work is waiting on I/O; threads release the GIL while waiting.
 
+@@drill
+What does GIL stand for?
+= global interpreter lock
+? Only one thread runs Python bytecode at a time.
+
 @@flashcards
 GIL :: Global Interpreter Lock: one thread runs Python bytecode at a time
 I/O-bound :: mostly waiting on network/disk; threads and asyncio help
