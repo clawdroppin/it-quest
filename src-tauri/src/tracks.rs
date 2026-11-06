@@ -564,14 +564,14 @@ pub fn linux_env() -> Track {
         modules: vec![
             module!(Novice, "0 · Choosing and Installing", "Distros and families, desktop environments, Wayland, live USBs, disks and partitions, fstab, UEFI and GRUB, dual boot and the first hour.", "linuxenv";
                 "le0_01_choose_install.md", "le0_02_disks_boot.md"),
-            module!(Novice, "1 · The Terminal and Files", "The shell, the filesystem tree, finding things, pipes, permissions, grep, sed and awk.", "linuxenv";
-                "le1_01_shell_files.md", "le1_02_text_tools.md"),
+            module!(Novice, "1 · The Terminal and Files", "The shell, the filesystem tree, finding things, pipes, permissions, grep, sed and awk, users and sudo, firewalls, SSH keys and encryption.", "linuxenv";
+                "le1_01_shell_files.md", "le1_02_text_tools.md", "le1_03_users_security.md"),
             module!(Intermediate, "2 · Installing Software", "apt, dnf, pacman and zypper, Flatpak, Snap, AppImage, versions, file ownership, cleaning up and keeping it updated.", "linuxenv";
                 "le2_01_software.md", "le2_02_packages_deep.md"),
             module!(Intermediate, "3 · Making It Yours", "Themes, fonts and Japanese input, launchers, autostart and user services, .bashrc, dotfiles and reliable shell scripts.", "linuxenv";
                 "le3_01_customise.md", "le3_02_scripting.md"),
-            module!(Advanced, "4 · Hardware, Gaming and Fixing Things", "Drivers, audio, Steam and Proton, backups, logs, systemd services and timers, network diagnosis and a method for fixing anything.", "linuxenv";
-                "le4_01_hardware_fix.md", "le4_02_systemd_network.md"),
+            module!(Advanced, "4 · Hardware, Gaming and Fixing Things", "Drivers, audio, Steam and Proton, backups, logs, systemd services and timers, network diagnosis and a method for fixing anything, Wayland, monitors and scaling, PipeWire and Bluetooth audio.", "linuxenv";
+                "le4_01_hardware_fix.md", "le4_02_systemd_network.md", "le4_03_display_audio.md"),
         ],
     }
 }

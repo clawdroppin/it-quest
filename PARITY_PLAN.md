@@ -912,3 +912,7 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - jc2_04_interviews_tests: 選考 flow, SPI and coding tests, common questions, manners, 候補日; slot formatter, answer checker.
 - jc3_04_housing_contracts: listings, 初期費用, lease types, 更新料, 原状回復, moving admin; listing parser, initial and two-year costs.
 - Exercises appended to jc0_01 (employer types) and jc1_01 (does the offer fit 技人国).
+
+### linuxenv (now 12 lessons, 26 exercises, 63 quizzes, ~20.2k words)
+- le1_03_users_security: UIDs, groups, sudo and visudo, ACLs, setuid, capabilities, ufw, SSH keys, LUKS, AppArmor/SELinux; account audit, sshd_config check.
+- le4_03_display_audio: Wayland vs X11, portals, logical pixels and scaling, PipeWire/WirePlumber, Bluetooth profiles; monitor layout, no-sound triage.
