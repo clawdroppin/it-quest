@@ -707,8 +707,8 @@ pub fn resolve() -> Track {
         lang: Some(Lang::Python),
         blurb: "Post-production from first import to final delivery: editing on the Cut and Edit pages, Fusion VFX and motion graphics, colour grading and colour management, Fairlight audio, codecs and export, and scripting Resolve with Python.",
         modules: vec![
-            module!(Novice, "0 · Pages, Projects and Timecode", "The pages, project settings, media management, proxies, frame rates and timecode.", "resolve";
-                "dr0_01_basics.md"),
+            module!(Novice, "0 · Pages, Projects and Timecode", "The pages, project settings, frame rates and timecode; storage planning, proxies and the render cache, Smart Bins, shared libraries and archives.", "resolve";
+                "dr0_01_basics.md", "dr0_02_media_collaboration.md"),
             module!(Novice, "1 · Editing", "The Cut and Edit pages, essential edits, trimming, storytelling, titles, speed, EDLs, sync, multicam and pacing.", "resolve";
                 "dr1_01_editing.md", "dr1_02_sync_pacing.md"),
             module!(Intermediate, "2 · Fusion", "Node-based compositing, keyframes and modifiers, tracking, keying, macros and motion graphics.", "resolve";

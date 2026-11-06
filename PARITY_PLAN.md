@@ -937,3 +937,6 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 
 ### gcp (now 12 lessons, 20 exercises, 60 quizzes, ~22.3k words)
 - Exercises appended to gc0_01 (project ID validation), gc1_01 (VPC Service Controls ingress/egress), gc2_01 (case-study requirement classification) and gc1_03 (availability and latency SLIs from logs).
+
+### resolve (now 12 lessons, 24 exercises, 60 quizzes, ~22.4k words)
+- dr0_02_media_collaboration: storage maths and the 3-2-1 rule, Clone Tool, Media Management and relinking, proxies vs optimized media vs render cache, Smart and Power Bins, local/network/Blackmagic Cloud libraries, bin locking, backups and .dra archives; shoot storage planner, Smart Bin rule evaluator.
