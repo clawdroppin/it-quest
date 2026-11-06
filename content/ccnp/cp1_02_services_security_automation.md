@@ -148,3 +148,67 @@ Which syslog severity number is "warning"?
 @@drill
 Which TCP port does BGP use?
 = 179
+
+@@exercise AAA method-list fallback
+With `aaa authentication login default group tacacs+ local`, the router tries the TACACS+ servers in order and moves to the next **method** only on an **ERROR** (no server answered). A **FAIL** (a server rejected the password) is final: the router does *not* try the local database. Simulate logins against this method list as the server status changes, and print the method that decided and the result.
+@@lang python
+@@starter
+METHODS = ["group tacacs+", "local"]
+tacacs_users = {"aiko": "Tq!9", "ben": "Rb#4"}
+local_users = {"admin": "Loc@l1", "aiko": "old-pass"}
+
+def authenticate(user, password, servers_up):
+    raise NotImplementedError
+
+attempts = [
+    ("aiko", "Tq!9", [True, True]),
+    ("aiko", "wrong", [True, True]),
+    ("admin", "Loc@l1", [True, False]),
+    ("admin", "Loc@l1", [False, False]),
+    ("aiko", "old-pass", [False, False]),
+    ("ben", "Rb#4", [False, True]),
+]
+for user, password, servers_up in attempts:
+    status = "/".join("up" if s else "down" for s in servers_up)
+    print(f"{user:<6} servers {status:<10} -> {authenticate(user, password, servers_up)}")
+@@expected
+aiko   servers up/up      -> ACCEPT by TACACS+ server 1
+aiko   servers up/up      -> REJECT by TACACS+ server 1
+admin  servers up/down    -> REJECT by TACACS+ server 1
+admin  servers down/down  -> ACCEPT by local database (TACACS+ unreachable)
+aiko   servers down/down  -> ACCEPT by local database (TACACS+ unreachable)
+ben    servers down/up    -> ACCEPT by TACACS+ server 2
+@@requires
+def authenticate
+any(servers_up)
+@@hint
+For `group tacacs+`, if `any(servers_up)` is true the first reachable server answers, and its accept or reject is final (a user it doesn't know is a reject too). If no server is up, that's an ERROR and you continue to `local`, where the local database decides. If every method errors, the login fails.
+@@solution
+METHODS = ["group tacacs+", "local"]
+tacacs_users = {"aiko": "Tq!9", "ben": "Rb#4"}
+local_users = {"admin": "Loc@l1", "aiko": "old-pass"}
+
+def authenticate(user, password, servers_up):
+    for method in METHODS:
+        if method == "group tacacs+":
+            if not any(servers_up):
+                continue  # ERROR: no server answered, try the next method
+            server = servers_up.index(True) + 1
+            ok = tacacs_users.get(user) == password
+            return f"{'ACCEPT' if ok else 'REJECT'} by TACACS+ server {server}"
+        if method == "local":
+            ok = local_users.get(user) == password
+            return f"{'ACCEPT' if ok else 'REJECT'} by local database (TACACS+ unreachable)"
+    return "REJECT: every method returned an error"
+
+attempts = [
+    ("aiko", "Tq!9", [True, True]),
+    ("aiko", "wrong", [True, True]),
+    ("admin", "Loc@l1", [True, False]),
+    ("admin", "Loc@l1", [False, False]),
+    ("aiko", "old-pass", [False, False]),
+    ("ben", "Rb#4", [False, True]),
+]
+for user, password, servers_up in attempts:
+    status = "/".join("up" if s else "down" for s in servers_up)
+    print(f"{user:<6} servers {status:<10} -> {authenticate(user, password, servers_up)}")

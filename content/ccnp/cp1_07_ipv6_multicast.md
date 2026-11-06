@@ -228,3 +228,66 @@ for source, group, arrived in packets:
     expected, route = rpf_interface(source)
     result = "RPF pass, forward" if expected == arrived else f"RPF FAIL (route {route} points to {expected}), drop"
     print(f"({source}, {group}) in {arrived}: {result}")
+
+@@exercise Plan /64 subnets from a /48
+@@concepts networking, numbers, strings
+A site has `2001:db8:acad::/48`, which leaves 16 bits of subnet ID, or 65,536 /64s. Use a readable scheme: the first hex digit of the subnet ID is the **building** (0–15) and the remaining three hex digits are the **VLAN ID** (up to 4094 = `ffe`), so building 2, VLAN 10 is `2001:db8:acad:200a::/64`. Build the subnet for each VLAN, show each building's /52, and print the first host address (`::1`, the gateway) of each subnet.
+@@lang python
+@@starter
+import ipaddress
+
+SITE = ipaddress.ip_network("2001:db8:acad::/48")
+vlans = [(0, 10, "core mgmt"), (1, 10, "B1 users"), (1, 20, "B1 voice"), (2, 10, "B2 users"),
+         (2, 100, "B2 wifi"), (2, 4094, "B2 native")]
+
+def subnet(building, vlan):
+    raise NotImplementedError
+
+def building_block(building):
+    raise NotImplementedError
+
+print(f"{SITE} holds {2 ** (64 - SITE.prefixlen):,} /64 subnets")
+for b in sorted({b for b, _, _ in vlans}):
+    print(f"building {b}: {building_block(b)}")
+for b, v, name in vlans:
+    net = subnet(b, v)
+    print(f"  {name:<10} vlan {v:<4} {str(net):<26} gateway {net.network_address + 1}")
+@@expected
+2001:db8:acad::/48 holds 65,536 /64 subnets
+building 0: 2001:db8:acad::/52
+building 1: 2001:db8:acad:1000::/52
+building 2: 2001:db8:acad:2000::/52
+  core mgmt  vlan 10   2001:db8:acad:a::/64       gateway 2001:db8:acad:a::1
+  B1 users   vlan 10   2001:db8:acad:100a::/64    gateway 2001:db8:acad:100a::1
+  B1 voice   vlan 20   2001:db8:acad:1014::/64    gateway 2001:db8:acad:1014::1
+  B2 users   vlan 10   2001:db8:acad:200a::/64    gateway 2001:db8:acad:200a::1
+  B2 wifi    vlan 100  2001:db8:acad:2064::/64    gateway 2001:db8:acad:2064::1
+  B2 native  vlan 4094 2001:db8:acad:2ffe::/64    gateway 2001:db8:acad:2ffe::1
+@@requires
+def subnet
+def building_block
+<< 64
+@@hint
+The subnet ID is `building * 0x1000 + vlan` (one hex digit for the building, three for the VLAN). Shift it into place with `<< 64` and add it to the /48's network address as an integer: `ipaddress.ip_network((int(SITE.network_address) + (sid << 64), 64))`. A building's /52 starts at `building << 76` with prefix length 52.
+@@solution
+import ipaddress
+
+SITE = ipaddress.ip_network("2001:db8:acad::/48")
+vlans = [(0, 10, "core mgmt"), (1, 10, "B1 users"), (1, 20, "B1 voice"), (2, 10, "B2 users"),
+         (2, 100, "B2 wifi"), (2, 4094, "B2 native")]
+
+def subnet(building, vlan):
+    if not (0 <= building <= 15 and 1 <= vlan <= 4094):
+        raise ValueError("building must be 0-15 and VLAN 1-4094")
+    sid = building * 0x1000 + vlan
+    return ipaddress.ip_network((int(SITE.network_address) + (sid << 64), 64))
+
+def building_block(building):
+    return ipaddress.ip_network((int(SITE.network_address) + (building << 76), 52))
+
+print(f"{SITE} holds {2 ** (64 - SITE.prefixlen):,} /64 subnets")
+for b in sorted({b for b, _, _ in vlans}):
+    print(f"building {b}: {building_block(b)}")
+for b, v, name in vlans:
+    net = subnet(b, v)
+    print(f"  {name:<10} vlan {v:<4} {str(net):<26} gateway {net.network_address + 1}")

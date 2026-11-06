@@ -130,3 +130,78 @@ How many dB of gain doubles the signal power?
 @@drill
 Which IP protocol number does GRE use?
 = 47
+
+@@exercise MAC learning, forwarding and flooding
+A switch learns the **source** MAC of every frame against the port and VLAN it arrived on. It then **forwards** to the known port for the destination, **filters** (drops) the frame if that port is the one it came in on, and **floods** broadcasts and unknown unicasts to every other port in the same VLAN. Process the frames in order and print what happens to each one, then the final MAC table.
+@@lang python
+@@starter
+ports = {"Gi1/0/1": 10, "Gi1/0/2": 10, "Gi1/0/3": 20, "Gi1/0/4": 10, "Gi1/0/5": 20}
+BROADCAST = "ffff.ffff.ffff"
+frames = [
+    ("Gi1/0/1", "aaaa.0000.0001", BROADCAST),
+    ("Gi1/0/2", "aaaa.0000.0002", "aaaa.0000.0001"),
+    ("Gi1/0/1", "aaaa.0000.0001", "aaaa.0000.0002"),
+    ("Gi1/0/3", "bbbb.0000.0003", "aaaa.0000.0001"),
+    ("Gi1/0/4", "aaaa.0000.0004", "aaaa.0000.0002"),
+    ("Gi1/0/4", "aaaa.0000.0002", "aaaa.0000.0004"),
+    ("Gi1/0/1", "aaaa.0000.0001", "aaaa.0000.0002"),
+]
+mac_table = {}
+
+def process(in_port, src, dst):
+    raise NotImplementedError
+
+for in_port, src, dst in frames:
+    print(f"{in_port} {src} -> {dst}: {process(in_port, src, dst)}")
+print("MAC table:")
+for (vlan, mac), port in sorted(mac_table.items()):
+    print(f"  vlan {vlan}  {mac}  {port}")
+@@expected
+Gi1/0/1 aaaa.0000.0001 -> ffff.ffff.ffff: flood (broadcast) to Gi1/0/2, Gi1/0/4
+Gi1/0/2 aaaa.0000.0002 -> aaaa.0000.0001: forward to Gi1/0/1
+Gi1/0/1 aaaa.0000.0001 -> aaaa.0000.0002: forward to Gi1/0/2
+Gi1/0/3 bbbb.0000.0003 -> aaaa.0000.0001: flood (unknown unicast) to Gi1/0/5
+Gi1/0/4 aaaa.0000.0004 -> aaaa.0000.0002: forward to Gi1/0/2
+Gi1/0/4 aaaa.0000.0002 -> aaaa.0000.0004: filter (destination is on the incoming port)
+Gi1/0/1 aaaa.0000.0001 -> aaaa.0000.0002: forward to Gi1/0/4
+MAC table:
+  vlan 10  aaaa.0000.0001  Gi1/0/1
+  vlan 10  aaaa.0000.0002  Gi1/0/4
+  vlan 10  aaaa.0000.0004  Gi1/0/4
+  vlan 20  bbbb.0000.0003  Gi1/0/3
+@@requires
+def process
+mac_table[(vlan, src)] = in_port
+@@hint
+Look up the VLAN with `ports[in_port]` and learn with `mac_table[(vlan, src)] = in_port` (this also moves a MAC that shows up on a new port). If the destination is the broadcast address or not in the table for that VLAN, flood to the other ports of the VLAN. If it's known on the incoming port, filter it; otherwise forward.
+@@solution
+ports = {"Gi1/0/1": 10, "Gi1/0/2": 10, "Gi1/0/3": 20, "Gi1/0/4": 10, "Gi1/0/5": 20}
+BROADCAST = "ffff.ffff.ffff"
+frames = [
+    ("Gi1/0/1", "aaaa.0000.0001", BROADCAST),
+    ("Gi1/0/2", "aaaa.0000.0002", "aaaa.0000.0001"),
+    ("Gi1/0/1", "aaaa.0000.0001", "aaaa.0000.0002"),
+    ("Gi1/0/3", "bbbb.0000.0003", "aaaa.0000.0001"),
+    ("Gi1/0/4", "aaaa.0000.0004", "aaaa.0000.0002"),
+    ("Gi1/0/4", "aaaa.0000.0002", "aaaa.0000.0004"),
+    ("Gi1/0/1", "aaaa.0000.0001", "aaaa.0000.0002"),
+]
+mac_table = {}
+
+def process(in_port, src, dst):
+    vlan = ports[in_port]
+    mac_table[(vlan, src)] = in_port
+    out = mac_table.get((vlan, dst))
+    if dst == BROADCAST or out is None:
+        others = [p for p, v in ports.items() if v == vlan and p != in_port]
+        kind = "broadcast" if dst == BROADCAST else "unknown unicast"
+        return f"flood ({kind}) to {', '.join(others) if others else 'no other ports'}"
+    if out == in_port:
+        return "filter (destination is on the incoming port)"
+    return f"forward to {out}"
+
+for in_port, src, dst in frames:
+    print(f"{in_port} {src} -> {dst}: {process(in_port, src, dst)}")
+print("MAC table:")
+for (vlan, mac), port in sorted(mac_table.items()):
+    print(f"  vlan {vlan}  {mac}  {port}")

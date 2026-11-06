@@ -170,3 +170,93 @@ A BGP neighbor is stuck in which state when the TCP session can't be established
 = Active
 = active
 ? Idle → Connect → Active → OpenSent → OpenConfirm → Established.
+
+@@exercise Build the routing table and look up destinations
+Several sources offer routes. For each prefix, the router installs the route with the lowest **administrative distance**, and the lowest metric breaks a tie within the same source. Then, for each destination, the router picks the installed route with the **longest matching prefix**, whatever its AD. Print the routing table and the result of each lookup.
+@@lang python
+@@starter
+import ipaddress
+
+AD = {"connected": 0, "static": 1, "ebgp": 20, "eigrp": 90, "ospf": 110, "rip": 120, "eigrp-ext": 170, "ibgp": 200}
+offered = [
+    ("10.0.0.0/8", "ospf", 20, "10.255.0.1"),
+    ("10.0.0.0/8", "ibgp", 0, "192.0.2.9"),
+    ("10.1.0.0/16", "eigrp", 3072, "10.255.0.5"),
+    ("10.1.0.0/16", "ospf", 30, "10.255.0.1"),
+    ("10.1.2.0/24", "static", 0, "10.255.0.9"),
+    ("10.1.2.0/24", "rip", 2, "10.255.0.13"),
+    ("0.0.0.0/0", "static", 0, "203.0.113.1"),
+    ("0.0.0.0/0", "ebgp", 0, "198.51.100.1"),
+    ("172.16.0.0/12", "ospf", 40, "10.255.0.1"),
+    ("172.16.0.0/12", "ospf", 25, "10.255.0.2"),
+]
+destinations = ["10.1.2.77", "10.1.9.9", "10.200.0.1", "172.20.1.1", "8.8.8.8"]
+
+def install(offered):
+    raise NotImplementedError
+
+def lookup(rib, dest):
+    raise NotImplementedError
+
+rib = install(offered)
+for prefix, (source, metric, nh) in sorted(rib.items(), key=lambda kv: kv[0].prefixlen):
+    print(f"{str(prefix):<15} via {nh:<14} [{AD[source]}/{metric}] {source}")
+for d in destinations:
+    prefix, (source, metric, nh) = lookup(rib, d)
+    print(f"{d:<11} -> {str(prefix):<15} via {nh} ({source})")
+@@expected
+0.0.0.0/0       via 203.0.113.1    [1/0] static
+10.0.0.0/8      via 10.255.0.1     [110/20] ospf
+172.16.0.0/12   via 10.255.0.2     [110/25] ospf
+10.1.0.0/16     via 10.255.0.5     [90/3072] eigrp
+10.1.2.0/24     via 10.255.0.9     [1/0] static
+10.1.2.77   -> 10.1.2.0/24     via 10.255.0.9 (static)
+10.1.9.9    -> 10.1.0.0/16     via 10.255.0.5 (eigrp)
+10.200.0.1  -> 10.0.0.0/8      via 10.255.0.1 (ospf)
+172.20.1.1  -> 172.16.0.0/12   via 10.255.0.2 (ospf)
+8.8.8.8     -> 0.0.0.0/0       via 203.0.113.1 (static)
+@@requires
+def install
+def lookup
+key=lambda p: p.prefixlen
+@@hint
+In `install`, keep a dict from `ipaddress.ip_network(prefix)` to `(source, metric, next_hop)`, and replace an entry when the new route's `(AD[source], metric)` is lower. In `lookup`, collect the prefixes where `ipaddress.ip_address(dest) in prefix` and take `max(matches, key=lambda p: p.prefixlen)`.
+@@solution
+import ipaddress
+
+AD = {"connected": 0, "static": 1, "ebgp": 20, "eigrp": 90, "ospf": 110, "rip": 120, "eigrp-ext": 170, "ibgp": 200}
+offered = [
+    ("10.0.0.0/8", "ospf", 20, "10.255.0.1"),
+    ("10.0.0.0/8", "ibgp", 0, "192.0.2.9"),
+    ("10.1.0.0/16", "eigrp", 3072, "10.255.0.5"),
+    ("10.1.0.0/16", "ospf", 30, "10.255.0.1"),
+    ("10.1.2.0/24", "static", 0, "10.255.0.9"),
+    ("10.1.2.0/24", "rip", 2, "10.255.0.13"),
+    ("0.0.0.0/0", "static", 0, "203.0.113.1"),
+    ("0.0.0.0/0", "ebgp", 0, "198.51.100.1"),
+    ("172.16.0.0/12", "ospf", 40, "10.255.0.1"),
+    ("172.16.0.0/12", "ospf", 25, "10.255.0.2"),
+]
+destinations = ["10.1.2.77", "10.1.9.9", "10.200.0.1", "172.20.1.1", "8.8.8.8"]
+
+def install(offered):
+    rib = {}
+    for prefix, source, metric, nh in offered:
+        net = ipaddress.ip_network(prefix)
+        current = rib.get(net)
+        if current is None or (AD[source], metric) < (AD[current[0]], current[1]):
+            rib[net] = (source, metric, nh)
+    return rib
+
+def lookup(rib, dest):
+    addr = ipaddress.ip_address(dest)
+    matches = [p for p in rib if addr in p]
+    best = max(matches, key=lambda p: p.prefixlen)
+    return best, rib[best]
+
+rib = install(offered)
+for prefix, (source, metric, nh) in sorted(rib.items(), key=lambda kv: kv[0].prefixlen):
+    print(f"{str(prefix):<15} via {nh:<14} [{AD[source]}/{metric}] {source}")
+for d in destinations:
+    prefix, (source, metric, nh) = lookup(rib, d)
+    print(f"{d:<11} -> {str(prefix):<15} via {nh} ({source})")

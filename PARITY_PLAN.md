@@ -930,3 +930,7 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 ### azure (now 12 lessons, 20 exercises, 69 quizzes, ~23.7k words)
 - az2_06_apps_keyvault: App Service tiers and slots, Functions hosting plans, ACI/Container Apps/AKS/ACR, managed identities, Key Vault RBAC, soft delete and purge protection; tier choice and slot swap, Functions cost, Key Vault access and recovery.
 - Exercises appended to az0_01 (composite SLA), az1_01 (database choice), az1_02 (Conditional Access), az1_04 (budget forecast alerts) and az2_05 (stateful metric alert).
+
+### ccnp (now 12 lessons, 20 exercises, 64 quizzes, ~24.2k words)
+- cp1_08_fhrp_nat_deep: HSRP v1/v2 election, preempt and tracking, VRRP, GLBP AVG/AVF, NAT terms and types, order of operations; HSRP election simulator, PAT translation table.
+- Exercises appended to cp0_01 (MAC learning and flooding), cp1_01 (AD and longest prefix match), cp1_02 (AAA method-list fallback) and cp1_07 (IPv6 /64 plan from a /48).
