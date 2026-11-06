@@ -901,3 +901,8 @@ Order: rustui → gimp → cissp, itil → pmp, japan-career → linuxenv, terra
 - it2_05_requests_service_desk: service requests, catalogue, desk structures, shift-left, desk metrics; request routing, desk dashboard.
 - it2_06_assets_finance_suppliers: ITAM/SAM, CapEx/OpEx, showback/chargeback, suppliers and underpinning contracts; licence position, showback.
 - Exercises appended to it0_01 (outputs/outcomes/costs/risks) and it1_01 (which guiding principle).
+
+### pmp (now 13 lessons, 20 exercises, 74 quizzes, ~22.8k words)
+- pm0_03_motivation_leadership: Maslow, Herzberg, X/Y/Z, McClelland, Vroom, situational leadership, power, distributed teams; style chooser, time-zone overlap rotation.
+- pm1_06_flow_forecasting: Kanban, WIP limits, Little's law, CFDs, Monte Carlo; flow metrics from a board, seeded Monte Carlo forecast.
+- pm2_03_benefits_change: NPV/IRR/payback/BCR, opportunity and sunk cost, benefits ownership, ADKAR/Kotter/Satir/Bridges, transition; project ranking, benefits and ADKAR gaps.

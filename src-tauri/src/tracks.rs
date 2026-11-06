@@ -1018,12 +1018,12 @@ pub fn knowledge() -> Vec<Track> {
             lang: None,
             blurb: "Lead IT projects: predictive and agile, people and stakeholders, scope, schedule, cost, risk and quality.",
             modules: vec![
-                module!(Advanced, "0 · The Exam and People", "PMP mindset, servant leadership, teams, conflict and stakeholders.", "pmp";
-                    "pm0_01_pmp_people.md", "pm0_02_people_deep.md"),
-                module!(Advanced, "1 · Process", "Scope and traceability, estimating, critical path and compression, EVM forecasts, risk decisions, contract math, resources, communication, agile and business value.", "pmp";
-                    "pm1_01_process.md", "pm1_02_schedule_cost_deep.md", "pm1_03_agile_risk_business.md", "pm1_04_scope_procurement.md", "pm1_05_resources_communication.md"),
-                module!(Advanced, "2 · Quality, Change and the Exam", "Control charts and Pareto, cost of quality, integrated change control, closing, situational question rules, pacing and a study plan.", "pmp";
-                    "pm2_01_quality_change.md", "pm2_02_exam_strategy.md"),
+                module!(Advanced, "0 · The Exam and People", "PMP mindset, servant leadership, teams, conflict and stakeholders, motivation theories, situational leadership, power and distributed teams.", "pmp";
+                    "pm0_01_pmp_people.md", "pm0_02_people_deep.md", "pm0_03_motivation_leadership.md"),
+                module!(Advanced, "1 · Process", "Scope and traceability, estimating, critical path and compression, EVM forecasts, risk decisions, contract math, resources, communication, agile and business value, Kanban flow, Little's law and Monte Carlo forecasts.", "pmp";
+                    "pm1_01_process.md", "pm1_02_schedule_cost_deep.md", "pm1_03_agile_risk_business.md", "pm1_04_scope_procurement.md", "pm1_05_resources_communication.md", "pm1_06_flow_forecasting.md"),
+                module!(Advanced, "2 · Quality, Change and the Exam", "Control charts and Pareto, cost of quality, integrated change control, closing, situational question rules, pacing and a study plan, NPV and IRR, benefits realisation and change models.", "pmp";
+                    "pm2_01_quality_change.md", "pm2_02_exam_strategy.md", "pm2_03_benefits_change.md"),
                 build!(Advanced, "📅 Office Move: Critical Path and EVM", "The forward/backward pass and earned value formulas, in Python.", "pmp";
                     "pm9_01_schedule_evm.md"),
                 // generated project ideas pmp
