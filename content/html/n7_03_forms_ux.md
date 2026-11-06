@@ -115,6 +115,11 @@ Why is client-side validation never enough on its own?
 - It doesn't work offline
 ? Client checks are for convenience.
 
+@@drill
+Which form attribute turns off the browser's validation bubbles but keeps the rules?
+= novalidate
+? Then show your own messages using the validity API.
+
 @@flashcards
 `validity.valid` :: all constraints pass
 `valueMissing` :: required and empty

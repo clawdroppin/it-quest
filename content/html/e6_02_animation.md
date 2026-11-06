@@ -117,6 +117,13 @@ Why avoid `transition: all`?
 - It disables keyframes
 ? List the properties you mean.
 
+@@drill
+Which media feature detects that the user wants less motion?
+= prefers-reduced-motion
+= prefers-reduced-motion: reduce
+= (prefers-reduced-motion: reduce)
+? Turn off big animations inside it.
+
 @@flashcards
 `transform: translateY(-4px)` :: move visually, no layout change
 `translate` / `scale` / `rotate` :: individual transform properties

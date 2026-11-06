@@ -41,6 +41,13 @@ Why use custom elements with Shadow DOM for the status board components?
 - Search engines require it
 ? CSS custom properties still pass through, which is how theming works.
 
+@@drill
+Which method attaches a shadow root to an element?
+= attachShadow
+= attachShadow()
+= this.attachShadow({ mode: "open" })
+? this.attachShadow({ mode: "open" }).
+
 @@flashcards
 board :: fetch, loading state, error + retry, refresh
 row :: dot + text state + since + disclosure

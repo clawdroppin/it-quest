@@ -157,6 +157,11 @@ Why use URLs like `#/tickets/42` in a single-page app?
 - They're more secure
 ? The URL is part of the app's state: users expect it to describe what they're looking at.
 
+@@drill
+Which browser API stores small strings that survive reloads?
+= localStorage
+? sessionStorage clears when the tab closes.
+
 @@flashcards
 `await fetch(url)` :: send a request; resolves with a Response
 `response.ok` :: true for status 200-299

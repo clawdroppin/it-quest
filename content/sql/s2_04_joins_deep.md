@@ -122,6 +122,11 @@ A report joins employees to their devices and to their tickets, then sums device
 - Prices are stored as text
 ? Aggregate each child table separately, then join.
 
+@@drill
+Which keyword finds rows that have no matching row in another table, as a subquery test?
+= NOT EXISTS
+? An anti join.
+
 @@flashcards
 self join :: a table joined to itself with two aliases
 `a.id < b.id` :: each pair once, no self-pairs

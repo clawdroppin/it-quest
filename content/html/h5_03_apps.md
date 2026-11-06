@@ -164,6 +164,14 @@ What does Vite do for a front-end project?
 - Tests the site in real browsers
 ? Bundlers like Vite turn many source files (and npm packages) into a few small files for the browser.
 
+@@drill
+Which file describes a Progressive Web App's name and icons?
+= manifest.json
+= web app manifest
+= manifest
+= manifest.webmanifest
+? Link it with <link rel="manifest">.
+
 @@flashcards
 `customElements.define("my-tag", Class)` :: register a custom element (the name needs a dash)
 `class X extends HTMLElement` :: the base class of custom elements

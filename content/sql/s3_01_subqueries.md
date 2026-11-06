@@ -85,6 +85,11 @@ Why is NOT EXISTS usually safer than NOT IN for 'employees with no devices'?
 - NOT EXISTS sorts the results
 ? Comparisons with NULL are unknown, which poisons NOT IN.
 
+@@drill
+Which keyword starts a common table expression?
+= WITH
+? WITH recent AS (SELECT ...) SELECT * FROM recent.
+
 @@flashcards
 subquery :: a query inside another query
 scalar subquery :: returns one value, e.g. (SELECT AVG(x) ...)

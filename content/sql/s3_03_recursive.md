@@ -108,6 +108,11 @@ Why generate a series of days and LEFT JOIN the data to it?
 - To sort the dates
 ? GROUP BY can only output days that have rows.
 
+@@drill
+Which keywords start a recursive CTE?
+= WITH RECURSIVE
+? An anchor query, UNION ALL, then the recursive step.
+
 @@flashcards
 `WITH RECURSIVE` :: CTE that refers to itself
 anchor member :: the starting rows

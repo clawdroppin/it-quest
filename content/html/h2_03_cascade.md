@@ -121,6 +121,12 @@ With `@layer base, components;`, a rule in `base` with an id selector vs a rule 
 - The one written later in the file
 ? Layer order is compared before specificity.
 
+@@drill
+Which function reads a CSS custom property?
+= var()
+= var
+? color: var(--brand).
+
 @@flashcards
 cascade order :: origin/importance → layers → specificity → order
 specificity :: (ids, classes/attributes/pseudo-classes, elements)

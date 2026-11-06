@@ -147,6 +147,13 @@ Why validate a request body with Zod when the handler already has types?
 - It isn't needed
 ? Validate at the edges, then trust the types inside.
 
+@@drill
+Which tsconfig option turns on all strict type checks?
+= strict
+= "strict": true
+= strict: true
+? Always enable it for new projects.
+
 @@flashcards
 `strict` :: the essential set of type checks
 `noEmit` :: tsc only checks; something else runs the code

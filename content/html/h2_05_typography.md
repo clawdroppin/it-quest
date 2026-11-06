@@ -118,6 +118,12 @@ What's the WCAG AA minimum contrast for normal body text?
 - 7:1
 ? Large text needs 3:1; AAA asks for 7:1.
 
+@@drill
+Which CSS function sets a value with a minimum, a preferred size and a maximum?
+= clamp()
+= clamp
+? font-size: clamp(1rem, 2.5vw, 1.5rem).
+
 @@flashcards
 `rem` :: relative to the root font size
 `em` :: relative to the element's font size

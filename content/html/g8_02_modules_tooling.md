@@ -136,6 +136,13 @@ What is tree-shaking?
 - Compressing images
 ? It relies on static `import`/`export`.
 
+@@drill
+Which script type loads a file as an ES module?
+= module
+= type="module"
+= type=module
+? <script type="module" src="app.js">.
+
 @@flashcards
 `type="module"` :: ES module script; deferred, scoped
 `export` / `import` :: share code between files

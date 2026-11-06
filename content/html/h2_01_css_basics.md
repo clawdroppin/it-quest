@@ -126,6 +126,11 @@ Why prefer `rem` to `px` for font sizes?
 - It's faster
 ? Accessibility: people with low vision set bigger default fonts. rem respects that.
 
+@@drill
+Which `box-sizing` value includes padding and border in the width?
+= border-box
+? *, *::before, *::after { box-sizing: border-box; }.
+
 @@flashcards
 `.class` :: class selector
 `#id` :: id selector (avoid for styling)

@@ -63,6 +63,12 @@ Why give keyboard shortcuts a visible hint in the UI?
 - It makes the app faster
 ? Show them in tooltips, menus or a command palette.
 
+@@drill
+In the fuzzy matcher, query characters must appear in the text in order. What's the name for such a sequence?
+= subsequence
+= a subsequence
+? Bonuses for consecutive matches and word starts rank the best results first.
+
 @@flashcards
 View model :: UI state and behaviour without rendering
 Command palette :: search-driven list of every app action

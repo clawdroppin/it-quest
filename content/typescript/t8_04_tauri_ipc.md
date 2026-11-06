@@ -72,6 +72,12 @@ Why do persisted settings need a version number?
 - To encrypt them
 ? Users skip versions; files outlive app releases.
 
+@@drill
+Which Tauri function calls a Rust command from the front end?
+= invoke
+= invoke()
+? await invoke("save_settings", { settings }).
+
 @@flashcards
 Tauri :: web UI + Rust backend desktop framework
 Electron :: web UI + Node.js backend desktop framework

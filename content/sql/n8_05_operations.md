@@ -106,6 +106,13 @@ What do RPO and RTO measure?
 - Rows per operation and time per row
 ? They drive the backup and HA design.
 
+@@drill
+What's the name of the zero-downtime schema change pattern of adding the new form, migrating, then removing the old?
+= expand and contract
+= expand/contract
+= expand-contract
+? Old and new code both work during the change.
+
 @@flashcards
 logical backup :: SQL dump: portable, slow to restore
 physical backup :: copy of data files

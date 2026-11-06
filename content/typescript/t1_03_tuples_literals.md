@@ -111,6 +111,11 @@ What's the advantage of `satisfies` over a type annotation?
 - It allows any value
 ? You keep exact keys and literal values for autocomplete.
 
+@@drill
+Which assertion makes an object literal deeply readonly with literal types?
+= as const
+? const roles = ["admin", "user"] as const.
+
 @@flashcards
 Literal type :: an exact value as a type, like `"warn"` or `443`
 Widening :: `let` and properties get the general type

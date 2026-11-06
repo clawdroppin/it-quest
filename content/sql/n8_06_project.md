@@ -53,6 +53,11 @@ What does a foreign key from installations to licences guarantee?
 - Installations can't be deleted
 ? Referential integrity stops orphan rows.
 
+@@drill
+Which constraint stops a column from holding values outside a rule, such as negative seat counts?
+= CHECK
+? seats INTEGER CHECK (seats >= 0).
+
 @@flashcards
 true-up :: paying the vendor for over-deployed seats
 valid licence :: starts <= today < expires

@@ -71,6 +71,12 @@ Why rank power users by active days rather than event count?
 - SQL can't count events
 ? Engagement is about coming back.
 
+@@drill
+What's the name of a group of users who signed up in the same period?
+= cohort
+= a cohort
+? Retention is tracked per cohort.
+
 @@flashcards
 event table :: user, event, timestamp
 funnel :: users reaching each step in order

@@ -83,6 +83,12 @@ In SQLite, which expression gives the date 30 days from today?
 - DATEADD(30)
 ? Each database has its own date functions; SQLite uses modifiers like '+30 days'.
 
+@@drill
+Which expression is SQL's if/else?
+= CASE
+= CASE WHEN
+? CASE WHEN cpu > 90 THEN 'high' ELSE 'ok' END.
+
 @@flashcards
 UPPER / LOWER / TRIM :: change case, remove spaces
 LENGTH / SUBSTR :: text length / part of a text

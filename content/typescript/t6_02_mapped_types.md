@@ -112,6 +112,11 @@ What does `{ [K in keyof E]: { type: K; payload: E[K] } }[keyof E]` produce?
 - never
 ? Map, then index with keyof to collect the values as a union.
 
+@@drill
+Which modifier removes `readonly` in a mapped type?
+= -readonly
+? { -readonly [K in keyof T]: T[K] }.
+
 @@flashcards
 Mapped type :: `{ [K in keyof T]: ... }`
 Homomorphic mapped type :: maps over keyof T and keeps modifiers

@@ -94,6 +94,12 @@ In a generic `DataTable<T>`, what does `key: keyof T & string` give you?
 - Nothing at runtime
 ? Typos in column keys become compile errors.
 
+@@drill
+Which React type describes anything a component can render?
+= ReactNode
+= React.ReactNode
+? children: ReactNode.
+
 @@flashcards
 Props type :: an object type for a component's parameters
 `React.ReactNode` :: anything React can render

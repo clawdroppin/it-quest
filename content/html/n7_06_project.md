@@ -50,6 +50,11 @@ How should the form show an error for one field?
 - Clearing the field
 ? Colour alone doesn't reach everyone; linked text is read by screen readers.
 
+@@drill
+Which attribute links an input to its error message for screen readers?
+= aria-describedby
+? Also set aria-invalid="true".
+
 @@flashcards
 `<fieldset>` + `<legend>` :: group related fields
 `noindex` :: keep internal pages out of search

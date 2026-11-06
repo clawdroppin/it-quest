@@ -99,6 +99,12 @@ Which FTS5 tokenizer helps with Japanese text, which has no spaces between words
 - ascii
 ? It indexes every 3-character sequence, so substring search works.
 
+@@drill
+Which SQLite virtual table module provides full-text search?
+= FTS5
+= fts
+? CREATE VIRTUAL TABLE docs USING fts5(body).
+
 @@flashcards
 `LIKE '%x%'` :: substring match, can't use a normal index
 `ILIKE` :: case-insensitive LIKE (PostgreSQL)

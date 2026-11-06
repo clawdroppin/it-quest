@@ -57,6 +57,11 @@ Which query returns only the name and os columns of devices?
 - SELECT devices(name, os);
 ? List the columns you want after SELECT, separated by commas.
 
+@@drill
+Which SQL keyword reads rows from a table?
+= SELECT
+? SELECT * FROM servers;
+
 @@flashcards
 database :: Organized, stored data a program can query
 table :: Rows (records) and columns (fields)

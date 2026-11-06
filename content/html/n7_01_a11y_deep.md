@@ -124,6 +124,11 @@ What does `<dialog>` opened with `showModal()` give you for free?
 - Form validation
 ? You still provide the name and sensible initial focus.
 
+@@drill
+Which attribute makes screen readers announce changes to a region?
+= aria-live
+? aria-live="polite" waits for a pause.
+
 @@flashcards
 first rule of ARIA :: use native HTML when you can
 `aria-expanded` :: is the controlled region open

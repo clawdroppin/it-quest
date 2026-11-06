@@ -122,6 +122,11 @@ Why use a generic `<T>` instead of `any`?
 - Generics are checked at run time
 ? With `any`, the result is `any` too, and every check is lost.
 
+@@drill
+Which operator produces a union of an object type's keys?
+= keyof
+? keyof { a: 1; b: 2 } is "a" | "b".
+
 @@flashcards
 `(x: string) => boolean` :: a function type
 `count = 4` :: optional parameter with a default

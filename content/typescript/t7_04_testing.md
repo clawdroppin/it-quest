@@ -102,6 +102,12 @@ What's the most robust way to test code that depends on the current time?
 - Avoid testing it
 ? Real time makes tests flaky.
 
+@@drill
+What's the name of a test double that records how it was called?
+= spy
+= a spy
+? Check the recorded calls after the code runs.
+
 @@flashcards
 Vitest :: fast Jest-compatible test runner for TS
 `node:test` :: Node's built-in test runner

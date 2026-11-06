@@ -125,6 +125,11 @@ Which feature exists only with `experimentalDecorators`?
 - Decorator factories
 ? Standard decorators don't support parameters.
 
+@@drill
+Which character starts a decorator?
+= @
+? @logged method() { ... }.
+
 @@flashcards
 Decorator :: function applied with `@name` to a class or member
 Method decorator signature (standard) :: `(method, context) => replacement`

@@ -71,6 +71,12 @@ Why is storing the department **name** on every ticket row a problem?
 - It's not a problem
 ? Normalization stores each fact once and references it by key.
 
+@@drill
+What's the name of the attack where user input changes a SQL statement?
+= sql injection
+= injection
+? Prevent it with parameters.
+
 @@flashcards
 SQL injection :: User input changing a query's meaning; fixed with parameterized queries
 parameterized query :: SQL with placeholders (?), data sent separately

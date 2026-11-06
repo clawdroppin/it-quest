@@ -132,6 +132,12 @@ In the gaps-and-islands trick, what is constant within a run of consecutive numb
 - RANK()
 ? Both increase by 1 per row inside a run.
 
+@@drill
+Which window function reads the previous row's value?
+= LAG
+= LAG()
+? LEAD reads the next row.
+
 @@flashcards
 frame :: rows around the current row a window function sees
 default frame with ORDER BY :: RANGE UNBOUNDED PRECEDING to CURRENT ROW

@@ -70,6 +70,11 @@ What does r² = 0.9 tell you about a regression line?
 - x causes y
 ? It measures fit, not causation.
 
+@@drill
+Which statistic is the middle value when the values are sorted?
+= median
+? Less affected by outliers than the mean.
+
 @@flashcards
 median :: middle value; robust to outliers
 `percentile_cont(0.5) WITHIN GROUP (ORDER BY x)` :: PostgreSQL median

@@ -71,6 +71,11 @@ What's a safe habit before running an UPDATE or DELETE?
 - Use DISTINCT
 ? If the SELECT shows the wrong rows, the UPDATE would have changed the wrong rows.
 
+@@drill
+Which statement undoes the changes in the current transaction?
+= ROLLBACK
+? COMMIT keeps them.
+
 @@flashcards
 INSERT INTO t (cols) VALUES (...) :: Add a row
 UPDATE t SET col = value WHERE ... :: Change rows (WHERE!)

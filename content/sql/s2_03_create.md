@@ -87,6 +87,11 @@ What does a FOREIGN KEY on `devices.employee_id` do?
 - Encrypts the column
 ? It stops devices pointing to employees that don't exist.
 
+@@drill
+Which constraint makes a column's values unique and identifies each row?
+= PRIMARY KEY
+? One per table.
+
 @@flashcards
 PRIMARY KEY :: Uniquely identifies each row; unique and not null
 FOREIGN KEY (REFERENCES) :: Must point at an existing row in another table

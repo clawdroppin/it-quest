@@ -71,6 +71,13 @@ What makes a CTE recursive?
 - It has more than one SELECT
 ? WITH RECURSIVE stops when the recursive part returns no new rows.
 
+@@drill
+Which SQL feature lets a query refer to its own results to generate rows?
+= recursive cte
+= with recursive
+= recursive common table expression
+? WITH RECURSIVE n(x) AS (...).
+
 @@flashcards
 Mandelbrot step :: x' = x² − y² + cx, y' = 2xy + cy
 escape condition :: x² + y² > 4

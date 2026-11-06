@@ -63,6 +63,11 @@ Why model incident status as a union of string literals?
 - It's required by Node
 ? Add a status and the compiler points to every place that must handle it.
 
+@@drill
+Which type makes the compiler complain if a switch misses a case?
+= never
+? Assign the leftover value to a never variable.
+
 @@flashcards
 MTTA :: mean time to acknowledge
 MTTR :: mean time to resolve

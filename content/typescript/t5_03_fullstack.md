@@ -169,6 +169,11 @@ Which framework is typical for structured, enterprise-style Node.js back ends wi
 - Vite
 ? NestJS is built around modules, controllers and DI providers, much like Angular and Spring.
 
+@@drill
+Complete the slogan for checking data at the boundary: "Parse, don't ..."
+= validate
+? Turn unknown input into a typed value once.
+
 @@flashcards
 `unknown` :: a value you must check before using; right type for outside data
 `as T` :: a compile-time assertion; checks nothing at runtime

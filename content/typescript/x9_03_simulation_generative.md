@@ -75,6 +75,13 @@ In Conway's Game of Life, when is a dead cell born?
 - Randomly
 ? Survival needs 2 or 3; birth needs exactly 3.
 
+@@drill
+What's the name of a string-rewriting system often used to draw plants?
+= l-system
+= l-systems
+= lindenmayer system
+? Repeatedly replace symbols, then draw with turtle graphics.
+
 @@flashcards
 PRNG :: pseudo-random number generator
 Seed :: starting value that determines the whole sequence

@@ -94,6 +94,11 @@ How do you check that tables A and B contain exactly the same rows?
 - `COUNT(A) = COUNT(B)`
 ? Equal counts can still hide different rows.
 
+@@drill
+Which set operator returns rows from the first query that aren't in the second?
+= EXCEPT
+? Oracle calls it MINUS.
+
 @@flashcards
 `UNION` :: combine, remove duplicates
 `UNION ALL` :: combine, keep everything (fast)

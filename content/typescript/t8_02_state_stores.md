@@ -88,6 +88,12 @@ Where should data fetched from an API usually live?
 - In component props only
 ? It needs loading/error states, refetching and invalidation.
 
+@@drill
+Which React hook manages state with a reducer function?
+= useReducer
+= useReducer()
+? const [state, dispatch] = useReducer(reducer, initial).
+
 @@flashcards
 Reducer :: `(state, action) => newState`, pure
 Action union :: `{ type: "a"; ... } | { type: "b"; ... }`

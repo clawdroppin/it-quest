@@ -69,6 +69,12 @@ Which join keeps tickets that have no matching SLA target, so they show up as a 
 - A UNION
 ? Rows with a NULL target reveal missing configuration.
 
+@@drill
+What does SLA stand for?
+= service level agreement
+= service-level agreement
+? For example: respond to P1 tickets within 1 hour.
+
 @@flashcards
 population :: the set of rows a report counts
 as-of time :: fixed "now" for measuring open items

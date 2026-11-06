@@ -96,6 +96,12 @@ What does `conic-gradient(red 0 25%, blue 0 60%, green 0)` draw?
 - Nothing; it's invalid
 ? Conic gradients sweep around a centre.
 
+@@drill
+Which two pseudo-elements give an element two extra boxes to draw with? Write the first one.
+= ::before
+= :before
+? ::after is the other; both need content: "".
+
 @@flashcards
 `border-radius: 50%` :: circle
 `border-radius: 0 70%` :: leaf shape

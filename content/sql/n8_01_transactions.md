@@ -134,6 +134,11 @@ What does `ROLLBACK TO sp` do?
 - Deletes the savepoint only
 ? Earlier work is kept and can still be committed.
 
+@@drill
+What does the I in ACID stand for?
+= isolation
+? Atomicity, Consistency, Isolation, Durability.
+
 @@flashcards
 ACID :: Atomicity, Consistency, Isolation, Durability
 dirty read :: reading uncommitted data

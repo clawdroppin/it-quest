@@ -91,6 +91,12 @@ Why is a calendar table better than calculating business days with formulas?
 - It uses less space
 ? One row per day with flags handles every exception.
 
+@@drill
+Which SQLite function formats a date with a format string?
+= strftime
+= strftime()
+? strftime('%Y-%m', created_at).
+
 @@flashcards
 instant :: a moment in time: store in UTC
 civil time :: wall-clock time in a named zone

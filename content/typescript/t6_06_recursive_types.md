@@ -109,6 +109,12 @@ What does "Type instantiation is excessively deep and possibly infinite" mean?
 - A syntax error
 ? Simplify, make it tail-recursive, or narrow the input types.
 
+@@drill
+Which built-in utility type makes every property readonly at one level?
+= Readonly
+= Readonly<T>
+? A DeepReadonly needs a recursive type.
+
 @@flashcards
 Recursive type :: a type that refers to itself (trees, JSON)
 `DeepPartial<T>` :: optional at every level

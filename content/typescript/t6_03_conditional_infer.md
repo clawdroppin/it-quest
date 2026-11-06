@@ -126,6 +126,11 @@ How do you stop a conditional type from distributing over a union?
 - It makes fetchHost synchronous
 ? Derive types from a single source of truth.
 
+@@drill
+Which keyword captures a type inside a conditional type pattern?
+= infer
+? T extends Promise<infer U> ? U : T.
+
 @@flashcards
 Conditional type :: `T extends U ? X : Y`
 Distributive conditional :: applies per union member for a bare type parameter

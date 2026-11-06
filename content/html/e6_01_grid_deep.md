@@ -125,6 +125,12 @@ What problem does subgrid solve?
 - Nested flexbox
 ? Titles, texts and buttons line up across cards.
 
+@@drill
+Write the grid track definition for as many columns of at least 200px as fit.
+= repeat(auto-fit, minmax(200px, 1fr))
+= repeat(auto-fill, minmax(200px, 1fr))
+? auto-fit stretches the columns to fill the row.
+
 @@flashcards
 `fr` :: a share of the free space
 `minmax(a, b)` :: track between a and b

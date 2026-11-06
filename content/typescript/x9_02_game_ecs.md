@@ -83,6 +83,13 @@ When do two AABBs overlap?
 - When their areas are equal
 ? Check each axis separately.
 
+@@drill
+What's the name of updating a simulation in equal time slices regardless of frame rate?
+= fixed time step
+= fixed timestep
+= fixed time-step
+? Accumulate frame time and step in fixed amounts.
+
 @@flashcards
 Entity :: an id with no data or behaviour
 Component :: plain data attached to an entity

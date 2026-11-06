@@ -113,6 +113,13 @@ Which images should not get `loading="lazy"`?
 - Images in closed tabs
 ? Lazy-loading the hero delays the largest paint.
 
+@@drill
+Which attribute delays loading images until they're near the viewport?
+= loading="lazy"
+= loading
+= loading=lazy
+? Don't lazy-load the main image at the top.
+
 @@flashcards
 `alt=""` :: decorative image: skipped by screen readers
 functional alt :: describe the action, not the picture

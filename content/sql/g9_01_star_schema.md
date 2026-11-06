@@ -70,6 +70,13 @@ Why shouldn't you sum a daily "open tickets" snapshot over a month?
 - Snapshots have no numbers
 ? Stock levels and balances behave the same way.
 
+@@drill
+In a star schema, which kind of table holds the measurements, such as sales amounts?
+= fact table
+= fact
+= the fact table
+? Dimension tables describe them.
+
 @@flashcards
 OLTP :: transactional workload: small reads/writes, normalised
 OLAP :: analytical workload: big scans and aggregates

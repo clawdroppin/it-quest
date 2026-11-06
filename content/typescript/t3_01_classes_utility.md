@@ -142,6 +142,12 @@ What is `typeof defaults` in a type position?
 - A runtime check
 ? In a type position, `typeof` reads a value's static type.
 
+@@drill
+Which utility type makes every property optional?
+= Partial
+= Partial<T>
+? Required<T> does the opposite.
+
 @@flashcards
 `implements I` :: the class must provide everything interface I has
 `#field` :: a private field, enforced at run time

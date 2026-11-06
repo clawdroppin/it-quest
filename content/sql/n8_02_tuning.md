@@ -102,6 +102,11 @@ What makes an index "covering" for a query?
 - It covers all rows
 ? PostgreSQL and SQL Server can add extra columns with INCLUDE.
 
+@@drill
+Which SQLite command shows how a query will use indexes?
+= EXPLAIN QUERY PLAN
+? SCAN means a full table scan; SEARCH uses an index.
+
 @@flashcards
 sargable :: a condition an index can seek on
 bare column rule :: put calculations on the constant side

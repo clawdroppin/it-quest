@@ -163,6 +163,11 @@ What does `Intl.NumberFormat("ja-JP", { style: "currency", currency: "JPY" }).fo
 - "128,000円" always
 ? The Intl API formats per locale; yen has no decimal places.
 
+@@drill
+Which attribute on `<html>` sets the page's language?
+= lang
+? <html lang="ja"> for Japanese.
+
 @@flashcards
 `<title>` :: search result link text
 `meta description` :: search result snippet

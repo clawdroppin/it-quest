@@ -1191,5 +1191,13 @@ self.addEventListener("fetch", (event) => {
   <rect width="64" height="64" rx="14" fill="#2f6f5e"/>
   <path d="M18 33l9 9 19-21" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
+
+@@drill
+Which browser feature lets a web app work offline by intercepting requests?
+= service worker
+= a service worker
+= service workers
+? It serves cached files when there's no network.
+
 @@text
 🎉 You've built an installable, offline, accessible web app with tested logic and no dependencies at all. Every framework is a more convenient way of doing what you just did by hand: state, render, events.

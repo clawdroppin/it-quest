@@ -176,6 +176,14 @@ When should a function return a `Result` instead of throwing?
 - For bugs and crashes
 ? The `Result` type appears in the signature, so callers can't forget. Unexpected failures still throw.
 
+@@drill
+What's the name of a type like `number & { __brand: "UserId" }` that stops mixing up IDs?
+= branded type
+= brand
+= branded
+= a branded type
+? A UserId can't be passed where an OrderId is expected.
+
 @@flashcards
 discriminated union :: a union of object types with a shared literal field (e.g. `status`)
 make illegal states unrepresentable :: design types so invalid data can't be written

@@ -131,6 +131,11 @@ Why keep `width` and `height` attributes on images even when CSS sizes them?
 - They enable lazy loading
 ? Pair them with `height: auto` in CSS.
 
+@@drill
+Which script attribute downloads in parallel and runs after the HTML is parsed, in order?
+= defer
+? async runs as soon as it arrives, in any order.
+
 @@flashcards
 LCP :: main content visible, ≤ 2.5 s
 INP :: response to input, ≤ 200 ms

@@ -76,6 +76,12 @@ What does `LAG(total) OVER (ORDER BY day)` return for each row?
 - The smallest total
 ? LAG and LEAD look backwards and forwards; useful for day-over-day changes.
 
+@@drill
+Which window function numbers rows 1, 2, 3 within each partition?
+= ROW_NUMBER
+= ROW_NUMBER()
+? Use it for top N per group.
+
 @@flashcards
 OVER () :: Turns an aggregate into a window function
 PARTITION BY :: Groups for a window function, keeping every row

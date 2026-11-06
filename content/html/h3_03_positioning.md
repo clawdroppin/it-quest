@@ -110,6 +110,11 @@ What's the right way to stop a wide table from making the whole page scroll side
 - Use smaller fonts
 ? The table scrolls on its own; the page stays put.
 
+@@drill
+Which `position` value keeps a header in view after scrolling past it?
+= sticky
+? Give it top: 0.
+
 @@flashcards
 `position: relative` :: nudge + reference box for absolute children
 `position: absolute` :: out of flow, relative to positioned ancestor

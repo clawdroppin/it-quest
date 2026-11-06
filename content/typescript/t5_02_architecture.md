@@ -153,6 +153,12 @@ Which test is least likely to break during a refactor?
 - One that checks the number of lines in a file
 ? Test behaviour, not implementation.
 
+@@drill
+What's the other name for ports and adapters architecture?
+= hexagonal architecture
+= hexagonal
+? The core depends only on interfaces (ports).
+
 @@flashcards
 port :: an interface the core defines for something it needs (repo, clock, mailer)
 adapter :: an implementation of a port for one technology (Postgres, SMTP, memory)

@@ -114,6 +114,12 @@ How do you make filtering on `json_extract(attrs, '$.rack')` fast in SQLite?
 - Use LIKE
 ? Expression indexes and generated columns both work.
 
+@@drill
+Which SQLite table-valued function turns a JSON array into rows?
+= json_each
+= json_each()
+? SELECT value FROM json_each('[1,2,3]').
+
 @@flashcards
 `json_extract(doc, '$.a.b')` :: read a value at a path
 `->>` :: extract as SQL value (SQLite 3.38+, PostgreSQL, MySQL)

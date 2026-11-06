@@ -99,6 +99,13 @@ Why is keyset pagination (`WHERE id > ?`) faster than `OFFSET` for deep pages?
 - LIMIT is ignored with OFFSET
 ? Page 10,000 with OFFSET reads 200,000 rows to show 20.
 
+@@drill
+What's the name of pagination that uses the last row's key instead of OFFSET?
+= keyset pagination
+= keyset
+= seek method
+? WHERE id > :last ORDER BY id LIMIT 20.
+
 @@flashcards
 index :: a sorted structure (B-tree) for finding rows without reading the whole table
 full table scan :: reading every row (SCAN in the query plan)

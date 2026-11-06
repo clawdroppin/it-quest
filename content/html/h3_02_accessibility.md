@@ -111,6 +111,12 @@ The first rule of ARIA is...
 - ARIA replaces HTML
 ? ARIA can't add keyboard behaviour. Native elements have it built in.
 
+@@drill
+Which element should wrap a page's main content?
+= <main>
+= main
+? Screen reader users can jump straight to it.
+
 @@flashcards
 `<main>` :: the page's main content (one per page)
 `<nav>` :: navigation links

@@ -119,6 +119,12 @@ What does `<details>` give you?
 - A table of contents
 ? `<summary>` is the clickable label.
 
+@@drill
+Which element marks up a date or time with a machine-readable value?
+= <time>
+= time
+? <time datetime="2026-11-06">6 November</time>.
+
 @@flashcards
 `<strong>` :: important
 `<em>` :: stress emphasis

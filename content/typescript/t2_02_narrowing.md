@@ -127,6 +127,12 @@ What does `function isUser(x: unknown): x is User` tell the compiler?
 - It throws if x isn't a User
 ? A type predicate. The function's logic must actually check, or the type is a lie.
 
+@@drill
+What's the name of a union whose members share a literal property such as `kind`?
+= discriminated union
+= tagged union
+? switch (shape.kind) narrows each case.
+
 @@flashcards
 narrowing :: a check makes a union type more specific
 `typeof x === "string"` :: narrows to string

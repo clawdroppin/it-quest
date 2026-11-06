@@ -111,6 +111,12 @@ How should you choose between `<h2>` and `<h3>`?
 - It doesn't matter
 ? Headings form the outline of the page. Change sizes with CSS.
 
+@@drill
+Which element holds the page title shown in the browser tab?
+= <title>
+= title
+? It goes inside <head>.
+
 @@flashcards
 `<!doctype html>` :: first line of every modern HTML page
 `<head>` :: information about the page (title, charset, styles)

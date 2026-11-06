@@ -117,6 +117,12 @@ In native CSS nesting, what does `&:hover` inside `.card { }` mean?
 - It's invalid
 ? `&` is replaced by the parent selector.
 
+@@drill
+Which property makes an element a size container for container queries?
+= container-type
+= container-type: inline-size
+? Then use @container (min-width: 400px).
+
 @@flashcards
 `container-type: inline-size` :: make a size container
 `@container (min-width: 28rem)` :: style by container width

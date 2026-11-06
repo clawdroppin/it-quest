@@ -121,6 +121,12 @@ What does `tags?: string[]` mean in an object type?
 - Only if `ip` is optional
 ? Structural typing. (An object literal written directly in the call *is* checked for extra properties, to catch typos.)
 
+@@drill
+Write the type of an array of numbers.
+= number[]
+= Array<number>
+? Both spellings mean the same.
+
 @@flashcards
 `string[]` :: an array of strings
 `[string, number]` :: a tuple

@@ -101,6 +101,12 @@ Which data needs runtime validation in a typed backend?
 - Nothing; TypeScript checks it all
 ? Types end where the outside world begins.
 
+@@drill
+Which Zod helper gets the TypeScript type from a schema?
+= z.infer
+= infer
+? type User = z.infer<typeof UserSchema>.
+
 @@flashcards
 Schema :: runtime description of data that also yields a static type
 `z.infer<typeof S>` :: the static type of a Zod schema

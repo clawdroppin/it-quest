@@ -139,6 +139,12 @@ What does `label:has(input:checked)` match?
 - none
 ? For n = 0, 1, 2: positions 3, 2, 1.
 
+@@drill
+Which pseudo-class styles an element based on what it contains?
+= :has()
+= :has
+? label:has(input:checked).
+
 @@flashcards
 `A B` :: B anywhere inside A
 `A > B` :: direct child

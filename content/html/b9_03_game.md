@@ -96,6 +96,12 @@ How do you detect a circle overlapping a rectangle?
 - Use `getBoundingClientRect`
 ? Closest-point test.
 
+@@drill
+Which browser function should drive a canvas game loop?
+= requestAnimationFrame
+= window.requestAnimationFrame
+? It syncs with the display's refresh.
+
 @@flashcards
 game loop :: update(dt) then render()
 delta time :: seconds since last frame

@@ -86,6 +86,11 @@ Why can you use an alias in ORDER BY but usually not in WHERE?
 - ORDER BY ignores aliases
 ? Logical order: FROM, WHERE, SELECT, ORDER BY, LIMIT.
 
+@@drill
+Which keyword sorts results from highest to lowest?
+= DESC
+? ORDER BY cpu DESC.
+
 @@flashcards
 ORDER BY col :: sort ascending (add DESC for descending)
 ORDER BY a, b :: sort by a, then by b for ties

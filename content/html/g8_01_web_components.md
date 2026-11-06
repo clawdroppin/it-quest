@@ -133,6 +133,12 @@ What does `composed: true` on a CustomEvent do?
 - Sends it to the server
 ? Combine with `bubbles: true` for listeners on ancestors.
 
+@@drill
+Which method registers a custom element?
+= customElements.define
+= define
+? Names must contain a hyphen.
+
 @@flashcards
 `customElements.define("x-y", Class)` :: register an element
 hyphen in name :: required

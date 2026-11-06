@@ -128,6 +128,11 @@ What is the specificity of `:where(.card .title)`?
 - Same as an ID
 ? `:where()` is designed to be easily overridden.
 
+@@drill
+Which at-rule declares cascade layers?
+= @layer
+? @layer reset, base, components, utilities;
+
 @@flashcards
 design token :: named design decision (colour, space, radius)
 semantic token :: named by purpose (`--color-danger`)

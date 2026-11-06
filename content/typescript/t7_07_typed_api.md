@@ -94,6 +94,11 @@ In a typed middleware chain, what does `.use(auth)` change?
 - It makes the context any
 ? The context type accumulates with each middleware.
 
+@@drill
+Which HTTP status code means the request is missing valid authentication?
+= 401
+? 403 means authenticated but not allowed.
+
 @@flashcards
 Router :: maps method + path to a handler
 Route params :: values captured from `:name` segments

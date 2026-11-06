@@ -106,6 +106,11 @@ What does "reflow" at 320px wide check?
 - Font loading
 ? A WCAG requirement for people who zoom.
 
+@@drill
+Which Chrome DevTools panel audits performance, accessibility and SEO?
+= Lighthouse
+? Run it in an incognito window.
+
 @@flashcards
 W3C validator :: checks HTML validity
 duplicate ids :: break labels, ARIA and scripts

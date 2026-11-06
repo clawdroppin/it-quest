@@ -103,6 +103,13 @@ With `module: nodenext`, how do you import `./util.ts` from another TS file?
 - `require("./util")`
 ? Node's ESM requires extensions; TS maps `.js` back to `.ts`.
 
+@@drill
+Which tsconfig option makes the compiler emit .d.ts files?
+= declaration
+= "declaration": true
+= declaration: true
+? Needed when publishing a library.
+
 @@flashcards
 `tsc --noEmit` :: type-check only
 esbuild / swc :: fast type-stripping compilers

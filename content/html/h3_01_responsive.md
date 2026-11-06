@@ -112,6 +112,11 @@ What's the benefit of `--accent: #0ea5e9;` with `var(--accent)`?
 - Variables can't be changed by media queries
 ? Custom properties can be redefined in media queries and for parts of the page.
 
+@@drill
+Which meta tag name makes a page scale correctly on phones?
+= viewport
+? <meta name="viewport" content="width=device-width, initial-scale=1">.
+
 @@flashcards
 `@media (min-width: 700px)` :: styles for screens at least 700px wide
 mobile first :: default for small screens, add for larger

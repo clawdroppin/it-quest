@@ -93,6 +93,12 @@ What makes a load idempotent?
 - It deletes everything first
 ? UPSERTs on a business key are the usual tool.
 
+@@drill
+What does ETL stand for?
+= extract, transform, load
+= extract transform load
+? ELT loads first and transforms inside the warehouse.
+
 @@flashcards
 ETL :: transform before loading
 ELT :: load raw, transform in the warehouse with SQL

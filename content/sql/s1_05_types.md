@@ -83,6 +83,12 @@ Why does `ORDER BY version` put '10' before '9' when `version` is TEXT?
 - Because 10 is even
 ? Store numbers as numbers, or CAST when sorting.
 
+@@drill
+Which function converts a value to another type?
+= CAST
+= CAST()
+? CAST(price AS REAL).
+
 @@flashcards
 `typeof(x)` :: SQLite storage class of a value
 type affinity :: a SQLite column's preferred type

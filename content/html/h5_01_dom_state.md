@@ -146,6 +146,12 @@ In the state → render pattern, what does a click handler do?
 - Calls `innerHTML` on the body
 ? The DOM is always drawn from the state, so it can never disagree with it.
 
+@@drill
+Which method finds the first element matching a CSS selector?
+= querySelector
+= document.querySelector
+? querySelectorAll finds them all.
+
 @@flashcards
 DOM :: the browser's live tree of the page's elements
 `querySelector` / `querySelectorAll` :: find one / all elements by CSS selector

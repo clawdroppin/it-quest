@@ -696,5 +696,11 @@ try {
   },
   "include": ["*.ts"]
 }
+
+@@drill
+Which built-in type maps string keys to values of one type? Write it for string to number.
+= Record<string, number>
+? Same as { [key: string]: number }.
+
 @@text
 🎉 Alert routing and fatigue are daily problems for SRE and operations teams. Having built a router yourself, you'll understand Alertmanager configs, PagerDuty rules and "why did nobody get paged?" incidents from the inside.

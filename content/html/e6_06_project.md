@@ -58,6 +58,11 @@ Which layout tool fits the dashboard's overall page areas (header, sidebar, main
 - Absolute positioning
 ? grid-template-areas makes the layout readable and easy to change per breakpoint.
 
+@@drill
+Which CSS property assigns named areas to a grid layout?
+= grid-template-areas
+? Each string is a row of area names.
+
 @@flashcards
 page layout :: grid areas + media query
 KPI tiles :: auto-fit minmax

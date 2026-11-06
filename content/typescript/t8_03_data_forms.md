@@ -97,6 +97,12 @@ Why validate on the server even with client-side validation?
 - To show nicer messages
 ? Client validation is UX; server validation is security.
 
+@@drill
+In the `Remote<T>` union, which state name means the request hasn't started yet?
+= idle
+= "idle"
+? The others are loading, error and ready.
+
 @@flashcards
 API type map :: endpoint → { query, body, response }
 `Remote<T>` :: idle / loading / error / ready union

@@ -117,6 +117,11 @@ What does `readonly` on a property do at runtime?
 - Throws on assignment
 ? Use Object.freeze for runtime immutability.
 
+@@drill
+Which modifier stops a property from being reassigned?
+= readonly
+? readonly id: number.
+
 @@flashcards
 interface :: named object shape that can be extended and merged
 Intersection `A & B` :: has all properties of A and B

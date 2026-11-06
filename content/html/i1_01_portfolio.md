@@ -424,5 +424,11 @@ section { padding-block: 2.5rem; }
   a { color: black; text-decoration: none; }
   #contact a[href^="mailto"]::after { content: " (" attr(href) ")"; }
 }
+
+@@drill
+Which `<meta>` name gives search engines a page summary?
+= description
+? <meta name="description" content="...">.
+
 @@text
 🎉 Put the link on your 職務経歴書, your LinkedIn and your GitHub profile. Keep adding each project you finish: by the end of this app, the page will show a recruiter everything you can do.

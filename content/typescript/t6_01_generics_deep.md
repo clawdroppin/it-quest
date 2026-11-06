@@ -129,6 +129,11 @@ Why is `function log<T>(x: T): void` a poor use of generics?
 - It's slower
 ? Type parameters should relate two or more positions.
 
+@@drill
+Which keyword constrains a type parameter?
+= extends
+? function f<T extends { id: number }>(x: T).
+
 @@flashcards
 Constraint :: `T extends X`: T must be assignable to X
 `K extends keyof T` :: K is a key of T

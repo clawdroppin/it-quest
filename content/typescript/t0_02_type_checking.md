@@ -128,6 +128,11 @@ What does `strictNullChecks` change?
 - It checks for null at runtime
 ? `string | null` must be narrowed before use.
 
+@@drill
+Which type has no values, such as the return type of a function that always throws?
+= never
+? It's the bottom type.
+
 @@flashcards
 Type erasure :: types disappear at runtime
 Structural typing :: compatibility by shape, not name

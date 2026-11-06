@@ -160,6 +160,11 @@ Grid or flexbox for a navigation bar of links in one line?
 - position: absolute
 ? Use grid when you need rows *and* columns.
 
+@@drill
+Which `display` value lays out children in one direction with flexbox?
+= flex
+? display: grid for two directions.
+
 @@flashcards
 `display: flex` :: lay out children in a row (or column)
 `justify-content` :: spacing along the main direction

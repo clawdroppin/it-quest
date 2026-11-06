@@ -91,6 +91,12 @@ Which is the simplest free way to publish a portfolio site?
 - Emailing the HTML files
 ? Push the files to a repository and enable Pages. Add a custom domain later if you like.
 
+@@drill
+Which HTTP header limits where a page may load scripts from?
+= Content-Security-Policy
+= csp
+? It blocks many XSS attacks.
+
 @@flashcards
 XSS :: attacker-controlled HTML/script running in your page
 escaping :: turning `<` into `&lt;` so text can't become HTML

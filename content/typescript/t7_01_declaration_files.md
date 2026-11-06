@@ -140,6 +140,12 @@ Why assign the result of an `any` call to `unknown` immediately?
 - TypeScript requires it
 ? Contain `any` in one wrapper.
 
+@@drill
+Which file extension holds type declarations only?
+= .d.ts
+= d.ts
+? No runtime code.
+
 @@flashcards
 `.d.ts` :: a declaration (types-only) file
 DefinitelyTyped :: community types published as `@types/*`

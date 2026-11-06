@@ -123,6 +123,11 @@ In a table, what's the difference between `<th>` and `<td>`?
 - No difference
 ? Header cells help screen readers announce what column a value is in.
 
+@@drill
+Which attribute gives an image its text alternative?
+= alt
+? Use alt="" for purely decorative images.
+
 @@flashcards
 <a href> :: a link
 <img alt> :: an image with a text alternative

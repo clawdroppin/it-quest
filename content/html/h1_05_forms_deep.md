@@ -91,6 +91,12 @@ Why must the server validate again?
 - HTML validation only works offline
 ? Client-side validation is a convenience, not security.
 
+@@drill
+Which element provides suggestions for a text input?
+= <datalist>
+= datalist
+? Connect it with the list attribute.
+
 @@flashcards
 `type="email"` :: email keyboard + format check
 `inputmode="numeric"` :: numeric keyboard on a text field

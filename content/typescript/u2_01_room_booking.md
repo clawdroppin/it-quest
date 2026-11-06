@@ -985,5 +985,11 @@ test("agenda shows a room's confirmed meetings for one day", () => {
   },
   "include": ["*.ts"]
 }
+
+@@drill
+End times are exclusive. Do bookings 10:00-11:00 and 11:00-12:00 overlap? (yes or no)
+= no
+? Back-to-back meetings are fine: a.start < b.end && b.start < a.end is false.
+
 @@text
 🎉 Discriminated unions for state, `Result` values for expected failures, pure domain functions, and ports with swappable adapters: this is how large TypeScript codebases (and Java, C# and Go ones) stay changeable for years.

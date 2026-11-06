@@ -107,6 +107,12 @@ Which type turns `"error"` into `"onError"`?
 - `Capitalize<"onerror">`
 ? Capitalize upper-cases the first character only.
 
+@@drill
+Which intrinsic type turns `"click"` into `"Click"`?
+= Capitalize
+= Capitalize<T>
+? Uppercase, Lowercase and Uncapitalize also exist.
+
 @@flashcards
 Template literal type :: `` `prefix-${T}` ``
 Union in a placeholder :: produces every combination

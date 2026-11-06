@@ -114,6 +114,11 @@ Products can be in several categories, and categories hold many products. How is
 - One products table per category
 ? Many-to-many relationships always need a table in the middle.
 
+@@drill
+Which constraint stops a column from being empty?
+= NOT NULL
+? email TEXT NOT NULL.
+
 @@flashcards
 schema :: the tables, columns and constraints of a database
 `NOT NULL` / `UNIQUE` / `CHECK` :: no missing values / no duplicates / only valid values

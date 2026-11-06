@@ -116,6 +116,11 @@ Why write `import type { Cidr } from "./subnet.ts"`?
 - It makes the import faster to type
 ? Type-only imports keep the runtime and the type layers clearly apart.
 
+@@drill
+Write the return type of an async function that resolves to a string.
+= Promise<string>
+? Every async function returns a Promise.
+
 @@flashcards
 Promise<T> :: a value of type T that arrives later
 async function :: returns Promise<T>

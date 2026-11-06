@@ -83,6 +83,11 @@ Which query counts the different operating systems in use?
 - SELECT SUM(os) FROM devices;
 ? COUNT(DISTINCT col) counts unique non-NULL values.
 
+@@drill
+Which clause filters groups after GROUP BY?
+= HAVING
+? WHERE filters rows before grouping.
+
 @@flashcards
 COUNT(*) :: Number of rows
 COUNT(col) :: Number of non-NULL values in col

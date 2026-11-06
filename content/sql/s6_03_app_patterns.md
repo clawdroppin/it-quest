@@ -153,6 +153,12 @@ Why keep migrations as numbered files in Git instead of changing the database by
 - Git compresses the database
 ? Reproducible, reviewed, versioned schema changes. Same idea as infrastructure as code.
 
+@@drill
+Which clause makes INSERT update the existing row when a key already exists (SQLite and PostgreSQL)?
+= ON CONFLICT
+= ON CONFLICT DO UPDATE
+? INSERT ... ON CONFLICT(id) DO UPDATE SET ...
+
 @@flashcards
 transaction :: `BEGIN` ... `COMMIT`: all changes or none
 `ROLLBACK` :: undo everything since BEGIN

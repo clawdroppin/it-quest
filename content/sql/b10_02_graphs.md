@@ -74,6 +74,13 @@ How is a network of routers stored as a graph in SQL?
 - A view with no rows
 ? Recursive CTEs walk the edges table.
 
+@@drill
+What do you call a graph stored as a table of (from, to) pairs?
+= edge list
+= an edge list
+= edges table
+? Each row is one edge.
+
 @@flashcards
 edge table :: (src, dst, cost)
 undirected edge :: store both directions

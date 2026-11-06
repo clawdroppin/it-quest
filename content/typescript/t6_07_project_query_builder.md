@@ -76,6 +76,12 @@ Why does the builder reject `.where("agee", 30)` at compile time?
 - where() takes no arguments
 ? Typos in column names become type errors.
 
+@@drill
+Which indexed access type gives the type of `Row`'s `age` column?
+= Row["age"]
+= Row['age']
+? Indexed access types read a property's type.
+
 @@flashcards
 Accumulating generics :: each chained call returns a builder with a refined type parameter
 `Pick<Row, Selected>` :: result row with selected columns

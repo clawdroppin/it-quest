@@ -111,6 +111,11 @@ When do temporary tables disappear?
 - At midnight
 ? They're also invisible to other connections.
 
+@@drill
+Which statement saves a query under a name you can select from?
+= CREATE VIEW
+? CREATE VIEW open_tickets AS SELECT ...
+
 @@flashcards
 view :: a saved query you can SELECT from
 `CREATE OR REPLACE VIEW` :: change a view (PostgreSQL, MySQL)

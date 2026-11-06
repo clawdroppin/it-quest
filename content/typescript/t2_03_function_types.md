@@ -135,6 +135,11 @@ What does `asserts x is string` in a return type mean?
 - It's a comment
 ? Use assertion functions for invariants and config checks.
 
+@@drill
+Write the return type of a type predicate that says `x` is a string.
+= x is string
+? function isString(x: unknown): x is string.
+
 @@flashcards
 Function type :: `(a: A) => R`
 Call signature :: `{ (a: A): R }` in an object type

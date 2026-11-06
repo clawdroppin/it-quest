@@ -113,6 +113,12 @@ What does `RAISE(ABORT, 'msg')` do in a SQLite trigger?
 - Rolls back all transactions
 ? Use it to enforce rules a CHECK can't express.
 
+@@drill
+Which foreign key action deletes the child rows when the parent is deleted?
+= ON DELETE CASCADE
+= CASCADE
+? ON DELETE RESTRICT blocks the delete instead.
+
 @@flashcards
 `CHECK (expr)` :: row-level rule
 `PRAGMA foreign_keys = ON` :: enable FK enforcement in SQLite

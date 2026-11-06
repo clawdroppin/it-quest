@@ -111,6 +111,12 @@ What does a branded type cost at runtime?
 - A Symbol per value
 ? The brand is erased; only the smart constructor's check runs.
 
+@@drill
+Function parameter types vary in the opposite direction to their function types. What's this called?
+= contravariance
+= contravariant
+? A handler for Animal can stand in for a handler for Dog.
+
 @@flashcards
 Assignability :: A fits where B is expected
 Covariance :: same direction (outputs, readonly)

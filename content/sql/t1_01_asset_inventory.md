@@ -822,5 +822,13 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+@@drill
+Which function counts the rows in each group?
+= COUNT(*)
+= COUNT
+= COUNT()
+? SELECT type, COUNT(*) FROM assets GROUP BY type.
+
 @@text
 🎉 You've designed a schema that defends itself, written injection-proof queries, and used transactions for changes that must not half-happen. That's the daily work of a junior DBA or a backend developer, and a good story for an interview: *"I built an asset inventory where the database itself guarantees a device has only one holder."*

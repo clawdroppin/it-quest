@@ -97,6 +97,11 @@ A customer asks to be forgotten, but invoices must be kept for 7 years. What's t
 - Move the data to a backup
 ? Pseudonymise or anonymise in one transaction, and handle copies.
 
+@@drill
+Which SQL statement gives a user permission on a table?
+= GRANT
+? GRANT SELECT ON tickets TO reporting.
+
 @@flashcards
 least privilege :: each role gets only what it needs
 `GRANT SELECT ON v TO role` :: allow reading a view

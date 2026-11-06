@@ -883,5 +883,11 @@ except Conflict as e:
 print("\nSales by category:")
 for r in shop.sales_by_category():
     print(f"  {r['rank']}. {r['category']:<9} {r['units']:>3} units  ${r['revenue_cents'] / 100:>10,.2f}")
+
+@@drill
+Which clause returns the rows an INSERT or UPDATE changed?
+= RETURNING
+? INSERT ... RETURNING id.
+
 @@text
 🎉 Constraints, transactions, conditional updates, optimistic locking, triggers, views and window functions: you've used the database the way production systems do, letting it guarantee what application code can't.

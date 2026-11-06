@@ -108,6 +108,11 @@ How do you connect a `<label>` to its input?
 - `aria-input="true"`
 ? A connected label can be clicked to focus the field, and is read by screen readers.
 
+@@drill
+Which attribute connects a `<label>` to an input?
+= for
+? <label for="email"> matches id="email".
+
 @@flashcards
 <form action method> :: where and how to send data
 name :: the key the server receives

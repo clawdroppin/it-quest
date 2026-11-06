@@ -100,6 +100,11 @@ Why are discriminated unions a good fit for ASTs?
 - They make parsing unnecessary
 ? Add a node type and the compiler lists every place to update.
 
+@@drill
+What does AST stand for?
+= abstract syntax tree
+? The parser builds it; the evaluator walks it.
+
 @@flashcards
 Lexer (tokenizer) :: text → tokens
 Parser :: tokens → abstract syntax tree

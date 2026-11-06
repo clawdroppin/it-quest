@@ -116,6 +116,12 @@ Why not inline a user-uploaded SVG into your page?
 - Browsers block it
 ? Sanitise, or display it as `<img>`.
 
+@@drill
+Which SVG fill value makes an icon follow the surrounding text colour?
+= currentColor
+= fill="currentColor"
+? Change the text colour and the icon follows.
+
 @@flashcards
 `viewBox` :: internal coordinates
 `<path d="M L C Z">` :: arbitrary shape

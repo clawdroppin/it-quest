@@ -93,6 +93,11 @@ Which type should you use for parsed JSON whose shape you haven't checked yet?
 - `string`
 ? `unknown` forces you to check before using it. `any` silently allows anything.
 
+@@drill
+Which type is the safe alternative to `any` for values you haven't checked yet?
+= unknown
+? You must narrow it before using it.
+
 @@flashcards
 `let x: number = 1` :: a type annotation
 type inference :: TypeScript works out the type from the value

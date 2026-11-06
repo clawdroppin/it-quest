@@ -114,6 +114,12 @@ What should you do with an unrecognized error in `catch (e)`?
 - Convert it to null
 ? Never silently swallow errors you don't understand.
 
+@@drill
+Which type holds either a success value or an error?
+= Result
+= Result<T, E>
+? { ok: true, value } | { ok: false, error }.
+
 @@flashcards
 `Result<T, E>` :: `{ ok: true; value: T } | { ok: false; error: E }`
 Expected failure :: domain error the caller should handle

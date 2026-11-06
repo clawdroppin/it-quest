@@ -76,6 +76,12 @@ Why give tables aliases like `FROM employees e JOIN departments d`?
 - It renames the tables permanently
 ? Aliases are also required when joining a table to itself.
 
+@@drill
+Which join keeps every row from the left table, even without a match?
+= LEFT JOIN
+= LEFT OUTER JOIN
+? Missing columns from the right are NULL.
+
 @@flashcards
 JOIN ... ON :: Combine rows from two tables where the ON condition matches
 INNER JOIN :: Only rows with a match on both sides

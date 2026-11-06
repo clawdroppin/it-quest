@@ -96,6 +96,14 @@ How do you get a point on a circle of radius r around (cx, cy) at angle θ?
 - `x = cos(cx)`, `y = sin(cy)`
 ? Polar to Cartesian coordinates.
 
+@@drill
+Which method gets the 2D drawing context from a canvas element?
+= getContext
+= getContext("2d")
+= getContext('2d')
+= canvas.getContext("2d")
+? const ctx = canvas.getContext("2d").
+
 @@flashcards
 `getContext("2d")` :: canvas drawing API
 `fillRect(x, y, w, h)` :: filled rectangle
