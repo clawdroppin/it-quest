@@ -65,6 +65,25 @@ class Status(Enum):
 s = Status("down")
 print(s, s.value, s is Status.DOWN)
 ```
+## Checking types with a tool
+
+Type hints don't change how Python runs, so to get value from them, run a **type checker** such as mypy or Pyright (the engine behind VS Code's Pylance) over your code:
+
+```text
+$ mypy inventory.py
+inventory.py:12: error: Argument 1 to "to_gb" has incompatible type "str"; expected "float"
+```
+
+It finds mistakes before the code runs: passing a string where a number is expected, forgetting that a function can return `None`, or misspelling a dataclass field. Editors show the same errors as you type.
+
+Useful hint syntax:
+
+- `list[str]`, `dict[str, int]`, `tuple[str, int]` for collections.
+- `str | None` for "a string or None" (older code writes `Optional[str]`).
+- `Callable[[int], str]` from `collections.abc` for a function that takes an int and returns a str.
+- `Literal["low", "high"]` (from `typing`) for a value that must be one of a few strings.
+
+Start by hinting function signatures. You don't need to annotate every local variable, because the checker works out most of them itself.
 
 @@quiz
 What happens when you call `to_gb("5000")` with the hint `megabytes: float`?
@@ -73,6 +92,31 @@ What happens when you call `to_gb("5000")` with the hint `megabytes: float`?
 - The string is converted to a float automatically
 - Nothing at all, it works
 ? Hints are for tools and people. The interpreter doesn't enforce them.
+
+@@quiz
+What does `@dataclass` generate for you?
+* An `__init__`, a readable `__repr__` and `__eq__` from the class's fields
+- A database table
+- Automatic type checking at runtime
+- A JSON file
+? frozen=True also makes instances immutable.
+
+@@quiz
+How do you get type errors reported before running the code?
+* Run a type checker such as mypy or Pyright
+- Python checks hints automatically when it runs
+- Add `import types`
+- Use print statements
+? Hints are for tools and readers; Python itself ignores them at runtime.
+
+@@flashcards
+type hint :: def f(x: int) -> str: documents expected types
+str | None :: a string or None
+list[str] :: a list of strings
+@dataclass :: generates __init__, __repr__ and __eq__
+frozen=True :: dataclass instances can't be changed
+Enum :: a fixed set of named values
+mypy / Pyright :: tools that check type hints
 
 @@exercise Sort incidents
 Write a dataclass `Incident` with fields `id: int`, `severity: int`, `title: str`, and a function `triage(incidents)` that returns them sorted by severity (**1 first**), then by id. Two incidents with the same fields must be equal (`==`).

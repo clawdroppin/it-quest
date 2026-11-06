@@ -71,6 +71,22 @@ Which pattern matches a whole string of exactly 3 digits, like `404`?
 - `.{3}`
 ? `\d{3}` is three digits; `^` and `$` (or `fullmatch`) make sure nothing else is around them.
 
+@@quiz
+What does `re.findall(r"\d+", "cpu 91% mem 64%")` return?
+* `["91", "64"]`
+- `[91, 64]`
+- `"91"`
+- `["9", "1", "6", "4"]`
+? findall returns every match as a string; + means one or more digits.
+
+@@quiz
+Why write regex patterns as raw strings like `r"\d+"`?
+* So backslashes reach the regex engine unchanged
+- Raw strings are faster
+- Patterns must be raw strings or they fail
+- To make the match case-insensitive
+? Without r, Python would treat some backslash sequences as escapes first.
+
 @@flashcards
 `\d` / `\w` / `\s` :: digit / word character / whitespace
 `+` / `*` / `?` :: one or more / zero or more / optional

@@ -79,6 +79,22 @@ Your script gets status `403` from an API. What does it mean?
 - Success
 ? 401 = who are you? (not authenticated). 403 = I know who you are, and the answer is no.
 
+@@quiz
+Why set a `timeout` on every HTTP request?
+* Without one, a request to a server that never answers can hang your script forever
+- Timeouts make requests faster
+- APIs reject requests without them
+- It's required for HTTPS
+? requests.get(url, timeout=10) gives up after 10 seconds.
+
+@@quiz
+What does `response.raise_for_status()` do?
+* Raises an exception if the status is 4xx or 5xx
+- Prints the status code
+- Retries the request
+- Converts the body to JSON
+? It turns HTTP errors into Python exceptions you can catch.
+
 @@flashcards
 HTTP 200 / 201 / 204 :: OK / Created / No Content
 HTTP 401 vs 403 :: not authenticated vs not allowed

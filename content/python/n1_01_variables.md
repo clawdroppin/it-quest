@@ -67,6 +67,23 @@ print(type(42))
 print(type(3.75))
 print(type(True))
 ```
+## Variables are labels, not boxes
+
+It helps to picture a variable as a **label** stuck onto a value, not a box that holds it. `a = b` doesn't copy anything; it sticks a second label onto the same value. For numbers and strings this makes no visible difference, but it matters later with lists, which you can change: two labels on one list means changes through one name show up through the other.
+
+## Swapping and multiple assignment
+
+Python can assign several variables in one line, which makes swapping two values easy:
+
+```python
+host, port = "db01", 5432
+print(host, port)
+primary, backup = "web01", "web02"
+primary, backup = backup, primary
+print("primary is now", primary)
+```
+
+The right-hand side is worked out first, then the values are assigned left to right, so no temporary variable is needed.
 
 @@quiz
 What does this print?
@@ -89,6 +106,22 @@ Which is a good Python variable name for "number of failed logins"?
 * `failed_logins`
 - `x`
 ? Python style is snake_case, names can't start with a digit, and the name should explain itself.
+
+@@quiz
+After `primary, backup = "web01", "web02"` and then `primary, backup = backup, primary`, what is `primary`?
+* `"web02"`
+- `"web01"`
+- an error
+- a tuple of both values
+? The right side is evaluated first, then assigned.
+
+@@flashcards
+variable :: a name that refers to a value
+= :: assign a value to a name
+snake_case :: Python's naming style: failed_logins
+int / float / str / bool :: whole number / decimal / text / True or False
+type(x) :: shows the type of a value
+a, b = b, a :: swap two variables
 
 @@exercise Server info card
 Create three variables: `name` with the text `"mail01"`, `ram_gb` with the number `16`, and `location` with `"Tokyo"`. Then print them so the output is exactly:

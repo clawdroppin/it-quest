@@ -85,6 +85,22 @@ print(groups)
 - `"b"`
 ? `.get` returns the default you give it when the key is missing.
 
+@@quiz
+What happens with `ports = {"ssh": 22}` and then `ports["http"]`?
+* KeyError, because the key doesn't exist
+- It returns None
+- It returns 0
+- It adds the key "http"
+? Use ports.get("http") or check with `"http" in ports` first.
+
+@@quiz
+Which loop gives you both the key and the value?
+* `for name, port in ports.items():`
+- `for name, port in ports:`
+- `for name in ports.values():`
+- `for port in ports.keys():`
+? .items() yields (key, value) pairs.
+
 @@flashcards
 `d[key]` :: the value for key; KeyError if missing
 `d.get(key, default)` :: the value, or default if the key is missing

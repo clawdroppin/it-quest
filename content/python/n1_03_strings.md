@@ -108,6 +108,14 @@ What does `f"{3.14159:.2f}"` produce?
 - An error
 ? Strings never change in place. Write `name = name.strip()` to keep the result.
 
+@@quiz
+What is `"server"[0:3]`?
+* `"ser"`
+- `"serv"`
+- `"s"`
+- `"ver"`
+? A slice includes the start index and stops before the end index.
+
 @@flashcards
 `s.strip()` :: remove whitespace from both ends
 `s.lower()` / `s.upper()` :: change case

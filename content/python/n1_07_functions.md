@@ -92,6 +92,23 @@ In `def connect(host, port=22):`, what is `port=22`?
 - A syntax error
 ? Callers can write `connect("srv")` (port is 22) or `connect("srv", 2222)`.
 
+@@quiz
+What does a function return if it has no `return` statement?
+* None
+- 0
+- An empty string
+- The last value it printed
+? Printing and returning are different: print shows a value, return hands it back.
+
+@@flashcards
+def name(params): :: define a function
+return :: hand a value back to the caller
+parameter :: a name in the def line
+argument :: the value passed in a call
+default value :: def f(port=22): used when not passed
+local variable :: exists only inside the function
+None :: what a function returns without return
+
 @@exercise Convert units
 Write a function `bytes_to_mb(n)` that returns `n` bytes in megabytes, **rounded to 2 decimals** (1 MB = 1024 × 1024 bytes).
 @@starter

@@ -94,6 +94,22 @@ Which line has a bug?
 - `if count != 0:`
 ? `=` assigns, `==` compares. Python gives a SyntaxError for `if count = 0:`.
 
+@@quiz
+What does `bool("")` return?
+* False
+- True
+- None
+- an error
+? Empty strings, 0, empty lists and None are "falsy".
+
+@@flashcards
+== :: equal to (one = assigns, two compare)
+!= :: not equal to
+if / elif / else :: run the first block whose condition is true
+and / or / not :: combine or flip conditions
+truthy / falsy :: values treated as True / False in an if
+indentation :: the spaces that mark which lines belong to the if
+
 @@exercise Password policy
 Read a password from the input. Print `strong` if it's **at least 12 characters** long **and** contains **no spaces**, `weak` if it's at least 8 characters (and no spaces), otherwise `rejected`. A password with a space is always `rejected`.
 

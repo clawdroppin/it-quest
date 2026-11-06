@@ -92,6 +92,22 @@ What does `json.loads('{"ok": true}')["ok"]` give in Python?
 - `1`
 ? JSON `true` becomes Python's `True`.
 
+@@quiz
+Why open a CSV file with `newline=""`?
+* So the csv module handles line endings itself and doesn't add blank rows on Windows
+- To skip the header row
+- To read it faster
+- To remove commas
+? The csv docs recommend newline="" for both reading and writing.
+
+@@quiz
+Which gives you each CSV row as a dictionary keyed by the header names?
+* `csv.DictReader(f)`
+- `csv.reader(f)`
+- `json.load(f)`
+- `f.readlines()`
+? DictWriter does the reverse for writing.
+
 @@flashcards
 `json.loads(text)` / `json.dumps(obj)` :: JSON text → Python / Python → JSON text
 `json.load(f)` / `json.dump(obj, f, indent=2)` :: the same, with files

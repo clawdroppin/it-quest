@@ -54,6 +54,23 @@ Notice that line 1 *did* run: the output shows before the error. A `NameError` m
 4. Still stuck? Copy the error into the **AI Helper** and ask what it means.
 
 > In IT support you'll read error messages all day: from Windows, from servers, from apps. Getting calm and methodical about them is one of the most valuable skills you can build.
+## The errors you'll meet first
+
+| Error | What it usually means |
+|---|---|
+| `SyntaxError` | the code isn't valid Python: a missing bracket, quote or colon |
+| `IndentationError` | the spaces at the start of a line don't line up |
+| `NameError` | a name that doesn't exist: a typo, or a variable used before it was set |
+| `TypeError` | an operation on the wrong kind of value, like `"5" + 3` |
+| `ValueError` | the right type but an impossible value, like `int("abc")` |
+| `ZeroDivisionError` | dividing by zero |
+| `IndexError` / `KeyError` | asking a list for a position, or a dictionary for a key, that isn't there |
+
+Learn to recognise these names and you'll know where to look before you've even read the rest of the message.
+
+## Asking for help well
+
+When you're really stuck, explain the problem out loud (or to a rubber duck on your desk); saying it often reveals the mistake. If you ask a person or search online, include the **exact error message**, the line it points to, what you expected and what happened instead. "It doesn't work" can't be answered; "TypeError: can only concatenate str (not "int") to str on line 4" usually can be answered in seconds.
 
 @@quiz
 Python shows: `NameError: name 'pirnt' is not defined`. What's the most likely problem?
@@ -69,6 +86,22 @@ Where should you start reading a Python traceback?
 * At the bottom: the last line says what went wrong
 - In the middle
 ? The last line has the error type and message. The lines above it show where it happened.
+
+@@quiz
+`int("abc")` fails. Which error does Python raise?
+* ValueError
+- NameError
+- SyntaxError
+- KeyError
+? The type (a string) is fine for int(), but this particular value can't be converted.
+
+@@flashcards
+SyntaxError :: invalid Python: missing bracket, quote or colon
+IndentationError :: line indentation doesn't line up
+NameError :: a name that doesn't exist (often a typo)
+TypeError :: an operation on the wrong kind of value
+ValueError :: right type, impossible value
+traceback :: the error report; read it from the bottom up
 
 @@exercise Fix the program
 This program has **two** mistakes. Run it, read the errors, and fix them so it prints:

@@ -36,6 +36,18 @@ print("Disk: OK")
 print("Network: OK")
 print("All checks passed.")
 ```
+## What Python is used for in IT
+
+Python is the most common language for **automation** in IT jobs: renaming thousands of files, checking which servers are up, reading log files, calling cloud APIs, generating reports from spreadsheets, and gluing tools together. Network engineers use it to configure routers, security analysts to sift through alerts, data engineers to move data around, and developers to build web services. Ansible, the AWS and Azure command-line tools, and many monitoring systems are written in Python or are scripted with it.
+
+It's popular because the code reads almost like English, there's a library for nearly everything, and the same script runs on Windows, macOS and Linux.
+
+## How to learn it well
+
+- **Type the examples yourself** rather than only reading them. Your fingers learn the syntax faster than your eyes do.
+- **Change things and run again.** What happens if you print a number instead of text? If you remove the quotes? Breaking code on purpose is how you learn what each part does.
+- **Read the error messages.** They look scary at first, but the next lesson shows they're mostly telling you exactly what's wrong and where.
+- **Little and often** beats long sessions: twenty minutes a day builds the habit.
 
 @@quiz
 In what order does Python run the lines of a program?
@@ -44,6 +56,28 @@ In what order does Python run the lines of a program?
 * Top to bottom, one after another
 - All at the same time
 ? Python reads your program like a recipe: line 1, then line 2, and so on.
+
+@@quiz
+What does `print("Hello")` do?
+* Shows the text Hello on the screen
+- Sends Hello to a printer
+- Saves Hello to a file
+- Creates a variable called Hello
+? print displays its value in the output.
+
+@@quiz
+Why does `print(Hello)` (without quotes) fail?
+* Without quotes Python looks for a variable named Hello, which doesn't exist
+- print only works with numbers
+- Python doesn't allow capital letters
+- The brackets are wrong
+? Quotes make text; a bare word is a name.
+
+@@flashcards
+print() :: show a value in the output
+"text" :: a string: text in quotes
+# comment :: a note for humans; Python ignores it
+program :: instructions run from top to bottom
 
 @@exercise Say hello
 Write a program that prints exactly:

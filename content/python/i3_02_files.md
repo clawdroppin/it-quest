@@ -84,6 +84,22 @@ What happens to an existing file when you open it with mode `"w"`?
 - Nothing until you call save()
 ? `"w"` truncates the file. Use `"a"` to append.
 
+@@quiz
+Why use `with open(path) as f:` instead of `f = open(path)`?
+* The file is closed automatically when the block ends, even after an error
+- It's the only way to read text
+- It makes reading faster
+- It creates the file if it's missing
+? with handles the clean-up for you.
+
+@@quiz
+Which pathlib call gives the file name without the folder, from `Path("logs/app.log")`?
+* `.name`, which is "app.log"
+- `.parent`
+- `.suffix`
+- `.stem`, which is "app.log"
+? .stem is "app", .suffix is ".log", .parent is "logs".
+
 @@flashcards
 `with open(p, encoding="utf-8") as f:` :: open a file; it's closed automatically after the block
 mode `"w"` :: write: erases the existing file

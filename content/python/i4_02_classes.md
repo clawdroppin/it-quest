@@ -95,6 +95,32 @@ What is `self` in a method?
 - A global variable
 ? `web.start()` calls `start` with `self` = `web`.
 
+@@quiz
+What does `class Server(Device):` mean?
+* Server inherits from Device: it gets Device's methods and can add or override its own
+- Server and Device are the same class
+- Device is created inside Server
+- Server can only be used with Device objects
+? Inheritance expresses an "is a" relationship.
+
+@@quiz
+What's the difference between `__str__` and `__repr__`?
+* __str__ is the friendly text for users; __repr__ is an unambiguous one for developers
+- They are the same thing
+- __repr__ is only for numbers
+- __str__ is only used in files
+? print uses __str__; the interactive prompt and lists use __repr__.
+
+@@flashcards
+class :: a blueprint for objects
+__init__ :: sets up a new object
+self :: the object the method was called on
+attribute :: a value stored on an object, like self.name
+method :: a function defined in a class
+__str__ / __repr__ :: friendly text / developer text
+inheritance :: class Child(Parent): reuse and extend
+super() :: call the parent class's method
+
 @@exercise A disk class
 Write a class `Disk` with:
 

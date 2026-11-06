@@ -106,6 +106,14 @@ Which of these is a private (RFC 1918) address?
 - 100.200.1.1
 ? The private ranges are 10.0.0.0/8, 172.16.0.0/12 (172.16–172.31) and 192.168.0.0/16.
 
+@@quiz
+What does `ipaddress.ip_address("10.0.0.5") in ipaddress.ip_network("10.0.0.0/24")` return?
+* True
+- False
+- An error
+- "10.0.0.0/24"
+? The in operator checks whether an address belongs to a network.
+
 @@flashcards
 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 :: the private (RFC 1918) IPv4 ranges
 127.0.0.1 :: loopback: this computer itself

@@ -74,6 +74,30 @@ Your script is run every night by Task Scheduler / cron. How does the scheduler 
 - It can't know
 ? Schedulers, CI pipelines and other scripts all check the exit code.
 
+@@quiz
+What does argparse give you for free when you define your options?
+* A `--help` message and error messages for wrong arguments
+- A graphical window
+- Automatic logging to a file
+- A configuration file
+? Users can run `script.py --help` to see every option.
+
+@@quiz
+Why use `logging` instead of `print` in a tool?
+* Messages get levels and timestamps, and you can send them to files or silence them without changing the code
+- print doesn't work in scripts
+- logging is faster
+- logging encrypts the output
+? logging.info, warning and error can be filtered by level.
+
+@@flashcards
+argparse :: command-line options with --help for free
+add_argument("--dry-run", action="store_true") :: an on/off flag
+logging.basicConfig(level=...) :: set up log format and level
+logger levels :: DEBUG, INFO, WARNING, ERROR, CRITICAL
+sys.exit(1) :: end with a failure exit code
+if __name__ == "__main__": :: run main only when executed directly
+
 @@exercise A tiny CLI
 Write `main(argv)` that parses these options from the list `argv`:
 

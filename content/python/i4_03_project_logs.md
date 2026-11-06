@@ -13,6 +13,37 @@ Status codes matter: **2xx** success, **3xx** redirect, **4xx** client error (40
 
 You'll build the analyzer in steps: parse a line into an object, then compute the statistics an on-call engineer would want.
 
+@@quiz
+In a log analyser, why read the file line by line instead of `f.read()`?
+* Log files can be huge; line by line uses little memory
+- read() can't open text files
+- Lines are sorted automatically
+- It's required by the re module
+? `for line in f:` reads one line at a time.
+
+@@quiz
+Which tool counts how often each error message appears?
+* `collections.Counter`
+- `set`
+- `sorted`
+- `enumerate`
+? Counter(messages).most_common(5) gives the top five.
+
+@@quiz
+Some lines in the log don't match your pattern. What should a robust analyser do?
+* Skip them (and maybe count them) instead of crashing
+- Stop with an exception
+- Treat them as errors
+- Delete them from the file
+? Real logs always contain surprises: partial writes, stack traces, other formats.
+
+@@flashcards
+for line in f :: read a file one line at a time
+re.match / re.search :: match at the start / anywhere
+Counter :: count occurrences
+defaultdict(list) :: group items without checking keys
+datetime.strptime :: parse a timestamp
+
 @@exercise Parse a line
 Write a class `Request` with attributes `ip`, `method`, `path`, `status` (int) and `size` (int), and a function `parse(line)` that returns a `Request`, or `None` if the line doesn't match the format.
 @@starter

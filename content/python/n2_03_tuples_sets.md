@@ -57,6 +57,27 @@ print(logged_in | allowed)      # in either (union)
 | tuple `( )` | yes | no | yes | fixed records, multiple return values |
 | set `{ }` | no | yes | no | uniqueness, membership, comparing groups |
 | dict `{k: v}` | yes | yes | unique keys | lookups by name |
+## Choosing the right collection
+
+| Need | Use |
+|---|---|
+| an ordered list you'll add to or change | **list** `["web01", "web02"]` |
+| look things up by a name or ID | **dict** `{"web01": "10.0.0.5"}` |
+| a fixed group of values that belong together | **tuple** `("db01", 5432)` |
+| unique items, or "is this in the group?" | **set** `{"admin", "dev"}` |
+
+Sets have operators that answer common IT questions in one line:
+
+```python
+ad_accounts = {"ana", "ben", "chen", "dave"}
+hr_staff = {"ana", "chen", "erin"}
+print("leavers with accounts:", sorted(ad_accounts - hr_staff))
+print("in both:", sorted(ad_accounts & hr_staff))
+print("everyone:", sorted(ad_accounts | hr_staff))
+print("missing accounts:", sorted(hr_staff - ad_accounts))
+```
+
+Checking `name in a_set` is fast even with millions of items, while `name in a_list` has to look through the list one item at a time. When you only need to know "have I seen this before?", use a set.
 
 @@quiz
 You have two lists of usernames: accounts in Active Directory, and people in the HR system. You want the AD accounts of people who've left. What's the best tool?
@@ -65,6 +86,30 @@ You have two lists of usernames: accounts in Active Directory, and people in the
 - A tuple
 - `sorted()`
 ? Set difference gives everything in the first set that's not in the second, in one step. This is a real "orphaned account" audit.
+
+@@quiz
+What is `{1, 2, 2, 3}`?
+* `{1, 2, 3}`, because a set keeps only unique items
+- `{1, 2, 2, 3}`
+- an error
+- a list
+? Duplicates disappear in a set.
+
+@@quiz
+`location = ("Tokyo", 35.68, 139.69)`. What happens with `location[0] = "Osaka"`?
+* TypeError: tuples can't be changed
+- The first item becomes "Osaka"
+- A new tuple is created automatically
+- Nothing happens
+? Tuples are immutable; build a new tuple instead.
+
+@@flashcards
+tuple :: fixed, ordered group: (a, b)
+set :: unique items, fast membership: {a, b}
+a - b :: in a but not in b
+a & b :: in both
+a | b :: in either
+x in s :: fast membership test on a set
 
 @@exercise Orphaned accounts
 Write `orphaned(ad_users, hr_staff)` that returns a **sorted list** of usernames that exist in `ad_users` but not in `hr_staff`. Compare them **case-insensitively** (return lowercase names).

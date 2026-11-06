@@ -51,6 +51,24 @@ print(parts[0], int(parts[1]) * 2)
 ```
 
 You'll learn about the `[...]` list it returns in the Lists lesson. For now: `parts[0]` is the first piece, `parts[1]` the second.
+## Validating what people type
+
+People type unexpected things: spaces, words instead of numbers, nothing at all. Clean and check input before you use it:
+
+```python,norun
+answer = input("How many servers? ").strip()
+if answer.isdigit():
+    count = int(answer)
+    print("Checking", count, "servers")
+else:
+    print("Please type a whole number, for example 5")
+```
+
+- `.strip()` removes spaces and line breaks around the text.
+- `.isdigit()` is true only if every character is a digit, so `int()` won't fail.
+- `.lower()` lets you accept "Y", "y" and "yes " alike: `if answer.strip().lower() in ("y", "yes"):`.
+
+Later, in the error-handling lesson, you'll see the other approach: try `int(answer)` and catch the `ValueError` if it fails. Both are common; checking first is easier to read when there's only one rule.
 
 @@quiz
 The user types `5` at `n = input()`. What does `print(n * 3)` show?
@@ -59,6 +77,30 @@ The user types `5` at `n = input()`. What does `print(n * 3)` show?
 - An error
 - `5 5 5`
 ? `n` is the string `"5"`, and a string times 3 is the string repeated. Use `int(input())` to get a number.
+
+@@quiz
+Which converts the text `"42"` into a number you can do maths with?
+* `int("42")`
+- `str("42")`
+- `"42".number()`
+- `input("42")`
+? int() turns text of digits into an integer; float() handles decimals.
+
+@@quiz
+What does `"a,b,c".split(",")` give?
+* `["a", "b", "c"]`
+- `"abc"`
+- `("a", "b", "c")`
+- `["a,b,c"]`
+? split breaks a string into a list at each separator.
+
+@@flashcards
+input() :: read a line typed by the user (always a string)
+int() / float() :: convert text to a whole number / decimal
+str() :: convert a value to text
+.strip() :: remove spaces and newlines around text
+.split(",") :: break text into a list at each comma
+.isdigit() :: True if every character is a digit
 
 @@exercise Subnet host counter
 Read a **prefix length** (like `24`) from the input. A network with that prefix has `2 ** (32 - prefix) - 2` usable host addresses. Print the result like this, for the input `24`:

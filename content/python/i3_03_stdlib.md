@@ -86,6 +86,22 @@ You need a random password reset token. Which module?
 - `time`
 ? `secrets` uses the operating system's cryptographically secure randomness. `random` is predictable.
 
+@@quiz
+What does `Counter(["web", "db", "web"]).most_common(1)` return?
+* `[("web", 2)]`
+- `"web"`
+- `{"web": 2, "db": 1}`
+- `2`
+? most_common(n) returns the n most frequent items with their counts.
+
+@@quiz
+How do you get the date 30 days from now?
+* `datetime.now() + timedelta(days=30)`
+- `datetime.now() + 30`
+- `datetime.now().add(30)`
+- `date.today(30)`
+? Arithmetic on datetimes uses timedelta.
+
 @@flashcards
 `from datetime import datetime, timedelta` :: dates/times, and durations to add to them
 `strftime` / `strptime` :: date → text / text → date

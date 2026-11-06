@@ -88,6 +88,14 @@ A disk holds 1000 GB. Files of 64 GB each. How many *complete* files fit? Which 
 - `64 // 1000`
 ? `//` gives the whole number of times 64 fits: 15. `/` would give 15.625.
 
+@@quiz
+What is `2 + 3 * 4`?
+* 14
+- 20
+- 24
+- 9
+? Multiplication happens before addition; use brackets to change the order.
+
 @@flashcards
 `//` :: floor division: the whole part of a division (7 // 2 is 3)
 `%` :: modulo: the remainder of a division (7 % 2 is 1)

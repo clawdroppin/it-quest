@@ -90,6 +90,31 @@ What does calling a generator function, like `countdown(3)`, do?
 - Raises StopIteration
 ? Nothing runs until the first `next()` (which a for loop does for you).
 
+@@quiz
+What's the advantage of `(line for line in f if "ERROR" in line)` over a list comprehension for a huge log file?
+* It produces lines one at a time, so the whole file is never held in memory
+- It's always faster
+- It sorts the lines
+- It can be reused many times
+? Generator expressions are lazy; list comprehensions build the whole list.
+
+@@quiz
+What does `itertools.islice(gen, 5)` do?
+* Takes the first five items from an iterator
+- Splits a generator into five parts
+- Skips five items
+- Repeats a generator five times
+? Use it to take part of an infinite or very long iterator.
+
+@@flashcards
+iterable :: something you can loop over
+iterator :: gives one item at a time with next()
+yield :: hand out a value and pause the function
+generator expression :: (x for x in items), lazy
+StopIteration :: raised when an iterator is finished
+itertools.islice :: take part of an iterator
+itertools.groupby :: group consecutive items by a key
+
 @@exercise Batches for an API
 APIs often accept at most N items per call. Write a generator `batches(items, size)` that yields lists of up to `size` items, in order, without using `itertools.batched`.
 @@starter

@@ -84,6 +84,14 @@ Where should a script's API token come from?
 - The git commit message
 ? Code ends up in git, in backups, in screenshots. Secrets must live outside it.
 
+@@quiz
+What is `requirements.txt` (or the dependencies in pyproject.toml) for?
+* Recording the packages a project needs so anyone can install the same set
+- Storing passwords
+- Listing tests to run
+- Configuring the editor
+? pip install -r requirements.txt recreates the environment.
+
 @@flashcards
 `python -m venv .venv` :: create a virtual environment
 `pip freeze > requirements.txt` :: record exact package versions

@@ -86,6 +86,14 @@ A command finished with exit code `1`. What does that usually mean?
 - It printed one line
 ? By convention, 0 is success and anything else is a failure code.
 
+@@quiz
+Which call copies a whole folder tree?
+* `shutil.copytree(src, dst)`
+- `shutil.copy(src, dst)`
+- `os.rename(src, dst)`
+- `pathlib.Path(src).copy(dst)`
+? shutil.copy copies one file; copytree copies a directory and everything in it.
+
 @@flashcards
 `subprocess.run([...], capture_output=True, text=True)` :: run a command and get its output
 exit code 0 :: success (any other number: failure)

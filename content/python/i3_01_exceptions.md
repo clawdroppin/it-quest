@@ -91,6 +91,22 @@ When does the `finally` block run?
 - Never, it's for documentation
 ? `finally` is for cleanup that must always happen, like closing a connection.
 
+@@quiz
+What does `raise ValueError("port must be 1-65535")` do?
+* Stops the function and signals an error that callers can catch
+- Prints the message and continues
+- Logs a warning only
+- Returns the message as a string
+? Raise errors for invalid input, and catch them where you can handle them.
+
+@@flashcards
+try / except :: run code and handle errors it raises
+except ValueError as e :: catch one type and keep the error
+else :: runs if no exception happened
+finally :: always runs, for clean-up
+raise :: signal an error yourself
+bare except :: catches everything, even typos (avoid)
+
 @@exercise Parse a number safely
 Write `to_int(text, default)` that returns `text` converted to an `int`, or `default` if it can't be converted. Surrounding spaces are fine (`int` ignores them).
 @@starter

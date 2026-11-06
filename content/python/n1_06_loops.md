@@ -103,6 +103,23 @@ What's the difference between `break` and `continue`?
 - `break` only works in while loops
 ? `continue` jumps to the next round; `break` jumps out of the loop.
 
+@@quiz
+What does `for i in range(3): print(i)` print?
+* 0, 1 and 2 on separate lines
+- 1, 2 and 3
+- 0, 1, 2 and 3
+- 3
+? range(3) starts at 0 and stops before 3.
+
+@@flashcards
+for x in items :: repeat for each item
+range(5) :: 0, 1, 2, 3, 4
+range(2, 8) :: 2 up to 7
+while condition :: repeat while the condition is true
+break :: leave the loop now
+continue :: skip to the next round
+accumulator :: a variable updated each round, like total += x
+
 @@exercise Retry with backoff
 When a connection fails, good scripts wait longer before each retry: 1 second, then 2, 4, 8... (doubling). Print the wait time for 6 retries like this:
 

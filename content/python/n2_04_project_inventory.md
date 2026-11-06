@@ -18,6 +18,37 @@ for a in assets:
 
 Work through the exercises in order: each builds a piece of the final report. Plan before you type: what goes in, what comes out, and which pattern (loop and filter, counting, grouping) fits?
 
+@@quiz
+In an asset inventory, which structure fits "look up an asset by its tag"?
+* A dictionary keyed by tag
+- A list, searched each time
+- A tuple
+- A set of tags only
+? Dictionaries give direct lookup by key.
+
+@@quiz
+Why keep each asset as a dictionary inside a list (or a dict of dicts) instead of separate lists for names, owners and locations?
+* Each asset's fields stay together, so they can't get out of step
+- It uses less memory
+- Separate lists can't hold strings
+- Python requires it
+? Parallel lists break as soon as one of them is sorted or edited on its own.
+
+@@quiz
+What does `sorted(assets, key=lambda a: a["location"])` do?
+* Returns a new list of assets ordered by location
+- Sorts the assets in place
+- Returns only the locations
+- Groups assets by location
+? key tells sorted which value to compare.
+
+@@flashcards
+list of dicts :: one dict per record, e.g. per asset
+dict of dicts :: records keyed by an ID
+sorted(x, key=...) :: new list ordered by a chosen value
+lambda a: a["x"] :: a tiny inline function
+len() :: how many items
+
 @@exercise Count by type
 Write `count_by_type(assets)` that returns a dict like `{"laptop": 2, "server": 1, "monitor": 1}`.
 @@starter

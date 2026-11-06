@@ -100,6 +100,22 @@ Which job benefits most from a thread pool?
 - Sorting a list of 10 items
 ? Website checks are I/O-bound: almost all the time is spent waiting on the network, so many can wait at once.
 
+@@quiz
+Which job is a good fit for multiprocessing rather than threads?
+* CPU-heavy work such as hashing or image processing
+- Waiting on many slow web requests
+- Reading user input
+- Printing to the console
+? Python's GIL lets only one thread run Python code at a time; processes run truly in parallel.
+
+@@quiz
+In asyncio, what does `await asyncio.gather(*tasks)` do?
+* Runs the coroutines concurrently and waits for all of them
+- Runs them one after another
+- Cancels all of them
+- Starts them in separate processes
+? While one task waits on I/O, the event loop runs others.
+
 @@flashcards
 I/O-bound :: mostly waiting (network, disk): use threads or asyncio
 CPU-bound :: mostly computing: use processes (ProcessPoolExecutor)

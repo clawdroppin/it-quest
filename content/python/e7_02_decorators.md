@@ -110,6 +110,31 @@ What does `@timed` written above `def backup(...)` do?
 - Adds a comment
 ? Decorator syntax is just shorthand for `backup = timed(backup)`.
 
+@@quiz
+Why use `functools.wraps` inside a decorator?
+* It keeps the original function's name and docstring on the wrapper
+- It makes the decorator run faster
+- It's required for the decorator to work at all
+- It catches exceptions
+? Without it, every decorated function looks like it's called "wrapper".
+
+@@quiz
+What does a `with` block guarantee for a context manager?
+* Its clean-up code runs when the block ends, even if an exception happens
+- The code inside runs in a separate thread
+- Exceptions are hidden
+- The block runs twice
+? Files, locks and connections all use this.
+
+@@flashcards
+first-class functions :: functions can be stored and passed around
+decorator :: a function that wraps another function
+@decorator :: shorthand for f = decorator(f)
+*args, **kwargs :: accept any positional and keyword arguments
+functools.wraps :: keep the wrapped function's name and docs
+context manager :: set-up and clean-up around a with block
+@contextmanager :: write a context manager with yield
+
 @@exercise Call counter
 Write a decorator `counted` that counts how many times the decorated function is called, storing the number in an attribute `calls` on the wrapper (starting at 0). The wrapped function must still return its normal result.
 @@starter

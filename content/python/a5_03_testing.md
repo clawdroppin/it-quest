@@ -87,6 +87,30 @@ Which inputs are the best extra tests for `average(numbers)`?
 - None: one test is enough
 ? Edge cases (empty, one item) are where bugs hide; more normal cases rarely find new ones.
 
+@@quiz
+In unittest, which method checks that two values are equal?
+* `self.assertEqual(a, b)`
+- `self.check(a, b)`
+- `assert.equal(a, b)`
+- `self.same(a, b)`
+? There are also assertTrue, assertIn and assertRaises.
+
+@@quiz
+What does `with self.assertRaises(ValueError):` test?
+* That the code inside raises a ValueError
+- That the code never raises an error
+- That a ValueError is printed
+- That the function returns None
+? Testing failure cases is as important as testing the happy path.
+
+@@flashcards
+assert x == y :: stop with an error if the condition is false
+unittest.TestCase :: a class whose test_ methods are run
+assertEqual :: check two values are equal
+assertRaises :: check that code raises an exception
+python -m unittest :: discover and run tests
+edge cases :: empty input, zero, negatives, huge values
+
 @@exercise Write the tests
 The function `grade(score)` is given. Write a `unittest.TestCase` class named `GradeTests` with **at least 3** test methods that check it: a normal case, the exact boundaries (90 → `"A"`, 89 → `"B"`), and that a score above 100 raises `ValueError`. The app checks that your tests run and pass on this correct `grade`, and **fail** on a broken one.
 @@starter
