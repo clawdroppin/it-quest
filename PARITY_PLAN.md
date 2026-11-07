@@ -985,3 +985,20 @@ Drills and quizzes are keyed by block position (`<lesson>!<block>`, `<lesson>?<b
 Some cert-track lessons, mostly the broad overview lessons each track opens with, taught material without a single exercise. Now every core lesson in every track has at least one, so 52 lessons gained one across A+, Network+, CCNA, AWS, Linux, Security+, Foundations, DevOps, Azure, CISSP, CKA, Cloud, ITIL, Japan career, PMP and Python. Rust gained three single-file exercises (modules, doc comments with tests, the action pattern). The exceptions are about pages, Rust's getting-started page and lessons that are themselves `@@project` builds.
 
 Each exercise is a small, self-contained task built from the lesson's own facts and tables, and its starter code doesn't already pass. Linux exercises are in bash, matching the track; the rest are in Python. They were checked against existing titles to avoid duplicates and appended at the end of each lesson. That keeps existing exercise indices (`<lesson>#<n>`) unchanged.
+
+## Exercise checks and depth (after 1.6.3)
+
+- **Stronger checks.** 110 exercises had `@@requires` lines that the starter already met, or none at all, so a near-empty answer could pass them. Each one now also requires a construct that is in the solution and not in the starter (an `elif`, a `.items()`, an `awk -F:`, an `UPDATE devices`). A rescan finds no exercise left whose requires lines all sit in the starter.
+- **Depth floor for cert tracks.** The cert and IT tracks averaged noticeably fewer exercises per lesson than the language tracks. 40 new exercises (IPA FE, A+, Network+, Japanese, CCNA, Japan career, Linux, Security+, AWS, CISSP, ITIL, Foundations, CCNP, GCP, Terraform, PMP) bring every track to at least 1.7 exercises per lesson. Each one uses the lesson's own tables and facts, and they're appended at the end of their lessons.
+- **Full verify.** Every track passes `--verify --projects` with 0 problems.
+
+## Exam versions (checked November 2026)
+
+| Track | Exam taught | What changed |
+|---|---|---|
+| Security+ | SY0-701 | SY0-801 is due around 17 Nov 2026; SY0-701 stays available in English until 11 Jun 2027. The lesson says so. |
+| ITIL | ITIL 4 Foundation | ITIL (Version 5) Foundation launched 12 Feb 2026; ITIL 4 exams retire at the end of 2027. The lesson says so. |
+| CCNA | 200-301 v1.1 | v2.0 replaces it on 3 Feb 2027 (adds AI and operations topics). The lesson says so. |
+| CCNP ENCOR | 350-401 v1.2 | Since 19 Mar 2026 wireless is out and the automation domain is "Automation and AI". The domain list, the weights quiz and the QoS/wireless intro were updated. |
+| CISSP | 2024 outline | A new outline takes effect 15 Apr 2027 (same eight domains). The lesson says so. |
+| Network+, AWS SAA, CKA, AZ-104, Terraform, PMP | current | No content change needed; recheck at the next pass. |
