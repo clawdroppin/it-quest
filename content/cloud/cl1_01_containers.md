@@ -173,3 +173,88 @@ USER :: Dockerfile instruction to drop root
 Which Docker command shows the output (logs) of a container named web?
 = docker logs web
 ? Add -f to follow.
+
+@@exercise Check port mappings for conflicts
+Each container in `planned` has `-p` mappings like `8080:80` (host port : container port), optionally with an address (`127.0.0.1:5432:5432`) or a protocol (`53:53/udp`). Write `parse_mapping(text)` returning `(host_ip, host_port, container_port, protocol)`, with `0.0.0.0` and `tcp` as defaults.
+
+Then write `conflicts(planned)` that reports every host port (per protocol) published by more than one container. Two containers clash when they use the same port and protocol and either one listens on `0.0.0.0` or both use the same address. Also warn about databases (port 5432 or 3306 inside the container) published on all addresses.
+@@lang python
+@@starter
+planned = {
+    "web": ["8080:80", "8443:443"],
+    "api": ["8080:3000"],
+    "db": ["5432:5432"],
+    "db-local": ["127.0.0.1:5433:5432"],
+    "dns": ["53:53/udp", "53:53"],
+    "metrics": ["127.0.0.1:9100:9100"],
+    "metrics2": ["127.0.0.2:9100:9100"],
+}
+
+def parse_mapping(text):
+    raise NotImplementedError
+
+
+def conflicts(planned):
+    raise NotImplementedError
+
+
+for problem in conflicts(planned):
+    print("CONFLICT " + problem)
+for name, maps in planned.items():
+    for m in maps:
+        ip, host, cont, proto = parse_mapping(m)
+        if cont in (5432, 3306) and ip == "0.0.0.0":
+            print(f"WARN {name}: database port {cont} published on all addresses; bind to 127.0.0.1")
+@@expected
+CONFLICT port 8080/tcp: web and api clash
+WARN db: database port 5432 published on all addresses; bind to 127.0.0.1
+@@requires
+def parse_mapping
+def conflicts
+split(":")
+@@hint
+Split off `/udp` first, then split on `:` and look at how many parts you got. Group the mappings by `(host_port, protocol)`; only groups with two or more entries can clash.
+@@solution
+planned = {
+    "web": ["8080:80", "8443:443"],
+    "api": ["8080:3000"],
+    "db": ["5432:5432"],
+    "db-local": ["127.0.0.1:5433:5432"],
+    "dns": ["53:53/udp", "53:53"],
+    "metrics": ["127.0.0.1:9100:9100"],
+    "metrics2": ["127.0.0.2:9100:9100"],
+}
+
+def parse_mapping(text):
+    proto = "tcp"
+    if "/" in text:
+        text, proto = text.split("/")
+    parts = text.split(":")
+    if len(parts) == 3:
+        ip, host, cont = parts
+    else:
+        ip, (host, cont) = "0.0.0.0", parts
+    return ip, int(host), int(cont), proto
+
+def conflicts(planned):
+    used = {}
+    for name, maps in planned.items():
+        for m in maps:
+            ip, host, cont, proto = parse_mapping(m)
+            used.setdefault((host, proto), []).append((name, ip))
+    found = []
+    for (port, proto), users in sorted(used.items()):
+        for i in range(len(users)):
+            for j in range(i + 1, len(users)):
+                (a, ip_a), (b, ip_b) = users[i], users[j]
+                if "0.0.0.0" in (ip_a, ip_b) or ip_a == ip_b:
+                    found.append(f"port {port}/{proto}: {a} and {b} clash")
+    return found
+
+for problem in conflicts(planned):
+    print("CONFLICT " + problem)
+for name, maps in planned.items():
+    for m in maps:
+        ip, host, cont, proto = parse_mapping(m)
+        if cont in (5432, 3306) and ip == "0.0.0.0":
+            print(f"WARN {name}: database port {cont} published on all addresses; bind to 127.0.0.1")

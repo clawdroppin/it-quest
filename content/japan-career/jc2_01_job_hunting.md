@@ -116,3 +116,86 @@ What is the Japanese word for a job offer? (2 kanji)
 = ないてい
 = naitei
 ? Then 内定承諾 (accepting the offer).
+
+@@exercise Track applications through the 選考 stages
+Track a mid-career job search through the lesson's stages: 応募 → 書類選考 → 一次面接 → 二次面接 → 最終面接 → 内定. Each application records the furthest stage it reached, whether it was rejected (`不採用`), and the date of the last contact.
+
+Write `funnel(apps)` that counts how many applications **reached** each stage, and `follow_ups(apps, today)` that lists active applications with no contact for more than 7 days (polite follow-up time). Print the funnel with the percentage of applications that reached each stage, then the follow-ups.
+@@lang python
+@@starter
+from datetime import date
+
+STAGES = ["応募", "書類選考", "一次面接", "二次面接", "最終面接", "内定"]
+apps = [
+    {"company": "Sakura Systems", "stage": "最終面接", "rejected": False, "last": date(2026, 11, 5)},
+    {"company": "Kansai Cloud", "stage": "書類選考", "rejected": True, "last": date(2026, 10, 20)},
+    {"company": "Mirai Net", "stage": "一次面接", "rejected": False, "last": date(2026, 10, 25)},
+    {"company": "Fuji Data", "stage": "内定", "rejected": False, "last": date(2026, 11, 6)},
+    {"company": "Tokyo SecOps", "stage": "応募", "rejected": False, "last": date(2026, 10, 15)},
+    {"company": "Nagoya Infra", "stage": "二次面接", "rejected": True, "last": date(2026, 11, 1)},
+    {"company": "Hokkaido Web", "stage": "書類選考", "rejected": False, "last": date(2026, 11, 2)},
+]
+
+def funnel(apps):
+    raise NotImplementedError
+
+
+def follow_ups(apps, today):
+    raise NotImplementedError
+
+
+today = date(2026, 11, 7)
+counts = funnel(apps)
+for s in STAGES:
+    print(f"{s}\t{counts[s]}  {counts[s] * 100 // len(apps)}%")
+print("Follow up:")
+for company, stage, days in follow_ups(apps, today):
+    print(f"  {company} ({stage}): {days} days since last contact")
+@@expected
+応募	7  100%
+書類選考	6  85%
+一次面接	4  57%
+二次面接	3  42%
+最終面接	2  28%
+内定	1  14%
+Follow up:
+  Mirai Net (一次面接): 13 days since last contact
+  Tokyo SecOps (応募): 23 days since last contact
+@@requires
+def funnel
+def follow_ups
+STAGES.index
+@@hint
+An application at 二次面接 also passed every earlier stage, so count it in each stage up to its own: `STAGES[:STAGES.index(stage) + 1]`.
+@@solution
+from datetime import date
+
+STAGES = ["応募", "書類選考", "一次面接", "二次面接", "最終面接", "内定"]
+apps = [
+    {"company": "Sakura Systems", "stage": "最終面接", "rejected": False, "last": date(2026, 11, 5)},
+    {"company": "Kansai Cloud", "stage": "書類選考", "rejected": True, "last": date(2026, 10, 20)},
+    {"company": "Mirai Net", "stage": "一次面接", "rejected": False, "last": date(2026, 10, 25)},
+    {"company": "Fuji Data", "stage": "内定", "rejected": False, "last": date(2026, 11, 6)},
+    {"company": "Tokyo SecOps", "stage": "応募", "rejected": False, "last": date(2026, 10, 15)},
+    {"company": "Nagoya Infra", "stage": "二次面接", "rejected": True, "last": date(2026, 11, 1)},
+    {"company": "Hokkaido Web", "stage": "書類選考", "rejected": False, "last": date(2026, 11, 2)},
+]
+
+def funnel(apps):
+    counts = {s: 0 for s in STAGES}
+    for a in apps:
+        for s in STAGES[:STAGES.index(a["stage"]) + 1]:
+            counts[s] += 1
+    return counts
+
+def follow_ups(apps, today):
+    return [(a["company"], a["stage"], (today - a["last"]).days) for a in apps
+            if not a["rejected"] and a["stage"] != "内定" and (today - a["last"]).days > 7]
+
+today = date(2026, 11, 7)
+counts = funnel(apps)
+for s in STAGES:
+    print(f"{s}\t{counts[s]}  {counts[s] * 100 // len(apps)}%")
+print("Follow up:")
+for company, stage, days in follow_ups(apps, today):
+    print(f"  {company} ({stage}): {days} days since last contact")

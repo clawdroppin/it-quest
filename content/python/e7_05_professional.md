@@ -107,3 +107,103 @@ Write the command that creates a virtual environment in a folder called `.venv`.
 ruff :: fast Python linter and formatter
 paramiko / netmiko :: SSH automation for servers / network devices
 boto3 :: the AWS SDK for Python
+
+@@exercise Review a project's layout
+Check a repository's file list against the lesson's project layout and quality habits. Write `review(files, gitignore)` that returns the problems:
+
+- no `pyproject.toml` (or only a `setup.py`);
+- no `README.md`, or no `tests/` folder with at least one `test_*.py`;
+- code not in a package folder (a `.py` file at the top level other than a small `main.py`);
+- committed files that should be ignored: anything in `.venv/` or `__pycache__/`, `.env` files (secrets!), `*.pyc`;
+- a `.gitignore` that doesn't list `.venv` and `__pycache__`.
+
+Print each project with `looks professional` or its problems.
+@@lang python
+@@starter
+import fnmatch
+
+projects = {
+    "netcheck": ([
+        "pyproject.toml", "README.md", ".gitignore", "src/netcheck/__init__.py", "src/netcheck/ping.py",
+        "tests/test_ping.py",
+    ], [".venv/", "__pycache__/", ".env"]),
+    "old-scripts": ([
+        "setup.py", "backup.py", "report.py", "helpers.py", ".env", "__pycache__/helpers.cpython-313.pyc",
+        ".venv/bin/python",
+    ], ["*.log"]),
+    "inventory": ([
+        "pyproject.toml", "README.md", "main.py", "inventory/__init__.py", "inventory/load.py", "tests/conftest.py",
+    ], [".venv", "__pycache__"]),
+}
+
+def review(files, gitignore):
+    raise NotImplementedError
+
+
+for name, (files, gitignore) in projects.items():
+    problems = review(files, gitignore)
+    print(name + ":")
+    for p in problems or ["looks professional"]:
+        print("  " + p)
+@@expected
+netcheck:
+  looks professional
+old-scripts:
+  no pyproject.toml (setup.py only)
+  no README.md
+  no tests/test_*.py
+  code outside a package: backup.py, report.py, helpers.py
+  committed by mistake: .env
+  committed by mistake: __pycache__/helpers.cpython-313.pyc
+  committed by mistake: .venv/bin/python
+  .gitignore misses .venv
+  .gitignore misses __pycache__
+inventory:
+  no tests/test_*.py
+@@requires
+def review
+fnmatch.fnmatch(
+@@hint
+`fnmatch.fnmatch(path, "tests/test_*.py")` does shell-style matching. Strip a trailing `/` from the .gitignore lines before comparing.
+@@solution
+import fnmatch
+
+projects = {
+    "netcheck": ([
+        "pyproject.toml", "README.md", ".gitignore", "src/netcheck/__init__.py", "src/netcheck/ping.py",
+        "tests/test_ping.py",
+    ], [".venv/", "__pycache__/", ".env"]),
+    "old-scripts": ([
+        "setup.py", "backup.py", "report.py", "helpers.py", ".env", "__pycache__/helpers.cpython-313.pyc",
+        ".venv/bin/python",
+    ], ["*.log"]),
+    "inventory": ([
+        "pyproject.toml", "README.md", "main.py", "inventory/__init__.py", "inventory/load.py", "tests/conftest.py",
+    ], [".venv", "__pycache__"]),
+}
+
+def review(files, gitignore):
+    problems = []
+    if "pyproject.toml" not in files:
+        problems.append("no pyproject.toml" + (" (setup.py only)" if "setup.py" in files else ""))
+    if "README.md" not in files:
+        problems.append("no README.md")
+    if not any(fnmatch.fnmatch(f, "tests/test_*.py") for f in files):
+        problems.append("no tests/test_*.py")
+    loose = [f for f in files if "/" not in f and f.endswith(".py") and f not in ("main.py", "setup.py")]
+    if loose:
+        problems.append("code outside a package: " + ", ".join(loose))
+    for f in files:
+        if f.startswith((".venv/", "__pycache__/")) or "/__pycache__/" in f or f.endswith(".pyc") or f.split("/")[-1] == ".env":
+            problems.append(f"committed by mistake: {f}")
+    ignored = {g.rstrip("/") for g in gitignore}
+    for needed in (".venv", "__pycache__"):
+        if needed not in ignored:
+            problems.append(f".gitignore misses {needed}")
+    return problems
+
+for name, (files, gitignore) in projects.items():
+    problems = review(files, gitignore)
+    print(name + ":")
+    for p in problems or ["looks professional"]:
+        print("  " + p)

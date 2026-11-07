@@ -118,3 +118,108 @@ KQL :: Kusto Query Language for Log Analytics
 Which Azure PowerShell cmdlet signs you in?
 = Connect-AzAccount
 ? Then Set-AzContext chooses the subscription.
+
+@@exercise Translate Azure CLI commands to PowerShell
+Runbooks mix the Azure CLI and Azure PowerShell. Write `parse(cmd)` that splits an `az` command into its command words and its `--option value` pairs, then `to_powershell(cmd)` that translates the commands in `MAP`: each CLI option becomes a PowerShell parameter (`--resource-group` → `-ResourceGroupName`, `--name` → `-Name`, `--location` → `-Location`, others in `PARAMS`). A command or option that isn't in the tables comes back as `# no mapping for: ...`.
+@@lang python
+@@starter
+MAP = {
+    "group create": "New-AzResourceGroup",
+    "group delete": "Remove-AzResourceGroup",
+    "vm start": "Start-AzVM",
+    "vm stop": "Stop-AzVM",
+    "storage account create": "New-AzStorageAccount",
+    "vm list": "Get-AzVM",
+}
+PARAMS = {
+    "--name": "-Name", "--resource-group": "-ResourceGroupName", "--location": "-Location",
+    "--sku": "-SkuName", "--kind": "-Kind",
+}
+runbook = [
+    "az group create --name rg-web --location japaneast",
+    "az storage account create --name stwebdata01 --resource-group rg-web --location japaneast --sku Standard_LRS --kind StorageV2",
+    "az vm start --name vm-web01 --resource-group rg-web",
+    "az vm list --resource-group rg-web",
+    "az vm resize --name vm-web01 --size Standard_B2s",
+    "az group delete --name rg-old --no-wait",
+]
+
+def parse(cmd):
+    raise NotImplementedError
+
+
+def to_powershell(cmd):
+    raise NotImplementedError
+
+
+for line in runbook:
+    print(line)
+    print("  " + to_powershell(line))
+@@expected
+az group create --name rg-web --location japaneast
+  New-AzResourceGroup -Name rg-web -Location japaneast
+az storage account create --name stwebdata01 --resource-group rg-web --location japaneast --sku Standard_LRS --kind StorageV2
+  New-AzStorageAccount -Name stwebdata01 -ResourceGroupName rg-web -Location japaneast -SkuName Standard_LRS -Kind StorageV2
+az vm start --name vm-web01 --resource-group rg-web
+  Start-AzVM -Name vm-web01 -ResourceGroupName rg-web
+az vm list --resource-group rg-web
+  Get-AzVM -ResourceGroupName rg-web
+az vm resize --name vm-web01 --size Standard_B2s
+  # no mapping for: az vm resize
+az group delete --name rg-old --no-wait
+  # no mapping for: --no-wait (in Remove-AzResourceGroup)
+@@requires
+def parse
+def to_powershell
+startswith("--")
+@@hint
+Walk the words with an index: a word starting with `--` is an option, and the next word is its value unless it is another option. Everything else is part of the command name.
+@@solution
+MAP = {
+    "group create": "New-AzResourceGroup",
+    "group delete": "Remove-AzResourceGroup",
+    "vm start": "Start-AzVM",
+    "vm stop": "Stop-AzVM",
+    "storage account create": "New-AzStorageAccount",
+    "vm list": "Get-AzVM",
+}
+PARAMS = {
+    "--name": "-Name", "--resource-group": "-ResourceGroupName", "--location": "-Location",
+    "--sku": "-SkuName", "--kind": "-Kind",
+}
+runbook = [
+    "az group create --name rg-web --location japaneast",
+    "az storage account create --name stwebdata01 --resource-group rg-web --location japaneast --sku Standard_LRS --kind StorageV2",
+    "az vm start --name vm-web01 --resource-group rg-web",
+    "az vm list --resource-group rg-web",
+    "az vm resize --name vm-web01 --size Standard_B2s",
+    "az group delete --name rg-old --no-wait",
+]
+
+def parse(cmd):
+    words = cmd.split()[1:]
+    command, options, i = [], {}, 0
+    while i < len(words):
+        if words[i].startswith("--"):
+            has_value = i + 1 < len(words) and not words[i + 1].startswith("--")
+            options[words[i]] = words[i + 1] if has_value else None
+            i += 2 if has_value else 1
+        else:
+            command.append(words[i])
+            i += 1
+    return " ".join(command), options
+
+def to_powershell(cmd):
+    command, options = parse(cmd)
+    if command not in MAP:
+        return f"# no mapping for: az {command}"
+    parts = [MAP[command]]
+    for opt, value in options.items():
+        if opt not in PARAMS:
+            return f"# no mapping for: {opt} (in {MAP[command]})"
+        parts.append(PARAMS[opt] + (f" {value}" if value else ""))
+    return " ".join(parts)
+
+for line in runbook:
+    print(line)
+    print("  " + to_powershell(line))

@@ -175,3 +175,103 @@ CKA / CKAD / KCNA :: Admin (hands-on) / developer (hands-on) / associate
 Which kubectl command shows a pod's details and recent events? (kubectl ... pod NAME)
 = kubectl describe pod NAME
 ? Events explain scheduling, pulling, probes and restarts.
+
+@@exercise Write a reconcile loop
+Kubernetes controllers compare **desired state** with **actual state** and act on the difference, again and again. Write `reconcile(desired, pods)` for a ReplicaSet: it returns the actions needed so that exactly `desired["replicas"]` Pods of the desired `image` are `Running`:
+
+- delete Pods with the wrong image, and Pods that are `Failed`;
+- if there are too many good Pods, delete the newest extras (highest number);
+- if too few, create new ones named `web-<next number>`.
+
+Apply the actions and run the loop over the events (a Pod crashes, someone scales up, a new image is rolled out) printing what the controller does each time. A loop with nothing to do prints `in sync`.
+@@lang python
+@@starter
+def reconcile(desired, pods):
+    raise NotImplementedError
+
+
+def apply(actions, pods, image):
+    for verb, name in actions:
+        if verb == "delete":
+            del pods[name]
+        else:
+            pods[name] = {"image": image, "phase": "Running"}
+
+desired = {"replicas": 3, "image": "web:1.0"}
+pods = {}
+events = [
+    ("start", None),
+    ("web-2 crashes", lambda: pods["web-2"].update(phase="Failed")),
+    ("scale to 5", lambda: desired.update(replicas=5)),
+    ("scale to 2", lambda: desired.update(replicas=2)),
+    ("new image web:1.1", lambda: desired.update(image="web:1.1")),
+    ("nothing changed", None),
+]
+for label, change in events:
+    if change:
+        change()
+    actions = reconcile(desired, pods)
+    apply(actions, pods, desired["image"])
+    done = ", ".join(f"{v} {n}" for v, n in actions) or "in sync"
+    print(f"{label}: {done}")
+    print("   pods: " + ", ".join(f"{n}({p['image']})" for n, p in pods.items()))
+@@expected
+start: create web-1, create web-2, create web-3
+   pods: web-1(web:1.0), web-2(web:1.0), web-3(web:1.0)
+web-2 crashes: delete web-2, create web-4
+   pods: web-1(web:1.0), web-3(web:1.0), web-4(web:1.0)
+scale to 5: create web-5, create web-6
+   pods: web-1(web:1.0), web-3(web:1.0), web-4(web:1.0), web-5(web:1.0), web-6(web:1.0)
+scale to 2: delete web-6, delete web-5, delete web-4
+   pods: web-1(web:1.0), web-3(web:1.0)
+new image web:1.1: delete web-1, delete web-3, create web-4, create web-5
+   pods: web-4(web:1.1), web-5(web:1.1)
+nothing changed: in sync
+   pods: web-4(web:1.1), web-5(web:1.1)
+@@requires
+def reconcile
+sorted(
+@@hint
+First split the Pods into ones to delete and good ones. Then compare the number of good Pods with the desired count: slice off the extras, or create the shortfall with fresh numbers.
+@@solution
+def reconcile(desired, pods):
+    actions = []
+    good = []
+    for name, pod in sorted(pods.items(), key=lambda kv: int(kv[0].split("-")[1])):
+        if pod["image"] != desired["image"] or pod["phase"] == "Failed":
+            actions.append(("delete", name))
+        else:
+            good.append(name)
+    for name in good[desired["replicas"]:][::-1]:
+        actions.append(("delete", name))
+    next_n = max([int(n.split("-")[1]) for n in pods] + [0]) + 1
+    for _ in range(desired["replicas"] - len(good)):
+        actions.append(("create", f"web-{next_n}"))
+        next_n += 1
+    return actions
+
+def apply(actions, pods, image):
+    for verb, name in actions:
+        if verb == "delete":
+            del pods[name]
+        else:
+            pods[name] = {"image": image, "phase": "Running"}
+
+desired = {"replicas": 3, "image": "web:1.0"}
+pods = {}
+events = [
+    ("start", None),
+    ("web-2 crashes", lambda: pods["web-2"].update(phase="Failed")),
+    ("scale to 5", lambda: desired.update(replicas=5)),
+    ("scale to 2", lambda: desired.update(replicas=2)),
+    ("new image web:1.1", lambda: desired.update(image="web:1.1")),
+    ("nothing changed", None),
+]
+for label, change in events:
+    if change:
+        change()
+    actions = reconcile(desired, pods)
+    apply(actions, pods, desired["image"])
+    done = ", ".join(f"{v} {n}" for v, n in actions) or "in sync"
+    print(f"{label}: {done}")
+    print("   pods: " + ", ".join(f"{n}({p['image']})" for n, p in pods.items()))

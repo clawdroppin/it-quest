@@ -106,3 +106,69 @@ Theory X / Y :: people avoid work / people want to work
 @@drill
 How many communication channels does a team of 15 people have?
 = 105
+
+@@exercise Choose a delivery approach
+Use the lesson's table to suggest **predictive**, **agile** or **hybrid** for a project. Score each answer: stable, known requirements and formal regulation push towards predictive; frequent change, a need for early feedback and a software product push towards agile.
+
+Write `approach(project)` that adds +1 for each predictive signal and −1 for each agile signal, then returns `predictive` (score ≥ 2), `agile` (≤ −2) or `hybrid`. Also print the team's number of communication channels, n(n − 1) / 2, since a big team needs a communications plan either way.
+@@lang python
+@@starter
+PREDICTIVE = ["requirements_stable", "regulated", "fixed_contract"]
+AGILE = ["changes_often", "needs_early_feedback", "software"]
+projects = [
+    {"name": "Data centre move", "team": 12, "requirements_stable": True, "regulated": True, "fixed_contract": True},
+    {"name": "Customer mobile app", "team": 7, "changes_often": True, "needs_early_feedback": True, "software": True},
+    {"name": "ERP rollout with custom reports", "team": 20, "requirements_stable": True, "regulated": True,
+     "software": True, "needs_early_feedback": True},
+    {"name": "Internal chatbot pilot", "team": 4, "changes_often": True, "software": True, "fixed_contract": True,
+     "needs_early_feedback": True},
+]
+
+def approach(project):
+    raise NotImplementedError
+
+
+def channels(n):
+    raise NotImplementedError
+
+
+for p in projects:
+    score, kind = approach(p)
+    print(f"{p['name']}: score {score:+d} -> {kind}; {p['team']} people, {channels(p['team'])} channels")
+@@expected
+Data centre move: score +3 -> predictive; 12 people, 66 channels
+Customer mobile app: score -3 -> agile; 7 people, 21 channels
+ERP rollout with custom reports: score +0 -> hybrid; 20 people, 190 channels
+Internal chatbot pilot: score -2 -> agile; 4 people, 6 channels
+@@requires
+def approach
+def channels
+sum(
+@@hint
+`True` counts as 1 in `sum`, so `sum(project.get(signal, False) for signal in PREDICTIVE)` counts the predictive signals.
+@@solution
+PREDICTIVE = ["requirements_stable", "regulated", "fixed_contract"]
+AGILE = ["changes_often", "needs_early_feedback", "software"]
+projects = [
+    {"name": "Data centre move", "team": 12, "requirements_stable": True, "regulated": True, "fixed_contract": True},
+    {"name": "Customer mobile app", "team": 7, "changes_often": True, "needs_early_feedback": True, "software": True},
+    {"name": "ERP rollout with custom reports", "team": 20, "requirements_stable": True, "regulated": True,
+     "software": True, "needs_early_feedback": True},
+    {"name": "Internal chatbot pilot", "team": 4, "changes_often": True, "software": True, "fixed_contract": True,
+     "needs_early_feedback": True},
+]
+
+def approach(project):
+    score = sum(project.get(s, False) for s in PREDICTIVE) - sum(project.get(s, False) for s in AGILE)
+    if score >= 2:
+        return score, "predictive"
+    if score <= -2:
+        return score, "agile"
+    return score, "hybrid"
+
+def channels(n):
+    return n * (n - 1) // 2
+
+for p in projects:
+    score, kind = approach(p)
+    print(f"{p['name']}: score {score:+d} -> {kind}; {p['team']} people, {channels(p['team'])} channels")

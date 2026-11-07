@@ -142,3 +142,65 @@ egress :: Data leaving the cloud: usually charged
 What kind of hypervisor is VirtualBox? (Type 1 or Type 2)
 = Type 2
 ? It runs as an application on Windows, macOS or Linux.
+
+@@exercise When does a commitment pay off?
+FinOps teams decide whether to commit (reserved capacity or a savings plan) for a server. A commitment is paid every month for the whole term whether you use it or not; on-demand is paid only for the hours used.
+
+Write `break_even_hours(on_demand_rate, committed_monthly)` returning the hours per month at which both cost the same, and `advice(server)` that compares the expected monthly hours with that point: commit if usage is at least 10% above it, stay on demand if it is below, and `borderline: review in a month` in between. Print a table with the monthly cost of each option.
+@@lang python
+@@starter
+servers = [
+    {"name": "web (24/7)", "rate": 0.096, "committed": 42.0, "hours": 730},
+    {"name": "batch (nights)", "rate": 0.192, "committed": 84.0, "hours": 240},
+    {"name": "dev box (office hours)", "rate": 0.048, "committed": 21.0, "hours": 200},
+    {"name": "reporting", "rate": 0.384, "committed": 168.0, "hours": 460},
+]
+
+def break_even_hours(on_demand_rate, committed_monthly):
+    raise NotImplementedError
+
+
+def advice(server):
+    raise NotImplementedError
+
+
+print(f"{'server':<24}{'hours':>6}{'break-even':>12}{'on demand':>11}{'committed':>11}  advice")
+for s in servers:
+    point = break_even_hours(s["rate"], s["committed"])
+    on_demand = s["rate"] * s["hours"]
+    print(f"{s['name']:<24}{s['hours']:>6}{point:>12.0f}{on_demand:>11.2f}{s['committed']:>11.2f}  {advice(s)}")
+@@expected
+server                   hours  break-even  on demand  committed  advice
+web (24/7)                 730         438      70.08      42.00  commit
+batch (nights)             240         438      46.08      84.00  stay on demand
+dev box (office hours)     200         438       9.60      21.00  stay on demand
+reporting                  460         438     176.64     168.00  borderline: review in a month
+@@requires
+def break_even_hours
+def advice
+@@hint
+Break-even is the committed monthly price divided by the hourly on-demand rate. Compare the usage with that number, and with 1.1 times it.
+@@solution
+servers = [
+    {"name": "web (24/7)", "rate": 0.096, "committed": 42.0, "hours": 730},
+    {"name": "batch (nights)", "rate": 0.192, "committed": 84.0, "hours": 240},
+    {"name": "dev box (office hours)", "rate": 0.048, "committed": 21.0, "hours": 200},
+    {"name": "reporting", "rate": 0.384, "committed": 168.0, "hours": 460},
+]
+
+def break_even_hours(on_demand_rate, committed_monthly):
+    return committed_monthly / on_demand_rate
+
+def advice(server):
+    point = break_even_hours(server["rate"], server["committed"])
+    if server["hours"] >= point * 1.1:
+        return "commit"
+    if server["hours"] < point:
+        return "stay on demand"
+    return "borderline: review in a month"
+
+print(f"{'server':<24}{'hours':>6}{'break-even':>12}{'on demand':>11}{'committed':>11}  advice")
+for s in servers:
+    point = break_even_hours(s["rate"], s["committed"])
+    on_demand = s["rate"] * s["hours"]
+    print(f"{s['name']:<24}{s['hours']:>6}{point:>12.0f}{on_demand:>11.2f}{s['committed']:>11.2f}  {advice(s)}")

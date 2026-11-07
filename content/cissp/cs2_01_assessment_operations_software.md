@@ -97,3 +97,91 @@ polyinstantiation :: different records per classification level
 @@drill
 Which CMMI level is "defined"? (a number)
 = 3
+
+@@exercise Track patches against severity deadlines
+Patch management (domain 7) needs deadlines by severity. Using the CVSS base score: **critical** (9.0+) within 7 days, **high** (7.0–8.9) within 30, **medium** (4.0–6.9) within 90, **low** within 180. A vulnerability listed as **known exploited** gets the critical deadline whatever its score.
+
+Write `due(vuln)` returning the due date, and `status(vuln, today)` returning `patched on time`, `patched late`, `overdue by N days` or `due in N days`. Print the report sorted by due date, then the percentage patched on time among those already patched.
+@@lang python
+@@starter
+from datetime import date, timedelta
+
+vulns = [
+    {"id": "CVE-A", "host": "web01", "cvss": 9.8, "exploited": True, "found": date(2026, 10, 1), "patched": date(2026, 10, 5)},
+    {"id": "CVE-B", "host": "db01", "cvss": 7.5, "exploited": False, "found": date(2026, 9, 1), "patched": date(2026, 10, 15)},
+    {"id": "CVE-C", "host": "hr-app", "cvss": 5.3, "exploited": True, "found": date(2026, 10, 20), "patched": None},
+    {"id": "CVE-D", "host": "files01", "cvss": 6.1, "exploited": False, "found": date(2026, 9, 15), "patched": None},
+    {"id": "CVE-E", "host": "kiosk", "cvss": 3.1, "exploited": False, "found": date(2026, 6, 1), "patched": date(2026, 8, 1)},
+    {"id": "CVE-F", "host": "vpn01", "cvss": 8.8, "exploited": False, "found": date(2026, 10, 1), "patched": None},
+]
+
+def days_allowed(vuln):
+    raise NotImplementedError
+
+
+def due(vuln):
+    raise NotImplementedError
+
+
+def status(vuln, today):
+    raise NotImplementedError
+
+
+today = date(2026, 11, 7)
+for v in sorted(vulns, key=due):
+    print(f"{v['id']} {v['host']:<8} CVSS {v['cvss']:<4} due {due(v)}  {status(v, today)}")
+done = [v for v in vulns if v["patched"]]
+on_time = sum(status(v, today) == "patched on time" for v in done)
+print(f"Patched on time: {on_time}/{len(done)} ({on_time * 100 // len(done)}%)")
+@@expected
+CVE-B db01     CVSS 7.5  due 2026-10-01  patched late
+CVE-A web01    CVSS 9.8  due 2026-10-08  patched on time
+CVE-C hr-app   CVSS 5.3  due 2026-10-27  overdue by 11 days
+CVE-F vpn01    CVSS 8.8  due 2026-10-31  overdue by 7 days
+CVE-E kiosk    CVSS 3.1  due 2026-11-28  patched on time
+CVE-D files01  CVSS 6.1  due 2026-12-14  due in 37 days
+Patched on time: 2/3 (66%)
+@@requires
+def due
+def status
+timedelta(
+@@hint
+`found + timedelta(days=n)` gives the due date. Check the known-exploited flag before the score, since it overrides it.
+@@solution
+from datetime import date, timedelta
+
+vulns = [
+    {"id": "CVE-A", "host": "web01", "cvss": 9.8, "exploited": True, "found": date(2026, 10, 1), "patched": date(2026, 10, 5)},
+    {"id": "CVE-B", "host": "db01", "cvss": 7.5, "exploited": False, "found": date(2026, 9, 1), "patched": date(2026, 10, 15)},
+    {"id": "CVE-C", "host": "hr-app", "cvss": 5.3, "exploited": True, "found": date(2026, 10, 20), "patched": None},
+    {"id": "CVE-D", "host": "files01", "cvss": 6.1, "exploited": False, "found": date(2026, 9, 15), "patched": None},
+    {"id": "CVE-E", "host": "kiosk", "cvss": 3.1, "exploited": False, "found": date(2026, 6, 1), "patched": date(2026, 8, 1)},
+    {"id": "CVE-F", "host": "vpn01", "cvss": 8.8, "exploited": False, "found": date(2026, 10, 1), "patched": None},
+]
+
+def days_allowed(vuln):
+    if vuln["exploited"] or vuln["cvss"] >= 9.0:
+        return 7
+    if vuln["cvss"] >= 7.0:
+        return 30
+    if vuln["cvss"] >= 4.0:
+        return 90
+    return 180
+
+def due(vuln):
+    return vuln["found"] + timedelta(days=days_allowed(vuln))
+
+def status(vuln, today):
+    d = due(vuln)
+    if vuln["patched"]:
+        return "patched on time" if vuln["patched"] <= d else "patched late"
+    if today > d:
+        return f"overdue by {(today - d).days} days"
+    return f"due in {(d - today).days} days"
+
+today = date(2026, 11, 7)
+for v in sorted(vulns, key=due):
+    print(f"{v['id']} {v['host']:<8} CVSS {v['cvss']:<4} due {due(v)}  {status(v, today)}")
+done = [v for v in vulns if v["patched"]]
+on_time = sum(status(v, today) == "patched on time" for v in done)
+print(f"Patched on time: {on_time}/{len(done)} ({on_time * 100 // len(done)}%)")

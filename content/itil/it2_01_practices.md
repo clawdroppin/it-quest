@@ -180,3 +180,94 @@ swarming :: Experts collaborate at once on an issue
 What ITIL term describes a problem that has been analysed but not yet resolved? (two words)
 = known error
 ? Kept in a known error database, often with a workaround.
+
+@@exercise Name the practice for each piece of work
+The service desk receives mixed work. Write `practice(item)` that names the ITIL practice that should own it, checking in this order:
+
+1. a fault with a known root cause still being worked on, or a repeat of the same fault (`repeats` 3 or more) → **problem management**
+2. something broken or degraded now (`type: fault`) → **incident management**
+3. a request for something already in the catalogue (`in_catalogue`) → **service request management**
+4. a request to add, modify or remove something not in the catalogue → **change enablement**
+5. feedback or an improvement idea → **continual improvement**
+6. a question about agreed targets (`about_sla`) → **service level management**
+
+Print each item with its practice, then how many items each practice received.
+@@lang python
+@@starter
+items = [
+    {"text": "Email down for the whole sales team", "type": "fault", "repeats": 1},
+    {"text": "New starter needs a laptop", "type": "request", "in_catalogue": True},
+    {"text": "VPN drops every Monday morning, fourth time", "type": "fault", "repeats": 4},
+    {"text": "Upgrade the firewall firmware", "type": "request", "in_catalogue": False},
+    {"text": "Password reset", "type": "request", "in_catalogue": True},
+    {"text": "Survey: users want a self-service portal", "type": "feedback"},
+    {"text": "Customer asks why resolution took 3 days when the target is 1", "type": "question", "about_sla": True},
+    {"text": "Printer jam on floor 3", "type": "fault", "repeats": 1},
+]
+
+def practice(item):
+    raise NotImplementedError
+
+
+counts = {}
+for it in items:
+    p = practice(it)
+    counts[p] = counts.get(p, 0) + 1
+    print(f"{it['text']} -> {p}")
+print()
+for p, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+    print(f"{n}  {p}")
+@@expected
+Email down for the whole sales team -> incident management
+New starter needs a laptop -> service request management
+VPN drops every Monday morning, fourth time -> problem management
+Upgrade the firewall firmware -> change enablement
+Password reset -> service request management
+Survey: users want a self-service portal -> continual improvement
+Customer asks why resolution took 3 days when the target is 1 -> service level management
+Printer jam on floor 3 -> incident management
+
+2  incident management
+2  service request management
+1  change enablement
+1  continual improvement
+1  problem management
+1  service level management
+@@requires
+def practice
+@@hint
+Test the repeat count before the plain fault check: a recurring fault is still an incident each time, but the pattern belongs to problem management.
+@@solution
+items = [
+    {"text": "Email down for the whole sales team", "type": "fault", "repeats": 1},
+    {"text": "New starter needs a laptop", "type": "request", "in_catalogue": True},
+    {"text": "VPN drops every Monday morning, fourth time", "type": "fault", "repeats": 4},
+    {"text": "Upgrade the firewall firmware", "type": "request", "in_catalogue": False},
+    {"text": "Password reset", "type": "request", "in_catalogue": True},
+    {"text": "Survey: users want a self-service portal", "type": "feedback"},
+    {"text": "Customer asks why resolution took 3 days when the target is 1", "type": "question", "about_sla": True},
+    {"text": "Printer jam on floor 3", "type": "fault", "repeats": 1},
+]
+
+def practice(item):
+    kind = item["type"]
+    if kind == "fault" and item.get("repeats", 0) >= 3:
+        return "problem management"
+    if kind == "fault":
+        return "incident management"
+    if kind == "request":
+        return "service request management" if item.get("in_catalogue") else "change enablement"
+    if kind == "feedback":
+        return "continual improvement"
+    if item.get("about_sla"):
+        return "service level management"
+    return "service desk: clarify with the user"
+
+counts = {}
+for it in items:
+    p = practice(it)
+    counts[p] = counts.get(p, 0) + 1
+    print(f"{it['text']} -> {p}")
+print()
+for p, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+    print(f"{n}  {p}")

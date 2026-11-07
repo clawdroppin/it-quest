@@ -124,3 +124,75 @@ BAC is ¥1,000,000, EV ¥400,000 and AC ¥500,000. What is the VAC in yen, if th
 = -250000
 = -250,000
 ? CPI = 0.8; EAC = 1,250,000; VAC = BAC − EAC.
+
+@@exercise Pick a risk response from the P-I matrix
+Qualitative risk analysis scores each risk as probability × impact (both 1 to 5). Write `response(risk)` that suggests a response from the lesson's lists:
+
+- outside the project manager's authority (`outside_scope`) → `escalate`, threat or opportunity;
+- **threats**: score 15+ → `avoid` if the activity can be dropped (`optional`), else `transfer` if it can be insured or contracted (`transferable`), else `mitigate`; score 6–14 → `mitigate`; below 6 → `accept`;
+- **opportunities**: 15+ → `exploit`; 6–14 → `enhance`, or `share` if a partner is needed (`needs_partner`); below 6 → `accept`.
+
+Print the register sorted by score (highest first) with each response, and the risks that need an owner.
+@@lang python
+@@starter
+risks = [
+    {"id": "R1", "desc": "Key engineer leaves mid-project", "kind": "threat", "p": 3, "i": 5, "transferable": False, "owner": "PM"},
+    {"id": "R2", "desc": "Vendor delivers servers late", "kind": "threat", "p": 4, "i": 4, "transferable": True, "owner": ""},
+    {"id": "R3", "desc": "Optional AI feature may miss the legal review", "kind": "threat", "p": 4, "i": 5, "optional": True, "owner": "Product owner"},
+    {"id": "R4", "desc": "Office move disrupts one sprint", "kind": "threat", "p": 2, "i": 2, "owner": "PM"},
+    {"id": "R5", "desc": "Early cloud credits could fund extra testing", "kind": "opportunity", "p": 4, "i": 4, "owner": ""},
+    {"id": "R6", "desc": "Joint launch with a partner doubles reach", "kind": "opportunity", "p": 2, "i": 4, "needs_partner": True, "owner": "Sales"},
+    {"id": "R7", "desc": "Company-wide budget freeze", "kind": "threat", "p": 3, "i": 5, "outside_scope": True, "owner": ""},
+]
+
+def response(risk):
+    raise NotImplementedError
+
+
+for r in sorted(risks, key=lambda r: -r["p"] * r["i"]):
+    print(f"{r['id']} {r['kind']:<12} {r['p'] * r['i']:>2}  {response(r):<9} {r['desc']}")
+print("Needs an owner: " + ", ".join(r["id"] for r in risks if not r["owner"]))
+@@expected
+R3 threat       20  avoid     Optional AI feature may miss the legal review
+R2 threat       16  transfer  Vendor delivers servers late
+R5 opportunity  16  exploit   Early cloud credits could fund extra testing
+R1 threat       15  mitigate  Key engineer leaves mid-project
+R7 threat       15  escalate  Company-wide budget freeze
+R6 opportunity   8  share     Joint launch with a partner doubles reach
+R4 threat        4  accept    Office move disrupts one sprint
+Needs an owner: R2, R5, R7
+@@requires
+def response
+"escalate"
+@@hint
+Compute the score once, handle escalation first, then branch on threat or opportunity and on the score bands.
+@@solution
+risks = [
+    {"id": "R1", "desc": "Key engineer leaves mid-project", "kind": "threat", "p": 3, "i": 5, "transferable": False, "owner": "PM"},
+    {"id": "R2", "desc": "Vendor delivers servers late", "kind": "threat", "p": 4, "i": 4, "transferable": True, "owner": ""},
+    {"id": "R3", "desc": "Optional AI feature may miss the legal review", "kind": "threat", "p": 4, "i": 5, "optional": True, "owner": "Product owner"},
+    {"id": "R4", "desc": "Office move disrupts one sprint", "kind": "threat", "p": 2, "i": 2, "owner": "PM"},
+    {"id": "R5", "desc": "Early cloud credits could fund extra testing", "kind": "opportunity", "p": 4, "i": 4, "owner": ""},
+    {"id": "R6", "desc": "Joint launch with a partner doubles reach", "kind": "opportunity", "p": 2, "i": 4, "needs_partner": True, "owner": "Sales"},
+    {"id": "R7", "desc": "Company-wide budget freeze", "kind": "threat", "p": 3, "i": 5, "outside_scope": True, "owner": ""},
+]
+
+def response(risk):
+    score = risk["p"] * risk["i"]
+    if risk.get("outside_scope"):
+        return "escalate"
+    if risk["kind"] == "threat":
+        if score >= 15:
+            if risk.get("optional"):
+                return "avoid"
+            return "transfer" if risk.get("transferable") else "mitigate"
+        return "mitigate" if score >= 6 else "accept"
+    if score >= 15:
+        return "exploit"
+    if score >= 6:
+        return "share" if risk.get("needs_partner") else "enhance"
+    return "accept"
+
+for r in sorted(risks, key=lambda r: -r["p"] * r["i"]):
+    print(f"{r['id']} {r['kind']:<12} {r['p'] * r['i']:>2}  {response(r):<9} {r['desc']}")
+print("Needs an owner: " + ", ".join(r["id"] for r in risks if not r["owner"]))

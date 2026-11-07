@@ -110,3 +110,83 @@ What's the Japanese term for the year-end tax adjustment done by your employer? 
 = ねんまつちょうせい
 = nenmatsu chousei
 ? Bring your insurance and deduction certificates to HR in November.
+
+@@exercise Plan the first two weeks' paperwork
+Plan the lesson's first steps after moving in. You already have the 在留カード from the airport. Each task has prerequisites: 住民登録 needs the 在留カード; the bank account needs 住民登録 (for the 住民票 and address); the phone contract needs the 在留カード and a bank account; マイナンバーカード needs 住民登録.
+
+Write `schedule(tasks, move_in)` that orders the tasks so every prerequisite is done or already in hand (`have`) (one task per working day, starting the day after moving in, skipping Saturdays and Sundays because the ward office is closed), and check that 住民登録 lands within 14 days of moving in. Print the plan.
+@@lang python
+@@starter
+from datetime import date, timedelta
+
+have = {"在留カード"}
+tasks = {
+    "住民登録": ["在留カード"],
+    "マイナンバーカード申請": ["住民登録"],
+    "銀行口座": ["住民登録"],
+    "携帯電話": ["在留カード", "銀行口座"],
+}
+
+def order(tasks):
+    raise NotImplementedError
+
+
+def schedule(tasks, move_in):
+    raise NotImplementedError
+
+
+move_in = date(2026, 4, 2)
+plan = schedule(tasks, move_in)
+for day, t in plan:
+    print(f"{day} ({'月火水木金土日'[day.weekday()]}) {t}")
+registered = next(d for d, t in plan if t == "住民登録")
+left = 14 - (registered - move_in).days
+print(f"住民登録 on day {(registered - move_in).days} after moving in ({'OK' if left >= 0 else 'LATE'}, limit 14)")
+@@expected
+2026-04-03 (金) 住民登録
+2026-04-06 (月) マイナンバーカード申請
+2026-04-07 (火) 銀行口座
+2026-04-08 (水) 携帯電話
+住民登録 on day 1 after moving in (OK, limit 14)
+@@requires
+def schedule
+weekday()
+@@hint
+Repeatedly pick a task whose prerequisites are all done. For the dates, add a day and keep adding while `weekday()` is 5 or 6 (Saturday, Sunday).
+@@solution
+from datetime import date, timedelta
+
+have = {"在留カード"}
+tasks = {
+    "住民登録": ["在留カード"],
+    "マイナンバーカード申請": ["住民登録"],
+    "銀行口座": ["住民登録"],
+    "携帯電話": ["在留カード", "銀行口座"],
+}
+
+def order(tasks):
+    done, result = set(have), []
+    while len(result) < len(tasks):
+        ready = [t for t in tasks if t not in done and all(p in done for p in tasks[t])]
+        if not ready:
+            raise ValueError("circular prerequisites")
+        result.append(ready[0])
+        done.add(ready[0])
+    return result
+
+def schedule(tasks, move_in):
+    plan, day = [], move_in
+    for t in order(tasks):
+        day += timedelta(days=1)
+        while day.weekday() >= 5:
+            day += timedelta(days=1)
+        plan.append((day, t))
+    return plan
+
+move_in = date(2026, 4, 2)
+plan = schedule(tasks, move_in)
+for day, t in plan:
+    print(f"{day} ({'月火水木金土日'[day.weekday()]}) {t}")
+registered = next(d for d, t in plan if t == "住民登録")
+left = 14 - (registered - move_in).days
+print(f"住民登録 on day {(registered - move_in).days} after moving in ({'OK' if left >= 0 else 'LATE'}, limit 14)")

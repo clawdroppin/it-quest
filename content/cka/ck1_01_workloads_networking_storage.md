@@ -145,3 +145,115 @@ RWX :: ReadWriteMany: many nodes read and write
 @@drill
 What's the full DNS name of Service `api` in namespace `shop` (default cluster domain)?
 = api.shop.svc.cluster.local
+
+@@exercise Is this Deployment production-ready?
+Check Deployments (as parsed YAML dicts) against the lesson's production-ready checklist. Write `review(deploy)` that returns the problems:
+
+- fewer than 2 `replicas`;
+- an image with no tag or the `latest` tag;
+- a container without `resources.requests` or without `resources.limits.memory`;
+- no `readinessProbe` (traffic would reach Pods before they're ready) or no `livenessProbe`;
+- a `RollingUpdate` strategy with `maxUnavailable` equal to the replica count (the rollout could take every Pod down).
+
+Print each Deployment with `ready for production` or its problems.
+@@lang python
+@@starter
+deployments = [
+    {"name": "web", "replicas": 3, "strategy": {"type": "RollingUpdate", "maxUnavailable": 1},
+     "containers": [{"name": "web", "image": "registry.example.com/web:1.8.2",
+                     "resources": {"requests": {"cpu": "250m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}},
+                     "readinessProbe": {"httpGet": "/ready"}, "livenessProbe": {"httpGet": "/healthz"}}]},
+    {"name": "worker", "replicas": 1, "strategy": {"type": "RollingUpdate", "maxUnavailable": 1},
+     "containers": [{"name": "worker", "image": "registry.example.com/worker:latest",
+                     "resources": {"requests": {"cpu": "100m"}},
+                     "livenessProbe": {"exec": "check"}}]},
+    {"name": "api", "replicas": 2, "strategy": {"type": "RollingUpdate", "maxUnavailable": 2},
+     "containers": [{"name": "api", "image": "registry.example.com/api",
+                     "resources": {}, "readinessProbe": {"httpGet": "/ready"}},
+                    {"name": "proxy", "image": "envoyproxy/envoy:v1.31.0",
+                     "resources": {"requests": {"cpu": "50m"}, "limits": {"memory": "128Mi"}},
+                     "readinessProbe": {"tcpSocket": 9901}, "livenessProbe": {"tcpSocket": 9901}}]},
+]
+
+def image_tag(image):
+    raise NotImplementedError
+
+
+def review(deploy):
+    raise NotImplementedError
+
+
+for d in deployments:
+    problems = review(d)
+    print(d["name"] + ":")
+    for p in problems or ["ready for production"]:
+        print("  " + p)
+@@expected
+web:
+  ready for production
+worker:
+  only 1 replica
+  maxUnavailable can take every Pod down
+  worker: pin the image tag
+  worker: no memory limit
+  worker: no readinessProbe
+api:
+  maxUnavailable can take every Pod down
+  api: pin the image tag
+  api: no resource requests
+  api: no memory limit
+  api: no livenessProbe
+@@requires
+def review
+def image_tag
+rsplit(
+@@hint
+For the tag, look only at the part after the last `/`: a registry like `registry:5000/app` has a colon that isn't a tag.
+@@solution
+deployments = [
+    {"name": "web", "replicas": 3, "strategy": {"type": "RollingUpdate", "maxUnavailable": 1},
+     "containers": [{"name": "web", "image": "registry.example.com/web:1.8.2",
+                     "resources": {"requests": {"cpu": "250m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}},
+                     "readinessProbe": {"httpGet": "/ready"}, "livenessProbe": {"httpGet": "/healthz"}}]},
+    {"name": "worker", "replicas": 1, "strategy": {"type": "RollingUpdate", "maxUnavailable": 1},
+     "containers": [{"name": "worker", "image": "registry.example.com/worker:latest",
+                     "resources": {"requests": {"cpu": "100m"}},
+                     "livenessProbe": {"exec": "check"}}]},
+    {"name": "api", "replicas": 2, "strategy": {"type": "RollingUpdate", "maxUnavailable": 2},
+     "containers": [{"name": "api", "image": "registry.example.com/api",
+                     "resources": {}, "readinessProbe": {"httpGet": "/ready"}},
+                    {"name": "proxy", "image": "envoyproxy/envoy:v1.31.0",
+                     "resources": {"requests": {"cpu": "50m"}, "limits": {"memory": "128Mi"}},
+                     "readinessProbe": {"tcpSocket": 9901}, "livenessProbe": {"tcpSocket": 9901}}]},
+]
+
+def image_tag(image):
+    last = image.rsplit("/", 1)[-1]
+    return last.split(":", 1)[1] if ":" in last else None
+
+def review(deploy):
+    problems = []
+    if deploy["replicas"] < 2:
+        problems.append(f"only {deploy['replicas']} replica")
+    strategy = deploy.get("strategy", {})
+    if strategy.get("type") == "RollingUpdate" and strategy.get("maxUnavailable", 0) >= deploy["replicas"]:
+        problems.append("maxUnavailable can take every Pod down")
+    for c in deploy["containers"]:
+        tag = image_tag(c["image"])
+        if tag in (None, "latest"):
+            problems.append(f"{c['name']}: pin the image tag")
+        res = c.get("resources", {})
+        if "requests" not in res:
+            problems.append(f"{c['name']}: no resource requests")
+        if "memory" not in res.get("limits", {}):
+            problems.append(f"{c['name']}: no memory limit")
+        for probe in ("readinessProbe", "livenessProbe"):
+            if probe not in c:
+                problems.append(f"{c['name']}: no {probe}")
+    return problems
+
+for d in deployments:
+    problems = review(d)
+    print(d["name"] + ":")
+    for p in problems or ["ready for production"]:
+        print("  " + p)
