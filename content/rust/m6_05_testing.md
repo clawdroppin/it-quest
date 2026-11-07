@@ -1,4 +1,5 @@
 @@lesson m6-testing Writing Tests
+@@concepts testing
 @@text
 Every exercise in this course has been checked by **tests**: small pieces of code that call your functions and verify the results. Now you'll write your own. Testing is how professional programmers make sure code works — and *keeps* working as it changes.
 

@@ -1,4 +1,5 @@
 @@lesson m5-input Reading User Input
+@@concepts input
 @@text
 Until now, all data was written directly into the code. Real programs **interact**: they ask questions and react to answers. This lesson shows how to read text the user types.
 

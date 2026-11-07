@@ -96,7 +96,7 @@ Bone 1 has a local angle of 30° and bone 2 a local angle of 45°. What is bone 
 
 @@exercise Forward kinematics for a bone chain
 Compute the joint positions of a bone chain from local angles and lengths, for several keyframes of a waving-hand animation, and interpolate the angles between keyframes with ease-in-out so the hand moves smoothly.
-@@concepts numbers, loops, functions
+@@concepts numbers, loops, functions, conditions
 @@starter
 import math
 bones = [("upper arm", 40), ("forearm", 30), ("hand", 12)]
@@ -148,7 +148,6 @@ for frame in (0, 6, 12, 18, 24):
 
 @@exercise Two-bone inverse kinematics
 Solve two-bone IK with the law of cosines: given the bone lengths and a target, find the shoulder and elbow angles for both bend directions, clamp unreachable targets, and check each solution by running it back through forward kinematics.
-@@concepts numbers, functions, conditions
 @@starter
 import math
 A, B = 40.0, 30.0

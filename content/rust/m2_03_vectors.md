@@ -1,4 +1,5 @@
 @@lesson m2-vectors Vectors: Lists That Grow
+@@concepts lists
 @@text
 Arrays have a fixed length. But most real lists change: items get added to a shopping cart, enemies appear and disappear, messages arrive. For that, Rust has the **vector**, written `Vec`. It's the collection you'll use more than any other.
 

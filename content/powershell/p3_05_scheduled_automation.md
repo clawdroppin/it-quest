@@ -1,5 +1,5 @@
 @@lesson p3-scheduled-automation Running Scripts Unattended: Scheduled Tasks, Exit Codes and Idempotent Changes
-@@concepts automation, processes, conditions
+@@concepts automation, processes, conditions, loops, maps
 @@text
 A script you run by hand can ask questions, print colourful output and stop when something looks odd, because you're watching. A script that runs at 3 a.m. from Task Scheduler has nobody watching. It must find its own files, log what it did, report failure through its exit code, avoid prompting, and be safe to run twice. This lesson covers scheduling with PowerShell and the habits that make unattended scripts reliable.
 
@@ -185,7 +185,6 @@ Which cmdlet shows a scheduled task's last result and next run time?
 = Get-ScheduledTaskInfo
 
 @@exercise Next run times for task triggers
-@@concepts loops, conditions
 Given a fixed "now" of Thursday 2026-11-05 14:20, compute the next run time of each trigger the way Task Scheduler would: **Daily** at a time (today if the time is still ahead, otherwise tomorrow), **Weekly** on a set of weekdays at a time (the first matching day from today on whose time is still ahead), and **Repeat**: every N minutes between a start and an end time each day (the next slot after now, or tomorrow's start if today's window is over). Print each trigger with its next run as `yyyy-MM-dd HH:mm ddd` in the invariant culture.
 @@starter
 $now = [datetime]::ParseExact('2026-11-05 14:20', 'yyyy-MM-dd HH:mm', [cultureinfo]::InvariantCulture)
@@ -262,7 +261,6 @@ foreach ($t in $triggers) {
 }
 
 @@exercise Test, then set
-@@concepts maps, conditions, automation
 Write `Invoke-DesiredState` that compares a desired configuration with the current one and makes only the changes needed. Settings are a hashtable of name to value: for each desired setting print `ok` if it already matches, or `set` with the old and new value and update the current hashtable; for current settings marked in `$Remove`, print `remove` and delete them. With `-WhatIf`-style behaviour (a `$DryRun` switch), print the same plan prefixed with `would` but change nothing. Run it as a dry run, for real, and then again to show the second run changes nothing.
 @@starter
 $current = @{ 'Spooler.StartType' = 'Automatic'; 'RDP.Enabled' = 'True'; 'TLS1.0' = 'Enabled'; 'NTP.Server' = 'time.windows.com' }

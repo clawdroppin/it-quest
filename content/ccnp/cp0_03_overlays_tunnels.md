@@ -109,7 +109,7 @@ How many bits is a VXLAN Network Identifier?
 
 @@exercise Size tunnel MTU and MSS
 Stack encapsulations over an underlay MTU, compute the largest inner packet and the TCP MSS for each design, and flag designs where common packet sizes (1500-byte inner packets from hosts) won't fit without fragmentation or MSS clamping.
-@@concepts numbers, lists, functions
+@@concepts numbers, lists, functions, networking, maps, conditions
 @@lang python
 @@starter
 HEADERS = {"ip": 20, "gre": 4, "gre_key": 4, "udp": 8, "vxlan": 8, "eth": 14, "lisp": 8, "esp_fixed": 8 + 16 + 2 + 12}
@@ -159,7 +159,6 @@ for name, underlay, stack in designs:
 
 @@exercise LISP map-cache lookups
 An ITR holds a map-cache of EID prefixes to RLOC sets. For each destination, do a longest-prefix match. Choose RLOCs by lowest priority among those that are up, and split traffic by weight. If there's no match, send a Map-Request, and if the mapping system's reply is negative, forward via the proxy (PxTR).
-@@concepts networking, maps, conditions
 @@lang python
 @@starter
 import ipaddress

@@ -1,4 +1,5 @@
 @@lesson m5-result Result: Errors You Can Handle
+@@concepts errors
 @@text
 `Result` is how Rust handles **recoverable** errors. Like `Option`, it's just an enum:
 

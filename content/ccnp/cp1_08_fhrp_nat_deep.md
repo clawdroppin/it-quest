@@ -179,7 +179,7 @@ What priority does a VRRP router get when it owns the virtual IP address?
 ? The address owner always becomes master.
 
 @@exercise HSRP election with preempt and tracking
-@@concepts networking, conditions, loops
+@@concepts networking, conditions, loops, maps
 Simulate HSRP for one group. Each router has a priority, an interface IP, a preempt flag and tracked objects that lower its priority by a decrement when they go down. Apply a list of events in order (a router boots or fails, a tracked uplink goes down or comes back) and print the active router after each event. Rules: with no active router, the highest effective priority wins (tie: highest IP). An active router keeps the role unless it fails, or a router with a **higher** effective priority **and** preempt takes over.
 @@lang python
 @@starter
@@ -261,7 +261,6 @@ for kind, target in events:
     print(f"{kind:<10} {target:<10} active={active}  ({prios})")
 
 @@exercise Build a PAT translation table
-@@concepts networking, maps, loops
 Simulate PAT (overload) on one outside address, 203.0.113.5. For each outbound connection, reuse an existing translation for the same inside socket, keep the original source port if that global port is free, and otherwise take the lowest free port from 1024 up (a simplified model of what IOS does). Print the table in the style of `show ip nat translations`, then translate inbound packets back: a packet to a known global port goes to its inside socket; anything else is dropped unless a static port forward exists.
 @@lang python
 @@starter

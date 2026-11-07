@@ -1,5 +1,5 @@
 @@lesson x9-interpreter 🎓 Beyond IT: Building an Interpreter
-@@concepts strings, functions, objects
+@@concepts strings, text-processing, functions, objects
 @@text
 > **Beyond IT scope.** This module goes past IT and business software into computer science and creative programming: language implementation, game engines and simulations. TypeScript's union types make it a great language for these, and they deepen your understanding of how tools you use every day work. Skip it freely if your goal is an IT job.
 

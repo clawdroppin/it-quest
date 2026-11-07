@@ -102,7 +102,7 @@ What is the name for work delivered beyond the requirements, without a change re
 
 @@exercise Check a WBS and trace requirements
 Roll up work package estimates through a WBS, check the 100% rule against each parent's budgeted total, and use a traceability matrix to find requirements with no deliverable or test, and deliverables with no requirement.
-@@concepts maps, loops, functions
+@@concepts maps, loops, functions, numbers, conditions
 @@lang python
 @@starter
 wbs = {
@@ -181,7 +181,6 @@ for package in estimates:
 
 @@exercise Contract incentive calculations
 Compute what the buyer pays and the seller earns under CPFF, CPIF and FPIF contracts for several actual-cost outcomes, apply the FPIF ceiling, and compute the point of total assumption.
-@@concepts numbers, functions, conditions
 @@lang python
 @@starter
 TARGET_COST, TARGET_FEE = 100_000, 10_000

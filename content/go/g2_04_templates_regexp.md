@@ -1,5 +1,5 @@
 @@lesson g2-templates-regexp Text Templates and Regular Expressions
-@@concepts strings, text-processing
+@@concepts strings, text-processing, maps
 @@text
 Two standard-library packages do a lot of the text work in real Go programs: `text/template` (and its safe sibling `html/template`) turns data into text, and `regexp` pulls structure out of text. Both have a few rules that differ from other languages, and this lesson covers them.
 
@@ -178,7 +178,6 @@ What limit argument tells FindAllString to return every match?
 ? Any non-negative number limits the number of matches.
 
 @@exercise Render an on-call handover with text/template
-@@concepts strings, text-processing
 Write the template `handover` so that `main` prints a handover note. For each team, print its name and the on-call person; then list the open incidents with their severity padded to 4 characters, or "no open incidents" when there are none. Add a FuncMap function `upper` (with `strings.ToUpper`) and use it for team names. Finish with the total number of open incidents, computed in the template with `len` and a variable. Use `{{-` and `-}}` so there are no blank lines.
 @@starter
 package main
@@ -280,7 +279,6 @@ func main() {
 }
 
 @@exercise Parse access logs with named groups
-@@concepts strings, text-processing, maps
 Write `Parse(line string) (Entry, bool)` using one package-level regexp with **named groups** for the client IP, method, path, status and duration in milliseconds. Lines that don't match return `false`. Then `main` prints, per status class (2xx, 4xx, 5xx), the count and the slowest path, and masks the last octet of every IPv4 address in the bad lines with `ReplaceAllString` before printing them.
 @@starter
 package main

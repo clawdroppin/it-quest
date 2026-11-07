@@ -1,4 +1,5 @@
 @@lesson m5-custom-errors Your Own Error Types
+@@concepts errors, objects
 @@text
 `String` errors are easy, but they have a weakness: the caller can only *read* them. What if the caller wants to react differently to different problems — retry on a network timeout, but show a message for bad input? Matching on message text is fragile. The Rust way is an **error enum**.
 

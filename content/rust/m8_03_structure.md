@@ -1,4 +1,5 @@
 @@lesson m8-structure Structuring a Program
+@@concepts modules, input
 @@text
 You now know enough Rust to write real programs. The hard part is no longer *syntax* but *organization*: how to arrange code so it stays understandable as it grows from 50 to 5,000 lines. This lesson collects the patterns that work.
 

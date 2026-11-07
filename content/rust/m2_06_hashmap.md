@@ -1,4 +1,5 @@
 @@lesson m2-hashmap HashMap: Looking Things Up by Name
+@@concepts maps
 @@text
 Lists find things by **position**: element 0, element 1… But often you want to find things by a **name** or **key**: a phone number by person, a price by product, a score by player. For that we use a **map** (also called a dictionary). Rust's main one is the `HashMap`.
 

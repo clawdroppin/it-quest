@@ -303,6 +303,7 @@ pub fn parse_lesson(track: &str, src: &str) -> Lesson {
                 lesson.title = title.to_string();
             }
             ("concepts", _) => {
+                assert!(lesson.concepts.is_empty(), "lesson {}: only one @@concepts line per lesson (it tags the whole lesson)", lesson.id);
                 lesson.concepts = arg.split(',').map(|c| c.trim().to_string()).filter(|c| !c.is_empty()).collect();
                 for c in &lesson.concepts {
                     assert!(CONCEPTS.iter().any(|(id, _)| id == c), "lesson {}: unknown concept `{c}`", lesson.id);

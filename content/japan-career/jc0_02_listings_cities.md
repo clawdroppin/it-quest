@@ -88,7 +88,7 @@ Up to how many yen per month is the commuting allowance tax-free?
 
 @@exercise Screen and rank job listings
 Check listings against your profile (Japanese level, years of experience, skills), flag SES signals and fixed-term contracts, and rank the matches by the midpoint of the salary range, with a bonus for remote work.
-@@concepts lists, conditions, strings
+@@concepts lists, conditions, strings, numbers, maps, functions
 @@starter
 profile = {"jlpt": 3, "years": 4, "skills": {"python", "aws", "docker", "sql"}}
 listings = [
@@ -166,7 +166,6 @@ for score, listing, warnings in sorted(matches, key=lambda m: -m[0]):
 
 @@exercise Compare cities after rent
 For offers in different cities, estimate monthly take-home pay (using a simple 77% of gross, a rough figure for this salary band), subtract rent for a 1LDK, and compare what's left. Commuting costs are covered by 通勤手当, so they're ignored. Also show the gross salary Fukuoka would need to match Tokyo after rent.
-@@concepts numbers, maps, functions
 @@starter
 TAKE_HOME = 0.77   # rough example ratio, not tax advice
 offers = {"Tokyo (渋谷)": 7_500_000, "Osaka (梅田)": 6_400_000, "Fukuoka (天神)": 5_800_000, "Remote, Tokyo rate, living in Fukuoka": 7_500_000}

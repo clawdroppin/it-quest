@@ -1,4 +1,5 @@
 @@lesson m6-files Splitting Code Into Files
+@@concepts modules
 @@text
 In a Cargo project, each module can live in **its own file**. This is how every real project is organized. In this lesson you'll take the calculator from Module 5, turn it into a Cargo project, and split it into files.
 

@@ -1,4 +1,5 @@
 @@lesson m2-tuples Tuples: Grouping a Few Values
+@@concepts lists
 @@text
 So far every variable held **one** value. But data often comes in groups: a point on a map has an *x* and a *y*; a player has a name and a score. This module is all about **collections**: ways to keep many values together. We start with the simplest one.
 

@@ -1,4 +1,5 @@
 @@lesson m3-references References and Borrowing
+@@concepts functions
 @@text
 Moving ownership into a function and returning it is clumsy. Cloning costs time and memory. Most of the time, a function just wants to **look at** a value for a moment. For that, Rust has **references**.
 

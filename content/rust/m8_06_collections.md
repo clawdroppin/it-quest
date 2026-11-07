@@ -1,4 +1,5 @@
 @@lesson m8-collections More Collections: Sets, Sorted Maps and Queues
+@@concepts maps, lists
 @@text
 So far you've used two collections for almost everything: `Vec` (a list) and `HashMap` (key → value). Real apps often need a few more shapes of data. The standard library has them all in `std::collections`, and they work just like the ones you know: `new()`, `insert`, `len()`, `contains`, iterate with `for`.
 

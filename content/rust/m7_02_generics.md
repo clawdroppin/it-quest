@@ -1,4 +1,5 @@
 @@lesson m7-generics Generics
+@@concepts functions
 @@text
 Imagine writing a function that returns the largest number in a list. You write it for `i32`. Then you need it for `f64`. Then for `char`. Three copies of the same code, differing only in the type. **Generics** solve this: you write the code once, with a **type parameter** standing in for the real type.
 

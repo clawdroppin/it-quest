@@ -1,4 +1,5 @@
 @@lesson m0-errors Reading Compiler Errors
+@@concepts errors
 @@text
 You're going to see a *lot* of compiler errors while learning — and for the rest of your programming life. That's completely normal. The skill isn't avoiding errors; it's **reading them calmly and fixing them quickly**. Rust's error messages are some of the best of any language, so let's learn to read them.
 

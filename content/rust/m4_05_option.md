@@ -1,4 +1,5 @@
 @@lesson m4-option Option: Values That Might Be Missing
+@@concepts errors
 @@text
 You've met `Option` several times already. Now that you know enums, here's the secret: **`Option` is just an enum** from the standard library:
 

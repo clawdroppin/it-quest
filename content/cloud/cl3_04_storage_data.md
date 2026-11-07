@@ -157,7 +157,7 @@ Which caching pattern reads the cache first and fills it from the database on a 
 = lazy loading
 
 @@exercise Simulate a lifecycle policy
-@@concepts numbers, lists, loops
+@@concepts numbers, lists, loops, maps
 A bucket of logs gets 500 GB of new objects every month. A lifecycle rule keeps objects in **standard** for 30 days, moves them to **infrequent access** until day 90, then to **archive** until day 365, and deletes them after that. Compute the steady-state monthly storage bill (after a year of running, with 12 monthly batches aged 0, 30, 60, ... 330 days) with and without the rule, plus the one-off monthly transition request fees.
 @@starter
 PRICE_GB = {"standard": 0.023, "infrequent": 0.0125, "archive": 0.004}
@@ -222,7 +222,6 @@ fees = sum(OBJECTS_PER_BATCH / 1000 * fee for fee in TRANSITION_FEE_PER_1000.val
 print(f"transition requests: ${fees:,.2f}/month (each batch moves twice)")
 
 @@exercise Modulo hashing vs consistent hashing
-@@concepts maps, numbers, loops
 Place 10,000 keys on 4 nodes, then add a fifth node, and count how many keys move. Compare **modulo hashing** (`hash % N`) with a **consistent hash ring** using 100 virtual nodes per physical node. Use MD5 so the hashes are the same on every run, and also print how evenly the ring spreads the keys over the five nodes.
 @@starter
 import bisect

@@ -1,4 +1,5 @@
 @@lesson m8-json Saving Data as JSON with serde
+@@concepts json, files
 @@text
 Writing your own file format works for simple data, but gets painful fast: nested lists, optional fields, text that contains your separator character… The standard solution is to use a well-known format and a library that converts your types to and from it automatically.
 

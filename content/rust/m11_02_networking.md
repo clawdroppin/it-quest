@@ -1,4 +1,5 @@
 @@lesson m11-networking Networking with std::net: TCP Servers, Clients and Protocols
+@@concepts networking
 @@text
 Every web server, database driver and chat app sits on top of **sockets**. Rust's standard library gives you TCP and UDP directly in `std::net`. Building a small server by hand teaches what frameworks hide: connections, byte streams, framing and concurrency.
 

@@ -103,7 +103,7 @@ What do you say when answering after several rings? (hiragana or kanji)
 @@exercise Generate 議事録 from meeting notes
 Turn structured meeting notes into standard 議事録 text with the usual headings, list the decisions, and format action items as 「・内容（担当：名前、期限：M/D）」, sorted by deadline. Flag action items that have no owner or no deadline.
 @@lang python
-@@concepts strings, lists, maps
+@@concepts strings, lists, maps, conditions, functions
 @@starter
 from datetime import date
 notes = {
@@ -185,7 +185,6 @@ for w in warnings:
 @@exercise Take a phone message (伝言メモ)
 Simulate the phone flow: choose the right response for each situation (the colleague is available, away from their desk, in a meeting, or off today), refer to your colleague without さん, and produce a 伝言メモ for the colleague with time, caller, company, callback number (repeated back digit by digit in groups), and the message.
 @@lang python
-@@concepts conditions, strings, functions
 @@starter
 STATUS = {"available": "少々お待ちください。おつなぎいたします。",
           "away": "ただいま席を外しております。",

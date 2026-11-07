@@ -96,7 +96,7 @@ Which kind of Network Load Balancer preserves the client's source IP address?
 
 @@exercise Choose the load balancer
 Encode the four questions (HTTP or not, external or internal, global or regional, proxy or passthrough) as a function, and run it on scenario requirements. Requirements such as UDP, keeping the client IP, Cloud Armor or a single region constrain the answer.
-@@concepts conditions, functions, maps
+@@concepts conditions, functions, maps, numbers, loops, lists
 @@lang python
 @@starter
 scenarios = {
@@ -152,7 +152,6 @@ for name, req in scenarios.items():
 
 @@exercise Simulate a MIG autoscaler
 Simulate a target-utilisation autoscaler over a day of load: compute the recommended size each step with ⌈load ÷ (target × capacity)⌉, clamp it between min and max, scale out immediately, but only scale in after a 3-step stabilisation window, and count the VM-hours used.
-@@concepts numbers, loops, lists
 @@lang python
 @@starter
 import math

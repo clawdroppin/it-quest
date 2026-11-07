@@ -1,4 +1,5 @@
 @@lesson m4-methods Methods: Giving Types Behaviour
+@@concepts objects
 @@text
 In the last lesson you wrote functions like `area(r: &Rect)`. That works, but the function and the type it belongs to are separate. **Methods** are functions that belong to a type, defined inside an `impl` block. You've been calling methods all along: `name.len()`, `list.push(x)`.
 

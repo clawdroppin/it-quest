@@ -1,4 +1,5 @@
 @@lesson m2-grids Grids: Lists of Lists
+@@concepts lists, loops
 @@text
 Game boards, spreadsheets, images, maps, seating plans — lots of data is a **grid**: rows and columns. A grid is simply a **list of lists**: a list of rows, where each row is a list of cells.
 

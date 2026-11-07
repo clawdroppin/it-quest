@@ -1,4 +1,5 @@
 @@lesson m11-testing Advanced Testing: Integration Tests, Test Doubles, Properties and Fuzzing
+@@concepts testing
 @@text
 You already know `#[test]`, `assert_eq!` and `#[cfg(test)] mod tests`. Professional Rust projects go further: tests at several levels, fakes for the outside world, tests that generate their own inputs, and tools that hunt for crashes. This lesson covers that toolbox.
 

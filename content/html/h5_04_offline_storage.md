@@ -237,7 +237,7 @@ Which caching strategy answers from the cache and refreshes it from the network 
 = stale while revalidate
 
 @@exercise An offline-aware notes page
-@@concepts functions, json
+@@concepts functions, json, lists, concurrency
 Make the notes page offline friendly. Register a service worker at `/sw.js` only if `"serviceWorker" in navigator`. Keep the draft in `localStorage` under the key `"draft"` (save on every `input` event, restore on load, wrapping storage access in `try`). Show the connection state in a `role="status"` element with `aria-live="polite"`, updated from `navigator.onLine` and the `online` and `offline` events. Link a manifest with `rel="manifest"`.
 @@starter
 <!doctype html>
@@ -311,7 +311,6 @@ Write a `showStatus()` that sets the text from `navigator.onLine` and call it on
 </html>
 
 @@exercise A task list in IndexedDB
-@@concepts functions, lists, concurrency
 Store tasks in IndexedDB instead of memory. Write `openDb()` that opens database `"tasks-db"` version 1 and, in `onupgradeneeded`, creates an object store `"tasks"` with `keyPath: "id"` and an index `"byDone"` on `"done"`. Write promise helpers to `put` a task and `getAll` tasks, use `crypto.randomUUID()` for ids, and render the list after each change. Toggling a checkbox updates the task's `done` field with `put`.
 @@starter
 <!doctype html>

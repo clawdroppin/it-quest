@@ -119,7 +119,7 @@ Above how many seconds should you show determinate progress?
 
 @@exercise Spinner without flicker
 Simulate loading indicators for requests of different durations: the spinner appears only after a delay, stays visible for a minimum time once shown, and the content appears only when both the response has arrived and the minimum time has passed. Report when the spinner shows and hides, and how much extra time the minimum added.
-@@concepts conditions, functions, numbers
+@@concepts conditions, functions, numbers, loops, lists
 @@starter
 DELAY_MS, MIN_VISIBLE_MS = 300, 500
 requests = {"cache hit": 40, "fast API": 280, "slow API": 340, "search": 1200, "report": 4200}
@@ -159,7 +159,6 @@ for name, duration in requests.items():
 
 @@exercise Smooth a progress estimate
 Raw progress arrives in uneven jumps. Estimate the time remaining with an exponential moving average of the rate (alpha 0.3), never let the displayed estimate go up by more than 10% between updates, and compare it with the naive estimate from the latest jump only.
-@@concepts numbers, loops, lists
 @@starter
 # (seconds elapsed, fraction done)
 samples = [(1, 0.20), (2, 0.31), (3, 0.34), (4, 0.36), (5, 0.52), (6, 0.55), (7, 0.70), (8, 0.74), (9, 0.90), (10, 0.93)]

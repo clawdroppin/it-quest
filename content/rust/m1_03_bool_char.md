@@ -1,4 +1,5 @@
 @@lesson m1-bool-char True/False, Characters and Comparisons
+@@concepts conditions, variables
 @@text
 ## `bool` — true or false
 

@@ -1,5 +1,5 @@
 @@lesson l3-ssh-rsync SSH and rsync in Depth: Keys, Config, Agents, Tunnels and Safe Syncs
-@@concepts networking, automation, files
+@@concepts networking, automation, files, loops, conditions, text-processing, maps
 @@text
 Most Linux administration happens over SSH, and most file moving between machines happens with `rsync` (which usually runs over SSH). The basics take five minutes to learn, but the details decide whether your setup is secure, whether your scripts hang at 3 a.m. waiting for a password prompt, and whether a sync quietly deletes the wrong folder. This lesson goes through those details.
 
@@ -226,7 +226,6 @@ Which command prints the resolved SSH configuration for the host web-prod?
 = ssh -G web-prod
 
 @@exercise Resolve options from an ssh config
-@@concepts loops, conditions, text-processing
 `config` imitates `~/.ssh/config`. Print the options that apply to the host in `target`, the way ssh resolves them: go through the blocks in order; a block applies when any of its `Host` patterns matches the target (glob matching with `*` and `?`); for each option keyword, the **first** value found wins. Print `keyword value` lines in the order the options were first set, with keywords in lower case as `ssh -G` does.
 @@starter
 target=web-prod
@@ -305,7 +304,6 @@ for k in "${order[@]}"; do
 done
 
 @@exercise Plan an rsync mirror
-@@concepts text-processing, maps, files
 `src` and `dest` list files as `path size mtime`. Print what `rsync -a --delete` would do: `copy` for files missing at the destination, `update` for files whose size or mtime differs, `delete` for files at the destination that are not in the source, then a summary line with the counts and the number unchanged. Keep the source order for copies and updates, and the destination order for deletes.
 @@starter
 src='index.html 5120 1730880000

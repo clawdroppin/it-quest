@@ -1,4 +1,5 @@
 @@lesson m1-functions Functions
+@@concepts functions
 @@text
 So far all your code has lived inside `main`. Real programs are split into many **functions**: named blocks of code that each do one job. Functions are the most important tool for **organizing** code.
 

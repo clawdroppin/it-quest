@@ -1,4 +1,5 @@
 @@lesson m7-traits Traits: Shared Behaviour
+@@concepts objects
 @@text
 Different types often share a **capability**. A circle and a square can both compute their area. A dog and a robot can both "speak". A `Movie` and a `Book` can both be summarized. A **trait** describes such a capability: a set of methods that a type promises to provide.
 

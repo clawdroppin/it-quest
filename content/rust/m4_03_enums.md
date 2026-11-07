@@ -1,4 +1,5 @@
 @@lesson m4-enums Enums: One of Several Possibilities
+@@concepts objects, conditions
 @@text
 A struct says "a value has **all** of these fields". An **enum** (short for *enumeration*) says "a value is **one of** these options". Together, structs and enums can model almost anything.
 

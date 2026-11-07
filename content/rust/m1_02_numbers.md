@@ -1,4 +1,5 @@
 @@lesson m1-numbers Numbers and Data Types
+@@concepts numbers, variables
 @@text
 Every value in Rust has a **type**. The type tells the compiler what kind of data it is — and therefore what you can do with it. You can add two numbers, but what would it mean to add a number to `true`? The compiler uses types to catch mistakes like that before your program runs.
 

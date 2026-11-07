@@ -1,4 +1,5 @@
 @@lesson m7-closures Closures
+@@concepts functions
 @@text
 A **closure** is a small, unnamed function you can write right where you need it, store in a variable, or pass to another function. Closures are everywhere in Rust: sorting, filtering, button handlers in a GUI, and all the iterator methods in the next lesson.
 

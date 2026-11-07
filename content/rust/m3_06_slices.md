@@ -1,4 +1,5 @@
 @@lesson m3-slices Slices Revisited: &str and &[T]
+@@concepts lists, strings
 @@text
 A **slice** is a reference to a **continuous part** of a collection. It doesn't own anything; it's a "window" onto data that someone else owns.
 

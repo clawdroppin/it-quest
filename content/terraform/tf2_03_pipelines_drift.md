@@ -104,7 +104,7 @@ Which lifecycle argument makes Terraform leave attributes that are managed by an
 
 @@exercise Gate a pipeline on the plan
 Read a simplified plan JSON (`resource_changes` with actions), work out each change's risk, and decide the gate for the run: auto-apply, one approval, or two approvals plus a block on prod for deleting or replacing stateful resources. Print a PR-comment style summary.
-@@concepts json, conditions, maps
+@@concepts json, conditions, maps, loops
 @@lang python
 @@starter
 import json
@@ -171,7 +171,6 @@ for run, raw in plans.items():
 
 @@exercise Classify drift
 Compare the config, the state and the real infrastructure for each resource, then say what `terraform plan` will do (revert drift, recreate deleted resources, or nothing because of `ignore_changes`) and which drift should instead be accepted with `-refresh-only` because it is the intended value.
-@@concepts maps, conditions, loops
 @@lang python
 @@starter
 resources = {

@@ -120,7 +120,7 @@ With a 30 ms stagger, when does the 6th item start (the first starts at 0)?
 
 @@exercise Duration from distance and size
 Compute durations with a distance model, `base × (distance / reference) ** 0.5`, clamped between a minimum and maximum. Exits get 75% of the entrance time, and desktop takes 85% of mobile. Print a table for several motions.
-@@concepts numbers, functions
+@@concepts numbers, functions, lists, loops
 @@starter
 BASE_MS, REFERENCE_PX = 200, 200
 MIN_MS, MAX_MS = 100, 450
@@ -160,7 +160,6 @@ for name, px in motions:
 
 @@exercise Build a choreographed timeline
 Schedule a card-opening sequence: a container, a header that starts when 60% of the container is done, then list items staggered by a step that shrinks for long lists (capped total stagger), and an action button last. Print each motion's start and end, and the total length.
-@@concepts lists, loops, numbers
 @@starter
 CONTAINER_MS, ITEM_MS, STAGGER_MS, MAX_STAGGER_TOTAL = 260, 180, 40, 240
 

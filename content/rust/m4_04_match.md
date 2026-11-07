@@ -1,4 +1,5 @@
 @@lesson m4-match match and Patterns
+@@concepts conditions
 @@text
 `match` is one of Rust's most loved features. It's like a supercharged `if`/`else if` chain that can look *inside* values. This lesson covers all the kinds of **patterns** you can use.
 

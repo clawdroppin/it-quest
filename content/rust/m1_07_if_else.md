@@ -1,4 +1,5 @@
 @@lesson m1-if Making Decisions: if and else
+@@concepts conditions
 @@text
 Until now, programs ran every line from top to bottom. Real programs need to **make decisions**: do one thing *if* something is true, and something else otherwise. This is called **control flow**.
 

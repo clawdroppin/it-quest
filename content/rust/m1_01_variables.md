@@ -1,4 +1,5 @@
 @@lesson m1-variables Values and Variables
+@@concepts variables
 @@text
 Programs work with **data**: numbers, text, true/false values and more. A single piece of data is called a **value**. `42` is a value. `"hello"` is a value.
 

@@ -96,7 +96,7 @@ What is the Japanese word for using up your remaining paid leave before leaving?
 
 @@exercise Track paid leave balances
 Grant leave on each anniversary according to the statutory table (only if attendance was 80% or more), take days from the oldest grant first, expire grants after two years, and flag years in which fewer than 5 days were taken from a grant of 10 or more.
-@@concepts lists, loops, conditions
+@@concepts lists, loops, conditions, functions
 @@starter
 GRANTS = {0.5: 10, 1.5: 11, 2.5: 12, 3.5: 14, 4.5: 16, 5.5: 18, 6.5: 20}
 # service year at grant: (attendance rate, days taken in the following year)
@@ -150,7 +150,6 @@ for service, (attendance, taken) in history.items():
 
 @@exercise Plan your last day
 Given the day you give notice, the company's notice period, your remaining leave days and the bonus payment date, compute the official last day (退職日), the last working day (after 有給消化, counting weekdays only), and whether you keep the bonus. Then find the earliest notice date that still keeps the bonus.
-@@concepts functions, loops, conditions
 @@starter
 from datetime import date, timedelta
 

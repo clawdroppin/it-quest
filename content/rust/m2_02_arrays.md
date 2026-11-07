@@ -1,4 +1,5 @@
 @@lesson m2-arrays Arrays: Fixed-Size Lists
+@@concepts lists, loops
 @@text
 A tuple is good for two or three values of different types. But what about the temperatures of every day of the week? Or the scores of 30 students? For **many values of the same type**, we use lists. Rust's simplest list is the **array**.
 

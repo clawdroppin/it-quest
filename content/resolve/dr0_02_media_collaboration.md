@@ -161,7 +161,7 @@ Which kind of bin is shared across all projects in a library?
 = power bin
 
 @@exercise Plan storage for a shoot
-@@concepts numbers, maps, loops
+@@concepts numbers, maps, loops, conditions, lists
 Plan the storage for a three-day shoot. For each camera, compute the size of the originals from the bitrate and recorded hours, then the proxies (half-resolution ProRes Proxy at 45 Mb/s for the same hours). Apply the 3-2-1 rule (three copies of the originals, two of the proxies), add 20% headroom, and choose the smallest drive size from the list that fits each copy set.
 @@starter
 cameras = {
@@ -240,7 +240,6 @@ print(f"3 copies of originals: {pick_drive(need_orig)} TB drives x 3 (need {need
 print(f"2 copies of proxies:   {pick_drive(need_proxy)} TB drives x 2 (need {need_proxy:,.0f} GB each)")
 
 @@exercise Evaluate Smart Bin rules
-@@concepts maps, conditions, lists
 Smart Bins are rules over clip metadata. Each bin has a match mode (`all` or `any`) and a list of rules `(field, operator, value)` with the operators `is`, `contains` and `greater than`. Duration is in seconds. Print the clips that land in each Smart Bin, and list the clips that land in no Smart Bin at all, so you can see what still needs logging.
 @@starter
 clips = [

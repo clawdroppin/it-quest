@@ -1,4 +1,5 @@
 @@lesson m6-crates Using Crates: The Guessing Game
+@@concepts modules
 @@text
 One of Rust's biggest strengths is its ecosystem: more than 150,000 free libraries, called **crates**, published on **crates.io**. Need random numbers, JSON, HTTP, a GUI, a database? There's a crate for that. Cargo downloads and builds them for you.
 

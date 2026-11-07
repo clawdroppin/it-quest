@@ -1,4 +1,5 @@
 @@lesson m6-modules Modules and Visibility
+@@concepts modules
 @@text
 As programs grow, one long list of functions becomes hard to navigate. **Modules** group related code together, the way folders group files. They also control **visibility**: which parts can be used from outside the module.
 

@@ -1,4 +1,5 @@
 @@lesson m1-loops Loops: Doing Things Again and Again
+@@concepts loops
 @@text
 Computers are brilliant at repetition: they never get bored. A **loop** runs a block of code multiple times. Rust has three kinds: `loop`, `while` and `for`.
 

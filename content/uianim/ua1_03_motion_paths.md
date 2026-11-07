@@ -87,7 +87,7 @@ Which CSS property sets how far along the offset-path an element is?
 
 @@exercise Constant speed along a Bézier
 Sample a cubic Bézier into 1,000 segments to build a cumulative arc-length table, then compare positions at equal t steps with positions at equal distance steps. Print the length of each step for both, showing that the t-based steps vary a lot while the distance-based ones stay nearly constant (straight-line chords are slightly shorter than the arc where the curve bends).
-@@concepts numbers, lists, functions
+@@concepts numbers, lists, functions, loops
 @@starter
 import math
 from bisect import bisect_left
@@ -140,7 +140,6 @@ print("equal distance:    ", " ".join(f"{math.dist(a, b):5.1f}" for a, b in zip(
 
 @@exercise Orient a paper plane along its path
 Compute the tangent of the curve at several points and the rotation angle in degrees, then make a "subtle" variant for UI cards that keeps only 15% of the turn, clamped to ±8 degrees. Also compute a throw parabola's positions frame by frame until it lands.
-@@concepts numbers, functions, loops
 @@starter
 import math
 P = [(0, 0), (80, -120), (220, -120), (300, 0)]

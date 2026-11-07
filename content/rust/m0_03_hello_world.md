@@ -1,4 +1,5 @@
 @@lesson m0-hello Hello, World! (Every Character Explained)
+@@concepts hello
 @@text
 By tradition, the first program in any language prints "Hello, world!". Here it is in Rust:
 

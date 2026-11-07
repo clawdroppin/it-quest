@@ -1,4 +1,5 @@
 @@lesson m8-time-threads Time and Doing Things at Once
+@@concepts concurrency
 @@text
 Two things almost every app needs sooner or later:
 

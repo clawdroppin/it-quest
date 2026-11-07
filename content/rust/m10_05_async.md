@@ -1,4 +1,5 @@
 @@lesson m10-async Async Rust: Futures, async/await and Tokio
+@@concepts concurrency, networking
 @@text
 A web server may hold 10,000 open connections, but each one spends most of its time **waiting**: for the network, a database, a timer. One thread per connection wastes memory (each thread has its own stack, often 2–8 MB). **Async** Rust lets a handful of threads juggle thousands of waiting tasks. It's what powers Tokio, Axum, reqwest, sqlx and most Rust network software.
 

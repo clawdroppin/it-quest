@@ -105,7 +105,7 @@ Which migration strategy replaces an application with a SaaS product?
 
 @@exercise Plan migration waves
 Given applications with dependencies, put each app in the earliest wave in which all its dependencies have already moved (or will stay reachable on-premises), keeping chatty pairs together. Then suggest a strategy for each app from its attributes.
-@@concepts maps, loops, lists
+@@concepts maps, loops, lists, conditions, numbers
 @@lang python
 @@starter
 apps = {
@@ -195,7 +195,6 @@ for name in apps:
 
 @@exercise Choose a DR pattern per workload
 For each workload, pick the cheapest DR pattern whose typical RTO and RPO meet the requirement. Then estimate its monthly DR cost from the size of the primary environment, and flag requirements that only active-active can meet.
-@@concepts conditions, numbers, lists
 @@lang python
 @@starter
 # (name, typical RTO minutes, typical RPO minutes, DR cost as a fraction of primary)

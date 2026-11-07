@@ -1,4 +1,5 @@
 @@lesson m5-panic When Things Go Wrong: panic!
+@@concepts errors
 @@text
 Real programs deal with a messy world: users type nonsense, files go missing, the network drops. Good programs **expect problems and handle them gracefully**. This module is about doing that well.
 

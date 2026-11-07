@@ -194,7 +194,6 @@ Which loop consumes an async iterable?
 = for await
 
 @@exercise Lazy sequence helpers
-@@concepts loops, functions
 Write three generic generator functions: `range(start, end, step = 1)` yields numbers from `start` up to (not including) `end`; `chunk(source, size)` yields arrays of up to `size` items; and `zip(a, b)` yields pairs `[x, y]` until either input runs out. They must be **lazy**: `zip` and `chunk` must work on infinite inputs as long as the consumer stops.
 @@starter
 function* range(start: number, end: number, step = 1): Generator<number> {
@@ -253,7 +252,6 @@ function* zip<A, B>(a: Iterable<A>, b: Iterable<B>): Generator<[A, B]> {
 }
 
 @@exercise Paginate an API with an async generator
-@@concepts concurrency, loops, functions
 Write `paginate(fetchPage)`, an async generator that yields every item from a cursor-paginated API (each page is `{ items, next }`, and `next` is `null` on the last page). Then write `findFirst(source, predicate)`, which returns the first matching item from any async iterable, or `undefined`, and stops as soon as it finds one so no further pages are fetched.
 @@starter
 type Page<T> = { items: T[]; next: string | null };

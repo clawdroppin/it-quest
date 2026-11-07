@@ -1,4 +1,5 @@
 @@lesson m7-iterators Iterators
+@@concepts lists, loops
 @@text
 An **iterator** produces a sequence of values, one at a time. Every `for` loop you've written used one. Iterators also come with dozens of methods that, combined with closures, let you express data processing in a few clear lines.
 

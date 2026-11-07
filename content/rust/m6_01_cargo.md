@@ -1,4 +1,5 @@
 @@lesson m6-cargo Cargo Projects in VS Code
+@@concepts modules
 @@text
 So far, every program was a single file that this app compiled for you with `rustc`. Real Rust projects use **Cargo**, Rust's official build tool and package manager. You installed it along with Rust. From this module on, you'll work like a professional Rust developer: in **VS Code**, with **Cargo**, in a **terminal**.
 

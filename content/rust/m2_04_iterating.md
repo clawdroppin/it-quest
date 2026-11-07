@@ -1,4 +1,5 @@
 @@lesson m2-iterating Working Through Lists
+@@concepts lists, loops
 @@text
 Most code that deals with lists does one of a handful of things: visit every element, add them up, find something, count something, or build a new list. This lesson collects the tools for all of these.
 

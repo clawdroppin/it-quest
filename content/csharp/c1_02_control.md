@@ -1,5 +1,5 @@
 @@lesson c1-control Decisions and Loops
-@@concepts conditions, loops
+@@concepts conditions, loops, input
 @@text
 ## if / else
 

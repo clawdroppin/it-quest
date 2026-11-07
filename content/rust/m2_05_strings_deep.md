@@ -1,4 +1,5 @@
 @@lesson m2-strings Strings in Depth
+@@concepts strings, text-processing
 @@text
 Text is everywhere in programs: names, messages, commands, files, data from the internet. A string is really a **collection of characters**, so many list ideas apply — with a few twists.
 

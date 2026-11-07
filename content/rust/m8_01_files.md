@@ -1,4 +1,5 @@
 @@lesson m8-files Reading and Writing Files
+@@concepts files
 @@text
 So far, everything your programs knew disappeared when they ended. Real programs **remember**: settings, documents, save games, to-do lists. The simplest way to remember is a **file**.
 

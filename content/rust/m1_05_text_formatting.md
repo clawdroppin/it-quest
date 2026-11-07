@@ -1,4 +1,5 @@
 @@lesson m1-text Text: Strings and Formatting
+@@concepts strings
 @@text
 Text in programming is called a **string** (a "string of characters"). Rust has two main string types, and the difference matters a lot later. For now, here's the beginner-friendly version:
 

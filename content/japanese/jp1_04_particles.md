@@ -163,7 +163,6 @@ for phrase, role in learner:
 @@exercise は or が?
 Apply simple rules for は and が: question words (どれ, 誰, 何, どの…) and the answers to them take が; events with 発生する, ある, いる, できる, 分かる and 好き take が for their subject; a contrast or a known topic takes は. Classify the cases and print the sentence with the right particle.
 @@lang python
-@@concepts conditions, strings
 @@starter
 GA_PREDICATES = ("発生しました", "あります", "います", "できます", "分かります", "好きです")
 QUESTION_WORDS = ("どれ", "誰", "何", "どの", "どこ")

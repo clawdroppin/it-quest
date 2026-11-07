@@ -1,4 +1,5 @@
 @@lesson m4-structs Structs: Your Own Data Types
+@@concepts objects
 @@text
 So far you've used Rust's built-in types. Now you'll create **your own**. This is where programming starts to feel like *modeling the real world*: a game has players, a shop has products, a calendar has events. Each of those is a type you design.
 

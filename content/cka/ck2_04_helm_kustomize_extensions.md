@@ -184,7 +184,7 @@ Which kubectl command renders the kustomization in overlays/prod without applyin
 = kubectl kustomize overlays/prod/
 
 @@exercise Resolve Helm values
-@@concepts maps, functions, loops
+@@concepts maps, functions, loops, strings, json
 Work out the values Helm will use. Start from the chart defaults, deep-merge each `-f` file in order (maps merge key by key, lists and scalars replace), then apply each `--set` (a dotted path like `image.tag=2.4.1`; "true"/"false" and whole numbers become booleans and integers, as Helm does). Print the final values as flattened dotted paths, sorted.
 @@starter
 chart_defaults = {
@@ -300,7 +300,6 @@ for path, value in sorted(flatten(values).items()):
     print(f"{path} = {value!r}")
 
 @@exercise Build a Kustomize overlay
-@@concepts maps, strings, json
 Apply an overlay to base resources the way Kustomize does (a simplified model): add `namePrefix` to every name, set the namespace, add labels, override the image tag, set replicas on the named Deployment, and generate a ConfigMap whose name gets a 10-character hash suffix of its data. Update the Deployment's reference to the ConfigMap and the Service's reference to the Deployment so they point at the new names. Print each resulting resource, then show that changing the ConfigMap data changes the name the Deployment refers to.
 @@starter
 import hashlib

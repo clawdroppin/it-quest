@@ -1,4 +1,5 @@
 @@lesson m10-concurrency Fearless Concurrency: Send, Sync, Arc, Mutex, Atomics and Scoped Threads
+@@concepts concurrency
 @@text
 Module 8 spawned threads and sent messages on channels. Real concurrent programs also **share** data: a cache read by many threads, a counter of finished jobs, a work queue. Rust's type system turns most concurrency bugs (data races) into compile errors. This lesson shows how.
 

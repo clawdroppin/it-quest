@@ -105,7 +105,7 @@ Which IPv6 multicast address do OSPFv3 routers use for all SPF routers?
 
 @@exercise EUI-64, solicited-node and address types
 Build modified EUI-64 interface IDs from MAC addresses, form the full address from a /64 prefix, compute the solicited-node multicast address, and classify a list of IPv6 addresses by type, using bit operations and the `ipaddress` module only for formatting.
-@@concepts networking, numbers, strings
+@@concepts networking, numbers, strings, maps, conditions
 @@lang python
 @@starter
 import ipaddress
@@ -164,7 +164,6 @@ for a in ("fe80::21a:2bff:fe3c:4d5e", "fd12:3456::1", "ff02::a", "2400:cb00::1",
 
 @@exercise Multicast MACs and RPF checks
 Map IPv4 groups to multicast MAC addresses and find groups that collide on the same MAC, then run RPF checks: a packet from a source passes only if it arrived on the interface the unicast routing table (longest-prefix match) uses towards that source.
-@@concepts networking, maps, conditions
 @@lang python
 @@starter
 import ipaddress
@@ -230,7 +229,6 @@ for source, group, arrived in packets:
     print(f"({source}, {group}) in {arrived}: {result}")
 
 @@exercise Plan /64 subnets from a /48
-@@concepts networking, numbers, strings
 A site has `2001:db8:acad::/48`, which leaves 16 bits of subnet ID, or 65,536 /64s. Use a readable scheme: the first hex digit of the subnet ID is the **building** (0–15) and the remaining three hex digits are the **VLAN ID** (up to 4094 = `ffe`), so building 2, VLAN 10 is `2001:db8:acad:200a::/64`. Build the subnet for each VLAN, show each building's /52, and print the first host address (`::1`, the gateway) of each subnet.
 @@lang python
 @@starter

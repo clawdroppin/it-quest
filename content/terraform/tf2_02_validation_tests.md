@@ -164,7 +164,7 @@ Which test `command` value runs without creating real resources?
 
 @@exercise Validate input variables
 Implement validation rules like the HCL ones in the lesson (allowed values, bucket-name regex, CIDR prefix range, and a cross-variable rule) and run them against several tfvars sets, printing each variable's error message the way `terraform plan` would.
-@@concepts conditions, functions, text-processing
+@@concepts conditions, functions, text-processing, testing, maps
 @@lang python
 @@starter
 import re, ipaddress
@@ -250,7 +250,6 @@ for name, values in tfvars.items():
 
 @@exercise A tiny terraform test runner
 Model a module as a function from variables to planned resources, then run `.tftest.hcl`-style `run` blocks in order: each run merges its variables over the file-level ones, either expects the plan to succeed and checks assertions, or uses `expect_failures` and passes only if validation fails.
-@@concepts functions, testing, maps
 @@lang python
 @@starter
 def plan(var):

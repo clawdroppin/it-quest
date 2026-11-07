@@ -1,4 +1,5 @@
 @@lesson m11-observability Error Design and Observability: thiserror, anyhow, tracing
+@@concepts errors
 @@text
 When a program runs on a server at 3 a.m., two things decide how fast someone can fix it: **errors** that explain what went wrong and why, and **logs, metrics and traces** that show what the program was doing. This lesson covers both the Rust way.
 

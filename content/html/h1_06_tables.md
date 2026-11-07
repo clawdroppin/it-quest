@@ -215,7 +215,7 @@ Which element gives a table its accessible title?
 = <caption>
 
 @@exercise An accessible exam timetable
-@@concepts strings
+@@concepts strings, lists, functions
 Turn the div soup into a real table: a `<caption>` "Exam week timetable", a `<thead>` whose first header spans two rows (`rowspan="2"`) for "Day" and a grouped header "Morning" over two columns (`colspan="2"`, `scope="colgroup"`), the room and time headers with `scope="col"`, row headers with `scope="row"` for each day, `border-collapse: collapse`, and the time columns right-aligned with `tabular-nums`.
 @@starter
 <!doctype html>
@@ -278,7 +278,6 @@ The head has two rows: the first holds `<th scope="col" rowspan="2">Day</th>` an
 </html>
 
 @@exercise A sortable server table
-@@concepts lists, functions
 Make the table sortable. Keep the rows in a JavaScript array and render the `<tbody>` from it. Each sortable header holds a `<button type="button">`; clicking it sorts by that column (clicking again reverses the order), sets `aria-sort` to "ascending" or "descending" on that `th` and removes it from the others. Sort numbers numerically and names with an `Intl.Collator` using `numeric: true`, so "web2" comes before "web10". Wrap the table in a scrollable region with `overflow-x: auto`.
 @@starter
 <!doctype html>

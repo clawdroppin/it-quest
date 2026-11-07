@@ -106,7 +106,7 @@ Type the reading of 復旧 in hiragana.
 @@exercise Add furigana with a dictionary
 Annotate Japanese text with readings using a compound dictionary and longest-match lookup: at each position, try the longest dictionary word first. Output the text in the 漢字（かな） style, and list compounds the dictionary doesn't know (runs of kanji left without a reading).
 @@lang python
-@@concepts strings, maps, loops
+@@concepts strings, maps, loops, conditions
 @@starter
 DICT = {"本番環境": "ほんばんかんきょう", "環境": "かんきょう", "障害": "しょうがい", "発生": "はっせい", "原因": "げんいん",
         "調査": "ちょうさ", "復旧": "ふっきゅう", "設定": "せってい", "変更": "へんこう", "確認": "かくにん", "影響": "えいきょう",
@@ -170,7 +170,6 @@ for t in texts:
 @@exercise Schedule reviews with Leitner boxes
 Simulate 14 days of reviews for a deck of IT kanji cards: each card is due when its box interval has passed since its last review, correct answers move it up a box (maximum 5) and wrong answers send it to box 1. The answers are given per card as a string of results for each review. Print each day's reviews and the final boxes.
 @@lang python
-@@concepts maps, loops, conditions
 @@starter
 INTERVAL = {1: 1, 2: 2, 3: 4, 4: 8, 5: 16}
 # card: results of its successive reviews ("o" correct, "x" wrong)

@@ -1,4 +1,5 @@
 @@lesson m5-question The ? Operator: Passing Errors Up
+@@concepts errors
 @@text
 Often a function does several steps that can each fail, and if any step fails, the whole function should fail with that error. Writing a `match` for every step gets long:
 

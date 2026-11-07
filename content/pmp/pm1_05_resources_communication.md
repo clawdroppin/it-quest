@@ -92,7 +92,7 @@ Which resource optimisation technique keeps the critical path unchanged?
 
 @@exercise Smooth a resource histogram
 Build a daily histogram of developers needed from activities with start days, durations, people and total float, then smooth it: delay activities only within their float (non-critical activities first, largest float first) to bring peaks down to the available limit, and report peaks that only leveling (extending the end date) could remove.
-@@concepts lists, loops, functions
+@@concepts lists, loops, functions, conditions, maps
 @@lang python
 @@starter
 LIMIT = 4
@@ -160,7 +160,6 @@ print("over the limit on days:", over if over else "none", "->", "leveling neede
 
 @@exercise Plan communications
 Compute the channels as the team grows, then pick a communication method and frequency for each stakeholder from their interest, influence, audience size and how complex or sensitive the topic is.
-@@concepts conditions, maps, functions
 @@lang python
 @@starter
 stakeholders = [
