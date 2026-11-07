@@ -134,3 +134,74 @@ DORA metrics :: Deploy frequency, lead time, change failure rate, time to restor
 In GitHub Actions, which key makes a job wait for another job to succeed?
 = needs
 ? needs: test
+
+@@exercise Simulate a rolling deployment with health checks
+A **rolling** deployment replaces instances a few at a time. Write `rolling_deploy(instances, new_version, batch_size, healthy)` that updates `batch_size` instances per step and runs the health check `healthy(name, version)` on each updated instance:
+
+- if every instance in the batch passes, go on to the next batch;
+- if any fails, **stop** and roll back every instance updated so far to its old version, then return `rolled back`.
+
+Print each step and the final versions. Run it once with a good build and once with a build that fails its health check on the third instance.
+@@lang python
+@@starter
+def rolling_deploy(instances, new_version, batch_size, healthy):
+    raise NotImplementedError
+
+
+def good_build(name, version):
+    return True
+
+def bad_build(name, version):
+    return name != "web-3"
+
+for label, check, version in [("v2.4.0 (good)", good_build, "v2.4.0"), ("v2.5.0 (bad)", bad_build, "v2.5.0")]:
+    fleet = {f"web-{i}": "v2.3.1" for i in range(1, 7)}
+    print(label + ":")
+    result = rolling_deploy(fleet, version, 2, check)
+    print(f"  {result}: " + ", ".join(f"{n}={v}" for n, v in fleet.items()))
+@@expected
+v2.4.0 (good):
+  batch ['web-1', 'web-2']: healthy
+  batch ['web-3', 'web-4']: healthy
+  batch ['web-5', 'web-6']: healthy
+  deployed: web-1=v2.4.0, web-2=v2.4.0, web-3=v2.4.0, web-4=v2.4.0, web-5=v2.4.0, web-6=v2.4.0
+v2.5.0 (bad):
+  batch ['web-1', 'web-2']: healthy
+  batch ['web-3', 'web-4']: FAILED on ['web-3']
+  rolling back ['web-1', 'web-2', 'web-3', 'web-4']
+  rolled back: web-1=v2.3.1, web-2=v2.3.1, web-3=v2.3.1, web-4=v2.3.1, web-5=v2.3.1, web-6=v2.3.1
+@@requires
+def rolling_deploy
+rolled back
+@@hint
+Remember the old versions before you start, loop over the names in slices of `batch_size`, and keep a list of everything updated so the rollback knows what to undo.
+@@solution
+def rolling_deploy(instances, new_version, batch_size, healthy):
+    old = dict(instances)
+    updated = []
+    names = list(instances)
+    for start in range(0, len(names), batch_size):
+        batch = names[start:start + batch_size]
+        for name in batch:
+            instances[name] = new_version
+            updated.append(name)
+        failed = [n for n in batch if not healthy(n, new_version)]
+        print(f"  batch {batch}: " + ("healthy" if not failed else f"FAILED on {failed}"))
+        if failed:
+            for name in updated:
+                instances[name] = old[name]
+            print(f"  rolling back {updated}")
+            return "rolled back"
+    return "deployed"
+
+def good_build(name, version):
+    return True
+
+def bad_build(name, version):
+    return name != "web-3"
+
+for label, check, version in [("v2.4.0 (good)", good_build, "v2.4.0"), ("v2.5.0 (bad)", bad_build, "v2.5.0")]:
+    fleet = {f"web-{i}": "v2.3.1" for i in range(1, 7)}
+    print(label + ":")
+    result = rolling_deploy(fleet, version, 2, check)
+    print(f"  {result}: " + ", ".join(f"{n}={v}" for n, v in fleet.items()))

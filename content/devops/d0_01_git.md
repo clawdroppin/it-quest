@@ -137,3 +137,114 @@ semantic versioning :: MAJOR.MINOR.PATCH
 Which Git command creates a new commit that undoes an earlier commit? (git ...)
 = git revert
 ? Unlike reset, it doesn't rewrite history.
+
+@@exercise Read git status --porcelain
+Scripts and editors read `git status --porcelain`: two status letters (`X` = the staging area, `Y` = the working tree), a space, then the path. `??` is untracked, `M` modified, `A` added, `D` deleted, `R` renamed (`old -> new`).
+
+Write `parse(output)` that sorts the files into **staged**, **not staged** and **untracked** (a file like `MM` is in both of the first two). Then write `advice(groups)` that returns what to do next: `nothing to commit` when everything is clean, `commit the staged changes` when only staged changes exist, otherwise `git add` what you want, and say if untracked files may belong in `.gitignore` (anything ending in `.log` or inside `node_modules/`).
+@@lang python
+@@starter
+WORD = {"M": "modified", "A": "added", "D": "deleted", "R": "renamed"}
+outputs = {
+    "feature work": """M  src/app.py
+ M README.md
+MM src/config.py
+A  tests/test_app.py
+R  docs/old.md -> docs/guide.md
+?? debug.log
+?? notes.txt
+ D scripts/old.sh""",
+    "ready to commit": """M  src/app.py
+A  src/new.py""",
+    "clean": "",
+}
+
+def parse(output):
+    raise NotImplementedError
+
+
+def advice(groups):
+    raise NotImplementedError
+
+
+for name, out in outputs.items():
+    groups = parse(out)
+    print(name + ":")
+    for group, files in groups.items():
+        for f in files:
+            print(f"  [{group}] {f}")
+    for tip in advice(groups):
+        print("  -> " + tip)
+@@expected
+feature work:
+  [staged] modified: src/app.py
+  [staged] modified: src/config.py
+  [staged] added: tests/test_app.py
+  [staged] renamed: docs/old.md -> docs/guide.md
+  [not staged] modified: README.md
+  [not staged] modified: src/config.py
+  [not staged] deleted: scripts/old.sh
+  [untracked] debug.log
+  [untracked] notes.txt
+  -> git add the changes you want in this commit
+  -> consider .gitignore for: debug.log
+ready to commit:
+  [staged] modified: src/app.py
+  [staged] added: src/new.py
+  -> commit the staged changes
+clean:
+  -> nothing to commit, working tree clean
+@@requires
+def parse
+def advice
+splitlines()
+@@hint
+Slice each line: `line[0]` is X, `line[1]` is Y and `line[3:]` the path. Check X and Y separately, since one file can be both staged and changed again.
+@@solution
+WORD = {"M": "modified", "A": "added", "D": "deleted", "R": "renamed"}
+outputs = {
+    "feature work": """M  src/app.py
+ M README.md
+MM src/config.py
+A  tests/test_app.py
+R  docs/old.md -> docs/guide.md
+?? debug.log
+?? notes.txt
+ D scripts/old.sh""",
+    "ready to commit": """M  src/app.py
+A  src/new.py""",
+    "clean": "",
+}
+
+def parse(output):
+    groups = {"staged": [], "not staged": [], "untracked": []}
+    for line in output.splitlines():
+        x, y, path = line[0], line[1], line[3:]
+        if x == "?":
+            groups["untracked"].append(path)
+            continue
+        if x != " ":
+            groups["staged"].append(f"{WORD[x]}: {path}")
+        if y != " ":
+            groups["not staged"].append(f"{WORD[y]}: {path}")
+    return groups
+
+def advice(groups):
+    if not any(groups.values()):
+        return ["nothing to commit, working tree clean"]
+    if not groups["not staged"] and not groups["untracked"]:
+        return ["commit the staged changes"]
+    tips = ["git add the changes you want in this commit"]
+    ignore = [p for p in groups["untracked"] if p.endswith(".log") or "node_modules/" in p]
+    if ignore:
+        tips.append("consider .gitignore for: " + ", ".join(ignore))
+    return tips
+
+for name, out in outputs.items():
+    groups = parse(out)
+    print(name + ":")
+    for group, files in groups.items():
+        for f in files:
+            print(f"  [{group}] {f}")
+    for tip in advice(groups):
+        print("  -> " + tip)

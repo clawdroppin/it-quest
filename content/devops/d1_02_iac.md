@@ -157,3 +157,99 @@ Packer :: Builds golden machine images
 Which Terraform command previews changes without applying them? (terraform ...)
 = terraform plan
 ? Then terraform apply.
+
+@@exercise Write a terraform plan
+`terraform plan` compares the **desired** configuration with the **state** file and lists what it will do. Write `plan(desired, state)` that returns the actions, sorted by resource address:
+
+- in desired but not in state → `+ create`
+- in both but with different attributes → `~ update in-place`, listing each changed attribute as `attr: old -> new`; if a changed attribute is one that forces replacement (`FORCES_NEW`), it's `-/+ replace` instead
+- in state but not desired → `- destroy`
+
+Print the plan and finish with Terraform's summary line, like `Plan: 2 to add, 1 to change, 1 to destroy.` (a replacement counts as one add and one destroy).
+@@lang python
+@@starter
+FORCES_NEW = {"ami", "availability_zone", "engine"}
+PAST = {"create": "created", "destroy": "destroyed", "replace": "replaced", "update in-place": "updated in-place"}
+state = {
+    "aws_instance.web": {"ami": "ami-0a1", "instance_type": "t3.micro", "availability_zone": "ap-northeast-1a"},
+    "aws_s3_bucket.logs": {"bucket": "acme-logs", "versioning": False},
+    "aws_db_instance.main": {"engine": "postgres", "instance_class": "db.t3.small"},
+    "aws_security_group.old": {"name": "legacy-sg"},
+}
+desired = {
+    "aws_instance.web": {"ami": "ami-0b2", "instance_type": "t3.small", "availability_zone": "ap-northeast-1a"},
+    "aws_s3_bucket.logs": {"bucket": "acme-logs", "versioning": True},
+    "aws_db_instance.main": {"engine": "postgres", "instance_class": "db.t3.small"},
+    "aws_cloudwatch_log_group.app": {"name": "/app/web", "retention_in_days": 30},
+}
+
+def plan(desired, state):
+    raise NotImplementedError
+
+
+actions = plan(desired, state)
+add = change = destroy = 0
+for symbol, addr, verb, changes in actions:
+    print(f"  {symbol} {addr} will be {PAST[verb]}")
+    for c in changes:
+        print(f"      {c}")
+    add += symbol in ("+", "-/+")
+    destroy += symbol in ("-", "-/+")
+    change += symbol == "~"
+print(f"Plan: {add} to add, {change} to change, {destroy} to destroy.")
+@@expected
+  + aws_cloudwatch_log_group.app will be created
+  -/+ aws_instance.web will be replaced
+      ami: ami-0a1 -> ami-0b2
+      instance_type: t3.micro -> t3.small
+  ~ aws_s3_bucket.logs will be updated in-place
+      versioning: False -> True
+  - aws_security_group.old will be destroyed
+Plan: 2 to add, 1 to change, 2 to destroy.
+@@requires
+def plan
+sorted(
+@@hint
+Loop over the union of both address sets. For resources in both, compare attribute by attribute, then check whether any of the changed ones is in `FORCES_NEW`.
+@@solution
+FORCES_NEW = {"ami", "availability_zone", "engine"}
+PAST = {"create": "created", "destroy": "destroyed", "replace": "replaced", "update in-place": "updated in-place"}
+state = {
+    "aws_instance.web": {"ami": "ami-0a1", "instance_type": "t3.micro", "availability_zone": "ap-northeast-1a"},
+    "aws_s3_bucket.logs": {"bucket": "acme-logs", "versioning": False},
+    "aws_db_instance.main": {"engine": "postgres", "instance_class": "db.t3.small"},
+    "aws_security_group.old": {"name": "legacy-sg"},
+}
+desired = {
+    "aws_instance.web": {"ami": "ami-0b2", "instance_type": "t3.small", "availability_zone": "ap-northeast-1a"},
+    "aws_s3_bucket.logs": {"bucket": "acme-logs", "versioning": True},
+    "aws_db_instance.main": {"engine": "postgres", "instance_class": "db.t3.small"},
+    "aws_cloudwatch_log_group.app": {"name": "/app/web", "retention_in_days": 30},
+}
+
+def plan(desired, state):
+    actions = []
+    for addr in sorted(set(desired) | set(state)):
+        if addr not in state:
+            actions.append(("+", addr, "create", []))
+        elif addr not in desired:
+            actions.append(("-", addr, "destroy", []))
+        else:
+            old, new = state[addr], desired[addr]
+            changes = [f"{k}: {old.get(k)} -> {new.get(k)}" for k in sorted(set(old) | set(new)) if old.get(k) != new.get(k)]
+            if not changes:
+                continue
+            forced = any(k in FORCES_NEW and old.get(k) != new.get(k) for k in set(old) | set(new))
+            actions.append(("-/+", addr, "replace", changes) if forced else ("~", addr, "update in-place", changes))
+    return actions
+
+actions = plan(desired, state)
+add = change = destroy = 0
+for symbol, addr, verb, changes in actions:
+    print(f"  {symbol} {addr} will be {PAST[verb]}")
+    for c in changes:
+        print(f"      {c}")
+    add += symbol in ("+", "-/+")
+    destroy += symbol in ("-", "-/+")
+    change += symbol == "~"
+print(f"Plan: {add} to add, {change} to change, {destroy} to destroy.")
