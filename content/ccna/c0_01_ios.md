@@ -123,3 +123,91 @@ What's the short command to save the running configuration? (the classic one, st
 = copy running-config startup-config
 = copy run startup-config
 ? `write memory` (wr) also works.
+
+@@exercise Replay a console session through the IOS modes
+Write `step(mode, cmd)` that returns the mode after typing `cmd` and whether it was allowed there. Modes are `user` (`>`), `priv` (`#`), `config` (`(config)#`) and `if` (`(config-if)#`).
+
+- `enable` goes user → priv; `configure terminal` (or `conf t`) goes priv → config; `interface ...` goes config or if → if.
+- `exit` goes up one level (if → config → priv → user); `end` from config or if goes to priv.
+- `show ...` is allowed in user and priv; in config modes only as `do show ...`.
+- Anything else (`hostname`, `ip address`, `no shutdown`, ...) needs config or if mode; `copy running-config startup-config` needs priv.
+
+A rejected command leaves the mode unchanged. Replay the session and print each prompt, the command and `% Invalid` when it was rejected.
+@@lang python
+@@starter
+PROMPT = {"user": ">", "priv": "#", "config": "(config)#", "if": "(config-if)#"}
+UP = {"if": "config", "config": "priv", "priv": "user", "user": "user"}
+session = [
+    "show version", "configure terminal", "enable", "conf t", "hostname R1",
+    "show ip interface brief", "do show ip interface brief", "interface g0/1",
+    "ip address 10.0.0.1 255.255.255.0", "no shutdown", "exit", "end",
+    "copy running-config startup-config", "exit", "copy running-config startup-config",
+]
+
+def step(mode, cmd):
+    raise NotImplementedError
+
+
+mode = "user"
+for cmd in session:
+    new, ok = step(mode, cmd)
+    print(f"R1{PROMPT[mode]} {cmd}" + ("" if ok else "   % Invalid"))
+    mode = new
+print("finished in", PROMPT[mode])
+@@expected
+R1> show version
+R1> configure terminal   % Invalid
+R1> enable
+R1# conf t
+R1(config)# hostname R1
+R1(config)# show ip interface brief   % Invalid
+R1(config)# do show ip interface brief
+R1(config)# interface g0/1
+R1(config-if)# ip address 10.0.0.1 255.255.255.0
+R1(config-if)# no shutdown
+R1(config-if)# exit
+R1(config)# end
+R1# copy running-config startup-config
+R1# exit
+R1> copy running-config startup-config   % Invalid
+finished in >
+@@requires
+def step
+startswith(
+@@hint
+Return a pair `(new_mode, allowed)`. Handle the mode-changing commands first, then the `show` family, then treat the rest as configuration commands.
+@@solution
+PROMPT = {"user": ">", "priv": "#", "config": "(config)#", "if": "(config-if)#"}
+UP = {"if": "config", "config": "priv", "priv": "user", "user": "user"}
+session = [
+    "show version", "configure terminal", "enable", "conf t", "hostname R1",
+    "show ip interface brief", "do show ip interface brief", "interface g0/1",
+    "ip address 10.0.0.1 255.255.255.0", "no shutdown", "exit", "end",
+    "copy running-config startup-config", "exit", "copy running-config startup-config",
+]
+
+def step(mode, cmd):
+    if cmd == "enable":
+        return ("priv", True) if mode == "user" else (mode, False)
+    if cmd in ("configure terminal", "conf t"):
+        return ("config", True) if mode == "priv" else (mode, False)
+    if cmd.startswith("interface "):
+        return ("if", True) if mode in ("config", "if") else (mode, False)
+    if cmd == "exit":
+        return UP[mode], True
+    if cmd == "end":
+        return ("priv", True) if mode in ("config", "if") else (mode, False)
+    if cmd.startswith("show "):
+        return mode, mode in ("user", "priv")
+    if cmd.startswith("do show "):
+        return mode, mode in ("config", "if")
+    if cmd.startswith("copy "):
+        return mode, mode == "priv"
+    return mode, mode in ("config", "if")
+
+mode = "user"
+for cmd in session:
+    new, ok = step(mode, cmd)
+    print(f"R1{PROMPT[mode]} {cmd}" + ("" if ok else "   % Invalid"))
+    mode = new
+print("finished in", PROMPT[mode])

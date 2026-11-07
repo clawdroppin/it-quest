@@ -153,3 +153,117 @@ Which TCP port does TACACS+ use?
 = 49
 = tcp 49
 ? RADIUS uses UDP 1812/1813.
+
+@@exercise Hand out DHCP leases from a pool
+Model `ip dhcp pool` with `ip dhcp excluded-address`. Write a `Pool` class taking the network and a list of excluded ranges, with:
+
+- `request(mac)`: the client's existing lease if it has one, otherwise the lowest free address that isn't excluded, the network or broadcast address. Returns `None` when the pool is exhausted.
+- `release(mac)`: frees that client's address.
+
+Replay the events and print each result, then print the bindings like `show ip dhcp binding`.
+@@lang python
+@@starter
+import ipaddress
+
+class Pool:
+    def __init__(self, network, excluded):
+        self.net = ipaddress.ip_network(network)
+        self.excluded = set()
+        for first, last in excluded:
+            a, b = int(ipaddress.ip_address(first)), int(ipaddress.ip_address(last))
+            self.excluded |= {ipaddress.ip_address(n) for n in range(a, b + 1)}
+        self.bindings = {}
+
+    def request(self, mac):
+        raise NotImplementedError
+
+    def release(self, mac):
+        raise NotImplementedError
+
+
+pool = Pool("10.10.10.0/27", [("10.10.10.1", "10.10.10.20"), ("10.10.10.30", "10.10.10.30")])
+events = [("request", "aa:01"), ("request", "aa:02"), ("request", "aa:01"), ("request", "aa:03"),
+          ("release", "aa:02"), ("request", "aa:04"), ("request", "aa:05"), ("request", "aa:06"),
+          ("request", "aa:07"), ("request", "aa:08"), ("request", "aa:09"), ("request", "aa:10"),
+          ("request", "aa:11")]
+for action, mac in events:
+    if action == "release":
+        pool.release(mac)
+        print(f"release {mac}")
+    else:
+        addr = pool.request(mac)
+        print(f"request {mac} -> {addr if addr else 'no free address (pool exhausted)'}")
+print("Bindings:")
+for mac, addr in sorted(pool.bindings.items(), key=lambda kv: kv[1]):
+    print(f"  {addr}  {mac}")
+@@expected
+request aa:01 -> 10.10.10.21
+request aa:02 -> 10.10.10.22
+request aa:01 -> 10.10.10.21
+request aa:03 -> 10.10.10.23
+release aa:02
+request aa:04 -> 10.10.10.22
+request aa:05 -> 10.10.10.24
+request aa:06 -> 10.10.10.25
+request aa:07 -> 10.10.10.26
+request aa:08 -> 10.10.10.27
+request aa:09 -> 10.10.10.28
+request aa:10 -> 10.10.10.29
+request aa:11 -> no free address (pool exhausted)
+Bindings:
+  10.10.10.21  aa:01
+  10.10.10.22  aa:04
+  10.10.10.23  aa:03
+  10.10.10.24  aa:05
+  10.10.10.25  aa:06
+  10.10.10.26  aa:07
+  10.10.10.27  aa:08
+  10.10.10.28  aa:09
+  10.10.10.29  aa:10
+@@requires
+class Pool
+def request
+hosts()
+@@hint
+`ip_network(...).hosts()` already skips the network and broadcast addresses, in order, so the first free one you meet is the lowest.
+@@solution
+import ipaddress
+
+class Pool:
+    def __init__(self, network, excluded):
+        self.net = ipaddress.ip_network(network)
+        self.excluded = set()
+        for first, last in excluded:
+            a, b = int(ipaddress.ip_address(first)), int(ipaddress.ip_address(last))
+            self.excluded |= {ipaddress.ip_address(n) for n in range(a, b + 1)}
+        self.bindings = {}
+
+    def request(self, mac):
+        if mac in self.bindings:
+            return self.bindings[mac]
+        used = set(self.bindings.values())
+        for addr in self.net.hosts():
+            if addr not in self.excluded and addr not in used:
+                self.bindings[mac] = addr
+                return addr
+        return None
+
+    def release(self, mac):
+        self.bindings.pop(mac, None)
+
+
+pool = Pool("10.10.10.0/27", [("10.10.10.1", "10.10.10.20"), ("10.10.10.30", "10.10.10.30")])
+events = [("request", "aa:01"), ("request", "aa:02"), ("request", "aa:01"), ("request", "aa:03"),
+          ("release", "aa:02"), ("request", "aa:04"), ("request", "aa:05"), ("request", "aa:06"),
+          ("request", "aa:07"), ("request", "aa:08"), ("request", "aa:09"), ("request", "aa:10"),
+          ("request", "aa:11")]
+for action, mac in events:
+    if action == "release":
+        pool.release(mac)
+        print(f"release {mac}")
+    else:
+        addr = pool.request(mac)
+        print(f"request {mac} -> {addr if addr else 'no free address (pool exhausted)'}")
+print("Bindings:")
+for mac, addr in sorted(pool.bindings.items(), key=lambda kv: kv[1]):
+    print(f"  {addr}  {mac}")

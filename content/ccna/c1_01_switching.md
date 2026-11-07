@@ -136,3 +136,79 @@ Which command shows VLANs and their access ports in a short table?
 = sh vlan br
 = sh vlan brief
 ? `show interfaces trunk` covers trunks.
+
+@@exercise Compare the two ends of a trunk
+Each switch reports its side of a link as a dict (`mode`, `native`, `allowed`). Write `check_link(a, b)` that returns a list of problems:
+
+- DTP: `auto` + `auto` forms no trunk; `access` on either end with `trunk`/`desirable`/`auto` on the other is a mode mismatch.
+- If the link is a trunk, a different `native` VLAN on each end is a native VLAN mismatch, and native VLAN 1 on either end is a best-practice warning.
+- VLANs allowed on only one end are listed as `VLAN n allowed on one end only`.
+
+Print each link with `OK` or its problems.
+@@lang python
+@@starter
+links = {
+    "SW1 g0/1 - SW2 g0/1": ({"mode": "trunk", "native": 999, "allowed": {10, 20, 30, 99}},
+                            {"mode": "trunk", "native": 999, "allowed": {10, 20, 30, 99}}),
+    "SW1 g0/2 - SW3 g0/1": ({"mode": "trunk", "native": 999, "allowed": {10, 30}},
+                            {"mode": "trunk", "native": 1, "allowed": {10, 20, 30}}),
+    "SW2 g0/2 - SW4 g0/1": ({"mode": "auto", "native": 1, "allowed": set()},
+                            {"mode": "auto", "native": 1, "allowed": set()}),
+    "SW3 g0/2 - SW5 g0/1": ({"mode": "access", "native": 1, "allowed": set()},
+                            {"mode": "trunk", "native": 999, "allowed": {10}}),
+    "SW4 g0/2 - SW6 g0/1": ({"mode": "desirable", "native": 999, "allowed": {20}},
+                            {"mode": "auto", "native": 999, "allowed": {20}}),
+}
+
+def check_link(a, b):
+    raise NotImplementedError
+
+
+for name, (a, b) in links.items():
+    problems = check_link(a, b)
+    print(name + ": " + ("OK" if not problems else "; ".join(problems)))
+@@expected
+SW1 g0/1 - SW2 g0/1: OK
+SW1 g0/2 - SW3 g0/1: native VLAN mismatch (999 vs 1); native VLAN 1 in use: move it to an unused VLAN; VLAN 20 allowed on one end only
+SW2 g0/2 - SW4 g0/1: dynamic auto on both ends: no trunk forms
+SW3 g0/2 - SW5 g0/1: mode mismatch: access on one end, trunk on the other
+SW4 g0/2 - SW6 g0/1: OK
+@@requires
+def check_link
+^
+@@hint
+The symmetric difference `a ^ b` of two sets gives the VLANs that are in one but not the other.
+@@solution
+links = {
+    "SW1 g0/1 - SW2 g0/1": ({"mode": "trunk", "native": 999, "allowed": {10, 20, 30, 99}},
+                            {"mode": "trunk", "native": 999, "allowed": {10, 20, 30, 99}}),
+    "SW1 g0/2 - SW3 g0/1": ({"mode": "trunk", "native": 999, "allowed": {10, 30}},
+                            {"mode": "trunk", "native": 1, "allowed": {10, 20, 30}}),
+    "SW2 g0/2 - SW4 g0/1": ({"mode": "auto", "native": 1, "allowed": set()},
+                            {"mode": "auto", "native": 1, "allowed": set()}),
+    "SW3 g0/2 - SW5 g0/1": ({"mode": "access", "native": 1, "allowed": set()},
+                            {"mode": "trunk", "native": 999, "allowed": {10}}),
+    "SW4 g0/2 - SW6 g0/1": ({"mode": "desirable", "native": 999, "allowed": {20}},
+                            {"mode": "auto", "native": 999, "allowed": {20}}),
+}
+
+def check_link(a, b):
+    modes = {a["mode"], b["mode"]}
+    if modes == {"auto"}:
+        return ["dynamic auto on both ends: no trunk forms"]
+    if "access" in modes and modes != {"access"}:
+        return ["mode mismatch: access on one end, " + (modes - {"access"}).pop() + " on the other"]
+    if "access" in modes:
+        return []
+    problems = []
+    if a["native"] != b["native"]:
+        problems.append(f"native VLAN mismatch ({a['native']} vs {b['native']})")
+    if 1 in (a["native"], b["native"]):
+        problems.append("native VLAN 1 in use: move it to an unused VLAN")
+    for vlan in sorted(a["allowed"] ^ b["allowed"]):
+        problems.append(f"VLAN {vlan} allowed on one end only")
+    return problems
+
+for name, (a, b) in links.items():
+    problems = check_link(a, b)
+    print(name + ": " + ("OK" if not problems else "; ".join(problems)))

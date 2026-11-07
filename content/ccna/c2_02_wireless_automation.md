@@ -97,3 +97,82 @@ Puppet / Chef :: Agent-based configuration management
 Which HTTP status code means "Created"?
 = 201
 ? 200 is OK; 204 No Content.
+
+@@exercise Map CRUD actions to REST calls
+A script talks to a controller's REST API. Write `rest_call(action, resource)` that returns the HTTP method and URL path for `read`, `create`, `update` and `delete` (`GET`, `POST`, `PUT`, `DELETE`; the path is `/api/v1/` followed by the resource, which for updates and deletes includes the item's id, like `vlans/20`).
+
+Also write `explain(status)` for the status codes in the lesson (200, 201, 204, 400, 401, 403, 404, 500), saying whether the script should retry: only 500 is worth retrying; 401 means fix the token. Print each planned call with the controller's reply.
+@@lang python
+@@starter
+METHOD = {"read": "GET", "create": "POST", "update": "PUT", "delete": "DELETE"}
+MEANING = {
+    200: "OK", 201: "Created", 204: "No Content", 400: "Bad Request",
+    401: "Unauthorized", 403: "Forbidden", 404: "Not Found", 500: "Server Error",
+}
+calls = [
+    ("read", "devices", 200),
+    ("create", "vlans", 201),
+    ("update", "vlans/20", 400),
+    ("delete", "vlans/30", 204),
+    ("read", "interfaces", 401),
+    ("delete", "users/admin", 403),
+    ("read", "devices/99", 404),
+    ("create", "wlans", 500),
+]
+
+def rest_call(action, resource):
+    raise NotImplementedError
+def explain(status):
+    raise NotImplementedError
+
+
+for action, resource, status in calls:
+    method, path = rest_call(action, resource)
+    print(f"{action:<7}{method:<7}{path:<24}{explain(status)}")
+@@expected
+read   GET    /api/v1/devices         200 OK
+create POST   /api/v1/vlans           201 Created
+update PUT    /api/v1/vlans/20        400 Bad Request: fix the request, don't retry
+delete DELETE /api/v1/vlans/30        204 No Content
+read   GET    /api/v1/interfaces      401 Unauthorized: get a new token
+delete DELETE /api/v1/users/admin     403 Forbidden: fix the request, don't retry
+read   GET    /api/v1/devices/99      404 Not Found: fix the request, don't retry
+create POST   /api/v1/wlans           500 Server Error: retry later
+@@requires
+def rest_call
+def explain
+@@hint
+Two dicts do most of the work: action to method, and status code to its name. `explain` then only needs the retry rules.
+@@solution
+METHOD = {"read": "GET", "create": "POST", "update": "PUT", "delete": "DELETE"}
+MEANING = {
+    200: "OK", 201: "Created", 204: "No Content", 400: "Bad Request",
+    401: "Unauthorized", 403: "Forbidden", 404: "Not Found", 500: "Server Error",
+}
+calls = [
+    ("read", "devices", 200),
+    ("create", "vlans", 201),
+    ("update", "vlans/20", 400),
+    ("delete", "vlans/30", 204),
+    ("read", "interfaces", 401),
+    ("delete", "users/admin", 403),
+    ("read", "devices/99", 404),
+    ("create", "wlans", 500),
+]
+
+def rest_call(action, resource):
+    return METHOD[action], "/api/v1/" + resource
+
+def explain(status):
+    text = f"{status} {MEANING[status]}"
+    if status == 500:
+        return text + ": retry later"
+    if status == 401:
+        return text + ": get a new token"
+    if status >= 400:
+        return text + ": fix the request, don't retry"
+    return text
+
+for action, resource, status in calls:
+    method, path = rest_call(action, resource)
+    print(f"{action:<7}{method:<7}{path:<24}{explain(status)}")

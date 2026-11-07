@@ -142,3 +142,83 @@ VRRP / GLBP :: Open-standard FHRP / Cisco load-balancing FHRP
 What wildcard mask matches a /24 network?
 = 0.0.0.255
 ? 255.255.255.255 − 255.255.255.0.
+
+@@exercise Elect the HSRP active router
+Write `elect(routers)` that returns the active and standby router of an HSRP group: highest priority wins, and a tie goes to the highest interface IP. Only routers that are `up` take part.
+
+Then simulate preempt with `after_recovery(current_active, routers)`: when a router comes back up, it only takes over if it has `preempt` set and beats the current active router. Print the election, the failure of R1, and R1's recovery, once without preempt and once with it.
+@@lang python
+@@starter
+import ipaddress
+
+def make_routers(preempt):
+    raise NotImplementedError
+def rank(routers, name):
+    raise NotImplementedError
+def elect(routers):
+    raise NotImplementedError
+def after_recovery(current_active, routers):
+    raise NotImplementedError
+
+
+for preempt in (False, True):
+    routers = make_routers(preempt)
+    print(f"preempt on R1: {preempt}")
+    active, standby = elect(routers)
+    print(f"  start: active {active}, standby {standby}")
+    routers["R1"]["up"] = False
+    active, standby = elect(routers)
+    print(f"  R1 fails: active {active}, standby {standby}")
+    routers["R1"]["up"] = True
+    active = after_recovery(active, routers)
+    print(f"  R1 recovers: active {active}")
+@@expected
+preempt on R1: False
+  start: active R1, standby R3
+  R1 fails: active R3, standby R2
+  R1 recovers: active R3
+preempt on R1: True
+  start: active R1, standby R3
+  R1 fails: active R3, standby R2
+  R1 recovers: active R1
+@@requires
+def elect
+def after_recovery
+ipaddress
+@@hint
+Sort by the tuple `(priority, ip_address(ip))` in reverse. Compare addresses with `ipaddress.ip_address`, not as strings: as strings, "10.1.1.10" sorts before "10.1.1.4".
+@@solution
+import ipaddress
+
+def make_routers(preempt):
+    return {
+        "R1": {"ip": "10.1.1.2", "priority": 110, "preempt": preempt, "up": True},
+        "R2": {"ip": "10.1.1.3", "priority": 100, "preempt": False, "up": True},
+        "R3": {"ip": "10.1.1.4", "priority": 100, "preempt": False, "up": True},
+    }
+
+def rank(routers, name):
+    r = routers[name]
+    return (r["priority"], ipaddress.ip_address(r["ip"]))
+
+def elect(routers):
+    alive = sorted((n for n in routers if routers[n]["up"]), key=lambda n: rank(routers, n), reverse=True)
+    return alive[0], (alive[1] if len(alive) > 1 else None)
+
+def after_recovery(current_active, routers):
+    best = elect(routers)[0]
+    if best != current_active and routers[best]["preempt"]:
+        return best
+    return current_active
+
+for preempt in (False, True):
+    routers = make_routers(preempt)
+    print(f"preempt on R1: {preempt}")
+    active, standby = elect(routers)
+    print(f"  start: active {active}, standby {standby}")
+    routers["R1"]["up"] = False
+    active, standby = elect(routers)
+    print(f"  R1 fails: active {active}, standby {standby}")
+    routers["R1"]["up"] = True
+    active = after_recovery(active, routers)
+    print(f"  R1 recovers: active {active}")
