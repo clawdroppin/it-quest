@@ -126,3 +126,70 @@ Which backup type contains all changes since the last FULL backup?
 = differential
 = differential backup
 ? Incremental is since the last backup of any kind.
+
+@@exercise Check a backup rotation
+A small office runs a full backup on Sundays and incremental backups the other days. To restore a given day you need the last full backup and every incremental since it. Write `restore_set(backups, day)` returning the backup names needed, in order, or raising `ValueError("no full backup before <day>")`. Also print whether each restore set meets the 3-2-1 rule's "one copy off-site" part: at least one backup in the set must be stored `offsite`.
+@@lang python
+@@starter
+backups = [
+    ("Sun-full", "full", "local"),
+    ("Mon-inc", "inc", "local"),
+    ("Tue-inc", "inc", "local"),
+    ("Wed-inc", "inc", "local"),
+    ("Thu-inc", "inc", "offsite"),
+    ("Fri-inc", "inc", "local"),
+]
+
+def restore_set(backups, day):
+    raise NotImplementedError
+
+
+for day in ["Sun-full", "Wed-inc", "Fri-inc"]:
+    chosen = restore_set(backups, day)
+    offsite = any(where == "offsite" for _name, _kind, where in chosen)
+    print(f"Restore {day}: " + " + ".join(name for name, _k, _w in chosen) + f" (off-site copy: {'yes' if offsite else 'no'})")
+try:
+    restore_set(backups[1:], "Tue-inc")
+except ValueError as e:
+    print("Error:", e)
+@@expected
+Restore Sun-full: Sun-full (off-site copy: no)
+Restore Wed-inc: Sun-full + Mon-inc + Tue-inc + Wed-inc (off-site copy: no)
+Restore Fri-inc: Sun-full + Mon-inc + Tue-inc + Wed-inc + Thu-inc + Fri-inc (off-site copy: yes)
+Error: no full backup before Tue-inc
+@@requires
+def restore_set
+raise ValueError
+any(
+@@hint
+Walk backwards from the day you want until you hit a full backup, then slice from there to the day.
+@@solution
+backups = [
+    ("Sun-full", "full", "local"),
+    ("Mon-inc", "inc", "local"),
+    ("Tue-inc", "inc", "local"),
+    ("Wed-inc", "inc", "local"),
+    ("Thu-inc", "inc", "offsite"),
+    ("Fri-inc", "inc", "local"),
+]
+
+def restore_set(backups, day):
+    names = [b[0] for b in backups]
+    end = names.index(day)
+    start = None
+    for i in range(end, -1, -1):
+        if backups[i][1] == "full":
+            start = i
+            break
+    if start is None:
+        raise ValueError(f"no full backup before {day}")
+    return backups[start:end + 1]
+
+for day in ["Sun-full", "Wed-inc", "Fri-inc"]:
+    chosen = restore_set(backups, day)
+    offsite = any(where == "offsite" for _name, _kind, where in chosen)
+    print(f"Restore {day}: " + " + ".join(name for name, _k, _w in chosen) + f" (off-site copy: {'yes' if offsite else 'no'})")
+try:
+    restore_set(backups[1:], "Tue-inc")
+except ValueError as e:
+    print("Error:", e)

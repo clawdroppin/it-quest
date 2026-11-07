@@ -120,3 +120,61 @@ What IEEE standard tags frames with their VLAN on a trunk?
 = 802.1q
 = ieee 802.1q
 ? The tag holds a 12-bit VLAN ID: VLANs 1–4094.
+
+@@exercise Choose a route by longest prefix match
+A router picks the most specific matching route (the longest prefix), and the default route `0.0.0.0/0` only when nothing else matches. Write `best_route(table, address)` using the `ipaddress` module and print the next hop for each destination.
+@@lang python
+@@starter
+import ipaddress
+
+table = [
+    ("0.0.0.0/0", "203.0.113.1"),
+    ("10.0.0.0/8", "10.255.0.1"),
+    ("10.20.0.0/16", "10.20.0.1"),
+    ("10.20.30.0/24", "10.20.30.1"),
+    ("192.168.1.0/24", "connected"),
+]
+destinations = ["10.20.30.40", "10.20.99.1", "10.1.1.1", "192.168.1.77", "8.8.8.8"]
+
+def best_route(table, address):
+    raise NotImplementedError
+
+
+for d in destinations:
+    net, hop = best_route(table, d)
+    print(f"{d} -> {hop} (via {net})")
+@@expected
+10.20.30.40 -> 10.20.30.1 (via 10.20.30.0/24)
+10.20.99.1 -> 10.20.0.1 (via 10.20.0.0/16)
+10.1.1.1 -> 10.255.0.1 (via 10.0.0.0/8)
+192.168.1.77 -> connected (via 192.168.1.0/24)
+8.8.8.8 -> 203.0.113.1 (via 0.0.0.0/0)
+@@requires
+def best_route
+prefixlen
+@@hint
+Loop over every route that contains the address and keep the one with the largest `prefixlen`.
+@@solution
+import ipaddress
+
+table = [
+    ("0.0.0.0/0", "203.0.113.1"),
+    ("10.0.0.0/8", "10.255.0.1"),
+    ("10.20.0.0/16", "10.20.0.1"),
+    ("10.20.30.0/24", "10.20.30.1"),
+    ("192.168.1.0/24", "connected"),
+]
+destinations = ["10.20.30.40", "10.20.99.1", "10.1.1.1", "192.168.1.77", "8.8.8.8"]
+
+def best_route(table, address):
+    ip = ipaddress.ip_address(address)
+    best = None
+    for prefix, hop in table:
+        net = ipaddress.ip_network(prefix)
+        if ip in net and (best is None or net.prefixlen > best[0].prefixlen):
+            best = (net, hop)
+    return best
+
+for d in destinations:
+    net, hop = best_route(table, d)
+    print(f"{d} -> {hop} (via {net})")

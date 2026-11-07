@@ -144,3 +144,63 @@ Which port does SNMP use for polling (gets and sets)?
 = 161
 = udp 161
 ? Traps from devices go to 162.
+
+@@exercise Port and protocol lookup
+Write `lookup(port)` returning `(protocol, transport)` for the ports from the lesson, and `classify(port)` returning `well-known` (0-1023), `registered` (1024-49151) or `dynamic` (49152-65535). Print each port from the capture with its service (or `unknown`) and its range.
+@@lang python
+@@starter
+PORTS = {
+    20: ("FTP data", "TCP"), 21: ("FTP control", "TCP"), 22: ("SSH", "TCP"), 23: ("Telnet", "TCP"),
+    25: ("SMTP", "TCP"), 53: ("DNS", "TCP/UDP"), 67: ("DHCP server", "UDP"), 80: ("HTTP", "TCP"),
+    110: ("POP3", "TCP"), 123: ("NTP", "UDP"), 143: ("IMAP", "TCP"), 161: ("SNMP", "UDP"),
+    389: ("LDAP", "TCP"), 443: ("HTTPS", "TCP"), 445: ("SMB", "TCP"), 3389: ("RDP", "TCP"),
+}
+capture = [443, 53, 3389, 51544, 161, 8080, 22]
+
+def lookup(port):
+    raise NotImplementedError
+def classify(port):
+    raise NotImplementedError
+
+
+for port in capture:
+    found = lookup(port)
+    service = f"{found[0]} over {found[1]}" if found else "unknown"
+    print(f"{port}: {service} ({classify(port)})")
+@@expected
+443: HTTPS over TCP (well-known)
+53: DNS over TCP/UDP (well-known)
+3389: RDP over TCP (registered)
+51544: unknown (dynamic)
+161: SNMP over UDP (well-known)
+8080: unknown (registered)
+22: SSH over TCP (well-known)
+@@requires
+def lookup
+def classify
+49151
+@@hint
+Keep the ports in a dictionary of tuples; `.get` returns None for ports you don't know.
+@@solution
+PORTS = {
+    20: ("FTP data", "TCP"), 21: ("FTP control", "TCP"), 22: ("SSH", "TCP"), 23: ("Telnet", "TCP"),
+    25: ("SMTP", "TCP"), 53: ("DNS", "TCP/UDP"), 67: ("DHCP server", "UDP"), 80: ("HTTP", "TCP"),
+    110: ("POP3", "TCP"), 123: ("NTP", "UDP"), 143: ("IMAP", "TCP"), 161: ("SNMP", "UDP"),
+    389: ("LDAP", "TCP"), 443: ("HTTPS", "TCP"), 445: ("SMB", "TCP"), 3389: ("RDP", "TCP"),
+}
+capture = [443, 53, 3389, 51544, 161, 8080, 22]
+
+def lookup(port):
+    return PORTS.get(port)
+
+def classify(port):
+    if port <= 1023:
+        return "well-known"
+    if port <= 49151:
+        return "registered"
+    return "dynamic"
+
+for port in capture:
+    found = lookup(port)
+    service = f"{found[0]} over {found[1]}" if found else "unknown"
+    print(f"{port}: {service} ({classify(port)})")

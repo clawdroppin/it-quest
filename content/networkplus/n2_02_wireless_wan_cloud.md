@@ -103,3 +103,72 @@ VPC / VNet :: Your private network in AWS / Azure
 NAT gateway :: Outbound internet for private subnets
 security group vs NACL :: Stateful per instance vs stateless per subnet
 Direct Connect / ExpressRoute :: Private lines into AWS / Azure
+
+@@exercise Choose an SD-WAN path per application
+An SD-WAN edge has three links and measures each one. Write `best_link(app, links)` that picks, for each application, the cheapest link (lowest `cost`) that meets the app's needs: latency at or below `max_ms`, loss at or below `max_loss` %, and `up`. If none qualifies, fall back to the up link with the lowest latency and mark it `(degraded)`. Print the choice for each application, then again after the fibre link goes down.
+@@lang python
+@@starter
+links = {
+    "fibre": {"latency": 8, "loss": 0.1, "cost": 1, "up": True},
+    "mpls": {"latency": 12, "loss": 0.0, "cost": 3, "up": True},
+    "lte": {"latency": 45, "loss": 1.5, "cost": 2, "up": True},
+}
+apps = {
+    "voice": {"max_ms": 30, "max_loss": 0.5},
+    "erp": {"max_ms": 60, "max_loss": 0.2},
+    "backup": {"max_ms": 200, "max_loss": 2.0},
+}
+
+def best_link(app, links):
+    raise NotImplementedError
+
+
+for state in ["all links up", "fibre down"]:
+    if state == "fibre down":
+        links["fibre"]["up"] = False
+        links["mpls"]["loss"] = 0.8
+    print(state + ":")
+    for app in apps:
+        print(f"  {app}: {best_link(app, links)}")
+@@expected
+all links up:
+  voice: fibre
+  erp: fibre
+  backup: fibre
+fibre down:
+  voice: mpls (degraded)
+  erp: mpls (degraded)
+  backup: lte
+@@requires
+def best_link
+min(
+@@hint
+Filter the links that meet every requirement, then `min(..., key=cost)`. The fallback is a second `min` by latency over the links that are up.
+@@solution
+links = {
+    "fibre": {"latency": 8, "loss": 0.1, "cost": 1, "up": True},
+    "mpls": {"latency": 12, "loss": 0.0, "cost": 3, "up": True},
+    "lte": {"latency": 45, "loss": 1.5, "cost": 2, "up": True},
+}
+apps = {
+    "voice": {"max_ms": 30, "max_loss": 0.5},
+    "erp": {"max_ms": 60, "max_loss": 0.2},
+    "backup": {"max_ms": 200, "max_loss": 2.0},
+}
+
+def best_link(app, links):
+    need = apps[app]
+    good = [name for name, l in links.items()
+            if l["up"] and l["latency"] <= need["max_ms"] and l["loss"] <= need["max_loss"]]
+    if good:
+        return min(good, key=lambda name: links[name]["cost"])
+    up = [name for name, l in links.items() if l["up"]]
+    return min(up, key=lambda name: links[name]["latency"]) + " (degraded)"
+
+for state in ["all links up", "fibre down"]:
+    if state == "fibre down":
+        links["fibre"]["up"] = False
+        links["mpls"]["loss"] = 0.8
+    print(state + ":")
+    for app in apps:
+        print(f"  {app}: {best_link(app, links)}")

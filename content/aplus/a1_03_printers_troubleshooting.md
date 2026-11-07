@@ -115,3 +115,81 @@ impact printer :: Pins and ribbon; multi-part forms
 Which laser printing step comes right after "exposing"?
 = developing
 ? Toner is attracted to the areas the laser discharged.
+
+@@exercise Laser printer symptom lookup
+Write `diagnose(symptom)` that returns the likely cause for a laser printer symptom, using the lesson's table:
+
+- `smudges` (toner rubs off) → `fuser`
+- `ghosting` (faint repeated image) → `drum or cleaning`
+- `vertical lines` → `drum (scratched) or toner`
+- `blank pages` → `transfer corona or toner`
+- `paper jams` → `pickup rollers`
+- anything else → `unknown: follow the troubleshooting method`
+
+Also write `count_by_part(tickets)` that counts tickets per suspected part and prints them from most to fewest (ties alphabetically).
+@@lang python
+@@starter
+CAUSES = {
+    "smudges": "fuser",
+    "ghosting": "drum or cleaning",
+    "vertical lines": "drum (scratched) or toner",
+    "blank pages": "transfer corona or toner",
+    "paper jams": "pickup rollers",
+}
+tickets = ["smudges", "paper jams", "ghosting", "smudges", "wifi drops", "paper jams", "smudges"]
+
+def diagnose(symptom):
+    raise NotImplementedError
+def count_by_part(tickets):
+    raise NotImplementedError
+
+
+for t in tickets:
+    print(f"{t}: {diagnose(t)}")
+print("Parts to stock:")
+for part, n in count_by_part(tickets):
+    print(f"  {n} x {part}")
+@@expected
+smudges: fuser
+paper jams: pickup rollers
+ghosting: drum or cleaning
+smudges: fuser
+wifi drops: unknown: follow the troubleshooting method
+paper jams: pickup rollers
+smudges: fuser
+Parts to stock:
+  3 x fuser
+  2 x pickup rollers
+  1 x drum or cleaning
+  1 x unknown: follow the troubleshooting method
+@@requires
+def diagnose
+def count_by_part
+.get(
+@@hint
+A dictionary with `.get(symptom, default)` handles the unknown case in one line.
+@@solution
+CAUSES = {
+    "smudges": "fuser",
+    "ghosting": "drum or cleaning",
+    "vertical lines": "drum (scratched) or toner",
+    "blank pages": "transfer corona or toner",
+    "paper jams": "pickup rollers",
+}
+tickets = ["smudges", "paper jams", "ghosting", "smudges", "wifi drops", "paper jams", "smudges"]
+
+def diagnose(symptom):
+    return CAUSES.get(symptom, "unknown: follow the troubleshooting method")
+
+def count_by_part(tickets):
+    counts = {}
+    for t in tickets:
+        part = diagnose(t)
+        counts[part] = counts.get(part, 0) + 1
+    return sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+
+for t in tickets:
+    print(f"{t}: {diagnose(t)}")
+print("Parts to stock:")
+for part, n in count_by_part(tickets):
+    print(f"  {n} x {part}")

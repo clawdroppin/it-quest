@@ -132,3 +132,77 @@ workgroup vs domain :: Local accounts per PC vs central accounts and policy
 Which command repairs protected Windows system files?
 = sfc /scannow
 ? System File Checker.
+
+@@exercise Which Windows edition does each user need?
+Write `edition_for(needs)` that returns the cheapest edition that covers every need, using the lesson's table. Home covers none of the business features. Pro adds `domain join`, `BitLocker`, `Group Policy`, `Remote Desktop host` and `Hyper-V`. Enterprise adds `volume licensing` and `advanced security` on top of Pro.
+
+Also write `can_run_windows_11(pc)` returning the list of failed requirements (4 GB RAM, 64 GB storage, TPM 2.0, UEFI with Secure Boot, 64-bit CPU). Print each user's edition and whether their PC is ready.
+@@lang python
+@@starter
+PRO = {"domain join", "BitLocker", "Group Policy", "Remote Desktop host", "Hyper-V"}
+ENTERPRISE = PRO | {"volume licensing", "advanced security"}
+users = [
+    ("Aiko (home office)", set(), {"ram": 8, "disk": 256, "tpm": 2.0, "secure_boot": True, "bits": 64}),
+    ("Ben (accounts)", {"domain join", "BitLocker"}, {"ram": 4, "disk": 128, "tpm": 1.2, "secure_boot": True, "bits": 64}),
+    ("Chika (developer)", {"Hyper-V", "domain join"}, {"ram": 16, "disk": 512, "tpm": 2.0, "secure_boot": True, "bits": 64}),
+    ("Dev (security team)", {"advanced security", "BitLocker"}, {"ram": 2, "disk": 32, "tpm": 0, "secure_boot": False, "bits": 32}),
+]
+
+def edition_for(needs):
+    raise NotImplementedError
+def can_run_windows_11(pc):
+    raise NotImplementedError
+
+
+for name, needs, pc in users:
+    failed = can_run_windows_11(pc)
+    ready = "ready for Windows 11" if not failed else "not ready: " + ", ".join(failed)
+    print(f"{name}: {edition_for(needs)}, {ready}")
+@@expected
+Aiko (home office): Home, ready for Windows 11
+Ben (accounts): Pro, not ready: TPM 2.0
+Chika (developer): Pro, ready for Windows 11
+Dev (security team): Enterprise, not ready: RAM, storage, TPM 2.0, Secure Boot, 64-bit CPU
+@@requires
+def edition_for
+def can_run_windows_11
+<=
+@@hint
+Sets make this short: `needs <= PRO` is true when every need is a Pro feature.
+@@solution
+PRO = {"domain join", "BitLocker", "Group Policy", "Remote Desktop host", "Hyper-V"}
+ENTERPRISE = PRO | {"volume licensing", "advanced security"}
+users = [
+    ("Aiko (home office)", set(), {"ram": 8, "disk": 256, "tpm": 2.0, "secure_boot": True, "bits": 64}),
+    ("Ben (accounts)", {"domain join", "BitLocker"}, {"ram": 4, "disk": 128, "tpm": 1.2, "secure_boot": True, "bits": 64}),
+    ("Chika (developer)", {"Hyper-V", "domain join"}, {"ram": 16, "disk": 512, "tpm": 2.0, "secure_boot": True, "bits": 64}),
+    ("Dev (security team)", {"advanced security", "BitLocker"}, {"ram": 2, "disk": 32, "tpm": 0, "secure_boot": False, "bits": 32}),
+]
+
+def edition_for(needs):
+    if not needs:
+        return "Home"
+    if needs <= PRO:
+        return "Pro"
+    if needs <= ENTERPRISE:
+        return "Enterprise"
+    return "no edition covers: " + ", ".join(sorted(needs - ENTERPRISE))
+
+def can_run_windows_11(pc):
+    failed = []
+    if pc["ram"] < 4:
+        failed.append("RAM")
+    if pc["disk"] < 64:
+        failed.append("storage")
+    if pc["tpm"] < 2.0:
+        failed.append("TPM 2.0")
+    if not pc["secure_boot"]:
+        failed.append("Secure Boot")
+    if pc["bits"] != 64:
+        failed.append("64-bit CPU")
+    return failed
+
+for name, needs, pc in users:
+    failed = can_run_windows_11(pc)
+    ready = "ready for Windows 11" if not failed else "not ready: " + ", ".join(failed)
+    print(f"{name}: {edition_for(needs)}, {ready}")

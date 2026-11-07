@@ -111,3 +111,51 @@ measured service :: Pay per use
 multitenancy :: Many customers share the same hardware
 hybrid cloud :: On-premises/private plus public cloud, connected
 sandbox :: Isolated environment for testing untrusted software
+
+@@exercise Will these VMs fit on the host?
+A host has 32 GB of RAM and 8 CPU cores. The hypervisor itself needs 4 GB. Write `plan(vms)` that adds VMs in order and returns the names that fit and the names that don't. A VM fits if the remaining RAM is enough (RAM can't be overcommitted here) and the total vCPUs stay within 2 per physical core (16).
+
+Print the VMs that fit, the ones that don't, and the RAM left over.
+@@lang python
+@@starter
+HOST_RAM, HOST_CORES, HYPERVISOR_RAM = 32, 8, 4
+vms = [("dc01", 4, 2), ("web01", 8, 4), ("sql01", 12, 6), ("test01", 8, 2), ("jump01", 2, 2), ("build01", 2, 4)]
+
+def plan(vms):
+    raise NotImplementedError
+
+
+fits, rejected, ram_left = plan(vms)
+print("Fits:", ", ".join(fits))
+print("Doesn't fit:", ", ".join(rejected))
+print(f"RAM left: {ram_left} GB")
+@@expected
+Fits: dc01, web01, sql01, jump01
+Doesn't fit: test01, build01
+RAM left: 2 GB
+@@requires
+def plan
+HOST_CORES * 2
+@@hint
+Keep two running totals, RAM left and vCPUs used, and only update them when a VM is accepted.
+@@solution
+HOST_RAM, HOST_CORES, HYPERVISOR_RAM = 32, 8, 4
+vms = [("dc01", 4, 2), ("web01", 8, 4), ("sql01", 12, 6), ("test01", 8, 2), ("jump01", 2, 2), ("build01", 2, 4)]
+
+def plan(vms):
+    ram_left = HOST_RAM - HYPERVISOR_RAM
+    vcpus = 0
+    fits, rejected = [], []
+    for name, ram, cpu in vms:
+        if ram <= ram_left and vcpus + cpu <= HOST_CORES * 2:
+            fits.append(name)
+            ram_left -= ram
+            vcpus += cpu
+        else:
+            rejected.append(name)
+    return fits, rejected, ram_left
+
+fits, rejected, ram_left = plan(vms)
+print("Fits:", ", ".join(fits))
+print("Doesn't fit:", ", ".join(rejected))
+print(f"RAM left: {ram_left} GB")

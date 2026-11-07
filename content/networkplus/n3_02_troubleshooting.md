@@ -118,3 +118,69 @@ Which command shows the routing table on Windows?
 = route print
 = netstat -r
 ? On Linux: `ip route`.
+
+@@exercise Read the ping and traceroute results
+Apply the troubleshooting ladder to test results. Write `diagnose(results)`:
+
+- loopback (127.0.0.1) fails → `TCP/IP stack problem`
+- own IP fails → `NIC or driver problem`
+- gateway fails → `local network problem (cable, switch, VLAN)`
+- an internet IP fails → `routing or ISP problem beyond the gateway`
+- a name fails but the IP works → `DNS problem`
+- everything works → `network OK: check the application`
+
+Check the tests in that order and report the first failure.
+@@lang python
+@@starter
+cases = {
+    "PC-1": {"loopback": True, "own_ip": True, "gateway": False, "internet_ip": False, "name": False},
+    "PC-2": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": True, "name": False},
+    "PC-3": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": True, "name": True},
+    "PC-4": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": False, "name": False},
+}
+LADDER = [
+    ("loopback", "TCP/IP stack problem"),
+    ("own_ip", "NIC or driver problem"),
+    ("gateway", "local network problem (cable, switch, VLAN)"),
+    ("internet_ip", "routing or ISP problem beyond the gateway"),
+    ("name", "DNS problem"),
+]
+
+def diagnose(results):
+    raise NotImplementedError
+
+
+for pc, results in cases.items():
+    print(f"{pc}: {diagnose(results)}")
+@@expected
+PC-1: local network problem (cable, switch, VLAN)
+PC-2: DNS problem
+PC-3: network OK: check the application
+PC-4: routing or ISP problem beyond the gateway
+@@requires
+def diagnose
+@@hint
+Keep the tests in ladder order in a list and return at the first one that failed.
+@@solution
+cases = {
+    "PC-1": {"loopback": True, "own_ip": True, "gateway": False, "internet_ip": False, "name": False},
+    "PC-2": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": True, "name": False},
+    "PC-3": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": True, "name": True},
+    "PC-4": {"loopback": True, "own_ip": True, "gateway": True, "internet_ip": False, "name": False},
+}
+LADDER = [
+    ("loopback", "TCP/IP stack problem"),
+    ("own_ip", "NIC or driver problem"),
+    ("gateway", "local network problem (cable, switch, VLAN)"),
+    ("internet_ip", "routing or ISP problem beyond the gateway"),
+    ("name", "DNS problem"),
+]
+
+def diagnose(results):
+    for test, meaning in LADDER:
+        if not results[test]:
+            return meaning
+    return "network OK: check the application"
+
+for pc, results in cases.items():
+    print(f"{pc}: {diagnose(results)}")

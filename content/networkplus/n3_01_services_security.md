@@ -144,3 +144,58 @@ VLAN hopping :: Reaching other VLANs by double tagging or switch spoofing
 Which DNS record type maps a name to an IPv6 address?
 = AAAA
 ? "Quad A".
+
+@@exercise Resolve names from a zone file
+Write `resolve(zone, name, rtype)` that answers DNS queries from a small zone. Follow CNAME records (up to 5 hops) until you reach the requested type. Return the answers as a list, or `NXDOMAIN` if the name doesn't exist. Print each query's answer.
+@@lang python
+@@starter
+zone = [
+    ("example.com", "A", "203.0.113.10"),
+    ("example.com", "MX", "10 mail.example.com"),
+    ("www.example.com", "CNAME", "example.com"),
+    ("mail.example.com", "A", "203.0.113.25"),
+    ("example.com", "TXT", "v=spf1 mx -all"),
+    ("shop.example.com", "CNAME", "www.example.com"),
+]
+queries = [("www.example.com", "A"), ("shop.example.com", "A"), ("example.com", "MX"), ("ftp.example.com", "A")]
+
+def resolve(zone, name, rtype):
+    raise NotImplementedError
+
+
+for name, rtype in queries:
+    print(f"{name} {rtype}: {resolve(zone, name, rtype)}")
+@@expected
+www.example.com A: ['203.0.113.10']
+shop.example.com A: ['203.0.113.10']
+example.com MX: ['10 mail.example.com']
+ftp.example.com A: NXDOMAIN
+@@requires
+def resolve
+CNAME
+@@hint
+Look for the requested type first; if there's none, look for a CNAME, switch to its target and try again.
+@@solution
+zone = [
+    ("example.com", "A", "203.0.113.10"),
+    ("example.com", "MX", "10 mail.example.com"),
+    ("www.example.com", "CNAME", "example.com"),
+    ("mail.example.com", "A", "203.0.113.25"),
+    ("example.com", "TXT", "v=spf1 mx -all"),
+    ("shop.example.com", "CNAME", "www.example.com"),
+]
+queries = [("www.example.com", "A"), ("shop.example.com", "A"), ("example.com", "MX"), ("ftp.example.com", "A")]
+
+def resolve(zone, name, rtype):
+    for _hop in range(5):
+        answers = [v for n, t, v in zone if n == name and t == rtype]
+        if answers:
+            return answers
+        cname = [v for n, t, v in zone if n == name and t == "CNAME"]
+        if not cname:
+            break
+        name = cname[0]
+    return "NXDOMAIN" if not any(n == name for n, _t, _v in zone) else []
+
+for name, rtype in queries:
+    print(f"{name} {rtype}: {resolve(zone, name, rtype)}")

@@ -105,3 +105,64 @@ in-place upgrade :: New OS version keeping apps and files
 Which Linux command shows disk free space in human-readable units?
 = df -h
 ? `du -sh folder` shows how much a folder uses.
+
+@@exercise Translate commands between Windows, macOS and Linux
+Technicians often know the Windows command but not the Linux or macOS one. Write `translate(command, target)` using this table (target is `"linux"` or `"macos"`):
+
+| Windows | Linux | macOS |
+|---|---|---|
+| `ipconfig` | `ip a` | `ifconfig` |
+| `dir` | `ls -l` | `ls -l` |
+| `tasklist` | `ps aux` | `ps aux` |
+| `ping -t` | `ping` | `ping` |
+| `chkdsk` | `fsck` | `diskutil verifyVolume` |
+| `shutdown /r` | `sudo reboot` | `sudo shutdown -r now` |
+
+Unknown commands return `no direct equivalent`.
+@@lang python
+@@starter
+TABLE = {
+    "ipconfig": ("ip a", "ifconfig"),
+    "dir": ("ls -l", "ls -l"),
+    "tasklist": ("ps aux", "ps aux"),
+    "ping -t": ("ping", "ping"),
+    "chkdsk": ("fsck", "diskutil verifyVolume"),
+    "shutdown /r": ("sudo reboot", "sudo shutdown -r now"),
+}
+questions = [("ipconfig", "linux"), ("ipconfig", "macos"), ("chkdsk", "macos"), ("shutdown /r", "linux"), ("gpupdate", "linux")]
+
+def translate(command, target):
+    raise NotImplementedError
+
+
+for cmd, target in questions:
+    print(f"{cmd} on {target}: {translate(cmd, target)}")
+@@expected
+ipconfig on linux: ip a
+ipconfig on macos: ifconfig
+chkdsk on macos: diskutil verifyVolume
+shutdown /r on linux: sudo reboot
+gpupdate on linux: no direct equivalent
+@@requires
+def translate
+@@hint
+Store each row as a tuple `(linux, macos)` and unpack it.
+@@solution
+TABLE = {
+    "ipconfig": ("ip a", "ifconfig"),
+    "dir": ("ls -l", "ls -l"),
+    "tasklist": ("ps aux", "ps aux"),
+    "ping -t": ("ping", "ping"),
+    "chkdsk": ("fsck", "diskutil verifyVolume"),
+    "shutdown /r": ("sudo reboot", "sudo shutdown -r now"),
+}
+questions = [("ipconfig", "linux"), ("ipconfig", "macos"), ("chkdsk", "macos"), ("shutdown /r", "linux"), ("gpupdate", "linux")]
+
+def translate(command, target):
+    if command not in TABLE:
+        return "no direct equivalent"
+    linux, macos = TABLE[command]
+    return linux if target == "linux" else macos
+
+for cmd, target in questions:
+    print(f"{cmd} on {target}: {translate(cmd, target)}")

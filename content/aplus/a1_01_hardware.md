@@ -112,3 +112,79 @@ OLED :: Each pixel emits its own light; no backlight
 How many pins does a DDR5 desktop DIMM have?
 = 288
 ? Same count as DDR4, different notch.
+
+@@exercise Check a RAM upgrade
+A user wants more memory. For each PC, decide whether the requested sticks can be installed. Write `check(pc, sticks)` returning a list of problems (empty means OK):
+
+- every stick's type must match the board (`"DDR4"` or `"DDR5"`): `wrong type: DDR5 in a DDR4 board`
+- there must be enough slots: `needs 4 slots, board has 2`
+- the total must not exceed the board's maximum: `64 GB is over the 32 GB maximum`
+
+Print `OK` or the problems joined with `; `. Then print the total GB for the PCs that pass.
+@@lang python
+@@starter
+pcs = [
+    {"name": "PC-101", "type": "DDR4", "slots": 4, "max_gb": 64},
+    {"name": "PC-102", "type": "DDR4", "slots": 2, "max_gb": 32},
+    {"name": "LT-201", "type": "DDR5", "slots": 2, "max_gb": 64},
+]
+requests = {
+    "PC-101": [("DDR4", 16), ("DDR4", 16)],
+    "PC-102": [("DDR4", 16), ("DDR4", 16), ("DDR4", 16), ("DDR4", 16)],
+    "LT-201": [("DDR4", 32), ("DDR5", 32)],
+}
+
+def check(pc, sticks):
+    raise NotImplementedError
+
+
+passed = 0
+for pc in pcs:
+    sticks = requests[pc["name"]]
+    problems = check(pc, sticks)
+    print(f"{pc['name']}: {'OK' if not problems else '; '.join(problems)}")
+    if not problems:
+        passed += sum(size for _kind, size in sticks)
+print(f"Total installed in passing PCs: {passed} GB")
+@@expected
+PC-101: OK
+PC-102: needs 4 slots, board has 2; 64 GB is over the 32 GB maximum
+LT-201: wrong type: DDR4 in a DDR5 board
+Total installed in passing PCs: 32 GB
+@@requires
+def check
+sum(
+@@hint
+Collect problems in a list instead of returning at the first one, so the technician sees everything at once.
+@@solution
+pcs = [
+    {"name": "PC-101", "type": "DDR4", "slots": 4, "max_gb": 64},
+    {"name": "PC-102", "type": "DDR4", "slots": 2, "max_gb": 32},
+    {"name": "LT-201", "type": "DDR5", "slots": 2, "max_gb": 64},
+]
+requests = {
+    "PC-101": [("DDR4", 16), ("DDR4", 16)],
+    "PC-102": [("DDR4", 16), ("DDR4", 16), ("DDR4", 16), ("DDR4", 16)],
+    "LT-201": [("DDR4", 32), ("DDR5", 32)],
+}
+
+def check(pc, sticks):
+    problems = []
+    for kind, _size in sticks:
+        if kind != pc["type"]:
+            problems.append(f"wrong type: {kind} in a {pc['type']} board")
+    if len(sticks) > pc["slots"]:
+        problems.append(f"needs {len(sticks)} slots, board has {pc['slots']}")
+    total = sum(size for _kind, size in sticks)
+    if total > pc["max_gb"]:
+        problems.append(f"{total} GB is over the {pc['max_gb']} GB maximum")
+    return problems
+
+passed = 0
+for pc in pcs:
+    sticks = requests[pc["name"]]
+    problems = check(pc, sticks)
+    print(f"{pc['name']}: {'OK' if not problems else '; '.join(problems)}")
+    if not problems:
+        passed += sum(size for _kind, size in sticks)
+print(f"Total installed in passing PCs: {passed} GB")

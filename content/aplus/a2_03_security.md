@@ -127,3 +127,106 @@ What is the last step of the CompTIA malware removal process? (two words)
 = educate the end user
 = educate end user
 ? Most infections start with a click; teaching prevents the next one.
+
+@@exercise Name the social engineering attack
+Write `classify(report)` that names the attack described in each incident report, checking these clues in order (the report is lowercased first):
+
+1. `ceo`, `cfo` or `executive` together with `email` → `whaling`
+2. `email` → `phishing`
+3. `text message` or `sms` → `smishing`
+4. `phone` or `call` → `vishing`
+5. `followed` or `held the door` → `tailgating`
+6. `over my shoulder` or `watched me type` → `shoulder surfing`
+7. `bin` or `trash` → `dumpster diving`
+8. otherwise → `unknown: escalate to security`
+
+Then print how many reports there were of each attack, most common first (ties alphabetically).
+@@lang python
+@@starter
+reports = [
+    "Email asking me to reset my password on a strange site",
+    "Someone followed me through the badge door without scanning",
+    "Text message said my parcel was held and asked for a card number",
+    "Email to the CFO asking for an urgent wire transfer",
+    "A caller said he was from IT and needed my password",
+    "A visitor watched me type my PIN at the printer",
+    "Old invoices with customer data were found in the trash outside",
+    "Email with an invoice attachment from an unknown sender",
+    "USB stick left in the car park",
+]
+
+def classify(report):
+    raise NotImplementedError
+
+
+counts = {}
+for r in reports:
+    kind = classify(r)
+    counts[kind] = counts.get(kind, 0) + 1
+    print(f"{kind}: {r}")
+print("Totals:")
+for kind, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+    print(f"  {n} {kind}")
+@@expected
+phishing: Email asking me to reset my password on a strange site
+tailgating: Someone followed me through the badge door without scanning
+smishing: Text message said my parcel was held and asked for a card number
+whaling: Email to the CFO asking for an urgent wire transfer
+vishing: A caller said he was from IT and needed my password
+shoulder surfing: A visitor watched me type my PIN at the printer
+dumpster diving: Old invoices with customer data were found in the trash outside
+phishing: Email with an invoice attachment from an unknown sender
+unknown: escalate to security: USB stick left in the car park
+Totals:
+  2 phishing
+  1 dumpster diving
+  1 shoulder surfing
+  1 smishing
+  1 tailgating
+  1 unknown: escalate to security
+  1 vishing
+  1 whaling
+@@requires
+def classify
+.lower()
+@@hint
+Order matters: check the whaling clues before plain email, or every whaling report becomes phishing.
+@@solution
+reports = [
+    "Email asking me to reset my password on a strange site",
+    "Someone followed me through the badge door without scanning",
+    "Text message said my parcel was held and asked for a card number",
+    "Email to the CFO asking for an urgent wire transfer",
+    "A caller said he was from IT and needed my password",
+    "A visitor watched me type my PIN at the printer",
+    "Old invoices with customer data were found in the trash outside",
+    "Email with an invoice attachment from an unknown sender",
+    "USB stick left in the car park",
+]
+
+def classify(report):
+    text = report.lower()
+    if any(w in text for w in ("ceo", "cfo", "executive")) and "email" in text:
+        return "whaling"
+    if "email" in text:
+        return "phishing"
+    if "text message" in text or "sms" in text:
+        return "smishing"
+    if "phone" in text or "call" in text:
+        return "vishing"
+    if "followed" in text or "held the door" in text:
+        return "tailgating"
+    if "over my shoulder" in text or "watched me type" in text:
+        return "shoulder surfing"
+    if "bin" in text or "trash" in text:
+        return "dumpster diving"
+    return "unknown: escalate to security"
+
+counts = {}
+for r in reports:
+    kind = classify(r)
+    counts[kind] = counts.get(kind, 0) + 1
+    print(f"{kind}: {r}")
+print("Totals:")
+for kind, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+    print(f"  {n} {kind}")

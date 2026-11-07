@@ -118,3 +118,60 @@ What is the maximum length of a Cat 6a Ethernet run, in metres?
 = 100m
 = 100 m
 ? The 100 m limit applies to all common twisted-pair categories.
+
+@@exercise Pick the right cable
+Write `cable_for(distance_m, interference, speed_gbps)` that recommends a cable:
+
+- over 100 m: `fiber` (copper Ethernet is limited to 100 m)
+- heavy interference (`True`): `STP Cat 6a` (shielded)
+- 10 Gbps or more: `Cat 6a`
+- otherwise: `Cat 6`
+
+Print each run with its recommendation.
+@@lang python
+@@starter
+runs = [
+    ("Office to switch", 35, False, 1),
+    ("Server rack", 15, False, 10),
+    ("Factory floor", 60, True, 1),
+    ("Building to building", 240, False, 10),
+    ("Lab bench", 90, False, 1),
+]
+
+def cable_for(distance_m, interference, speed_gbps):
+    raise NotImplementedError
+
+
+for name, distance, noisy, speed in runs:
+    print(f"{name} ({distance} m, {speed} Gbps): {cable_for(distance, noisy, speed)}")
+@@expected
+Office to switch (35 m, 1 Gbps): Cat 6
+Server rack (15 m, 10 Gbps): Cat 6a
+Factory floor (60 m, 1 Gbps): STP Cat 6a
+Building to building (240 m, 10 Gbps): fiber
+Lab bench (90 m, 1 Gbps): Cat 6
+@@requires
+def cable_for
+100
+@@hint
+Check the distance first: no copper cable fixes a 240 m run.
+@@solution
+runs = [
+    ("Office to switch", 35, False, 1),
+    ("Server rack", 15, False, 10),
+    ("Factory floor", 60, True, 1),
+    ("Building to building", 240, False, 10),
+    ("Lab bench", 90, False, 1),
+]
+
+def cable_for(distance_m, interference, speed_gbps):
+    if distance_m > 100:
+        return "fiber"
+    if interference:
+        return "STP Cat 6a"
+    if speed_gbps >= 10:
+        return "Cat 6a"
+    return "Cat 6"
+
+for name, distance, noisy, speed in runs:
+    print(f"{name} ({distance} m, {speed} Gbps): {cable_for(distance, noisy, speed)}")
