@@ -122,6 +122,12 @@ In iced, how does a button look different when hovered?
 - With a separate HoverButton widget
 ? Styles are functions of theme and status.
 
+@@drill
+Which egui type holds the colours of a theme?
+= Visuals
+= egui::Visuals
+? Visuals::dark() and Visuals::light().
+
 @@flashcards
 design tokens :: named design decisions: colours, spacing, radius, type sizes
 bg / surface / text / muted / accent :: core colour tokens

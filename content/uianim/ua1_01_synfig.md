@@ -119,6 +119,13 @@ A loading spinner should rotate forever at a constant speed. Which Synfig conver
 - Bone Link
 ? Set the rotation's rate, e.g. 360° per second.
 
+@@drill
+What does Synfig use to deform vector shapes like a skeleton?
+= bones
+= skeleton
+= skeleton layer
+? Bones move linked vertices.
+
 @@flashcards
 Synfig Studio :: open-source 2D vector animation suite
 Animation mode :: changes create waypoints (red border)

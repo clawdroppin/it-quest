@@ -113,6 +113,12 @@ Why convert to black and white with Luminance (or Mono Mixer) rather than Averag
 - Average makes colour images
 ? Different weights give different moods, like colour filters on film.
 
+@@drill
+Which graph shows how many pixels there are at each brightness?
+= histogram
+= the histogram
+? Check it before correcting colours.
+
 @@flashcards
 histogram :: count of pixels per brightness, black left, white right
 clipping :: detail lost to pure black or white

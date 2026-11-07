@@ -109,6 +109,12 @@ How should a disabled button differ from an enabled one?
 - Red, to signal an error
 ? Disabled states that don't explain themselves frustrate users; sometimes it's better to keep the button enabled and validate on click.
 
+@@drill
+Which button variant is used for the single most important action on a screen?
+= primary
+= primary button
+? Secondary and tertiary are for less important actions.
+
 @@flashcards
 primary / secondary / ghost / destructive :: button variants by importance
 icon-only button :: needs a tooltip and an accessible label

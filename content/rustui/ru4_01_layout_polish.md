@@ -91,6 +91,11 @@ A delete action happens instantly. What's the friendliest way to protect against
 - Ask for a password
 ? Undo is faster for the common case and still safe.
 
+@@drill
+Which key should move focus to the next control?
+= Tab
+? Shift+Tab moves back.
+
 @@flashcards
 gap / padding :: space between children / around them
 grow weight :: share of leftover space (FillPortion, stretch)

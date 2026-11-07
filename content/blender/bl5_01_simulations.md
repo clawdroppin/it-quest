@@ -104,6 +104,11 @@ How do CG shadows land on a real floor in a VFX shot rendered with Cycles?
 - Turn off the world light
 ? Composite the result over the plate.
 
+@@drill
+What's the name of Blender's fluid, fire and smoke simulation system?
+= Mantaflow
+? Simulations are baked to disk before rendering.
+
 @@flashcards
 simulation step :: apply forces, update velocity, update position
 substeps :: more, smaller time steps for accuracy

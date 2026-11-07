@@ -126,6 +126,12 @@ Where would you look for failed SSH logins on Ubuntu?
 - /var/spool/cron
 ? On Red Hat it's /var/log/secure.
 
+@@drill
+Which command starts a systemd service and enables it at boot?
+= systemctl enable --now
+= systemctl enable --now <service>
+? systemctl enable --now nginx.
+
 @@flashcards
 useradd -m -s :: Create a user with a home and shell
 usermod -aG group user :: Add a user to a group (append!)

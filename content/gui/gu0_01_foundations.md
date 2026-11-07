@@ -205,6 +205,13 @@ Which tkinter layout manager is best for a form with labels and inputs?
 - None, use pixel positions
 ? `grid` puts labels in one column and inputs in the next, and `sticky` plus `weight` let inputs stretch.
 
+@@drill
+What's the name of the loop that waits for events and runs their handlers?
+= event loop
+= the event loop
+= main loop
+? Blocking it freezes the window.
+
 @@flashcards
 widget / control :: a building block of a GUI: button, label, text box, list
 event :: something that happens: click, key press, timer, window closing

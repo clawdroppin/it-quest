@@ -111,6 +111,12 @@ What does Path → Object to Path do to a text object?
 - Adds an outline stroke to the text
 ? Do it on a copy for logos and icons that must render the same everywhere.
 
+@@drill
+Which Inkscape save option strips editor data for a clean SVG?
+= Optimized SVG
+= plain svg
+? Plain SVG also drops Inkscape-specific data.
+
 @@flashcards
 Node tool (N) :: edit path nodes and handles
 cusp / smooth / symmetric :: node types

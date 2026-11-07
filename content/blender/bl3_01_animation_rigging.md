@@ -94,6 +94,11 @@ What does Ctrl+P → With Automatic Weights do?
 - Bakes physics
 ? Fix problem areas afterwards in Weight Paint mode.
 
+@@drill
+Which key inserts a keyframe on the hovered property or selected object?
+= I
+? The timeline shows keyframes as diamonds.
+
 @@flashcards
 I / Alt+I :: insert / delete keyframe
 Auto Keying :: record every change as keyframes

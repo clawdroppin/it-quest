@@ -119,6 +119,11 @@ What does Cryptomatte provide?
 - A camera lens model
 ? Pick objects in the compositor to isolate them.
 
+@@drill
+Which shader node is Blender's all-purpose physically based material?
+= Principled BSDF
+? It covers most real-world materials.
+
 @@flashcards
 EEVEE / Cycles / Workbench :: real-time, path traced, viewport engines
 Principled BSDF :: all-purpose PBR shader

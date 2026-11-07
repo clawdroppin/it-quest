@@ -208,5 +208,11 @@ Persistent=true
 
 [Install]
 WantedBy=timers.target
+
+@@drill
+Which Ubuntu firewall tool allows SSH with `allow OpenSSH`?
+= ufw
+? ufw allow OpenSSH, then ufw enable.
+
 @@text
 🎉 Snapshot, provision, verify, break, fix, document: that's the real job. Put `LAB.md`, the scripts and your lab-log notes on GitHub as **"Hardened Ubuntu web server"**, with the before/after output of `ss -tulpn` and lynis' hardening index. Then try the same with Ansible (the Linux+ automation lesson has a starter playbook).

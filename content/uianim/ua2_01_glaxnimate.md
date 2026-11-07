@@ -113,6 +113,11 @@ Which Glaxnimate/Lottie feature makes a checkmark "draw itself"?
 - Opacity
 ? The stroke reveals along its path.
 
+@@drill
+Which JSON-based animation format does Glaxnimate export for apps?
+= Lottie
+? Telegram stickers use a compressed variant (.tgs).
+
 @@flashcards
 Glaxnimate :: open-source vector animation editor for Lottie, SVG and .tgs
 Bodymovin :: the After Effects exporter Lottie came from

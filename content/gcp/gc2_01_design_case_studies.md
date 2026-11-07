@@ -89,6 +89,12 @@ The question says the company wants to move "as quickly as possible" and moderni
 - Move only the data
 ? Time words matter: quick now, modernize afterwards.
 
+@@drill
+Which GCP service is a fully managed, globally consistent relational database?
+= Cloud Spanner
+= Spanner
+? Cloud SQL is regional; Spanner scales globally.
+
 @@flashcards
 case study parts :: overview, solution concept, environment, business and technical requirements
 "minimize operational overhead" :: managed or serverless services

@@ -215,6 +215,13 @@ What does a canary release do?
 - Tests the release in a separate cluster
 ? Argo Rollouts and Flagger automate the steps and the metric checks.
 
+@@drill
+What's the name of the property that running a playbook twice changes nothing the second time?
+= idempotency
+= idempotent
+= idempotence
+? Describe the desired state, not the steps.
+
 @@flashcards
 idempotent :: same result however many times it runs
 declarative :: describe the desired state, the tool works out the steps

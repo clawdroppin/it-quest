@@ -117,6 +117,11 @@ What is a typical integrated loudness target for YouTube and Spotify?
 - −40 LUFS
 ? EBU R128 broadcast uses −23 LUFS.
 
+@@drill
+Which unit measures loudness for streaming platforms?
+= LUFS
+? Many platforms target about -14 LUFS.
+
 @@flashcards
 Fairlight :: Resolve's audio workstation page
 clip gain vs fader :: per-clip level vs track mix level

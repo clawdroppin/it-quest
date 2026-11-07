@@ -231,6 +231,11 @@ Why must a long task in a desktop GUI run off the UI thread?
 - The operating system forbids file access from the UI thread
 ? Run the work on a worker thread or async task and marshal the result back to the UI thread.
 
+@@drill
+Which XML-based language describes WPF user interfaces?
+= XAML
+? Code-behind or a view model holds the logic.
+
 @@flashcards
 WinForms :: classic C# Windows GUI: controls with properties and `+=` event handlers
 WPF :: C# + XAML; draws everything itself, so it's fully styleable and animatable

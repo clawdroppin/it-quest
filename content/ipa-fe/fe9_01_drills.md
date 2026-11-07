@@ -702,5 +702,12 @@ def main(argv):
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
+
+@@drill
+What is the worst-case number of comparisons for binary search on 1,024 sorted items?
+= 10
+= 11
+? log2(1024) = 10 halvings; 11 comparisons counting the final check.
+
 @@text
 🎉 Ten classic algorithms, written and traced. Do one IPA 科目B sample question set (IPA publishes them on its site) under time pressure next. 合格を目指して頑張ってください!

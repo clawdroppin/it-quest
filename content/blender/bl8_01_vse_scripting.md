@@ -124,6 +124,12 @@ How can you find the Python path of any button?
 - It's not possible
 ? Then copy the call into your script.
 
+@@drill
+What does VSE stand for in Blender?
+= video sequence editor
+= video sequencer
+? Blender's built-in video editor.
+
 @@flashcards
 VSE :: Blender's Video Sequence Editor
 channels :: tracks; higher channels are on top

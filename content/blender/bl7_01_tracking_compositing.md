@@ -96,6 +96,12 @@ In the "over" operation with premultiplied alpha, what is the result?
 - bg × fg alpha
 ? Premultiplied colour already includes alpha.
 
+@@drill
+Which Blender editor tracks features in video footage?
+= Movie Clip Editor
+= movie clip editor
+? Solving the camera matches a 3D camera to the footage.
+
 @@flashcards
 Movie Clip Editor :: footage, markers, tracking and solving
 marker / pattern / search area :: feature tracked / patch matched / where it's searched

@@ -125,6 +125,11 @@ Which Resolve feature lets several people work on one project simultaneously ove
 - The Cut page
 ? Multi-user also works with a local PostgreSQL server in Studio.
 
+@@drill
+Which two languages can script DaVinci Resolve? Name the one that isn't Lua.
+= Python
+? Lua is the other.
+
 @@flashcards
 External scripting :: Preferences → System → General
 GetResolve / GetProjectManager / GetCurrentProject :: entry points of the API

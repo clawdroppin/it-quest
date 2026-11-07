@@ -200,6 +200,12 @@ In the slider example, why listen to `input` rather than `change`?
 - They're identical
 ? Use `input` for live previews and `change` for expensive work like saving.
 
+@@drill
+Which CSS pseudo-class styles a control only when it's focused from the keyboard?
+= :focus-visible
+= focus-visible
+? Mouse clicks don't show the ring.
+
 @@flashcards
 `:hover` / `:active` :: pointer over it / being pressed
 `:focus-visible` :: a focus ring only when the keyboard is used

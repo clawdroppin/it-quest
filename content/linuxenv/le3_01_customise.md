@@ -124,6 +124,12 @@ What does GNU Stow do with dotfiles?
 - Compresses old versions
 ? So editing ~/.bashrc edits the file in the Git repository.
 
+@@drill
+Which file extension describes an app launcher on the Linux desktop?
+= .desktop
+= desktop
+? Put them in ~/.local/share/applications.
+
 @@flashcards
 GNOME Tweaks / Extension Manager :: extra GNOME settings / install extensions
 gsettings / dconf :: read and write GNOME settings from the terminal

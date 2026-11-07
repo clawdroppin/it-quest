@@ -114,6 +114,12 @@ Where do GIMP 3 Python plug-ins go?
 - In /tmp
 ? The plug-in registers procedures that then appear in the menus.
 
+@@drill
+What's the name of GIMP's built-in Scheme scripting language?
+= Script-Fu
+= script fu
+? Python-Fu is the Python equivalent.
+
 @@flashcards
 text layer :: editable text until merged or painted on
 Text along Path :: curved text

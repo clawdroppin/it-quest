@@ -138,6 +138,12 @@ Why do macOS and iOS icons need extra care compared with Windows icons?
 - They must be saved as .ico files
 ? Follow each platform's template grid and let the system shape the icon.
 
+@@drill
+Which file format holds a Windows app icon at several sizes?
+= .ico
+= ico
+? macOS uses .icns.
+
 @@flashcards
 app icon :: the app's face on the taskbar, dock, Start menu and home screen
 squint test :: blur or shrink the icon: is it still recognisable?

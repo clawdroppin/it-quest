@@ -1003,5 +1003,13 @@ Prepare an answer for each one, in Japanese, and a short English version too
 - Arrive 5-10 minutes early; for online interviews, test the camera and connection.
 - Knock 3 times, 「失礼いたします」, wait to be asked to sit (「どうぞおかけください」).
 - At the end: 「本日はお忙しいところ、ありがとうございました」.
+
+@@drill
+What does 逆質問 (gyaku shitsumon) mean in an interview?
+= questions you ask the interviewer
+= reverse questions
+= questions to ask them
+? Prepare two or three thoughtful ones.
+
 @@text
 🎉 Ten minutes a day with your own trainer, and the words in Japanese tickets and emails start to look familiar within weeks. 毎日少しずつ、頑張りましょう!

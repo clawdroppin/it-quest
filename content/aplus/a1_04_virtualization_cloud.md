@@ -95,6 +95,12 @@ In a SaaS email service, what is still the customer's responsibility?
 - Replacing failed disks
 ? The provider runs the platform; identities and data stay with the customer.
 
+@@drill
+Which VM network mode puts the VM directly on the physical network with its own IP?
+= bridged
+= bridged mode
+? NAT hides the VM behind the host.
+
 @@flashcards
 snapshot :: Saved VM state for rollback; not a backup
 bridged networking :: VM gets its own address on the real network

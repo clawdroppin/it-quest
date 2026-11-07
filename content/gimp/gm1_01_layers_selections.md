@@ -129,6 +129,13 @@ You pasted an image and the Layers dialog shows a "Floating Selection". What do 
 - Invert the selection
 ? Most operations are blocked until the floating selection is placed.
 
+@@drill
+What's the name of a greyscale layer that hides or shows parts of a layer without deleting pixels?
+= layer mask
+= a layer mask
+= mask
+? White shows, black hides.
+
 @@flashcards
 layer stack :: upper layers cover lower ones
 alpha channel :: per-pixel transparency of a layer

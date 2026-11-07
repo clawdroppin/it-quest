@@ -525,5 +525,12 @@ Summer2026!
 Winter2026!
 changeme
 trustno1
+
+@@drill
+How many characters of the SHA-1 hash does the k-anonymity breach check send?
+= 5
+= five
+? The service returns all matching suffixes; the full hash never leaves your machine.
+
 @@text
 🎉 Hashes, baselines, detective controls, NIST password guidance and k-anonymity: you've just used five Security+ topics in working code. On your CV: *"Built a file integrity monitor and a breach-aware password auditor in Python."*

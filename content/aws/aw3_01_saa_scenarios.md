@@ -111,6 +111,14 @@ A nightly batch job can be interrupted and restarted. Cheapest compute?
 - Lightsail
 ? Serverless and fully managed services remove servers to patch and scale.
 
+@@drill
+Which AWS service distributes HTTP traffic across instances in several Availability Zones?
+= Application Load Balancer
+= ALB
+= Elastic Load Balancing
+= ELB
+? Use it with an Auto Scaling group for resilience.
+
 @@flashcards
 SAA-C03 :: 65 questions, 130 min, pass 720/1000
 explicit deny :: always wins in IAM policy evaluation

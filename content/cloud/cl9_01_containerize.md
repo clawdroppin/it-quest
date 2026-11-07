@@ -860,5 +860,11 @@ Clean up: `kind delete cluster --name lab`.
 - Push the image to a registry (Docker Hub, GitHub Container Registry, ECR, ACR).
 - Run it on a managed service: AWS App Runner / ECS Fargate, Azure Container Apps, Google Cloud Run.
 - Scan the image: `docker scout cves statusboard:1.0` or `trivy image statusboard:1.0`.
+
+@@drill
+Which file describes the instructions for building a container image?
+= Dockerfile
+? docker build -t status-board .
+
 @@text
 🎉 You've built an image the right way (slim base, cached layers, non-root user, health check, `.dockerignore`), wired containers by service name, and watched Kubernetes self-heal, scale and roll out. That's exactly the demo to show in an interview for an infrastructure or SRE role.

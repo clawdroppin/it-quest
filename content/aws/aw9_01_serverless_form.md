@@ -731,5 +731,12 @@ Create an S3 bucket, upload site/index.html, and put CloudFront in front of it w
     sam delete
 
 Check the console that the stack, table and log groups are gone.
+
+@@drill
+Which AWS service runs code without managing servers?
+= Lambda
+= AWS Lambda
+? Pay per request and execution time.
+
 @@text
 🎉 API Gateway, Lambda, DynamoDB, IAM roles with least privilege, CloudFormation/SAM, CloudWatch logs, throttling, encryption at rest, point-in-time recovery: one small project touches a large part of the Cloud Practitioner and Solutions Architect exams. Draw its architecture diagram for your portfolio, and explain the **shared responsibility** split for each piece.

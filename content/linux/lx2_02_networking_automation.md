@@ -110,6 +110,13 @@ A server can ping 1.1.1.1 but `curl https://example.com` fails with "could not r
 - The web server's TLS certificate
 ? Reaching an IP proves link, address and routing work; failing names points to DNS.
 
+@@drill
+Which command shows listening ports with their processes?
+= ss -tulpn
+= ss -tlnp
+= ss
+? The modern replacement for netstat.
+
 @@flashcards
 ip a / ip route :: Addresses / routes
 ss -tulpn :: Listening ports and processes

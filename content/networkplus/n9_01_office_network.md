@@ -632,5 +632,11 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+@@drill
+How many usable hosts does a /27 subnet have?
+= 30
+? 32 addresses minus network and broadcast.
+
 @@text
 🎉 You now plan networks the way network engineers do: on paper first, checked by a machine, then configuration generated from the same data so it can't drift from the documentation. That idea is the heart of **network automation** (Ansible, Netmiko, Terraform), one of the best-paid directions in networking.

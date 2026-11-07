@@ -113,6 +113,13 @@ Which statement about Wayland is true?
 - It's required for gaming
 ? GNOME, KDE Plasma and COSMIC all default to Wayland.
 
+@@drill
+What do you call the graphical shell such as GNOME or KDE Plasma?
+= desktop environment
+= a desktop environment
+= de
+? The distribution is the whole system around it.
+
 @@flashcards
 kernel vs distribution :: Linux itself vs the complete operating system built on it
 apt / dnf / pacman / zypper :: Debian / Fedora / Arch / openSUSE package managers

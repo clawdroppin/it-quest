@@ -742,5 +742,12 @@ Tips
 - Numbers everywhere: users supported, tickets per month, hours saved, uptime.
 - 【実績】(results) and 【役割】(your role) under each job.
 - Link your GitHub with the projects from this app (status board, SLA clock, audit script...).
+
+@@drill
+What is the Japanese word for a standard résumé?
+= rirekisho
+= 履歴書
+? The 職務経歴書 (shokumu keirekisho) describes your work history in detail.
+
 @@text
 🎉 You've reached the end of the Japan path: language, the national exam, the market, visas, documents, offers and the admin of daily life. Combine it with the technical tracks and their projects (your GitHub portfolio), and you're ready to apply. 頑張ってください!

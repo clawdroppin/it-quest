@@ -835,5 +835,13 @@ if __name__ == "__main__":
     }
   }
 ]
+
+@@drill
+Which container field limits how much CPU and memory a pod may use?
+= resources.limits
+= limits
+= resources
+? Set requests too, so the scheduler can place pods.
+
 @@text
 🎉 Run it in CI with `kubectl create ... --dry-run=client -o json` or on a whole live cluster. Knowing *why* each of these rules exists is exactly what a Kubernetes administrator is hired for.

@@ -1557,5 +1557,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Render the Kubernetes manifests
         run: kubectl kustomize k8s/ > rendered.yaml && cat rendered.yaml
+
+@@drill
+Which endpoint does an orchestrator call to check a service is healthy, by convention?
+= /health
+= /healthz
+? Return 200 when it can serve.
+
 @@text
 🚀 Tests, an image, a pipeline, manifests, metrics, alerts and dashboards, all versioned in one repository: that's what "you build it, you run it" looks like, and it's exactly what DevOps interviews ask you to talk through.

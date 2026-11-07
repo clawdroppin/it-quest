@@ -97,6 +97,11 @@ At 24 fps, what does animating "on twos" mean?
 - Two layers per drawing
 ? Common in hand-drawn animation; fast actions go on ones.
 
+@@drill
+What's the name of Blender's tool for drawing 2D strokes in 3D space?
+= Grease Pencil
+? Strokes live on layers like a 2D animation app.
+
 @@flashcards
 Grease Pencil :: 2D drawing and animation inside 3D
 Grease Pencil v3 :: rewrite in Blender 4.3 on the geometry system

@@ -130,6 +130,11 @@ What's a "golden path" in platform engineering?
 - A Kubernetes ingress rule
 ? Teams can leave the path, but following it gives them everything for free.
 
+@@drill
+What does SBOM stand for?
+= software bill of materials
+? A list of every component in your software.
+
 @@flashcards
 shift left :: find security problems early, in the IDE and CI
 secret scanner :: gitleaks, trufflehog, GitHub push protection

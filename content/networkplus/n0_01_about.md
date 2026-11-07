@@ -85,6 +85,11 @@ What is the passing score for Network+ N10-009?
 - 800
 ? A+ Core 1 is 675 and Core 2 is 700; Network+ is 720.
 
+@@drill
+What is the exam code for the current Network+ exam?
+= N10-009
+? Check comptia.org before you book.
+
 @@flashcards
 Network+ exam :: N10-009; 90 questions, 90 minutes, pass 720/900
 Network+ domains :: Concepts, implementation, operations, security, troubleshooting

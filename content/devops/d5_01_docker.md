@@ -200,6 +200,13 @@ A container exits with code 137. What's the most likely cause?
 - The image wasn't found
 ? 128 + 9 (SIGKILL) = 137. Check `docker inspect` for `OOMKilled`.
 
+@@drill
+What's the name of a Dockerfile with a build stage and a smaller final stage?
+= multi-stage build
+= multi-stage
+= multistage build
+? The final image leaves the compilers behind.
+
 @@flashcards
 layer :: one filesystem change from RUN, COPY or ADD; cached and shared
 build cache rule :: rarely changing steps first, often changing steps last

@@ -122,6 +122,12 @@ What are handles?
 - Track headers
 ? A 1-second dissolve needs at least half a second of handle on each side (centred).
 
+@@drill
+Which edit removes a section and closes the gap automatically?
+= ripple delete
+= ripple
+? Shift+Delete on the Edit page.
+
 @@flashcards
 Cut page :: fast editing: source tape, dual timeline, smart tools
 Edit page :: full NLE with tracks, inspector, effects

@@ -114,6 +114,12 @@ Where does a developer get CSS for an element?
 - Only from exported PNGs
 ? Exports for assets are set in the Design tab.
 
+@@drill
+What's the name of Penpot's container that acts like a screen or artboard?
+= board
+= a board
+? Boards can use flex or grid layout.
+
 @@flashcards
 board :: a screen or container (B)
 flex layout :: Shift+A, rows or columns like CSS flexbox

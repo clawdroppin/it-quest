@@ -1474,5 +1474,12 @@ Merge the PR when it's green.
 - Add a **scheduled** run (`on: schedule: - cron: "0 0 * * *"`), which is 09:00 in Japan.
 - Add a `deploy` job with `environment: production` and a required reviewer.
 - Add **Dependabot** (`.github/dependabot.yml`) to keep the `actions/*` versions updated.
+
+@@drill
+What does SLO stand for?
+= service level objective
+= service-level objective
+? For example: 99.9% of requests succeed each month.
+
 @@text
 🎉 Git, pull requests, branch protection, a CI matrix, job dependencies, artifacts, least-privilege tokens, SLIs, SLOs, error budgets and burn rates. In an interview for a DevOps or SRE role, walking through this repository is a better answer than any definition.

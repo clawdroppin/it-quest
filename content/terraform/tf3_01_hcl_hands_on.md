@@ -176,6 +176,11 @@ Is a variable marked `sensitive = true` safe in the state file?
 - Only in HCP Terraform
 ? Use an encrypted backend with tight access, or ephemeral values and external secret stores.
 
+@@drill
+Which meta-argument creates one resource per entry in a map or set?
+= for_each
+? count is for N identical copies.
+
 @@flashcards
 terraform console :: evaluate expressions interactively
 variable validation :: condition + error_message on input values

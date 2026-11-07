@@ -113,6 +113,13 @@ What is a Smart Bin?
 - A bin shared online
 ? Great for organising large projects.
 
+@@drill
+Which Resolve page imports and organises media?
+= Media
+= the Media page
+= Media page
+? Then Cut or Edit, Fusion, Color, Fairlight and Deliver.
+
 @@flashcards
 Media / Cut / Edit / Fusion / Color / Fairlight / Deliver :: Resolve's pages
 Resolve vs Resolve Studio :: free vs paid with GPU codecs, NR, HDR, AI tools

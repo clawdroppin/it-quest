@@ -181,6 +181,11 @@ How does the "line drawing" animation work?
 - Using a GIF
 ? `stroke-dasharray: L; stroke-dashoffset: L;` then animate `stroke-dashoffset` to 0.
 
+@@drill
+Which SVG attribute defines the coordinate system of an icon?
+= viewBox
+? viewBox="0 0 24 24".
+
 @@flashcards
 SVG :: a text format for vector drawings: sharp at any size, styleable, animatable
 `viewBox="0 0 24 24"` :: the drawing grid; the standard size for UI icons

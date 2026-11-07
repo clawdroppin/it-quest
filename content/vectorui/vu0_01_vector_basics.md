@@ -120,6 +120,11 @@ In SVG, which element is drawn on top?
 - The one with the highest id
 ? Order in the file is drawing order (unless you use z-index tricks in HTML).
 
+@@drill
+Which SVG path command draws a straight line to a point?
+= L
+? M moves, C draws a curve, Z closes the path.
+
 @@flashcards
 vector :: shapes from maths, scale without blur
 raster :: a grid of pixels

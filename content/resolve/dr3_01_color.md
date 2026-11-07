@@ -120,6 +120,12 @@ How do you apply one grade to all the shots from the same camera at once?
 - Change the project frame rate
 ? Group grades sit before or after each clip's own grade.
 
+@@drill
+Which three primary controls adjust shadows, midtones and highlights?
+= lift, gamma, gain
+= lift gamma gain
+? Offset moves everything together.
+
 @@flashcards
 correction vs grading :: make right and matching vs create a look
 serial / parallel / layer / outside nodes :: Alt+S / Alt+P / Alt+L / Alt+O

@@ -147,6 +147,13 @@ What does `ctx.animate_bool_with_time(id, on, 0.12)` return in egui?
 - A new Response
 ? Use it to blend colours, sizes and positions.
 
+@@drill
+Which physical model gives motion a natural overshoot and settle?
+= spring
+= springs
+= a spring
+? Stiffness and damping control the feel.
+
 @@flashcards
 ease-out :: 1 − (1 − t)³, fast start, gentle stop
 ease-in :: slow start, for things leaving

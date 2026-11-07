@@ -110,6 +110,11 @@ Which command shows which package installed `/usr/bin/convert` on Fedora?
 - dpkg -S convert
 ? dpkg -S is the Debian equivalent.
 
+@@drill
+Which universal package format installs apps from Flathub?
+= Flatpak
+? flatpak install flathub org.gimp.GIMP.
+
 @@flashcards
 repository :: signed collection of packages your system trusts
 dependency :: a library or program a package needs

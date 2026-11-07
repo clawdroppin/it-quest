@@ -154,6 +154,12 @@ Which file makes GitHub ask a specific team to review changes to their files?
 - `.gitattributes`
 ? Combined with branch protection, code owners' approval can be required before merging.
 
+@@drill
+Which git command creates and switches to a new branch called `fix`?
+= git switch -c fix
+= git checkout -b fix
+? git switch -c is the newer form.
+
 @@flashcards
 working tree / staging area / repository :: your files / what the next commit holds / the commits
 `git switch -c name` :: create a branch and move to it

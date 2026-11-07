@@ -108,6 +108,12 @@ Which modifier animates text characters with a staggered offset?
 - Expression
 ? Set the delay per character and the easing.
 
+@@drill
+Which Fusion node combines a foreground over a background?
+= Merge
+= Merge node
+? Every composite is built from Merges.
+
 @@flashcards
 MediaIn / MediaOut :: the clip into and out of a Fusion comp
 Merge :: foreground over background with blend modes

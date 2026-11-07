@@ -806,5 +806,11 @@ only business minutes count, and very few are left.
 障害対応 (incident response) and 運用保守 (operations and maintenance) jobs ask about exactly this.
 Be ready to explain 一次対応 (first-line response), エスカレーション, SLA, and 再発防止策 (preventing recurrence),
 which is problem management.
+
+@@drill
+Which ITIL practice restores normal service as quickly as possible?
+= incident management
+? Problem management finds the root cause.
+
 @@text
 🎉 Incidents, service requests, priorities, SLAs, OLAs, pausing the clock, problem records, standard changes, knowledge articles: you've now *done* the practices the ITIL Foundation exam asks about. In a 運用保守 interview, talking through this kit shows you understand the job, not just the vocabulary.

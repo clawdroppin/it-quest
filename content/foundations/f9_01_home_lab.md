@@ -82,5 +82,12 @@ Write an entry every time you work on the lab, especially when something breaks.
 **What went wrong:**
 **How I fixed it:**
 **What I learned:**
+
+@@drill
+What's the name of software that runs virtual machines on a computer?
+= hypervisor
+= a hypervisor
+? VirtualBox, Hyper-V and Proxmox are examples.
+
 @@text
 💡 In interviews, a story from this log ("DNS broke after I changed the DC's IP, and here's how I found it") is worth more than a certificate on its own. Do both.

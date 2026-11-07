@@ -231,6 +231,11 @@ What does Alertmanager do that Prometheus doesn't?
 - Draws dashboards
 ? Prometheus decides *that* something is wrong; Alertmanager decides *who hears about it, and how*.
 
+@@drill
+Which Prometheus metric type only ever goes up (or resets to zero)?
+= counter
+? Use rate() to turn it into a per-second value.
+
 @@flashcards
 scrape :: Prometheus pulls `/metrics` from each target on a schedule
 time series :: a metric name + a set of labels, with timestamped values

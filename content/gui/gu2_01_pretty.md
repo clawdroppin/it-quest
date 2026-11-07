@@ -141,6 +141,13 @@ Why use a spacing scale such as 4, 8, 12, 16, 24, 32 instead of any value that l
 - Screen readers need it
 ? A small set of tokens removes hundreds of one-off decisions.
 
+@@drill
+What do you call named values like `--space-2` or `--brand` that a design reuses everywhere?
+= design tokens
+= tokens
+= design token
+? Decide once, reuse everywhere.
+
 @@flashcards
 design token :: a named design decision: `--accent`, `--space-3`, `--radius`
 spacing scale :: a short list of allowed gaps, e.g. 4, 8, 16, 24, 40

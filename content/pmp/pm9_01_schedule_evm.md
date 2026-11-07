@@ -364,5 +364,14 @@ if __name__ == "__main__":
   ],
   "status": { "bac": 6000000, "pv": 2400000, "ev": 2100000, "ac": 2500000 }
 }
+
+@@drill
+Write the formula for the cost performance index.
+= CPI = EV / AC
+= ev / ac
+= ev/ac
+= cpi = ev/ac
+? Below 1 means over budget.
+
 @@text
 🎉 The math part of the PMP is now something you've built, not just memorized. In an interview for a PM or team lead role, explaining critical path and CPI with your own project is far more convincing than a definition.

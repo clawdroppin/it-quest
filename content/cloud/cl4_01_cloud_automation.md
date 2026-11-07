@@ -142,6 +142,12 @@ How does a central automation account read resources in 40 member accounts?
 - With VPC peering
 ? Temporary credentials per account, from one trusted identity.
 
+@@drill
+What's the name of the retry strategy that waits longer after each throttled request?
+= exponential backoff
+= backoff
+? Add jitter so clients don't retry in sync.
+
 @@flashcards
 boto3 client :: low-level AWS API calls, responses as dicts
 DefaultAzureCredential :: Azure SDK credential chain

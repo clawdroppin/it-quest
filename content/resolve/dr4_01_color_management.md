@@ -103,6 +103,12 @@ What does one stop of exposure mean in linear light?
 - Changing the gamma
 ? log2 of the ratio of linear values gives stops.
 
+@@drill
+What does ACES stand for in colour management?
+= academy color encoding system
+= academy colour encoding system
+? A standard colour pipeline for film and TV.
+
 @@flashcards
 waveform :: luma per image column, exposure and clipping
 RGB Parade :: per-channel waveforms for balance

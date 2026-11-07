@@ -1596,5 +1596,13 @@ test("loading saved data", () => {
   <path d="M17 36h30l-4 16H21z" fill="#fb923c"/>
   <rect x="15" y="33" width="34" height="6" rx="3" fill="#fdba74"/>
 </svg>
+
+@@drill
+Which Tauri command-line tool generates all app icon sizes from one image?
+= tauri icon
+= cargo tauri icon
+= npx tauri icon
+? Start from a 1024 x 1024 PNG.
+
 @@text
 🌱 Tokens, themes, real controls, feedback, motion with taste, and icons drawn by hand: that's what makes the difference between an app that works and an app people *like*. Every GUI you build from now on, in any language, can be made like this.

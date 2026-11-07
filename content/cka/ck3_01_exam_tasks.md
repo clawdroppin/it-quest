@@ -207,6 +207,12 @@ Why is a pod Pending with "0/3 nodes are available: insufficient cpu" when the n
 - The pod has no image
 ? Over-generous requests on other pods use up schedulable capacity.
 
+@@drill
+Which kubectl command rolls a Deployment back to its previous revision?
+= kubectl rollout undo
+= kubectl rollout undo deployment
+? Add --to-revision=N for a specific one.
+
 @@flashcards
 k config use-context :: first command in every exam task
 --dry-run=client -o yaml :: generate a manifest to edit

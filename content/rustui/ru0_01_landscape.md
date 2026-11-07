@@ -155,6 +155,11 @@ Why run animated UIs with `cargo run --release`?
 - Animations are disabled in debug builds
 ? Profile and judge smoothness in release mode.
 
+@@drill
+Which Rust GUI library is immediate mode?
+= egui
+? iced and Slint are retained mode.
+
 @@flashcards
 egui / eframe :: immediate-mode GUI / its app framework
 immediate mode :: describe the whole UI every frame; calls return interactions

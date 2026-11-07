@@ -117,6 +117,12 @@ What does AWS Systems Manager Session Manager replace?
 - IAM roles
 ? Azure Bastion and GCP IAP TCP forwarding play the same role.
 
+@@drill
+What do you call the pre-built, governed account structure a company deploys before any workloads?
+= landing zone
+= a landing zone
+? Identity, networking, logging and guardrails come first.
+
 @@flashcards
 landing zone :: accounts, identity, network and guardrails set up before workloads
 AWS Organizations / Azure management groups / GCP folders :: grouping many accounts or subscriptions

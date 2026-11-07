@@ -81,6 +81,11 @@ A Wi-Fi client shows a signal of −82 dBm. What does that mean?
 - The AP is on 6 GHz
 ? Around −67 dBm or better is needed for reliable voice and video.
 
+@@drill
+Which Wi-Fi security standard is the current, strongest one?
+= WPA3
+? WPA2 is still common; avoid WEP and WPA.
+
 @@flashcards
 SSID / BSSID :: Network name / one AP radio's MAC
 ESS :: Several APs sharing an SSID for roaming

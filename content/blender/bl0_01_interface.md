@@ -117,6 +117,11 @@ How do you find any command whose shortcut you've forgotten?
 - Numpad 0
 ? Menu search also shows the shortcut.
 
+@@drill
+Which key moves (grabs) the selected object in Blender?
+= G
+? R rotates and S scales.
+
 @@flashcards
 editor / area / workspace :: one tool / a region of the window / a saved layout
 Outliner :: scene tree of collections and objects

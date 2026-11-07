@@ -123,6 +123,12 @@ How can a Lottie animation follow the app's dark theme?
 - Change the frame rate
 ? Name your layers in the editor so code can target them.
 
+@@drill
+Which JavaScript library plays Lottie animations in a web page?
+= lottie-web
+= dotlottie-web
+? dotlottie-web plays the smaller .lottie format.
+
 @@flashcards
 dotlottie-web :: LottieFiles' canvas/WASM web player
 lottie-web :: Airbnb's original player (svg, canvas, html renderers)

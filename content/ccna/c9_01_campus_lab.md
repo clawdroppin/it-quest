@@ -770,5 +770,13 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+@@drill
+Which IOS command shows a summary of interface IP addresses and status?
+= show ip interface brief
+= sh ip int br
+= show ip int brief
+? The first command to run when checking a device.
+
 @@text
 🎉 You configured a campus network by hand *and* wrote the automation that checks it. That combination, CCNA knowledge plus Python, is exactly what "network automation engineer" job ads ask for. Put the lab (with your own configs) and the checker on GitHub.

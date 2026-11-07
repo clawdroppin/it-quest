@@ -91,6 +91,13 @@ What does "constant" (hold) interpolation do?
 - Loops forever
 ? Linear is the constant-speed one.
 
+@@drill
+What do you call generating the frames between two keyframes?
+= tweening
+= in-betweening
+= tween
+? Short for in-betweening.
+
 @@flashcards
 micro-interaction :: small animation in response to a user action
 keyframe :: a property's value at a chosen time

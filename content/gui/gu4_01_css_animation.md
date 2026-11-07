@@ -212,6 +212,11 @@ What's "squash and stretch"?
 - A flexbox setting
 ? `scale(.95, 1.05)` going up and `scale(1.08, .92)` on landing make a bounce feel squishy and cute.
 
+@@drill
+Which CSS property animates smoothly between two states?
+= transition
+? transition: transform 200ms ease-out.
+
 @@flashcards
 `transition: prop dur easing` :: animate a property when its value changes
 `@keyframes name { 0% {...} 100% {...} }` :: a multi-step animation

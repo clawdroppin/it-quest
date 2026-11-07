@@ -128,6 +128,11 @@ What makes most Windows games run on Linux through Steam?
 - Flatpak
 ? ProtonDB shows community reports for each game.
 
+@@drill
+Which command lists PCI devices such as the graphics card?
+= lspci
+? lsusb lists USB devices.
+
 @@flashcards
 inxi -Fxz :: full hardware summary, safe to share
 lspci -k / lsusb / lsblk -f :: PCI devices and drivers / USB devices / disks and filesystems

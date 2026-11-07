@@ -727,5 +727,12 @@ route-map ISP-B-IN permit 20
 neighbor 203.0.113.1 route-map ISP-A-IN in
 neighbor 203.0.113.5 route-map ISP-A-IN in
 neighbor 198.51.100.1 route-map ISP-B-IN in
+
+@@drill
+Which BGP attribute, local to one router, is compared first in Cisco's best-path selection?
+= Weight
+= weight
+? Then local preference, then locally originated, then AS path length.
+
 @@text
 🎉 You now know the BGP decision process better than many people who configure it daily. In an interview for a network engineer role, walking through *why* a path won, attribute by attribute, is exactly what they want to hear.

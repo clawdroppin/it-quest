@@ -93,6 +93,11 @@ How do you make a node setup reusable with sliders on the modifier?
 - Bake it
 ? Exposed group inputs show up on the modifier panel.
 
+@@drill
+Which node places instances on the points of a geometry?
+= Instance on Points
+? Combine with Distribute Points on Faces to scatter objects.
+
 @@flashcards
 Geometry Nodes :: Blender's procedural node system for geometry
 Group Input / Output :: original geometry in, result out

@@ -115,6 +115,13 @@ You clicked something and all the panels vanished. What probably happened?
 - The XCF is corrupted
 ? Windows → Dockable Dialogs reopens any closed panel.
 
+@@drill
+Which GIMP menu command saves an image as PNG or JPEG?
+= Export As
+= File > Export As
+= export
+? Save writes GIMP's own .xcf format.
+
 @@flashcards
 GIMP 3 :: GTK 3 interface, non-destructive filters, Python 3 plug-ins
 Tool Options :: settings of the active tool, check them first

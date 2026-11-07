@@ -643,5 +643,12 @@ if __name__ == "__main__":
     }
   ]
 }
+
+@@drill
+Which command writes a plan as JSON for a script to review?
+= terraform show -json
+= terraform show -json plan.out
+? terraform plan -out=plan.out first.
+
 @@text
 🎉 You've written policy as code, the same idea as Sentinel and OPA in HCP Terraform, in about a hundred lines of Python. Reading plans carefully, and building tools so others can too, is what makes a team trust its infrastructure as code.

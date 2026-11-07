@@ -232,6 +232,12 @@ A matrix has `os: [ubuntu, windows]` and `python: ["3.11", "3.12", "3.13"]` with
 - 7
 ? 2 × 3 = 6 combinations, minus one excluded.
 
+@@drill
+In which folder do GitHub Actions workflow files live?
+= .github/workflows
+= .github/workflows/
+? Each YAML file there is a workflow.
+
 @@flashcards
 `.github/workflows/*.yml` :: where workflows live
 `on:` :: the triggers: push, pull_request, schedule, workflow_dispatch, workflow_call

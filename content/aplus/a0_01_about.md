@@ -84,6 +84,11 @@ How long is an A+ certification valid before it must be renewed?
 - For life
 ? Renew with continuing education units or a higher CompTIA certification.
 
+@@drill
+What is the passing score for A+ Core 1 (on the 100-900 scale)?
+= 675
+? Core 2 needs 700.
+
 @@flashcards
 A+ Core 1 :: Mobile devices, networking, hardware, virtualization & cloud, HW/network troubleshooting
 A+ Core 2 :: Operating systems, security, software troubleshooting, operational procedures

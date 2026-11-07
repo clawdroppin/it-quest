@@ -578,5 +578,11 @@ $file = Join-Path $dir ((Get-Date -Format 'yyyyMMdd-HHmm') + '.txt')
 Set-Content -Path $file -Value $note -Encoding UTF8
 Write-Host ""
 Write-Host "Ticket note saved to $file (fill in Action and Result when you're done)"
+
+@@drill
+What is step 1 of the CompTIA troubleshooting methodology?
+= identify the problem
+? Gather information and question the user first.
+
 @@text
 🎉 Prioritizing, diagnosing and documenting are the core of help desk work, and now you have a tool that does all three and a knowledge base that grows with you. In an interview, show the kb.json and explain why it's data and not code.

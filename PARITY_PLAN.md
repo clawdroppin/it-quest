@@ -973,3 +973,15 @@ Floor per lesson: at least 3 quizzes, a flashcard deck, and 600 words of text.
 - Rust: 54 lessons raised to the floor. The m0 to m8 lessons got an extra quiz each; the project lessons (grade book, inventory, calculator, movies) got three quizzes and flashcards; the thread pool and key-value store got flashcards.
 
 The scan (no lesson under 3 quizzes, missing flashcards, or under 600 words) now comes back empty for every track.
+
+## Drills (every lesson, every track)
+
+Cert tracks had a typed-answer drill in almost every lesson; the language tracks had almost none (Rust, Python and JavaScript had zero). Every lesson in every track now has at least one `@@drill`, and each answer was checked against its own lesson.
+
+Drills and quizzes are keyed by block position (`<lesson>!<block>`, `<lesson>?<block>`), so every new block was added after the lesson's last quiz, drill or project. A check that compares the working tree with HEAD confirmed that no existing keyed block moved. The 1.6.2 lesson-floor pass did move 15 drills; `KEY_MIGRATIONS` in `src/progress.ts` remaps those saved answers once on load.
+
+## Drills (every lesson, every track)
+
+Cert tracks had a typed-answer drill in almost every lesson; the language tracks had almost none (Rust, Python and JavaScript had zero). Every lesson in every track now has at least one `@@drill`, and each answer was checked against its own lesson.
+
+Drills and quizzes are keyed by block position (`<lesson>!<block>`, `<lesson>?<block>`), so every new block was added after the lesson's last quiz, drill or project. A check that compares the working tree with HEAD confirmed that no existing keyed block moved. The 1.6.2 lesson-floor pass did move 15 drills; `KEY_MIGRATIONS` in `src/progress.ts` remaps those saved answers once on load.

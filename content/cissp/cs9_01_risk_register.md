@@ -511,5 +511,16 @@ if __name__ == "__main__":
     { "name": "email", "mtd": 24, "rto": 8, "wrt": 2, "rpo": 1, "backup_interval": 0.5 }
   ]
 }
+
+@@drill
+Write the formula for annualized loss expectancy using SLE and ARO.
+= ALE = SLE × ARO
+= ale = sle x aro
+= sle × aro
+= sle x aro
+= sle * aro
+= ale = sle * aro
+? SLE = asset value × exposure factor.
+
 @@text
 🎉 You can now turn security into business language, which is the core skill the CISSP tests and the reason security managers are paid what they are.

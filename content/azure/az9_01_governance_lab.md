@@ -823,5 +823,12 @@ Also remove the policy assignments and budget if you created them at subscriptio
 ## For your portfolio
 Screenshots of the audit output before and after, the policy denying an untagged resource,
 and the Bicep file. Explain in one paragraph *why* each rule matters (cost, security, ownership).
+
+@@drill
+Which Azure feature enforces rules such as "every resource must have a cost-center tag"?
+= Azure Policy
+= Policy
+? Policies can deny, audit or modify resources.
+
 @@text
 🎉 You can now explain RBAC, Policy, tags, locks, budgets, NSGs and Bicep with something you built. In an interview, *"I wrote a script that found ¥33,780 a month of untagged spend"* is worth more than any certificate line.

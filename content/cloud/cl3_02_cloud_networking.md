@@ -117,6 +117,12 @@ You're shifting 10% of users to a new region to test it. Which Route 53 routing 
 - Geolocation
 ? Weights of 90 and 10 split the answers by percentage.
 
+@@drill
+What's the name of a private, isolated network in a cloud provider (AWS and GCP)?
+= VPC
+= virtual private cloud
+? Azure calls it a virtual network (VNet).
+
 @@flashcards
 VPC / VNet :: your private network in the cloud
 non-overlapping CIDR :: plan ranges so networks can be connected later

@@ -115,6 +115,11 @@ Why does modifier order matter?
 - Only the last modifier is applied
 ? The stack runs top to bottom.
 
+@@drill
+Which key switches between Object Mode and Edit Mode?
+= Tab
+? Edit Mode edits vertices, edges and faces.
+
 @@flashcards
 Tab :: toggle Object and Edit Mode
 1 / 2 / 3 (edit mode) :: vertex / edge / face select

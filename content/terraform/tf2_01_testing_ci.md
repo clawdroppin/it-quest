@@ -155,6 +155,11 @@ What does exit code 2 from `terraform plan -detailed-exitcode` mean?
 - 10.0.8.0/24
 ? Add 8 bits to the prefix (/24) and take network number 2.
 
+@@drill
+Which command checks that Terraform configuration files are syntactically valid?
+= terraform validate
+? terraform fmt -check checks formatting.
+
 @@flashcards
 dynamic block :: generates repeated nested blocks
 optional(type, default) :: optional object attributes with defaults

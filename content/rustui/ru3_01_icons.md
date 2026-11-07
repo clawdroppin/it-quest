@@ -117,6 +117,11 @@ What's the main limitation of icon fonts?
 - They're always huge files
 ? Use SVG for multicolour icons.
 
+@@drill
+Which crate renders SVG files to pixels in Rust?
+= resvg
+? Pair it with tiny-skia.
+
 @@flashcards
 icon font :: icons as glyphs: one colour, scales like text
 egui-phosphor :: Phosphor icon font for egui

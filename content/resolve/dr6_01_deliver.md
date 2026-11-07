@@ -108,6 +108,15 @@ The audio drifts out of sync towards the end of an export. What's the likely cau
 - Using AAC audio
 ? Check clip attributes, timeline and export frame rates.
 
+@@drill
+Which video codec is the common choice for web delivery?
+= H.264
+= h264
+= avc
+= H.265
+= hevc
+? ProRes and DNxHR are intermediate codecs.
+
 @@flashcards
 Deliver page :: render queue and export settings
 single clip vs individual clips :: one file vs one per clip

@@ -101,6 +101,13 @@ Why should components reference semantic tokens such as `color.surface` rather t
 - Penpot only supports semantic tokens
 ? The semantic layer is the switch a dark or high-contrast theme flips.
 
+@@drill
+What do you call tokens like `color.button.background` that describe a role rather than a raw value?
+= semantic tokens
+= semantic
+= component tokens
+? They point at primitive tokens like blue-500.
+
 @@flashcards
 design system :: tokens, components and rules shared by design and code
 primitive token :: a raw value (indigo.500)

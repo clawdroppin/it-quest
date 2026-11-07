@@ -139,6 +139,13 @@ Why is `rm` more dangerous than deleting in the file manager?
 - It formats the disk
 ? Use `rm -i`, or `gio trash file` to move things to the trash instead.
 
+@@drill
+Which command makes a script executable for its owner?
+= chmod u+x
+= chmod +x
+= chmod 744
+? chmod u+x script.sh.
+
 @@flashcards
 Tab completion :: finish commands and paths, Tab Tab lists choices
 Ctrl+R :: search command history

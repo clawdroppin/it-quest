@@ -489,5 +489,12 @@ if __name__ == "__main__":
     ]
   }
 }
+
+@@drill
+Which basic role grants full control of a Google Cloud project and should be avoided?
+= Owner
+= roles/owner
+? Prefer predefined roles with least privilege.
+
 @@text
 🎉 You've built a real security control. Least privilege, groups instead of people, no public access by accident, no keys: that's the IAM half of the security domain on the Professional Cloud Architect exam, and it's what you'll be asked to defend in architecture reviews.

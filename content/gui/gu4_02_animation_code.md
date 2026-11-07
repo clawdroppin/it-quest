@@ -193,6 +193,13 @@ A spring animation has high stiffness and low damping. How does it move?
 - It never reaches the target
 ? Damping removes energy; with little of it the value bounces around the target.
 
+@@drill
+What do you call a function that maps animation progress (0 to 1) to a curved value?
+= easing function
+= easing
+= an easing function
+? ease-out starts fast and slows down.
+
 @@flashcards
 progress :: `p = elapsed / duration`, clamped to 0..1
 lerp :: `a + (b - a) * t`: the value between a and b
