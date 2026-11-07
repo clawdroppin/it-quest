@@ -1,4 +1,5 @@
 @@lesson lx0-boot Linux+, the Boot Process and the File System
+@@lang bash
 @@text
 **CompTIA Linux+** proves you can administer Linux servers: the operating system of the cloud, containers, and most of the internet. The current exam is **XK0-006** (2025); check comptia.org for the objectives. Its domains cover **system management**, **services and user management**, **security**, **automation, orchestration and scripting**, and **troubleshooting**. Do the **Bash & Linux** track first: Linux+ assumes you're comfortable in the shell.
 
@@ -117,3 +118,78 @@ dmesg :: Kernel ring buffer messages
 Which command shows the running kernel's version?
 = uname -r
 ? `uname -a` shows everything.
+
+@@exercise Translate runlevel commands to systemctl
+Old runbooks still use SysV runlevels. The variable `runbook` holds one command per line. Translate each with the lesson's table (0 poweroff, 1 rescue, 3 multi-user, 5 graphical, 6 reboot):
+
+- `init N` or `telinit N` → `systemctl isolate <target>` (for 0 and 6, `systemctl poweroff` / `systemctl reboot`)
+- an inittab line `id:N:initdefault:` → `systemctl set-default <target>`
+- `runlevel` → `systemctl get-default`
+- anything else → `# no translation: <line>`
+
+Print `old  =>  new` for each line.
+@@starter
+runbook='init 3
+telinit 1
+id:5:initdefault:
+runlevel
+init 6
+telinit 0
+init 4
+service nginx restart'
+
+# translate each line of "$runbook"
+@@expected
+init 3  =>  systemctl isolate multi-user.target
+telinit 1  =>  systemctl isolate rescue.target
+id:5:initdefault:  =>  systemctl set-default graphical.target
+runlevel  =>  systemctl get-default
+init 6  =>  systemctl reboot
+telinit 0  =>  systemctl poweroff
+init 4  =>  # no translation: runlevel 4 is unused on systemd
+service nginx restart  =>  # no translation: service nginx restart
+@@requires
+case
+isolate
+set-default
+@@hint
+A function with a `case "$1" in 0) ... ;; esac` maps the number to a target. Match the line shapes with `case "$line" in "init "*|"telinit "*) ...`, and take the number with `${line##* }`.
+@@solution
+runbook='init 3
+telinit 1
+id:5:initdefault:
+runlevel
+init 6
+telinit 0
+init 4
+service nginx restart'
+
+target_for() {
+    case "$1" in
+        0) echo poweroff.target ;;
+        1) echo rescue.target ;;
+        3) echo multi-user.target ;;
+        5) echo graphical.target ;;
+        6) echo reboot.target ;;
+        *) echo "" ;;
+    esac
+}
+
+while IFS= read -r line; do
+    case "$line" in
+        "init "*|"telinit "*)
+            n=${line##* }
+            t=$(target_for "$n")
+            if [ "$n" = 0 ]; then new="systemctl poweroff"
+            elif [ "$n" = 6 ]; then new="systemctl reboot"
+            elif [ -n "$t" ]; then new="systemctl isolate $t"
+            else new="# no translation: runlevel $n is unused on systemd"
+            fi ;;
+        id:*:initdefault:)
+            n=$(echo "$line" | cut -d: -f2)
+            new="systemctl set-default $(target_for "$n")" ;;
+        runlevel) new="systemctl get-default" ;;
+        *) new="# no translation: $line" ;;
+    esac
+    echo "$line  =>  $new"
+done <<< "$runbook"

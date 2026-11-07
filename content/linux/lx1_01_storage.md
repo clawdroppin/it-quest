@@ -1,4 +1,5 @@
 @@lesson lx1-storage Storage: Partitions, LVM, File Systems and Mounts
+@@lang bash
 @@text
 ## Disks and partitions
 
@@ -124,3 +125,65 @@ NFS / CIFS :: Linux / Windows network file shares
 Which command shows disks and partitions as a tree?
 = lsblk
 ? Add `-f` to see file systems and UUIDs.
+
+@@exercise Plan LVM extensions from vgs output
+`vgs` holds the output of `vgs --units g --noheadings` (name, PVs, LVs, snapshots, attributes, size, free) and `requests` holds `volume group, logical volume, GB to add` lines. Work through the requests in order. If the group still has enough free space, print the `lvextend -r -L +NG /dev/<vg>/<lv>` command and take the space away. Otherwise print how many GB are missing and the three steps to add a disk (`pvcreate /dev/NEW`, `vgextend <vg> /dev/NEW`, then the `lvextend`). Finish with each group's free space left.
+@@starter
+vgs='  vg_data   2   3   0 wz--n- 199.99g  35.00g
+  vg_logs   1   1   0 wz--n-  49.99g   4.00g'
+
+requests='vg_data lv_app 20
+vg_data lv_db 10
+vg_logs lv_var 10
+vg_data lv_app 8'
+
+# read the free space per group into an associative array, then process the requests
+@@expected
+lvextend -r -L +20G /dev/vg_data/lv_app
+lvextend -r -L +10G /dev/vg_data/lv_db
+# vg_logs/lv_var needs 6G more than vg_logs has free:
+pvcreate /dev/NEW
+vgextend vg_logs /dev/NEW
+lvextend -r -L +10G /dev/vg_logs/lv_var
+# vg_data/lv_app needs 3G more than vg_data has free:
+pvcreate /dev/NEW
+vgextend vg_data /dev/NEW
+lvextend -r -L +8G /dev/vg_data/lv_app
+vg_data free: 5G
+vg_logs free: 4G
+@@requires
+declare -A
+lvextend -r
+vgextend
+@@hint
+Load the free column (strip the `g`, keep whole GB with `${free%%.*}`) into `declare -A free`, then compare each request with `(( ${free[$vg]} >= gb ))`.
+@@solution
+vgs='  vg_data   2   3   0 wz--n- 199.99g  35.00g
+  vg_logs   1   1   0 wz--n-  49.99g   4.00g'
+
+requests='vg_data lv_app 20
+vg_data lv_db 10
+vg_logs lv_var 10
+vg_data lv_app 8'
+
+declare -A free
+while read -r name pv lv sn attr size vfree; do
+    vfree=${vfree%g}
+    free[$name]=${vfree%%.*}
+done <<< "$vgs"
+
+while read -r vg lv gb; do
+    if (( ${free[$vg]} >= gb )); then
+        echo "lvextend -r -L +${gb}G /dev/$vg/$lv"
+        free[$vg]=$(( ${free[$vg]} - gb ))
+    else
+        echo "# $vg/$lv needs $(( gb - ${free[$vg]} ))G more than $vg has free:"
+        echo "pvcreate /dev/NEW"
+        echo "vgextend $vg /dev/NEW"
+        echo "lvextend -r -L +${gb}G /dev/$vg/$lv"
+    fi
+done <<< "$requests"
+
+for vg in vg_data vg_logs; do
+    echo "$vg free: ${free[$vg]}G"
+done

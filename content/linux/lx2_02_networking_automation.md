@@ -1,4 +1,5 @@
 @@lesson lx2-net-auto Networking, Containers and Automation on Linux
+@@lang bash
 @@text
 ## Networking
 
@@ -130,3 +131,64 @@ docker compose :: Multi-container apps from one file
 Kubernetes :: Container orchestration across servers
 Ansible :: Agentless, SSH, YAML playbooks, idempotent
 cloud-init :: First-boot configuration of cloud VMs
+
+@@exercise Find the first failing network layer
+A helpdesk script collected check results from four servers, as `host check=result ...` lines. Walk the lesson's order (`link`, `addr`, `gw`, `internet`, `dns`, `listen`) and report the **first** check that failed for each host with the command to run next. If everything passed, print `all checks passed: look at the firewall`.
+@@starter
+results='web01 link=up addr=ok gw=ok internet=ok dns=fail listen=ok
+web02 link=down addr=none gw=fail internet=fail dns=fail listen=ok
+db01 link=up addr=ok gw=ok internet=ok dns=ok listen=fail
+app01 link=up addr=ok gw=ok internet=ok dns=ok listen=ok
+app02 link=up addr=none gw=fail internet=fail dns=fail listen=fail'
+
+declare -A next_cmd=(
+    [link]="ip link; ethtool eth0"
+    [addr]="ip a; nmcli con show"
+    [gw]="ip route; ping -c 3 <gateway>"
+    [internet]="tracepath 1.1.1.1"
+    [dns]="resolvectl status; dig example.com"
+    [listen]="ss -tulpn"
+)
+
+# for each host, find the first failing check in order
+@@expected
+web01: dns failed (fail): resolvectl status; dig example.com
+web02: link failed (down): ip link; ethtool eth0
+db01: listen failed (fail): ss -tulpn
+app01: all checks passed: look at the firewall
+app02: addr failed (none): ip a; nmcli con show
+@@requires
+for check in
+@@hint
+Turn each line's `key=value` words into an associative array, then loop `for check in link addr gw internet dns listen` and stop at the first value that isn't `up` or `ok`.
+@@solution
+results='web01 link=up addr=ok gw=ok internet=ok dns=fail listen=ok
+web02 link=down addr=none gw=fail internet=fail dns=fail listen=ok
+db01 link=up addr=ok gw=ok internet=ok dns=ok listen=fail
+app01 link=up addr=ok gw=ok internet=ok dns=ok listen=ok
+app02 link=up addr=none gw=fail internet=fail dns=fail listen=fail'
+
+declare -A next_cmd=(
+    [link]="ip link; ethtool eth0"
+    [addr]="ip a; nmcli con show"
+    [gw]="ip route; ping -c 3 <gateway>"
+    [internet]="tracepath 1.1.1.1"
+    [dns]="resolvectl status; dig example.com"
+    [listen]="ss -tulpn"
+)
+
+while read -r host rest; do
+    declare -A r=()
+    for kv in $rest; do
+        r[${kv%%=*}]=${kv#*=}
+    done
+    verdict="all checks passed: look at the firewall"
+    for check in link addr gw internet dns listen; do
+        if [ "${r[$check]}" != up ] && [ "${r[$check]}" != ok ]; then
+            verdict="$check failed (${r[$check]}): ${next_cmd[$check]}"
+            break
+        fi
+    done
+    echo "$host: $verdict"
+    unset r
+done <<< "$results"

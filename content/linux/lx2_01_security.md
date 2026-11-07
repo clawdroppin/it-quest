@@ -1,4 +1,5 @@
 @@lesson lx2-security Linux Security: Permissions, SELinux, Firewalls and SSH
+@@lang bash
 @@text
 ## Permissions beyond rwx
 
@@ -134,3 +135,60 @@ LUKS :: Linux disk encryption
 What octal value is rwxr-xr-x?
 = 755
 ? The usual permission for programs and folders.
+
+@@exercise Review a remote firewall change
+An admin will paste the commands in `plan` into an SSH session. Check them in order and print a warning for each problem, then `SAFE` or `NOT SAFE`:
+
+- `ufw enable` before any `ufw allow 22/tcp` (or `ufw allow ssh`) locks you out.
+- a `firewall-cmd --add-...` without `--permanent` is lost on the next reload.
+- `--permanent` changes without a later `firewall-cmd --reload` don't take effect yet (a warning, but still safe).
+- `setenforce 0` or `SELINUX=disabled` turns SELinux off: fix the label or boolean instead.
+@@starter
+plan='firewall-cmd --add-service=https
+firewall-cmd --permanent --add-port=8443/tcp
+setenforce 0
+ufw enable
+ufw allow 22/tcp'
+
+# check each line of "$plan" in order
+@@expected
+line 1: runtime-only change, lost on reload: add --permanent
+line 3: turns SELinux off: fix the label or boolean instead
+line 4: ufw enable before allowing SSH locks you out
+warning: permanent changes need firewall-cmd --reload
+NOT SAFE
+@@requires
+--reload
+NOT SAFE
+@@hint
+Keep two flags while you read the lines: whether SSH is allowed yet, and whether a permanent change is waiting for a reload. Check the flags again after the loop.
+@@solution
+plan='firewall-cmd --add-service=https
+firewall-cmd --permanent --add-port=8443/tcp
+setenforce 0
+ufw enable
+ufw allow 22/tcp'
+
+ssh_allowed=0
+pending=0
+unsafe=0
+n=0
+while IFS= read -r cmd; do
+    n=$((n + 1))
+    case "$cmd" in
+        "ufw allow 22/tcp"|"ufw allow ssh") ssh_allowed=1 ;;
+        "ufw enable")
+            if [ "$ssh_allowed" = 0 ]; then
+                echo "line $n: ufw enable before allowing SSH locks you out"; unsafe=1
+            fi ;;
+        firewall-cmd*--reload*) pending=0 ;;
+        firewall-cmd*--permanent*) pending=1 ;;
+        firewall-cmd*--add-*) echo "line $n: runtime-only change, lost on reload: add --permanent" ;;
+        "setenforce 0"|*SELINUX=disabled*)
+            echo "line $n: turns SELinux off: fix the label or boolean instead"; unsafe=1 ;;
+    esac
+done <<< "$plan"
+if [ "$pending" = 1 ]; then
+    echo "warning: permanent changes need firewall-cmd --reload"
+fi
+if [ "$unsafe" = 1 ]; then echo "NOT SAFE"; else echo "SAFE"; fi

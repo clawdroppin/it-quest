@@ -1,4 +1,5 @@
 @@lesson lx3-troubleshooting Linux Troubleshooting
+@@lang bash
 @@text
 ## Performance
 
@@ -90,3 +91,74 @@ Which command shows how many CPU cores the system has?
 = nproc
 = lscpu
 ? Compare it with the load average.
+
+@@exercise Pick the first check for each symptom
+Turn tickets into a first step, using the lesson's symptom table. Write a function `first_check` that reads a ticket (case-insensitive) and prints the check for the first matching clue, in this order:
+
+| Clue | First check |
+|---|---|
+| `no space` and `df` shows space | `df -i` (inodes) |
+| `disk full` or `no space` | `df -h; du -sh /* \| sort -h` |
+| `won't start` or `failed` | `systemctl status <unit>; journalctl -u <unit>` |
+| `permission denied` | `namei -l <path>` (each folder needs x) |
+| `resolve` or `dns` | `resolvectl status; dig @8.8.8.8 <name>` |
+| `log in` or `login` | `faillock --user <user>; chage -l <user>` |
+| `emergency mode` | `check /etc/fstab, then mount -a` |
+| anything else | `read the error, then journalctl -xe` |
+@@starter
+tickets='Disk full on web01, uploads failing
+No space left on device but df shows 40% used
+nginx won'"'"'t start after the config change
+Permission denied reading /srv/app/config.yml
+Cannot resolve internal.example.com
+User ksato cannot log in since Monday
+Server boots into emergency mode
+Clock is 5 minutes slow'
+
+first_check() {
+    : # your code here
+}
+
+while IFS= read -r t; do
+    echo "$t -> $(first_check "$t")"
+done <<< "$tickets"
+@@expected
+Disk full on web01, uploads failing -> df -h; du -sh /* | sort -h
+No space left on device but df shows 40% used -> df -i (inodes)
+nginx won't start after the config change -> systemctl status <unit>; journalctl -u <unit>
+Permission denied reading /srv/app/config.yml -> namei -l <path> (each folder needs x)
+Cannot resolve internal.example.com -> resolvectl status; dig @8.8.8.8 <name>
+User ksato cannot log in since Monday -> faillock --user <user>; chage -l <user>
+Server boots into emergency mode -> check /etc/fstab, then mount -a
+Clock is 5 minutes slow -> read the error, then journalctl -xe
+@@requires
+${1,,}
+df -i
+@@hint
+Lowercase once with `local t=${1,,}`, then test the clues in order with `[[ $t == *"no space"* ]]`. The inode case must come before the plain disk-full case.
+@@solution
+tickets='Disk full on web01, uploads failing
+No space left on device but df shows 40% used
+nginx won'"'"'t start after the config change
+Permission denied reading /srv/app/config.yml
+Cannot resolve internal.example.com
+User ksato cannot log in since Monday
+Server boots into emergency mode
+Clock is 5 minutes slow'
+
+first_check() {
+    local t=${1,,}
+    if [[ $t == *"no space"* && $t == *"df"* ]]; then echo "df -i (inodes)"
+    elif [[ $t == *"disk full"* || $t == *"no space"* ]]; then echo "df -h; du -sh /* | sort -h"
+    elif [[ $t == *"won't start"* || $t == *"failed"* ]]; then echo "systemctl status <unit>; journalctl -u <unit>"
+    elif [[ $t == *"permission denied"* ]]; then echo "namei -l <path> (each folder needs x)"
+    elif [[ $t == *"resolve"* || $t == *"dns"* ]]; then echo "resolvectl status; dig @8.8.8.8 <name>"
+    elif [[ $t == *"log in"* || $t == *"login"* ]]; then echo "faillock --user <user>; chage -l <user>"
+    elif [[ $t == *"emergency mode"* ]]; then echo "check /etc/fstab, then mount -a"
+    else echo "read the error, then journalctl -xe"
+    fi
+}
+
+while IFS= read -r t; do
+    echo "$t -> $(first_check "$t")"
+done <<< "$tickets"
