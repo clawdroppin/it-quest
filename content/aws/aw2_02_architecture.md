@@ -91,3 +91,98 @@ serverless web app :: S3 + CloudFront, API Gateway + Lambda + DynamoDB, Cognito
 Name the DR strategy where only core components (like the database) run in the recovery region. (two words)
 = pilot light
 ? Like the small flame that can light the whole furnace.
+
+@@exercise Review a three-tier design
+Check a design against the lesson's three-tier pattern. Each resource has a `tier` (`web`, `app`, `db`), its `subnet` (`public` or `private`) and the `azs` it runs in. Write `review(resources)` that returns findings:
+
+- Only the load balancer (tier `web`) may be in a public subnet; anything else public is `exposed`.
+- Every tier must span at least two AZs, otherwise `single AZ`.
+- Databases need `multi_az` set and `encrypted` set.
+- Each tier must have at least one resource, otherwise `missing tier`.
+
+Print the findings for each design, or `matches the pattern`.
+@@lang python
+@@starter
+designs = {
+    "first draft": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c"}},
+        {"name": "app-asg", "tier": "app", "subnet": "public", "azs": {"a"}},
+        {"name": "orders-db", "tier": "db", "subnet": "public", "azs": {"a"}, "multi_az": False, "encrypted": False},
+    ],
+    "reviewed": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c"}},
+        {"name": "app-asg", "tier": "app", "subnet": "private", "azs": {"a", "c"}},
+        {"name": "orders-db", "tier": "db", "subnet": "private", "azs": {"a", "c"}, "multi_az": True, "encrypted": True},
+    ],
+    "no database": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c", "d"}},
+        {"name": "app-asg", "tier": "app", "subnet": "private", "azs": {"a", "c"}},
+    ],
+}
+
+def review(resources):
+    raise NotImplementedError
+
+
+for name, resources in designs.items():
+    findings = review(resources)
+    print(name + ":")
+    for f in findings or ["matches the pattern"]:
+        print("  " + f)
+@@expected
+first draft:
+  app-asg: exposed in a public subnet
+  app-asg: single AZ
+  orders-db: exposed in a public subnet
+  orders-db: single AZ
+  orders-db: enable Multi-AZ
+  orders-db: enable encryption at rest
+reviewed:
+  matches the pattern
+no database:
+  missing tier: db
+@@requires
+def review
+any(
+@@hint
+Do the per-design check (is each tier present?) with `any` first, then loop over the resources for the per-resource rules.
+@@solution
+designs = {
+    "first draft": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c"}},
+        {"name": "app-asg", "tier": "app", "subnet": "public", "azs": {"a"}},
+        {"name": "orders-db", "tier": "db", "subnet": "public", "azs": {"a"}, "multi_az": False, "encrypted": False},
+    ],
+    "reviewed": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c"}},
+        {"name": "app-asg", "tier": "app", "subnet": "private", "azs": {"a", "c"}},
+        {"name": "orders-db", "tier": "db", "subnet": "private", "azs": {"a", "c"}, "multi_az": True, "encrypted": True},
+    ],
+    "no database": [
+        {"name": "alb", "tier": "web", "subnet": "public", "azs": {"a", "c", "d"}},
+        {"name": "app-asg", "tier": "app", "subnet": "private", "azs": {"a", "c"}},
+    ],
+}
+
+def review(resources):
+    findings = []
+    for tier in ("web", "app", "db"):
+        if not any(r["tier"] == tier for r in resources):
+            findings.append(f"missing tier: {tier}")
+    for r in resources:
+        if r["subnet"] == "public" and r["tier"] != "web":
+            findings.append(f"{r['name']}: exposed in a public subnet")
+        if len(r["azs"]) < 2:
+            findings.append(f"{r['name']}: single AZ")
+        if r["tier"] == "db":
+            if not r.get("multi_az"):
+                findings.append(f"{r['name']}: enable Multi-AZ")
+            if not r.get("encrypted"):
+                findings.append(f"{r['name']}: enable encryption at rest")
+    return findings
+
+for name, resources in designs.items():
+    findings = review(resources)
+    print(name + ":")
+    for f in findings or ["matches the pattern"]:
+        print("  " + f)

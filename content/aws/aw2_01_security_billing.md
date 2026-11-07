@@ -147,3 +147,92 @@ Which service is the audit log of every API call in an AWS account?
 = CloudTrail
 = AWS CloudTrail
 ? Turn on an organization trail and send it to a protected S3 bucket.
+
+@@exercise Who patches it: AWS or you?
+Under the shared responsibility model, what the customer does depends on the service. Write `responsible(service, task)` returning `AWS` or `customer`, using these rules:
+
+- Physical security, hardware and the virtualization layer are always AWS.
+- On **EC2** (IaaS) the customer patches the guest OS and the application, and configures security groups and encryption.
+- On **RDS** AWS patches the OS and the database engine; the customer still manages database users, security groups and encryption settings.
+- On **Lambda** AWS also runs the runtime; the customer owns the function code and its IAM role.
+- **Data**, **IAM users and permissions** and **client-side encryption** are always the customer's.
+
+Some tasks don't exist for some services (S3 has no database engine or security groups), so also write `applies(service, task)` and print `-` in those cells. Print a table of tasks against EC2, RDS, Lambda and S3; S3 is fully managed like Lambda.
+@@lang python
+@@starter
+ALWAYS_AWS = {"physical security", "hardware", "hypervisor"}
+ALWAYS_CUSTOMER = {"data", "IAM permissions", "client-side encryption"}
+AWS_BY_SERVICE = {
+    "EC2": set(),
+    "RDS": {"guest OS patching", "database engine patching"},
+    "Lambda": {"guest OS patching", "runtime patching"},
+    "S3": {"guest OS patching", "runtime patching"},
+}
+APPLIES = {
+    "database engine patching": {"EC2", "RDS"},
+    "runtime patching": {"EC2", "Lambda"},
+    "security groups": {"EC2", "RDS", "Lambda"},
+}
+tasks = ["physical security", "hypervisor", "guest OS patching", "database engine patching",
+         "runtime patching", "security groups", "data", "IAM permissions"]
+services = ["EC2", "RDS", "Lambda", "S3"]
+
+def applies(service, task):
+    raise NotImplementedError
+
+
+def responsible(service, task):
+    raise NotImplementedError
+
+
+print(f"{'task':<26}" + "".join(f"{s:<10}" for s in services))
+for task in tasks:
+    print(f"{task:<26}" + "".join(f"{responsible(s, task):<10}" for s in services))
+@@expected
+task                      EC2       RDS       Lambda    S3        
+physical security         AWS       AWS       AWS       AWS       
+hypervisor                AWS       AWS       AWS       AWS       
+guest OS patching         customer  AWS       AWS       AWS       
+database engine patching  customer  AWS       -         -         
+runtime patching          customer  -         AWS       -         
+security groups           customer  customer  customer  -         
+data                      customer  customer  customer  customer  
+IAM permissions           customer  customer  customer  customer  
+@@requires
+def responsible
+def applies
+@@hint
+Rule out tasks that don't apply first, then check the two "always" sets, then look the task up in the set of things AWS takes over for that service; everything else stays with the customer.
+@@solution
+ALWAYS_AWS = {"physical security", "hardware", "hypervisor"}
+ALWAYS_CUSTOMER = {"data", "IAM permissions", "client-side encryption"}
+AWS_BY_SERVICE = {
+    "EC2": set(),
+    "RDS": {"guest OS patching", "database engine patching"},
+    "Lambda": {"guest OS patching", "runtime patching"},
+    "S3": {"guest OS patching", "runtime patching"},
+}
+APPLIES = {
+    "database engine patching": {"EC2", "RDS"},
+    "runtime patching": {"EC2", "Lambda"},
+    "security groups": {"EC2", "RDS", "Lambda"},
+}
+tasks = ["physical security", "hypervisor", "guest OS patching", "database engine patching",
+         "runtime patching", "security groups", "data", "IAM permissions"]
+services = ["EC2", "RDS", "Lambda", "S3"]
+
+def applies(service, task):
+    return service in APPLIES.get(task, {service})
+
+def responsible(service, task):
+    if not applies(service, task):
+        return "-"
+    if task in ALWAYS_AWS:
+        return "AWS"
+    if task in ALWAYS_CUSTOMER:
+        return "customer"
+    return "AWS" if task in AWS_BY_SERVICE[service] else "customer"
+
+print(f"{'task':<26}" + "".join(f"{s:<10}" for s in services))
+for task in tasks:
+    print(f"{task:<26}" + "".join(f"{responsible(s, task):<10}" for s in services))

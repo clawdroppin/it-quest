@@ -121,3 +121,87 @@ EventBridge :: Event bus and scheduler
 Is a network ACL stateful or stateless?
 = stateless
 ? Return traffic must be explicitly allowed.
+
+@@exercise Fan out SNS messages to SQS queues
+An order service publishes to an **SNS** topic. Several **SQS** queues subscribe, and each subscription can have a filter policy: a dict of attribute → allowed values. A message goes to a queue when every attribute in the filter has one of the allowed values (no filter = every message).
+
+Write `publish(message, subscriptions, queues)` that appends the message to each matching queue and returns how many queues got it. Then let each consumer drain its queue at its own pace (`batch` messages per poll) and print what is left after one poll.
+@@lang python
+@@starter
+subscriptions = {
+    "billing-queue": {"type": ["order_placed", "refund"]},
+    "shipping-queue": {"type": ["order_placed"], "country": ["JP", "KR"]},
+    "audit-queue": {},
+    "fraud-queue": {"type": ["order_placed"], "amount_band": ["high"]},
+}
+consumers = {"billing-queue": 2, "shipping-queue": 1, "audit-queue": 10, "fraud-queue": 1}
+messages = [
+    {"id": 1, "type": "order_placed", "country": "JP", "amount_band": "low"},
+    {"id": 2, "type": "order_placed", "country": "DE", "amount_band": "high"},
+    {"id": 3, "type": "refund", "country": "JP", "amount_band": "low"},
+    {"id": 4, "type": "order_placed", "country": "KR", "amount_band": "high"},
+    {"id": 5, "type": "newsletter_signup", "country": "JP"},
+]
+
+def matches(message, policy):
+    raise NotImplementedError
+
+
+def publish(message, subscriptions, queues):
+    raise NotImplementedError
+
+
+queues = {q: [] for q in subscriptions}
+for m in messages:
+    print(f"message {m['id']} ({m['type']}) -> {publish(m, subscriptions, queues)} queue(s)")
+for q, batch in consumers.items():
+    got, queues[q] = queues[q][:batch], queues[q][batch:]
+    print(f"{q}: processed {got}, waiting {queues[q]}")
+@@expected
+message 1 (order_placed) -> 3 queue(s)
+message 2 (order_placed) -> 3 queue(s)
+message 3 (refund) -> 2 queue(s)
+message 4 (order_placed) -> 4 queue(s)
+message 5 (newsletter_signup) -> 1 queue(s)
+billing-queue: processed [1, 2], waiting [3, 4]
+shipping-queue: processed [1], waiting [4]
+audit-queue: processed [1, 2, 3, 4, 5], waiting []
+fraud-queue: processed [2], waiting [4]
+@@requires
+def publish
+all(
+@@hint
+A filter matches when `all(message.get(attr) in allowed ...)` holds over its items; `all` of an empty filter is `True`, which handles the no-filter case for free.
+@@solution
+subscriptions = {
+    "billing-queue": {"type": ["order_placed", "refund"]},
+    "shipping-queue": {"type": ["order_placed"], "country": ["JP", "KR"]},
+    "audit-queue": {},
+    "fraud-queue": {"type": ["order_placed"], "amount_band": ["high"]},
+}
+consumers = {"billing-queue": 2, "shipping-queue": 1, "audit-queue": 10, "fraud-queue": 1}
+messages = [
+    {"id": 1, "type": "order_placed", "country": "JP", "amount_band": "low"},
+    {"id": 2, "type": "order_placed", "country": "DE", "amount_band": "high"},
+    {"id": 3, "type": "refund", "country": "JP", "amount_band": "low"},
+    {"id": 4, "type": "order_placed", "country": "KR", "amount_band": "high"},
+    {"id": 5, "type": "newsletter_signup", "country": "JP"},
+]
+
+def matches(message, policy):
+    return all(message.get(attr) in allowed for attr, allowed in policy.items())
+
+def publish(message, subscriptions, queues):
+    sent = 0
+    for queue, policy in subscriptions.items():
+        if matches(message, policy):
+            queues[queue].append(message["id"])
+            sent += 1
+    return sent
+
+queues = {q: [] for q in subscriptions}
+for m in messages:
+    print(f"message {m['id']} ({m['type']}) -> {publish(m, subscriptions, queues)} queue(s)")
+for q, batch in consumers.items():
+    got, queues[q] = queues[q][:batch], queues[q][batch:]
+    print(f"{q}: processed {got}, waiting {queues[q]}")

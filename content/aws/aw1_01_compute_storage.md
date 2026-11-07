@@ -115,3 +115,83 @@ Which AWS service provides serverless functions?
 = Lambda
 = AWS Lambda
 ? Pay per request and duration.
+
+@@exercise Decode EC2 instance type names
+An instance type like `m7g.2xlarge` is a family letter (`m`), a generation (`7`), optional attributes (`g` Graviton, `i` Intel, `a` AMD, `d` local NVMe, `n` extra networking) and a size after the dot.
+
+Write `decode(name)` that returns a readable description using the families from the lesson (`t`/`m` general purpose, `c` compute optimized, `r`/`x` memory optimized, `i` storage optimized, `p`/`g` accelerated). Then write `pick(workload)` that returns the family for a workload keyword (`web`, `video encoding`, `in-memory cache`, `machine learning training`, `data warehouse on local disks`). Print both.
+@@lang python
+@@starter
+import re
+
+FAMILY = {
+    "t": "general purpose (burstable)", "m": "general purpose", "c": "compute optimized",
+    "r": "memory optimized", "x": "memory optimized (extra large)", "i": "storage optimized",
+    "p": "accelerated (GPU)", "g": "accelerated (GPU)",
+}
+ATTR = {"g": "Graviton", "i": "Intel", "a": "AMD", "d": "local NVMe", "n": "extra networking"}
+WORKLOAD = {
+    "web": "m", "video encoding": "c", "in-memory cache": "r",
+    "machine learning training": "p", "data warehouse on local disks": "i",
+}
+
+def decode(name):
+    raise NotImplementedError
+
+
+def pick(workload):
+    raise NotImplementedError
+
+
+for name in ["t3.micro", "m7g.2xlarge", "c6in.large", "r6id.4xlarge", "p5.48xlarge", "large"]:
+    print(decode(name))
+for w in WORKLOAD:
+    print(f"{w}: {pick(w)} family ({FAMILY[pick(w)]})")
+@@expected
+t3.micro: general purpose (burstable), generation 3, size micro
+m7g.2xlarge: general purpose, generation 7, size 2xlarge, Graviton
+c6in.large: compute optimized, generation 6, size large, Intel, extra networking
+r6id.4xlarge: memory optimized, generation 6, size 4xlarge, Intel, local NVMe
+p5.48xlarge: accelerated (GPU), generation 5, size 48xlarge
+large: not an instance type
+web: m family (general purpose)
+video encoding: c family (compute optimized)
+in-memory cache: r family (memory optimized)
+machine learning training: p family (accelerated (GPU))
+data warehouse on local disks: i family (storage optimized)
+@@requires
+def decode
+def pick
+re.
+@@hint
+A regular expression with four groups splits the name: `([a-z])(\d+)([a-z]*)\.(\w+)`. Each attribute is one letter, so loop over the third group.
+@@solution
+import re
+
+FAMILY = {
+    "t": "general purpose (burstable)", "m": "general purpose", "c": "compute optimized",
+    "r": "memory optimized", "x": "memory optimized (extra large)", "i": "storage optimized",
+    "p": "accelerated (GPU)", "g": "accelerated (GPU)",
+}
+ATTR = {"g": "Graviton", "i": "Intel", "a": "AMD", "d": "local NVMe", "n": "extra networking"}
+WORKLOAD = {
+    "web": "m", "video encoding": "c", "in-memory cache": "r",
+    "machine learning training": "p", "data warehouse on local disks": "i",
+}
+
+def decode(name):
+    m = re.fullmatch(r"([a-z])(\d+)([a-z]*)\.(\w+)", name)
+    if not m:
+        return f"{name}: not an instance type"
+    fam, gen, attrs, size = m.groups()
+    extras = [ATTR[a] for a in attrs if a in ATTR]
+    text = f"{name}: {FAMILY.get(fam, 'unknown family')}, generation {gen}, size {size}"
+    return text + (", " + ", ".join(extras) if extras else "")
+
+def pick(workload):
+    return WORKLOAD.get(workload, "m")
+
+for name in ["t3.micro", "m7g.2xlarge", "c6in.large", "r6id.4xlarge", "p5.48xlarge", "large"]:
+    print(decode(name))
+for w in WORKLOAD:
+    print(f"{w}: {pick(w)} family ({FAMILY[pick(w)]})")

@@ -98,3 +98,80 @@ How many pillars does the AWS Well-Architected Framework have?
 = 6
 = six
 ? Sustainability was added as the sixth in 2021.
+
+@@exercise Choose a Region for each workload
+Pick a Region the way the lesson orders the factors. Write `choose_region(workload, regions)`:
+
+1. **Compliance**: if the workload has a `country`, only Regions in that country qualify.
+2. **Service availability**: the Region must offer every service in `needs`.
+3. **Latency**: among those, keep Regions within `max_ms` of the users.
+4. **Price**: of the rest, take the cheapest (lowest `price` index). Ties go to the lowest latency.
+
+Return the Region code, or the first factor that ruled everything out (`no region: compliance`, `no region: services` or `no region: latency`).
+@@lang python
+@@starter
+regions = {
+    "ap-northeast-1": {"country": "JP", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.12, "ms": {"Tokyo": 5, "Osaka": 12, "Frankfurt": 230}},
+    "ap-northeast-3": {"country": "JP", "services": {"EC2", "RDS", "EKS"}, "price": 1.12, "ms": {"Tokyo": 12, "Osaka": 4, "Frankfurt": 235}},
+    "eu-central-1": {"country": "DE", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.08, "ms": {"Tokyo": 230, "Osaka": 235, "Frankfurt": 3}},
+    "us-east-1": {"country": "US", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.00, "ms": {"Tokyo": 160, "Osaka": 165, "Frankfurt": 95}},
+}
+workloads = [
+    ("Japanese bank records", {"country": "JP", "needs": {"RDS"}, "users": "Osaka", "max_ms": 50}),
+    ("Tokyo chatbot", {"country": "JP", "needs": {"EC2", "Bedrock"}, "users": "Tokyo", "max_ms": 50}),
+    ("Global batch reports", {"country": None, "needs": {"EC2"}, "users": "Frankfurt", "max_ms": 200}),
+    ("German shop", {"country": "DE", "needs": {"EKS"}, "users": "Frankfurt", "max_ms": 20}),
+    ("Korean records", {"country": "KR", "needs": {"EC2"}, "users": "Tokyo", "max_ms": 50}),
+    ("Osaka game server", {"country": "JP", "needs": {"Bedrock"}, "users": "Osaka", "max_ms": 10}),
+]
+
+def choose_region(workload, regions):
+    raise NotImplementedError
+
+
+for name, w in workloads:
+    print(f"{name}: {choose_region(w, regions)}")
+@@expected
+Japanese bank records: ap-northeast-3
+Tokyo chatbot: ap-northeast-1
+Global batch reports: us-east-1
+German shop: eu-central-1
+Korean records: no region: compliance
+Osaka game server: no region: latency
+@@requires
+def choose_region
+min(
+@@hint
+Narrow the list of names one factor at a time and return early when it becomes empty. The final pick is `min` with the key `(price, latency)`.
+@@solution
+regions = {
+    "ap-northeast-1": {"country": "JP", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.12, "ms": {"Tokyo": 5, "Osaka": 12, "Frankfurt": 230}},
+    "ap-northeast-3": {"country": "JP", "services": {"EC2", "RDS", "EKS"}, "price": 1.12, "ms": {"Tokyo": 12, "Osaka": 4, "Frankfurt": 235}},
+    "eu-central-1": {"country": "DE", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.08, "ms": {"Tokyo": 230, "Osaka": 235, "Frankfurt": 3}},
+    "us-east-1": {"country": "US", "services": {"EC2", "RDS", "Bedrock", "EKS"}, "price": 1.00, "ms": {"Tokyo": 160, "Osaka": 165, "Frankfurt": 95}},
+}
+workloads = [
+    ("Japanese bank records", {"country": "JP", "needs": {"RDS"}, "users": "Osaka", "max_ms": 50}),
+    ("Tokyo chatbot", {"country": "JP", "needs": {"EC2", "Bedrock"}, "users": "Tokyo", "max_ms": 50}),
+    ("Global batch reports", {"country": None, "needs": {"EC2"}, "users": "Frankfurt", "max_ms": 200}),
+    ("German shop", {"country": "DE", "needs": {"EKS"}, "users": "Frankfurt", "max_ms": 20}),
+    ("Korean records", {"country": "KR", "needs": {"EC2"}, "users": "Tokyo", "max_ms": 50}),
+    ("Osaka game server", {"country": "JP", "needs": {"Bedrock"}, "users": "Osaka", "max_ms": 10}),
+]
+
+def choose_region(workload, regions):
+    names = list(regions)
+    if workload["country"]:
+        names = [n for n in names if regions[n]["country"] == workload["country"]]
+        if not names:
+            return "no region: compliance"
+    names = [n for n in names if workload["needs"] <= regions[n]["services"]]
+    if not names:
+        return "no region: services"
+    names = [n for n in names if regions[n]["ms"][workload["users"]] <= workload["max_ms"]]
+    if not names:
+        return "no region: latency"
+    return min(names, key=lambda n: (regions[n]["price"], regions[n]["ms"][workload["users"]]))
+
+for name, w in workloads:
+    print(f"{name}: {choose_region(w, regions)}")
