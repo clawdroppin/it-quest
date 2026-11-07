@@ -125,3 +125,86 @@ What port does Windows Remote Desktop (RDP) use?
 = 3389
 = tcp 3389
 ? Never expose 3389 directly to the internet: it's one of the most attacked ports.
+
+@@exercise Walk through DHCP and fall back to APIPA
+Simulate a laptop joining a network. DHCP is four messages: **D**iscover (broadcast), **O**ffer, **R**equest, **A**ck. Write `join(network)` that prints each message and returns the address the laptop ends up with:
+
+- If no DHCP server answers the Discover (`server` is `None`), the laptop gives itself an **APIPA** address `169.254.x.y` (use the last two bytes of its MAC, as numbers) and the result says `DHCP failed`.
+- If the server's pool is empty it doesn't make an offer: same fallback.
+- Otherwise it offers the first free address with the gateway and DNS server, the laptop requests it, and the server acknowledges it.
+
+Then say what the user would see: an APIPA address means "connected, no internet".
+@@lang python
+@@starter
+networks = [
+    {"name": "Office Wi-Fi", "mac": "3c:22:fb:10:0a:2f",
+     "server": {"pool": ["192.168.1.50", "192.168.1.51"], "gateway": "192.168.1.1", "dns": "192.168.1.1"}},
+    {"name": "Meeting room cable (DHCP server down)", "mac": "3c:22:fb:10:0a:2f", "server": None},
+    {"name": "Guest Wi-Fi (pool full)", "mac": "a4:83:e7:01:c8:99",
+     "server": {"pool": [], "gateway": "10.0.0.1", "dns": "1.1.1.1"}},
+]
+
+def apipa(mac):
+    raise NotImplementedError
+
+
+def join(network):
+    raise NotImplementedError
+
+
+for n in networks:
+    addr, status = join(n)
+    print(f"  result: {addr} ({status})")
+@@expected
+Office Wi-Fi:
+  DISCOVER from 3c:22:fb:10:0a:2f to 255.255.255.255
+  OFFER 192.168.1.50, gateway 192.168.1.1, DNS 192.168.1.1
+  REQUEST 192.168.1.50
+  ACK 192.168.1.50
+  result: 192.168.1.50 (OK)
+Meeting room cable (DHCP server down):
+  DISCOVER from 3c:22:fb:10:0a:2f to 255.255.255.255
+  (no answer) self-assigned 169.254.10.47
+  result: 169.254.10.47 (DHCP failed: connected, no internet)
+Guest Wi-Fi (pool full):
+  DISCOVER from a4:83:e7:01:c8:99 to 255.255.255.255
+  (no free addresses, no offer) self-assigned 169.254.200.153
+  result: 169.254.200.153 (DHCP failed: connected, no internet)
+@@requires
+def join
+def apipa
+169.254
+int(
+@@hint
+`int("0a", 16)` turns a MAC byte into a number. For the offer, `pool.pop(0)` takes the first free address and removes it from the pool.
+@@solution
+networks = [
+    {"name": "Office Wi-Fi", "mac": "3c:22:fb:10:0a:2f",
+     "server": {"pool": ["192.168.1.50", "192.168.1.51"], "gateway": "192.168.1.1", "dns": "192.168.1.1"}},
+    {"name": "Meeting room cable (DHCP server down)", "mac": "3c:22:fb:10:0a:2f", "server": None},
+    {"name": "Guest Wi-Fi (pool full)", "mac": "a4:83:e7:01:c8:99",
+     "server": {"pool": [], "gateway": "10.0.0.1", "dns": "1.1.1.1"}},
+]
+
+def apipa(mac):
+    parts = mac.split(":")
+    return f"169.254.{int(parts[-2], 16)}.{int(parts[-1], 16)}"
+
+def join(network):
+    print(f"{network['name']}:")
+    print(f"  DISCOVER from {network['mac']} to 255.255.255.255")
+    server = network["server"]
+    if server is None or not server["pool"]:
+        reason = "no answer" if server is None else "no free addresses, no offer"
+        addr = apipa(network["mac"])
+        print(f"  ({reason}) self-assigned {addr}")
+        return addr, "DHCP failed: connected, no internet"
+    addr = server["pool"].pop(0)
+    print(f"  OFFER {addr}, gateway {server['gateway']}, DNS {server['dns']}")
+    print(f"  REQUEST {addr}")
+    print(f"  ACK {addr}")
+    return addr, "OK"
+
+for n in networks:
+    addr, status = join(n)
+    print(f"  result: {addr} ({status})")

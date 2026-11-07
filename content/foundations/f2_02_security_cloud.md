@@ -94,3 +94,80 @@ shared responsibility :: Provider secures the cloud; customer secures what's in 
 Name the three letters of the security triad (as a word).
 = CIA
 ? Confidentiality, Integrity, Availability.
+
+@@exercise Is it really multi-factor?
+MFA needs factors of **different kinds**: something you know, something you have, something you are. Write `kind(method)` using the `KIND` table, then `check(methods)` that returns `MFA`, `single factor` (only one kind, even if several methods: a password plus a security question is still one factor) or `no authentication`.
+
+Print each sign-in flow with the kinds it uses and the verdict.
+@@lang python
+@@starter
+KIND = {
+    "password": "know", "PIN": "know", "security question": "know",
+    "authenticator app code": "have", "hardware key": "have", "SMS code": "have", "smart card": "have",
+    "fingerprint": "are", "face scan": "are",
+}
+logins = {
+    "Webmail": ["password", "security question"],
+    "VPN": ["password", "authenticator app code"],
+    "Laptop": ["PIN"],
+    "Data centre door": ["smart card", "fingerprint"],
+    "Admin portal": ["password", "hardware key", "face scan"],
+    "Kiosk": [],
+    "Banking app": ["password", "PIN"],
+}
+
+def kind(method):
+    raise NotImplementedError
+
+
+def check(methods):
+    raise NotImplementedError
+
+
+for name, methods in logins.items():
+    kinds, verdict = check(methods)
+    shown = ", ".join(sorted(kinds)) or "none"
+    print(f"{name}: {' + '.join(methods) or '-'} -> kinds: {shown} -> {verdict}")
+@@expected
+Webmail: password + security question -> kinds: know -> single factor
+VPN: password + authenticator app code -> kinds: have, know -> MFA
+Laptop: PIN -> kinds: know -> single factor
+Data centre door: smart card + fingerprint -> kinds: are, have -> MFA
+Admin portal: password + hardware key + face scan -> kinds: are, have, know -> MFA
+Kiosk: - -> kinds: none -> no authentication
+Banking app: password + PIN -> kinds: know -> single factor
+@@requires
+def kind
+def check
+len(kinds)
+@@hint
+Put the kinds in a set: duplicates disappear, so `len(set_of_kinds) >= 2` is exactly the MFA rule.
+@@solution
+KIND = {
+    "password": "know", "PIN": "know", "security question": "know",
+    "authenticator app code": "have", "hardware key": "have", "SMS code": "have", "smart card": "have",
+    "fingerprint": "are", "face scan": "are",
+}
+logins = {
+    "Webmail": ["password", "security question"],
+    "VPN": ["password", "authenticator app code"],
+    "Laptop": ["PIN"],
+    "Data centre door": ["smart card", "fingerprint"],
+    "Admin portal": ["password", "hardware key", "face scan"],
+    "Kiosk": [],
+    "Banking app": ["password", "PIN"],
+}
+
+def kind(method):
+    return KIND[method]
+
+def check(methods):
+    kinds = {kind(m) for m in methods}
+    if not kinds:
+        return kinds, "no authentication"
+    return kinds, "MFA" if len(kinds) >= 2 else "single factor"
+
+for name, methods in logins.items():
+    kinds, verdict = check(methods)
+    shown = ", ".join(sorted(kinds)) or "none"
+    print(f"{name}: {' + '.join(methods) or '-'} -> kinds: {shown} -> {verdict}")

@@ -104,3 +104,98 @@ What is the very last step of the CompTIA troubleshooting methodology? (one word
 = document
 = documentation
 ? Document findings, actions and outcomes, so the next person (or future you) benefits.
+
+@@exercise Did they follow the methodology?
+A ticket's work log tags each action with the step of the lesson's methodology it belongs to: `identify`, `theory`, `test`, `plan`, `implement`, `verify`, `document`, or `escalate`. Write `audit(log)` that returns the problems:
+
+- steps may repeat (a failed test sends you back to `theory`) but must never jump **forward** past a step that hasn't happened yet (implementing before testing a theory);
+- `verify` and `document` must both happen before the ticket closes, unless it was escalated;
+- the log should mention a backup before the first `implement` when the fix touches data (`touches_data`).
+
+Print each ticket with `followed the methodology` or its problems.
+@@lang python
+@@starter
+ORDER = ["identify", "theory", "test", "plan", "implement", "verify", "document"]
+tickets = {
+    "INC-301 printer offline": {"touches_data": False, "log": [
+        ("identify", "user can't print, others can"), ("theory", "wrong default printer"),
+        ("test", "default is the old printer: confirmed"), ("plan", "set the new default"),
+        ("implement", "changed default"), ("verify", "test page printed"), ("document", "noted in ticket")]},
+    "INC-302 Outlook crash": {"touches_data": True, "log": [
+        ("identify", "crashes on start"), ("implement", "rebuilt the profile"), ("verify", "opens now")]},
+    "INC-303 slow laptop": {"touches_data": False, "log": [
+        ("identify", "slow since Monday"), ("theory", "update running"), ("test", "no update: wrong"),
+        ("theory", "full disk"), ("test", "disk 99% full: confirmed"), ("plan", "clear temp files"),
+        ("implement", "cleared 40 GB"), ("verify", "fast again")]},
+    "INC-304 VPN for one user": {"touches_data": False, "log": [
+        ("identify", "VPN fails for one user"), ("theory", "certificate expired"),
+        ("test", "not confirmed"), ("escalate", "sent to network team")]},
+    "INC-305 file share": {"touches_data": True, "log": [
+        ("identify", "folder missing"), ("theory", "permissions changed"), ("test", "confirmed"),
+        ("plan", "backup taken, then restore permissions"), ("implement", "restored ACL"),
+        ("verify", "user sees folder"), ("document", "recorded the change")]},
+}
+
+def audit(ticket):
+    raise NotImplementedError
+
+
+for name, t in tickets.items():
+    problems = audit(t)
+    print(f"{name}: " + ("followed the methodology" if not problems else "; ".join(problems)))
+@@expected
+INC-301 printer offline: followed the methodology
+INC-302 Outlook crash: jumped to implement before theory; no document step; no backup before changing data
+INC-303 slow laptop: no document step
+INC-304 VPN for one user: followed the methodology
+INC-305 file share: followed the methodology
+@@requires
+def audit
+ORDER.index
+@@hint
+Track the furthest step reached so far. A step is fine if it is at most one further than that; going back to an earlier step is allowed.
+@@solution
+ORDER = ["identify", "theory", "test", "plan", "implement", "verify", "document"]
+tickets = {
+    "INC-301 printer offline": {"touches_data": False, "log": [
+        ("identify", "user can't print, others can"), ("theory", "wrong default printer"),
+        ("test", "default is the old printer: confirmed"), ("plan", "set the new default"),
+        ("implement", "changed default"), ("verify", "test page printed"), ("document", "noted in ticket")]},
+    "INC-302 Outlook crash": {"touches_data": True, "log": [
+        ("identify", "crashes on start"), ("implement", "rebuilt the profile"), ("verify", "opens now")]},
+    "INC-303 slow laptop": {"touches_data": False, "log": [
+        ("identify", "slow since Monday"), ("theory", "update running"), ("test", "no update: wrong"),
+        ("theory", "full disk"), ("test", "disk 99% full: confirmed"), ("plan", "clear temp files"),
+        ("implement", "cleared 40 GB"), ("verify", "fast again")]},
+    "INC-304 VPN for one user": {"touches_data": False, "log": [
+        ("identify", "VPN fails for one user"), ("theory", "certificate expired"),
+        ("test", "not confirmed"), ("escalate", "sent to network team")]},
+    "INC-305 file share": {"touches_data": True, "log": [
+        ("identify", "folder missing"), ("theory", "permissions changed"), ("test", "confirmed"),
+        ("plan", "backup taken, then restore permissions"), ("implement", "restored ACL"),
+        ("verify", "user sees folder"), ("document", "recorded the change")]},
+}
+
+def audit(ticket):
+    problems, reached = [], -1
+    for step, note in ticket["log"]:
+        if step == "escalate":
+            continue
+        pos = ORDER.index(step)
+        if pos > reached + 1:
+            problems.append(f"jumped to {step} before {ORDER[reached + 1]}")
+        reached = max(reached, pos)
+    steps = [s for s, _ in ticket["log"]]
+    if "escalate" not in steps:
+        for needed in ("verify", "document"):
+            if needed not in steps:
+                problems.append(f"no {needed} step")
+    if ticket["touches_data"] and "implement" in steps:
+        before = ticket["log"][:steps.index("implement")]
+        if not any("backup" in note for _, note in before):
+            problems.append("no backup before changing data")
+    return problems
+
+for name, t in tickets.items():
+    problems = audit(t)
+    print(f"{name}: " + ("followed the methodology" if not problems else "; ".join(problems)))
