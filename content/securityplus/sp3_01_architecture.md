@@ -119,3 +119,115 @@ Which kind of exercise talks through an incident scenario in a meeting room, wit
 = tabletop
 = tabletop exercise
 ? Cheap, fast and very effective at finding gaps in plans.
+
+@@exercise Mask, tokenize and hash sensitive fields
+Protect a customer export with three of the lesson's methods:
+
+- `mask(card)`: show only the last 4 digits (`**** **** **** 1111`), for the support screen.
+- `tokenize(card, vault)`: replace the card number with a random-looking token and keep the mapping in `vault`, so the payment system can swap it back with `detokenize`. The same card always gets the same token.
+- `hash_email(email)`: SHA-256 of the lowercased address, so analysts can count unique customers without seeing addresses.
+
+Print the support view, the analytics view and prove the token round-trips. (Tokens use a counter so the output is repeatable; a real vault would use random values.)
+@@lang python
+@@starter
+import hashlib
+
+customers = [
+    {"name": "Aiko Tanaka", "email": "Aiko@example.jp", "card": "4111111111111111"},
+    {"name": "Ben Ito", "email": "ben@example.jp", "card": "5500005555555559"},
+    {"name": "Aiko Tanaka", "email": "aiko@example.jp", "card": "4111111111111111"},
+]
+
+def mask(card):
+    raise NotImplementedError
+
+
+def tokenize(card, vault):
+    raise NotImplementedError
+
+
+def detokenize(token, vault):
+    raise NotImplementedError
+
+
+def hash_email(email):
+    raise NotImplementedError
+
+
+vault = {}
+print("Support view:")
+for c in customers:
+    print(f"  {c['name']}: {mask(c['card'])}")
+print("Stored by the shop:")
+for c in customers:
+    print(f"  {c['name']}: {tokenize(c['card'], vault)}")
+print("Analytics view:")
+hashes = [hash_email(c["email"]) for c in customers]
+for h in hashes:
+    print("  " + h[:16] + "...")
+print(f"  unique customers: {len(set(hashes))}")
+token = tokenize(customers[1]["card"], vault)
+print("Round trip:", detokenize(token, vault) == customers[1]["card"])
+@@expected
+Support view:
+  Aiko Tanaka: **** **** **** 1111
+  Ben Ito: **** **** **** 5559
+  Aiko Tanaka: **** **** **** 1111
+Stored by the shop:
+  Aiko Tanaka: tok_000001
+  Ben Ito: tok_000002
+  Aiko Tanaka: tok_000001
+Analytics view:
+  0203afc6e22ea9e0...
+  cd2e5b8f59600c3d...
+  0203afc6e22ea9e0...
+  unique customers: 2
+Round trip: True
+@@requires
+def mask
+def tokenize
+def hash_email
+hashlib.sha256
+.lower()
+@@hint
+Masking is string slicing, tokenization is a dict lookup in both directions, and hashing is `hashlib.sha256(text.encode()).hexdigest()`. Lowercase the email before hashing or `Aiko@` and `aiko@` count as two people.
+@@solution
+import hashlib
+
+customers = [
+    {"name": "Aiko Tanaka", "email": "Aiko@example.jp", "card": "4111111111111111"},
+    {"name": "Ben Ito", "email": "ben@example.jp", "card": "5500005555555559"},
+    {"name": "Aiko Tanaka", "email": "aiko@example.jp", "card": "4111111111111111"},
+]
+
+def mask(card):
+    return "**** **** **** " + card[-4:]
+
+def tokenize(card, vault):
+    for token, value in vault.items():
+        if value == card:
+            return token
+    token = f"tok_{len(vault) + 1:06d}"
+    vault[token] = card
+    return token
+
+def detokenize(token, vault):
+    return vault[token]
+
+def hash_email(email):
+    return hashlib.sha256(email.lower().encode()).hexdigest()
+
+vault = {}
+print("Support view:")
+for c in customers:
+    print(f"  {c['name']}: {mask(c['card'])}")
+print("Stored by the shop:")
+for c in customers:
+    print(f"  {c['name']}: {tokenize(c['card'], vault)}")
+print("Analytics view:")
+hashes = [hash_email(c["email"]) for c in customers]
+for h in hashes:
+    print("  " + h[:16] + "...")
+print(f"  unique customers: {len(set(hashes))}")
+token = tokenize(customers[1]["card"], vault)
+print("Round trip:", detokenize(token, vault) == customers[1]["card"])

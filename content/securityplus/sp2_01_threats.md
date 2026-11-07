@@ -142,3 +142,78 @@ What is the name for malware that leaves no file on disk and runs in memory, oft
 = fileless malware
 = fileless
 ? EDR tools watch behaviour, not just files, to catch it.
+
+@@exercise Brute force or password spraying?
+The sign-in log lists failed and successful logins as `(time, source IP, account, result)`. Write `classify_sources(log)` that looks at each source IP's failures:
+
+- 10 or more failures against **one** account → `brute force`
+- failures against 5 or more **different** accounts with at most 2 tries each → `password spraying`
+- otherwise → `noise`
+
+For each brute force or spraying source, also report any account that later signed in **successfully** from that IP: that account is probably compromised. Print a line per source IP, sorted.
+@@lang python
+@@starter
+log = []
+for i in range(12):
+    log.append((f"09:{i:02d}", "203.0.113.7", "admin", "fail"))
+for i, user in enumerate(["aiko", "ben", "chika", "dev", "eri", "fumi"]):
+    log.append((f"10:{i:02d}", "198.51.100.23", user, "fail"))
+log.append(("10:07", "198.51.100.23", "fumi", "success"))
+log.append(("11:00", "192.0.2.50", "ben", "fail"))
+log.append(("11:01", "192.0.2.50", "ben", "success"))
+log.append(("11:30", "203.0.113.7", "admin", "fail"))
+
+def classify_sources(log):
+    raise NotImplementedError
+
+
+for ip, (kind, fails, accounts, hit) in sorted(classify_sources(log).items()):
+    line = f"{ip}: {kind} ({fails} failures, {accounts} account(s))"
+    if hit:
+        line += "; then signed in as " + ", ".join(hit) + ": reset and investigate"
+    print(line)
+@@expected
+192.0.2.50: noise (1 failures, 1 account(s))
+198.51.100.23: password spraying (6 failures, 6 account(s)); then signed in as fumi: reset and investigate
+203.0.113.7: brute force (13 failures, 1 account(s))
+@@requires
+def classify_sources
+len(per_account)
+@@hint
+Count failures per IP **and** per account (`failures[ip][account]`). Brute force is many tries at one account; spraying is few tries at many accounts.
+@@solution
+log = []
+for i in range(12):
+    log.append((f"09:{i:02d}", "203.0.113.7", "admin", "fail"))
+for i, user in enumerate(["aiko", "ben", "chika", "dev", "eri", "fumi"]):
+    log.append((f"10:{i:02d}", "198.51.100.23", user, "fail"))
+log.append(("10:07", "198.51.100.23", "fumi", "success"))
+log.append(("11:00", "192.0.2.50", "ben", "fail"))
+log.append(("11:01", "192.0.2.50", "ben", "success"))
+log.append(("11:30", "203.0.113.7", "admin", "fail"))
+
+def classify_sources(log):
+    failures, successes = {}, {}
+    for _, ip, account, result in log:
+        if result == "fail":
+            failures.setdefault(ip, {})
+            failures[ip][account] = failures[ip].get(account, 0) + 1
+        else:
+            successes.setdefault(ip, set()).add(account)
+    report = {}
+    for ip, per_account in failures.items():
+        if max(per_account.values()) >= 10 and len(per_account) == 1:
+            kind = "brute force"
+        elif len(per_account) >= 5 and max(per_account.values()) <= 2:
+            kind = "password spraying"
+        else:
+            kind = "noise"
+        hit = sorted(successes.get(ip, set()) & set(per_account)) if kind != "noise" else []
+        report[ip] = (kind, sum(per_account.values()), len(per_account), hit)
+    return report
+
+for ip, (kind, fails, accounts, hit) in sorted(classify_sources(log).items()):
+    line = f"{ip}: {kind} ({fails} failures, {accounts} account(s))"
+    if hit:
+        line += "; then signed in as " + ", ".join(hit) + ": reset and investigate"
+    print(line)

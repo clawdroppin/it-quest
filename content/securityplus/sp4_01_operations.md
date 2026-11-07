@@ -143,3 +143,106 @@ threat hunting :: Proactively searching for undetected attackers
 What is the last phase of the incident response process? (two words)
 = lessons learned
 ? Improve the plan and controls so it doesn't happen again.
+
+@@exercise Run a SOAR playbook on alerts
+A SOAR platform runs a playbook for each SIEM alert. Write `run_playbook(alert)` that returns the list of actions taken, in order:
+
+1. Every alert: `enrich: look up <host or user> in the CMDB`.
+2. `malware` with severity `high` or `critical`: `isolate host <host>`, then `open P1 ticket`.
+3. `malware` lower than high: `run full scan on <host>`.
+4. `impossible travel`: `disable account <user>`, `revoke sessions for <user>`, `open P2 ticket`.
+5. `phishing reported`: `remove email from all mailboxes`, `block sender domain <domain>`.
+6. Anything else: `send to analyst queue`.
+7. Every `critical` alert also gets `page the on-call analyst` at the end.
+
+Print each alert and its actions, then how many alerts needed a human.
+@@lang python
+@@starter
+alerts = [
+    {"id": 101, "type": "malware", "severity": "critical", "host": "fin-laptop-07"},
+    {"id": 102, "type": "malware", "severity": "low", "host": "kiosk-02"},
+    {"id": 103, "type": "impossible travel", "severity": "high", "user": "ksato"},
+    {"id": 104, "type": "phishing reported", "severity": "medium", "user": "aiko", "domain": "examp1e-pay.com"},
+    {"id": 105, "type": "dns tunnelling", "severity": "critical", "host": "web03"},
+]
+SEVERE = {"high", "critical"}
+
+def run_playbook(alert):
+    raise NotImplementedError
+
+
+human = 0
+for a in alerts:
+    actions = run_playbook(a)
+    if any("analyst" in step for step in actions):
+        human += 1
+    print(f"#{a['id']} {a['type']} ({a['severity']}):")
+    for step in actions:
+        print("  - " + step)
+print(f"{human} of {len(alerts)} alerts needed a human")
+@@expected
+#101 malware (critical):
+  - enrich: look up fin-laptop-07 in the CMDB
+  - isolate host fin-laptop-07
+  - open P1 ticket
+  - page the on-call analyst
+#102 malware (low):
+  - enrich: look up kiosk-02 in the CMDB
+  - run full scan on kiosk-02
+#103 impossible travel (high):
+  - enrich: look up ksato in the CMDB
+  - disable account ksato
+  - revoke sessions for ksato
+  - open P2 ticket
+#104 phishing reported (medium):
+  - enrich: look up aiko in the CMDB
+  - remove email from all mailboxes
+  - block sender domain examp1e-pay.com
+#105 dns tunnelling (critical):
+  - enrich: look up web03 in the CMDB
+  - send to analyst queue
+  - page the on-call analyst
+2 of 5 alerts needed a human
+@@requires
+def run_playbook
+elif
+@@hint
+Start the list with the enrichment step, add one branch's steps with an `if`/`elif` chain, and append the paging step after the chain so it applies to every critical alert.
+@@solution
+alerts = [
+    {"id": 101, "type": "malware", "severity": "critical", "host": "fin-laptop-07"},
+    {"id": 102, "type": "malware", "severity": "low", "host": "kiosk-02"},
+    {"id": 103, "type": "impossible travel", "severity": "high", "user": "ksato"},
+    {"id": 104, "type": "phishing reported", "severity": "medium", "user": "aiko", "domain": "examp1e-pay.com"},
+    {"id": 105, "type": "dns tunnelling", "severity": "critical", "host": "web03"},
+]
+SEVERE = {"high", "critical"}
+
+def run_playbook(alert):
+    subject = alert.get("host") or alert.get("user")
+    actions = [f"enrich: look up {subject} in the CMDB"]
+    kind = alert["type"]
+    if kind == "malware" and alert["severity"] in SEVERE:
+        actions += [f"isolate host {alert['host']}", "open P1 ticket"]
+    elif kind == "malware":
+        actions.append(f"run full scan on {alert['host']}")
+    elif kind == "impossible travel":
+        user = alert["user"]
+        actions += [f"disable account {user}", f"revoke sessions for {user}", "open P2 ticket"]
+    elif kind == "phishing reported":
+        actions += ["remove email from all mailboxes", f"block sender domain {alert['domain']}"]
+    else:
+        actions.append("send to analyst queue")
+    if alert["severity"] == "critical":
+        actions.append("page the on-call analyst")
+    return actions
+
+human = 0
+for a in alerts:
+    actions = run_playbook(a)
+    if any("analyst" in step for step in actions):
+        human += 1
+    print(f"#{a['id']} {a['type']} ({a['severity']}):")
+    for step in actions:
+        print("  - " + step)
+print(f"{human} of {len(alerts)} alerts needed a human")

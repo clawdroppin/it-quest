@@ -127,3 +127,80 @@ honeypot / honeytoken :: Fake system / fake data that alerts when touched
 Which control type is a firewall rule that blocks traffic?
 = preventive
 ? It stops the event from happening.
+
+@@exercise Zero trust access decisions
+Play the **policy engine**. Every request is checked on its own merits: no implicit trust for being on the office network. Write `decide(request, policy)` that returns `allow` or `deny` with every reason:
+
+- the user must be authenticated **with MFA**;
+- the device must be managed and patched (`posture` is `healthy`);
+- the user's role must be listed for the resource (least privilege);
+- sensitive resources (`sensitivity: high`) also require the request to come from an expected country.
+
+The network location (`office` or `home`) is printed but never used to allow anything. Print each decision as the policy administrator would pass it to the enforcement point.
+@@lang python
+@@starter
+policy = {
+    "payroll": {"roles": {"hr", "finance"}, "sensitivity": "high", "countries": {"JP"}},
+    "wiki": {"roles": {"hr", "finance", "engineer", "sales"}, "sensitivity": "low"},
+    "prod-db": {"roles": {"dba"}, "sensitivity": "high", "countries": {"JP", "US"}},
+}
+requests = [
+    {"user": "aiko", "role": "hr", "mfa": True, "posture": "healthy", "network": "home", "country": "JP", "resource": "payroll"},
+    {"user": "ben", "role": "sales", "mfa": True, "posture": "healthy", "network": "office", "country": "JP", "resource": "payroll"},
+    {"user": "chika", "role": "engineer", "mfa": False, "posture": "healthy", "network": "office", "country": "JP", "resource": "wiki"},
+    {"user": "dev", "role": "dba", "mfa": True, "posture": "unpatched", "network": "office", "country": "JP", "resource": "prod-db"},
+    {"user": "eri", "role": "finance", "mfa": True, "posture": "healthy", "network": "home", "country": "BR", "resource": "payroll"},
+    {"user": "fumi", "role": "sales", "mfa": True, "posture": "healthy", "network": "home", "country": "DE", "resource": "wiki"},
+]
+
+def decide(request, policy):
+    raise NotImplementedError
+
+
+for r in requests:
+    verdict, reasons = decide(r, policy)
+    detail = "" if not reasons else ": " + ", ".join(reasons)
+    print(f"{r['user']} -> {r['resource']} from {r['network']}: {verdict}{detail}")
+@@expected
+aiko -> payroll from home: allow
+ben -> payroll from office: deny: role sales not permitted
+chika -> wiki from office: deny: no MFA
+dev -> prod-db from office: deny: device unpatched
+eri -> payroll from home: deny: unexpected country BR
+fumi -> wiki from home: allow
+@@requires
+def decide
+@@hint
+Collect every failed check in a list instead of returning at the first one, so the log explains the whole decision. Notice that `network` never appears in a condition.
+@@solution
+policy = {
+    "payroll": {"roles": {"hr", "finance"}, "sensitivity": "high", "countries": {"JP"}},
+    "wiki": {"roles": {"hr", "finance", "engineer", "sales"}, "sensitivity": "low"},
+    "prod-db": {"roles": {"dba"}, "sensitivity": "high", "countries": {"JP", "US"}},
+}
+requests = [
+    {"user": "aiko", "role": "hr", "mfa": True, "posture": "healthy", "network": "home", "country": "JP", "resource": "payroll"},
+    {"user": "ben", "role": "sales", "mfa": True, "posture": "healthy", "network": "office", "country": "JP", "resource": "payroll"},
+    {"user": "chika", "role": "engineer", "mfa": False, "posture": "healthy", "network": "office", "country": "JP", "resource": "wiki"},
+    {"user": "dev", "role": "dba", "mfa": True, "posture": "unpatched", "network": "office", "country": "JP", "resource": "prod-db"},
+    {"user": "eri", "role": "finance", "mfa": True, "posture": "healthy", "network": "home", "country": "BR", "resource": "payroll"},
+    {"user": "fumi", "role": "sales", "mfa": True, "posture": "healthy", "network": "home", "country": "DE", "resource": "wiki"},
+]
+
+def decide(request, policy):
+    rule = policy[request["resource"]]
+    reasons = []
+    if not request["mfa"]:
+        reasons.append("no MFA")
+    if request["posture"] != "healthy":
+        reasons.append(f"device {request['posture']}")
+    if request["role"] not in rule["roles"]:
+        reasons.append(f"role {request['role']} not permitted")
+    if rule["sensitivity"] == "high" and request["country"] not in rule["countries"]:
+        reasons.append(f"unexpected country {request['country']}")
+    return ("deny", reasons) if reasons else ("allow", [])
+
+for r in requests:
+    verdict, reasons = decide(r, policy)
+    detail = "" if not reasons else ": " + ", ".join(reasons)
+    print(f"{r['user']} -> {r['resource']} from {r['network']}: {verdict}{detail}")
