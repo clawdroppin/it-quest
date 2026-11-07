@@ -169,3 +169,72 @@ do ... while :: Test-last loop (runs at least once)
 In IPA pseudo-code, what's the first index of an array? (a number)
 = 1
 ? Python starts at 0: watch out when translating.
+
+@@exercise Print a trace table (トレース表)
+The exam's pseudo-code for Euclid's algorithm is:
+
+```text
+○整数型: gcd(整数型: a, 整数型: b)
+  整数型: r
+  while (b ≠ 0)
+    r ← a mod b
+    a ← b
+    b ← r
+  endwhile
+  return a
+```
+
+Write `trace_gcd(a, b)` that runs it and returns the trace table: one row for the start and one after every pass through the loop, with columns `pass`, `a`, `b`, `r` (`-` before r is set). Print the tables for gcd(1071, 462) and gcd(24, 36), then the answers. Notice how the second one swaps a and b on the first pass.
+@@lang python
+@@starter
+def trace_gcd(a, b):
+    raise NotImplementedError
+
+
+for a, b in [(1071, 462), (24, 36)]:
+    rows, answer = trace_gcd(a, b)
+    print(f"gcd({a}, {b})")
+    print("pass     a     b     r")
+    for n, ra, rb, rr in rows:
+        print(f"{n:>4}{ra:>6}{rb:>6}{rr:>6}")
+    print(f"answer: {answer}")
+@@expected
+gcd(1071, 462)
+pass     a     b     r
+   0  1071   462     -
+   1   462   147   147
+   2   147    21    21
+   3    21     0     0
+answer: 21
+gcd(24, 36)
+pass     a     b     r
+   0    24    36     -
+   1    36    24    24
+   2    24    12    12
+   3    12     0     0
+answer: 12
+@@requires
+def trace_gcd
+while b != 0
+%
+@@hint
+Append a row once before the loop and once at the end of each pass. `mod` in the pseudo-code is `%` in Python.
+@@solution
+def trace_gcd(a, b):
+    rows = [(0, a, b, "-")]
+    n = 0
+    while b != 0:
+        r = a % b
+        a = b
+        b = r
+        n += 1
+        rows.append((n, a, b, r))
+    return rows, a
+
+for a, b in [(1071, 462), (24, 36)]:
+    rows, answer = trace_gcd(a, b)
+    print(f"gcd({a}, {b})")
+    print("pass     a     b     r")
+    for n, ra, rb, rr in rows:
+        print(f"{n:>4}{ra:>6}{rb:>6}{rr:>6}")
+    print(f"answer: {answer}")

@@ -203,3 +203,97 @@ def principle_for(text):
 
 for s in situations:
     print(f"{principle_for(s) or 'no match (ask a person)':<36} {s}")
+
+@@exercise Which of the four dimensions?
+Every change touches the four dimensions of service management: **organizations and people**, **information and technology**, **partners and suppliers**, **value streams and processes**. Write `dimensions(task)` that returns every dimension a project task touches, using keywords (`training`, `roles`, `culture` → people; `software`, `data`, `server`, `tool` → technology; `vendor`, `contract`, `outsourc` → partners; `workflow`, `process`, `handoff`, `approval` → value streams).
+
+Print each task with its dimensions, then warn about any dimension the whole plan never touches: the classic reason a tool rollout fails.
+@@lang python
+@@starter
+DIMENSIONS = {
+    "organizations and people": ["training", "roles", "culture"],
+    "information and technology": ["software", "data", "server", "tool"],
+    "partners and suppliers": ["vendor", "contract", "outsourc"],
+    "value streams and processes": ["workflow", "process", "handoff", "approval"],
+}
+plans = {
+    "New ticketing tool": [
+        "Buy the ticketing software licence",
+        "Migrate old ticket data",
+        "Install the tool on two servers",
+    ],
+    "Outsourced night shift": [
+        "Sign the contract with the support vendor",
+        "Define the handoff between day and night teams",
+        "Training for the vendor's agents",
+        "Give the vendor read access to the knowledge base data",
+    ],
+}
+
+def dimensions(task):
+    raise NotImplementedError
+
+
+for plan, tasks in plans.items():
+    print(plan + ":")
+    touched = set()
+    for t in tasks:
+        d = dimensions(t)
+        touched.update(d)
+        print(f"  {t}: {', '.join(d) or 'none'}")
+    for d in DIMENSIONS:
+        if d not in touched:
+            print(f"  warning: nothing covers {d}")
+@@expected
+New ticketing tool:
+  Buy the ticketing software licence: information and technology
+  Migrate old ticket data: information and technology
+  Install the tool on two servers: information and technology
+  warning: nothing covers organizations and people
+  warning: nothing covers partners and suppliers
+  warning: nothing covers value streams and processes
+Outsourced night shift:
+  Sign the contract with the support vendor: partners and suppliers
+  Define the handoff between day and night teams: value streams and processes
+  Training for the vendor's agents: organizations and people, partners and suppliers
+  Give the vendor read access to the knowledge base data: information and technology, partners and suppliers
+@@requires
+def dimensions
+any(
+@@hint
+Return every matching dimension, not just the first: a task can touch several. Keep a set of the dimensions touched by the whole plan and compare it with all four at the end.
+@@solution
+DIMENSIONS = {
+    "organizations and people": ["training", "roles", "culture"],
+    "information and technology": ["software", "data", "server", "tool"],
+    "partners and suppliers": ["vendor", "contract", "outsourc"],
+    "value streams and processes": ["workflow", "process", "handoff", "approval"],
+}
+plans = {
+    "New ticketing tool": [
+        "Buy the ticketing software licence",
+        "Migrate old ticket data",
+        "Install the tool on two servers",
+    ],
+    "Outsourced night shift": [
+        "Sign the contract with the support vendor",
+        "Define the handoff between day and night teams",
+        "Training for the vendor's agents",
+        "Give the vendor read access to the knowledge base data",
+    ],
+}
+
+def dimensions(task):
+    text = task.lower()
+    return [d for d, words in DIMENSIONS.items() if any(w in text for w in words)]
+
+for plan, tasks in plans.items():
+    print(plan + ":")
+    touched = set()
+    for t in tasks:
+        d = dimensions(t)
+        touched.update(d)
+        print(f"  {t}: {', '.join(d) or 'none'}")
+    for d in DIMENSIONS:
+        if d not in touched:
+            print(f"  warning: nothing covers {d}")

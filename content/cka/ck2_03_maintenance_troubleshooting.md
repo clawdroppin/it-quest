@@ -244,6 +244,7 @@ ok-1: healthy
 def triage
 137
 127
+.get(
 @@hint
 Check `waiting` first (ImagePullBackOff, CreateContainerConfigError, CrashLoopBackOff with the exit code), then `phase == "Pending"` (scheduling), then readiness. Return a tuple `(cause, command)`.
 @@solution

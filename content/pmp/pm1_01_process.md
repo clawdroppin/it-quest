@@ -196,3 +196,88 @@ def response(risk):
 for r in sorted(risks, key=lambda r: -r["p"] * r["i"]):
     print(f"{r['id']} {r['kind']:<12} {r['p'] * r['i']:>2}  {response(r):<9} {r['desc']}")
 print("Needs an owner: " + ", ".join(r["id"] for r in risks if not r["owner"]))
+
+@@exercise Sort costs into the cost of quality
+Cost of quality has four parts: **prevention** and **appraisal** (the cost of conformance) and **internal failure** and **external failure** (the cost of nonconformance). Write `category(item)` by keyword: `training`, `standards`, `design review` → prevention; `testing`, `inspection`, `audit` → appraisal; `rework`, `scrap`, `retest` → internal failure; `warranty`, `recall`, `complaint`, `lost customer` → external failure.
+
+Print the total per category, conformance versus nonconformance, and what share of the total the failures are.
+@@lang python
+@@starter
+items = [
+    ("Training testers on the new framework", 4_000),
+    ("Coding standards workshop", 1_500),
+    ("Design review sessions", 3_000),
+    ("Automated testing infrastructure", 6_000),
+    ("Security audit", 5_000),
+    ("Rework after failed acceptance", 9_000),
+    ("Retest of the payment module", 2_500),
+    ("Warranty fixes after go-live", 12_000),
+    ("Customer complaint handling", 3_500),
+]
+RULES = [
+    ("prevention", ["training", "standards", "design review"]),
+    ("appraisal", ["testing", "inspection", "audit"]),
+    ("internal failure", ["rework", "scrap", "retest"]),
+    ("external failure", ["warranty", "recall", "complaint", "lost customer"]),
+]
+
+def category(item):
+    raise NotImplementedError
+
+
+totals = {name: 0 for name, _ in RULES}
+for item, cost in items:
+    totals[category(item)] += cost
+for name, cost in totals.items():
+    print(f"{name:<17} ${cost:>7,}")
+conformance = totals["prevention"] + totals["appraisal"]
+nonconformance = totals["internal failure"] + totals["external failure"]
+print(f"conformance ${conformance:,}, nonconformance ${nonconformance:,}")
+print(f"failures are {nonconformance * 100 / (conformance + nonconformance):.0f}% of the cost of quality")
+@@expected
+prevention        $  8,500
+appraisal         $ 11,000
+internal failure  $ 11,500
+external failure  $ 15,500
+conformance $19,500, nonconformance $27,000
+failures are 58% of the cost of quality
+@@requires
+def category
+.lower()
+@@hint
+Check the keyword lists in order and add each cost into a dict keyed by category. Conformance is prevention + appraisal; nonconformance is the two failure categories.
+@@solution
+items = [
+    ("Training testers on the new framework", 4_000),
+    ("Coding standards workshop", 1_500),
+    ("Design review sessions", 3_000),
+    ("Automated testing infrastructure", 6_000),
+    ("Security audit", 5_000),
+    ("Rework after failed acceptance", 9_000),
+    ("Retest of the payment module", 2_500),
+    ("Warranty fixes after go-live", 12_000),
+    ("Customer complaint handling", 3_500),
+]
+RULES = [
+    ("prevention", ["training", "standards", "design review"]),
+    ("appraisal", ["testing", "inspection", "audit"]),
+    ("internal failure", ["rework", "scrap", "retest"]),
+    ("external failure", ["warranty", "recall", "complaint", "lost customer"]),
+]
+
+def category(item):
+    text = item.lower()
+    for name, words in RULES:
+        if any(w in text for w in words):
+            return name
+    return "unclassified"
+
+totals = {name: 0 for name, _ in RULES}
+for item, cost in items:
+    totals[category(item)] += cost
+for name, cost in totals.items():
+    print(f"{name:<17} ${cost:>7,}")
+conformance = totals["prevention"] + totals["appraisal"]
+nonconformance = totals["internal failure"] + totals["external failure"]
+print(f"conformance ${conformance:,}, nonconformance ${nonconformance:,}")
+print(f"failures are {nonconformance * 100 / (conformance + nonconformance):.0f}% of the cost of quality")

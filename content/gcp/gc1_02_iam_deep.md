@@ -242,6 +242,7 @@ bucket lab-data: location asia-northeast1 not in ['europe-west1', 'europe-west4'
 @@requires
 def effective
 "merge"
+.get(
 @@hint
 Walk from the org down to the project (reverse of the ancestor chain). For locations, `replace` sets the allowed set, `merge` unions it. Boolean constraints: the nearest node that sets a value wins.
 @@solution

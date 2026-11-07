@@ -233,6 +233,7 @@ fn checks() {
 @@requires
 macro_rules! hashmap
 macro_rules! max_of
+HashMap::new(
 @@hint
 `hashmap`: `( $( $k:expr => $v:expr ),* $(,)? ) => {{ let mut m = ::std::collections::HashMap::new(); $( m.insert($k, $v); )* m }};`. `max_of`: two rules, `($x:expr) => { $x };` and `($x:expr, $($rest:expr),+) => { ::std::cmp::max($x, max_of!($($rest),+)) };`.
 @@solution

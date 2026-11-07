@@ -198,3 +198,83 @@ for listener in ("colleague", "client"):
 print("own company to a client:", company("own", "client"))
 print("client's company, email:", company("client", "client", written=True), "/ speech:", company("client", "client", written=False))
 print(f"trap: to a client, say 「{refer('田中', 'client')}は席を外しております」, not 「田中部長はいらっしゃいません」")
+
+@@exercise Sort messages into 報・連・相
+Classify chat messages to a manager by the 報連相 rule and open each with the right phrase. Write `kind(message)` that returns `報告` for results and progress (keywords `done`, `finished`, `fixed`, `progress`, `failed`), `連絡` for facts everyone affected needs (`change`, `outage`, `maintenance`, `schedule`, `will be`), and `相談` for questions before deciding (`should I`, `which`, `advice`, `?`). Check 相談 first, then 報告, then 連絡.
+
+Write `opener(k)` returning `ご報告です。`, `ご連絡です。` or `ご相談があるのですが、`, and print each message with its opener. Bad news first: list the failures (`failed`) at the top.
+@@lang python
+@@starter
+messages = [
+    "The server migration is finished and all checks passed",
+    "Tomorrow's maintenance will be from 22:00 to 23:00",
+    "Should I restart the database now or wait until tonight?",
+    "The backup job failed last night",
+    "There is an outage at the Osaka office network",
+    "Progress: 3 of 5 laptops are set up",
+    "Which vendor do you prefer for the new printers?",
+]
+RULES = [
+    ("相談", ["should i", "which", "advice", "?"]),
+    ("報告", ["done", "finished", "fixed", "progress", "failed"]),
+    ("連絡", ["change", "outage", "maintenance", "schedule", "will be"]),
+]
+OPENERS = {"報告": "ご報告です。", "連絡": "ご連絡です。", "相談": "ご相談があるのですが、"}
+
+def kind(message):
+    raise NotImplementedError
+
+
+def opener(k):
+    raise NotImplementedError
+
+
+ordered = sorted(messages, key=lambda m: "failed" not in m)
+for m in ordered:
+    k = kind(m)
+    print(f"[{k}] {opener(k)} {m}")
+@@expected
+[報告] ご報告です。 The backup job failed last night
+[報告] ご報告です。 The server migration is finished and all checks passed
+[連絡] ご連絡です。 Tomorrow's maintenance will be from 22:00 to 23:00
+[相談] ご相談があるのですが、 Should I restart the database now or wait until tonight?
+[連絡] ご連絡です。 There is an outage at the Osaka office network
+[報告] ご報告です。 Progress: 3 of 5 laptops are set up
+[相談] ご相談があるのですが、 Which vendor do you prefer for the new printers?
+@@requires
+def kind
+def opener
+.lower()
+@@hint
+Lowercase once, then check the rule lists in order and return at the first match. `sorted(..., key=lambda m: "failed" not in m)` puts the failures first, because `False` sorts before `True`.
+@@solution
+messages = [
+    "The server migration is finished and all checks passed",
+    "Tomorrow's maintenance will be from 22:00 to 23:00",
+    "Should I restart the database now or wait until tonight?",
+    "The backup job failed last night",
+    "There is an outage at the Osaka office network",
+    "Progress: 3 of 5 laptops are set up",
+    "Which vendor do you prefer for the new printers?",
+]
+RULES = [
+    ("相談", ["should i", "which", "advice", "?"]),
+    ("報告", ["done", "finished", "fixed", "progress", "failed"]),
+    ("連絡", ["change", "outage", "maintenance", "schedule", "will be"]),
+]
+OPENERS = {"報告": "ご報告です。", "連絡": "ご連絡です。", "相談": "ご相談があるのですが、"}
+
+def kind(message):
+    text = message.lower()
+    for k, words in RULES:
+        if any(w in text for w in words):
+            return k
+    return "連絡"
+
+def opener(k):
+    return OPENERS[k]
+
+ordered = sorted(messages, key=lambda m: "failed" not in m)
+for m in ordered:
+    k = kind(m)
+    print(f"[{k}] {opener(k)} {m}")

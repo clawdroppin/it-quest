@@ -169,6 +169,7 @@ msato /home/msato
 asilva /home/asilva
 @@requires
 awk -F:
+$3 >= 1000
 @@hint
 `$3 >= 1000 && $7 !~ /(nologin|false)$/ { print $1, $6 }`. Field 3 is the UID, 6 the home, 7 the shell.
 @@solution
@@ -183,3 +184,59 @@ asilva:x:1003:1003:Ana Silva:/home/asilva:/bin/bash
 olduser:x:1004:1004::/home/olduser:/bin/false'
 
 echo "$passwd" | awk -F: '$3 >= 1000 && $7 !~ /(nologin|false)$/ { print $1, $6 }'
+
+@@exercise List each user's groups from /etc/group
+`/etc/group` lines are `name:x:GID:member1,member2`. A user's **primary** group comes from the GID field of `/etc/passwd`; supplementary groups list them as members. Print each user from `passwd` with their primary group and every supplementary group, like `id -Gn` would, then list the members of `sudo` and `wheel` (people with admin rights).
+@@starter
+passwd='ytanaka:x:1001:1001:Yuki Tanaka:/home/ytanaka:/bin/bash
+msato:x:1002:1002:Mika Sato:/home/msato:/bin/bash
+deploy:x:1003:2000:Deploy bot:/home/deploy:/bin/bash'
+
+group='sudo:x:27:ytanaka
+wheel:x:10:
+ytanaka:x:1001:
+msato:x:1002:
+devs:x:2000:ytanaka,msato
+docker:x:998:deploy,ytanaka
+backup:x:34:msato'
+
+# print each user's primary and supplementary groups, then the admins
+@@expected
+ytanaka: ytanaka sudo devs docker
+msato: msato devs backup
+deploy: devs docker
+admins (sudo): ytanaka
+admins (wheel): none
+@@requires
+awk
+-F:
+@@hint
+Use awk with `-F:`. Read `group` first (`NR == FNR` style, or pass it as a variable), store each GID's name and each group's members, then go through `passwd`.
+@@solution
+passwd='ytanaka:x:1001:1001:Yuki Tanaka:/home/ytanaka:/bin/bash
+msato:x:1002:1002:Mika Sato:/home/msato:/bin/bash
+deploy:x:1003:2000:Deploy bot:/home/deploy:/bin/bash'
+
+group='sudo:x:27:ytanaka
+wheel:x:10:
+ytanaka:x:1001:
+msato:x:1002:
+devs:x:2000:ytanaka,msato
+docker:x:998:deploy,ytanaka
+backup:x:34:msato'
+
+awk -F: '
+    NR == FNR { name[$3] = $1; members[$1] = $4; order[++n] = $1; next }
+    {
+        out = $1 ": " name[$4]
+        for (i = 1; i <= n; i++) {
+            g = order[i]
+            if (("," members[g] ",") ~ ("," $1 ",") && g != name[$4]) out = out " " g
+        }
+        print out
+    }
+    END {
+        print "admins (sudo): " (members["sudo"] == "" ? "none" : members["sudo"])
+        print "admins (wheel): " (members["wheel"] == "" ? "none" : members["wheel"])
+    }
+' <(echo "$group") <(echo "$passwd")

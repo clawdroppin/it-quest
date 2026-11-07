@@ -193,3 +193,77 @@ try:
     restore_set(backups[1:], "Tue-inc")
 except ValueError as e:
     print("Error:", e)
+
+@@exercise Redact personal data from a ticket
+Tickets get shared with vendors, so personal data must go first. Write `redact(text)` that replaces, using regular expressions:
+
+- email addresses with `[email]`;
+- phone numbers like `090-1234-5678` or `+81 3 1234 5678` with `[phone]`;
+- card numbers (13 to 16 digits, maybe split by spaces or dashes) with `[card ending 1234]`, keeping the last four digits;
+- IPv4 addresses are **not** personal here, so leave them.
+
+Print each ticket before and after, and how many items were redacted.
+@@lang python
+@@starter
+import re
+
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+CARD = re.compile(r"\b(?:\d[ -]?){12,15}\d\b")
+PHONE = re.compile(r"(?:\+\d{1,3}[ -]?)?\(?0?\d{1,4}\)?[ -]\d{3,4}[ -]\d{4}\b")
+tickets = [
+    "User aiko.tanaka@example.co.jp cannot print. Call her on 090-1234-5678.",
+    "Refund to card 4111 1111 1111 1111 failed, customer ben@example.com, PC at 10.0.4.17",
+    "Caller from +81 3 1234 5678 asked about invoice 2026-118, card 5500-0055-5555-5559.",
+    "Laptop 192.168.1.20 won't boot.",
+]
+
+def redact(text):
+    raise NotImplementedError
+
+
+for t in tickets:
+    clean, n = redact(t)
+    print(f"before: {t}")
+    print(f"after:  {clean}  ({n} redacted)")
+@@expected
+before: User aiko.tanaka@example.co.jp cannot print. Call her on 090-1234-5678.
+after:  User [email] cannot print. Call her on [phone].  (2 redacted)
+before: Refund to card 4111 1111 1111 1111 failed, customer ben@example.com, PC at 10.0.4.17
+after:  Refund to card [card ending 1111] failed, customer [email], PC at 10.0.4.17  (2 redacted)
+before: Caller from +81 3 1234 5678 asked about invoice 2026-118, card 5500-0055-5555-5559.
+after:  Caller from [phone] asked about invoice 2026-118, card [card ending 5559].  (2 redacted)
+before: Laptop 192.168.1.20 won't boot.
+after:  Laptop 192.168.1.20 won't boot.  (0 redacted)
+@@requires
+def redact
+re.compile(
+.subn(
+@@hint
+Redact card numbers first, so their digit groups aren't mistaken for phone numbers. `pattern.subn(replacement, text)` returns the new text and how many replacements it made; the replacement can be a function that receives the match.
+@@solution
+import re
+
+EMAIL = re.compile(r"[\w.+-]+@[\w-]+(?:\.[\w-]+)+")
+CARD = re.compile(r"\b(?:\d[ -]?){12,15}\d\b")
+PHONE = re.compile(r"(?:\+\d{1,3}[ -]?)?\(?0?\d{1,4}\)?[ -]\d{3,4}[ -]\d{4}\b")
+tickets = [
+    "User aiko.tanaka@example.co.jp cannot print. Call her on 090-1234-5678.",
+    "Refund to card 4111 1111 1111 1111 failed, customer ben@example.com, PC at 10.0.4.17",
+    "Caller from +81 3 1234 5678 asked about invoice 2026-118, card 5500-0055-5555-5559.",
+    "Laptop 192.168.1.20 won't boot.",
+]
+
+def redact(text):
+    count = 0
+    def card(m):
+        digits = re.sub(r"\D", "", m.group())
+        return f"[card ending {digits[-4:]}]"
+    text, n = CARD.subn(card, text); count += n
+    text, n = EMAIL.subn("[email]", text); count += n
+    text, n = PHONE.subn("[phone]", text); count += n
+    return text, count
+
+for t in tickets:
+    clean, n = redact(t)
+    print(f"before: {t}")
+    print(f"after:  {clean}  ({n} redacted)")

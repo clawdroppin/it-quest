@@ -274,6 +274,7 @@ state:
 def apply_block
 "moved"
 "removed"
+sorted(
 @@hint
 Use a set for state and a list for planned destroys. For `moved`, check `src in state` and `dst in state` before renaming.
 @@solution

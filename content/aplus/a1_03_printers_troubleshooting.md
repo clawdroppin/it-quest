@@ -193,3 +193,88 @@ for t in tickets:
 print("Parts to stock:")
 for part, n in count_by_part(tickets):
     print(f"  {n} x {part}")
+
+@@exercise Choose the printer for each job
+Pick a printer type from the lesson's table for each request. Write `printer_for(job)`:
+
+- multi-part carbon forms (`copies` > 1 at once) → **impact**;
+- receipts or labels → **thermal**;
+- plastic parts or prototypes → **3D**;
+- photos → **inkjet**;
+- otherwise high volume (more than 500 pages a month) → **laser**, low volume → **inkjet**.
+
+Also return the maintenance tip from the table's "typical problems" column. Print each job with its printer and tip.
+@@lang python
+@@starter
+TIPS = {
+    "laser": "replace the toner and fuser on schedule; ghosting or smudges point to the drum or fuser",
+    "inkjet": "run head cleaning and alignment if you see banding",
+    "thermal": "clean the heating element when print fades",
+    "impact": "replace the ribbon when print gets faint",
+    "3D": "level the bed and keep filament dry",
+}
+jobs = [
+    {"name": "Shop till receipts", "kind": "receipt"},
+    {"name": "Warehouse delivery notes in triplicate", "kind": "form", "copies": 3},
+    {"name": "Accounts office reports", "kind": "document", "pages_per_month": 4000},
+    {"name": "Home user's holiday photos", "kind": "photo"},
+    {"name": "Replacement plastic clip for a cabinet", "kind": "part"},
+    {"name": "Small office letters", "kind": "document", "pages_per_month": 150},
+    {"name": "Shipping labels", "kind": "label"},
+]
+
+def printer_for(job):
+    raise NotImplementedError
+
+
+for j in jobs:
+    p, tip = printer_for(j)
+    print(f"{j['name']}: {p} ({tip})")
+@@expected
+Shop till receipts: thermal (clean the heating element when print fades)
+Warehouse delivery notes in triplicate: impact (replace the ribbon when print gets faint)
+Accounts office reports: laser (replace the toner and fuser on schedule; ghosting or smudges point to the drum or fuser)
+Home user's holiday photos: inkjet (run head cleaning and alignment if you see banding)
+Replacement plastic clip for a cabinet: 3D (level the bed and keep filament dry)
+Small office letters: inkjet (run head cleaning and alignment if you see banding)
+Shipping labels: thermal (clean the heating element when print fades)
+@@requires
+def printer_for
+elif
+@@hint
+An `if`/`elif` chain in the order of the rules; `job.get('copies', 1)` handles jobs that don't say how many copies.
+@@solution
+TIPS = {
+    "laser": "replace the toner and fuser on schedule; ghosting or smudges point to the drum or fuser",
+    "inkjet": "run head cleaning and alignment if you see banding",
+    "thermal": "clean the heating element when print fades",
+    "impact": "replace the ribbon when print gets faint",
+    "3D": "level the bed and keep filament dry",
+}
+jobs = [
+    {"name": "Shop till receipts", "kind": "receipt"},
+    {"name": "Warehouse delivery notes in triplicate", "kind": "form", "copies": 3},
+    {"name": "Accounts office reports", "kind": "document", "pages_per_month": 4000},
+    {"name": "Home user's holiday photos", "kind": "photo"},
+    {"name": "Replacement plastic clip for a cabinet", "kind": "part"},
+    {"name": "Small office letters", "kind": "document", "pages_per_month": 150},
+    {"name": "Shipping labels", "kind": "label"},
+]
+
+def printer_for(job):
+    kind = job["kind"]
+    if job.get("copies", 1) > 1:
+        p = "impact"
+    elif kind in ("receipt", "label"):
+        p = "thermal"
+    elif kind == "part":
+        p = "3D"
+    elif kind == "photo":
+        p = "inkjet"
+    else:
+        p = "laser" if job.get("pages_per_month", 0) > 500 else "inkjet"
+    return p, TIPS[p]
+
+for j in jobs:
+    p, tip = printer_for(j)
+    print(f"{j['name']}: {p} ({tip})")

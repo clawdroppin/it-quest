@@ -290,6 +290,7 @@ line 11: bad quoted value
 8080 5 10
 @@requires
 strings.Cut
+strings.HasPrefix(
 @@hint
 Loop with `for i, line := range strings.Split(text, "\n")` and use `i+1` as the line number. A section line: `strings.HasPrefix(line, "[") && strings.HasSuffix(line, "]")`. Only try `strconv.Unquote` when the value starts with `"`; if it fails, record `bad quoted value`.
 @@solution

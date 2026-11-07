@@ -184,6 +184,7 @@ fn checks() {
 }
 @@requires
 HashSet
+.insert(
 @@hint
 Create an empty `HashSet`, `insert` every name, and return its `len()`. Or in one line: `visits.iter().collect::<HashSet<_>>().len()`.
 @@solution
@@ -233,6 +234,7 @@ fn checks() {
 }
 @@requires
 BTreeMap
+.split_whitespace(
 @@hint
 Loop over `text.split_whitespace()`. For each word: `map.entry(word.len()).or_default().push(word.to_string())`.
 @@solution

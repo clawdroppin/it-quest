@@ -288,6 +288,7 @@ minute 14: avg  61.0%  RESOLVED (below threshold for 3 evaluations)
 @@requires
 def evaluate
 RESOLVE_AFTER
+sum(
 @@hint
 Start at minute `WINDOW` (index `WINDOW - 1`) so a full window exists; `avg = sum(samples[m - WINDOW + 1 : m + 1]) / WINDOW`. Keep `firing` and a counter of consecutive false evaluations. When not firing and avg > THRESHOLD, fire. When firing, reset the counter if the condition is true, otherwise increase it and resolve when it reaches RESOLVE_AFTER. Report only the evaluations where something happens.
 @@solution

@@ -124,6 +124,7 @@ non-key attributes: ['数量', '商品名', '単価', '顧客番号', '顧客名
 @@requires
 def closure
 combinations
+while 
 @@hint
 Closure: start with the set, and keep applying every dependency whose left side is included until nothing changes. Candidate keys: try subsets by size and keep those whose closure is every attribute, skipping supersets of keys you've already found. A partial dependency is a proper subset of a key that determines a non-key attribute. A transitive dependency is a key → non-key X → non-key Y.
 @@solution

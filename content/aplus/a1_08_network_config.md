@@ -237,6 +237,7 @@ DEFAULT_PASSWORDS = {"admin", "password", "1234", ""}
 @@requires
 DEFAULT_PASSWORDS
 port_forwards
+enumerate(
 @@hint
 Append a message to `findings` for each failed check; then `for i, f in enumerate(findings, 1): print(f"{i}. {f}")`.
 @@solution

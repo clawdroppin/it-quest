@@ -1,6 +1,6 @@
 @@lesson cp0-qos-wireless-deep QoS and Wireless in Depth: DSCP, Queuing, Shaping, RF Math and Roaming
 @@text
-ENCOR's architecture and infrastructure domains include QoS and wireless with surprisingly precise questions: which DSCP value is AF31, what the token bucket's Tc is, how many dBm a 100 mW radio puts out, and whether a link budget closes. This lesson gives the rules and numbers, then the design concepts (trust boundaries, queuing, roaming) that sit around them.
+ENCOR's architecture and infrastructure domains test QoS with surprisingly precise questions: which DSCP value is AF31 or what the token bucket's Tc is. Wireless (how many dBm a 100 mW radio puts out, whether a link budget closes) left ENCOR in version 1.2 and now belongs to the wireless concentration exams, but it is still everyday enterprise knowledge. This lesson gives the rules and numbers, then the design concepts (trust boundaries, queuing, roaming) that sit around them.
 
 ## Marking
 

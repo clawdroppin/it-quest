@@ -207,6 +207,7 @@ gcr 1.0
 @@requires
 def to_cmyk
 def limit_ink
+max(
 @@hint
 Scale RGB to 0–1, `k = gcr * (1 - max(r, g, b))`, then `c = (1 - r - k) / (1 - k)` and so on (return `(0, 0, 0, 1)` when k is 1). In `limit_ink`, if `sum(cmyk) <= limit` return it unchanged; otherwise `factor = (limit - k) / (c + m + y)` and multiply C, M and Y by it.
 @@solution

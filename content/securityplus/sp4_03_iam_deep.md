@@ -167,6 +167,7 @@ patient_ito -> rec-1 at 03:00: ALLOW (own record)
 @@requires
 def allowed
 "auditor"
+user["dept"]
 @@hint
 Check the own-record rule first, then branch on the role. Return a `(decision, reason)` tuple to make the output readable.
 @@solution

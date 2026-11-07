@@ -231,3 +231,88 @@ for h in hashes:
 print(f"  unique customers: {len(set(hashes))}")
 token = tokenize(customers[1]["card"], vault)
 print("Round trip:", detokenize(token, vault) == customers[1]["card"])
+
+@@exercise Classify data and apply handling rules
+Label each data set and check how it is handled. Write `classify(item)`: anything with card numbers, health data or passwords is **restricted**; personal data (names with addresses, emails, employee records) is **confidential**; internal documents are **internal**; marketing material is **public**.
+
+Each label requires: restricted → encrypted at rest **and** in transit, no external sharing, access logged; confidential → encrypted at rest and in transit; internal → encrypted in transit; public → nothing. Write `violations(item)` and print each item with its label and any violations.
+@@lang python
+@@starter
+RULES = {
+    "restricted": {"at_rest": True, "in_transit": True, "external_ok": False, "logged": True},
+    "confidential": {"at_rest": True, "in_transit": True, "external_ok": True, "logged": False},
+    "internal": {"at_rest": False, "in_transit": True, "external_ok": True, "logged": False},
+    "public": {"at_rest": False, "in_transit": False, "external_ok": True, "logged": False},
+}
+items = [
+    {"name": "Payments database", "contains": {"card numbers"}, "at_rest": True, "in_transit": True, "shared_externally": False, "logged": True},
+    {"name": "HR spreadsheet", "contains": {"employee records"}, "at_rest": False, "in_transit": True, "shared_externally": False, "logged": False},
+    {"name": "Clinic exports", "contains": {"health data"}, "at_rest": True, "in_transit": False, "shared_externally": True, "logged": False},
+    {"name": "IT runbook", "contains": {"internal documents"}, "at_rest": False, "in_transit": True, "shared_externally": False, "logged": False},
+    {"name": "Product brochure", "contains": {"marketing"}, "at_rest": False, "in_transit": False, "shared_externally": True, "logged": False},
+]
+
+def classify(item):
+    raise NotImplementedError
+
+
+def violations(item):
+    raise NotImplementedError
+
+
+for it in items:
+    v = violations(it)
+    print(f"{it['name']}: {classify(it)}" + (" -> " + ", ".join(v) if v else ", handled correctly"))
+@@expected
+Payments database: restricted, handled correctly
+HR spreadsheet: confidential -> encrypt at rest
+Clinic exports: restricted -> encrypt in transit, stop external sharing, log every access
+IT runbook: internal, handled correctly
+Product brochure: public, handled correctly
+@@requires
+def classify
+def violations
+&
+@@hint
+Set intersection (`contains & {...}`) tells you whether any sensitive type is present. Check the most sensitive label first.
+@@solution
+RULES = {
+    "restricted": {"at_rest": True, "in_transit": True, "external_ok": False, "logged": True},
+    "confidential": {"at_rest": True, "in_transit": True, "external_ok": True, "logged": False},
+    "internal": {"at_rest": False, "in_transit": True, "external_ok": True, "logged": False},
+    "public": {"at_rest": False, "in_transit": False, "external_ok": True, "logged": False},
+}
+items = [
+    {"name": "Payments database", "contains": {"card numbers"}, "at_rest": True, "in_transit": True, "shared_externally": False, "logged": True},
+    {"name": "HR spreadsheet", "contains": {"employee records"}, "at_rest": False, "in_transit": True, "shared_externally": False, "logged": False},
+    {"name": "Clinic exports", "contains": {"health data"}, "at_rest": True, "in_transit": False, "shared_externally": True, "logged": False},
+    {"name": "IT runbook", "contains": {"internal documents"}, "at_rest": False, "in_transit": True, "shared_externally": False, "logged": False},
+    {"name": "Product brochure", "contains": {"marketing"}, "at_rest": False, "in_transit": False, "shared_externally": True, "logged": False},
+]
+
+def classify(item):
+    c = item["contains"]
+    if c & {"card numbers", "health data", "passwords"}:
+        return "restricted"
+    if c & {"personal data", "emails", "employee records"}:
+        return "confidential"
+    if "internal documents" in c:
+        return "internal"
+    return "public"
+
+def violations(item):
+    rule = RULES[classify(item)]
+    found = []
+    if rule["at_rest"] and not item["at_rest"]:
+        found.append("encrypt at rest")
+    if rule["in_transit"] and not item["in_transit"]:
+        found.append("encrypt in transit")
+    if not rule["external_ok"] and item["shared_externally"]:
+        found.append("stop external sharing")
+    if rule["logged"] and not item["logged"]:
+        found.append("log every access")
+    return found
+
+for it in items:
+    v = violations(it)
+    print(f"{it['name']}: {classify(it)}" + (" -> " + ", ".join(v) if v else ", handled correctly"))

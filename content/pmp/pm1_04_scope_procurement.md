@@ -138,6 +138,7 @@ R4 Accessible (WCAG AA): no deliverable and no test
 def rollup
 budgets
 rtm
+sum(
 @@hint
 `rollup` returns the estimate for a work package, or else the sum of `rollup` over its children (recursion). Compare each parent's rollup with its budget. In the RTM, look for a missing deliverable or test. Gold plating is any work package that no requirement points to.
 @@solution
@@ -204,6 +205,7 @@ def cpif
 def fpif
 CEILING
 SELLER_SHARE
+min(
 @@hint
 Incentive = SELLER_SHARE × (TARGET_COST − actual). CPIF: fee = TARGET_FEE + incentive, buyer pays actual + fee. FPIF: price = min(actual + TARGET_FEE + incentive, CEILING), and the seller's profit = price − actual. CPFF: buyer pays actual + TARGET_FEE. PTA = TARGET_COST + (CEILING − (TARGET_COST + TARGET_FEE)) / BUYER_SHARE.
 @@solution

@@ -175,3 +175,91 @@ def cable_for(distance_m, interference, speed_gbps):
 
 for name, distance, noisy, speed in runs:
     print(f"{name} ({distance} m, {speed} Gbps): {cable_for(distance, noisy, speed)}")
+
+@@exercise Match Wi-Fi standards to bands and speeds
+Using the lesson's Wi-Fi table, write `standards_for(need)` that returns every standard that supports the needed `band` (2.4, 5 or 6 GHz), sorted oldest to newest, and `best(need)` that returns the newest one the **client** supports (`client_max`, a standard name) as long as it also supports the band. Print the advice for each device, adding `use channel 1, 6 or 11` for 2.4 GHz and `use WPA3` for everything.
+@@lang python
+@@starter
+TABLE = [
+    ("802.11a", "", {5}),
+    ("802.11b", "", {2.4}),
+    ("802.11g", "", {2.4}),
+    ("802.11n", "Wi-Fi 4", {2.4, 5}),
+    ("802.11ac", "Wi-Fi 5", {5}),
+    ("802.11ax", "Wi-Fi 6", {2.4, 5}),
+    ("802.11ax (6E)", "Wi-Fi 6E", {2.4, 5, 6}),
+    ("802.11be", "Wi-Fi 7", {2.4, 5, 6}),
+]
+ORDER = [s for s, _, _ in TABLE]
+devices = [
+    {"name": "Old barcode scanner", "band": 2.4, "client_max": "802.11g"},
+    {"name": "Laptop in a crowded office", "band": 6, "client_max": "802.11be"},
+    {"name": "Smart TV", "band": 5, "client_max": "802.11ac"},
+    {"name": "Warehouse sensor far from the AP", "band": 2.4, "client_max": "802.11n"},
+    {"name": "Old phone", "band": 6, "client_max": "802.11ac"},
+]
+
+def standards_for(need):
+    raise NotImplementedError
+
+
+def best(need):
+    raise NotImplementedError
+
+
+for d in devices:
+    pick = best(d)
+    if pick is None:
+        print(f"{d['name']}: no standard it supports runs on {d['band']} GHz")
+        continue
+    name = dict((s, n) for s, n, _ in TABLE)[pick]
+    tips = ["use WPA3"] + (["use channel 1, 6 or 11"] if d["band"] == 2.4 else [])
+    print(f"{d['name']}: {pick}{' (' + name + ')' if name else ''} on {d['band']} GHz; " + ", ".join(tips))
+@@expected
+Old barcode scanner: 802.11g on 2.4 GHz; use WPA3, use channel 1, 6 or 11
+Laptop in a crowded office: 802.11be (Wi-Fi 7) on 6 GHz; use WPA3
+Smart TV: 802.11ac (Wi-Fi 5) on 5 GHz; use WPA3
+Warehouse sensor far from the AP: 802.11n (Wi-Fi 4) on 2.4 GHz; use WPA3, use channel 1, 6 or 11
+Old phone: no standard it supports runs on 6 GHz
+@@requires
+def standards_for
+def best
+ORDER.index(
+@@hint
+Keep the table in age order, so an index tells you how new a standard is. Filter by band first, then by the client's limit, and take the last one.
+@@solution
+TABLE = [
+    ("802.11a", "", {5}),
+    ("802.11b", "", {2.4}),
+    ("802.11g", "", {2.4}),
+    ("802.11n", "Wi-Fi 4", {2.4, 5}),
+    ("802.11ac", "Wi-Fi 5", {5}),
+    ("802.11ax", "Wi-Fi 6", {2.4, 5}),
+    ("802.11ax (6E)", "Wi-Fi 6E", {2.4, 5, 6}),
+    ("802.11be", "Wi-Fi 7", {2.4, 5, 6}),
+]
+ORDER = [s for s, _, _ in TABLE]
+devices = [
+    {"name": "Old barcode scanner", "band": 2.4, "client_max": "802.11g"},
+    {"name": "Laptop in a crowded office", "band": 6, "client_max": "802.11be"},
+    {"name": "Smart TV", "band": 5, "client_max": "802.11ac"},
+    {"name": "Warehouse sensor far from the AP", "band": 2.4, "client_max": "802.11n"},
+    {"name": "Old phone", "band": 6, "client_max": "802.11ac"},
+]
+
+def standards_for(need):
+    return [s for s, _, bands in TABLE if need["band"] in bands]
+
+def best(need):
+    limit = ORDER.index(need["client_max"])
+    usable = [s for s in standards_for(need) if ORDER.index(s) <= limit]
+    return usable[-1] if usable else None
+
+for d in devices:
+    pick = best(d)
+    if pick is None:
+        print(f"{d['name']}: no standard it supports runs on {d['band']} GHz")
+        continue
+    name = dict((s, n) for s, n, _ in TABLE)[pick]
+    tips = ["use WPA3"] + (["use channel 1, 6 or 11"] if d["band"] == 2.4 else [])
+    print(f"{d['name']}: {pick}{' (' + name + ')' if name else ''} on {d['band']} GHz; " + ", ".join(tips))

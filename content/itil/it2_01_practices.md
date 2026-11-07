@@ -235,6 +235,7 @@ Printer jam on floor 3 -> incident management
 1  service level management
 @@requires
 def practice
+>= 3
 @@hint
 Test the repeat count before the plain fault check: a recurring fault is still an incident each time, but the pattern belongs to problem management.
 @@solution

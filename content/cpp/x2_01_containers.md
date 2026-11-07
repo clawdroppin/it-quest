@@ -225,6 +225,7 @@ tanaka
 4 unique
 @@requires
 std::set
+.insert(
 @@hint
 `std::set<std::string> users; std::string w; while (std::cin >> w) users.insert(w);` A set is already sorted.
 @@solution

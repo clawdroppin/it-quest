@@ -201,6 +201,7 @@ IAM permissions           customer  customer  customer  customer
 @@requires
 def responsible
 def applies
+in APPLIES
 @@hint
 Rule out tasks that don't apply first, then check the two "always" sets, then look the task up in the set of things AWS takes over for that service; everything else stays with the customer.
 @@solution

@@ -2,7 +2,7 @@
 @@text
 ## The CISSP
 
-The **CISSP** (Certified Information Systems Security Professional, from ISC2) is the best-known *management-level* security certification. It's a **CAT** (computerized adaptive testing) exam: 100–150 questions in 3 hours, harder or easier depending on your answers, and you need 700 of 1000 points. To be certified you also need **five years** of paid work in at least two of the eight domains (four with a degree or another approved certification). Pass without the experience and you become an **Associate of ISC2** while you earn it.
+The **CISSP** (Certified Information Systems Security Professional, from ISC2) is the best-known *management-level* security certification. It's a **CAT** (computerized adaptive testing) exam: 100–150 questions in 3 hours, harder or easier depending on your answers, and you need 700 of 1000 points. To be certified you also need **five years** of paid work in at least two of the eight domains (four with a degree or another approved certification). Pass without the experience and you become an **Associate of ISC2** while you earn it. The exam follows the outline ISC2 published in April 2024; a new outline takes effect on **15 April 2027**, keeping the eight domains with adjusted weights.
 
 | # | Domain | Weight |
 |---|---|---|
@@ -216,3 +216,85 @@ def best_answer(options):
 for name, options in scenarios.items():
     text, kind, step = best_answer(options)
     print(f"{name}\n  -> {text} ({kind}, {step})")
+
+@@exercise Who is the owner, custodian or processor?
+Assign the lesson's data roles. Each statement describes what a person or company does with the payroll data. Write `role(statement)` that returns the role, checking in this order:
+
+- decides why and how personal data is processed (`decides the purpose`) → **data controller**;
+- processes it on someone else's behalf (`on behalf of`) → **data processor**;
+- accountable, classifies it, approves access (`accountable`, `classifies`, `approves access`) → **data owner**;
+- implements controls, backups, patches (`backups`, `implements`, `encryption`) → **data custodian**;
+- keeps it accurate and consistent (`quality`, `accurate`) → **data steward**;
+- the person the data is about (`about them`) → **data subject**.
+
+Print each statement and role, then check the classic exam trap: the IT team should never be the owner.
+@@lang python
+@@starter
+RULES = [
+    ("data controller", ["decides the purpose"]),
+    ("data processor", ["on behalf of"]),
+    ("data owner", ["accountable", "classifies", "approves access"]),
+    ("data custodian", ["backups", "implements", "encryption"]),
+    ("data steward", ["quality", "accurate"]),
+    ("data subject", ["about them"]),
+]
+statements = [
+    ("Head of HR", "is accountable for payroll data and classifies it as confidential"),
+    ("IT operations", "runs the nightly backups and implements disk encryption"),
+    ("Payroll SaaS vendor", "processes salaries on behalf of the company"),
+    ("Our company", "decides the purpose of collecting bank details"),
+    ("Data team", "checks the records are accurate and consistent"),
+    ("Employee", "has data about them in the payroll system"),
+    ("IT manager", "approves access to the payroll share"),
+]
+
+def role(statement):
+    raise NotImplementedError
+
+
+for who, what in statements:
+    r = role(what)
+    note = "  <- trap: owners are business people, not IT" if r == "data owner" and "IT" in who else ""
+    print(f"{who}: {r}{note}")
+@@expected
+Head of HR: data owner
+IT operations: data custodian
+Payroll SaaS vendor: data processor
+Our company: data controller
+Data team: data steward
+Employee: data subject
+IT manager: data owner  <- trap: owners are business people, not IT
+@@requires
+def role
+any(
+@@hint
+An ordered list of (role, keywords) and a loop that returns the first match. The trap check only needs the person's name and the role you found.
+@@solution
+RULES = [
+    ("data controller", ["decides the purpose"]),
+    ("data processor", ["on behalf of"]),
+    ("data owner", ["accountable", "classifies", "approves access"]),
+    ("data custodian", ["backups", "implements", "encryption"]),
+    ("data steward", ["quality", "accurate"]),
+    ("data subject", ["about them"]),
+]
+statements = [
+    ("Head of HR", "is accountable for payroll data and classifies it as confidential"),
+    ("IT operations", "runs the nightly backups and implements disk encryption"),
+    ("Payroll SaaS vendor", "processes salaries on behalf of the company"),
+    ("Our company", "decides the purpose of collecting bank details"),
+    ("Data team", "checks the records are accurate and consistent"),
+    ("Employee", "has data about them in the payroll system"),
+    ("IT manager", "approves access to the payroll share"),
+]
+
+def role(statement):
+    for name, words in RULES:
+        if any(w in statement for w in words):
+            return name
+    return "unclear"
+
+for who, what in statements:
+    r = role(what)
+    note = "  <- trap: owners are business people, not IT" if r == "data owner" and "IT" in who else ""
+    print(f"{who}: {r}{note}")

@@ -193,6 +193,7 @@ func main() {
 C: 412.6 / 512 GB (80.6%)
 @@requires
 Printf
+fmt.Printf(
 @@hint
 `%.1f` for one decimal, `%.0f` for none, `%%` for a percent sign: `fmt.Printf("C: %.1f / %.0f GB (%.1f%%)\n", ...)`.
 @@solution
@@ -228,6 +229,7 @@ func main() {
 42: invalid
 @@requires
 switch
+case code
 @@hint
 `switch { case code >= 200 && code <= 299: class = "success" ... default: class = "invalid" }`
 @@solution

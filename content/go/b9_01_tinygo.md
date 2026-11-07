@@ -149,6 +149,7 @@ t=143ms released
 raw transitions: 14, debounced changes: 6
 @@requires
 Update(
+++
 @@hint
 In `Update`: `if sample == d.state { d.count = 0; return false, d.state }`, otherwise increment and flip the state when the count reaches 5 (reset the count). Keep `mode := 0` and advance it with `(mode + 1) % 3` on presses. Count raw transitions by comparing each sample with the previous one.
 @@solution

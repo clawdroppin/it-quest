@@ -172,6 +172,7 @@ plain       尊敬語 (their action)    謙譲語 (my action)
 def masu
 I_VERBS
 になる
+[:-1]
 @@hint
 `masu(verb)` turns any keigo verb into its ます form: する endings → します; I_VERBS → drop る + います; なる/がる/参る/申す/おる etc. are group 1 (る → ります, す → します, く → きます); いる/いただく... treat by the last kana with I_ROW. For the patterns, the ます-stem of a group 1 verb is `verb[:-1] + I_ROW[verb[-1]]`, of a group 2 verb `verb[:-1]`.
 @@solution
@@ -242,6 +243,7 @@ NG  こちらの画面を拝見してください。
 def check
 DOUBLE
 HUMBLE_REQUESTS
+.replace(
 @@hint
 Return a list of `(problem, fixed_sentence)` tuples; apply each fix to the sentence with `str.replace`. ご苦労様 → お疲れ様 when the audience is a superior or a customer.
 @@solution

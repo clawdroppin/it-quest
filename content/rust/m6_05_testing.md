@@ -291,6 +291,7 @@ fn hidden_check() {
 @@requires
 fn removes_punctuation
 fn collapses_extra_spaces
+split_whitespace(
 @@hint
 Split the title with `split_whitespace()`. For each word, keep only the alphanumeric characters, lowercased (build a new `String`). Skip words that end up empty. Collect the words in a `Vec<String>` and `join("-")`.
 @@solution

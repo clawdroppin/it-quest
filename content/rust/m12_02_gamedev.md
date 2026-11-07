@@ -215,6 +215,7 @@ fn checks() {
 }
 @@requires
 fn movement_system
+.iter_mut(
 @@hint
 `movement_system`: `for (p, v) in self.positions.iter_mut().zip(&self.velocities) { if let (Some(p), Some(v)) = (p, v) { p.x += v.dx * dt; p.y += v.dy * dt; } }`. In `damage_system`, use `if let Some(h) = self.health[id].as_mut()`, and when `*h <= 0` set `self.health[id] = None` and record the id.
 @@solution
@@ -355,6 +356,7 @@ fn checks() {
 }
 @@requires
 accumulator
+while 
 @@hint
 `overlaps`: `self.x < other.x + other.w && other.x < self.x + self.w` and the same for y. `advance`: add the time, then `while self.accumulator >= self.step - 1e-9 && n < 5 { self.accumulator -= self.step; n += 1; }`; if you hit 5, set the accumulator to 0. The small epsilon protects against floating-point sums like 0.05 + 0.05 being 0.09999….
 @@solution

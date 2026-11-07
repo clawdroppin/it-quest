@@ -169,3 +169,72 @@ Which equals NOT (A AND B)?
 Write decimal 200 in hexadecimal.
 = C8
 ? 200 = 12×16 + 8.
+
+@@exercise Convert bases, fractions included
+基数変換 questions often include a fraction: 10.625 in decimal is 1010.101 in binary. Write `to_base(x, base, places=8)` that converts a non-negative decimal number to base 2, 8 or 16: the integer part by repeated division (read the remainders backwards), the fraction by repeated multiplication (read the integer parts forwards), stopping when the fraction is 0 or after `places` digits (then add `…` to show it's cut off).
+
+Also write `from_base(text, base)` for the reverse, using the place values (… 2², 2¹, 2⁰ . 2⁻¹, 2⁻² …). Print each conversion and check that converting back gives the original (when it wasn't cut off).
+@@lang python
+@@starter
+DIGITS = "0123456789ABCDEF"
+
+def to_base(x, base, places=8):
+    raise NotImplementedError
+
+
+def from_base(text, base):
+    raise NotImplementedError
+
+
+for x, base in [(10.625, 2), (0.1, 2), (255, 16), (100.5, 8), (0.75, 16), (13.375, 2)]:
+    text = to_base(x, base)
+    back = from_base(text, base)
+    check = "exact" if text.endswith("…") is False and back == x else "cut off (no exact representation)"
+    print(f"{x} -> base {base}: {text}  ({check})")
+@@expected
+10.625 -> base 2: 1010.101  (exact)
+0.1 -> base 2: 0.00011001…  (cut off (no exact representation))
+255 -> base 16: FF  (exact)
+100.5 -> base 8: 144.4  (exact)
+0.75 -> base 16: 0.C  (exact)
+13.375 -> base 2: 1101.011  (exact)
+@@requires
+def to_base
+def from_base
+//=
+@@hint
+For the fraction, multiply by the base: the integer part of the result is the next digit, and what's left after the point carries on. 0.1 never reaches 0 in binary, which is why the limit exists.
+@@solution
+DIGITS = "0123456789ABCDEF"
+
+def to_base(x, base, places=8):
+    whole, frac = int(x), x - int(x)
+    digits = ""
+    while True:
+        digits = DIGITS[whole % base] + digits
+        whole //= base
+        if whole == 0:
+            break
+    if frac == 0:
+        return digits
+    out = []
+    while frac and len(out) < places:
+        frac *= base
+        out.append(DIGITS[int(frac)])
+        frac -= int(frac)
+    return digits + "." + "".join(out) + ("…" if frac else "")
+
+def from_base(text, base):
+    whole, _, frac = text.rstrip("…").partition(".")
+    value = 0
+    for ch in whole:
+        value = value * base + DIGITS.index(ch)
+    for i, ch in enumerate(frac, 1):
+        value += DIGITS.index(ch) * base ** -i
+    return value
+
+for x, base in [(10.625, 2), (0.1, 2), (255, 16), (100.5, 8), (0.75, 16), (13.375, 2)]:
+    text = to_base(x, base)
+    back = from_base(text, base)
+    check = "exact" if text.endswith("…") is False and back == x else "cut off (no exact representation)"
+    print(f"{x} -> base {base}: {text}  ({check})")

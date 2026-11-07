@@ -151,6 +151,7 @@ print(f"住民登録 on day {(registered - move_in).days} after moving in ({'OK'
 @@requires
 def schedule
 weekday()
+all(
 @@hint
 Repeatedly pick a task whose prerequisites are all done. For the dates, add a day and keep adding while `weekday()` is 5 or 6 (Saturday, Sunday).
 @@solution

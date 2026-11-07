@@ -175,6 +175,7 @@ staging after swap:    {'version': '1.4.2', 'DB': 'stage-sql', 'FEATURE_X': 'off
 def choose_tier
 def swap
 sticky
+dict(
 @@hint
 `choose_tier` returns the first tier where `max_instances >= instances`, `slots >= slots`, and autoscale and zones are available if required. In `swap`, start each side as a copy of the other side's settings, then put back each sticky key from the original side: `new_prod[k] = production[k]` and `new_stage[k] = staging[k]`.
 @@solution

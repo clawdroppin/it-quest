@@ -162,6 +162,7 @@ files01    D:           1210.8 2000.0    61%
 3 disks, 1 nearly full
 @@requires
 StringBuilder
+foreach
 @@hint
 Format a row with `$"{d.Host,-10} {mount,-12}{d.UsedGb,7:F1}{d.SizeGb,7:F1}{pct,6:F0}%"`. Note the header's exact spacing: count the characters, or build the header with the same alignments. Percent: `d.UsedGb / d.SizeGb * 100`, formatted with `F0` (rounds).
 @@solution

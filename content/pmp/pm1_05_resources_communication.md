@@ -118,6 +118,7 @@ over the limit on days: [3, 4, 5, 6] -> leveling needed (end date moves)
 def histogram
 LIMIT
 float
+sorted(
 @@hint
 `histogram` returns a list of people per day, from start day 0 to the last finish. To smooth: for each non-critical activity (largest float first), try every delay from 0 up to its float and keep the one that gives the lowest peak, then the lowest sum of overloads. Report days still above `LIMIT`.
 @@solution

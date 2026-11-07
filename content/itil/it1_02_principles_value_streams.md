@@ -224,6 +224,7 @@ CHG3007 replace core switch firmware         normal    risk 4: team lead  !! day
 def classify
 STANDARD_CATALOGUE
 FREEZE
+impact * likelihood
 @@hint
 Each change is `(id, title, impact, likelihood, day, fixes_p1, exploited_vuln)`. Check standard first, then emergency, then compute the risk score for normal changes. Only normal changes are blocked by the freeze; emergencies go ahead.
 @@solution

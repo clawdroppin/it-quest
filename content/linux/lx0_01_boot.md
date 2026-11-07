@@ -193,3 +193,90 @@ while IFS= read -r line; do
     esac
     echo "$line  =>  $new"
 done <<< "$runbook"
+
+@@exercise Where does it belong in the FHS?
+Write a function `fhs_dir` that prints which FHS directory a file belongs in, from a short description, using the lesson's table:
+
+| Clue | Directory |
+|---|---|
+| `config` | /etc |
+| `log` | /var/log |
+| `database` or `container data` | /var/lib |
+| `mail queue` or `print queue` | /var/spool |
+| `add-on` or `vendor app` | /opt |
+| `installed program` | /usr/bin |
+| `library` | /usr/lib |
+| `temporary` | /tmp (cleared at boot) |
+| `device` | /dev |
+| `kernel` | /boot |
+
+Check the clues in this order and print `ask: not in the table` when nothing matches.
+@@starter
+files='nginx config file
+web server log
+PostgreSQL database files
+vendor app installed from a .run file
+temporary download
+installed program from a package
+outgoing mail queue
+shared library for OpenSSL
+the second NVMe disk device
+kernel image and initramfs
+my holiday photos'
+
+fhs_dir() {
+    : # your code here
+}
+
+while IFS= read -r f; do
+    echo "$f -> $(fhs_dir "$f")"
+done <<< "$files"
+@@expected
+nginx config file -> /etc
+web server log -> /var/log
+PostgreSQL database files -> /var/lib
+vendor app installed from a .run file -> /opt
+temporary download -> /tmp (cleared at boot)
+installed program from a package -> /usr/bin
+outgoing mail queue -> /var/spool
+shared library for OpenSSL -> /usr/lib
+the second NVMe disk device -> /dev
+kernel image and initramfs -> /boot
+my holiday photos -> ask: not in the table
+@@requires
+case
+/var/lib
+@@hint
+A `case "$1" in *config*) echo /etc ;; ... esac` checks patterns in order and stops at the first match. Use `*database*|*"container data"*)` for a clue with two options.
+@@solution
+files='nginx config file
+web server log
+PostgreSQL database files
+vendor app installed from a .run file
+temporary download
+installed program from a package
+outgoing mail queue
+shared library for OpenSSL
+the second NVMe disk device
+kernel image and initramfs
+my holiday photos'
+
+fhs_dir() {
+    case "$1" in
+        *config*) echo /etc ;;
+        *log*) echo /var/log ;;
+        *database*|*"container data"*) echo /var/lib ;;
+        *"mail queue"*|*"print queue"*) echo /var/spool ;;
+        *add-on*|*"vendor app"*) echo /opt ;;
+        *"installed program"*) echo /usr/bin ;;
+        *library*) echo /usr/lib ;;
+        *temporary*) echo "/tmp (cleared at boot)" ;;
+        *device*) echo /dev ;;
+        *kernel*) echo /boot ;;
+        *) echo "ask: not in the table" ;;
+    esac
+}
+
+while IFS= read -r f; do
+    echo "$f -> $(fhs_dir "$f")"
+done <<< "$files"

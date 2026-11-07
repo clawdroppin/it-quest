@@ -203,6 +203,7 @@ fn checks() {
 }
 @@requires
 fn tick
+self.index(
 @@hint
 For wrapping neighbours, add `height - 1`, `0` or `1` instead of subtracting: `for dr in [self.height - 1, 0, 1] { for dc in [self.width - 1, 0, 1] { if dr == 0 && dc == 0 { continue; } let r = (row + dr) % self.height; let c = (col + dc) % self.width; n += self.cells[self.index(r, c)]; } }`. Build the next generation in a new `Vec` and assign it at the end.
 @@solution

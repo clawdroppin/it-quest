@@ -172,6 +172,7 @@ for ip, prefix in [("192.168.10.77", 26), ("10.1.1.20", 28), ("172.16.5.200", 30
 172.16.5.200/30: network 172.16.5.200, broadcast 172.16.5.203, 2 hosts
 @@requires
 block
+// block
 @@hint
 `net = d // block * block`, `bc = net + block - 1`, `hosts = block - 2`, then build the strings with f-strings: `f"{a}.{b}.{c}.{net}"`.
 @@solution
@@ -185,3 +186,76 @@ def subnet(ip, prefix):
 for ip, prefix in [("192.168.10.77", 26), ("10.1.1.20", 28), ("172.16.5.200", 30)]:
     net, bc, hosts = subnet(ip, prefix)
     print(f"{ip}/{prefix}: network {net}, broadcast {bc}, {hosts} hosts")
+
+@@exercise Classify special addresses
+Write `classify(addr)` that names the kind of IPv4 or IPv6 address, checking in this order: loopback, APIPA / link-local (169.254.0.0/16, fe80::/10), private (RFC 1918) or unique local (fc00::/7), multicast, documentation (192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24, 2001:db8::/32), the limited broadcast 255.255.255.255, otherwise public. Use the `ipaddress` module's networks to check membership, not string prefixes. Print each address with its kind and whether it can be routed on the internet.
+@@lang python
+@@starter
+import ipaddress as ip
+
+RANGES = [
+    ("loopback", ["127.0.0.0/8", "::1/128"]),
+    ("link-local (APIPA)", ["169.254.0.0/16", "fe80::/10"]),
+    ("private", ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fc00::/7"]),
+    ("multicast", ["224.0.0.0/4", "ff00::/8"]),
+    ("documentation", ["192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24", "2001:db8::/32"]),
+    ("limited broadcast", ["255.255.255.255/32"]),
+]
+addresses = ["10.20.30.40", "172.31.255.1", "172.32.0.1", "169.254.7.9", "127.0.0.53", "224.0.0.5",
+             "203.0.113.25", "8.8.8.8", "255.255.255.255", "fe80::1a2b:3cff:fe4d:5e6f", "fd12:3456::1",
+             "2001:db8::10", "2606:4700::1111", "::1"]
+
+def classify(addr):
+    raise NotImplementedError
+
+
+for addr in addresses:
+    kind = classify(addr)
+    print(f"{addr:<28} {kind:<20} {'routable' if kind == 'public' else 'not routed on the internet'}")
+@@expected
+10.20.30.40                  private              not routed on the internet
+172.31.255.1                 private              not routed on the internet
+172.32.0.1                   public               routable
+169.254.7.9                  link-local (APIPA)   not routed on the internet
+127.0.0.53                   loopback             not routed on the internet
+224.0.0.5                    multicast            not routed on the internet
+203.0.113.25                 documentation        not routed on the internet
+8.8.8.8                      public               routable
+255.255.255.255              limited broadcast    not routed on the internet
+fe80::1a2b:3cff:fe4d:5e6f    link-local (APIPA)   not routed on the internet
+fd12:3456::1                 private              not routed on the internet
+2001:db8::10                 documentation        not routed on the internet
+2606:4700::1111              public               routable
+::1                          loopback             not routed on the internet
+@@requires
+def classify
+ip_network(
+@@hint
+`ipaddress.ip_address(x) in ipaddress.ip_network(n)` checks membership; compare `.version` first, because an IPv4 address is never in an IPv6 network. 172.32.0.1 is the classic trap: 172.16.0.0/12 ends at 172.31.255.255.
+@@solution
+import ipaddress as ip
+
+RANGES = [
+    ("loopback", ["127.0.0.0/8", "::1/128"]),
+    ("link-local (APIPA)", ["169.254.0.0/16", "fe80::/10"]),
+    ("private", ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fc00::/7"]),
+    ("multicast", ["224.0.0.0/4", "ff00::/8"]),
+    ("documentation", ["192.0.2.0/24", "198.51.100.0/24", "203.0.113.0/24", "2001:db8::/32"]),
+    ("limited broadcast", ["255.255.255.255/32"]),
+]
+addresses = ["10.20.30.40", "172.31.255.1", "172.32.0.1", "169.254.7.9", "127.0.0.53", "224.0.0.5",
+             "203.0.113.25", "8.8.8.8", "255.255.255.255", "fe80::1a2b:3cff:fe4d:5e6f", "fd12:3456::1",
+             "2001:db8::10", "2606:4700::1111", "::1"]
+
+def classify(addr):
+    a = ip.ip_address(addr)
+    for kind, nets in RANGES:
+        for n in nets:
+            net = ip.ip_network(n)
+            if net.version == a.version and a in net:
+                return kind
+    return "public"
+
+for addr in addresses:
+    kind = classify(addr)
+    print(f"{addr:<28} {kind:<20} {'routable' if kind == 'public' else 'not routed on the internet'}")

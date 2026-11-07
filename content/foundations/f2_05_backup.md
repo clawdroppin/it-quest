@@ -134,6 +134,7 @@ Sat -> Sat
 def restore_chain
 "full"
 "diff"
+.index(
 @@hint
 Cut the list at the target day: `upto = backups[: [d for d, _ in backups].index(day) + 1]`. Find the index of the last full in `upto`, then walk forward from there; when you meet a diff, reset the chain to `[full, diff]`.
 @@solution

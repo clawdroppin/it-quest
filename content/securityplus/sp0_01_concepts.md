@@ -1,6 +1,6 @@
 @@lesson sp0-concepts Security+ and Core Security Concepts
 @@text
-**CompTIA Security+** is the baseline security certification for IT jobs. It's required for many government roles worldwide, and it's what employers expect before any security-flavoured job: SOC analyst, security administrator, or a sysadmin who's trusted with security. The current exam is **SY0-701**: up to 90 questions in 90 minutes, passing score **750** (100–900).
+**CompTIA Security+** is the baseline security certification for IT jobs. It's required for many government roles worldwide, and it's what employers expect before any security-flavoured job: SOC analyst, security administrator, or a sysadmin who's trusted with security. The current exam is **SY0-701**: up to 90 questions in 90 minutes, passing score **750** (100–900). Its successor, **SY0-801**, is due around 17 November 2026; SY0-701 stays available in English until 11 June 2027, and either one earns the same certification. The core topics in this track carry over, but check comptia.org for the objectives of the version you book.
 
 | Domain | Weight |
 |---|---|
@@ -170,6 +170,7 @@ eri -> payroll from home: deny: unexpected country BR
 fumi -> wiki from home: allow
 @@requires
 def decide
+.append(
 @@hint
 Collect every failed check in a list instead of returning at the first one, so the log explains the whole decision. Notice that `network` never appears in a condition.
 @@solution

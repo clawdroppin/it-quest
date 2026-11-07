@@ -213,6 +213,7 @@ fn checks() {
 }
 @@requires
 impl TicketRepo for MemoryRepo
+.iter_mut(
 @@hint
 `insert`: `let id = self.tickets.len() as u32 + 1;` then push. `update`: `match self.tickets.iter_mut().find(|t| t.id == ticket.id) { Some(t) => { *t = ticket; true } None => false }`. In `close`, `let mut t = self.repo.get(id).ok_or(format!("ticket {id} not found"))?;` then check `t.closed`.
 @@solution

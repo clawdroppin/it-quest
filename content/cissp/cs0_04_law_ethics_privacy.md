@@ -242,6 +242,7 @@ Manager asks you to skip a penetration test scope review
 @@requires
 def best_option
 min(
+len(
 @@hint
 Filter out illegal options, then sort by a key: `(min(o["canons"]), -len(o["canons"]))`. The first one wins.
 @@solution

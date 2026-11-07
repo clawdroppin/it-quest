@@ -185,6 +185,7 @@ preempt on R1: True
 def elect
 def after_recovery
 ipaddress
+ip_address(
 @@hint
 Sort by the tuple `(priority, ip_address(ip))` in reverse. Compare addresses with `ipaddress.ip_address`, not as strings: as strings, "10.1.1.10" sorts before "10.1.1.4".
 @@solution
@@ -222,3 +223,70 @@ for preempt in (False, True):
     routers["R1"]["up"] = True
     active = after_recovery(active, routers)
     print(f"  R1 recovers: active {active}")
+
+@@exercise Calculate OSPF costs and the best path
+OSPF cost = reference bandwidth ÷ interface bandwidth, rounded down, never less than 1. With the default 100 Mb/s reference, every link of 100 Mb/s or faster costs 1, so OSPF can't tell FastEthernet from 10 Gb.
+
+Write `cost(bw_mbps, ref)` and `best_path(paths, ref)` that sums each path's costs and returns the cheapest. Print the costs of each path with the default reference (100) and with `auto-cost reference-bandwidth 10000`, and say whether the choice changes.
+@@lang python
+@@starter
+paths = {
+    "R1-R2-R4 (two 10G links)": [10000, 10000],
+    "R1-R3-R4 (Fa + Gi)": [100, 1000],
+    "R1-R4 direct (one Fa link)": [100],
+}
+
+def cost(bw_mbps, ref):
+    raise NotImplementedError
+
+
+def best_path(paths, ref):
+    raise NotImplementedError
+
+
+choices = {}
+for ref in (100, 10000):
+    best, totals = best_path(paths, ref)
+    choices[ref] = best
+    print(f"reference {ref} Mb/s:")
+    for name, total in totals.items():
+        print(f"  {name}: cost {total}" + ("  <- best" if name == best else ""))
+print("choice changes" if choices[100] != choices[10000] else "same choice")
+@@expected
+reference 100 Mb/s:
+  R1-R2-R4 (two 10G links): cost 2
+  R1-R3-R4 (Fa + Gi): cost 2
+  R1-R4 direct (one Fa link): cost 1  <- best
+reference 10000 Mb/s:
+  R1-R2-R4 (two 10G links): cost 2  <- best
+  R1-R3-R4 (Fa + Gi): cost 110
+  R1-R4 direct (one Fa link): cost 100
+choice changes
+@@requires
+def cost
+def best_path
+max(1,
+@@hint
+Use integer division `ref // bw` and `max(1, ...)` so fast links don't get a cost of 0. With reference 100, the direct FastEthernet link wins because it has fewer hops, not because it's faster.
+@@solution
+paths = {
+    "R1-R2-R4 (two 10G links)": [10000, 10000],
+    "R1-R3-R4 (Fa + Gi)": [100, 1000],
+    "R1-R4 direct (one Fa link)": [100],
+}
+
+def cost(bw_mbps, ref):
+    return max(1, ref // bw_mbps)
+
+def best_path(paths, ref):
+    totals = {name: sum(cost(bw, ref) for bw in links) for name, links in paths.items()}
+    return min(totals, key=lambda n: (totals[n], n)), totals
+
+choices = {}
+for ref in (100, 10000):
+    best, totals = best_path(paths, ref)
+    choices[ref] = best
+    print(f"reference {ref} Mb/s:")
+    for name, total in totals.items():
+        print(f"  {name}: cost {total}" + ("  <- best" if name == best else ""))
+print("choice changes" if choices[100] != choices[10000] else "same choice")

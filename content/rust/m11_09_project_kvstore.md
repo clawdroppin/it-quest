@@ -271,6 +271,7 @@ fn checks() {
 }
 @@requires
 fn unescape
+.chars()
 @@hint
 `unescape`: loop with `let mut chars = s.chars();` and on `\\` match `chars.next()`: `Some('\\')`, `Some('t')`, `Some('n')`, otherwise error. Sort with `let mut sorted = entries.to_vec(); sorted.sort_by(|a, b| a.0.cmp(&b.0));`. In `restore`, split each line with `line.split('\t')` (escaped values contain no raw tabs), and parse `-` as `None`.
 @@solution

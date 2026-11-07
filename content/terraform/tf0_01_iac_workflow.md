@@ -225,3 +225,74 @@ def check(name, commands):
 for name, commands in sequences.items():
     problems = check(name, commands)
     print(f"{name:<22} " + ("ok" if not problems else "; ".join(problems)))
+
+@@exercise Resolve references in HCL expressions
+Terraform strings can contain `${...}` references such as `${var.env}`, `${local.name}` or `${aws_s3_bucket.logs.arn}`. Write `resolve(text, values)` that replaces each reference with its value from `values` (a dict of dotted names), resolving locals that themselves contain references, and raising an error for an unknown name or a reference cycle. Print the resolved strings, then show the errors.
+@@lang python
+@@starter
+import re
+
+REF = re.compile(r"\$\{([\w.]+)\}")
+values = {
+    "var.env": "prod",
+    "var.project": "shop",
+    "local.prefix": "${var.project}-${var.env}",
+    "local.bucket_name": "${local.prefix}-logs",
+    "aws_s3_bucket.logs.arn": "arn:aws:s3:::shop-prod-logs",
+    "local.a": "${local.b}",
+    "local.b": "${local.a}",
+}
+
+def resolve(text, values, seen=()):
+    raise NotImplementedError
+
+
+for text in ["${local.bucket_name}", "Name tag: ${var.project} (${var.env})", "${aws_s3_bucket.logs.arn}/*"]:
+    print(f"{text} -> {resolve(text, values)}")
+for text in ["${var.region}", "${local.a}"]:
+    try:
+        resolve(text, values)
+    except ValueError as e:
+        print(f"{text} -> Error: {e}")
+@@expected
+${local.bucket_name} -> shop-prod-logs
+Name tag: ${var.project} (${var.env}) -> Name tag: shop (prod)
+${aws_s3_bucket.logs.arn}/* -> arn:aws:s3:::shop-prod-logs/*
+${var.region} -> Error: reference to undeclared var.region
+${local.a} -> Error: cycle: local.a -> local.b -> local.a
+@@requires
+def resolve
+.sub(
+@@hint
+`re.sub` can take a function: for each `${name}`, look the name up and resolve its value recursively. Pass along the names you're already resolving to detect a cycle.
+@@solution
+import re
+
+REF = re.compile(r"\$\{([\w.]+)\}")
+values = {
+    "var.env": "prod",
+    "var.project": "shop",
+    "local.prefix": "${var.project}-${var.env}",
+    "local.bucket_name": "${local.prefix}-logs",
+    "aws_s3_bucket.logs.arn": "arn:aws:s3:::shop-prod-logs",
+    "local.a": "${local.b}",
+    "local.b": "${local.a}",
+}
+
+def resolve(text, values, seen=()):
+    def sub(m):
+        name = m.group(1)
+        if name in seen:
+            raise ValueError(f"cycle: {' -> '.join(seen + (name,))}")
+        if name not in values:
+            raise ValueError(f"reference to undeclared {name}")
+        return resolve(values[name], values, seen + (name,))
+    return REF.sub(sub, text)
+
+for text in ["${local.bucket_name}", "Name tag: ${var.project} (${var.env})", "${aws_s3_bucket.logs.arn}/*"]:
+    print(f"{text} -> {resolve(text, values)}")
+for text in ["${var.region}", "${local.a}"]:
+    try:
+        resolve(text, values)
+    except ValueError as e:
+        print(f"{text} -> Error: {e}")

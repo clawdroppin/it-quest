@@ -163,6 +163,7 @@ def to_octal(symbolic):
 @@requires
 def to_symbolic
 def to_octal
+& 4
 @@hint
 For each digit d: `("r" if d & 4 else "-") + ("w" if d & 2 else "-") + ("x" if d & 1 else "-")`. Reverse: take the string in chunks of 3 and add 4/2/1 for each letter present.
 @@solution

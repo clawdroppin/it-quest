@@ -192,3 +192,66 @@ if [ "$pending" = 1 ]; then
     echo "warning: permanent changes need firewall-cmd --reload"
 fi
 if [ "$unsafe" = 1 ]; then echo "NOT SAFE"; else echo "SAFE"; fi
+
+@@exercise Check SSH key permissions
+`sshd` refuses keys when the files are too open. The variable `listing` holds `ls -la` output from a user's home and `~/.ssh` (permission string, owner, name). Check:
+
+- `~/.ssh` must be `drwx------` (700);
+- `authorized_keys` must not be writable by group or others (600 or 644);
+- private keys (`id_*` without `.pub`) must be `-rw-------` (600);
+- everything must be owned by the user (`ytanaka`);
+- the home directory must not be writable by group or others.
+
+Print `OK` or a fix (a `chmod` or `chown` command) for each line.
+@@starter
+listing='drwxrwxr-x ytanaka /home/ytanaka
+drwxr-xr-x ytanaka /home/ytanaka/.ssh
+-rw-rw-r-- ytanaka /home/ytanaka/.ssh/authorized_keys
+-rw-r--r-- ytanaka /home/ytanaka/.ssh/id_ed25519
+-rw-r--r-- ytanaka /home/ytanaka/.ssh/id_ed25519.pub
+-rw------- root /home/ytanaka/.ssh/config'
+
+# check each line of "$listing"
+@@expected
+FIX  ytanaka: chmod go-w /home/ytanaka
+FIX  .ssh: chmod 700 /home/ytanaka/.ssh
+FIX  authorized_keys: chmod 644 /home/ytanaka/.ssh/authorized_keys
+FIX  id_ed25519: chmod 600 /home/ytanaka/.ssh/id_ed25519
+OK   id_ed25519.pub
+FIX  config: chown ytanaka /home/ytanaka/.ssh/config
+@@requires
+while read
+chmod 700
+@@hint
+Read the three fields with `while read -r perm owner path`. Characters 6 and 9 of the permission string (`${perm:5:1}`, `${perm:8:1}`) are group-write and other-write.
+@@solution
+listing='drwxrwxr-x ytanaka /home/ytanaka
+drwxr-xr-x ytanaka /home/ytanaka/.ssh
+-rw-rw-r-- ytanaka /home/ytanaka/.ssh/authorized_keys
+-rw-r--r-- ytanaka /home/ytanaka/.ssh/id_ed25519
+-rw-r--r-- ytanaka /home/ytanaka/.ssh/id_ed25519.pub
+-rw------- root /home/ytanaka/.ssh/config'
+
+user=ytanaka
+while read -r perm owner path; do
+    fixes=""
+    name=${path##*/}
+    if [ "$owner" != "$user" ]; then
+        fixes="$fixes chown $user $path;"
+    fi
+    case "$path" in
+        */.ssh)
+            [ "$perm" = drwx------ ] || fixes="$fixes chmod 700 $path;" ;;
+        */authorized_keys|*.pub)
+            if [ "${perm:5:1}" = w ] || [ "${perm:8:1}" = w ]; then fixes="$fixes chmod 644 $path;"; fi ;;
+        */.ssh/id_*)
+            [ "$perm" = -rw------- ] || fixes="$fixes chmod 600 $path;" ;;
+        /home/*)
+            if [ "${perm:5:1}" = w ] || [ "${perm:8:1}" = w ]; then fixes="$fixes chmod go-w $path;"; fi ;;
+    esac
+    if [ -z "$fixes" ]; then
+        echo "OK   $name"
+    else
+        echo "FIX  $name:${fixes%;}"
+    fi
+done <<< "$listing"

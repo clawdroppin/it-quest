@@ -117,6 +117,7 @@ match D社 (SES): ¥400万-¥550万, score ¥475万 [SES signal: プロジェク
 def check
 SES_SIGNALS
 required
+sorted(
 @@hint
 JLPT levels: a lower number is harder, so you qualify when `profile["jlpt"] <= listing["jlpt"]`. Collect the reasons a listing doesn't match (Japanese level, years, missing required skills). Separately collect warnings (SES signals in `place`, 契約社員). Score matches by the salary midpoint, plus ¥500,000 for remote.
 @@solution
@@ -183,6 +184,7 @@ Fukuoka matches Tokyo after rent at a gross salary of about ¥571万
 def left_after_rent
 TAKE_HOME
 rent_1ldk
+sorted(
 @@hint
 Monthly take-home = annual × TAKE_HOME ÷ 12. Subtract the rent. To match Tokyo, Fukuoka needs (Tokyo's amount left + Fukuoka rent) × 12 ÷ TAKE_HOME in gross salary.
 @@solution

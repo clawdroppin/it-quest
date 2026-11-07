@@ -205,6 +205,7 @@ Core Ultra 7 265K on Z790: socket mismatch (LGA1851 CPU, LGA1700 board)
 @@requires
 "socket"
 needs_bios_update
+.join(
 @@hint
 Collect problems in a list. If the socket differs, that's the only problem worth reporting. Then check the generation and RAM.
 @@solution

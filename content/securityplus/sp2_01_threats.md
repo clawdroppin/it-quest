@@ -217,3 +217,98 @@ for ip, (kind, fails, accounts, hit) in sorted(classify_sources(log).items()):
     if hit:
         line += "; then signed in as " + ", ".join(hit) + ": reset and investigate"
     print(line)
+
+@@exercise Match logs against indicators of compromise
+A threat intelligence feed gives indicators of compromise: file hashes, IP addresses and domains. Write `load_iocs(feed)` that sorts them by type (a 64-character hex string is a SHA-256 hash, `ipaddress` can parse an IP, anything else with a dot is a domain), then `hunt(events, iocs)` that returns every event matching an IoC. A domain matches its subdomains too (`cdn.evil.example` matches `evil.example`). Print each hit with the host and the IoC, then the hosts to isolate.
+@@lang python
+@@starter
+import ipaddress
+
+feed = """203.0.113.66
+evil.example
+b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+198.51.100.9
+update-check.example.net"""
+events = [
+    {"host": "pc-14", "type": "dns", "value": "cdn.evil.example"},
+    {"host": "pc-07", "type": "dns", "value": "www.example.co.jp"},
+    {"host": "srv-02", "type": "conn", "value": "203.0.113.66"},
+    {"host": "pc-22", "type": "file", "value": "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c"},
+    {"host": "pc-07", "type": "conn", "value": "192.0.2.10"},
+    {"host": "pc-31", "type": "dns", "value": "notevil.example"},
+    {"host": "pc-31", "type": "dns", "value": "update-check.example.net"},
+]
+
+def load_iocs(feed):
+    raise NotImplementedError
+
+
+def hunt(events, iocs):
+    raise NotImplementedError
+
+
+hits = hunt(events, load_iocs(feed))
+for host, kind, ioc in hits:
+    print(f"HIT {host}: {kind} {ioc}")
+print("Isolate: " + ", ".join(sorted({h for h, _, _ in hits})))
+@@expected
+HIT pc-14: domain evil.example
+HIT srv-02: ip 203.0.113.66
+HIT pc-22: hash b5bb9d8014a0...
+HIT pc-31: domain update-check.example.net
+Isolate: pc-14, pc-22, pc-31, srv-02
+@@requires
+def load_iocs
+def hunt
+endswith("." + d)
+@@hint
+Match a domain exactly or as a suffix after a dot: `v.endswith("." + d)`. Without the dot, `notevil.example` would match `evil.example`.
+@@solution
+import ipaddress
+
+feed = """203.0.113.66
+evil.example
+b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+198.51.100.9
+update-check.example.net"""
+events = [
+    {"host": "pc-14", "type": "dns", "value": "cdn.evil.example"},
+    {"host": "pc-07", "type": "dns", "value": "www.example.co.jp"},
+    {"host": "srv-02", "type": "conn", "value": "203.0.113.66"},
+    {"host": "pc-22", "type": "file", "value": "b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c"},
+    {"host": "pc-07", "type": "conn", "value": "192.0.2.10"},
+    {"host": "pc-31", "type": "dns", "value": "notevil.example"},
+    {"host": "pc-31", "type": "dns", "value": "update-check.example.net"},
+]
+
+def load_iocs(feed):
+    iocs = {"hash": set(), "ip": set(), "domain": set()}
+    for line in feed.split():
+        if len(line) == 64 and all(c in "0123456789abcdef" for c in line.lower()):
+            iocs["hash"].add(line.lower())
+            continue
+        try:
+            ipaddress.ip_address(line)
+            iocs["ip"].add(line)
+        except ValueError:
+            iocs["domain"].add(line.lower())
+    return iocs
+
+def hunt(events, iocs):
+    hits = []
+    for e in events:
+        v = e["value"].lower()
+        if e["type"] == "file" and v in iocs["hash"]:
+            hits.append((e["host"], "hash", v[:12] + "..."))
+        elif e["type"] == "conn" and v in iocs["ip"]:
+            hits.append((e["host"], "ip", v))
+        elif e["type"] == "dns":
+            for d in iocs["domain"]:
+                if v == d or v.endswith("." + d):
+                    hits.append((e["host"], "domain", d))
+    return hits
+
+hits = hunt(events, load_iocs(feed))
+for host, kind, ioc in hits:
+    print(f"HIT {host}: {kind} {ioc}")
+print("Isolate: " + ", ".join(sorted({h for h, _, _ in hits})))

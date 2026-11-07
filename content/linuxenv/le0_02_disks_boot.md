@@ -134,6 +134,7 @@ skip: /dev/sdc (partition sdc1 is mounted)
 lsblk_p
 RM
 MOUNTPOINTS
+field(
 @@hint
 Read each line with `while read -r line` and pull fields out with a helper such as `field() { sed -n "s/.*$1=\"\([^\"]*\)\".*/\1/p" <<<"$line"; }`. A partition belongs to a disk when its NAME starts with the disk's name, so collect mounted partitions first, then loop over disks.
 @@solution

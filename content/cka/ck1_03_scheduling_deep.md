@@ -268,6 +268,7 @@ final: {'zone-a': 3, 'zone-b': 3, 'zone-c': 2}
 @@requires
 def allowed
 MAX_SKEW
+.values()
 @@hint
 `allowed` copies the counts, adds 1 to the zone and checks `max(c.values()) - min(c.values()) <= MAX_SKEW`. A zone in `full` is never a candidate, but still counts for the skew.
 @@solution

@@ -168,3 +168,59 @@ Pre-order traversal of this tree: root A, left child B (children D, E), right ch
 What's the Japanese term for a stack's ordering, "last in, first out"?
 = 後入れ先出し
 ? Queue: 先入れ先出し.
+
+@@exercise Trace the Tower of Hanoi recursively
+A favourite 再帰 question: how many moves does the Tower of Hanoi take? Write `hanoi(n, src, dst, via, moves)` that appends each move `(disk, from, to)` to `moves`, using the recursive rule: move n−1 disks out of the way, move the biggest disk, move the n−1 disks back on top.
+
+Print every move for 3 disks, then check that the number of moves is 2ⁿ − 1 for n = 1 to 10, and print how long 64 disks would take at one move per second (in years).
+@@lang python
+@@starter
+def hanoi(n, src, dst, via, moves):
+    raise NotImplementedError
+
+
+moves = []
+hanoi(3, "A", "C", "B", moves)
+for i, (disk, a, b) in enumerate(moves, 1):
+    print(f"{i}: disk {disk} {a} -> {b}")
+for n in range(1, 11):
+    m = []
+    hanoi(n, "A", "C", "B", m)
+    assert len(m) == 2 ** n - 1, n
+print("moves = 2^n - 1 for n = 1..10: OK")
+years = (2 ** 64 - 1) / (365.25 * 24 * 3600)
+print(f"64 disks at 1 move/s: {years:.3e} years")
+@@expected
+1: disk 1 A -> C
+2: disk 2 A -> B
+3: disk 1 C -> B
+4: disk 3 A -> C
+5: disk 1 B -> A
+6: disk 2 B -> C
+7: disk 1 A -> C
+moves = 2^n - 1 for n = 1..10: OK
+64 disks at 1 move/s: 5.845e+11 years
+@@requires
+def hanoi
+hanoi(n - 1
+@@hint
+The base case is `n == 0` (nothing to move). Each call makes two recursive calls with `n - 1`, swapping which peg is the helper.
+@@solution
+def hanoi(n, src, dst, via, moves):
+    if n == 0:
+        return
+    hanoi(n - 1, src, via, dst, moves)
+    moves.append((n, src, dst))
+    hanoi(n - 1, via, dst, src, moves)
+
+moves = []
+hanoi(3, "A", "C", "B", moves)
+for i, (disk, a, b) in enumerate(moves, 1):
+    print(f"{i}: disk {disk} {a} -> {b}")
+for n in range(1, 11):
+    m = []
+    hanoi(n, "A", "C", "B", m)
+    assert len(m) == 2 ** n - 1, n
+print("moves = 2^n - 1 for n = 1..10: OK")
+years = (2 ** 64 - 1) / (365.25 * 24 * 3600)
+print(f"64 disks at 1 move/s: {years:.3e} years")

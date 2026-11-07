@@ -210,6 +210,7 @@ DLQ: m2, m3
 @@requires
 heapq
 MAX_RECEIVE
+max(
 @@hint
 Keep a heap of `(visible_at, msg)` and a clock. Pop the next message, set `clock = max(clock, visible_at)`, count the receive; a failure or a too-long job puts it back at `clock + VISIBILITY` (the worker gives up after the timeout, so the clock advances by `min(work, VISIBILITY)` for slow jobs and by `work` for successes).
 @@solution

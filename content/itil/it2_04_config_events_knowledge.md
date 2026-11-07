@@ -132,6 +132,7 @@ shared by the shop and the intranet: host:esx-1, net:core-switch, san:main
 def affected_by
 PRIORITY
 svc:
+sorted(
 @@hint
 Build the reverse map (CI → CIs that depend on it). From the failed CI, walk the reverse map with a stack, collecting everything reachable. Services are the names starting with `svc:`. A single point of failure is a CI whose affected services equal all services.
 @@solution
@@ -208,6 +209,7 @@ t=530 web-1 http=down: duplicate, suppressed
 def classify
 THRESHOLDS
 RUNS_ON
+.get(
 @@hint
 `classify` returns "informational", "warning" or "exception": numeric metrics use the thresholds, "down" is an exception, anything else informational. Deduplicate with a dict of the last time each `(source, check, level)` was seen (skip if within 300 s). Track hosts that are down; a service exception whose host is down is suppressed and linked to the host incident.
 @@solution

@@ -204,3 +204,84 @@ for port in capture:
     found = lookup(port)
     service = f"{found[0]} over {found[1]}" if found else "unknown"
     print(f"{port}: {service} ({classify(port)})")
+
+@@exercise Which OSI layer is it?
+Write `layer(item)` that returns the OSI layer number and name for protocols, devices, PDUs and addresses, using `LAYERS`. Then write `encapsulate(data)` that prints how an HTTP request is wrapped on the way down: the data, then a TCP segment (with ports), an IP packet (with addresses), an Ethernet frame (with MACs and the FCS trailer) and finally bits. Print the layer for each item and the encapsulation of one request.
+@@lang python
+@@starter
+NAMES = {1: "physical", 2: "data link", 3: "network", 4: "transport", 5: "session", 6: "presentation", 7: "application"}
+LAYERS = {
+    "HTTP": 7, "DNS": 7, "SSH": 7, "TLS": 6, "JPEG": 6, "TCP": 4, "UDP": 4, "segment": 4, "port": 4,
+    "IP": 3, "ICMP": 3, "router": 3, "packet": 3, "IP address": 3,
+    "Ethernet": 2, "switch": 2, "frame": 2, "MAC address": 2, "ARP": 2,
+    "hub": 1, "cable": 1, "bits": 1, "repeater": 1,
+}
+items = ["switch", "ICMP", "TLS", "frame", "port", "hub", "MAC address", "DNS", "router", "UDP", "firewall"]
+
+def layer(item):
+    raise NotImplementedError
+
+
+def encapsulate(data):
+    raise NotImplementedError
+
+
+for it in items:
+    n, name = layer(it)
+    print(f"{it}: " + (f"layer {n} ({name})" if n else name))
+print("Sending GET /index.html:")
+encapsulate("GET /index.html")
+@@expected
+switch: layer 2 (data link)
+ICMP: layer 3 (network)
+TLS: layer 6 (presentation)
+frame: layer 2 (data link)
+port: layer 4 (transport)
+hub: layer 1 (physical)
+MAC address: layer 2 (data link)
+DNS: layer 7 (application)
+router: layer 3 (network)
+UDP: layer 4 (transport)
+firewall: depends: a firewall can work at layers 3, 4 or 7
+Sending GET /index.html:
+  L7 application data: GET /index.html
+  L4 transport  TCP segment: src port 51514, dst port 80 + data
+  L3 network    IP packet: src 192.168.1.20, dst 203.0.113.10 + segment
+  L2 data link  Ethernet frame: src MAC aa:bb:cc:00:11:22, dst MAC (the gateway) + packet + FCS
+  L1 physical   bits on the wire
+@@requires
+def layer
+def encapsulate
+LAYERS.get(
+@@hint
+A dict from item to layer number, plus one from number to name. The destination MAC in the frame is the gateway's, not the web server's: frames only cross one link.
+@@solution
+NAMES = {1: "physical", 2: "data link", 3: "network", 4: "transport", 5: "session", 6: "presentation", 7: "application"}
+LAYERS = {
+    "HTTP": 7, "DNS": 7, "SSH": 7, "TLS": 6, "JPEG": 6, "TCP": 4, "UDP": 4, "segment": 4, "port": 4,
+    "IP": 3, "ICMP": 3, "router": 3, "packet": 3, "IP address": 3,
+    "Ethernet": 2, "switch": 2, "frame": 2, "MAC address": 2, "ARP": 2,
+    "hub": 1, "cable": 1, "bits": 1, "repeater": 1,
+}
+items = ["switch", "ICMP", "TLS", "frame", "port", "hub", "MAC address", "DNS", "router", "UDP", "firewall"]
+
+def layer(item):
+    n = LAYERS.get(item)
+    return (n, NAMES[n]) if n else (None, "depends: a firewall can work at layers 3, 4 or 7")
+
+def encapsulate(data):
+    steps = [
+        (7, f"data: {data}"),
+        (4, "TCP segment: src port 51514, dst port 80 + data"),
+        (3, "IP packet: src 192.168.1.20, dst 203.0.113.10 + segment"),
+        (2, "Ethernet frame: src MAC aa:bb:cc:00:11:22, dst MAC (the gateway) + packet + FCS"),
+        (1, "bits on the wire"),
+    ]
+    for n, text in steps:
+        print(f"  L{n} {NAMES[n]:<10} {text}")
+
+for it in items:
+    n, name = layer(it)
+    print(f"{it}: " + (f"layer {n} ({name})" if n else name))
+print("Sending GET /index.html:")
+encapsulate("GET /index.html")

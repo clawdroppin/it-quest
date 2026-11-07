@@ -167,6 +167,7 @@ total: 500500
 @@requires
 std::thread
 join
+.emplace_back(
 @@hint
 `threads.emplace_back([&, i] { partial[i] = std::accumulate(bytes.begin() + i * chunk, bytes.begin() + (i + 1) * chunk, 0LL); });` in a loop over `i`, then join, then sum `partial`.
 @@solution

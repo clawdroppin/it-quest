@@ -158,6 +158,7 @@ check(top_talkers(["a", "b", "a", "c", "a", "b"], 2), [("a", 3), ("b", 2)], "top
 check(top_talkers([], 3), [], "empty list")
 @@requires
 Counter
+most_common(
 @@hint
 `return Counter(ips).most_common(n)`
 @@solution

@@ -153,3 +153,90 @@ def sha256_hex(data):
 published = sha256_hex(b"installer v1.0")
 for name, data in [("good", b"installer v1.0"), ("tampered", b"installer v1.1")]:
     print(name, "OK" if sha256_hex(data) == published else "MISMATCH", sha256_hex(data)[:16])
+
+@@exercise Pick the right crypto for each requirement
+Match requirements to the lesson's tools. Write `pick(req)` that returns the technique and an example algorithm:
+
+- encrypt a large amount of data, both sides already share a key → **symmetric** (AES-256-GCM);
+- share a key with someone you've never met → **asymmetric key exchange** (ECDHE);
+- prove a file hasn't changed → **hashing** (SHA-256);
+- prove who sent something and that it wasn't changed → **digital signature** (Ed25519 / RSA-PSS);
+- store passwords → **salted, slow hashing** (Argon2id / bcrypt);
+- prove a website's identity → **certificate (PKI)**.
+
+Also flag any requirement that names a broken algorithm (MD5, SHA-1, DES, RC4) with its replacement.
+@@lang python
+@@starter
+TABLE = {
+    "bulk": ("symmetric encryption", "AES-256-GCM"),
+    "key exchange": ("asymmetric key exchange", "ECDHE"),
+    "integrity": ("hashing", "SHA-256"),
+    "sender": ("digital signature", "Ed25519 or RSA-PSS"),
+    "passwords": ("salted, slow password hashing", "Argon2id or bcrypt"),
+    "website identity": ("certificate (PKI)", "X.509 from a trusted CA"),
+}
+BROKEN = {"MD5": "SHA-256", "SHA-1": "SHA-256", "DES": "AES", "RC4": "AES-GCM or ChaCha20"}
+requirements = [
+    ("Encrypt the nightly 2 TB backup", "bulk"),
+    ("Agree a session key with a new partner over the internet", "key exchange"),
+    ("Check a downloaded ISO matches the published MD5", "integrity"),
+    ("Prove the CFO approved this contract", "sender"),
+    ("Store customer passwords in the database", "passwords"),
+    ("Show customers the shop really is example.co.jp", "website identity"),
+    ("Old VPN still uses DES", "bulk"),
+]
+
+def pick(need):
+    raise NotImplementedError
+
+
+for text, need in requirements:
+    technique, algo = pick(need)
+    line = f"{text}: {technique} ({algo})"
+    for old, new in BROKEN.items():
+        if old in text.split():
+            line += f"; {old} is broken, use {new}"
+    print(line)
+@@expected
+Encrypt the nightly 2 TB backup: symmetric encryption (AES-256-GCM)
+Agree a session key with a new partner over the internet: asymmetric key exchange (ECDHE)
+Check a downloaded ISO matches the published MD5: hashing (SHA-256); MD5 is broken, use SHA-256
+Prove the CFO approved this contract: digital signature (Ed25519 or RSA-PSS)
+Store customer passwords in the database: salted, slow password hashing (Argon2id or bcrypt)
+Show customers the shop really is example.co.jp: certificate (PKI) (X.509 from a trusted CA)
+Old VPN still uses DES: symmetric encryption (AES-256-GCM); DES is broken, use AES
+@@requires
+def pick
+BROKEN.items()
+@@hint
+A dict from need to (technique, algorithm) does the matching. For broken algorithms, check whole words with `text.split()` so "SHA-256" doesn't match "SHA".
+@@solution
+TABLE = {
+    "bulk": ("symmetric encryption", "AES-256-GCM"),
+    "key exchange": ("asymmetric key exchange", "ECDHE"),
+    "integrity": ("hashing", "SHA-256"),
+    "sender": ("digital signature", "Ed25519 or RSA-PSS"),
+    "passwords": ("salted, slow password hashing", "Argon2id or bcrypt"),
+    "website identity": ("certificate (PKI)", "X.509 from a trusted CA"),
+}
+BROKEN = {"MD5": "SHA-256", "SHA-1": "SHA-256", "DES": "AES", "RC4": "AES-GCM or ChaCha20"}
+requirements = [
+    ("Encrypt the nightly 2 TB backup", "bulk"),
+    ("Agree a session key with a new partner over the internet", "key exchange"),
+    ("Check a downloaded ISO matches the published MD5", "integrity"),
+    ("Prove the CFO approved this contract", "sender"),
+    ("Store customer passwords in the database", "passwords"),
+    ("Show customers the shop really is example.co.jp", "website identity"),
+    ("Old VPN still uses DES", "bulk"),
+]
+
+def pick(need):
+    return TABLE[need]
+
+for text, need in requirements:
+    technique, algo = pick(need)
+    line = f"{text}: {technique} ({algo})"
+    for old, new in BROKEN.items():
+        if old in text.split():
+            line += f"; {old} is broken, use {new}"
+    print(line)

@@ -140,6 +140,7 @@ retained: mainframe
 def plan_waves
 stays
 chatty
+sorted(
 @@hint
 Treat apps in `stays` as already satisfied. Each round, an app is ready when every dependency has moved or stays. For each chatty pair, delay the earlier app to the later one's wave so they move together. Strategy: retain if licence-bound, repurchase if a SaaS option exists, replatform if it's custom code that depends on a database, refactor if it's a custom app others depend on heavily, otherwise rehost.
 @@solution
@@ -220,6 +221,7 @@ total DR cost: $26,790/month
 def choose
 PATTERNS
 rpo
+<= rpo
 @@hint
 Patterns are ordered from cheapest to most expensive, so return the first one whose RTO and RPO are both less than or equal to the requirement. The DR cost is the primary cost times the pattern's fraction. Sum the totals at the end.
 @@solution

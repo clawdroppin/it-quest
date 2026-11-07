@@ -244,3 +244,73 @@ for pid in candidates:
     else:
         print(f"{pid:<44} {'; '.join(issues)}")
         print(f"{'':<44} suggestion: {suggest(pid)}")
+
+@@exercise Choose a Google Cloud database
+Use the lesson's storage table. Write `database(w)` for each workload:
+
+- analytics over huge data with SQL → **BigQuery**;
+- wide-column, huge throughput, low latency (IoT, time series) → **Bigtable**;
+- documents for mobile or web apps → **Firestore**;
+- relational and **global** with strong consistency → **Cloud Spanner**;
+- relational, PostgreSQL-compatible, high performance → **AlloyDB**;
+- other relational, one region → **Cloud SQL** (add `with HA` when it needs to survive a zone failure).
+
+Print each workload with its choice.
+@@lang python
+@@starter
+workloads = [
+    {"name": "Order database for a shop in Japan", "model": "relational", "engine": "MySQL", "global": False, "zone_failure": True},
+    {"name": "Bank ledger across three continents", "model": "relational", "global": True},
+    {"name": "Sensor readings from 2 million meters", "model": "wide-column"},
+    {"name": "Chat app user profiles", "model": "document"},
+    {"name": "Five years of clickstream for SQL reports", "model": "analytics"},
+    {"name": "PostgreSQL ERP needing more speed", "model": "relational", "engine": "PostgreSQL", "high_performance": True, "global": False},
+    {"name": "Internal wiki database", "model": "relational", "engine": "PostgreSQL", "global": False},
+]
+
+def database(w):
+    raise NotImplementedError
+
+
+for w in workloads:
+    print(f"{w['name']}: {database(w)}")
+@@expected
+Order database for a shop in Japan: Cloud SQL with HA
+Bank ledger across three continents: Cloud Spanner
+Sensor readings from 2 million meters: Bigtable
+Chat app user profiles: Firestore
+Five years of clickstream for SQL reports: BigQuery
+PostgreSQL ERP needing more speed: AlloyDB
+Internal wiki database: Cloud SQL
+@@requires
+def database
+.get(
+@@hint
+Decide by data model first, then for relational workloads by scale (global → Spanner), engine and performance. Use `w.get(...)` for the optional fields.
+@@solution
+workloads = [
+    {"name": "Order database for a shop in Japan", "model": "relational", "engine": "MySQL", "global": False, "zone_failure": True},
+    {"name": "Bank ledger across three continents", "model": "relational", "global": True},
+    {"name": "Sensor readings from 2 million meters", "model": "wide-column"},
+    {"name": "Chat app user profiles", "model": "document"},
+    {"name": "Five years of clickstream for SQL reports", "model": "analytics"},
+    {"name": "PostgreSQL ERP needing more speed", "model": "relational", "engine": "PostgreSQL", "high_performance": True, "global": False},
+    {"name": "Internal wiki database", "model": "relational", "engine": "PostgreSQL", "global": False},
+]
+
+def database(w):
+    model = w["model"]
+    if model == "analytics":
+        return "BigQuery"
+    if model == "wide-column":
+        return "Bigtable"
+    if model == "document":
+        return "Firestore"
+    if w.get("global"):
+        return "Cloud Spanner"
+    if w.get("engine") == "PostgreSQL" and w.get("high_performance"):
+        return "AlloyDB"
+    return "Cloud SQL" + (" with HA" if w.get("zone_failure") else "")
+
+for w in workloads:
+    print(f"{w['name']}: {database(w)}")

@@ -193,6 +193,7 @@ Email (RTO 8 h, RPO 240 min): hot site, back up every 240 min
 @@requires
 SITES
 INTERVALS
+next(
 @@hint
 `next((name for name, hours in SITES if hours <= rto), None)` gives the cheapest suitable site because SITES is cheapest first. For the interval, `max((i for i in INTERVALS if i <= rpo), default=None)`.
 @@solution

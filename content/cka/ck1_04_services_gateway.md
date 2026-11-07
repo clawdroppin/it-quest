@@ -179,6 +179,7 @@ from shop: web.data -> NXDOMAIN
 @@requires
 def records
 svc.cluster.local
+.items()
 @@hint
 Build a dict of FQDN → answer: `f"{svc}.{ns}.svc.cluster.local"` maps to the ClusterIP, or to the list of Pod IPs for headless Services; `f"{pod}.{svc}.{ns}.svc.cluster.local"` maps to each Pod IP.
 @@solution

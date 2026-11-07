@@ -295,6 +295,7 @@ check(is_maintenance_window(FixedClock(4, 22)), True, "friday 22h")
 check(is_maintenance_window(FixedClock(4, 21)), False, "friday 21h")
 @@requires
 Protocol
+.now()
 @@hint
 The protocol body is just `def now(self) -> tuple[int, int]: ...`. `FixedClock.now` returns the stored tuple. Then `day, hour = clock.now(); return day >= 5 or hour >= 22 or hour < 6`.
 @@solution

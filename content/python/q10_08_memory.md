@@ -173,6 +173,7 @@ c.put("d", 4)
 check((c.keys(), c.evictions), (["a", "d"], 2), "second eviction")
 @@requires
 OrderedDict
+.move_to_end(
 @@hint
 `get`: `if key not in self._d: return None`; `self._d.move_to_end(key)`; return it. `put`: set the value, `move_to_end(key)`, then `if len(self._d) > self.capacity: self._d.popitem(last=False); self.evictions += 1`.
 @@solution

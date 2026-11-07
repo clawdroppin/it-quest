@@ -7,7 +7,7 @@ CCNP Enterprise takes **two exams**:
 1. **350-401 ENCOR** (Implementing Cisco Enterprise Network Core Technologies): the core exam, 120 minutes. Passing it also qualifies you for the CCIE Enterprise lab.
 2. One **concentration exam** of your choice, for example **300-410 ENARSI** (advanced routing and services), 300-415 ENSDWI (SD-WAN), 300-420 ENSLD (design), 300-425 ENWLSD (wireless design) or 300-435 ENAUTO (automation).
 
-ENCOR's domains: **Architecture** (15%), **Virtualization** (10%), **Infrastructure** (30%: layer 2, layer 3, wireless, IP services), **Network Assurance** (10%), **Security** (20%), **Automation** (15%). It assumes you know CCNA well: VLANs, STP, OSPF and ACLs are only the starting point.
+ENCOR's domains: **Architecture** (15%), **Virtualization** (10%), **Infrastructure** (30%: layer 2, layer 3, IP services), **Network Assurance** (10%), **Security** (20%), **Automation and AI** (15%). Version 1.2 of the exam (since 19 March 2026) dropped the wireless topics, which now belong to the wireless concentration exams. The wireless section below is still useful background for enterprise work, but ENCOR no longer tests it. It assumes you know CCNA well: VLANs, STP, OSPF and ACLs are only the starting point.
 
 In Japan, CCNP is a strong signal for network engineer (ネットワークエンジニア) roles at SIers, carriers (NTT, KDDI, SoftBank) and large enterprises, often paying well above entry level.
 
@@ -68,11 +68,11 @@ The benefit: cheap internet links alongside MPLS, with **application-aware routi
 
 @@quiz
 Which ENCOR domain carries the most weight?
-* Infrastructure (layer 2, layer 3, wireless and IP services)
+* Infrastructure (layer 2, layer 3 and IP services)
 - Architecture
-- Automation
+- Automation and AI
 - Virtualization
-? Infrastructure is 30%, Security 20%, Architecture and Automation 15% each.
+? Infrastructure is 30%, Security 20%, Architecture and Automation and AI 15% each.
 
 @@quiz
 In Cisco SD-WAN, which component distributes routing information and policy to the WAN edge routers using OMP?
@@ -205,3 +205,78 @@ for in_port, src, dst in frames:
 print("MAC table:")
 for (vlan, mac), port in sorted(mac_table.items()):
     print(f"  vlan {vlan}  {mac}  {port}")
+
+@@exercise Check campus oversubscription ratios
+In a tiered campus, each layer's uplinks carry traffic from many faster downlinks. The common design guideline is at most **20:1** from access to distribution and **4:1** from distribution to core. Write `ratio(switch)` = total downlink bandwidth ÷ total uplink bandwidth, and `review(campus)` that flags any switch over its layer's limit and suggests the number of extra uplinks (of the same speed) that would bring it under the limit. Print each switch with its ratio.
+@@lang python
+@@starter
+import math
+
+LIMIT = {"access": 20, "distribution": 4}
+campus = [
+    {"name": "acc-1F", "layer": "access", "down": [(48, 1)], "up": [(2, 10)]},
+    {"name": "acc-2F", "layer": "access", "down": [(48, 2.5), (48, 1)], "up": [(2, 10)]},
+    {"name": "acc-lab", "layer": "access", "down": [(24, 10)], "up": [(1, 10)]},
+    {"name": "dist-A", "layer": "distribution", "down": [(12, 10)], "up": [(2, 40)]},
+    {"name": "dist-B", "layer": "distribution", "down": [(24, 10)], "up": [(2, 10)]},
+]
+
+def total(links):
+    raise NotImplementedError
+
+
+def ratio(sw):
+    raise NotImplementedError
+
+
+def review(campus):
+    raise NotImplementedError
+
+
+for line in review(campus):
+    print(line)
+@@expected
+acc-1F (access): 2.4:1 OK
+acc-2F (access): 8.4:1 OK
+acc-lab (access): 24.0:1 over 20:1, add 1 x 10G uplink(s)
+dist-A (distribution): 1.5:1 OK
+dist-B (distribution): 12.0:1 over 4:1, add 4 x 10G uplink(s)
+@@requires
+def ratio
+def review
+math.ceil(
+@@hint
+Bandwidth is ports × speed for each group of links. The uplinks needed are `ceil(downlink_total / limit / uplink_speed)`; subtract the uplinks already there.
+@@solution
+import math
+
+LIMIT = {"access": 20, "distribution": 4}
+campus = [
+    {"name": "acc-1F", "layer": "access", "down": [(48, 1)], "up": [(2, 10)]},
+    {"name": "acc-2F", "layer": "access", "down": [(48, 2.5), (48, 1)], "up": [(2, 10)]},
+    {"name": "acc-lab", "layer": "access", "down": [(24, 10)], "up": [(1, 10)]},
+    {"name": "dist-A", "layer": "distribution", "down": [(12, 10)], "up": [(2, 40)]},
+    {"name": "dist-B", "layer": "distribution", "down": [(24, 10)], "up": [(2, 10)]},
+]
+
+def total(links):
+    return sum(n * gbps for n, gbps in links)
+
+def ratio(sw):
+    return total(sw["down"]) / total(sw["up"])
+
+def review(campus):
+    out = []
+    for sw in campus:
+        r = ratio(sw)
+        limit = LIMIT[sw["layer"]]
+        if r <= limit:
+            out.append(f"{sw['name']} ({sw['layer']}): {r:.1f}:1 OK")
+            continue
+        speed = sw["up"][0][1]
+        need = math.ceil(total(sw["down"]) / limit / speed) - sum(n for n, _ in sw["up"])
+        out.append(f"{sw['name']} ({sw['layer']}): {r:.1f}:1 over {limit}:1, add {need} x {speed}G uplink(s)")
+    return out
+
+for line in review(campus):
+    print(line)

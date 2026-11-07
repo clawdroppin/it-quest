@@ -144,6 +144,7 @@ PC-031 storage
 PC-040 network or server
 @@requires
 def bottleneck
+>= 90
 @@hint
 Check the swapping case first, because a swapping machine also has a busy disk and you don't want it reported as "storage".
 @@solution
@@ -180,6 +181,7 @@ NVMe SSD: 16.7 hours
 HDD: 173.6 days
 @@requires
 def human
+/ 60
 @@hint
 `if seconds < 120: return f"{seconds:.1f} seconds"`, then divide by 60 for minutes, by 3600 for hours, by 86400 for days.
 @@solution

@@ -190,6 +190,7 @@ Windowsサーバーは問題ありませんが、Linuxサーバーは要確認�
 def particle
 GA_PREDICATES
 QUESTION_WORDS
+.startswith(
 @@hint
 Return が if the subject starts with a question word, if the kind is "answer", or if the predicate starts with one of `GA_PREDICATES` (use `predicate.startswith(GA_PREDICATES)`). Otherwise return は. Print the reason alongside.
 @@solution

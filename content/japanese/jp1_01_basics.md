@@ -190,3 +190,85 @@ for s in draft:
             fixed = s[: -len(casual)] + polite
             break
     print(f"fix   {s} -> {fixed}")
+
+@@exercise Build です sentences: statement, negative, question
+The core pattern is **X は Y です**. Write `sentence(topic, noun, kind)` for the four polite forms:
+
+- `statement`: X は Y です。
+- `negative`: X は Y ではありません。
+- `question`: X は Y ですか。
+- `past`: X は Y でした。
+
+Then write `self_intro(name, job, country)` that builds a three-line 自己紹介 with はじめまして, 〜です and よろしくお願いします. Print every form for each example, then the introduction.
+@@lang python
+@@starter
+ENDINGS = {
+    "statement": "です。",
+    "negative": "ではありません。",
+    "question": "ですか。",
+    "past": "でした。",
+}
+examples = [("わたし", "エンジニア"), ("これ", "パソコン"), ("田中さん", "マネージャー")]
+
+def sentence(topic, noun, kind):
+    raise NotImplementedError
+
+
+def self_intro(name, job, country):
+    raise NotImplementedError
+
+
+for topic, noun in examples:
+    for kind in ENDINGS:
+        print(f"{kind:<10}{sentence(topic, noun, kind)}")
+print()
+for line in self_intro("アナ", "ITサポート", "ポーランド"):
+    print(line)
+@@expected
+statement わたしはエンジニアです。
+negative  わたしはエンジニアではありません。
+question  わたしはエンジニアですか。
+past      わたしはエンジニアでした。
+statement これはパソコンです。
+negative  これはパソコンではありません。
+question  これはパソコンですか。
+past      これはパソコンでした。
+statement 田中さんはマネージャーです。
+negative  田中さんはマネージャーではありません。
+question  田中さんはマネージャーですか。
+past      田中さんはマネージャーでした。
+
+はじめまして。
+アナです。ポーランドから来ました。ITサポートです。
+よろしくお願いします。
+@@requires
+def sentence
+def self_intro
+ENDINGS[
+@@hint
+Keep the four endings in a dict and join topic + は + noun + ending. The particle は is written with the kana は even though it's read "wa".
+@@solution
+ENDINGS = {
+    "statement": "です。",
+    "negative": "ではありません。",
+    "question": "ですか。",
+    "past": "でした。",
+}
+examples = [("わたし", "エンジニア"), ("これ", "パソコン"), ("田中さん", "マネージャー")]
+
+def sentence(topic, noun, kind):
+    return f"{topic}は{noun}{ENDINGS[kind]}"
+
+def self_intro(name, job, country):
+    return [
+        "はじめまして。",
+        f"{name}です。{country}から来ました。{job}です。",
+        "よろしくお願いします。",
+    ]
+
+for topic, noun in examples:
+    for kind in ENDINGS:
+        print(f"{kind:<10}{sentence(topic, noun, kind)}")
+print()
+for line in self_intro("アナ", "ITサポート", "ポーランド"):
+    print(line)

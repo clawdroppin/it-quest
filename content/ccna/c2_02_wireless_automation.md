@@ -141,6 +141,7 @@ create POST   /api/v1/wlans           500 Server Error: retry later
 @@requires
 def rest_call
 def explain
+/api/v1/
 @@hint
 Two dicts do most of the work: action to method, and status code to its name. `explain` then only needs the retry rules.
 @@solution
@@ -176,3 +177,100 @@ def explain(status):
 for action, resource, status in calls:
     method, path = rest_call(action, resource)
     print(f"{action:<7}{method:<7}{path:<24}{explain(status)}")
+
+@@exercise Choose the AP mode for each job
+Pick an access point mode from the lesson's list for each requirement. Write `ap_mode(need)`:
+
+- serve clients at a **branch** where traffic should stay local if the WAN fails → `FlexConnect`;
+- serve clients at the main site → `local`;
+- only scan for rogue APs and intrusions, no clients → `monitor`;
+- capture packets for Wireshark → `sniffer`;
+- find non-Wi-Fi interference (microwaves, Bluetooth) → `SE-Connect`;
+- link two buildings without a cable → `bridge/mesh`.
+
+Then count how many APs of each mode the plan needs and warn if any site has no AP serving clients.
+@@lang python
+@@starter
+plan = [
+    ("Tokyo HQ", "serve clients", False),
+    ("Tokyo HQ", "serve clients", False),
+    ("Tokyo HQ", "scan for rogue APs", False),
+    ("Osaka branch", "serve clients", True),
+    ("Osaka branch", "serve clients", True),
+    ("Warehouse", "link two buildings", False),
+    ("Warehouse", "find interference", False),
+    ("Lab", "capture packets", False),
+]
+MODES = {
+    "scan for rogue APs": "monitor",
+    "capture packets": "sniffer",
+    "find interference": "SE-Connect",
+    "link two buildings": "bridge/mesh",
+}
+
+def ap_mode(need, branch):
+    raise NotImplementedError
+
+
+counts, serving = {}, {}
+for site, need, branch in plan:
+    mode = ap_mode(need, branch)
+    counts[mode] = counts.get(mode, 0) + 1
+    serving.setdefault(site, False)
+    serving[site] |= mode in ("local", "FlexConnect")
+    print(f"{site}: {need} -> {mode}")
+print("APs per mode: " + ", ".join(f"{m} {n}" for m, n in sorted(counts.items())))
+for site, ok in serving.items():
+    if not ok:
+        print(f"warning: no AP serves clients at {site}")
+@@expected
+Tokyo HQ: serve clients -> local
+Tokyo HQ: serve clients -> local
+Tokyo HQ: scan for rogue APs -> monitor
+Osaka branch: serve clients -> FlexConnect
+Osaka branch: serve clients -> FlexConnect
+Warehouse: link two buildings -> bridge/mesh
+Warehouse: find interference -> SE-Connect
+Lab: capture packets -> sniffer
+APs per mode: FlexConnect 2, SE-Connect 1, bridge/mesh 1, local 2, monitor 1, sniffer 1
+warning: no AP serves clients at Warehouse
+warning: no AP serves clients at Lab
+@@requires
+def ap_mode
+setdefault(
+@@hint
+Client-serving APs depend on the site: local at the main site, FlexConnect at a branch. The other needs map straight to a mode with a dict.
+@@solution
+plan = [
+    ("Tokyo HQ", "serve clients", False),
+    ("Tokyo HQ", "serve clients", False),
+    ("Tokyo HQ", "scan for rogue APs", False),
+    ("Osaka branch", "serve clients", True),
+    ("Osaka branch", "serve clients", True),
+    ("Warehouse", "link two buildings", False),
+    ("Warehouse", "find interference", False),
+    ("Lab", "capture packets", False),
+]
+MODES = {
+    "scan for rogue APs": "monitor",
+    "capture packets": "sniffer",
+    "find interference": "SE-Connect",
+    "link two buildings": "bridge/mesh",
+}
+
+def ap_mode(need, branch):
+    if need == "serve clients":
+        return "FlexConnect" if branch else "local"
+    return MODES[need]
+
+counts, serving = {}, {}
+for site, need, branch in plan:
+    mode = ap_mode(need, branch)
+    counts[mode] = counts.get(mode, 0) + 1
+    serving.setdefault(site, False)
+    serving[site] |= mode in ("local", "FlexConnect")
+    print(f"{site}: {need} -> {mode}")
+print("APs per mode: " + ", ".join(f"{m} {n}" for m, n in sorted(counts.items())))
+for site, ok in serving.items():
+    if not ok:
+        print(f"warning: no AP serves clients at {site}")

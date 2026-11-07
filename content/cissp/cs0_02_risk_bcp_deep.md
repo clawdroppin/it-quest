@@ -245,6 +245,7 @@ data warehouse:
 def problems
 SITE_READY
 "wrt"
+sorted(
 @@hint
 Sort `SITE_READY` items by readiness time descending (cheapest first: cold, warm, hot) and pick the first whose time ≤ RTO.
 @@solution

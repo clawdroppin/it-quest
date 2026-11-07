@@ -167,6 +167,7 @@ mixed, day 7: full d0 + diff d6 + inc d7 (3 sets)
 def chain
 "diff"
 "inc"
+sorted(
 @@hint
 Start from the latest full ≤ day. Walk forward: a differential replaces everything after the full (reset the chain to `[full, diff]`), an incremental is appended.
 @@solution

@@ -123,6 +123,7 @@ orphan:  variant=Danger, size=lg, state=default  (unknown: variant=Danger)
 def parse
 product
 PROPS
+product(
 @@hint
 `parse` splits on ", " and then on "=" into a dict. The expected set is every combination from `product(*PROPS.values())`. A drawn variant is an orphan if any value isn't in its property's options. The gaps are the expected combinations not drawn.
 @@solution
@@ -184,6 +185,7 @@ def layout
 grow
 min
 max
+sum(
 @@hint
 Free space = container − 2 × PADDING − GAP × (n − 1) − the fixed and hug widths. Loop: share the free space among the unfrozen fill children by grow, and if any share is outside its min or max, freeze that child at the limit, subtract it, and repeat. Then walk left to right adding widths and gaps for the x positions.
 @@solution

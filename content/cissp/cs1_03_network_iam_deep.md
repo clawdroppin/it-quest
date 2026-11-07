@@ -139,6 +139,7 @@ request 6 from mallory: REJECT (authenticator client doesn't match the ticket)
 def check
 SKEW
 seen
+abs(
 @@hint
 Return `(accepted, reason)`. Check, in order: service name, expiry against `server_time`, `abs(server_time - ts) > SKEW`, client mismatch, and replay: the pair `(client, ts)` already in `seen`. Add the pair to `seen` only when accepting.
 @@solution
@@ -208,6 +209,7 @@ farah (it-admin): privileged without justification: manage_users
 def effective
 SOD
 PRIVILEGED
+union(
 @@hint
 `effective` is the union of the permission sets of the user's roles: `set().union(*(ROLES[r] for r in roles))`. A conflict exists when both permissions of a SoD pair are in the set. Privileged permissions minus `justified` need a justification. Leavers should have no roles at all.
 @@solution

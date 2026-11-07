@@ -280,6 +280,7 @@ check(validate(Alert, {}), ["missing key: host", "missing key: severity"], "miss
 check(validate(Alert, {"host": 1, "severity": 2, "acknowledged": "yes"}), ["host: expected str, got int", "acknowledged: expected bool, got str"], "types")
 @@requires
 get_type_hints
+get_type_hints(
 @@hint
 `hints = get_type_hints(td_class)` gives `{"host": str, "severity": int, "acknowledged": bool}` (NotRequired is stripped). Loop over `hints.items()`: if the key is missing and in `td_class.__required_keys__`, add a missing error; if present and `not isinstance(data[k], kind)`, add a type error with `kind.__name__` and `type(data[k]).__name__`. Then add unknown keys.
 @@solution

@@ -167,6 +167,7 @@ LT-0042 | Tokyo    | 1
 schema_migrations
 INSERT OR IGNORE
 pragma_table_info
+asset_locations
 @@hint
 Each migration is idempotent on its own: `CREATE TABLE IF NOT EXISTS ...`, `INSERT OR IGNORE INTO assets (tag) VALUES ('LT-0042')`, `INSERT OR IGNORE INTO asset_locations VALUES ('LT-0042', 'Tokyo')`, followed by `INSERT OR IGNORE INTO schema_migrations VALUES (n, 'name')`. Copy the whole block a second time for the re-run. Columns: `SELECT 'assets' AS tbl, name FROM pragma_table_info('assets') UNION ALL ...`.
 @@solution

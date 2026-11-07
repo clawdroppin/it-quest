@@ -214,3 +214,102 @@ for name, a, b, d in activities:
         critical.append(name)
     print(f"{name:<6} {a}->{b} duration {d}  total float {total_float}")
 print("critical path:", " -> ".join(critical), f"({es[nodes[-1]]} days)")
+
+@@exercise Which law applies? (法務)
+Match workplace situations to the lesson's laws. Write `law_for(case)` that checks the case's keywords in this order and returns the law:
+
+1. `password` or `ID` used by someone else, or a security hole attacked → 不正アクセス禁止法
+2. `customer data`, `personal information` or `leak` → 個人情報保護法
+3. the client gives `direct orders` to a worker under 請負 or 準委任 → 偽装請負 (労働者派遣法)
+4. `overtime` or `paid leave` → 労働基準法
+5. `copied code`, `program` ownership → 著作権法
+6. `trade secret` or a look-alike `domain` → 不正競争防止法
+7. `logo` or `brand name` → 産業財産権 (商標権)
+8. a big company `delays payment` to a small `subcontractor` → 下請法
+
+Print each case and its law; anything else is `ask the legal team`.
+@@lang python
+@@starter
+RULES = [
+    (("password", "ID ", "security hole"), "不正アクセス禁止法"),
+    (("customer data", "personal information", "leak"), "個人情報保護法"),
+    (("direct orders",), "偽装請負 (労働者派遣法)"),
+    (("overtime", "paid leave"), "労働基準法"),
+    (("copied code", "program"), "著作権法"),
+    (("trade secret", "domain"), "不正競争防止法"),
+    (("logo", "brand name"), "産業財産権 (商標権)"),
+    (("delays payment",), "下請法"),
+]
+cases = [
+    "A contractor logged in with a former colleague's ID and password",
+    "A USB stick with customer data was lost on the train",
+    "Under a 準委任 contract, the client's manager gives direct orders to the SES engineer every morning",
+    "The team works 70 hours of overtime a month with no 36協定",
+    "A competitor registered a domain that looks like ours to sell fakes",
+    "Who owns a program written during working hours?",
+    "Another shop uses a logo almost identical to ours",
+    "A large customer delays payment to a small subcontractor by four months",
+    "The office printer is broken again",
+]
+
+def law_for(case):
+    raise NotImplementedError
+
+
+for c in cases:
+    print(f"{c}\n  -> {law_for(c)}")
+@@expected
+A contractor logged in with a former colleague's ID and password
+  -> 不正アクセス禁止法
+A USB stick with customer data was lost on the train
+  -> 個人情報保護法
+Under a 準委任 contract, the client's manager gives direct orders to the SES engineer every morning
+  -> 偽装請負 (労働者派遣法)
+The team works 70 hours of overtime a month with no 36協定
+  -> 労働基準法
+A competitor registered a domain that looks like ours to sell fakes
+  -> 不正競争防止法
+Who owns a program written during working hours?
+  -> 著作権法
+Another shop uses a logo almost identical to ours
+  -> 産業財産権 (商標権)
+A large customer delays payment to a small subcontractor by four months
+  -> 下請法
+The office printer is broken again
+  -> ask the legal team
+@@requires
+def law_for
+any(
+@@hint
+Keep the rules as a list of (keywords, law) pairs and return the first match, so the order of the list decides ties.
+@@solution
+RULES = [
+    (("password", "ID ", "security hole"), "不正アクセス禁止法"),
+    (("customer data", "personal information", "leak"), "個人情報保護法"),
+    (("direct orders",), "偽装請負 (労働者派遣法)"),
+    (("overtime", "paid leave"), "労働基準法"),
+    (("copied code", "program"), "著作権法"),
+    (("trade secret", "domain"), "不正競争防止法"),
+    (("logo", "brand name"), "産業財産権 (商標権)"),
+    (("delays payment",), "下請法"),
+]
+cases = [
+    "A contractor logged in with a former colleague's ID and password",
+    "A USB stick with customer data was lost on the train",
+    "Under a 準委任 contract, the client's manager gives direct orders to the SES engineer every morning",
+    "The team works 70 hours of overtime a month with no 36協定",
+    "A competitor registered a domain that looks like ours to sell fakes",
+    "Who owns a program written during working hours?",
+    "Another shop uses a logo almost identical to ours",
+    "A large customer delays payment to a small subcontractor by four months",
+    "The office printer is broken again",
+]
+
+def law_for(case):
+    for words, law in RULES:
+        if any(w in case for w in words):
+            return law
+    return "ask the legal team"
+
+for c in cases:
+    print(f"{c}\n  -> {law_for(c)}")

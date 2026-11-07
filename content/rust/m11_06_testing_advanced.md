@@ -214,6 +214,7 @@ fn checks() {
 }
 @@requires
 fn shrink
+cur.clone(
 @@hint
 `next`: `let mut x = self.state; x ^= x << 13; x ^= x >> 7; x ^= x << 17; self.state = x; x`. `shrink`: `let mut cur = input; 'outer: loop { for i in 0..cur.len() { let mut c = cur.clone(); c.remove(i); if fails(&c) { cur = c; continue 'outer; } } return cur; }`. In `find_counterexample`, call `shrink(v, &|x| !prop(x))`.
 @@solution
@@ -349,6 +350,7 @@ fn checks() {
 }
 @@requires
 impl Mailer for SpyMailer
+.send(
 @@hint
 Filter with `!t.done && t.due >= now && t.due <= now + 86_400`, then `match mailer.send(t.owner, &format!("Reminder: {}", t.title)) { Ok(()) => sent += 1, Err(_) => failed += 1 }`. The spy only records successful sends.
 @@solution

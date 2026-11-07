@@ -142,6 +142,7 @@ Leo Martin  | lmartin  | Support    | Support Agent
 Sara Ito    | sito     | Support    | Support Lead
 @@requires
 CREATE VIEW directory
+COALESCE(
 @@hint
 `CREATE VIEW directory AS SELECT e.name, e.username, COALESCE(d.name, '(contractor)') AS department, e.title FROM employees e LEFT JOIN departments d ON d.id = e.dept_id;`. For Osaka, filter with `WHERE department IN (SELECT name FROM departments WHERE location = 'Osaka')`.
 @@solution

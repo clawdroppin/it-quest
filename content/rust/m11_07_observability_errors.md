@@ -348,6 +348,7 @@ fn checks() {
 }
 @@requires
 fn enabled
+.starts_with(
 @@hint
 A helper `fn quote(v: &str) -> String` decides on quoting. Parse a level with a `match` on the lower-case name. In `enabled`, filter rules where `target == path || target.starts_with(&format!("{path}::"))`, take `max_by_key(|(p, _)| p.len())`, and compare `level >= rule`.
 @@solution

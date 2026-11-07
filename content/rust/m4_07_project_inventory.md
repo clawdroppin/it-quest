@@ -417,6 +417,7 @@ Gold: 130 | Stock value: 132g
 @@requires
 fn report
 in_category
+self.in_category(
 @@hint
 Build a `String` called `out`. Loop over `[Category::Weapon, Category::Armor, Category::Potion]`; get `self.in_category(cat)`; skip it if empty (`continue`). Add the header with `out.push_str(&format!("== {:?} ==\n", cat));`. For each item: `let qty = format!("x{}", item.quantity);` then `format!("  {:<16}{:<3}{:>4}g\n", item.name, qty, item.price)`. Finish with the gold line (no `\n` at the end, since `println!` adds one).
 @@solution

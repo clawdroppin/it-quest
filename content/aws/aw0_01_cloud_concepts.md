@@ -175,3 +175,115 @@ def choose_region(workload, regions):
 
 for name, w in workloads:
     print(f"{name}: {choose_region(w, regions)}")
+
+@@exercise Map review findings to the Well-Architected pillars
+A Well-Architected review produced findings. Write `pillar(finding)` that assigns each one to one of the six pillars by keyword, checking in this order:
+
+1. **Security**: `IAM`, `encrypt`, `public`, `MFA`, `root`
+2. **Reliability**: `single AZ`, `backup`, `failover`, `recovery`
+3. **Cost optimization**: `idle`, `unused`, `on-demand`, `oversized`
+4. **Performance efficiency**: `latency`, `cache`, `instance type`
+5. **Sustainability**: `utilisation`, `region`, `energy`
+6. **Operational excellence**: `manual`, `runbook`, `monitoring`, `deploy`
+
+Print the findings grouped by pillar in the framework's order, with a count, and name the pillar(s) with the most findings (there can be a tie).
+@@lang python
+@@starter
+PILLARS = [
+    ("Operational excellence", ["manual", "runbook", "monitoring", "deploy"]),
+    ("Security", ["IAM", "encrypt", "public", "MFA", "root"]),
+    ("Reliability", ["single AZ", "backup", "failover", "recovery"]),
+    ("Performance efficiency", ["latency", "cache", "instance type"]),
+    ("Cost optimization", ["idle", "unused", "on-demand", "oversized"]),
+    ("Sustainability", ["utilisation", "region", "energy"]),
+]
+CHECK_ORDER = ["Security", "Reliability", "Cost optimization", "Performance efficiency", "Sustainability", "Operational excellence"]
+findings = [
+    "Root account has no MFA",
+    "Database runs in a single AZ",
+    "Deployments are manual SSH sessions",
+    "Twelve idle load balancers",
+    "S3 bucket with customer files is public",
+    "No backup of the build server",
+    "Users in Osaka see 300 ms latency; no cache in front of the API",
+    "Average CPU utilisation is 4% on the batch fleet",
+    "No runbook for the payment outage",
+    "Oversized RDS instance for a test database",
+]
+
+def pillar(finding):
+    raise NotImplementedError
+
+
+groups = {name: [] for name, _ in PILLARS}
+for f in findings:
+    groups[pillar(f)].append(f)
+for name, items in groups.items():
+    print(f"{name} ({len(items)})")
+    for f in items:
+        print(f"  - {f}")
+most = max(len(v) for v in groups.values())
+print("Most findings:", ", ".join(n for n, v in groups.items() if len(v) == most))
+@@expected
+Operational excellence (2)
+  - Deployments are manual SSH sessions
+  - No runbook for the payment outage
+Security (2)
+  - Root account has no MFA
+  - S3 bucket with customer files is public
+Reliability (2)
+  - Database runs in a single AZ
+  - No backup of the build server
+Performance efficiency (1)
+  - Users in Osaka see 300 ms latency; no cache in front of the API
+Cost optimization (2)
+  - Twelve idle load balancers
+  - Oversized RDS instance for a test database
+Sustainability (1)
+  - Average CPU utilisation is 4% on the batch fleet
+Most findings: Operational excellence, Security, Reliability, Cost optimization
+@@requires
+def pillar
+.lower()
+@@hint
+Check the pillars in the given order, but print them in the framework's order: keep both lists. Lowercase both the finding and the keywords so `MFA` matches `mfa`.
+@@solution
+PILLARS = [
+    ("Operational excellence", ["manual", "runbook", "monitoring", "deploy"]),
+    ("Security", ["IAM", "encrypt", "public", "MFA", "root"]),
+    ("Reliability", ["single AZ", "backup", "failover", "recovery"]),
+    ("Performance efficiency", ["latency", "cache", "instance type"]),
+    ("Cost optimization", ["idle", "unused", "on-demand", "oversized"]),
+    ("Sustainability", ["utilisation", "region", "energy"]),
+]
+CHECK_ORDER = ["Security", "Reliability", "Cost optimization", "Performance efficiency", "Sustainability", "Operational excellence"]
+findings = [
+    "Root account has no MFA",
+    "Database runs in a single AZ",
+    "Deployments are manual SSH sessions",
+    "Twelve idle load balancers",
+    "S3 bucket with customer files is public",
+    "No backup of the build server",
+    "Users in Osaka see 300 ms latency; no cache in front of the API",
+    "Average CPU utilisation is 4% on the batch fleet",
+    "No runbook for the payment outage",
+    "Oversized RDS instance for a test database",
+]
+
+def pillar(finding):
+    words = dict(PILLARS)
+    text = finding.lower()
+    for name in CHECK_ORDER:
+        if any(w.lower() in text for w in words[name]):
+            return name
+    return "Operational excellence"
+
+groups = {name: [] for name, _ in PILLARS}
+for f in findings:
+    groups[pillar(f)].append(f)
+for name, items in groups.items():
+    print(f"{name} ({len(items)})")
+    for f in items:
+        print(f"  - {f}")
+most = max(len(v) for v in groups.values())
+print("Most findings:", ", ".join(n for n, v in groups.items() if len(v) == most))

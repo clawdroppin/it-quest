@@ -188,6 +188,7 @@ Contractor access: ¥5,700/user/month (goods ¥0, access ¥4,800, actions ¥900)
 def monthly_cost
 goods
 actions
+sum(
 @@hint
 Goods are `(name, price, life_months)`: monthly share = price / life. Access and actions are `(name, monthly_cost)`. Return the total and the breakdown by part. A consumer owning goods carries the risk of loss and damage; offerings without goods leave that risk with the provider.
 @@solution

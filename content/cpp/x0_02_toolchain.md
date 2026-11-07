@@ -151,6 +151,7 @@ errors: missing value for --port
 errors: unknown flag -x
 @@requires
 std::map
+.size()
 @@hint
 Loop with an index so you can consume the next argument: `for (size_t i = 1; i < argv.size(); ++i)`. For `--name=value`, `a.find('=')` splits it. A small `join(const std::vector<std::string>&)` helper prints lists separated by spaces.
 @@solution

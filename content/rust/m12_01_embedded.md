@@ -178,6 +178,7 @@ fn checks() {
 }
 @@requires
 fn write_field
+match
 @@hint
 A mask of `width` ones: careful, `1u32 << 32` overflows, so use `if width == 32 { u32::MAX } else { (1 << width) - 1 }`. Then `(reg & !(mask << shift)) | ((value & mask) << shift)`. Pin `n` has `shift = n * 2`, width 2. Convert back with a `match` on the 2-bit value.
 @@solution
@@ -309,6 +310,7 @@ fn checks() {
 }
 @@requires
 const N: usize
+T::default(
 @@hint
 `new`: `RingBuffer { buf: [T::default(); N], head: 0, len: 0 }`. The slot after the newest element is `(self.head + self.len) % N`. `pop` reads `self.buf[self.head]`, then `self.head = (self.head + 1) % N; self.len -= 1`. `push_overwrite`: if full, `self.pop();` first, then `push`.
 @@solution

@@ -178,3 +178,89 @@ def best_route(table, address):
 for d in destinations:
     net, hop = best_route(table, d)
     print(f"{d} -> {hop} (via {net})")
+
+@@exercise Learn MACs and flood unknown frames
+Simulate a switch with VLANs. Write a `Switch` class whose `receive(port, src, dst, now)` learns `src` on `port` (in the port's VLAN) and returns where the frame goes:
+
+- to the learned port if `dst` is known in that VLAN (and is not the incoming port: then it's filtered);
+- flooded out every other port **in the same VLAN** if `dst` is unknown or `ff:ff:ff:ff:ff:ff`.
+
+MAC entries age out after 300 seconds (`now` is passed in). Replay the frames and print each decision, then the MAC table.
+@@lang python
+@@starter
+class Switch:
+    def __init__(self, vlans, aging=300):
+        self.vlans = vlans
+        self.aging = aging
+        self.table = {}
+
+    def receive(self, port, src, dst, now):
+        raise NotImplementedError
+
+
+sw = Switch({"g1": 10, "g2": 10, "g3": 10, "g4": 20, "g5": 20})
+frames = [
+    (0, "g1", "aa:01", "ff:ff:ff:ff:ff:ff"),
+    (1, "g2", "aa:02", "aa:01"),
+    (2, "g1", "aa:01", "aa:02"),
+    (3, "g4", "bb:04", "aa:01"),
+    (4, "g3", "aa:03", "aa:03"),
+    (400, "g2", "aa:02", "aa:01"),
+]
+for now, port, src, dst in frames:
+    print(f"t={now:<4}{port} {src} -> {dst}: {sw.receive(port, src, dst, now)}")
+print("MAC table:")
+for (vlan, mac), (port, seen) in sorted(sw.table.items()):
+    print(f"  VLAN {vlan}  {mac}  {port}  (seen t={seen})")
+@@expected
+t=0   g1 aa:01 -> ff:ff:ff:ff:ff:ff: flood to g2, g3
+t=1   g2 aa:02 -> aa:01: forward to g1
+t=2   g1 aa:01 -> aa:02: forward to g2
+t=3   g4 bb:04 -> aa:01: flood to g5
+t=4   g3 aa:03 -> aa:03: filter (same port)
+t=400 g2 aa:02 -> aa:01: flood to g1, g3
+MAC table:
+  VLAN 10  aa:02  g2  (seen t=400)
+  VLAN 10  aa:03  g3  (seen t=4)
+  VLAN 20  bb:04  g4  (seen t=3)
+@@requires
+class Switch
+def receive
+self.table[
+@@hint
+Key the table by `(vlan, mac)` so the same MAC in two VLANs doesn't collide. Learn the source before looking up the destination, and flood only to ports in the incoming port's VLAN.
+@@solution
+class Switch:
+    def __init__(self, vlans, aging=300):
+        self.vlans = vlans
+        self.aging = aging
+        self.table = {}
+
+    def receive(self, port, src, dst, now):
+        vlan = self.vlans[port]
+        self.table[(vlan, src)] = (port, now)
+        entry = self.table.get((vlan, dst))
+        if entry and now - entry[1] > self.aging:
+            del self.table[(vlan, dst)]
+            entry = None
+        if dst != "ff:ff:ff:ff:ff:ff" and entry:
+            out = entry[0]
+            return "filter (same port)" if out == port else f"forward to {out}"
+        ports = [p for p, v in self.vlans.items() if v == vlan and p != port]
+        return "flood to " + ", ".join(ports)
+
+
+sw = Switch({"g1": 10, "g2": 10, "g3": 10, "g4": 20, "g5": 20})
+frames = [
+    (0, "g1", "aa:01", "ff:ff:ff:ff:ff:ff"),
+    (1, "g2", "aa:02", "aa:01"),
+    (2, "g1", "aa:01", "aa:02"),
+    (3, "g4", "bb:04", "aa:01"),
+    (4, "g3", "aa:03", "aa:03"),
+    (400, "g2", "aa:02", "aa:01"),
+]
+for now, port, src, dst in frames:
+    print(f"t={now:<4}{port} {src} -> {dst}: {sw.receive(port, src, dst, now)}")
+print("MAC table:")
+for (vlan, mac), (port, seen) in sorted(sw.table.items()):
+    print(f"  VLAN {vlan}  {mac}  {port}  (seen t={seen})")

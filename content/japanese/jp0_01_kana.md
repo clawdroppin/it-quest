@@ -177,3 +177,113 @@ for w in words:
     k, h = to_katakana(w), to_hiragana(w)
     print(f"{w:<8} katakana {k:<8} hiragana {h:<8} all katakana? {all_katakana(w)}")
 print(f"あ U+{ord('あ'):04X}, ア U+{ord('ア'):04X}, difference 0x{ord('ア') - ord('あ'):X}")
+
+@@exercise Read katakana loanwords
+Katakana IT words are English in disguise once you can read the special marks: **ー** lengthens the vowel before it, a small **ッ** doubles the next consonant, and a small **ャュョ/ィェ** replaces the `i` (or `u`) of the kana before it (キ + ャ = kya, テ + ィ = ti, チ + ェ = che). Write `romanize(word)` that reads katakana into romaji (long vowels doubled, like `saabaa`), using the `KANA` table, then `respell(english)` that spells an English word the way katakana would hear it, using the `RESPELL` pairs in order (`er` → `aa`, `l` → `r`, `v` → `b` …), and `guess(word)` that picks the candidate whose respelling is closest to the romaji by `difflib.SequenceMatcher` ratio. Print each word, its reading and the guess.
+@@lang python
+@@starter
+import difflib
+
+KANA = {
+    "ア": "a", "イ": "i", "ウ": "u", "エ": "e", "オ": "o", "カ": "ka", "キ": "ki", "ク": "ku", "ケ": "ke", "コ": "ko",
+    "サ": "sa", "シ": "shi", "ス": "su", "セ": "se", "ソ": "so", "タ": "ta", "チ": "chi", "ツ": "tsu", "テ": "te",
+    "ト": "to", "ナ": "na", "ニ": "ni", "ヌ": "nu", "ネ": "ne", "ノ": "no", "ハ": "ha", "ヒ": "hi", "フ": "fu",
+    "ヘ": "he", "ホ": "ho", "マ": "ma", "ミ": "mi", "ム": "mu", "メ": "me", "モ": "mo", "ヤ": "ya", "ユ": "yu",
+    "ヨ": "yo", "ラ": "ra", "リ": "ri", "ル": "ru", "レ": "re", "ロ": "ro", "ワ": "wa", "ン": "n", "ガ": "ga",
+    "ギ": "gi", "グ": "gu", "ゲ": "ge", "ゴ": "go", "ザ": "za", "ジ": "ji", "ズ": "zu", "ゼ": "ze", "ゾ": "zo",
+    "ダ": "da", "デ": "de", "ド": "do", "バ": "ba", "ビ": "bi", "ブ": "bu", "ベ": "be", "ボ": "bo", "パ": "pa",
+    "ピ": "pi", "プ": "pu", "ペ": "pe", "ポ": "po",
+}
+SMALL = {"ャ": "ya", "ュ": "yu", "ョ": "yo", "ィ": "i", "ェ": "e", "ァ": "a", "ォ": "o"}
+RESPELL = [("er", "aa"), ("or", "oo"), ("ck", "kk"), ("c", "k"), ("v", "b"), ("l", "r"), ("ey", "ii"), ("ee", "ii")]
+CANDIDATES = ["server", "network", "password", "login", "file", "database", "security", "update", "cloud",
+              "keyboard", "router", "printer", "backup", "mail", "ticket", "check", "chat"]
+words = ["サーバー", "ネットワーク", "パスワード", "ログイン", "クラウド", "キーボード", "バックアップ", "チケット",
+         "チェック", "セキュリティ", "プリンター", "チャット", "ファイル"]
+
+def romanize(word):
+    raise NotImplementedError
+
+
+def respell(english):
+    raise NotImplementedError
+
+
+def guess(word):
+    raise NotImplementedError
+
+
+for w in words:
+    print(f"{w}: {romanize(w)} -> {guess(w)}")
+@@expected
+サーバー: saabaa -> server
+ネットワーク: nettowaaku -> network
+パスワード: pasuwaado -> password
+ログイン: roguin -> login
+クラウド: kuraudo -> cloud
+キーボード: kiiboodo -> keyboard
+バックアップ: bakkuappu -> backup
+チケット: chiketto -> ticket
+チェック: chekku -> check
+セキュリティ: sekyuriti -> security
+プリンター: purintaa -> printer
+チャット: chatto -> chat
+ファイル: fairu -> file
+@@requires
+def romanize
+def respell
+def guess
+SequenceMatcher
+@@hint
+Walk the word one character at a time. `ー` repeats the last letter, `ッ` sets a flag that doubles the next consonant, and a small kana replaces the last vowel of what you've written so far. After `sh`, `ch` or `j`, drop the `y` (シャ is sha, not shya). Compare the reading with the *respelled* candidates: "server" and "saabaa" look nothing alike until `er` becomes `aa` and `v` becomes `b`.
+@@solution
+import difflib
+
+KANA = {
+    "ア": "a", "イ": "i", "ウ": "u", "エ": "e", "オ": "o", "カ": "ka", "キ": "ki", "ク": "ku", "ケ": "ke", "コ": "ko",
+    "サ": "sa", "シ": "shi", "ス": "su", "セ": "se", "ソ": "so", "タ": "ta", "チ": "chi", "ツ": "tsu", "テ": "te",
+    "ト": "to", "ナ": "na", "ニ": "ni", "ヌ": "nu", "ネ": "ne", "ノ": "no", "ハ": "ha", "ヒ": "hi", "フ": "fu",
+    "ヘ": "he", "ホ": "ho", "マ": "ma", "ミ": "mi", "ム": "mu", "メ": "me", "モ": "mo", "ヤ": "ya", "ユ": "yu",
+    "ヨ": "yo", "ラ": "ra", "リ": "ri", "ル": "ru", "レ": "re", "ロ": "ro", "ワ": "wa", "ン": "n", "ガ": "ga",
+    "ギ": "gi", "グ": "gu", "ゲ": "ge", "ゴ": "go", "ザ": "za", "ジ": "ji", "ズ": "zu", "ゼ": "ze", "ゾ": "zo",
+    "ダ": "da", "デ": "de", "ド": "do", "バ": "ba", "ビ": "bi", "ブ": "bu", "ベ": "be", "ボ": "bo", "パ": "pa",
+    "ピ": "pi", "プ": "pu", "ペ": "pe", "ポ": "po",
+}
+SMALL = {"ャ": "ya", "ュ": "yu", "ョ": "yo", "ィ": "i", "ェ": "e", "ァ": "a", "ォ": "o"}
+RESPELL = [("er", "aa"), ("or", "oo"), ("ck", "kk"), ("c", "k"), ("v", "b"), ("l", "r"), ("ey", "ii"), ("ee", "ii")]
+CANDIDATES = ["server", "network", "password", "login", "file", "database", "security", "update", "cloud",
+              "keyboard", "router", "printer", "backup", "mail", "ticket", "check", "chat"]
+words = ["サーバー", "ネットワーク", "パスワード", "ログイン", "クラウド", "キーボード", "バックアップ", "チケット",
+         "チェック", "セキュリティ", "プリンター", "チャット", "ファイル"]
+
+def romanize(word):
+    out, double = "", False
+    for ch in word:
+        if ch == "ー":
+            out += out[-1]
+        elif ch == "ッ":
+            double = True
+        elif ch in SMALL:
+            small = SMALL[ch]
+            if out.endswith(("sh", "ch", "j"), 0, len(out) - 1) and small.startswith("y"):
+                small = small[1:]
+            out = out[:-1] + small
+        else:
+            r = KANA[ch]
+            if double:
+                r = ("t" if r.startswith("ch") else r[0]) + r
+                double = False
+            out += r
+    return out
+
+def respell(english):
+    for a, b in RESPELL:
+        english = english.replace(a, b)
+    return english
+
+def guess(word):
+    reading = romanize(word)
+    return max(CANDIDATES, key=lambda c: difflib.SequenceMatcher(None, reading, respell(c)).ratio())
+
+for w in words:
+    print(f"{w}: {romanize(w)} -> {guess(w)}")

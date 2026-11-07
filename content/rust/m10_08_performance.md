@@ -222,6 +222,7 @@ fn checks() {
 }
 @@requires
 HashMap
+.insert(
 @@hint
 Give `go` an extra parameter `memo: &mut HashMap<(usize, usize), u64>`. At the start: `if let Some(&v) = memo.get(&(r, c)) { return v; }`. Before returning, `memo.insert((r, c), total);`.
 @@solution

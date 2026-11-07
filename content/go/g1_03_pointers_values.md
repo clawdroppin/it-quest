@@ -329,6 +329,7 @@ height: 4
 empty height: 0
 @@requires
 func (n *Node) InOrder
+uint32(
 @@hint
 `Insert`: `if root == nil { return &Node{IP: ip} }`, then recurse left or right and assign: `root.Left = Insert(root.Left, ip)`. Methods on a nil pointer receiver are allowed: start `InOrder` and `Height` with `if n == nil { return ... }`. `ParseIP`: shift and OR the four octets: `ip = ip<<8 | uint32(n)`.
 @@solution

@@ -178,6 +178,7 @@ reporting                  460         438     176.64     168.00  borderline: re
 @@requires
 def break_even_hours
 def advice
+* 1.1
 @@hint
 Break-even is the committed monthly price divided by the hourly on-demand rate. Compare the usage with that number, and with 1.1 times it.
 @@solution

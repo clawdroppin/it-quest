@@ -230,3 +230,91 @@ for r in reports:
 print("Totals:")
 for kind, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
     print(f"  {n} {kind}")
+
+@@exercise Identify the malware from its symptoms
+Score each malware type in the lesson's table against a ticket's symptoms. Write `suspects(symptoms)` that adds up points for each type using `CLUES` (a symptom can point to several types) and returns the types with the highest score, sorted by name. Print the top suspects for each ticket and the first step of the removal process for that case: `disconnect from the network` if a worm, ransomware or botnet is among them, otherwise `quarantine the machine and disable System Restore`.
+@@lang python
+@@starter
+CLUES = {
+    "files renamed with odd extensions": {"ransomware": 3},
+    "ransom note": {"ransomware": 3},
+    "fans busy while idle": {"cryptominer": 2, "botnet": 1},
+    "high GPU use": {"cryptominer": 2},
+    "browser redirects": {"spyware": 2, "trojan": 1},
+    "new toolbar": {"spyware": 1, "trojan": 2},
+    "antivirus disabled": {"rootkit": 2, "trojan": 1},
+    "files missing from task manager": {"rootkit": 3},
+    "other PCs infected over the network": {"worm": 3},
+    "unusual outbound traffic at night": {"botnet": 2, "worm": 1},
+    "passwords stolen": {"spyware": 2},
+    "installed a free game": {"trojan": 2},
+}
+tickets = {
+    "T-201": ["files renamed with odd extensions", "ransom note"],
+    "T-202": ["fans busy while idle", "high GPU use"],
+    "T-203": ["installed a free game", "new toolbar", "browser redirects"],
+    "T-204": ["antivirus disabled", "files missing from task manager"],
+    "T-205": ["unusual outbound traffic at night", "fans busy while idle", "other PCs infected over the network"],
+    "T-206": ["passwords stolen", "browser redirects"],
+}
+SPREADING = {"worm", "ransomware", "botnet"}
+
+def suspects(symptoms):
+    raise NotImplementedError
+
+
+for ticket, symptoms in tickets.items():
+    top = suspects(symptoms)
+    first = "disconnect from the network" if SPREADING & set(top) else "quarantine the machine and disable System Restore"
+    print(f"{ticket}: {', '.join(top)} -> first: {first}")
+@@expected
+T-201: ransomware -> first: disconnect from the network
+T-202: cryptominer -> first: quarantine the machine and disable System Restore
+T-203: trojan -> first: quarantine the machine and disable System Restore
+T-204: rootkit -> first: quarantine the machine and disable System Restore
+T-205: worm -> first: disconnect from the network
+T-206: spyware -> first: quarantine the machine and disable System Restore
+@@requires
+def suspects
+max(
+@@hint
+Add points into a dict per type, find the best score with `max(score.values())`, then keep every type with that score (there may be a tie).
+@@solution
+CLUES = {
+    "files renamed with odd extensions": {"ransomware": 3},
+    "ransom note": {"ransomware": 3},
+    "fans busy while idle": {"cryptominer": 2, "botnet": 1},
+    "high GPU use": {"cryptominer": 2},
+    "browser redirects": {"spyware": 2, "trojan": 1},
+    "new toolbar": {"spyware": 1, "trojan": 2},
+    "antivirus disabled": {"rootkit": 2, "trojan": 1},
+    "files missing from task manager": {"rootkit": 3},
+    "other PCs infected over the network": {"worm": 3},
+    "unusual outbound traffic at night": {"botnet": 2, "worm": 1},
+    "passwords stolen": {"spyware": 2},
+    "installed a free game": {"trojan": 2},
+}
+tickets = {
+    "T-201": ["files renamed with odd extensions", "ransom note"],
+    "T-202": ["fans busy while idle", "high GPU use"],
+    "T-203": ["installed a free game", "new toolbar", "browser redirects"],
+    "T-204": ["antivirus disabled", "files missing from task manager"],
+    "T-205": ["unusual outbound traffic at night", "fans busy while idle", "other PCs infected over the network"],
+    "T-206": ["passwords stolen", "browser redirects"],
+}
+SPREADING = {"worm", "ransomware", "botnet"}
+
+def suspects(symptoms):
+    score = {}
+    for s in symptoms:
+        for kind, pts in CLUES.get(s, {}).items():
+            score[kind] = score.get(kind, 0) + pts
+    if not score:
+        return []
+    top = max(score.values())
+    return sorted(k for k, v in score.items() if v == top)
+
+for ticket, symptoms in tickets.items():
+    top = suspects(symptoms)
+    first = "disconnect from the network" if SPREADING & set(top) else "quarantine the machine and disable System Restore"
+    print(f"{ticket}: {', '.join(top)} -> first: {first}")

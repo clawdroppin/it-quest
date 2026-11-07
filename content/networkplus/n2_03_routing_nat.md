@@ -213,6 +213,7 @@ reply to 203.0.113.5:50077 -> dropped (no translation)
 @@requires
 PUBLIC_IP
 50000
++= 1
 @@hint
 Keep `table = {}` keyed by `(ip, port, dest)` and `reverse = {}` from public port back to the key.
 @@solution

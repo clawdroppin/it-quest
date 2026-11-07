@@ -185,6 +185,7 @@ fn checks() {
 }
 @@requires
 fn caret_matches
+.split(
 @@hint
 Parse with `let parts: Vec<&str> = v.split('.').collect();` and check there are three, then parse each with `.parse().ok()?`. Tuples compare lexicographically, so `ver >= req` works directly. Then `if req.0 > 0 { ver.0 == req.0 } else if req.1 > 0 { ver.0 == 0 && ver.1 == req.1 } else { ver == req }`.
 @@solution
@@ -270,6 +271,7 @@ fn checks() {
 }
 @@requires
 BTreeSet
+.iter(
 @@hint
 Use a work list: `let mut todo: Vec<String> = requested.iter().map(|s| s.to_string()).collect();` plus `"default"`. Pop items; skip ones already in the result; `dep:` items are inserted without lookup; otherwise look up the table (error if missing), insert, and push its children.
 @@solution

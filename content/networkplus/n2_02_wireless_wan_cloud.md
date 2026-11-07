@@ -172,3 +172,82 @@ for state in ["all links up", "fibre down"]:
     print(state + ":")
     for app in apps:
         print(f"  {app}: {best_link(app, links)}")
+
+@@exercise Pick a WAN connection for each site
+Each branch has needs (minimum Mb/s, maximum latency, whether it needs an SLA) and a list of available connections. Write `choose(site, options)` that keeps the options meeting every need (an SLA need rules out options without one) and returns the cheapest per month, with a **backup** link: the cheapest other available option (it only has to keep the site online during an outage, so it doesn't need to meet every need). Print each site's primary and backup with the total monthly cost.
+@@lang python
+@@starter
+options = {
+    "fibre": {"mbps": 1000, "latency": 5, "sla": True, "cost": 320},
+    "cable": {"mbps": 500, "latency": 15, "sla": False, "cost": 90},
+    "DSL": {"mbps": 50, "latency": 25, "sla": False, "cost": 40},
+    "5G": {"mbps": 300, "latency": 30, "sla": False, "cost": 60},
+    "satellite (LEO)": {"mbps": 150, "latency": 45, "sla": False, "cost": 110},
+    "MPLS": {"mbps": 100, "latency": 10, "sla": True, "cost": 450},
+}
+sites = [
+    {"name": "Tokyo HQ", "available": ["fibre", "cable", "5G", "MPLS"], "mbps": 200, "latency": 20, "sla": True},
+    {"name": "Osaka branch", "available": ["cable", "DSL", "5G"], "mbps": 100, "latency": 40, "sla": False},
+    {"name": "Mountain lodge", "available": ["DSL", "satellite (LEO)"], "mbps": 100, "latency": 60, "sla": False},
+    {"name": "Small shop", "available": ["DSL", "5G"], "mbps": 20, "latency": 50, "sla": False},
+]
+
+def meets(site, o):
+    raise NotImplementedError
+
+
+def choose(site, options):
+    raise NotImplementedError
+
+
+for s in sites:
+    primary, backup = choose(s, options)
+    if primary is None:
+        print(f"{s['name']}: nothing meets the needs")
+        continue
+    total = options[primary]["cost"] + (options[backup]["cost"] if backup else 0)
+    print(f"{s['name']}: primary {primary}, backup {backup or 'none available'}, ${total}/month")
+@@expected
+Tokyo HQ: primary fibre, backup 5G, $380/month
+Osaka branch: primary 5G, backup DSL, $100/month
+Mountain lodge: primary satellite (LEO), backup DSL, $150/month
+Small shop: primary DSL, backup 5G, $100/month
+@@requires
+def choose
+sorted(
+@@hint
+Filter with a helper that checks every need, sort by cost and take the first. The backup doesn't have to meet every need (it only covers outages), but it must be a different connection.
+@@solution
+options = {
+    "fibre": {"mbps": 1000, "latency": 5, "sla": True, "cost": 320},
+    "cable": {"mbps": 500, "latency": 15, "sla": False, "cost": 90},
+    "DSL": {"mbps": 50, "latency": 25, "sla": False, "cost": 40},
+    "5G": {"mbps": 300, "latency": 30, "sla": False, "cost": 60},
+    "satellite (LEO)": {"mbps": 150, "latency": 45, "sla": False, "cost": 110},
+    "MPLS": {"mbps": 100, "latency": 10, "sla": True, "cost": 450},
+}
+sites = [
+    {"name": "Tokyo HQ", "available": ["fibre", "cable", "5G", "MPLS"], "mbps": 200, "latency": 20, "sla": True},
+    {"name": "Osaka branch", "available": ["cable", "DSL", "5G"], "mbps": 100, "latency": 40, "sla": False},
+    {"name": "Mountain lodge", "available": ["DSL", "satellite (LEO)"], "mbps": 100, "latency": 60, "sla": False},
+    {"name": "Small shop", "available": ["DSL", "5G"], "mbps": 20, "latency": 50, "sla": False},
+]
+
+def meets(site, o):
+    return o["mbps"] >= site["mbps"] and o["latency"] <= site["latency"] and (o["sla"] or not site["sla"])
+
+def choose(site, options):
+    good = sorted((n for n in site["available"] if meets(site, options[n])), key=lambda n: options[n]["cost"])
+    if not good:
+        return None, None
+    backups = [n for n in site["available"] if n != good[0]]
+    backups.sort(key=lambda n: options[n]["cost"])
+    return good[0], (backups[0] if backups else None)
+
+for s in sites:
+    primary, backup = choose(s, options)
+    if primary is None:
+        print(f"{s['name']}: nothing meets the needs")
+        continue
+    total = options[primary]["cost"] + (options[backup]["cost"] if backup else 0)
+    print(f"{s['name']}: primary {primary}, backup {backup or 'none available'}, ${total}/month")

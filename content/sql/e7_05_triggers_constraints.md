@@ -224,6 +224,7 @@ id | first | last
 @@requires
 INSTEAD OF INSERT
 CREATE VIEW staff
+substr(
 @@hint
 `CREATE VIEW staff AS SELECT id, first || ' ' || last AS full_name FROM people;` Trigger body: `INSERT INTO people (first, last) VALUES (substr(NEW.full_name, 1, instr(NEW.full_name, ' ') - 1), substr(NEW.full_name, instr(NEW.full_name, ' ') + 1));`
 @@solution

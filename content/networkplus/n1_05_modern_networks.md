@@ -189,6 +189,7 @@ legacy: all ports open to the internet
 MGMT
 DB
 "0.0.0.0/0"
+!= "in"
 @@hint
 Skip outbound rules. Check `source == "0.0.0.0/0"` first, then classify the port.
 @@solution

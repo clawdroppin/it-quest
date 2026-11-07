@@ -237,6 +237,7 @@ best 198.51.100.0/24: via ISP-B (local-pref 200, AS path 65030 65040 65050)
 def matches
 "local_pref"
 route_map
+len(
 @@hint
 `prefix_in` matches when the prefix is a subnet of any listed network. Default local preference is 100 if no set action changes it. For best paths group accepted routes by prefix and take `max` by `(local_pref, -len(as_path))`.
 @@solution

@@ -1,6 +1,6 @@
 @@lesson c0-ios CCNA and the Cisco IOS Command Line
 @@text
-**Cisco CCNA** (exam **200-301**) is the most respected entry-level networking certification. Cisco gear runs a huge share of company and carrier networks, including in Japan, where CCNA/CCNP holders are in steady demand at SIers and network integrators. Do **Network+** (or at least its subnetting lesson) first.
+**Cisco CCNA** (exam **200-301**) is the most respected entry-level networking certification. Cisco gear runs a huge share of company and carrier networks, including in Japan, where CCNA/CCNP holders are in steady demand at SIers and network integrators. Do **Network+** (or at least its subnetting lesson) first. This track follows the **v1.1** exam topics. Cisco has published **v2.0**, which replaces v1.1 from 3 February 2027 under the same exam code, keeps the core networking and adds AI and network operations topics.
 
 | Domain | Weight |
 |---|---|
@@ -211,3 +211,112 @@ for cmd in session:
     print(f"R1{PROMPT[mode]} {cmd}" + ("" if ok else "   % Invalid"))
     mode = new
 print("finished in", PROMPT[mode])
+
+@@exercise Audit a running-config for basic hardening
+Check `show running-config` output against the lesson's basic setup. Write `audit(config)` that returns the problems:
+
+- no `hostname` (or still `Switch`/`Router`);
+- `enable password` used, or no `enable secret`;
+- no `service password-encryption`;
+- no `banner motd`;
+- a `line vty` block without `login local` or without `transport input ssh` (telnet sends passwords in clear text).
+
+Parse the vty lines by remembering which `line` block you're in (indented lines belong to it). Print each device with `OK` or its problems.
+@@lang python
+@@starter
+configs = {
+    "SW1": """hostname SW1
+enable secret 9 $9$abc
+service password-encryption
+banner motd # Authorized access only #
+line vty 0 4
+ login local
+ transport input ssh""",
+    "Switch": """hostname Switch
+enable password cisco
+line vty 0 4
+ login
+ transport input telnet ssh""",
+    "R2": """hostname R2
+enable secret 9 $9$xyz
+banner motd # Authorized access only #
+line con 0
+ login local
+line vty 0 15
+ login local
+ transport input all""",
+}
+
+def audit(config):
+    raise NotImplementedError
+
+
+for device, cfg in configs.items():
+    problems = audit(cfg)
+    print(f"{device}: " + ("OK" if not problems else "; ".join(problems)))
+@@expected
+SW1: OK
+Switch: set a hostname; remove enable password (plain text); set enable secret; add service password-encryption; add a banner motd; line vty 0 4: use login local; line vty 0 4: allow SSH only (transport input ssh)
+R2: add service password-encryption; line vty 0 15: allow SSH only (transport input ssh)
+@@requires
+def audit
+splitlines()
+startswith(" ")
+@@hint
+Lines that start with a space belong to the last unindented line. Keep the current block in a variable and collect the indented lines under each `line vty` block.
+@@solution
+configs = {
+    "SW1": """hostname SW1
+enable secret 9 $9$abc
+service password-encryption
+banner motd # Authorized access only #
+line vty 0 4
+ login local
+ transport input ssh""",
+    "Switch": """hostname Switch
+enable password cisco
+line vty 0 4
+ login
+ transport input telnet ssh""",
+    "R2": """hostname R2
+enable secret 9 $9$xyz
+banner motd # Authorized access only #
+line con 0
+ login local
+line vty 0 15
+ login local
+ transport input all""",
+}
+
+def audit(config):
+    lines = config.splitlines()
+    problems = []
+    names = [l.split()[1] for l in lines if l.startswith("hostname ")]
+    if not names or names[0] in ("Switch", "Router"):
+        problems.append("set a hostname")
+    if any(l.startswith("enable password") for l in lines):
+        problems.append("remove enable password (plain text)")
+    if not any(l.startswith("enable secret") for l in lines):
+        problems.append("set enable secret")
+    if "service password-encryption" not in lines:
+        problems.append("add service password-encryption")
+    if not any(l.startswith("banner motd") for l in lines):
+        problems.append("add a banner motd")
+    block, vty = None, {}
+    for l in lines:
+        if not l.startswith(" "):
+            block = l if l.startswith("line vty") else None
+            if block:
+                vty[block] = []
+        elif block:
+            vty[block].append(l.strip())
+    for name, body in vty.items():
+        if "login local" not in body:
+            problems.append(f"{name}: use login local")
+        if "transport input ssh" not in body:
+            problems.append(f"{name}: allow SSH only (transport input ssh)")
+    return problems
+
+for device, cfg in configs.items():
+    problems = audit(cfg)
+    print(f"{device}: " + ("OK" if not problems else "; ".join(problems)))

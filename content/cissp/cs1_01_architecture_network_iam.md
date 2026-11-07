@@ -178,3 +178,70 @@ for n in (2, 10, 100, 1000):
     print(f"{n:>5} people: symmetric {symmetric_keys(n):>7}  asymmetric {asymmetric_keys(n):>5}")
 for bits in (40, 56, 80, 128):
     print(f"{bits:>3}-bit key: {brute_force_years(bits):.3g} years on average")
+
+@@exercise Choose SAML, OAuth 2.0 or OpenID Connect
+Pick the federation protocol from the lesson for each integration. Write `protocol(need)`:
+
+- an app needs to **act on the user's behalf** with another API (read their calendar, post to their drive) without learning their password → **OAuth 2.0** (authorization, access tokens);
+- a modern web or mobile app needs to **know who the user is** → **OpenID Connect** (authentication on top of OAuth, ID tokens);
+- an enterprise web app needs **SSO** with the company identity provider, especially older apps → **SAML** (XML assertions);
+- a Windows domain inside the network → **Kerberos**.
+
+A need can ask for both identity and delegated access: that is OIDC plus OAuth scopes. Print each integration with its protocol and the token or assertion it uses.
+@@lang python
+@@starter
+TOKEN = {"OAuth 2.0": "access token", "OpenID Connect": "ID token (JWT)", "SAML": "XML assertion",
+         "Kerberos": "ticket (TGT, then service tickets)", "OpenID Connect + OAuth 2.0 scopes": "ID token + access token"}
+integrations = [
+    ("Expense app reads the user's calendar", {"delegated": True}),
+    ("Mobile app 'Sign in with Google'", {"identity": True, "modern": True}),
+    ("Legacy HR portal SSO with the corporate IdP", {"identity": True, "enterprise_sso": True}),
+    ("File shares on the Windows domain", {"on_prem_windows": True}),
+    ("New web app needs login and access to the user's files", {"identity": True, "modern": True, "delegated": True}),
+]
+
+def protocol(need):
+    raise NotImplementedError
+
+
+for name, need in integrations:
+    p = protocol(need)
+    print(f"{name}: {p} ({TOKEN[p]})")
+@@expected
+Expense app reads the user's calendar: OAuth 2.0 (access token)
+Mobile app 'Sign in with Google': OpenID Connect (ID token (JWT))
+Legacy HR portal SSO with the corporate IdP: SAML (XML assertion)
+File shares on the Windows domain: Kerberos (ticket (TGT, then service tickets))
+New web app needs login and access to the user's files: OpenID Connect + OAuth 2.0 scopes (ID token + access token)
+@@requires
+def protocol
+.get(
+@@hint
+Check the most specific needs first (Windows domain, enterprise SSO), then identity together with delegation, then each on its own. Remember: OAuth 2.0 alone is authorization, not login.
+@@solution
+TOKEN = {"OAuth 2.0": "access token", "OpenID Connect": "ID token (JWT)", "SAML": "XML assertion",
+         "Kerberos": "ticket (TGT, then service tickets)", "OpenID Connect + OAuth 2.0 scopes": "ID token + access token"}
+integrations = [
+    ("Expense app reads the user's calendar", {"delegated": True}),
+    ("Mobile app 'Sign in with Google'", {"identity": True, "modern": True}),
+    ("Legacy HR portal SSO with the corporate IdP", {"identity": True, "enterprise_sso": True}),
+    ("File shares on the Windows domain", {"on_prem_windows": True}),
+    ("New web app needs login and access to the user's files", {"identity": True, "modern": True, "delegated": True}),
+]
+
+def protocol(need):
+    if need.get("on_prem_windows"):
+        return "Kerberos"
+    if need.get("enterprise_sso"):
+        return "SAML"
+    if need.get("identity") and need.get("delegated"):
+        return "OpenID Connect + OAuth 2.0 scopes"
+    if need.get("identity"):
+        return "OpenID Connect"
+    if need.get("delegated"):
+        return "OAuth 2.0"
+    return "ask the identity team"
+
+for name, need in integrations:
+    p = protocol(need)
+    print(f"{name}: {p} ({TOKEN[p]})")

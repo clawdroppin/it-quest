@@ -382,6 +382,7 @@ still a tempErr: true
 result: context canceled attempts: 1 canceled: true
 @@requires
 errors.As
+.Temporary()
 @@hint
 `var t interface{ Temporary() bool }` then `errors.As(err, &t) && t.Temporary()`. Delay: `min(base<<(attempt-1), time.Second)`. Loop `for attempt := 1; ; attempt++`, returning from inside.
 @@solution

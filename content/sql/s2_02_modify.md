@@ -136,6 +136,7 @@ SV-0002
 @@requires
 BEGIN
 COMMIT
+UPDATE devices
 @@hint
 Two UPDATEs between `BEGIN;` and `COMMIT;`. Unassigned devices: `WHERE employee_id IS NULL`.
 @@solution

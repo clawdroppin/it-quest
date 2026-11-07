@@ -159,3 +159,82 @@ fits, rejected, ram_left = plan(vms)
 print("Fits:", ", ".join(fits))
 print("Doesn't fit:", ", ".join(rejected))
 print(f"RAM left: {ram_left} GB")
+
+@@exercise Diagnose a VM that won't behave
+Use the lesson's VM troubleshooting table. Each report gives the host's settings and the VM's. Write `diagnose(report)` that returns every likely cause with its fix:
+
+- `vt_enabled` false → turn on VT-x / AMD-V in UEFI;
+- the RAM of all running VMs plus 4 GB for the host is more than the host's RAM → not enough RAM;
+- VM network mode `internal` or `host-only` while it needs the internet → switch to NAT or bridged;
+- VM on `nat` but `lan_access` is needed → switch to bridged;
+- snapshots older than 30 days, or free host disk below 10% → delete old snapshots.
+
+Print each report's findings, or `no known cause: check the hypervisor logs`.
+@@lang python
+@@starter
+reports = [
+    {"vm": "Win11-test", "vt_enabled": False, "host_ram": 16, "vms_ram": [4], "mode": "nat",
+     "needs_internet": True, "lan_access": False, "snapshot_age_days": [2], "disk_free_pct": 40},
+    {"vm": "Web-lab", "vt_enabled": True, "host_ram": 16, "vms_ram": [8, 4, 4], "mode": "host-only",
+     "needs_internet": True, "lan_access": False, "snapshot_age_days": [], "disk_free_pct": 35},
+    {"vm": "File-server", "vt_enabled": True, "host_ram": 32, "vms_ram": [8], "mode": "nat",
+     "needs_internet": True, "lan_access": True, "snapshot_age_days": [90, 60, 3], "disk_free_pct": 6},
+    {"vm": "Ubuntu-dev", "vt_enabled": True, "host_ram": 32, "vms_ram": [8], "mode": "bridged",
+     "needs_internet": True, "lan_access": True, "snapshot_age_days": [1], "disk_free_pct": 50},
+]
+
+def diagnose(r):
+    raise NotImplementedError
+
+
+for r in reports:
+    print(r["vm"] + ":")
+    for f in diagnose(r) or ["no known cause: check the hypervisor logs"]:
+        print("  " + f)
+@@expected
+Win11-test:
+  virtualization off: enable VT-x / AMD-V in UEFI
+Web-lab:
+  not enough RAM: VMs need 16 GB + 4 GB for the host, host has 16 GB
+  host-only network has no internet: switch to NAT or bridged
+File-server:
+  other PCs can't reach a NAT VM: switch to bridged
+  disk 6% free, 2 old snapshot(s): delete snapshots you no longer need
+Ubuntu-dev:
+  no known cause: check the hypervisor logs
+@@requires
+def diagnose
+sum(
+@@hint
+Check each row of the table independently and collect every match: one VM can have several problems at once.
+@@solution
+reports = [
+    {"vm": "Win11-test", "vt_enabled": False, "host_ram": 16, "vms_ram": [4], "mode": "nat",
+     "needs_internet": True, "lan_access": False, "snapshot_age_days": [2], "disk_free_pct": 40},
+    {"vm": "Web-lab", "vt_enabled": True, "host_ram": 16, "vms_ram": [8, 4, 4], "mode": "host-only",
+     "needs_internet": True, "lan_access": False, "snapshot_age_days": [], "disk_free_pct": 35},
+    {"vm": "File-server", "vt_enabled": True, "host_ram": 32, "vms_ram": [8], "mode": "nat",
+     "needs_internet": True, "lan_access": True, "snapshot_age_days": [90, 60, 3], "disk_free_pct": 6},
+    {"vm": "Ubuntu-dev", "vt_enabled": True, "host_ram": 32, "vms_ram": [8], "mode": "bridged",
+     "needs_internet": True, "lan_access": True, "snapshot_age_days": [1], "disk_free_pct": 50},
+]
+
+def diagnose(r):
+    found = []
+    if not r["vt_enabled"]:
+        found.append("virtualization off: enable VT-x / AMD-V in UEFI")
+    if sum(r["vms_ram"]) + 4 > r["host_ram"]:
+        found.append(f"not enough RAM: VMs need {sum(r['vms_ram'])} GB + 4 GB for the host, host has {r['host_ram']} GB")
+    if r["needs_internet"] and r["mode"] in ("internal", "host-only"):
+        found.append(f"{r['mode']} network has no internet: switch to NAT or bridged")
+    if r["lan_access"] and r["mode"] == "nat":
+        found.append("other PCs can't reach a NAT VM: switch to bridged")
+    old = [a for a in r["snapshot_age_days"] if a > 30]
+    if old or r["disk_free_pct"] < 10:
+        found.append(f"disk {r['disk_free_pct']}% free, {len(old)} old snapshot(s): delete snapshots you no longer need")
+    return found
+
+for r in reports:
+    print(r["vm"] + ":")
+    for f in diagnose(r) or ["no known cause: check the hypervisor logs"]:
+        print("  " + f)

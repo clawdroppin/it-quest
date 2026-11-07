@@ -206,6 +206,7 @@ Replace first: DB01 NVMe, FS01 disk 3
 @@requires
 "pending"
 "wear"
+elif
 @@hint
 Build two lists, `failing` and `warning`, of reason strings. HDDs have `wear` of `None`, so check `d["wear"] is not None` first.
 @@solution

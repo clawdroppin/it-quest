@@ -173,6 +173,7 @@ ftp.example.com A: NXDOMAIN
 @@requires
 def resolve
 CNAME
+break
 @@hint
 Look for the requested type first; if there's none, look for a CNAME, switch to its target and try again.
 @@solution

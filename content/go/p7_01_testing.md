@@ -379,6 +379,7 @@ checked 1000 inputs, failures: 0
 @@requires
 rand.NewPCG(1, 2)
 utf8.ValidString
+.IntN(
 @@hint
 `r := []rune(s)`, swap in place, `return string(r)`. Generator: `alphabet := []rune("aZ9 -é日本🚀")`; for each input, `n := rng.IntN(13)` and pick `alphabet[rng.IntN(len(alphabet))]` n times. Print `Reverse("東京")` first.
 @@solution

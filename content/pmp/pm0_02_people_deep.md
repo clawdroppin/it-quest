@@ -231,6 +231,7 @@ Chen: R or A on 4 activities (max 3)
 def check
 MAX_LOAD
 "A"
+.values(
 @@hint
 Count `list(roles.values()).count("A")` per activity. For load, count activities where the person's role is R or A. "More than half the team" is `consulted > len(people) / 2`.
 @@solution

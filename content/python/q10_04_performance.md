@@ -218,6 +218,7 @@ check(top_n({"a": 5, "b": 9, "c": 9, "d": 1}, 3), [("b", 9), ("c", 9), ("a", 5)]
 check(top_n({}, 3), [], "empty")
 @@requires
 heapq
+heapq.nsmallest(
 @@hint
 Decorate the inner `ways` with `@cache` (it's created per call, so caches don't leak between different coin sets). Python's recursion limit may be hit for large amounts with coin 1: add `import sys; sys.setrecursionlimit(10_000)` or use a DP table: `table = [1] + [0] * amount; for c in coins: for a in range(c, amount + 1): table[a] += table[a - c]`. For top_n: `heapq.nsmallest(n, scores.items(), key=lambda kv: (-kv[1], kv[0]))`.
 @@solution

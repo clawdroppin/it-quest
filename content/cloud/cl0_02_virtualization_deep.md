@@ -161,6 +161,7 @@ N+1 without esx1: need 152 vCPU / 648 GB, have 224 / 432 -> NOT MET
 def fits
 CPU_RATIO
 HYPERVISOR_RESERVE_GB
+set(
 @@hint
 Track `used[host] = {"cpu": 0, "mem": 0, "groups": set()}`. Sort with `key=lambda v: (-v[2], v[0])`. For N+1, compare total VM vCPU and memory with the capacity of the remaining hosts after removing the one with the most RAM.
 @@solution

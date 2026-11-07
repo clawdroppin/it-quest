@@ -128,6 +128,7 @@ name    | tickets
 Mia Lee | 7
 @@requires
 WITH
+COUNT(
 @@hint
 `WITH workload AS (SELECT assignee_id, COUNT(*) AS tickets FROM tickets WHERE assignee_id IS NOT NULL GROUP BY assignee_id)`, then join it to employees and compare with `(SELECT AVG(tickets) FROM workload)`.
 @@solution

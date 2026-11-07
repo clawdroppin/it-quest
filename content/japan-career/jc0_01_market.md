@@ -176,3 +176,65 @@ def employer_type(description):
 for name, desc in companies.items():
     kind = employer_type(desc)
     print(f"{name}: {kind or 'unclear: ask what the IT team does'}" + (f" -> ask about {ASK[kind]}" if kind else ""))
+
+@@exercise Work out 年収 from 月給, 賞与 and 年俸制
+Offers state pay in different ways. Write `annual(offer)` that returns the gross 年収 in yen:
+
+- `月給` offers: monthly × 12 + bonus, where `賞与` is given in months of salary (`bonus_months`); a bonus that's `not guaranteed` is counted separately as a range from 0;
+- `年俸制` offers: the stated annual amount (paid in 12 or 14 instalments, which doesn't change the total);
+- add `allowances` (monthly, like 住宅手当) × 12.
+
+Print each offer's guaranteed 年収 and its upper estimate in 万円, and rank them by the guaranteed amount.
+@@lang python
+@@starter
+offers = [
+    {"company": "A社 (SIer)", "type": "月給", "monthly": 300_000, "bonus_months": 4, "guaranteed": False, "allowances": 20_000},
+    {"company": "B社 (外資)", "type": "年俸制", "annual": 6_000_000, "instalments": 12, "allowances": 0},
+    {"company": "C社 (自社開発)", "type": "月給", "monthly": 380_000, "bonus_months": 2, "guaranteed": True, "allowances": 0},
+    {"company": "D社 (SES)", "type": "年俸制", "annual": 4_200_000, "instalments": 14, "allowances": 10_000},
+]
+
+def annual(offer):
+    raise NotImplementedError
+
+
+def man(yen):
+    raise NotImplementedError
+
+
+rows = [(o["company"], *annual(o)) for o in offers]
+for name, low, high in sorted(rows, key=lambda r: -r[1]):
+    print(f"{name}: guaranteed {man(low)}" + (f", up to {man(high)} with bonus" if high > low else ""))
+@@expected
+B社 (外資): guaranteed 600万円
+C社 (自社開発): guaranteed 532万円
+D社 (SES): guaranteed 432万円
+A社 (SIer): guaranteed 384万円, up to 504万円 with bonus
+@@requires
+def annual
+* 12
+@@hint
+A 月給 offer is monthly × 12 plus months of bonus; only count the bonus in the guaranteed figure if it is guaranteed. 年俸制 instalments (12 or 14) only change the monthly payment, not the year's total.
+@@solution
+offers = [
+    {"company": "A社 (SIer)", "type": "月給", "monthly": 300_000, "bonus_months": 4, "guaranteed": False, "allowances": 20_000},
+    {"company": "B社 (外資)", "type": "年俸制", "annual": 6_000_000, "instalments": 12, "allowances": 0},
+    {"company": "C社 (自社開発)", "type": "月給", "monthly": 380_000, "bonus_months": 2, "guaranteed": True, "allowances": 0},
+    {"company": "D社 (SES)", "type": "年俸制", "annual": 4_200_000, "instalments": 14, "allowances": 10_000},
+]
+
+def annual(offer):
+    extra = offer.get("allowances", 0) * 12
+    if offer["type"] == "年俸制":
+        total = offer["annual"] + extra
+        return total, total
+    base = offer["monthly"] * 12 + extra
+    bonus = offer["monthly"] * offer["bonus_months"]
+    return (base + bonus, base + bonus) if offer["guaranteed"] else (base, base + bonus)
+
+def man(yen):
+    return f"{yen / 10_000:,.0f}万円"
+
+rows = [(o["company"], *annual(o)) for o in offers]
+for name, low, high in sorted(rows, key=lambda r: -r[1]):
+    print(f"{name}: guaranteed {man(low)}" + (f", up to {man(high)} with bonus" if high > low else ""))

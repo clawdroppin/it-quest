@@ -210,6 +210,7 @@ qa.tfvars: 2 error(s)
 def validate
 RULES
 can(
+.items()
 @@hint
 Loop over `RULES`. Each rule is `(variable, condition, message)`. Collect `(variable, message)` for every condition that's false. Wrapping risky calls in `can` (as the CIDR and regex rules do) means bad input gives a validation message instead of a crash.
 @@solution
@@ -289,6 +290,7 @@ run "rejects_typo"... fail
 def run_test
 expect_failures
 asserts
+run.get(
 @@hint
 Merge with `{**file_vars, **run.get("vars", {})}`. Call `plan` inside `try`. If `expect_failures` is set, the run passes only if `plan` raised with a matching name. Otherwise a raise is a failure, and every assert with a false condition is a failure. Return `(passed, messages)`.
 @@solution

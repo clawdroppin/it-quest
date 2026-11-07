@@ -199,3 +199,81 @@ for s in STAGES:
 print("Follow up:")
 for company, stage, days in follow_ups(apps, today):
     print(f"  {company} ({stage}): {days} days since last contact")
+
+@@exercise Find the red flags in a 労働条件通知書
+Check offers against the lesson's "watch for" column. Write `red_flags(offer)` returning warnings:
+
+- `雇用形態` is `業務委託`: no employee protections (no 社会保険, no paid leave);
+- a full-time offer without `社会保険` enrolment;
+- `休日` is `週休2日制` (not 完全週休2日制): some weeks have only one day off;
+- `年間休日` under 120;
+- `試用期間` longer than 6 months, or lower pay during it;
+- no `交通費`.
+
+Print each offer with its warnings, or `no red flags`, then the offers sorted by number of warnings.
+@@lang python
+@@starter
+offers = [
+    {"company": "A社", "雇用形態": "正社員", "社会保険": True, "休日": "完全週休2日制", "年間休日": 125,
+     "試用期間": 3, "試用期間_lower_pay": False, "交通費": True},
+    {"company": "B社", "雇用形態": "業務委託", "社会保険": False, "休日": "週休2日制", "年間休日": 105,
+     "試用期間": 0, "試用期間_lower_pay": False, "交通費": False},
+    {"company": "C社", "雇用形態": "契約社員", "社会保険": False, "休日": "完全週休2日制", "年間休日": 120,
+     "試用期間": 6, "試用期間_lower_pay": True, "交通費": True},
+    {"company": "D社", "雇用形態": "正社員", "社会保険": True, "休日": "週休2日制", "年間休日": 118,
+     "試用期間": 12, "試用期間_lower_pay": False, "交通費": True},
+]
+
+def red_flags(o):
+    raise NotImplementedError
+
+
+results = {o["company"]: red_flags(o) for o in offers}
+for company, flags in results.items():
+    print(f"{company}: " + ("; ".join(flags) if flags else "no red flags"))
+print("Ranked: " + " < ".join(sorted(results, key=lambda c: (len(results[c]), c))))
+@@expected
+A社: no red flags
+B社: 業務委託: freelance, no employee protections; 週休2日制 is not every weekend off; only 105 年間休日; no 交通費
+C社: no 社会保険 for a full-time employee; lower pay during 試用期間
+D社: 週休2日制 is not every weekend off; only 118 年間休日; 12-month 試用期間
+Ranked: A社 < C社 < D社 < B社
+@@requires
+def red_flags
+< 120
+@@hint
+One `if` per row of the table, appending a warning each time. 業務委託 explains the missing 社会保険 already, so use `elif` to avoid saying it twice.
+@@solution
+offers = [
+    {"company": "A社", "雇用形態": "正社員", "社会保険": True, "休日": "完全週休2日制", "年間休日": 125,
+     "試用期間": 3, "試用期間_lower_pay": False, "交通費": True},
+    {"company": "B社", "雇用形態": "業務委託", "社会保険": False, "休日": "週休2日制", "年間休日": 105,
+     "試用期間": 0, "試用期間_lower_pay": False, "交通費": False},
+    {"company": "C社", "雇用形態": "契約社員", "社会保険": False, "休日": "完全週休2日制", "年間休日": 120,
+     "試用期間": 6, "試用期間_lower_pay": True, "交通費": True},
+    {"company": "D社", "雇用形態": "正社員", "社会保険": True, "休日": "週休2日制", "年間休日": 118,
+     "試用期間": 12, "試用期間_lower_pay": False, "交通費": True},
+]
+
+def red_flags(o):
+    flags = []
+    if o["雇用形態"] == "業務委託":
+        flags.append("業務委託: freelance, no employee protections")
+    elif not o["社会保険"]:
+        flags.append("no 社会保険 for a full-time employee")
+    if o["休日"] == "週休2日制":
+        flags.append("週休2日制 is not every weekend off")
+    if o["年間休日"] < 120:
+        flags.append(f"only {o['年間休日']} 年間休日")
+    if o["試用期間"] > 6:
+        flags.append(f"{o['試用期間']}-month 試用期間")
+    if o["試用期間_lower_pay"]:
+        flags.append("lower pay during 試用期間")
+    if not o["交通費"]:
+        flags.append("no 交通費")
+    return flags
+
+results = {o["company"]: red_flags(o) for o in offers}
+for company, flags in results.items():
+    print(f"{company}: " + ("; ".join(flags) if flags else "no red flags"))
+print("Ranked: " + " < ".join(sorted(results, key=lambda c: (len(results[c]), c))))

@@ -123,6 +123,7 @@ total 244.1 min; answered 167 of 180 in 230 min, 13 unanswered
 def by_section
 TARGET
 TOTAL_MIN
+sum(
 @@hint
 Split into three slices of 60. For each, the target is 60 × TARGET seconds; print minutes used and the difference. Walk a running total to find the question where you were most behind schedule (`elapsed − n × TARGET` largest). Unanswered = questions remaining when the running total passes `TOTAL_MIN × 60`.
 @@solution
@@ -172,6 +173,7 @@ overall 66%: not yet: focus on the weakest domains first
 def plan
 WEIGHTS
 MAINTENANCE
+max(
 @@hint
 Score = correct / asked. Need = `WEIGHTS[d] * max(TARGET - score, 0)`. Give domains with no need `MAINTENANCE` of the hours each, and split the rest of the hours by need. Overall = total correct / total asked.
 @@solution

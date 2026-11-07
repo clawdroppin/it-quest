@@ -251,6 +251,7 @@ def check(policy, resources):
 def check
 "hard-mandatory"
 can_override
+sorted(
 @@hint
 `check` returns a list of failure messages (empty = pass). For run-2 and run-3 the public bucket isn't in the plan, so only the soft-mandatory and advisory policies fail.
 @@solution

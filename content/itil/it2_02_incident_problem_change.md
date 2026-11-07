@@ -237,6 +237,7 @@ Isolated incidents: INC2005
 def recurring
 WINDOW_DAYS
 known_errors
+sorted(
 @@hint
 For each group (sorted by day), slide a window: for each starting incident, take the incidents with `day - start_day < WINDOW_DAYS`; if there are at least `THRESHOLD`, return them.
 @@solution

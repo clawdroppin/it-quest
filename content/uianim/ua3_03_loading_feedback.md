@@ -136,6 +136,7 @@ report      4200 ms: spinner 300-4200 ms, content at 4200 ms (+0 ms)  (consider 
 def plan
 DELAY_MS
 MIN_VISIBLE_MS
+max(
 @@hint
 If `duration < DELAY_MS`, the spinner never shows and content appears at `duration`. Otherwise it shows at DELAY_MS and hides at `max(duration, DELAY_MS + MIN_VISIBLE_MS)`. The extra wait is the hide time minus the duration.
 @@solution

@@ -165,6 +165,7 @@ dialog         radius 15 -> 16
 def snap
 SCALE
 gap_between
+abs(
 @@hint
 `snap` returns the scale step with the smallest `abs(step - value)` (ties go to the smaller step if you use `min` with that key over the sorted list). Report each value whose snapped value differs. Proximity: inner padding and the inner gap must both be smaller than `gap_between`.
 @@solution

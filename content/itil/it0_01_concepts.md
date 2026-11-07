@@ -2,7 +2,7 @@
 @@text
 **ITIL** is the most widely used framework for **IT service management (ITSM)**: how IT organizations deliver services that actually help the business. If you work on a service desk, in operations (**運用保守**), or with ServiceNow or Jira Service Management, you're already doing ITIL, whether anyone calls it that or not. Many job adverts, in Japan and elsewhere, list **ITIL 4 Foundation** as a plus.
 
-**The exam**: ITIL 4 Foundation, run by **PeopleCert** (owner of AXELOS). It has 40 multiple-choice questions in 60 minutes, and you pass with **26 correct (65%)**. You need an accredited training course, which usually includes the voucher. It's available in Japanese too. PeopleCert updates ITIL from time to time, so check which version the current exam is based on. The core ideas below have stayed stable.
+**The exam**: ITIL 4 Foundation, run by **PeopleCert** (owner of AXELOS). It has 40 multiple-choice questions in 60 minutes, and you pass with **26 correct (65%)**. You need an accredited training course, which usually includes the voucher. It's available in Japanese too. **ITIL (Version 5) Foundation** went live on 12 February 2026 with the same format (40 questions, 60 minutes, 65%), and PeopleCert plans to retire the ITIL 4 exams at the end of 2027. ITIL 4 certificates stay valid. This track teaches the ITIL 4 vocabulary that Version 5 builds on; if you're booking an exam, check which version your course and voucher cover.
 
 ## Key concepts (the exam loves these definitions)
 
@@ -156,3 +156,69 @@ for text, hint in statements:
     summary[kind] = summary.get(kind, 0) + 1
     print(f"{kind:<14} {text}")
 print(", ".join(f"{k}: {v}" for k, v in sorted(summary.items())))
+
+@@exercise Customer, user or sponsor?
+ITIL names three roles on the consumer side: the **customer** defines requirements and takes responsibility for outcomes, the **user** uses the service, the **sponsor** authorises the budget. One person can hold several.
+
+Write `roles(person)` that returns every role a person holds from what they do (`uses`, `defines requirements`, `approves budget`). Then check each service has at least one of each role and print any gaps.
+@@lang python
+@@starter
+people = [
+    ("Sales director", "CRM", ["defines requirements", "approves budget"]),
+    ("Sales rep", "CRM", ["uses"]),
+    ("CFO", "Payroll", ["approves budget"]),
+    ("Payroll clerk", "Payroll", ["uses", "defines requirements"]),
+    ("Small-business owner", "Website", ["uses", "defines requirements", "approves budget"]),
+    ("Office manager", "Printers", ["uses"]),
+]
+ROLE = {"uses": "user", "defines requirements": "customer", "approves budget": "sponsor"}
+
+def roles(actions):
+    raise NotImplementedError
+
+
+services = {}
+for name, service, actions in people:
+    r = roles(actions)
+    services.setdefault(service, set()).update(r)
+    print(f"{name} ({service}): {', '.join(r)}")
+for service, held in services.items():
+    missing = {"customer", "user", "sponsor"} - held
+    if missing:
+        print(f"gap: {service} has no {', '.join(sorted(missing))}")
+@@expected
+Sales director (CRM): customer, sponsor
+Sales rep (CRM): user
+CFO (Payroll): sponsor
+Payroll clerk (Payroll): customer, user
+Small-business owner (Website): customer, sponsor, user
+Office manager (Printers): user
+gap: Printers has no customer, sponsor
+@@requires
+def roles
+setdefault(
+@@hint
+Map each action to a role with a dict, then collect the roles per service in a set. The missing roles are a set difference.
+@@solution
+people = [
+    ("Sales director", "CRM", ["defines requirements", "approves budget"]),
+    ("Sales rep", "CRM", ["uses"]),
+    ("CFO", "Payroll", ["approves budget"]),
+    ("Payroll clerk", "Payroll", ["uses", "defines requirements"]),
+    ("Small-business owner", "Website", ["uses", "defines requirements", "approves budget"]),
+    ("Office manager", "Printers", ["uses"]),
+]
+ROLE = {"uses": "user", "defines requirements": "customer", "approves budget": "sponsor"}
+
+def roles(actions):
+    return sorted(ROLE[a] for a in actions)
+
+services = {}
+for name, service, actions in people:
+    r = roles(actions)
+    services.setdefault(service, set()).update(r)
+    print(f"{name} ({service}): {', '.join(r)}")
+for service, held in services.items():
+    missing = {"customer", "user", "sponsor"} - held
+    if missing:
+        print(f"gap: {service} has no {', '.join(sorted(missing))}")

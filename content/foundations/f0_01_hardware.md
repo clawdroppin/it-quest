@@ -132,6 +132,7 @@ for n in [10, 192, 255]:
 255 11111111
 @@requires
 % 2
+// 2
 @@hint
 Loop 8 times: `bits = str(n % 2) + bits`, then `n = n // 2`.
 @@solution
@@ -144,3 +145,55 @@ def to_binary(n):
 
 for n in [10, 192, 255]:
     print(n, to_binary(n))
+
+@@exercise Why does my 1 TB drive show 931 GB?
+Drive makers use decimal units (1 TB = 10¹² bytes); Windows shows binary units (1 GiB = 2³⁰ bytes) but labels them "GB". Write `to_binary(size, unit)` that converts a decimal size like `(1, "TB")` into bytes and then into the largest binary unit that keeps the number at 1 or more, rounded to 2 decimals.
+
+Print what each advertised drive shows in Windows, the percentage that seems "missing", and how long a 1 Gb/s link (bits, not bytes!) takes to copy the full drive.
+@@lang python
+@@starter
+DECIMAL = {"KB": 10 ** 3, "MB": 10 ** 6, "GB": 10 ** 9, "TB": 10 ** 12}
+BINARY = [("TiB", 2 ** 40), ("GiB", 2 ** 30), ("MiB", 2 ** 20), ("KiB", 2 ** 10)]
+drives = [(1, "TB"), (500, "GB"), (2, "TB"), (256, "GB"), (64, "GB")]
+
+def to_binary(size, unit):
+    raise NotImplementedError
+
+
+for size, unit in drives:
+    value, name, b = to_binary(size, unit)
+    shown_gb = b / 2 ** 30
+    missing = 100 * (1 - shown_gb / (b / 10 ** 9))
+    seconds = b * 8 / 10 ** 9
+    print(f"{size} {unit}: Windows shows {value} {name} ({shown_gb:.0f} \"GB\"), {missing:.1f}% 'missing', "
+          f"copy at 1 Gb/s: {seconds / 60:.0f} min")
+@@expected
+1 TB: Windows shows 931.32 GiB (931 "GB"), 6.9% 'missing', copy at 1 Gb/s: 133 min
+500 GB: Windows shows 465.66 GiB (466 "GB"), 6.9% 'missing', copy at 1 Gb/s: 67 min
+2 TB: Windows shows 1.82 TiB (1863 "GB"), 6.9% 'missing', copy at 1 Gb/s: 267 min
+256 GB: Windows shows 238.42 GiB (238 "GB"), 6.9% 'missing', copy at 1 Gb/s: 34 min
+64 GB: Windows shows 59.6 GiB (60 "GB"), 6.9% 'missing', copy at 1 Gb/s: 9 min
+@@requires
+def to_binary
+2 **
+@@hint
+Convert to bytes first with powers of 10, then divide by powers of 2. The 'missing' space is just the gap between 10⁹ and 2³⁰ (about 7%), and it grows with each unit step.
+@@solution
+DECIMAL = {"KB": 10 ** 3, "MB": 10 ** 6, "GB": 10 ** 9, "TB": 10 ** 12}
+BINARY = [("TiB", 2 ** 40), ("GiB", 2 ** 30), ("MiB", 2 ** 20), ("KiB", 2 ** 10)]
+drives = [(1, "TB"), (500, "GB"), (2, "TB"), (256, "GB"), (64, "GB")]
+
+def to_binary(size, unit):
+    b = size * DECIMAL[unit]
+    for name, factor in BINARY:
+        if b >= factor:
+            return round(b / factor, 2), name, b
+    return b, "bytes", b
+
+for size, unit in drives:
+    value, name, b = to_binary(size, unit)
+    shown_gb = b / 2 ** 30
+    missing = 100 * (1 - shown_gb / (b / 10 ** 9))
+    seconds = b * 8 / 10 ** 9
+    print(f"{size} {unit}: Windows shows {value} {name} ({shown_gb:.0f} \"GB\"), {missing:.1f}% 'missing', "
+          f"copy at 1 Gb/s: {seconds / 60:.0f} min")

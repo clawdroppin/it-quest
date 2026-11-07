@@ -179,6 +179,7 @@ int main() {
 [db01]
 @@requires
 std::string& host
+find_first_not_of(
 @@hint
 `find_first_not_of(' ')` and `find_last_not_of(' ')` give the first and last non-space positions; then `host = host.substr(first, last - first + 1);`. Lower case with `std::tolower` on each `char&`.
 @@solution

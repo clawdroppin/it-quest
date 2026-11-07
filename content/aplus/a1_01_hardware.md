@@ -154,6 +154,7 @@ Total installed in passing PCs: 32 GB
 @@requires
 def check
 sum(
+.append(
 @@hint
 Collect problems in a list instead of returning at the first one, so the technician sees everything at once.
 @@solution
@@ -188,3 +189,82 @@ for pc in pcs:
     if not problems:
         passed += sum(size for _kind, size in sticks)
 print(f"Total installed in passing PCs: {passed} GB")
+
+@@exercise Will this SSD fit the laptop?
+Laptops take storage in different shapes. Write `fits(slot, drive)` that returns `(True, "")` or `(False, reason)`:
+
+- a `2.5"` bay takes 2.5" SATA drives only (check the drive's `height_mm` is not more than the bay's);
+- an `M.2` slot needs the drive to be M.2, the same **key** (`M` for NVMe ×4, `B+M` drives fit M-key and B-key slots), a **length** the slot supports (2230, 2242, 2280 …), and the right **protocol**: a SATA-only M.2 slot can't run an NVMe drive.
+
+Print every drive against every slot of the laptop.
+@@lang python
+@@starter
+slots = [
+    {"name": "M.2 slot 1", "form": "M.2", "key": "M", "lengths": {2242, 2280}, "protocols": {"NVMe", "SATA"}},
+    {"name": "M.2 slot 2", "form": "M.2", "key": "B", "lengths": {2242}, "protocols": {"SATA"}},
+    {"name": "2.5in bay", "form": "2.5", "height_mm": 7},
+]
+drives = [
+    {"name": "NVMe 2280 1TB", "form": "M.2", "key": "M", "length": 2280, "protocol": "NVMe"},
+    {"name": "SATA M.2 2242", "form": "M.2", "key": "B+M", "length": 2242, "protocol": "SATA"},
+    {"name": "NVMe 2230", "form": "M.2", "key": "M", "length": 2230, "protocol": "NVMe"},
+    {"name": "2.5in SATA SSD 7mm", "form": "2.5", "height_mm": 7},
+    {"name": "2.5in HDD 9.5mm", "form": "2.5", "height_mm": 9.5},
+]
+
+def fits(slot, drive):
+    raise NotImplementedError
+
+
+for d in drives:
+    results = []
+    for s in slots:
+        ok, why = fits(s, d)
+        results.append(f"{s['name']}: " + ("fits" if ok else why))
+    print(f"{d['name']}: " + "; ".join(results))
+@@expected
+NVMe 2280 1TB: M.2 slot 1: fits; M.2 slot 2: M-key drive in a B-key slot; 2.5in bay: needs a M.2 slot
+SATA M.2 2242: M.2 slot 1: fits; M.2 slot 2: fits; 2.5in bay: needs a M.2 slot
+NVMe 2230: M.2 slot 1: length 2230 not supported; M.2 slot 2: M-key drive in a B-key slot; 2.5in bay: needs a M.2 slot
+2.5in SATA SSD 7mm: M.2 slot 1: needs a 2.5 slot; M.2 slot 2: needs a 2.5 slot; 2.5in bay: fits
+2.5in HDD 9.5mm: M.2 slot 1: needs a 2.5 slot; M.2 slot 2: needs a 2.5 slot; 2.5in bay: 9.5 mm drive in a 7 mm bay
+@@requires
+def fits
+.split("+")
+@@hint
+Check in order: form factor, then (for M.2) key, length and protocol. A `B+M` drive has both notches, so split the key on `+` and see whether the slot's key is among them.
+@@solution
+slots = [
+    {"name": "M.2 slot 1", "form": "M.2", "key": "M", "lengths": {2242, 2280}, "protocols": {"NVMe", "SATA"}},
+    {"name": "M.2 slot 2", "form": "M.2", "key": "B", "lengths": {2242}, "protocols": {"SATA"}},
+    {"name": "2.5in bay", "form": "2.5", "height_mm": 7},
+]
+drives = [
+    {"name": "NVMe 2280 1TB", "form": "M.2", "key": "M", "length": 2280, "protocol": "NVMe"},
+    {"name": "SATA M.2 2242", "form": "M.2", "key": "B+M", "length": 2242, "protocol": "SATA"},
+    {"name": "NVMe 2230", "form": "M.2", "key": "M", "length": 2230, "protocol": "NVMe"},
+    {"name": "2.5in SATA SSD 7mm", "form": "2.5", "height_mm": 7},
+    {"name": "2.5in HDD 9.5mm", "form": "2.5", "height_mm": 9.5},
+]
+
+def fits(slot, drive):
+    if slot["form"] != drive["form"]:
+        return False, f"needs a {drive['form']} slot"
+    if slot["form"] == "2.5":
+        if drive["height_mm"] > slot["height_mm"]:
+            return False, f"{drive['height_mm']} mm drive in a {slot['height_mm']} mm bay"
+        return True, ""
+    if slot["key"] not in drive["key"].split("+"):
+        return False, f"{drive['key']}-key drive in a {slot['key']}-key slot"
+    if drive["length"] not in slot["lengths"]:
+        return False, f"length {drive['length']} not supported"
+    if drive["protocol"] not in slot["protocols"]:
+        return False, f"slot can't run {drive['protocol']}"
+    return True, ""
+
+for d in drives:
+    results = []
+    for s in slots:
+        ok, why = fits(s, d)
+        results.append(f"{s['name']}: " + ("fits" if ok else why))
+    print(f"{d['name']}: " + "; ".join(results))

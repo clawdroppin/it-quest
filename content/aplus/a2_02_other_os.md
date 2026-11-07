@@ -145,6 +145,7 @@ shutdown /r on linux: sudo reboot
 gpupdate on linux: no direct equivalent
 @@requires
 def translate
+ in TABLE
 @@hint
 Store each row as a tuple `(linux, macos)` and unpack it.
 @@solution

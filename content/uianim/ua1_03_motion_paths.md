@@ -106,6 +106,7 @@ equal distance:      52.1  51.8  48.9  52.0  52.1  52.1  52.1  52.1
 def bezier
 bisect_left
 def t_at_distance
+bisect_left(
 @@hint
 `bezier(t)` uses the Bernstein weights `(1-t)**3, 3*(1-t)**2*t, 3*(1-t)*t**2, t**3`. Build `ts = [i / N for i in range(N + 1)]` and the cumulative `table` of `math.dist` between consecutive points. `t_at_distance` uses `bisect_left(table, s)` and interpolates between the two neighbouring t values.
 @@solution

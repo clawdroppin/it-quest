@@ -193,6 +193,7 @@ truncated varint
 varint overflow
 @@requires
 0x80
+append(
 @@hint
 Encode: `for x >= 0x80 { out = append(out, byte(x)|0x80); x >>= 7 }`, then append `byte(x)`. Decode: `x |= uint64(b[i]&0x7f) << (7*i)`, stop when `b[i] < 0x80`. ZigZag: `uint64((n << 1) ^ (n >> 63))`; back: `int64(u>>1) ^ -int64(u&1)`.
 @@solution
