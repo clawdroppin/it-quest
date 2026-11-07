@@ -300,3 +300,166 @@ app struct :: holds all UI state between frames
 &mut self in update :: widgets change state directly
 derived values :: compute from state, don't store twice
 persistence :: save state with serde on exit
+
+@@exercise The action pattern, without a window
+This is the same problem as the Delete button above, with egui taken away so you can focus on the pattern. `frame` gets the buttons clicked in one frame as `(row, button)` pairs.
+
+1. In `frame`, loop over the rows and push an `Action` for each click on that row: `"delete"` → `Delete`, `"up"` → `MoveUp`, `"done"` → `Toggle`. Don't change `self.items` inside this loop.
+2. After the loop, call `apply` for each action.
+3. In `apply`, delete the row, swap it with the row above, or flip its `done` flag. Ignore indexes that are out of range, and moving row 0 up.
+@@starter
+#[derive(Debug, Clone, Copy)]
+enum Action {
+    Delete(usize),
+    MoveUp(usize),
+    Toggle(usize),
+}
+
+struct Item {
+    name: String,
+    done: bool,
+}
+
+struct App {
+    items: Vec<Item>,
+}
+
+impl App {
+    /// One "frame": draw every row, collecting what the user clicked, then change the list.
+    fn frame(&mut self, clicks: &[(usize, &str)]) {
+        // 1. loop over the rows, pushing an Action for each click on that row
+        // 2. after the loop, apply every action
+        let _ = clicks;
+        todo!()
+    }
+
+    fn apply(&mut self, action: Action) {
+        // Delete, MoveUp (swap with the row above) and Toggle; ignore indexes that are out of range
+        let _ = action;
+        todo!()
+    }
+
+    fn show(&self) {
+        let rows: Vec<String> = self
+            .items
+            .iter()
+            .map(|item| format!("{}{}", if item.done { "[x] " } else { "[ ] " }, item.name))
+            .collect();
+        println!("{}", rows.join(" | "));
+    }
+}
+
+fn main() {
+    let mut app = App {
+        items: ["milk", "bread", "eggs", "coffee"]
+            .iter()
+            .map(|n| Item { name: n.to_string(), done: false })
+            .collect(),
+    };
+    app.show();
+    app.frame(&[(1, "done")]);
+    app.show();
+    app.frame(&[(3, "up")]);
+    app.show();
+    app.frame(&[(0, "delete")]);
+    app.show();
+    app.frame(&[(0, "up"), (9, "delete")]);
+    app.show();
+}
+@@expected
+[ ] milk | [ ] bread | [ ] eggs | [ ] coffee
+[ ] milk | [x] bread | [ ] eggs | [ ] coffee
+[ ] milk | [x] bread | [ ] coffee | [ ] eggs
+[x] bread | [ ] coffee | [ ] eggs
+[x] bread | [ ] coffee | [ ] eggs
+@@requires
+actions.push(
+for action in actions
+self.items.swap(
+@@hint
+Collect into `let mut actions = Vec::new();` while you only read `self.items`; the mutable changes happen afterwards, when no borrow is active.
+@@solution
+#[derive(Debug, Clone, Copy)]
+enum Action {
+    Delete(usize),
+    MoveUp(usize),
+    Toggle(usize),
+}
+
+struct Item {
+    name: String,
+    done: bool,
+}
+
+struct App {
+    items: Vec<Item>,
+}
+
+impl App {
+    /// One "frame": draw every row, collecting what the user clicked, then change the list.
+    fn frame(&mut self, clicks: &[(usize, &str)]) {
+        let mut actions = Vec::new();
+        for (index, _item) in self.items.iter().enumerate() {
+            for &(row, button) in clicks {
+                if row == index {
+                    match button {
+                        "delete" => actions.push(Action::Delete(index)),
+                        "up" => actions.push(Action::MoveUp(index)),
+                        "done" => actions.push(Action::Toggle(index)),
+                        _ => {}
+                    }
+                }
+            }
+        }
+        for action in actions {
+            self.apply(action);
+        }
+    }
+
+    fn apply(&mut self, action: Action) {
+        match action {
+            Action::Delete(i) => {
+                if i < self.items.len() {
+                    self.items.remove(i);
+                }
+            }
+            Action::MoveUp(i) => {
+                if i > 0 && i < self.items.len() {
+                    self.items.swap(i, i - 1);
+                }
+            }
+            Action::Toggle(i) => {
+                if let Some(item) = self.items.get_mut(i) {
+                    item.done = !item.done;
+                }
+            }
+        }
+    }
+
+    fn show(&self) {
+        let rows: Vec<String> = self
+            .items
+            .iter()
+            .map(|item| format!("{}{}", if item.done { "[x] " } else { "[ ] " }, item.name))
+            .collect();
+        println!("{}", rows.join(" | "));
+    }
+}
+
+fn main() {
+    let mut app = App {
+        items: ["milk", "bread", "eggs", "coffee"]
+            .iter()
+            .map(|n| Item { name: n.to_string(), done: false })
+            .collect(),
+    };
+    app.show();
+    app.frame(&[(1, "done")]);
+    app.show();
+    app.frame(&[(3, "up")]);
+    app.show();
+    app.frame(&[(0, "delete")]);
+    app.show();
+    app.frame(&[(0, "up"), (9, "delete")]);
+    app.show();
+}

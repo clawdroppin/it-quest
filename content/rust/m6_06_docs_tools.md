@@ -116,3 +116,83 @@ rust-analyzer :: editor language server
 clippy :: linter with hundreds of checks
 rustfmt :: standard code formatter
 rustup :: installs and updates toolchains
+
+@@exercise Document and test a function
+Write `percent(part, whole)`: what percentage `part` is of `whole`, rounded to one decimal place, or `None` when `whole` is zero.
+
+Then do what a professional would do before publishing it:
+
+1. a `///` doc comment that says what it returns, when it returns `None`, and has an `# Examples` section,
+2. a `#[cfg(test)]` module with at least three tests (a normal case, rounding, and zero).
+
+When you press ✔ Check, your tests and some hidden ones run.
+@@starter
+// Write the doc comment (with an examples section) and the body,
+// then add a test module with at least three tests.
+fn percent(part: u64, whole: u64) -> Option<f64> {
+    let _ = (part, whole);
+    todo!()
+}
+
+fn main() {
+    println!("{:?}", percent(37, 120));
+    println!("{:?}", percent(5, 0));
+}
+@@tests
+#[test]
+fn hidden_percent_values() {
+    assert_eq!(percent(37, 120), Some(30.8));
+    assert_eq!(percent(0, 9), Some(0.0));
+    assert_eq!(percent(2, 0), None);
+}
+@@requires
+///
+# Examples
+#[cfg(test)]
+#[test]
+assert_eq!
+@@hint
+Round to one decimal with `(x * 10.0).round() / 10.0`. In the tests module, `use super::*;` brings `percent` into scope.
+@@solution
+/// Returns what percentage `part` is of `whole`, rounded to one decimal place.
+///
+/// Returns `None` when `whole` is zero, because the percentage is undefined.
+///
+/// # Examples
+///
+/// ```
+/// assert_eq!(percent(1, 4), Some(25.0));
+/// assert_eq!(percent(1, 0), None);
+/// ```
+fn percent(part: u64, whole: u64) -> Option<f64> {
+    if whole == 0 {
+        return None;
+    }
+    let raw = part as f64 * 100.0 / whole as f64;
+    Some((raw * 10.0).round() / 10.0)
+}
+
+fn main() {
+    println!("{:?}", percent(37, 120));
+    println!("{:?}", percent(5, 0));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn quarter() {
+        assert_eq!(percent(1, 4), Some(25.0));
+    }
+
+    #[test]
+    fn rounds_to_one_decimal() {
+        assert_eq!(percent(1, 3), Some(33.3));
+    }
+
+    #[test]
+    fn zero_whole_is_none() {
+        assert_eq!(percent(7, 0), None);
+    }
+}

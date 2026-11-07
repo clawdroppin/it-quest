@@ -212,3 +212,84 @@ mod utils; :: loads src/utils.rs (or src/utils/mod.rs)
 nested module file :: src/utils/math.rs for mod math inside utils
 pub use :: re-export an item
 lib.rs + main.rs :: a library crate and a binary in one package
+
+@@exercise Organise IP helpers into modules
+The Cargo project above splits code into files. The same `mod` rules work inside one file, which is how you'll practise them here: `mod name { ... }` instead of `mod name;`.
+
+Build a `network` module with two submodules:
+
+- `network::ip` with `pub fn parse(text: &str) -> Option<[u8; 4]>` (four dot-separated numbers 0-255, otherwise `None`) and `pub fn is_private(o: [u8; 4]) -> bool` (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)
+- `network::report` with `pub fn describe(text: &str) -> String` returning `"<text>: private"`, `"<text>: public"` or `"<text>: invalid"`. It reaches the other submodule with `use super::ip;`.
+
+`main` imports `describe` with `use network::report::describe;` and prints one line per address.
+@@starter
+// Put the IP helpers in a module called `network`, with two submodules:
+//   network::ip     -> pub fn parse(text: &str) -> Option<[u8; 4]>
+//                      pub fn is_private(o: [u8; 4]) -> bool
+//   network::report -> pub fn describe(text: &str) -> String
+// report reaches its sibling module through `super`. main imports describe with `use`.
+
+fn main() {
+    for text in ["10.1.2.3", "172.20.0.9", "172.32.0.1", "192.168.1.10", "8.8.8.8", "300.1.1.1", "1.2.3"] {
+        // println!("{}", describe(text));
+        let _ = text;
+    }
+}
+@@expected
+10.1.2.3: private
+172.20.0.9: private
+172.32.0.1: public
+192.168.1.10: private
+8.8.8.8: public
+300.1.1.1: invalid
+1.2.3: invalid
+@@requires
+mod network
+pub mod ip
+pub mod report
+use super::ip
+use network::report::describe
+@@hint
+Everything inside a module is private until you add `pub`, including the submodules themselves. 172.16.0.0/12 means the second octet is 16 to 31: `(16..=31).contains(&o[1])`.
+@@solution
+mod network {
+    pub mod ip {
+        /// Parses "a.b.c.d" into four octets.
+        pub fn parse(text: &str) -> Option<[u8; 4]> {
+            let parts: Vec<&str> = text.split('.').collect();
+            if parts.len() != 4 {
+                return None;
+            }
+            let mut octets = [0u8; 4];
+            for (i, part) in parts.iter().enumerate() {
+                octets[i] = part.parse().ok()?;
+            }
+            Some(octets)
+        }
+
+        /// True for 10.0.0.0/8, 172.16.0.0/12 and 192.168.0.0/16.
+        pub fn is_private(o: [u8; 4]) -> bool {
+            o[0] == 10 || (o[0] == 172 && (16..=31).contains(&o[1])) || (o[0] == 192 && o[1] == 168)
+        }
+    }
+
+    pub mod report {
+        use super::ip;
+
+        pub fn describe(text: &str) -> String {
+            match ip::parse(text) {
+                None => format!("{text}: invalid"),
+                Some(o) if ip::is_private(o) => format!("{text}: private"),
+                Some(_) => format!("{text}: public"),
+            }
+        }
+    }
+}
+
+use network::report::describe;
+
+fn main() {
+    for text in ["10.1.2.3", "172.20.0.9", "172.32.0.1", "192.168.1.10", "8.8.8.8", "300.1.1.1", "1.2.3"] {
+        println!("{}", describe(text));
+    }
+}
