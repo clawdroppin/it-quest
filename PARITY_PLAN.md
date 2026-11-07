@@ -980,8 +980,8 @@ Cert tracks had a typed-answer drill in almost every lesson; the language tracks
 
 Drills and quizzes are keyed by block position (`<lesson>!<block>`, `<lesson>?<block>`), so every new block was added after the lesson's last quiz, drill or project. A check that compares the working tree with HEAD confirmed that no existing keyed block moved. The 1.6.2 lesson-floor pass did move 15 drills; `KEY_MIGRATIONS` in `src/progress.ts` remaps those saved answers once on load.
 
-## Drills (every lesson, every track)
+## Exercises (every core lesson, every track)
 
-Cert tracks had a typed-answer drill in almost every lesson; the language tracks had almost none (Rust, Python and JavaScript had zero). Every lesson in every track now has at least one `@@drill`, and each answer was checked against its own lesson.
+Some cert-track lessons, mostly the broad overview lessons each track opens with, taught material without a single exercise. Now every core lesson in every track has at least one, so 63 lessons gained one across A+, Network+, CCNA, AWS, Linux, Security+, Foundations, DevOps, Azure, CISSP, CKA, Cloud, ITIL, Japan career, PMP and Python. Rust gained three single-file exercises (modules, doc comments with tests, the action pattern). The exceptions are about pages, Rust's getting-started page and lessons that are themselves `@@project` builds.
 
-Drills and quizzes are keyed by block position (`<lesson>!<block>`, `<lesson>?<block>`), so every new block was added after the lesson's last quiz, drill or project. A check that compares the working tree with HEAD confirmed that no existing keyed block moved. The 1.6.2 lesson-floor pass did move 15 drills; `KEY_MIGRATIONS` in `src/progress.ts` remaps those saved answers once on load.
+Each exercise is a small, self-contained task built from the lesson's own facts and tables, and its starter code doesn't already pass. Linux exercises are in bash, matching the track; the rest are in Python. They were checked against existing titles to avoid duplicates and appended at the end of each lesson. That keeps existing exercise indices (`<lesson>#<n>`) unchanged.
